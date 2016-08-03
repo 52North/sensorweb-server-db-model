@@ -26,16 +26,23 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.beans;
+package org.n52.io.extension;
 
+import static org.junit.Assert.assertTrue;
+
+import java.util.Arrays;
 import java.util.Collection;
 
-public class TextDataEntity extends DataEntity<String> {
+import org.junit.Test;
+import org.n52.series.db.beans.CountDataEntity;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+public class CountDataEntityTest {
+
+    @Test
+    public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
+        Collection<String> noDataValues = Arrays.asList(new String[] {"9999","-9999.9"});
+        CountDataEntity entity = new CountDataEntity();
+        entity.setValue(9999);
+        assertTrue(entity.isNoDataValue(noDataValues));
     }
 }
