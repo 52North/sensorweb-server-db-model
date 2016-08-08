@@ -26,30 +26,23 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.da;
+package org.n52.io.extension;
 
-import org.hibernate.Session;
-import org.n52.io.response.dataset.AbstractValue;
-import org.n52.io.response.dataset.Data;
-import org.n52.series.db.DataAccessException;
-import org.n52.series.db.HibernateSessionStore;
-import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.ServiceInfo;
-import org.n52.series.db.dao.DbQuery;
+import static org.junit.Assert.assertTrue;
 
-public interface DataRepository<DSE extends DatasetEntity<?>, V extends AbstractValue<?>> {
+import java.util.Arrays;
+import java.util.Collection;
 
-    Data<? extends AbstractValue<?>> getData(String id, DbQuery dbQuery) throws DataAccessException;
+import org.junit.Test;
+import org.n52.series.db.beans.CountDataEntity;
 
-    V getFirstValue(DSE entity, Session session, DbQuery query);
+public class CountDataEntityTest {
 
-    V getLastValue(DSE entity, Session session, DbQuery query);
-
-    void setSessionStore(HibernateSessionStore sessionStore);
-
-    void setServiceInfo(ServiceInfo serviceInfo);
-
-    ServiceInfo getServiceInfo();
-
-    Class<DSE> getEntityType();
+    @Test
+    public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
+        Collection<String> noDataValues = Arrays.asList(new String[] {"9999","-9999.9"});
+        CountDataEntity entity = new CountDataEntity();
+        entity.setValue(9999);
+        assertTrue(entity.isNoDataValue(noDataValues));
+    }
 }
