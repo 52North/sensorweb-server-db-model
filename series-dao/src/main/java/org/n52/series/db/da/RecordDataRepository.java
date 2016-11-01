@@ -35,45 +35,45 @@ import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Session;
-import org.n52.io.response.dataset.text.TextData;
-import org.n52.io.response.dataset.text.TextDatasetMetadata;
-import org.n52.io.response.dataset.text.TextValue;
+import org.n52.io.response.dataset.record.RecordData;
+import org.n52.io.response.dataset.record.RecordDatasetMetadata;
+import org.n52.io.response.dataset.record.RecordValue;
 import org.n52.series.db.DataAccessException;
-import org.n52.series.db.beans.TextDataEntity;
-import org.n52.series.db.beans.TextDatasetEntity;
+import org.n52.series.db.beans.RecordDataEntity;
+import org.n52.series.db.beans.RecordDatasetEntity;
 import org.n52.series.db.dao.DataDao;
 import org.n52.series.db.dao.DbQuery;
 
-public class TextDataRepository extends AbstractDataRepository<TextData, TextDatasetEntity, TextDataEntity, TextValue> {
+public class RecordDataRepository extends AbstractDataRepository<RecordData, RecordDatasetEntity, RecordDataEntity, RecordValue> {
 
     @Override
-    public Class<TextDatasetEntity> getEntityType() {
-        return TextDatasetEntity.class;
+    public Class<RecordDatasetEntity> getEntityType() {
+        return RecordDatasetEntity.class;
     }
 
     @Override
-    protected TextData assembleDataWithReferenceValues(TextDatasetEntity timeseries,
+    protected RecordData assembleDataWithReferenceValues(RecordDatasetEntity timeseries,
                                                        DbQuery dbQuery,
                                                        Session session)
             throws DataAccessException {
-        TextData result = assembleData(timeseries, dbQuery, session);
-        Set<TextDatasetEntity> referenceValues = timeseries.getReferenceValues();
+        RecordData result = assembleData(timeseries, dbQuery, session);
+        Set<RecordDatasetEntity> referenceValues = timeseries.getReferenceValues();
         if (referenceValues != null && !referenceValues.isEmpty()) {
-            TextDatasetMetadata metadata = new TextDatasetMetadata();
+            RecordDatasetMetadata metadata = new RecordDatasetMetadata();
             metadata.setReferenceValues(assembleReferenceSeries(referenceValues, dbQuery, session));
             result.setMetadata(metadata);
         }
         return result;
     }
 
-    private Map<String, TextData> assembleReferenceSeries(Set<TextDatasetEntity> referenceValues,
+    private Map<String, RecordData> assembleReferenceSeries(Set<RecordDatasetEntity> referenceValues,
                                                           DbQuery query,
                                                           Session session)
             throws DataAccessException {
-        Map<String, TextData> referenceSeries = new HashMap<>();
-        for (TextDatasetEntity referenceSeriesEntity : referenceValues) {
+        Map<String, RecordData> referenceSeries = new HashMap<>();
+        for (RecordDatasetEntity referenceSeriesEntity : referenceValues) {
             if (referenceSeriesEntity.isPublished()) {
-                TextData referenceSeriesData = assembleData(referenceSeriesEntity, query, session);
+                RecordData referenceSeriesData = assembleData(referenceSeriesEntity, query, session);
                 if (haveToExpandReferenceData(referenceSeriesData)) {
                     referenceSeriesData = expandReferenceDataIfNecessary(referenceSeriesEntity, query, session);
                 }
@@ -83,34 +83,34 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
         return referenceSeries;
     }
 
-    private boolean haveToExpandReferenceData(TextData referenceSeriesData) {
+    private boolean haveToExpandReferenceData(RecordData referenceSeriesData) {
         return referenceSeriesData.getValues().size() <= 1;
     }
 
-    private TextData expandReferenceDataIfNecessary(TextDatasetEntity seriesEntity, DbQuery query, Session session)
+    private RecordData expandReferenceDataIfNecessary(RecordDatasetEntity seriesEntity, DbQuery query, Session session)
             throws DataAccessException {
-        TextData result = new TextData();
-        DataDao<TextDataEntity> dao = new DataDao<>(session);
-        List<TextDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
+        RecordData result = new RecordData();
+        DataDao<RecordDataEntity> dao = new DataDao<>(session);
+        List<RecordDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
         if ( !hasValidEntriesWithinRequestedTimespan(observations)) {
-            TextValue lastValidValue = getLastValue(seriesEntity, session, query);
+            RecordValue lastValidValue = getLastValue(seriesEntity, session, query);
             result.addValues(expandToInterval(lastValidValue.getValue(), seriesEntity, query));
         }
 
         if (hasSingleValidReferenceValue(observations)) {
-            TextDataEntity entity = observations.get(0);
+            RecordDataEntity entity = observations.get(0);
             result.addValues(expandToInterval(entity.getValue(), seriesEntity, query));
         }
         return result;
     }
 
     @Override
-    protected TextData assembleData(TextDatasetEntity seriesEntity, DbQuery query, Session session)
+    protected RecordData assembleData(RecordDatasetEntity seriesEntity, DbQuery query, Session session)
             throws DataAccessException {
-        TextData result = new TextData();
-        DataDao<TextDataEntity> dao = new DataDao<>(session);
-        List<TextDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
-        for (TextDataEntity observation : observations) {
+        RecordData result = new RecordData();
+        DataDao<RecordDataEntity> dao = new DataDao<>(session);
+        List<RecordDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
+        for (RecordDataEntity observation : observations) { // XXX n times same object?
             if (observation != null) {
                 result.addValues(createSeriesValueFor(observation, seriesEntity, query));
             }
@@ -119,14 +119,14 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
     }
 
     // XXX
-    private TextValue[] expandToInterval(String value, TextDatasetEntity series, DbQuery query) {
-        TextDataEntity referenceStart = new TextDataEntity();
-        TextDataEntity referenceEnd = new TextDataEntity();
+    private RecordValue[] expandToInterval(Map<String, Object> value, RecordDatasetEntity series, DbQuery query) {
+        RecordDataEntity referenceStart = new RecordDataEntity();
+        RecordDataEntity referenceEnd = new RecordDataEntity();
         referenceStart.setTimestamp(query.getTimespan().getStart().toDate());
         referenceEnd.setTimestamp(query.getTimespan().getEnd().toDate());
         referenceStart.setValue(value);
         referenceEnd.setValue(value);
-        return new TextValue[] {
+        return new RecordValue[] {
                                 createSeriesValueFor(referenceStart, series, query),
                                 createSeriesValueFor(referenceEnd, series, query)
         };
@@ -134,24 +134,22 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
     }
 
     @Override
-    public TextValue createSeriesValueFor(TextDataEntity observation, TextDatasetEntity series, DbQuery query) {
+    public RecordValue createSeriesValueFor(RecordDataEntity observation, RecordDatasetEntity series, DbQuery query) {
         if (observation == null) {
             // do not fail on empty observations
             return null;
         }
 
-        String observationValue = !getServiceInfo().isNoDataValue(observation)
+        Map<String, Object> observationValue = !getServiceInfo().isNoDataValue(observation)
                 ? observation.getValue()
                 : null;
 
-        TextValue value = new TextValue();
+        RecordValue value = new RecordValue();
         value.setTimestamp(observation.getTimestamp().getTime());
         value.setValue(observationValue);
         if (query.isExpanded()) {
             addGeometry(observation, value);
             addValidTime(observation, value);
-        } else if (series.getPlatform().isMobile()) {
-            addGeometry(observation, value);
         }
         return value;
     }
