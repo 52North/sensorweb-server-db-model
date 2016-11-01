@@ -26,25 +26,21 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
+package org.n52.series.db.beans;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.n52.series.db.DataAccessException;
+public class RecordDatasetEntity extends DatasetEntity<RecordDataEntity> {
 
-/**
- * @param <T> entity type
- * @param <PK> primary key
- */
-public interface GenericDao<T, PK extends Serializable> {
+    private Set<RecordDatasetEntity> referenceValues = new HashSet<>();
 
-    T getInstance(PK key, DbQuery parameters) throws DataAccessException;
+    public Set<RecordDatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
 
-    List<T> getAllInstances(DbQuery parameters) throws DataAccessException;
-
-    Integer getCount(DbQuery query) throws DataAccessException;
-
-    boolean hasInstance(Long id, DbQuery query, Class<? extends T> clazz) throws DataAccessException;
+    public void setReferenceValues(Set<RecordDatasetEntity> referenceValues) {
+        this.referenceValues = referenceValues;
+    }
 
 }
