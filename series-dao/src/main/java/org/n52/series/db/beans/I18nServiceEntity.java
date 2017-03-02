@@ -26,19 +26,9 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
+package org.n52.series.db.beans;
 
-import org.junit.Assert;
-import org.junit.Test;
+public class I18nServiceEntity extends I18nEntity {
 
-public class DbQueryTest {
-
-    private final DbQueryFactory dbQueryFactory = new DefaultDbQueryFactory();
-
-    @Test
-    public void when_createWithNull_then_defaults() {
-        Assert.assertNotNull(dbQueryFactory.createFrom(null));
-    }
-
-
+    // serves for clear distinction
 }

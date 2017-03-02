@@ -28,17 +28,12 @@
  */
 package org.n52.series.db.dao;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.n52.io.request.IoParameters;
 
-public class DbQueryTest {
+public class DefaultDbQueryFactory implements DbQueryFactory {
 
-    private final DbQueryFactory dbQueryFactory = new DefaultDbQueryFactory();
-
-    @Test
-    public void when_createWithNull_then_defaults() {
-        Assert.assertNotNull(dbQueryFactory.createFrom(null));
+    @Override
+    public DbQuery createFrom(IoParameters parameters) {
+        return new DbQuery(parameters);
     }
-
-
 }

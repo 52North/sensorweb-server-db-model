@@ -17,5 +17,13 @@
              -->
       <property column="geom" name="geometry" type="org.hibernate.spatial.GeometryType"/>
     </component>
+    <set name="childs" table="featurerelation" inverse="false" fetch="select">
+        <key column="parentFeatureId" not-null="true"/>
+        <many-to-many entity-name="FeatureEntity" column="childFeatureId" not-null="true" foreign-key="featureOfInterestChildFk"/>
+    </set>
+    <set name="parents" table="featurerelation" inverse="false" fetch="select">
+        <key column="childFeatureId" not-null="true"/>
+        <many-to-many entity-name="FeatureEntity" column="parentFeatureId" not-null="true" foreign-key="featureOfInterestParentFk"/>
+    </set>
   </class>
 </hibernate-mapping>

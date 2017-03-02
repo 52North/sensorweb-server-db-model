@@ -26,19 +26,16 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
+package org.n52.series.db.da;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.n52.io.DatasetFactoryException;
 
-public class DbQueryTest {
+public interface IDataRepositoryFactory {
 
-    private final DbQueryFactory dbQueryFactory = new DefaultDbQueryFactory();
+    public boolean isKnown(String datasetType);
 
-    @Test
-    public void when_createWithNull_then_defaults() {
-        Assert.assertNotNull(dbQueryFactory.createFrom(null));
-    }
+    public DataRepository create(String datasetType) throws DatasetFactoryException;
 
+    public boolean hasCacheEntry(String measurement);
 
 }
