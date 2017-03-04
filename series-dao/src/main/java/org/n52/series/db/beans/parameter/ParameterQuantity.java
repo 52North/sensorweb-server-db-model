@@ -26,36 +26,35 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
+package org.n52.series.db.beans.parameter;
 
-import java.util.List;
+import java.util.Map;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.n52.series.db.beans.GeometryEntity;
-import org.n52.series.db.beans.SamplingGeometryEntity;
+import org.n52.series.db.beans.UnitEntity;
 
-public class SamplingGeometryDao {
+public class ParameterQuantity extends Parameter<Double> {
 
-    private static final String COLUMN_SERIES_PKID = "seriesPkid";
+    private UnitEntity unit;
 
-    private static final String COLUMN_TIMESTAMP = "timestamp";
-
-    private final Session session;
-
-    public SamplingGeometryDao(Session session) {
-        this.session = session;
+    @Override
+    public Map<String, Object> toValueMap() {
+        Map<String, Object> valueMap = super.toValueMap();
+        if (isSetUnit()) {
+            valueMap.put("unit", getUnit());
+        }
+        return valueMap;
     }
 
-    @SuppressWarnings("unchecked") // Hibernate
-    public List<GeometryEntity> getGeometriesOrderedByTimestamp(DbQuery parameters) {
-        Criteria criteria = session.createCriteria(SamplingGeometryEntity.class);
-        parameters.addDetachedFilters(COLUMN_SERIES_PKID, criteria);
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        criteria.addOrder(Order.asc(COLUMN_TIMESTAMP));
-        parameters.addSpatialFilterTo(criteria, parameters);
-        return (List<GeometryEntity>) criteria.list();
+    public UnitEntity getUnit() {
+        return unit;
+    }
+
+    public void setUnit(final UnitEntity unit) {
+        this.unit = unit;
+    }
+
+    public boolean isSetUnit() {
+        return getUnit() != null;
     }
 
 }

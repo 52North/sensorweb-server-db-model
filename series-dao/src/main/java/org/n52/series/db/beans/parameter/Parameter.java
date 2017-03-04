@@ -26,36 +26,66 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
+package org.n52.series.db.beans.parameter;
 
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.criterion.Order;
-import org.n52.series.db.beans.GeometryEntity;
-import org.n52.series.db.beans.SamplingGeometryEntity;
+public abstract class Parameter<T> {
 
-public class SamplingGeometryDao {
+    private long parameterId;
 
-    private static final String COLUMN_SERIES_PKID = "seriesPkid";
+    private long fkId;
 
-    private static final String COLUMN_TIMESTAMP = "timestamp";
+    private String name;
 
-    private final Session session;
+    private T value;
 
-    public SamplingGeometryDao(Session session) {
-        this.session = session;
+    public Map<String, Object> toValueMap() {
+        Map<String, Object> valueMap = new HashMap<>();
+        valueMap.put("name", getName());
+        valueMap.put("value", getValue());
+        return valueMap;
     }
 
-    @SuppressWarnings("unchecked") // Hibernate
-    public List<GeometryEntity> getGeometriesOrderedByTimestamp(DbQuery parameters) {
-        Criteria criteria = session.createCriteria(SamplingGeometryEntity.class);
-        parameters.addDetachedFilters(COLUMN_SERIES_PKID, criteria);
-        criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);
-        criteria.addOrder(Order.asc(COLUMN_TIMESTAMP));
-        parameters.addSpatialFilterTo(criteria, parameters);
-        return (List<GeometryEntity>) criteria.list();
+    public long getParameterId() {
+        return parameterId;
+    }
+
+    public void setParameterId(long parameterId) {
+        this.parameterId = parameterId;
+    }
+
+    public long getFkId() {
+        return fkId;
+    }
+
+    public void setFkId(long fkId) {
+        this.fkId = fkId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public boolean isSetName() {
+        return getName() != null;
+    }
+
+    public T getValue() {
+        return value;
+    }
+
+    public void setValue(T value) {
+        this.value = value;
+    }
+
+    public boolean isSetValue() {
+        return getValue() != null;
     }
 
 }
