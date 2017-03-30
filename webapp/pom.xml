@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <parent>
-        <groupId>org.n52.series-api</groupId>
-        <artifactId>spi-impl-series</artifactId>
+        <groupId>org.n52.series-api.db</groupId>
+        <artifactId>series-dao</artifactId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>series-dao-webapp</artifactId>
+    <artifactId>webapp</artifactId>
     <packaging>war</packaging>
     <name>Series REST API - DAO Webapp</name>
     <description>RESTful Sensor Web Client API as template Web application.</description>
@@ -23,18 +23,18 @@
 
     <dependencies>
         <dependency>
-            <groupId>${project.groupId}</groupId>
+            <groupId>org.n52.series-api</groupId>
             <artifactId>rest</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>series-dao</artifactId>
+            <artifactId>dao</artifactId>
             <scope>runtime</scope>
         </dependency>
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>series-mappings</artifactId>
+            <artifactId>mappings</artifactId>
             <scope>runtime</scope>
         </dependency>
         
@@ -169,7 +169,7 @@
                     <configuration>
                         <artifactItems>
                             <artifactItem>
-                                <groupId>${project.groupId}</groupId>
+                                <groupId>org.n52.series-api</groupId>
                                 <artifactId>rest</artifactId>
                                 <includes>api-doc/**</includes>
                                 <outputDirectory>${webappDirectory}</outputDirectory>
