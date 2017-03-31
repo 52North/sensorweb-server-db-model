@@ -60,6 +60,7 @@ import com.vividsolutions.jts.geom.Point;
 
 public class GeometriesRepository extends SessionAwareRepository implements OutputAssembler<GeometryInfo> {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeometriesRepository.class);
     @Autowired
     private PlatformRepository platformRepository;
 

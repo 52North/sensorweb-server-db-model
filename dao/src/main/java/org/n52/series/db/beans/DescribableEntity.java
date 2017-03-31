@@ -34,13 +34,13 @@ import org.n52.series.db.beans.parameter.Parameter;
 
 public class DescribableEntity {
 
-    public final static String PKID = "pkid";
+    public static final String PKID = "pkid";
 
-    public final static String DOMAIN_ID = "domainId";
+    public static final String DOMAIN_ID = "domainId";
 
-    public final static String NAME = "name";
+    public static final String NAME = "name";
 
-    public final static String SERVICE_ID = "serviceid";
+    public static final String SERVICE_ID = "serviceid";
 
     /**
      * A serial primary key.
