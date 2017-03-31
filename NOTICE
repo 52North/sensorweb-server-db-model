@@ -82,6 +82,7 @@ This project includes:
   Quartz Enterprise Job Scheduler under Apache 2.0
   Referencing services under GNU Lesser General Public License (LGPL) version 2.1
   Reflections under WTFPL
+  Series DAO REST API under GNU General Public License, Version 2.0
   Series REST API - DAO Mappings module under GNU General Public License, Version 2.0
   Series REST API - DAO module under GNU General Public License, Version 2.0
   Series REST API - DAO Webapp under GNU General Public License, Version 2.0
@@ -89,7 +90,6 @@ This project includes:
   Series REST API - REST module under GNU General Public License, Version 2.0
   Series REST API - SOS DAO module under GNU General Public License, Version 2.0
   Series REST API - SPI module under GNU General Public License, Version 2.0
-  Series REST API - SPI Series DAO Impl under GNU General Public License, Version 2.0
   SLF4J API Module under MIT License
   Spring AOP under The Apache Software License, Version 2.0
   Spring Aspects under The Apache Software License, Version 2.0
