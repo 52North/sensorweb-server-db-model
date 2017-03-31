@@ -28,19 +28,25 @@
  */
 package org.n52.series.db.beans;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public class SamplingGeometryEntity extends GeometryEntity {
 
     private Date timestamp;
+
     private Long seriesPkid;
 
     public Date getTimestamp() {
-        return timestamp;
+        return timestamp != null
+                ? new Timestamp(timestamp.getTime())
+                : timestamp;
     }
 
     public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
+        this.timestamp = timestamp != null
+                ? new Timestamp(timestamp.getTime())
+                : timestamp;
     }
 
     public Long getSeriesPkid() {

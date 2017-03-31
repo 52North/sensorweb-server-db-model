@@ -28,11 +28,11 @@
  */
 package org.n52.series.db.beans;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-
 import org.n52.series.db.beans.parameter.Parameter;
 
 
@@ -75,7 +75,9 @@ public abstract class DataEntity<T> {
      * @deprecated use {@link #getTimeend()}
      */
     public Date getTimestamp() {
-        return timeend;
+        return timeend != null
+                ? new Timestamp(timeend.getTime())
+                : null;
     }
 
     /**
@@ -83,7 +85,9 @@ public abstract class DataEntity<T> {
      * @deprecated use {@link #setTimeend(java.util.Date)}
      */
     public void setTimestamp(Date timestamp) {
-        this.timeend = timestamp;
+        this.timeend = timestamp != null
+                ? new Timestamp(timestamp.getTime())
+                : null;
     }
 
     /**
@@ -91,7 +95,9 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimestart() {
-        return timestart;
+        return timestart != null
+                ? new Timestamp(timestart.getTime())
+                : null;
     }
 
     /**
@@ -99,7 +105,9 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public void setTimestart(Date timestart) {
-        this.timestart = timestart;
+        this.timestart = timestart != null
+                ? new Timestamp(timestart.getTime())
+                : null;
     }
 
     /**
@@ -107,7 +115,9 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimeend() {
-        return timeend;
+        return timeend != null
+                ? new Timestamp(timeend.getTime())
+                : null;
     }
 
     /**
@@ -116,7 +126,9 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public void setTimeend(Date timeend) {
-        this.timeend = timeend;
+        this.timeend = timeend != null
+                ? new Timestamp(timeend.getTime())
+                : null;
     }
 
     public T getValue() {
@@ -158,19 +170,27 @@ public abstract class DataEntity<T> {
     }
 
     public Date getValidTimeStart() {
-        return validTimeStart;
+        return validTimeStart != null
+                ? new Timestamp(validTimeStart.getTime())
+                : null;
     }
 
     public void setValidTimeStart(Date validTimeStart) {
-        this.validTimeStart = validTimeStart;
+        this.validTimeStart = validTimeStart != null
+                ? new Timestamp(validTimeStart.getTime())
+                : null;
     }
 
     public Date getValidTimeEnd() {
-        return validTimeEnd;
+        return validTimeEnd != null
+                ? new Timestamp(validTimeEnd.getTime())
+                : null;
     }
 
     public void setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = validTimeEnd;
+        this.validTimeEnd = validTimeEnd != null
+                ? new Timestamp(validTimeEnd.getTime())
+                : null;
     }
 
     public boolean isSetValidTime() {
@@ -186,11 +206,15 @@ public abstract class DataEntity<T> {
     }
 
     public Date getResultTime() {
-        return resultTime;
+        return resultTime != null
+                ? new Timestamp(resultTime.getTime())
+                : null;
     }
 
     public void setResultTime(Date resultTime) {
-        this.resultTime = resultTime;
+        this.resultTime = resultTime != null
+                ? new Timestamp(resultTime.getTime())
+                : null;
     }
 
     public Set<Parameter<?>> getParameters() {

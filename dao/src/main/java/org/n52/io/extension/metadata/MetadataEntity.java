@@ -28,6 +28,7 @@
  */
 package org.n52.io.extension.metadata;
 
+import java.sql.Timestamp;
 import java.util.Date;
 
 public abstract class MetadataEntity<T> {
@@ -85,11 +86,15 @@ public abstract class MetadataEntity<T> {
     }
 
     public Date getLastUpdate() {
-        return lastUpdate;
+        return lastUpdate != null
+                ? new Timestamp(lastUpdate.getTime())
+                : lastUpdate;
     }
 
     public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = lastUpdate != null
+                ? new Timestamp(lastUpdate.getTime())
+                : lastUpdate;
     }
 
     public DatabaseMetadataOutput<T> toOutput() {

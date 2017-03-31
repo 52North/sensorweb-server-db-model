@@ -41,7 +41,9 @@ public class DatabaseMetadataOutput<T> {
     }
 
     public Date getLastUpdate() {
-        return lastUpdate;
+        return lastUpdate != null
+                ? new Date(lastUpdate.getTime())
+                : null;
     }
 
     static <T> DatabaseMetadataOutput<T> create() {
@@ -54,7 +56,9 @@ public class DatabaseMetadataOutput<T> {
     }
 
     DatabaseMetadataOutput<T> lastUpdatedAt(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+        this.lastUpdate = lastUpdate != null
+                ? new Date(lastUpdate.getTime())
+                : null;
         return this;
     }
 }

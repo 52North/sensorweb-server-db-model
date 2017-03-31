@@ -28,10 +28,10 @@
  */
 package org.n52.series.db.beans;
 
+import com.vividsolutions.jts.geom.Geometry;
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
 
@@ -107,14 +107,18 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the phenomenonTimeStart
      */
     public Date getPhenomenonTimeStart() {
-        return phenomenonTimeStart;
+        return hasPhenomenonTimeStart()
+                ? new Timestamp(phenomenonTimeStart.getTime())
+                : phenomenonTimeStart;
     }
 
     /**
      * @param phenomenonTimeStart the phenomenonTimeStart to set
      */
     public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = phenomenonTimeStart;
+        this.phenomenonTimeStart = phenomenonTimeStart != null
+                ? new Timestamp(phenomenonTimeStart.getTime())
+                : phenomenonTimeStart;
     }
 
     public boolean hasPhenomenonTimeStart() {
@@ -125,14 +129,18 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the phenomenonTimeEnd
      */
     public Date getPhenomenonTimeEnd() {
-        return phenomenonTimeEnd;
+        return hasPhenomenonTimeEnd()
+                ? new Timestamp(phenomenonTimeEnd.getTime())
+                : phenomenonTimeEnd;
     }
 
     /**
      * @param phenomenonTimeEnd the phenomenonTimeEnd to set
      */
     public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = phenomenonTimeEnd;
+        this.phenomenonTimeEnd = phenomenonTimeEnd != null
+                ? new Timestamp(phenomenonTimeEnd.getTime())
+                : phenomenonTimeEnd;
     }
 
     public boolean hasPhenomenonTimeEnd() {
@@ -143,14 +151,18 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the resultTimeStart
      */
     public Date getResultTimeStart() {
-        return resultTimeStart;
+        return hasResultTimeStart()
+                ? new Timestamp(resultTimeStart.getTime())
+                : resultTimeStart;
     }
 
     /**
      * @param resultTimeStart the resultTimeStart to set
      */
     public void setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = resultTimeStart;
+        this.resultTimeStart = resultTimeStart != null
+                ? new Timestamp(resultTimeStart.getTime())
+                : resultTimeStart;
     }
 
     public boolean hasResultTimeStart() {
@@ -161,14 +173,18 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the resultTimeEnd
      */
     public Date getResultTimeEnd() {
-        return resultTimeEnd;
+        return hasResultTimeEnd()
+                ? new Timestamp(resultTimeEnd.getTime())
+                : resultTimeEnd;
     }
 
     /**
      * @param resultTimeEnd the resultTimeEnd to set
      */
     public void setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = resultTimeEnd;
+        this.resultTimeEnd = resultTimeEnd != null
+                ? new Timestamp(resultTimeEnd.getTime())
+                : resultTimeEnd;
     }
 
     public boolean hasResultTimeEnd() {
