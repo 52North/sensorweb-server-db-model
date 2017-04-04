@@ -26,9 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
-
-
 
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -44,7 +43,9 @@ public class FeatureEntity extends HierarchicalEntity<FeatureEntity> {
     }
 
     public Geometry getGeometry(String srid) {
-        return geometryEntity != null ? geometryEntity.getGeometry(srid) : null;
+        return geometryEntity != null
+                ? geometryEntity.getGeometry(srid)
+                : null;
     }
 
     public void setGeometry(Geometry geometry) {
@@ -67,10 +68,14 @@ public class FeatureEntity extends HierarchicalEntity<FeatureEntity> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" Domain id: ").append(getDomainId());
-        sb.append(", service: ").append(getService());
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" Domain id: ")
+          .append(getDomainId());
+        sb.append(", service: ")
+          .append(getService());
+        return sb.append(" ]")
+                 .toString();
     }
 
 }

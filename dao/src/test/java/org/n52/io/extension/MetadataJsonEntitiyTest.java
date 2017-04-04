@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension;
 
 import java.io.IOException;
@@ -52,7 +53,8 @@ public class MetadataJsonEntitiyTest {
         ObjectMapper om = new ObjectMapper();
         String jsonString = om.writeValueAsString(entity);
         JsonNode jsonNode = om.readTree(jsonString);
-        JsonNode at = jsonNode.path("value").path("object");
+        JsonNode at = jsonNode.path("value")
+                              .path("object");
         Assert.assertTrue(at.isObject());
     }
 

@@ -26,10 +26,10 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 /**
- *
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
  * @deprecated use {@link MeasurementDataEntity} instead.
  */

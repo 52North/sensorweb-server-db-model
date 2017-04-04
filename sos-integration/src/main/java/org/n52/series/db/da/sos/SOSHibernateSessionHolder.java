@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da.sos;
 
 import java.io.IOException;
@@ -47,9 +48,9 @@ public class SOSHibernateSessionHolder implements HibernateSessionStore {
 
     private static final String DATASOURCE_PROPERTIES = "/datasource.properties";
 
-    private HibernateSessionHolder sessionHolder;
-
     private static SessionFactoryProvider provider;
+
+    private HibernateSessionHolder sessionHolder;
 
     public static HibernateSessionHolder createSessionHolder() {
         if (Configurator.getInstance() == null) {
@@ -57,7 +58,7 @@ public class SOSHibernateSessionHolder implements HibernateSessionStore {
                 LOGGER.debug("SOS Configurator not present, trying to load DB config from '{}'", DATASOURCE_PROPERTIES);
                 if (inputStream == null) {
                     LOGGER.error("DB config '{}' is missing!", DATASOURCE_PROPERTIES);
-                    throw new RuntimeException("Could not establish database connection.");
+                    throwNewDatabaseConnectionException();
                 }
                 Properties connectionProviderConfig = new Properties();
                 connectionProviderConfig.load(inputStream);
@@ -66,12 +67,14 @@ public class SOSHibernateSessionHolder implements HibernateSessionStore {
                 return new HibernateSessionHolder(provider);
             } catch (IOException e) {
                 LOGGER.error("Could not establish database connection. Check '{}'", DATASOURCE_PROPERTIES, e);
-                throw new RuntimeException("Could not establish database connection.");
+                throwNewDatabaseConnectionException();
             }
-        } else {
-            return new HibernateSessionHolder();
-        }
+        } 
+        return new HibernateSessionHolder();
+    }
 
+    private static void throwNewDatabaseConnectionException() {
+        throw new RuntimeException("Could not establish database connection.");
     }
 
     @Override

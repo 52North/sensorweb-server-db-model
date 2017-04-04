@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -81,7 +82,8 @@ public class FeatureRepository extends HierarchicalParameterRepository<FeatureEn
         String hrefBase = urHelper.getFeaturesHrefBaseUrl(query.getHrefBase());
         List<SearchResult> results = new ArrayList<>();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = searchResult.getPkid()
+                                      .toString();
             String label = searchResult.getLabelFrom(locale);
             results.add(new FeatureSearchResult(pkid, label, hrefBase));
         }
@@ -151,7 +153,7 @@ public class FeatureRepository extends HierarchicalParameterRepository<FeatureEn
             result.setService(getCondensedService(entity.getService(), parameters));
         }
         if (entity.hasParameters()) {
-            for (Parameter<?> parameter : entity.getParameters()) {
+            for (Parameter< ? > parameter : entity.getParameters()) {
                 result.addParameter(parameter.toValueMap());
             }
         }

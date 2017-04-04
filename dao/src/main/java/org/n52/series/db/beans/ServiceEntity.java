@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Arrays;
@@ -70,13 +71,15 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     @JsonIgnore
-    public boolean isNoDataValue(DataEntity<?> observation) {
+    public boolean isNoDataValue(DataEntity< ? > observation) {
         return observation.isNoDataValue(noDataValues);
     }
 
     public String getNoDataValues() {
-        final String csv = Arrays.toString(noDataValues.toArray(new Double[0])); //XXX
-        return csv.substring(1).substring(0, csv.length() - 2);
+        // XXX make parsing more robust
+        final String csv = Arrays.toString(noDataValues.toArray(new Double[0]));
+        return csv.substring(1)
+                  .substring(0, csv.length() - 2);
     }
 
     public void setNoDataValues(String noDataValues) {
@@ -100,12 +103,18 @@ public class ServiceEntity extends DescribableEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" url: ").append(getUrl());
-        sb.append(", type: ").append(getType());
-        sb.append(", version: ").append(getVersion());
-        sb.append(", noDataValues: ").append(getNoDataValues());
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" url: ")
+          .append(getUrl());
+        sb.append(", type: ")
+          .append(getType());
+        sb.append(", version: ")
+          .append(getVersion());
+        sb.append(", noDataValues: ")
+          .append(getNoDataValues());
+        return sb.append(" ]")
+                 .toString();
     }
 
 }

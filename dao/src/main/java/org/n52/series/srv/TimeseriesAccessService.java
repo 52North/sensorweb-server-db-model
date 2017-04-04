@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.srv;
 
 import org.n52.io.DatasetFactoryException;
@@ -42,7 +43,6 @@ import org.n52.series.db.da.TimeseriesRepository;
 import org.n52.series.db.dao.DbQuery;
 import org.n52.series.spi.srv.DataService;
 import org.n52.web.exception.InternalServerException;
-import org.n52.web.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Deprecated
@@ -67,23 +67,18 @@ public class TimeseriesAccessService extends AccessService<TimeseriesMetadataOut
                 }
             }
             return dataCollection;
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new InternalServerException("Could not get series data from database.", e);
         }
     }
 
-    private MeasurementData getDataFor(String timeseriesId, RequestParameterSet parameters)
-            throws DataAccessException {
+    private MeasurementData getDataFor(String timeseriesId, RequestParameterSet parameters) throws DataAccessException {
         DbQuery dbQuery = dbQueryFactory.createFrom(IoParameters.createFromQuery(parameters));
-        DataRepository dataRepository = createRepository("measurement");
+        DataRepository dataRepository = createRepository();
         return (MeasurementData) dataRepository.getData(timeseriesId, dbQuery);
     }
 
-    private DataRepository createRepository(String datasetType) throws DataAccessException {
-        if ( !"measurement".equalsIgnoreCase(datasetType)) {
-            throw new ResourceNotFoundException("unknown dataset type: " + datasetType);
-        }
+    private DataRepository createRepository() throws DataAccessException {
         try {
             return factory.create("measurement");
         } catch (DatasetFactoryException e) {

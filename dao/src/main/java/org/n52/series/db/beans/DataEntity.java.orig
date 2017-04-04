@@ -26,10 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-
 package org.n52.series.db.beans;
 
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -37,27 +35,22 @@ import java.util.Set;
 
 import org.n52.series.db.beans.parameter.Parameter;
 
+
 public abstract class DataEntity<T> {
 
     public static final String SERIES_PKID = "seriesPkid";
 
-    public static final String PROPERTY_TIMESTART = "timestart";
-
-    public static final String PROPERTY_TIMEEND = "timeend";
-
     private Long pkid;
 
-    // optional
-    private Date timestart;
+    private Date timestart; // optional
 
-    // required
-    private Date timeend;
+    private Date timeend; // required
 
     private T value;
 
     private Long seriesPkid;
 
-    private GeometryEntity geometry;
+    private GeometryEntity geometryEntity;
 
     private Boolean deleted;
 
@@ -67,7 +60,7 @@ public abstract class DataEntity<T> {
 
     private Date resultTime;
 
-    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
+    private final Set<Parameter<?>> parameters = new HashSet<>(0);
 
     public Long getPkid() {
         return pkid;
@@ -81,23 +74,16 @@ public abstract class DataEntity<T> {
      * @return timestamp
      * @deprecated use {@link #getTimeend()}
      */
-    @Deprecated
     public Date getTimestamp() {
-        return timeend != null
-                ? new Timestamp(timeend.getTime())
-                : null;
+        return timeend;
     }
 
     /**
      * @param timestamp
-     *        the timestamp
      * @deprecated use {@link #setTimeend(java.util.Date)}
      */
-    @Deprecated
     public void setTimestamp(Date timestamp) {
-        this.timeend = timestamp != null
-                ? new Timestamp(timestamp.getTime())
-                : null;
+        this.timeend = timestamp;
     }
 
     /**
@@ -105,20 +91,15 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimestart() {
-        return timestart != null
-                ? new Timestamp(timestart.getTime())
-                : null;
+        return timestart;
     }
 
     /**
      * @param timestart
-     *        the timestart
      * @since 2.0.0
      */
     public void setTimestart(Date timestart) {
-        this.timestart = timestart != null
-                ? new Timestamp(timestart.getTime())
-                : null;
+        this.timestart = timestart;
     }
 
     /**
@@ -126,20 +107,16 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimeend() {
-        return timeend != null
-                ? new Timestamp(timeend.getTime())
-                : null;
+        return timeend;
     }
 
     /**
+     *
      * @param timeend
-     *        the timeend
      * @since 2.0.0
      */
     public void setTimeend(Date timeend) {
-        this.timeend = timeend != null
-                ? new Timestamp(timeend.getTime())
-                : null;
+        this.timeend = timeend;
     }
 
     public T getValue() {
@@ -160,12 +137,21 @@ public abstract class DataEntity<T> {
         this.seriesPkid = seriesPkid;
     }
 
+<<<<<<< Updated upstream
     public GeometryEntity getGeometry() {
         return geometry;
     }
 
     public void setGeometry(GeometryEntity geometry) {
         this.geometry = geometry;
+=======
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
+    }
+
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
+        this.geometryEntity = geometryEntity;
+>>>>>>> Stashed changes
     }
 
     public boolean isSetGeometry() {
@@ -181,27 +167,19 @@ public abstract class DataEntity<T> {
     }
 
     public Date getValidTimeStart() {
-        return validTimeStart != null
-                ? new Timestamp(validTimeStart.getTime())
-                : null;
+        return validTimeStart;
     }
 
     public void setValidTimeStart(Date validTimeStart) {
-        this.validTimeStart = validTimeStart != null
-                ? new Timestamp(validTimeStart.getTime())
-                : null;
+        this.validTimeStart = validTimeStart;
     }
 
     public Date getValidTimeEnd() {
-        return validTimeEnd != null
-                ? new Timestamp(validTimeEnd.getTime())
-                : null;
+        return validTimeEnd;
     }
 
     public void setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = validTimeEnd != null
-                ? new Timestamp(validTimeEnd.getTime())
-                : null;
+        this.validTimeEnd = validTimeEnd;
     }
 
     public boolean isSetValidTime() {
@@ -217,22 +195,18 @@ public abstract class DataEntity<T> {
     }
 
     public Date getResultTime() {
-        return resultTime != null
-                ? new Timestamp(resultTime.getTime())
-                : null;
+        return resultTime;
     }
 
     public void setResultTime(Date resultTime) {
-        this.resultTime = resultTime != null
-                ? new Timestamp(resultTime.getTime())
-                : null;
+        this.resultTime = resultTime;
     }
 
-    public Set<Parameter< ? >> getParameters() {
+    public Set<Parameter<?>> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter< ? >> parameters) {
+    public void setParameters(Set<Parameter<?>> parameters) {
         if (parameters != null) {
             this.parameters.addAll(parameters);
         }
@@ -245,11 +219,8 @@ public abstract class DataEntity<T> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName())
-          .append(" [");
-        sb.append(" id: ")
-          .append(pkid);
-        return sb.append(" ]")
-                 .toString();
+        sb.append(getClass().getSimpleName()).append(" [");
+        sb.append(" id: ").append(pkid);
+        return sb.append(" ]").toString();
     }
 }

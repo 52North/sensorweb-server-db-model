@@ -26,8 +26,10 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
+import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
@@ -57,7 +59,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     /**
-     * @param envelope the envelope to set
+     * @param envelope
+     *        the envelope to set
      */
     public void setEnvelope(Geometry envelope) {
         this.envelope = envelope;
@@ -75,7 +78,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     /**
-     * @param observationTypes the observationTypes to set
+     * @param observationTypes
+     *        the observationTypes to set
      */
     public void setObservationTypes(Set<String> observationTypes) {
         this.observationTypes = observationTypes;
@@ -93,7 +97,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     /**
-     * @param featureTypes the featureTypes to set
+     * @param featureTypes
+     *        the featureTypes to set
      */
     public void setFeatureTypes(Set<String> featureTypes) {
         this.featureTypes = featureTypes;
@@ -107,14 +112,19 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the phenomenonTimeStart
      */
     public Date getPhenomenonTimeStart() {
-        return phenomenonTimeStart;
+        return hasPhenomenonTimeStart()
+                ? new Timestamp(phenomenonTimeStart.getTime())
+                : null;
     }
 
     /**
-     * @param phenomenonTimeStart the phenomenonTimeStart to set
+     * @param phenomenonTimeStart
+     *        the phenomenonTimeStart to set
      */
     public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = phenomenonTimeStart;
+        this.phenomenonTimeStart = phenomenonTimeStart != null
+                ? new Timestamp(phenomenonTimeStart.getTime())
+                : null;
     }
 
     public boolean hasPhenomenonTimeStart() {
@@ -125,14 +135,19 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the phenomenonTimeEnd
      */
     public Date getPhenomenonTimeEnd() {
-        return phenomenonTimeEnd;
+        return hasPhenomenonTimeEnd()
+                ? new Timestamp(phenomenonTimeEnd.getTime())
+                : null;
     }
 
     /**
-     * @param phenomenonTimeEnd the phenomenonTimeEnd to set
+     * @param phenomenonTimeEnd
+     *        the phenomenonTimeEnd to set
      */
     public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = phenomenonTimeEnd;
+        this.phenomenonTimeEnd = phenomenonTimeEnd != null
+                ? new Timestamp(phenomenonTimeEnd.getTime())
+                : null;
     }
 
     public boolean hasPhenomenonTimeEnd() {
@@ -143,14 +158,19 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the resultTimeStart
      */
     public Date getResultTimeStart() {
-        return resultTimeStart;
+        return hasResultTimeStart()
+                ? new Timestamp(resultTimeStart.getTime())
+                : null;
     }
 
     /**
-     * @param resultTimeStart the resultTimeStart to set
+     * @param resultTimeStart
+     *        the resultTimeStart to set
      */
     public void setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = resultTimeStart;
+        this.resultTimeStart = resultTimeStart != null
+                ? new Timestamp(resultTimeStart.getTime())
+                : null;
     }
 
     public boolean hasResultTimeStart() {
@@ -161,14 +181,19 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @return the resultTimeEnd
      */
     public Date getResultTimeEnd() {
-        return resultTimeEnd;
+        return hasResultTimeEnd()
+                ? new Timestamp(resultTimeEnd.getTime())
+                : null;
     }
 
     /**
-     * @param resultTimeEnd the resultTimeEnd to set
+     * @param resultTimeEnd
+     *        the resultTimeEnd to set
      */
     public void setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = resultTimeEnd;
+        this.resultTimeEnd = resultTimeEnd != null
+                ? new Timestamp(resultTimeEnd.getTime())
+                : null;
     }
 
     public boolean hasResultTimeEnd() {
@@ -178,9 +203,12 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" Domain id: ").append(getDomainId());
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" Domain id: ")
+          .append(getDomainId());
+        return sb.append(" ]")
+                 .toString();
     }
 
 }

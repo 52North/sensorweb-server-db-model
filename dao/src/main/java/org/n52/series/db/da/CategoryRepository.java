@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -75,13 +76,13 @@ public class CategoryRepository extends SessionAwareRepository implements Output
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found,
-            DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         String locale = query.getLocale();
         String hrefBase = urHelper.getProceduresHrefBaseUrl(query.getHrefBase());
         List<SearchResult> results = new ArrayList<>();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = searchResult.getPkid()
+                                      .toString();
             String label = searchResult.getLabelFrom(locale);
             results.add(new CategorySearchResult(pkid, label, hrefBase));
         }
@@ -139,14 +140,7 @@ public class CategoryRepository extends SessionAwareRepository implements Output
     @Override
     public CategoryOutput getInstance(String id, DbQuery parameters, Session session) throws DataAccessException {
         CategoryEntity entity = getInstance(parseId(id), parameters, session);
-        if (entity != null) {
-            return createExpanded(entity, parameters);
-        }
-        return null;
-    }
-
-    protected List<CategoryEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
-        return createDao(session).getAllInstances(parameters);
+        return createExpanded(entity, parameters);
     }
 
     protected CategoryEntity getInstance(Long id, DbQuery parameters, Session session) throws DataAccessException {
@@ -156,6 +150,10 @@ public class CategoryRepository extends SessionAwareRepository implements Output
             throw new ResourceNotFoundException("Resource with id '" + id + "' could not be found.");
         }
         return result;
+    }
+
+    protected List<CategoryEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
+        return createDao(session).getAllInstances(parameters);
     }
 
     protected CategoryOutput createExpanded(CategoryEntity entity, DbQuery parameters) throws DataAccessException {

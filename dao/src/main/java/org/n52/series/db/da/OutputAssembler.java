@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.Collection;
@@ -54,7 +55,7 @@ public interface OutputAssembler<T> {
 
     Collection<SearchResult> searchFor(IoParameters parameters);
 
-    List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found, DbQuery query);
+    List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query);
 
     boolean exists(String id, DbQuery query) throws DataAccessException;
 

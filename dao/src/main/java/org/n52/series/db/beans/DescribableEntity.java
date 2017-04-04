@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Set;
@@ -34,13 +35,13 @@ import org.n52.series.db.beans.parameter.Parameter;
 
 public class DescribableEntity {
 
-    public final static String PKID = "pkid";
+    public static final String PROPERTY_PKID = "pkid";
 
-    public final static String DOMAIN_ID = "domainId";
+    public static final String PROPERTY_NAME = "name";
 
-    public final static String NAME = "name";
+    public static final String PROPERTY_DOMAIN_ID = "domainId";
 
-    public final static String SERVICE_ID = "serviceid";
+    public static final String PROPERTY_SERVICE_ID = "serviceid";
 
     /**
      * A serial primary key.
@@ -66,36 +67,30 @@ public class DescribableEntity {
 
     private Set<I18nEntity> translations;
 
-    private Set<Parameter<?>> parameters;
+    private Set<Parameter< ? >> parameters;
 
     public Long getPkid() {
         return pkid;
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T setPkid(Long pkid) {
+    public void setPkid(Long pkid) {
         this.pkid = pkid;
-        return (T) this;
     }
 
     public String getDomainId() {
         return domainId;
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T setDomainId(String domainId) {
+    public void setDomainId(String domainId) {
         this.domainId = domainId;
-        return (T) this;
     }
 
     public String getName() {
         return name;
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return (T) this;
     }
 
     public boolean isSetName() {
@@ -122,11 +117,11 @@ public class DescribableEntity {
         this.translations = translations;
     }
 
-    public Set<Parameter<?>> getParameters() {
+    public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter<?>> parameters) {
+    public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 
@@ -167,7 +162,7 @@ public class DescribableEntity {
             return getNameI18n(locale);
         } else if (isNameAvailable()) {
             return getName();
-        } else if (isDomainIdAvailable()){
+        } else if (isDomainIdAvailable()) {
             return getDomainId();
         } else {
             // absolute fallback

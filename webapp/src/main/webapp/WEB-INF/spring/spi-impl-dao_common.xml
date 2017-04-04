@@ -13,7 +13,7 @@
     <mvc:annotation-driven />
     <ctx:annotation-config />
 
-    <bean id="serviceInfo" class="org.n52.series.db.beans.ServiceEntity">
+    <bean class="org.n52.series.db.beans.ServiceEntity">
         <property name="pkid" value="1" />
         <property name="version" value="2.0" />
         <property name="name" value="My RESTful Dataset Service" />

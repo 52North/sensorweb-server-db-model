@@ -27,10 +27,46 @@
  * for more details.
  */
 
-package org.n52.series.db.beans.parameter;
+package org.n52.series.db.dao;
 
-public abstract class ObservationParameter<T> extends Parameter<T> {
+import java.util.Set;
+import java.util.stream.Collectors;
 
-    // allows explicit mapping
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
+
+final class QueryUtils {
+
+    static final String PROPERTY_PKID = "pkid";
+
+    static String createAssociation(String alias, String property) {
+        return alias != null && !alias.isEmpty()
+                ? alias + "." + property
+                : property;
+    }
+
+    static Set<Long> parseToIds(Set<String> ids) {
+        return ids.stream()
+                  .map(e -> parseToId(e))
+                  .collect(Collectors.toSet());
+    }
+
+    static SimpleExpression matchesPkid(String pkid) {
+        return Restrictions.eq(PROPERTY_PKID, QueryUtils.parseToId(pkid));
+    }
+
+    /**
+     * @param id
+     *        the id string to parse.
+     * @return the long value of given string or {@link Long#MIN_VALUE} if string could not be parsed to type
+     *         long.
+     */
+    static Long parseToId(String id) {
+        try {
+            return Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            return Long.MIN_VALUE;
+        }
+    }
 
 }

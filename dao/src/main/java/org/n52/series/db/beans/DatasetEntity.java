@@ -26,25 +26,32 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.n52.io.response.dataset.measurement.MeasurementDatasetOutput;
 
+public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
 
-public class DatasetEntity<T extends DataEntity<?>> extends DescribableEntity {
+    public static final String ENTITY_ALIAS = "dataset";
+    public static final String PROPERTY_PROCEDURE = "procedure";
+    public static final String PROPERTY_CATEGORY = "category";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
+    public static final String PROPERTY_FEATURE = "feature";
+    public static final String PROPERTY_OFFERING = "offering";
+    public static final String PROPERTY_PLATFORM = "platform";
+    public static final String PROPERTY_DATASET_TYPE = "datasetType";
+    public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
 
-    public static final String PROCEDURE = "procedure";
-    public static final String CATEGORY = "category";
-    public static final String PHENOMENON = "phenomenon";
-    public static final String FEATURE = "feature";
-    public static final String OFFERING = "offering";
-    public static final String PLATFORM = "platform";
-    public static final String OBSERVATION_TYPE = "observationType";
+    public static final String DEFAULT_DATASET_TYPE = "measurement";
 
     private CategoryEntity category;
 
@@ -173,7 +180,8 @@ public class DatasetEntity<T extends DataEntity<?>> extends DescribableEntity {
     }
 
     /**
-     * @param firstValue the first value
+     * @param firstValue
+     *        the first value
      * @deprecated since 2.0.0, use {@link #setFirstValueAt(Date)}
      */
     @Deprecated
@@ -191,7 +199,8 @@ public class DatasetEntity<T extends DataEntity<?>> extends DescribableEntity {
     }
 
     /**
-     * @param lastValue the last value
+     * @param lastValue
+     *        the last value
      * @deprecated since 2.0.0, use {@link #setLastValueAt(Date)}
      */
     @Deprecated
@@ -200,24 +209,33 @@ public class DatasetEntity<T extends DataEntity<?>> extends DescribableEntity {
     }
 
     public Date getFirstValueAt() {
-        return firstValueAt;
+        return firstValueAt != null
+                ? new Timestamp(firstValueAt.getTime())
+                : null;
     }
 
     public void setFirstValueAt(Date firstValueAt) {
-        this.firstValueAt = firstValueAt;
+        this.firstValueAt = firstValueAt != null
+                ? new Timestamp(firstValueAt.getTime())
+                : null;
     }
 
     public Date getLastValueAt() {
-        return lastValueAt;
+        return lastValueAt != null
+                ? new Timestamp(lastValueAt.getTime())
+                : null;
     }
 
     public void setLastValueAt(Date lastValueAt) {
-        this.lastValueAt = lastValueAt;
+        this.lastValueAt = lastValueAt != null
+                ? new Timestamp(lastValueAt.getTime())
+                : null;
     }
 
     public String getDatasetType() {
         return datasetType == null || datasetType.isEmpty()
-                ? MeasurementDatasetOutput.DATASET_TYPE // backward compatible
+                // backward compatible
+                ? MeasurementDatasetOutput.DATASET_TYPE
                 : datasetType;
     }
 
@@ -225,12 +243,34 @@ public class DatasetEntity<T extends DataEntity<?>> extends DescribableEntity {
         this.datasetType = datasetType;
     }
 
+    /**
+     * @return a list of result times
+     * @since 2.0.0
+     */
     public Set<Date> getResultTimes() {
-        return resultTimes;
+        Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
+        return unmodifiableResultTimes != null
+                ? Collections.unmodifiableSet(unmodifiableResultTimes)
+                : null;
     }
 
+    /**
+     * @param resultTimes
+     *        a list of result times
+     * @since 2.0.0
+     */
     public void setResultTimes(Set<Date> resultTimes) {
-        this.resultTimes = resultTimes;
+        this.resultTimes = wrapToUnmutables(resultTimes);
+    }
+
+    private Set<Date> wrapToUnmutables(Set<Date> dates) {
+        return dates != null
+                ? dates.stream()
+                       .map(d -> d != null
+                               ? new Timestamp(d.getTime())
+                               : null)
+                       .collect(Collectors.toSet())
+                : null;
     }
 
     public UnitEntity getUnit() {
@@ -264,16 +304,28 @@ public class DatasetEntity<T extends DataEntity<?>> extends DescribableEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" id: ").append(getPkid());
-        sb.append(" , category: ").append(category);
-        sb.append(" , phenomenon: ").append(phenomenon);
-        sb.append(" , procedure: ").append(procedure);
-        sb.append(" , offering: ").append(offering);
-        sb.append(" , feature: ").append(feature);
-        sb.append(" , service: ").append(getService());
-        sb.append(" , #observations: ").append(getObservationCount() >= 0 ? getObservationCount() : observations.size());
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" id: ")
+          .append(getPkid());
+        sb.append(" , category: ")
+          .append(category);
+        sb.append(" , phenomenon: ")
+          .append(phenomenon);
+        sb.append(" , procedure: ")
+          .append(procedure);
+        sb.append(" , offering: ")
+          .append(offering);
+        sb.append(" , feature: ")
+          .append(feature);
+        sb.append(" , service: ")
+          .append(getService());
+        sb.append(" , #observations: ")
+          .append(getObservationCount() >= 0
+                  ? getObservationCount()
+                  : observations.size());
+        return sb.append(" ]")
+                 .toString();
     }
 
 }

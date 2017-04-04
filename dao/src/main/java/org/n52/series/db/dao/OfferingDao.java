@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.dao;
 
 import java.util.List;
@@ -34,14 +35,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.n52.series.db.DataAccessException;
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.I18nOfferingEntity;
 import org.n52.series.db.beans.OfferingEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class OfferingDao extends AbstractDao<OfferingEntity> {
-
-    private static final String SERIES_PROPERTY = "offering";
 
     public OfferingDao(Session session) {
         super(session);
@@ -50,21 +50,23 @@ public class OfferingDao extends AbstractDao<OfferingEntity> {
     @Override
     @SuppressWarnings("unchecked")
     public List<OfferingEntity> find(DbQuery query) {
-        Criteria criteria = translate(I18nOfferingEntity.class, getDefaultCriteria(), query)
-                .add(Restrictions.ilike("name", "%" + query.getSearchTerm() + "%"));
-        return query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nOfferingEntity.class, getDefaultCriteria(), query);
+        criteria.add(Restrictions.ilike(OfferingEntity.PROPERTY_NAME, "%" + query.getSearchTerm() + "%"));
+        return query.addFilters(criteria, getDatasetProperty())
+                    .list();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<OfferingEntity> getAllInstances(DbQuery query) throws DataAccessException {
-        Criteria criteria = translate(I18nOfferingEntity.class, getDefaultCriteria(), query);
-        return (List<OfferingEntity>) query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nOfferingEntity.class, getDefaultCriteria(), query);
+        return (List<OfferingEntity>) query.addFilters(criteria, getDatasetProperty())
+                                           .list();
     }
 
     @Override
-    protected String getSeriesProperty() {
-        return SERIES_PROPERTY;
+    protected String getDatasetProperty() {
+        return DatasetEntity.PROPERTY_OFFERING;
     }
 
     @Override

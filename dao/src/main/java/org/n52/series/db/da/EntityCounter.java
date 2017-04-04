@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import org.hibernate.Session;
@@ -35,13 +36,13 @@ import org.n52.series.db.DataAccessException;
 import org.n52.series.db.HibernateSessionStore;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.dao.CategoryDao;
+import org.n52.series.db.dao.DatasetDao;
 import org.n52.series.db.dao.DbQuery;
+import org.n52.series.db.dao.DbQueryFactory;
 import org.n52.series.db.dao.FeatureDao;
 import org.n52.series.db.dao.PhenomenonDao;
 import org.n52.series.db.dao.PlatformDao;
 import org.n52.series.db.dao.ProcedureDao;
-import org.n52.series.db.dao.DatasetDao;
-import org.n52.series.db.dao.DbQueryFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -135,8 +136,11 @@ public class EntityCounter {
 
     private DbQuery createBackwardsCompatibleQuery() {
         return dbQueryFactory.createFrom(IoParameters.createDefaults()
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "stationary", "insitu")
-                .extendWith(Parameters.FILTER_DATASET_TYPES, "measurement"));
+                                                     .extendWith(Parameters.FILTER_PLATFORM_TYPES,
+                                                                 "stationary",
+                                                                 "insitu")
+                                                     .extendWith(Parameters.FILTER_DATASET_TYPES,
+                                                                 DatasetEntity.DEFAULT_DATASET_TYPE));
     }
 
 }

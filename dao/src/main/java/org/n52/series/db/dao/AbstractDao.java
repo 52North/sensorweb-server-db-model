@@ -26,15 +26,15 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
 
-import static org.hibernate.criterion.Projections.rowCount;
-import static org.hibernate.criterion.Restrictions.eq;
+package org.n52.series.db.dao;
 
 import java.util.List;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
 import org.n52.series.db.DataAccessException;
 import org.n52.series.db.beans.I18nEntity;
 import org.slf4j.Logger;
@@ -57,45 +57,45 @@ public abstract class AbstractDao<T> implements GenericDao<T, Long> {
 
     protected abstract Class<T> getEntityClass();
 
-    protected abstract String getSeriesProperty();
+    protected abstract String getDatasetProperty();
 
-    public boolean hasInstance(String id, DbQuery query, Class<? extends T> clazz) throws DataAccessException {
+    public boolean hasInstance(String id, DbQuery query, Class< ? extends T> clazz) throws DataAccessException {
         return getInstance(id, query) != null;
     }
 
     @Override
-    public boolean hasInstance(Long id, DbQuery query, Class<? extends T> clazz) {
+    public boolean hasInstance(Long id, DbQuery query, Class< ? extends T> clazz) {
         return session.get(clazz, id) != null;
     }
 
     public T getInstance(String key, DbQuery parameters) throws DataAccessException {
-        if ( !parameters.getParameters().isMatchDomainIds()) {
+        if (!parameters.getParameters()
+                        .isMatchDomainIds()) {
             return getInstance(Long.parseLong(key), parameters);
         }
 
         LOGGER.debug("get dataset type for '{}'. {}", key, parameters);
         Criteria criteria = getDefaultCriteria();
-        return getEntityClass().cast(criteria
-               .add(eq("domainId", key))
-               .uniqueResult());
+        return getEntityClass().cast(criteria.add(Restrictions.eq("domainId", key))
+                                             .uniqueResult());
     }
 
     @Override
     public T getInstance(Long key, DbQuery parameters) throws DataAccessException {
         LOGGER.debug("get instance '{}': {}", key, parameters);
         Criteria criteria = getDefaultCriteria();
-        return getEntityClass().cast(criteria
-                .add(eq("pkid", key))
-                .uniqueResult());
+        return getEntityClass().cast(criteria.add(Restrictions.eq("pkid", key))
+                                             .uniqueResult());
     }
 
     @Override
     public Integer getCount(DbQuery query) throws DataAccessException {
-        Criteria criteria = getDefaultCriteria().setProjection(rowCount());
-        return ((Long) query.addFilters(criteria, getSeriesProperty()).uniqueResult()).intValue();
+        Criteria criteria = getDefaultCriteria().setProjection(Projections.rowCount());
+        return ((Long) query.addFilters(criteria, getDatasetProperty())
+                            .uniqueResult()).intValue();
     }
 
-    protected <I extends I18nEntity> Criteria translate(Class<I> clazz, Criteria criteria, DbQuery query) {
+    protected <I extends I18nEntity> Criteria i18n(Class<I> clazz, Criteria criteria, DbQuery query) {
         return hasTranslation(query, clazz)
                 ? query.addLocaleTo(criteria, clazz)
                 : criteria;
@@ -107,13 +107,13 @@ public abstract class AbstractDao<T> implements GenericDao<T, Long> {
     }
 
     protected Criteria getDefaultCriteria() {
-        return getDefaultCriteria(getSeriesProperty());
+        return getDefaultCriteria(getDatasetProperty());
     }
 
     protected Criteria getDefaultCriteria(String alias) {
         return alias == null || alias.isEmpty()
-            ? session.createCriteria(getEntityClass())
-            : session.createCriteria(getEntityClass(), alias);
+                ? session.createCriteria(getEntityClass())
+                : session.createCriteria(getEntityClass(), alias);
     }
 
 }

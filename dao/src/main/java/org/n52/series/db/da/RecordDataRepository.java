@@ -26,13 +26,16 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.hibernate.Session;
+import org.n52.io.request.IoParameters;
 import org.n52.io.response.dataset.record.RecordData;
 import org.n52.io.response.dataset.record.RecordDatasetMetadata;
 import org.n52.io.response.dataset.record.RecordValue;
@@ -43,7 +46,8 @@ import org.n52.series.db.beans.ServiceEntity;
 import org.n52.series.db.dao.DataDao;
 import org.n52.series.db.dao.DbQuery;
 
-public class RecordDataRepository extends AbstractDataRepository<RecordData, RecordDatasetEntity, RecordDataEntity, RecordValue> {
+public class RecordDataRepository
+        extends AbstractDataRepository<RecordData, RecordDatasetEntity, RecordDataEntity, RecordValue> {
 
     @Override
     public Class<RecordDatasetEntity> getEntityType() {
@@ -52,8 +56,8 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
 
     @Override
     protected RecordData assembleDataWithReferenceValues(RecordDatasetEntity timeseries,
-                                                       DbQuery dbQuery,
-                                                       Session session)
+                                                         DbQuery dbQuery,
+                                                         Session session)
             throws DataAccessException {
         RecordData result = assembleData(timeseries, dbQuery, session);
         Set<RecordDatasetEntity> referenceValues = timeseries.getReferenceValues();
@@ -66,8 +70,8 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
     }
 
     private Map<String, RecordData> assembleReferenceSeries(Set<RecordDatasetEntity> referenceValues,
-                                                          DbQuery query,
-                                                          Session session)
+                                                            DbQuery query,
+                                                            Session session)
             throws DataAccessException {
         Map<String, RecordData> referenceSeries = new HashMap<>();
         for (RecordDatasetEntity referenceSeriesEntity : referenceValues) {
@@ -76,14 +80,15 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
                 if (haveToExpandReferenceData(referenceSeriesData)) {
                     referenceSeriesData = expandReferenceDataIfNecessary(referenceSeriesEntity, query, session);
                 }
-                referenceSeries.put(referenceSeriesEntity.getPkid().toString(), referenceSeriesData);
+                referenceSeries.put(Long.toString(referenceSeriesEntity.getPkid()), referenceSeriesData);
             }
         }
         return referenceSeries;
     }
 
     private boolean haveToExpandReferenceData(RecordData referenceSeriesData) {
-        return referenceSeriesData.getValues().size() <= 1;
+        return referenceSeriesData.getValues()
+                                  .size() <= 1;
     }
 
     private RecordData expandReferenceDataIfNecessary(RecordDatasetEntity seriesEntity, DbQuery query, Session session)
@@ -91,7 +96,7 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
         RecordData result = new RecordData();
         DataDao<RecordDataEntity> dao = new DataDao<>(session);
         List<RecordDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
-        if ( !hasValidEntriesWithinRequestedTimespan(observations)) {
+        if (!hasValidEntriesWithinRequestedTimespan(observations)) {
             RecordValue lastValidValue = getLastValue(seriesEntity, session, query);
             result.addValues(expandToInterval(lastValidValue.getValue(), seriesEntity, query));
         }
@@ -109,7 +114,8 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
         RecordData result = new RecordData();
         DataDao<RecordDataEntity> dao = new DataDao<>(session);
         List<RecordDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
-        for (RecordDataEntity observation : observations) { // XXX n times same object?
+        for (RecordDataEntity observation : observations) {
+            // XXX n times same object?
             if (observation != null) {
                 result.addValues(createSeriesValueFor(observation, seriesEntity, query));
             }
@@ -121,13 +127,17 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
     private RecordValue[] expandToInterval(Map<String, Object> value, RecordDatasetEntity series, DbQuery query) {
         RecordDataEntity referenceStart = new RecordDataEntity();
         RecordDataEntity referenceEnd = new RecordDataEntity();
-        referenceStart.setTimestamp(query.getTimespan().getStart().toDate());
-        referenceEnd.setTimestamp(query.getTimespan().getEnd().toDate());
+        referenceStart.setTimestamp(query.getTimespan()
+                                         .getStart()
+                                         .toDate());
+        referenceEnd.setTimestamp(query.getTimespan()
+                                       .getEnd()
+                                       .toDate());
         referenceStart.setValue(value);
         referenceEnd.setValue(value);
         return new RecordValue[] {
-                                createSeriesValueFor(referenceStart, series, query),
-                                createSeriesValueFor(referenceEnd, series, query)
+            createSeriesValueFor(referenceStart, series, query),
+            createSeriesValueFor(referenceEnd, series, query),
         };
 
     }
@@ -139,12 +149,17 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
             return null;
         }
 
-        long timeend = observation.getTimeend().getTime();
-        long timestart = observation.getTimestart().getTime();
-        Map<String, Object> observationValue = !series.getService().isNoDataValue(observation)
+        ServiceEntity service = series.getService();
+        Map<String, Object> observationValue = !service.isNoDataValue(observation)
                 ? observation.getValue()
                 : null;
-        RecordValue value = query.getParameters().isShowTimeIntervals()
+
+        long timeend = observation.getTimeend()
+                                  .getTime();
+        long timestart = observation.getTimestart()
+                                    .getTime();
+        IoParameters parameters = query.getParameters();
+        RecordValue value = parameters.isShowTimeIntervals()
                 ? new RecordValue(timestart, timeend, observationValue)
                 : new RecordValue(timeend, observationValue);
 
@@ -152,7 +167,8 @@ public class RecordDataRepository extends AbstractDataRepository<RecordData, Rec
             addGeometry(observation, value);
             addValidTime(observation, value);
             addParameters(observation, value);
-        } else if (series.getPlatform().isMobile()) {
+        } else if (series.getPlatform()
+                         .isMobile()) {
             addGeometry(observation, value);
         }
         return value;

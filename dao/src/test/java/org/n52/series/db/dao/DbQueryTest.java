@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.dao;
 
 import org.junit.Assert;
@@ -39,6 +40,5 @@ public class DbQueryTest {
     public void when_createWithNull_then_defaults() {
         Assert.assertNotNull(dbQueryFactory.createFrom(null));
     }
-
 
 }

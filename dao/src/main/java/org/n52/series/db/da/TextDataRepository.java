@@ -26,13 +26,16 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.hibernate.Session;
+import org.n52.io.request.IoParameters;
 import org.n52.io.response.dataset.text.TextData;
 import org.n52.io.response.dataset.text.TextDatasetMetadata;
 import org.n52.io.response.dataset.text.TextValue;
@@ -51,9 +54,7 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
     }
 
     @Override
-    protected TextData assembleDataWithReferenceValues(TextDatasetEntity timeseries,
-                                                       DbQuery dbQuery,
-                                                       Session session)
+    protected TextData assembleDataWithReferenceValues(TextDatasetEntity timeseries, DbQuery dbQuery, Session session)
             throws DataAccessException {
         TextData result = assembleData(timeseries, dbQuery, session);
         Set<TextDatasetEntity> referenceValues = timeseries.getReferenceValues();
@@ -76,14 +77,15 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
                 if (haveToExpandReferenceData(referenceSeriesData)) {
                     referenceSeriesData = expandReferenceDataIfNecessary(referenceSeriesEntity, query, session);
                 }
-                referenceSeries.put(referenceSeriesEntity.getPkid().toString(), referenceSeriesData);
+                referenceSeries.put(Long.toString(referenceSeriesEntity.getPkid()), referenceSeriesData);
             }
         }
         return referenceSeries;
     }
 
     private boolean haveToExpandReferenceData(TextData referenceSeriesData) {
-        return referenceSeriesData.getValues().size() <= 1;
+        List<TextValue> values = referenceSeriesData.getValues();
+        return values.size() <= 1;
     }
 
     private TextData expandReferenceDataIfNecessary(TextDatasetEntity seriesEntity, DbQuery query, Session session)
@@ -91,7 +93,7 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
         TextData result = new TextData();
         DataDao<TextDataEntity> dao = new DataDao<>(session);
         List<TextDataEntity> observations = dao.getAllInstancesFor(seriesEntity, query);
-        if ( !hasValidEntriesWithinRequestedTimespan(observations)) {
+        if (!hasValidEntriesWithinRequestedTimespan(observations)) {
             TextValue lastValidValue = getLastValue(seriesEntity, session, query);
             result.addValues(expandToInterval(lastValidValue.getValue(), seriesEntity, query));
         }
@@ -121,13 +123,17 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
     private TextValue[] expandToInterval(String value, TextDatasetEntity series, DbQuery query) {
         TextDataEntity referenceStart = new TextDataEntity();
         TextDataEntity referenceEnd = new TextDataEntity();
-        referenceStart.setTimestamp(query.getTimespan().getStart().toDate());
-        referenceEnd.setTimestamp(query.getTimespan().getEnd().toDate());
+        referenceStart.setTimestamp(query.getTimespan()
+                                         .getStart()
+                                         .toDate());
+        referenceEnd.setTimestamp(query.getTimespan()
+                                       .getEnd()
+                                       .toDate());
         referenceStart.setValue(value);
         referenceEnd.setValue(value);
         return new TextValue[] {
-                                createSeriesValueFor(referenceStart, series, query),
-                                createSeriesValueFor(referenceEnd, series, query)
+            createSeriesValueFor(referenceStart, series, query),
+            createSeriesValueFor(referenceEnd, series, query),
         };
 
     }
@@ -139,12 +145,17 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
             return null;
         }
 
-        long timeend = observation.getTimeend().getTime();
-        long timestart = observation.getTimestart().getTime();
-        String observationValue = !series.getService().isNoDataValue(observation)
+        ServiceEntity service = series.getService();
+        String observationValue = !service.isNoDataValue(observation)
                 ? observation.getValue()
                 : null;
-        TextValue value = query.getParameters().isShowTimeIntervals()
+
+        long timeend = observation.getTimeend()
+                                  .getTime();
+        long timestart = observation.getTimestart()
+                                    .getTime();
+        IoParameters parameters = query.getParameters();
+        TextValue value = parameters.isShowTimeIntervals()
                 ? new TextValue(timestart, timeend, observationValue)
                 : new TextValue(timeend, observationValue);
 
@@ -152,7 +163,8 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
             addGeometry(observation, value);
             addValidTime(observation, value);
             addParameters(observation, value);
-        } else if (series.getPlatform().isMobile()) {
+        } else if (series.getPlatform()
+                         .isMobile()) {
             addGeometry(observation, value);
         }
         return value;

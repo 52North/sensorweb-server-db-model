@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Set;
@@ -43,17 +44,17 @@ import com.vividsolutions.jts.geom.Geometry;
  */
 public class PlatformEntity extends DescribableEntity {
 
-    public static final String COLUMN_PKID = "pkid";
-    public static final String INSITU = "insitu";
-    public static final String MOBILE = "mobile";
+    public static final String PROPERTY_INSITU = "insitu";
 
-    private boolean mobile = false;
+    public static final String PROPERTY_MOBILE = "mobile";
 
     private boolean insitu = true;
 
+    private boolean mobile;
+
     private Geometry geometry;
 
-    private Set<Parameter<?>> parameters;
+    private Set<Parameter< ? >> parameters;
 
     public PlatformType getPlatformType() {
         return PlatformType.toInstance(mobile, insitu);
@@ -83,11 +84,11 @@ public class PlatformEntity extends DescribableEntity {
         this.geometry = geometry;
     }
 
-    public Set<Parameter<?>> getParameters() {
+    public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter<?>> parameters) {
+    public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 

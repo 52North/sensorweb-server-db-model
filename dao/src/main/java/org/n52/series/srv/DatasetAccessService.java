@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.srv;
 
 import org.n52.io.DatasetFactoryException;
@@ -52,34 +53,32 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
  */
-public class DatasetAccessService extends AccessService<DatasetOutput> implements DataService<Data<?>> {
+public class DatasetAccessService extends AccessService<DatasetOutput> implements DataService<Data< ? >> {
 
     @Autowired
     private IDataRepositoryFactory dataFactory;
 
-    public DatasetAccessService(DatasetRepository<Data<?>> repository) {
+    public DatasetAccessService(DatasetRepository<Data< ? >> repository) {
         super(repository);
     }
 
     @Override
-    public DataCollection<Data<?>> getData(RequestParameterSet parameters) {
+    public DataCollection<Data< ? >> getData(RequestParameterSet parameters) {
         try {
-            TvpDataCollection<Data<?>> dataCollection = new TvpDataCollection<>();
+            TvpDataCollection<Data< ? >> dataCollection = new TvpDataCollection<>();
             for (String seriesId : parameters.getDatasets()) {
-                Data<?> data = getDataFor(seriesId, parameters);
+                Data< ? > data = getDataFor(seriesId, parameters);
                 if (data != null) {
                     dataCollection.addNewSeries(seriesId, data);
                 }
             }
             return dataCollection;
-        }
-        catch (DataAccessException e) {
+        } catch (DataAccessException e) {
             throw new InternalServerException("Could not get series data from database.", e);
         }
     }
 
-    private Data<?> getDataFor(String seriesId, RequestParameterSet parameters)
-            throws DataAccessException {
+    private Data< ? > getDataFor(String seriesId, RequestParameterSet parameters) throws DataAccessException {
         DbQuery dbQuery = dbQueryFactory.createFrom(IoParameters.createFromQuery(parameters));
         String handleAsDatasetFallback = parameters.getAsString(Parameters.HANDLE_AS_DATASET_TYPE);
         String datasetType = DatasetType.extractType(seriesId, handleAsDatasetFallback);
@@ -88,7 +87,7 @@ public class DatasetAccessService extends AccessService<DatasetOutput> implement
     }
 
     private DataRepository createRepository(String datasetType) throws DataAccessException {
-        if ( !("all".equalsIgnoreCase(datasetType) || dataFactory.isKnown(datasetType))) {
+        if (! ("all".equalsIgnoreCase(datasetType) || dataFactory.isKnown(datasetType))) {
             throw new ResourceNotFoundException("unknown dataset type: " + datasetType);
         }
         try {

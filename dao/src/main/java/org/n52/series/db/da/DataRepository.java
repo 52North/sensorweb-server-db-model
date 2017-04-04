@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import org.hibernate.Session;
@@ -37,13 +38,13 @@ import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.ServiceEntity;
 import org.n52.series.db.dao.DbQuery;
 
-public interface DataRepository<DSE extends DatasetEntity<?>, V extends AbstractValue<?>> {
+public interface DataRepository<E extends DatasetEntity< ? >, V extends AbstractValue< ? >> {
 
-    Data<? extends AbstractValue<?>> getData(String id, DbQuery dbQuery) throws DataAccessException;
+    Data< ? extends AbstractValue< ? >> getData(String id, DbQuery dbQuery) throws DataAccessException;
 
-    V getFirstValue(DSE entity, Session session, DbQuery query);
+    V getFirstValue(E entity, Session session, DbQuery query);
 
-    V getLastValue(DSE entity, Session session, DbQuery query);
+    V getLastValue(E entity, Session session, DbQuery query);
 
     void setSessionStore(HibernateSessionStore sessionStore);
 
@@ -51,5 +52,5 @@ public interface DataRepository<DSE extends DatasetEntity<?>, V extends Abstract
         // void
     }
 
-    Class<DSE> getEntityType();
+    Class<E> getEntityType();
 }

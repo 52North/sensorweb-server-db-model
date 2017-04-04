@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension.resulttime;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ResultTimeExtension extends MetadataExtension<DatasetOutput> {
 
-    private final static Logger LOGGER = LoggerFactory.getLogger(ResultTimeExtension.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ResultTimeExtension.class);
 
     private static final String CONFIG_FILE = "/config-extension-resultTime.json";
 
@@ -74,8 +75,9 @@ public class ResultTimeExtension extends MetadataExtension<DatasetOutput> {
 
     @Override
     public void addExtraMetadataFieldNames(DatasetOutput output) {
-        final ParameterOutput service = output.getSeriesParameters().getService();
-        if (isAvailableFor(service.getId())) {
+        final ParameterOutput serviceOutput = output.getSeriesParameters()
+                                                    .getService();
+        if (isAvailableFor(serviceOutput.getId())) {
             output.addExtra(EXTENSION_NAME);
         }
     }

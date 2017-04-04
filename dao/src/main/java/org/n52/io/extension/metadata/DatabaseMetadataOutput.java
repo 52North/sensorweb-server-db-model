@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension.metadata;
 
 import java.util.Date;
@@ -36,25 +37,29 @@ public class DatabaseMetadataOutput<T> {
 
     private Date lastUpdate;
 
+    static <T> DatabaseMetadataOutput<T> create() {
+        return new DatabaseMetadataOutput<>();
+    }
+
     public T getValue() {
         return value;
     }
 
     public Date getLastUpdate() {
-        return lastUpdate;
+        return lastUpdate != null
+                ? new Date(lastUpdate.getTime())
+                : null;
     }
 
-    static <T> DatabaseMetadataOutput<T> create() {
-        return new DatabaseMetadataOutput<>();
-    }
-
-    DatabaseMetadataOutput<T> withValue(T value) {
+    DatabaseMetadataOutput<T> setValue(T value) {
         this.value = value;
         return this;
     }
 
-    DatabaseMetadataOutput<T> lastUpdatedAt(Date lastUpdate) {
-        this.lastUpdate = lastUpdate;
+    DatabaseMetadataOutput<T> setLastUpdatedAt(Date lastUpdateAt) {
+        this.lastUpdate = lastUpdateAt != null
+                ? new Date(lastUpdateAt.getTime())
+                : null;
         return this;
     }
 }

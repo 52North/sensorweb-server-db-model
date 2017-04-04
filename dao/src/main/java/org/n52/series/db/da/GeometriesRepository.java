@@ -26,11 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.da;
 
-import static org.n52.io.request.Parameters.FEATURES;
-import static org.n52.io.response.GeometryType.PLATFORM_SITE;
-import static org.n52.io.response.GeometryType.PLATFORM_TRACK;
+package org.n52.series.db.da;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -52,6 +49,8 @@ import org.n52.series.db.dao.DbQuery;
 import org.n52.series.db.dao.FeatureDao;
 import org.n52.series.db.dao.SamplingGeometryDao;
 import org.n52.series.spi.search.SearchResult;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -59,6 +58,8 @@ import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.Point;
 
 public class GeometriesRepository extends SessionAwareRepository implements OutputAssembler<GeometryInfo> {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeometriesRepository.class);
 
     @Autowired
     private PlatformRepository platformRepository;
@@ -68,14 +69,15 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
         Session session = getSession();
         try {
             if (GeometryType.isPlatformGeometryId(id)) {
-                id = GeometryType.extractId(id);
+                String dbId = GeometryType.extractId(id);
+                final FeatureDao dao = new FeatureDao(session);
                 // XXX must be FALSE if 'site/2' matches an id of a feature from a mobile platform
-                return new FeatureDao(session).hasInstance(parseId(id), parameters, FeatureEntity.class);
-            }
-            else if (GeometryType.isObservedGeometryId(id)) {
-                id = GeometryType.extractId(id);
+                return dao.hasInstance(parseId(dbId), parameters, FeatureEntity.class);
+            } else if (GeometryType.isObservedGeometryId(id)) {
+                LOGGER.warn("ObservedGeometries not fully supported right now!");
+                // id = GeometryType.extractId(id);
                 // TODO class of observed geometries
-//                return new FeatureDao(session).hasInstance(parseId(id), clazz);
+                // return new FeatureDao(session).hasInstance(parseId(id), clazz);
             }
 
             return false;
@@ -141,11 +143,12 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found, DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         return Collections.emptyList();
     }
 
-    private List<GeometryInfo> getAllInstances(DbQuery query, Session session, boolean expanded) throws DataAccessException {
+    private List<GeometryInfo> getAllInstances(DbQuery query, Session session, boolean expanded)
+            throws DataAccessException {
         List<GeometryInfo> geometries = new ArrayList<>();
         query.setDatabaseAuthorityCode(getDatabaseSrid());
         final FilterResolver filterResolver = query.getFilterResolver();
@@ -168,7 +171,8 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
         return geometries;
     }
 
-    private GeometryInfo getPlatformLocationGeometry(String id, DbQuery parameters, Session session) throws DataAccessException {
+    private GeometryInfo getPlatformLocationGeometry(String id, DbQuery parameters, Session session)
+            throws DataAccessException {
         String geometryId = GeometryType.extractId(id);
         FeatureEntity featureEntity = getFeatureEntity(geometryId, parameters, session);
         if (featureEntity != null) {
@@ -187,14 +191,14 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
         return dao.getInstance(geometryId, parameters);
     }
 
-
-    private List<GeometryInfo> getAllSites(DbQuery parameters, Session session, boolean expanded) throws DataAccessException {
+    private List<GeometryInfo> getAllSites(DbQuery parameters, Session session, boolean expanded)
+            throws DataAccessException {
         List<GeometryInfo> geometryInfoList = new ArrayList<>();
         FeatureDao dao = new FeatureDao(session);
         DbQuery siteQuery = dbQueryFactory.createFrom(parameters.getParameters()
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "stationary")
-        );
+                                                                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
+                                                                .extendWith(Parameters.FILTER_PLATFORM_TYPES,
+                                                                            "stationary"));
         for (FeatureEntity featureEntity : dao.getAllInstances(siteQuery)) {
             GeometryInfo geometryInfo = createSite(featureEntity, parameters, expanded);
             if (geometryInfo != null) {
@@ -206,7 +210,7 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
 
     private GeometryInfo createSite(FeatureEntity featureEntity, DbQuery parameters, boolean expanded)
             throws DataAccessException {
-        final GeometryInfo geomInfo = new GeometryInfo(PLATFORM_SITE);
+        final GeometryInfo geomInfo = new GeometryInfo(GeometryType.PLATFORM_SITE);
         GeometryInfo geometryInfo = addCondensedValues(geomInfo, featureEntity, parameters);
         if (expanded) {
             Geometry geometry = featureEntity.getGeometry(getDatabaseSrid());
@@ -217,21 +221,23 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
         return geometryInfo;
     }
 
-    private Collection<GeometryInfo> getAllTracks(DbQuery parameters, Session session, boolean expanded) throws DataAccessException {
+    private Collection<GeometryInfo> getAllTracks(DbQuery parameters, Session session, boolean expanded)
+            throws DataAccessException {
         List<GeometryInfo> geometryInfoList = new ArrayList<>();
         FeatureDao featureDao = new FeatureDao(session);
         DbQuery trackQuery = dbQueryFactory.createFrom(parameters.getParameters()
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "mobile")
-        );
+                                                                 .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
+                                                                 .extendWith(Parameters.FILTER_PLATFORM_TYPES,
+                                                                             "mobile"));
         for (FeatureEntity featureEntity : featureDao.getAllInstances(trackQuery)) {
             geometryInfoList.add(createTrack(featureEntity, parameters, expanded, session));
         }
         return geometryInfoList;
     }
 
-    private GeometryInfo createTrack(FeatureEntity featureEntity, DbQuery parameters, boolean expanded, Session session) throws DataAccessException {
-        final GeometryInfo geomInfo = new GeometryInfo(PLATFORM_TRACK);
+    private GeometryInfo createTrack(FeatureEntity featureEntity, DbQuery parameters, boolean expanded, Session session)
+            throws DataAccessException {
+        final GeometryInfo geomInfo = new GeometryInfo(GeometryType.PLATFORM_TRACK);
         GeometryInfo geometryInfo = addCondensedValues(geomInfo, featureEntity, parameters);
         if (expanded) {
             if (featureEntity.isSetGeometry()) {
@@ -240,9 +246,9 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
                 return geometryInfo;
             } else {
                 // track available as points from observation table
-                DbQuery featureQuery = dbQueryFactory.createFrom(parameters.getParameters()
-                        .extendWith(FEATURES, String.valueOf(featureEntity.getPkid()))
-                );
+                DbQuery featureQuery = getDbQuery(parameters.getParameters()
+                                                            .extendWith(Parameters.FEATURES,
+                                                                        Long.toString(featureEntity.getPkid())));
                 final SamplingGeometryDao dao = new SamplingGeometryDao(session);
                 List<GeometryEntity> samplingGeometries = dao.getGeometriesOrderedByTimestamp(featureQuery);
                 geometryInfo.setGeometry(createLineString(samplingGeometries));
@@ -252,28 +258,30 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
         return geometryInfo;
     }
 
-    private Collection<GeometryInfo> getAllObservedGeometriesStatic(DbQuery parameters, Session session, boolean expanded) {
+    private Collection<GeometryInfo> getAllObservedGeometriesStatic(DbQuery parameters,
+                                                                    Session session,
+                                                                    boolean expanded) {
+        LOGGER.warn("Static ObservedGeometries not yet supported!");
         // TODO implement
         return new ArrayList<>();
     }
 
-    private Collection<GeometryInfo> getAllObservedGeometriesDynamic(DbQuery parameters, Session session, boolean expanded) {
+    private Collection<GeometryInfo> getAllObservedGeometriesDynamic(DbQuery parameters,
+                                                                     Session session,
+                                                                     boolean expanded) {
+        LOGGER.warn("Dynamic ObservedGeometries not yet supported!");
         // TODO implement
         return new ArrayList<>();
     }
 
     private List<GeometryEntity> getAllObservedGeometries(DbQuery parameters, Session session) {
+        LOGGER.warn("ObservedGeometries not yet supported!");
         // TODO Auto-generated method stub
         return null;
     }
 
-    private Collection<? extends GeometryEntity> convertAllMobileInsitu(List<FeatureEntity> allMobileInsitu) {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
-    private GeometryInfo addCondensedValues(GeometryInfo geometryInfo, FeatureEntity featureEntity,
-            DbQuery parameters) throws DataAccessException {
+    private GeometryInfo addCondensedValues(GeometryInfo geometryInfo, FeatureEntity featureEntity, DbQuery parameters)
+            throws DataAccessException {
         geometryInfo.setId(Long.toString(featureEntity.getPkid()));
         geometryInfo.setHrefBase(urHelper.getGeometriesHrefBaseUrl(parameters.getHrefBase()));
         geometryInfo.setPlatform(getPlatfom(featureEntity, parameters));
@@ -282,12 +290,14 @@ public class GeometriesRepository extends SessionAwareRepository implements Outp
 
     private PlatformOutput getPlatfom(FeatureEntity entity, DbQuery parameters) throws DataAccessException {
         DbQuery platformQuery = dbQueryFactory.createFrom(parameters.getParameters()
-                .extendWith(Parameters.FEATURES, String.valueOf(entity.getPkid()))
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "all")
-        );
+                                                                    .extendWith(Parameters.FEATURES,
+                                                                                String.valueOf(entity.getPkid()))
+                                                                    .extendWith(Parameters.FILTER_PLATFORM_TYPES,
+                                                                                "all"));
 
         List<PlatformOutput> platforms = platformRepository.getAllCondensed(platformQuery);
-        return platforms.iterator().next();
+        return platforms.iterator()
+                        .next();
     }
 
     private Geometry createLineString(List<GeometryEntity> samplingGeometries) {

@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db;
 
 import java.sql.CallableStatement;
@@ -35,6 +36,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.TimeZone;
+
 import org.hibernate.type.descriptor.ValueBinder;
 import org.hibernate.type.descriptor.ValueExtractor;
 import org.hibernate.type.descriptor.WrapperOptions;
@@ -44,14 +46,14 @@ import org.hibernate.type.descriptor.sql.BasicExtractor;
 import org.hibernate.type.descriptor.sql.TimestampTypeDescriptor;
 
 /**
- * Hibernate TypeDescriptor which forces all Timestamps queried from/inserted to
- * the database to use a configurable TimeZone instead of the JVM's timezone.
+ * Hibernate TypeDescriptor which forces all Timestamps queried from/inserted to the database to use a
+ * configurable TimeZone instead of the JVM's timezone.
  *
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- *
  * @since 2.0.0
  */
-public class ZonalTimestampTypeDescriptor extends TimestampTypeDescriptor {
+public final class ZonalTimestampTypeDescriptor extends TimestampTypeDescriptor {
+
     private static final long serialVersionUID = -7983231403900402497L;
 
     private static final TimeZone DEFAULT_ZONE = TimeZone.getTimeZone("UTC");
@@ -79,7 +81,8 @@ public class ZonalTimestampTypeDescriptor extends TimestampTypeDescriptor {
 
     public static ZonalTimestampTypeDescriptor getInstance(TimeZone zone) {
         if (instance != null) {
-            throw new IllegalStateException("Configured already with '" + zonalCalendar.toString() + "'");
+            final String calendar = zonalCalendar.toString();
+            throw new IllegalStateException("Configured already: '" + calendar + "'");
         }
         return new ZonalTimestampTypeDescriptor(zone);
     }
@@ -88,9 +91,10 @@ public class ZonalTimestampTypeDescriptor extends TimestampTypeDescriptor {
     public <X> ValueBinder<X> getBinder(final JavaTypeDescriptor<X> javaTypeDescriptor) {
         return new BasicBinder<X>(javaTypeDescriptor, this) {
             @Override
-            protected void doBind(PreparedStatement st, X value, int index, WrapperOptions options)
+            protected void doBind(PreparedStatement st, X value, int index, WrapperOptions opts)
                     throws SQLException {
-                st.setTimestamp(index, javaTypeDescriptor.unwrap(value, Timestamp.class, options), zonalCalendar);
+                final Timestamp unwrapped = javaTypeDescriptor.unwrap(value, Timestamp.class, opts);
+                st.setTimestamp(index, unwrapped, zonalCalendar);
             }
         };
     }
@@ -99,22 +103,23 @@ public class ZonalTimestampTypeDescriptor extends TimestampTypeDescriptor {
     public <X> ValueExtractor<X> getExtractor(final JavaTypeDescriptor<X> javaTypeDescriptor) {
         return new BasicExtractor<X>(javaTypeDescriptor, this) {
             @Override
-            protected X doExtract(ResultSet rs, String name, WrapperOptions options) throws SQLException {
+            protected X doExtract(ResultSet rs, String name, WrapperOptions opts) throws SQLException {
                 if (rs.getObject(name) != null) {
-                    return javaTypeDescriptor.wrap(rs.getTimestamp(name, zonalCalendar), options);
+                    return javaTypeDescriptor.wrap(rs.getTimestamp(name, zonalCalendar), opts);
                 }
                 return null;
             }
 
             @Override
-            protected X doExtract(CallableStatement statement, int index, WrapperOptions options) throws SQLException {
-                return javaTypeDescriptor.wrap(statement.getTimestamp(index, zonalCalendar), options);
+            protected X doExtract(CallableStatement statement, int index, WrapperOptions opts)
+                    throws SQLException {
+                return javaTypeDescriptor.wrap(statement.getTimestamp(index, zonalCalendar), opts);
             }
 
             @Override
-            protected X doExtract(CallableStatement statement, String name, WrapperOptions options)
+            protected X doExtract(CallableStatement statement, String name, WrapperOptions opts)
                     throws SQLException {
-                return javaTypeDescriptor.wrap(statement.getTimestamp(name, zonalCalendar), options);
+                return javaTypeDescriptor.wrap(statement.getTimestamp(name, zonalCalendar), opts);
             }
         };
     }

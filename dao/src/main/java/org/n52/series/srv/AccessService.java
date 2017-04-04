@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.srv;
 
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class AccessService<T extends ParameterOutput> extends ParameterService<T
             List<T> results = repository.getAllExpanded(dbQuery);
             return createOutputCollection(results);
         } catch (DataAccessException e) {
-            throw new InternalServerException("Could not get data.", e);
+            throw new InternalServerException("Could not get expanded data.", e);
         }
     }
 
@@ -71,7 +72,7 @@ public class AccessService<T extends ParameterOutput> extends ParameterService<T
             List<T> results = repository.getAllCondensed(dbQuery);
             return createOutputCollection(results);
         } catch (DataAccessException e) {
-            throw new InternalServerException("Could not get data.", e);
+            throw new InternalServerException("Could not get condensed data.", e);
         }
     }
 
@@ -85,7 +86,7 @@ public class AccessService<T extends ParameterOutput> extends ParameterService<T
             }
             return createOutputCollection(results);
         } catch (DataAccessException e) {
-            throw new InternalServerException("Could not get data.", e);
+            throw new InternalServerException("Could not get multiple instance data.", e);
         }
     }
 
@@ -95,7 +96,7 @@ public class AccessService<T extends ParameterOutput> extends ParameterService<T
             DbQuery dbQuery = dbQueryFactory.createFrom(query);
             return repository.getInstance(id, dbQuery);
         } catch (DataAccessException e) {
-            throw new InternalServerException("Could not get data.", e);
+            throw new InternalServerException("Could not get instance data.", e);
         }
     }
 

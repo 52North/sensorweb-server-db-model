@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -50,7 +51,6 @@ import org.n52.web.exception.ResourceNotFoundException;
 import com.vividsolutions.jts.geom.Geometry;
 
 /**
- *
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
  * @deprecated since 2.0.0.
  */
@@ -86,12 +86,11 @@ public class StationRepository extends SessionAwareRepository implements OutputA
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found,
-            DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         String locale = query.getLocale();
         List<SearchResult> results = new ArrayList<>();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = Long.toString(searchResult.getPkid());
             String label = searchResult.getLabelFrom(locale);
             results.add(new StationSearchResult(pkid, label));
         }
@@ -165,20 +164,23 @@ public class StationRepository extends SessionAwareRepository implements OutputA
         return createExpanded(result, parameters, session);
     }
 
-    private FeatureEntity getFeatureEntity(String id, DbQuery parameters, Session session) throws DataAccessException, BadRequestException {
+    private FeatureEntity getFeatureEntity(String id, DbQuery parameters, Session session)
+            throws DataAccessException, BadRequestException {
         parameters.setDatabaseAuthorityCode(getDatabaseSrid());
         DbQuery query = addPointLocationOnlyRestriction(parameters);
         return createDao(session).getInstance(parseId(id), query);
     }
 
-    public StationOutput getCondensedInstance(String id, DbQuery parameters, Session session) throws DataAccessException {
+    public StationOutput getCondensedInstance(String id, DbQuery parameters, Session session)
+            throws DataAccessException {
         parameters.setDatabaseAuthorityCode(getDatabaseSrid());
         FeatureDao featureDao = createDao(session);
         FeatureEntity result = featureDao.getInstance(parseId(id), getDbQuery(IoParameters.createDefaults()));
         return createCondensed(result, parameters);
     }
 
-    private StationOutput createExpanded(FeatureEntity feature, DbQuery parameters, Session session) throws DataAccessException {
+    private StationOutput createExpanded(FeatureEntity feature, DbQuery parameters, Session session)
+            throws DataAccessException {
         DatasetDao<MeasurementDatasetEntity> seriesDao = new DatasetDao<>(session, MeasurementDatasetEntity.class);
         List<MeasurementDatasetEntity> series = seriesDao.getInstancesWith(feature);
         StationOutput stationOutput = createCondensed(feature, parameters);
@@ -202,7 +204,7 @@ public class StationRepository extends SessionAwareRepository implements OutputA
 
     private DbQuery addPointLocationOnlyRestriction(DbQuery query) {
         return dbQueryFactory.createFrom(query.getParameters()
-                          .extendWith("geometryTypes", "Point"));
+                                              .extendWith("geometryTypes", "Point"));
     }
 
 }

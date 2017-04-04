@@ -26,16 +26,17 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import org.n52.io.DatasetFactoryException;
 
 public interface IDataRepositoryFactory {
 
-    public boolean isKnown(String datasetType);
+    boolean isKnown(String datasetType);
 
-    public DataRepository create(String datasetType) throws DatasetFactoryException;
+    DataRepository create(String datasetType) throws DatasetFactoryException;
 
-    public boolean hasCacheEntry(String measurement);
+    boolean hasCacheEntry(String measurement);
 
 }

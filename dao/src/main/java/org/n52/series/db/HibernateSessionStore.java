@@ -26,16 +26,17 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db;
 
 import org.hibernate.Session;
 
 public interface HibernateSessionStore {
 
-    public Session getSession();
+    Session getSession();
 
-    public void returnSession(Session session);
+    void returnSession(Session session);
 
-    public void shutdown();
+    void shutdown();
 
 }

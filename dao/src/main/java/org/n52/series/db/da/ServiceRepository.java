@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.hibernate.Session;
 import org.n52.io.DatasetFactoryException;
 import org.n52.io.DefaultIoFactory;
@@ -64,16 +66,21 @@ public class ServiceRepository extends SessionAwareRepository implements OutputA
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceRepository.class);
 
+    private static final String SERVICE_TYPE = "Restful series access layer.";
+
     @Autowired
     private EntityCounter counter;
 
     @Autowired
-    private DefaultIoFactory<Data<AbstractValue< ? >>, DatasetOutput<AbstractValue< ?>, ?>, AbstractValue< ?>> ioFactoryCreator;
+    private DefaultIoFactory<Data<AbstractValue< ? >>,
+                             DatasetOutput<AbstractValue< ? >, ? >,
+                             AbstractValue< ? >> ioFactoryCreator;
 
     @Override
     public boolean exists(String id, DbQuery parameters) throws DataAccessException {
         if (serviceEntity != null) {
-            return String.valueOf(serviceEntity.getPkid()).equalsIgnoreCase(id);
+            return String.valueOf(serviceEntity.getPkid())
+                         .equalsIgnoreCase(id);
         }
 
         Session session = getSession();
@@ -87,30 +94,27 @@ public class ServiceRepository extends SessionAwareRepository implements OutputA
 
     @Override
     public Collection<SearchResult> searchFor(IoParameters parameters) {
-//        final ServiceSearchResult result = new ServiceSearchResult(serviceInfo.getServiceId(), serviceInfo.getServiceDescription());
-//        String queryString = DbQuery.createFrom(parameters).getSearchTerm();
-//        return serviceInfo.getServiceDescription().contains(queryString)
-//                ? Collections.<SearchResult>singletonList(result)
-//                : Collections.<SearchResult>emptyList();
-//        Session session = getSession();
-//        try {
-//            ServiceDao serviceDao = createDao(session);
-//            DbQuery query = getDbQuery(parameters);
-//            List<ServiceEntity> found = serviceDao.find(query);
-//            return convertToSearchResults(found, query);
-//        } finally {
-//            returnSession(session);
-//        }
+        /*
+         * final ServiceSearchResult result = new ServiceSearchResult(serviceInfo.getServiceId(),
+         * serviceInfo.getServiceDescription()); String queryString =
+         * DbQuery.createFrom(parameters).getSearchTerm(); return
+         * serviceInfo.getServiceDescription().contains(queryString) ?
+         * Collections.<SearchResult>singletonList(result)ServiceRepository :
+         * Collections.<SearchResult>emptyList(); Session session = getSession(); try { ServiceDao serviceDao
+         * = createDao(session); DbQuery query = getDbQuery(parameters); List<ServiceEntity> found =
+         * serviceDao.find(query); return convertToSearchResults(found, query); } finally {
+         * returnSession(session); }
+         */
         // TODO implement search
         throw new UnsupportedOperationException("not supported");
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found, DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         List<SearchResult> results = new ArrayList<>();
         String locale = query.getLocale();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = Long.toString(searchResult.getPkid());
             String label = searchResult.getLabelFrom(locale);
             String hrefBase = new UrlHelper().getFeaturesHrefBaseUrl(query.getHrefBase());
             results.add(new FeatureSearchResult(pkid, label, hrefBase));
@@ -217,10 +221,10 @@ public class ServiceRepository extends SessionAwareRepository implements OutputA
         if (filterResolver.shallBehaveBackwardsCompatible()) {
             // ensure backwards compatibility
             service.setVersion("1.0.0");
-            service.setType("Restful series access layer.");
+            service.setType(SERVICE_TYPE);
         } else {
             service.setType(entity.getType() == null
-                    ? "Restful series access layer."
+                    ? SERVICE_TYPE
                     : entity.getType());
             service.setVersion(entity.getVersion() != null
                     ? entity.getVersion()
@@ -229,7 +233,6 @@ public class ServiceRepository extends SessionAwareRepository implements OutputA
 
             // TODO add features
             // TODO different counts
-
         }
         return service;
     }
@@ -238,7 +241,7 @@ public class ServiceRepository extends SessionAwareRepository implements OutputA
         Map<String, Set<String>> mimeTypesByDatasetTypes = new HashMap<>();
         for (String datasetType : ioFactoryCreator.getKnownTypes()) {
             try {
-                IoFactory<?, ? ,?> factory = ioFactoryCreator.create(datasetType);
+                IoFactory< ? , ? , ? > factory = ioFactoryCreator.create(datasetType);
                 mimeTypesByDatasetTypes.put(datasetType, factory.getSupportedMimeTypes());
             } catch (DatasetFactoryException e) {
                 LOGGER.error("IO Factory for dataset type '{}' couldn't be created.", datasetType);
@@ -250,7 +253,8 @@ public class ServiceRepository extends SessionAwareRepository implements OutputA
     private ParameterCount countParameters(ServiceOutput service, DbQuery query) {
         try {
             ParameterCount quantities = new ServiceOutput.ParameterCount();
-            DbQuery serviceQuery = dbQueryFactory.createFrom(query.getParameters().extendWith(IoParameters.SERVICES, service.getId()));
+            DbQuery serviceQuery = getDbQuery(query.getParameters()
+                                                   .extendWith(IoParameters.SERVICES, service.getId()));
             quantities.setOfferingsSize(counter.countOfferings(serviceQuery));
             quantities.setProceduresSize(counter.countProcedures(serviceQuery));
             quantities.setCategoriesSize(counter.countCategories(serviceQuery));

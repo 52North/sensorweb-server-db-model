@@ -26,11 +26,13 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
 import org.n52.io.response.dataset.measurement.MeasurementDatasetOutput;
 
 public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity> {
@@ -66,7 +68,8 @@ public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntit
             Date when = firstValue.getTimeend();
             Double value = firstValue.getValue();
             if (when == null || value == null) {
-                return null; // empty component
+                // empty component
+                return null;
             }
         }
         return firstValue;
@@ -79,7 +82,8 @@ public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntit
             Date when = lastValue.getTimeend();
             Double value = lastValue.getValue();
             if (when == null || value == null) {
-                return null; // empty component
+                // empty component
+                return null;
             }
         }
         return lastValue;

@@ -26,10 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
 
-import static org.hibernate.criterion.Restrictions.eq;
-import static org.hibernate.sql.JoinType.LEFT_OUTER_JOIN;
+package org.n52.series.db.dao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,18 +37,24 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Criterion;
 import org.hibernate.criterion.LogicalExpression;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.sql.JoinType;
 import org.n52.series.db.DataAccessException;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.I18nFeatureEntity;
+import org.n52.series.db.beans.I18nOfferingEntity;
+import org.n52.series.db.beans.I18nPhenomenonEntity;
 import org.n52.series.db.beans.I18nProcedureEntity;
+import org.n52.series.db.beans.OfferingEntity;
+import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.PlatformEntity;
+import org.n52.series.db.beans.ProcedureEntity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-@SuppressWarnings("rawtypes") // infer entitType runtime
+@SuppressWarnings("rawtypes")
 public class DatasetDao<T extends DatasetEntity> extends AbstractDao<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DatasetDao.class);
@@ -61,7 +65,7 @@ public class DatasetDao<T extends DatasetEntity> extends AbstractDao<T> {
 
     public DatasetDao(Session session, Class<T> clazz) {
         super(session);
-        this.entityType = clazz;//(Class<T>) AbstractSeriesEntity.class;
+        this.entityType = clazz;
     }
 
     @SuppressWarnings("unchecked")
@@ -79,58 +83,64 @@ public class DatasetDao<T extends DatasetEntity> extends AbstractDao<T> {
         String searchTerm = "%" + query.getSearchTerm() + "%";
 
         /*
-         * Timeseries labels are constructed from labels of related feature
-         * and phenomenon. Therefore we have to join both tables and search
-         * for given pattern on any of the stored labels.
+         * Timeseries labels are constructed from labels of related feature and phenomenon. Therefore we have
+         * to join both tables and search for given pattern on any of the stored labels.
          */
-
         Criteria criteria = addIgnoreUnpublishedSeriesTo(getDefaultCriteria("s"), "s");
-        Criteria featureCriteria = criteria.createCriteria("feature", LEFT_OUTER_JOIN);
-        series.addAll(translate(I18nFeatureEntity.class, featureCriteria, query)
-                      .add(Restrictions.ilike("name", searchTerm)).list());
 
-        Criteria procedureCriteria = criteria.createCriteria("procedure", LEFT_OUTER_JOIN);
-        series.addAll(translate(I18nProcedureEntity.class, procedureCriteria, query)
-                      .add(Restrictions.ilike("name", searchTerm)).list());
+        Criteria featureCriteria = criteria.createCriteria(DatasetEntity.PROPERTY_FEATURE,
+                                                           JoinType.LEFT_OUTER_JOIN);
+        featureCriteria = i18n(I18nFeatureEntity.class, featureCriteria, query);
+        featureCriteria.add(Restrictions.ilike(FeatureEntity.PROPERTY_NAME, searchTerm));
+        series.addAll(featureCriteria.list());
 
-        Criteria phenomenonCriteria = criteria.createCriteria("phenomenon", LEFT_OUTER_JOIN);
-        series.addAll(translate(I18nProcedureEntity.class, phenomenonCriteria, query)
-                      .add(Restrictions.ilike("name", searchTerm)).list());
+        Criteria procedureCriteria = criteria.createCriteria(DatasetEntity.PROPERTY_PROCEDURE,
+                                                             JoinType.LEFT_OUTER_JOIN);
+        procedureCriteria = i18n(I18nProcedureEntity.class, procedureCriteria, query);
+        procedureCriteria.add(Restrictions.ilike(ProcedureEntity.PROPERTY_NAME, searchTerm));
+        series.addAll(procedureCriteria.list());
+
+        Criteria offeringCriteria = criteria.createCriteria(DatasetEntity.PROPERTY_OFFERING,
+                                                            JoinType.LEFT_OUTER_JOIN);
+        offeringCriteria = i18n(I18nOfferingEntity.class, offeringCriteria, query);
+        offeringCriteria.add(Restrictions.ilike(OfferingEntity.PROPERTY_NAME, searchTerm));
+        series.addAll(offeringCriteria.list());
+
+        Criteria phenomenonCriteria = criteria.createCriteria(DatasetEntity.PROPERTY_PHENOMENON,
+                                                              JoinType.LEFT_OUTER_JOIN);
+        phenomenonCriteria = i18n(I18nPhenomenonEntity.class, phenomenonCriteria, query);
+        phenomenonCriteria.add(Restrictions.ilike(PhenomenonEntity.PROPERTY_NAME, searchTerm));
+        series.addAll(phenomenonCriteria.list());
 
         return series;
     }
-
 
     @Override
     @SuppressWarnings("unchecked")
     public List<T> getAllInstances(DbQuery parameters) throws DataAccessException {
         LOGGER.debug("get all instances: {}", parameters);
-        Criteria criteria = getDefaultCriteria("series");
-        Criteria procedureCreateria = criteria.createCriteria("procedure");
-        procedureCreateria.add(eq("reference", false));
-        return (List<T>) parameters.addFilters(criteria, getSeriesProperty()).list();
-    }
-
-    @Override
-    protected String getSeriesProperty() {
-        return "";//COLUMN_PKID;
+        Criteria criteria = getDefaultCriteria();
+        Criteria procedureCreateria = criteria.createCriteria(DatasetEntity.PROPERTY_PROCEDURE);
+        procedureCreateria.add(Restrictions.eq("reference", false));
+        return (List<T>) parameters.addFilters(criteria, getDatasetProperty())
+                                   .list();
     }
 
     @SuppressWarnings("unchecked")
     public List<T> getInstancesWith(FeatureEntity feature) {
         LOGGER.debug("get instance for feature '{}'", feature);
-        Criteria criteria = getDefaultCriteria("series");
-        criteria.createCriteria("feature", LEFT_OUTER_JOIN)
-                .add(eq(COLUMN_PKID, feature.getPkid()));
+        Criteria criteria = getDefaultCriteria().createCriteria(DatasetEntity.PROPERTY_FEATURE,
+                                                                JoinType.LEFT_OUTER_JOIN)
+                                                .add(Restrictions.eq(COLUMN_PKID, feature.getPkid()));
         return (List<T>) criteria.list();
     }
 
     @SuppressWarnings("unchecked")
     public List<T> getInstancesWith(PlatformEntity platform) {
         LOGGER.debug("get instance for platform '{}'", platform);
-        Criteria criteria = getDefaultCriteria("series");
-        criteria.createCriteria("procedure", LEFT_OUTER_JOIN)
-                .add(eq(COLUMN_PKID, platform.getPkid()));
+        Criteria criteria = getDefaultCriteria().createCriteria(DatasetEntity.PROPERTY_PROCEDURE,
+                                                                JoinType.LEFT_OUTER_JOIN)
+                                                .add(Restrictions.eq(COLUMN_PKID, platform.getPkid()));
         return (List<T>) criteria.list();
     }
 
@@ -140,41 +150,39 @@ public class DatasetDao<T extends DatasetEntity> extends AbstractDao<T> {
     }
 
     @Override
+    protected String getDatasetProperty() {
+        // self has no property
+        return "";
+    }
+
+    @Override
     protected Criteria getDefaultCriteria() {
-        return getDefaultCriteria("series");
+        // declare explicit alias here
+        return getDefaultCriteria(DatasetEntity.ENTITY_ALIAS);
     }
 
     @Override
     protected Criteria getDefaultCriteria(String alias) {
-       Criteria criteria = entityType != null
-            ? super.getDefaultCriteria(alias)
-            : session.createCriteria(DatasetEntity.class, alias);
+        Criteria criteria = entityType != null
+                ? super.getDefaultCriteria(alias)
+                : session.createCriteria(DatasetEntity.class, alias);
         addIgnoreUnpublishedSeriesTo(criteria, alias);
         return criteria;
     }
 
     private Criteria addIgnoreUnpublishedSeriesTo(Criteria criteria, String alias) {
-        alias = prepareForConcatenation(alias);
-        criteria.add(Restrictions.and(
-                createNotNullFirstLastValueRestriction(alias),
-                createPublishedAndNotDeletedRestriction(alias)));
+        criteria.add(Restrictions.and(createNotNullFirstLastValueRestriction(alias),
+                                      createPublishedAndNotDeletedRestriction(alias)));
         return criteria;
     }
 
     private Criterion createPublishedAndNotDeletedRestriction(String alias) {
-        return Restrictions.and(
-                Restrictions.eq(alias.concat("published"), true),
-                Restrictions.eqOrIsNull(alias.concat("deleted"), false));
+        return Restrictions.and(Restrictions.eq(QueryUtils.createAssociation(alias, "published"), true),
+                                Restrictions.eqOrIsNull(QueryUtils.createAssociation(alias, "deleted"), false));
     }
 
     private LogicalExpression createNotNullFirstLastValueRestriction(String alias) {
-        return Restrictions.and(
-                Restrictions.isNotNull(alias.concat("firstValueAt")),
-                Restrictions.isNotNull(alias.concat("lastValueAt")));
+        return Restrictions.and(Restrictions.isNotNull(QueryUtils.createAssociation(alias, "firstValueAt")),
+                                Restrictions.isNotNull(QueryUtils.createAssociation(alias, "lastValueAt")));
     }
-
-    private String prepareForConcatenation(String alias) {
-        return (alias == null || alias.isEmpty()) ? "" : alias.concat(".");
-    }
-
 }

@@ -26,11 +26,13 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db;
 
 import java.util.Comparator;
 import java.util.Date;
 import java.util.TimeZone;
+
 import org.hibernate.HibernateException;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.spi.SessionImplementor;
@@ -41,22 +43,18 @@ import org.hibernate.type.VersionType;
 import org.hibernate.type.descriptor.java.JdbcTimestampTypeDescriptor;
 
 /**
- * A type that maps between {@link java.sql.Types#TIMESTAMP TIMESTAMP} and
- * {@link java.sql.Timestamp}. Delegates to Hibernate's TimestampType, but
- * specifies ZonalTimestampTypeDescriptor as the SqlTypeDescriptor so that times
- * from the database can be configured to have a specific timezone.
+ * A type that maps between {@link java.sql.Types#TIMESTAMP TIMESTAMP} and {@link java.sql.Timestamp}.
+ * Delegates to Hibernate's TimestampType, but specifies ZonalTimestampTypeDescriptor as the SqlTypeDescriptor
+ * so that times from the database can be configured to have a specific timezone.
  *
- * @see <a
- *      href="https://github.com/52North/SOS/blob/8e448e79788abeb8e817be7819e46aa54adc55cc/hibernate/session-factory/src/main/java/org/n52/sos/ds/hibernate/type/UtcTimestampType.java">UtcTimestampType</a>
- * @see <a
- *      href="http://stackoverflow.com/questions/508019/jpa-hibernate-store-date-in-utc-time-zone/3430957#3430957">http://stackoverflow.com/questions/508019/jpa-hibernate-store-date-in-utc-time-zone/3430957#3430957</a>
- *
+ * @see <a href="http://stackoverflow.com/a/3430957/2299448"> http://stackoverflow.com/a/3430957/2299448</a>
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- *
  * @since 2.0.0
  */
-public class ZonalTimestampType extends AbstractSingleColumnStandardBasicType<Date> implements VersionType<Date>,
+public class ZonalTimestampType extends AbstractSingleColumnStandardBasicType<Date> implements
+        VersionType<Date>,
         LiteralType<Date> {
+
     private static final long serialVersionUID = 1425445989380765998L;
 
     /**
@@ -69,14 +67,14 @@ public class ZonalTimestampType extends AbstractSingleColumnStandardBasicType<Da
 
     /**
      * Creates an instance handling timestamps under given Timezone.
-     * @param zone the time zone timestamps shall be handled in.
+     *
+     * @param zone
+     *        the time zone timestamps shall be handled in.
      */
     public ZonalTimestampType(TimeZone zone) {
         // the only actual overriding is the descriptor
         super(ZonalTimestampTypeDescriptor.getInstance(zone), JdbcTimestampTypeDescriptor.INSTANCE);
     }
-
-    // the rest shall behave as TimestampType
 
     @Override
     public String getName() {
