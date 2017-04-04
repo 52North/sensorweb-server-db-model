@@ -26,8 +26,10 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
+import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -40,6 +42,10 @@ public abstract class DataEntity<T> {
 
     public static final String SERIES_PKID = "seriesPkid";
 
+    public static final String PROPERTY_TIMESTART = "timestart";
+
+    public static final String PROPERTY_TIMEEND = "timeend";
+
     private Long pkid;
 
     private Date timestart; // optional
@@ -50,7 +56,7 @@ public abstract class DataEntity<T> {
 
     private Long seriesPkid;
 
-    private GeometryEntity geometry;
+    private GeometryEntity geometryEntity;
 
     private Boolean deleted;
 
@@ -74,14 +80,17 @@ public abstract class DataEntity<T> {
      * @return timestamp
      * @deprecated use {@link #getTimeend()}
      */
+    @Deprecated
     public Date getTimestamp() {
         return timeend;
     }
 
     /**
      * @param timestamp
+     *        the timestamp
      * @deprecated use {@link #setTimeend(java.util.Date)}
      */
+    @Deprecated
     public void setTimestamp(Date timestamp) {
         this.timeend = timestamp;
     }
@@ -96,6 +105,7 @@ public abstract class DataEntity<T> {
 
     /**
      * @param timestart
+     *        the timestart
      * @since 2.0.0
      */
     public void setTimestart(Date timestart) {
@@ -137,16 +147,16 @@ public abstract class DataEntity<T> {
         this.seriesPkid = seriesPkid;
     }
 
-    public GeometryEntity getGeometry() {
-        return geometry;
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
     }
 
-    public void setGeometry(GeometryEntity geometry) {
-        this.geometry = geometry;
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
+        this.geometryEntity = geometryEntity;
     }
 
     public boolean isSetGeometry() {
-        return geometry != null && !geometry.isEmpty();
+        return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
