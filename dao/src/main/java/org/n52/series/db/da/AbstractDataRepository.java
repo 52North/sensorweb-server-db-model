@@ -108,7 +108,7 @@ public abstract class AbstractDataRepository<D extends Data< ? >,
 
     protected void addGeometry(DataEntity< ? > dataEntity, AbstractValue< ? > value) {
         if (dataEntity.isSetGeometry()) {
-            GeometryEntity geometry = dataEntity.getGeometry();
+            GeometryEntity geometry = dataEntity.getGeometryEntity();
             value.setGeometry(geometry.getGeometry(getDatabaseSrid()));
         }
     }

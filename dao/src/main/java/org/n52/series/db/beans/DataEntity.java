@@ -57,7 +57,7 @@ public abstract class DataEntity<T> {
 
     private Long seriesPkid;
 
-    private GeometryEntity geometry;
+    private GeometryEntity geometryEntity;
 
     private Boolean deleted;
 
@@ -160,16 +160,16 @@ public abstract class DataEntity<T> {
         this.seriesPkid = seriesPkid;
     }
 
-    public GeometryEntity getGeometry() {
-        return geometry;
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
     }
 
-    public void setGeometry(GeometryEntity geometry) {
-        this.geometry = geometry;
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
+        this.geometryEntity = geometryEntity;
     }
 
     public boolean isSetGeometry() {
-        return geometry != null && !geometry.isEmpty();
+        return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
