@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
@@ -33,9 +34,13 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" Domain id: ").append(getDomainId());
-        sb.append(", service: ").append(getService());
-        return sb.append(" ]").toString();
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" Domain id: ")
+                 .append(getDomainId())
+                 .append(", service: ")
+                 .append(getService())
+                 .append(" ]")
+                 .toString();
     }
 }

@@ -26,12 +26,17 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension.metadata;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
 public abstract class MetadataEntity<T> {
+
+    static final String PROPERTY_NAME = "name";
+
+    static final String PROPERTY_SERIES_ID = "seriesId";
 
     private Long pkid;
 
@@ -87,20 +92,20 @@ public abstract class MetadataEntity<T> {
 
     public Date getLastUpdate() {
         return lastUpdate != null
-                ? new Timestamp(lastUpdate.getTime())
-                : lastUpdate;
+            ? new Timestamp(lastUpdate.getTime())
+            : null;
     }
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate != null
-                ? new Timestamp(lastUpdate.getTime())
-                : lastUpdate;
+            ? new Timestamp(lastUpdate.getTime())
+            : null;
     }
 
     public DatabaseMetadataOutput<T> toOutput() {
-        return DatabaseMetadataOutput.<T>create()
-                .withValue(value)
-                .lastUpdatedAt(lastUpdate);
+        return DatabaseMetadataOutput.<T> create()
+                                     .setValue(value)
+                                     .setLastUpdatedAt(lastUpdate);
     }
 
 }

@@ -26,12 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
 
-import static org.hibernate.criterion.DetachedCriteria.forClass;
-import static org.hibernate.criterion.Projections.projectionList;
-import static org.hibernate.criterion.Projections.property;
-import static org.hibernate.criterion.Restrictions.eq;
+package org.n52.series.db.dao;
 
 import java.util.Collections;
 import java.util.Date;
@@ -41,7 +37,9 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.hibernate.criterion.SimpleExpression;
 import org.hibernate.criterion.Subqueries;
 import org.joda.time.Instant;
 import org.n52.io.request.IoParameters;
@@ -58,14 +56,12 @@ import org.springframework.transaction.annotation.Transactional;
  * TODO: JavaDoc
  *
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- * @param <T> the data entity type
+ * @param <T>
+ *        the data entity type
  */
 @Transactional
-@SuppressWarnings("rawtypes") // infer entitType runtime
+@SuppressWarnings("rawtypes")
 public class DataDao<T extends DataEntity> extends AbstractDao<T> {
-
-    @Autowired
-    private DbQueryFactory dbQueryFactory;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataDao.class);
 
@@ -80,6 +76,9 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
     private static final String COLUMN_TIMEEND = "timeend";
 
     private final Class<T> entityType;
+
+    @Autowired
+    private DbQueryFactory dbQueryFactory;
 
     public DataDao(Session session, Class<T> clazz) {
         super(session);
@@ -106,14 +105,17 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
 
     /**
      * <p>
-     * Retrieves all available observation instances.</p>
+     * Retrieves all available observation instances.
+     * </p>
      *
-     * @param parameters query parameters.
+     * @param parameters
+     *        query parameters.
      * @return all instances matching the given query parameters.
-     * @throws DataAccessException if accessing database fails.
+     * @throws DataAccessException
+     *         if accessing database fails.
      */
     @Override
-    @SuppressWarnings("unchecked") // cast from hibernate
+    @SuppressWarnings("unchecked")
     public List<T> getAllInstances(DbQuery parameters) throws DataAccessException {
         LOGGER.debug("get all instances: {}", parameters);
         Criteria criteria = getDefaultCriteria(parameters);
@@ -124,10 +126,11 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
     /**
      * Retrieves all available observations belonging to a particular series.
      *
-     * @param series the entity to get all observations for.
+     * @param series
+     *        the entity to get all observations for.
      * @return all observation entities belonging to the series.
-     * @throws org.n52.series.db.DataAccessException if accessing database
-     * fails.
+     * @throws org.n52.series.db.DataAccessException
+     *         if accessing database fails.
      */
     public List<T> getAllInstancesFor(DatasetEntity series) throws DataAccessException {
         LOGGER.debug("get all instances for series '{}'", series.getPkid());
@@ -135,42 +138,45 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
     }
 
     /**
-     * Retrieves all available observation instances belonging to a particular
-     * series.
+     * Retrieves all available observation instances belonging to a particular series.
      *
-     * @param series the series the observations belongs to.
-     * @param parameters some query parameters to restrict result.
-     * @return all observation entities belonging to the given series which
-     * match the given query.
-     * @throws DataAccessException if accessing database fails.
+     * @param series
+     *        the series the observations belongs to.
+     * @param parameters
+     *        some query parameters to restrict result.
+     * @return all observation entities belonging to the given series which match the given query.
+     * @throws DataAccessException
+     *         if accessing database fails.
      */
-    @SuppressWarnings("unchecked") // cast from hibernate
+    @SuppressWarnings("unchecked")
     public List<T> getAllInstancesFor(DatasetEntity series, DbQuery parameters) throws DataAccessException {
-        LOGGER.debug("get all instances for series '{}': {}", series.getPkid(), parameters);
-        Criteria criteria = getDefaultCriteria(parameters)
-                .add(eq(COLUMN_SERIES_PKID, series.getPkid()));
+        final Long pkid = series.getPkid();
+        LOGGER.debug("get all instances for series '{}': {}", pkid, parameters);
+        final SimpleExpression equalsPkid = Restrictions.eq(COLUMN_SERIES_PKID, pkid);
+        Criteria criteria = getDefaultCriteria(parameters).add(equalsPkid);
         parameters.addTimespanTo(criteria);
         return (List<T>) criteria.list();
     }
 
     @Override
-    protected String getSeriesProperty() {
-        return ""; // there's no series property for observation
+    protected String getDatasetProperty() {
+        // there's no series property for observation
+        return "";
     }
 
     private Criteria getDefaultCriteria(DbQuery parameters) {
         Criteria criteria = getDefaultCriteria();
         return parameters.getResultTime() != null
-            ? criteria.add(Restrictions.eq("resultTime", parameters.getResultTime()))
-            : criteria;
+                ? criteria.add(Restrictions.eq(COLUMN_RESULTTIME, parameters.getResultTime()))
+                : criteria;
     }
 
     @Override
     protected Criteria getDefaultCriteria() {
         return session.createCriteria(entityType)
-                // TODO check odering when `showtimeintervals=true`
-                .addOrder(Order.asc(COLUMN_TIMEEND))
-                .add(eq(COLUMN_DELETED, Boolean.FALSE));
+                      // TODO check odering when `showtimeintervals=true`
+                      .addOrder(Order.asc(COLUMN_TIMEEND))
+                      .add(Restrictions.eq(COLUMN_DELETED, Boolean.FALSE));
     }
 
     @Override
@@ -191,16 +197,16 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
     @SuppressWarnings("unchecked")
     private T getDataValueAt(Date timestamp, String column, DatasetEntity series, DbQuery query) {
         LOGGER.debug("get instances @{} for '{}'", timestamp, series.getPkid());
-        Criteria criteria = getDefaultCriteria()
-                .add(Restrictions.eq(COLUMN_SERIES_PKID, series.getPkid()))
-                .add(Restrictions.eq(column, timestamp));
+        Criteria criteria = getDefaultCriteria().add(Restrictions.eq(COLUMN_SERIES_PKID, series.getPkid()))
+                                                .add(Restrictions.eq(column, timestamp));
 
-        DetachedCriteria filter = forClass(DatasetEntity.class)
-                .setProjection(projectionList().add(property("pkid")));
+        DetachedCriteria filter = DetachedCriteria.forClass(DatasetEntity.class)
+                                                  .setProjection(Projections.projectionList()
+                                                                            .add(Projections.property("pkid")));
         criteria.add(Subqueries.propertyIn(COLUMN_SERIES_PKID, filter));
 
         IoParameters parameters = query.getParameters();
-        if ( !parameters.containsParameter(Parameters.RESULTTIME)) {
+        if (!parameters.containsParameter(Parameters.RESULTTIME)) {
             List<T> list = criteria.list();
             return getLastResultTimeValue(list);
         } else {

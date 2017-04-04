@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import org.n52.io.crs.CRSUtils;
@@ -41,13 +42,11 @@ import com.vividsolutions.jts.geom.Geometry;
  *
  * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
  */
-/**
- * @author henning
- *
- */
 public class GeometryEntity {
 
-    private static final Logger LOGGER  = LoggerFactory.getLogger(GeometryEntity.class);
+    public static final String PROPERTY_GEOMETRY = "geometry";
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(GeometryEntity.class);
 
     private final CRSUtils crsUtils = CRSUtils.createEpsgForcedXYAxisOrder();
 
@@ -63,6 +62,11 @@ public class GeometryEntity {
         return geometry != null && !geometry.isEmpty();
     }
 
+    public GeometryEntity setGeometry(Geometry geometry) {
+        this.geometry = geometry;
+        return this;
+    }
+
     /**
      * Returns the {@link Geometry}. Expects that a geometry with a valid SRID is available. Otherwise use
      * {@link #getGeometry(String)} to obtain a geometry with spatial reference.
@@ -70,12 +74,7 @@ public class GeometryEntity {
      * @return the geometry
      */
     public Geometry getGeometry() {
-        return getGeometry(null);
-    }
-
-    public GeometryEntity setGeometry(Geometry geometry) {
-        this.geometry = geometry;
-        return this;
+        return getGeometry((String) null);
     }
 
     /**
@@ -87,16 +86,16 @@ public class GeometryEntity {
      * @return the geometry or a created geometry (with given srid)
      */
     public Geometry getGeometry(String srid) {
-        Geometry g =  isSetLonLat()
-            ? crsUtils.createPoint(lon, lat, alt, srid)
-            : geometry;
+        Geometry builtGeometry = isSetLonLat()
+                ? crsUtils.createPoint(lon, lat, alt, srid)
+                : geometry;
         try {
-            return g != null && srid != null
-                    ? crsUtils.transformOuterToInner(g, srid)
-                    : g;
+            return builtGeometry != null && srid != null
+                    ? crsUtils.transformOuterToInner(builtGeometry, srid)
+                    : builtGeometry;
         } catch (FactoryException | TransformException e) {
             LOGGER.warn("Invalid srid '{}'. Could not transform geometry.", e);
-            return g;
+            return builtGeometry;
         }
     }
 
@@ -135,10 +134,14 @@ public class GeometryEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" latitude: ").append(getLat());
-        sb.append(", longitude: ").append(getLon());
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" latitude: ")
+          .append(getLat());
+        sb.append(", longitude: ")
+          .append(getLon());
+        return sb.append(" ]")
+                 .toString();
     }
 
 }

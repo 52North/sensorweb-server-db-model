@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.srv;
 
 import java.util.ArrayList;
@@ -65,7 +66,7 @@ public class Search implements SearchService {
     private OutputAssembler<PlatformOutput> platformRepository;
 
     @Autowired
-    private OutputAssembler<DatasetOutput<?,?>> datasetRepository;
+    private OutputAssembler<DatasetOutput< ? , ? >> datasetRepository;
 
     @Autowired
     @Deprecated

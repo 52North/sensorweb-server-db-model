@@ -26,9 +26,9 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension.resulttime;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
@@ -36,12 +36,15 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
 import org.n52.io.request.IoParameters;
 import org.n52.io.response.ParameterOutput;
 import org.n52.io.response.dataset.DatasetOutput;
 import org.n52.io.response.extension.MetadataExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ResultTimeExtension extends MetadataExtension<DatasetOutput> {
 
@@ -72,8 +75,9 @@ public class ResultTimeExtension extends MetadataExtension<DatasetOutput> {
 
     @Override
     public void addExtraMetadataFieldNames(DatasetOutput output) {
-        final ParameterOutput service = output.getSeriesParameters().getService();
-        if (isAvailableFor(service.getId())) {
+        final ParameterOutput serviceOutput = output.getSeriesParameters()
+                                                    .getService();
+        if (isAvailableFor(serviceOutput.getId())) {
             output.addExtra(EXTENSION_NAME);
         }
     }

@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -78,13 +79,12 @@ public class ProcedureRepository extends HierarchicalParameterRepository<Procedu
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found,
-                                                     DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         List<SearchResult> results = new ArrayList<>();
         String locale = query.getLocale();
         String hrefBase = urHelper.getProceduresHrefBaseUrl(query.getHrefBase());
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = Long.toString(searchResult.getPkid());
             String label = searchResult.getLabelFrom(locale);
             results.add(new ProcedureSearchResult(pkid, label, hrefBase));
         }
@@ -137,10 +137,6 @@ public class ProcedureRepository extends HierarchicalParameterRepository<Procedu
         return createExpanded(result, parameters);
     }
 
-    private List<ProcedureEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
-        return createDao(session).getAllInstances(parameters);
-    }
-
     private ProcedureEntity getInstance(Long id, DbQuery parameters, Session session) throws DataAccessException {
         ProcedureDao procedureDAO = createDao(session);
         ProcedureEntity result = procedureDAO.getInstance(id, parameters);
@@ -148,6 +144,10 @@ public class ProcedureRepository extends HierarchicalParameterRepository<Procedu
             throw new ResourceNotFoundException("Resource with id '" + id + "' could not be found.");
         }
         return result;
+    }
+
+    private List<ProcedureEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
+        return createDao(session).getAllInstances(parameters);
     }
 
     @Override
@@ -177,8 +177,8 @@ public class ProcedureRepository extends HierarchicalParameterRepository<Procedu
         return members == null
                 ? Collections.emptyList()
                 : members.stream()
-                    .map(e -> createCondensed(e, parameters))
-                    .collect(Collectors.toList());
+                         .map(e -> createCondensed(e, parameters))
+                         .collect(Collectors.toList());
     }
 
     private void checkForHref(ProcedureOutput result, DbQuery parameters) {

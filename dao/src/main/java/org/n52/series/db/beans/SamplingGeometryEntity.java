@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.sql.Timestamp;
@@ -40,13 +41,13 @@ public class SamplingGeometryEntity extends GeometryEntity {
     public Date getTimestamp() {
         return timestamp != null
                 ? new Timestamp(timestamp.getTime())
-                : timestamp;
+                : null;
     }
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = timestamp != null
                 ? new Timestamp(timestamp.getTime())
-                : timestamp;
+                : null;
     }
 
     public Long getSeriesPkid() {

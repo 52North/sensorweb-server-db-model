@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import org.n52.io.response.PlatformType;
@@ -79,9 +80,13 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" Domain id: ").append(getDomainId());
-        sb.append(", service: ").append(getService());
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" Domain id: ")
+          .append(getDomainId());
+        sb.append(", service: ")
+          .append(getService());
+        return sb.append(" ]")
+                 .toString();
     }
 }

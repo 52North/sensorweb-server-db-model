@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db;
 
 import java.util.Properties;
@@ -40,6 +41,8 @@ import org.springframework.orm.hibernate4.LocalSessionFactoryBuilder;
 public class SeriesLocalSessionFactoryBean extends LocalSessionFactoryBean {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(SeriesLocalSessionFactoryBean.class);
+
+    private static final String DEFAULT_TIMEZONE = "UTC";
 
     private static final String JDBC_TIME_ZONE = "jdbc.time.zone";
 
@@ -56,14 +59,14 @@ public class SeriesLocalSessionFactoryBean extends LocalSessionFactoryBean {
 
     private TimeZone createTimeZone(Properties properties) {
         String zone = properties.containsKey(JDBC_TIME_ZONE)
-            ? properties.getProperty(JDBC_TIME_ZONE)
-            : "UTC";
+                ? properties.getProperty(JDBC_TIME_ZONE)
+                : DEFAULT_TIMEZONE;
         try {
             LOGGER.info("Configure timezone for JDBC layer: " + zone);
             return TimeZone.getTimeZone(zone);
         } catch (Throwable e) {
             LOGGER.warn("Could not configure timezone for JDBC layer: " + zone);
-            return TimeZone.getTimeZone("UTC");
+            return TimeZone.getTimeZone(DEFAULT_TIMEZONE);
         }
     }
 }

@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -68,6 +69,14 @@ import com.vividsolutions.jts.geom.Geometry;
 public class PlatformRepository extends SessionAwareRepository implements OutputAssembler<PlatformOutput> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PlatformRepository.class);
+
+    private static final String FILTER_STATIONARY = "stationary";
+
+    private static final String FILTER_MOBILE = "mobile";
+
+    private static final String FILTER_INSITU = "insitu";
+
+    private static final String FILTER_REMOTE = "remote";
 
     @Autowired
     private DatasetRepository<Data> seriesRepository;
@@ -130,7 +139,8 @@ public class PlatformRepository extends SessionAwareRepository implements Output
         }
     }
 
-    PlatformOutput getCondensedInstance(DatasetEntity<?> series, DbQuery parameters, Session session) throws DataAccessException {
+    PlatformOutput getCondensedInstance(DatasetEntity< ? > series, DbQuery parameters, Session session)
+            throws DataAccessException {
         PlatformEntity entity = getEntity(getPlatformId(series), parameters, session);
         return createCondensed(entity, parameters);
     }
@@ -183,11 +193,12 @@ public class PlatformRepository extends SessionAwareRepository implements Output
         return results;
     }
 
-    private PlatformOutput createExpanded(PlatformEntity entity, DbQuery parameters, Session session) throws DataAccessException {
+    private PlatformOutput createExpanded(PlatformEntity entity, DbQuery parameters, Session session)
+            throws DataAccessException {
         PlatformOutput result = createCondensed(entity, parameters);
         DbQuery query = getDbQuery(parameters.getParameters()
-                .extendWith(Parameters.PLATFORMS, result.getId())
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES));
+                                             .extendWith(Parameters.PLATFORMS, result.getId())
+                                             .removeAllOf(Parameters.FILTER_PLATFORM_TYPES));
 
         List<DatasetOutput> datasets = seriesRepository.getAllCondensed(query);
         result.setDatasets(datasets);
@@ -197,15 +208,16 @@ public class PlatformRepository extends SessionAwareRepository implements Output
                 ? getLastSamplingGeometry(datasets, query, session)
                 : geometry);
         if (entity.hasParameters()) {
-            for (Parameter<?> parameter : entity.getParameters()) {
+            for (Parameter< ? > parameter : entity.getParameters()) {
                 result.addParameter(parameter.toValueMap());
             }
         }
         return result;
     }
 
-    private Geometry getLastSamplingGeometry(List<DatasetOutput> datasets, DbQuery query, Session session) throws DataAccessException {
-        AbstractValue<?> currentLastValue = null;
+    private Geometry getLastSamplingGeometry(List<DatasetOutput> datasets, DbQuery query, Session session)
+            throws DataAccessException {
+        AbstractValue< ? > currentLastValue = null;
         for (DatasetOutput dataset : datasets) {
             // XXX fix generics and inheritance of Data, AbstractValue, etc.
             // https://trello.com/c/dMVa0fg9/78-refactor-data-abstractvalue
@@ -213,10 +225,11 @@ public class PlatformRepository extends SessionAwareRepository implements Output
                 String id = dataset.getId();
                 DataRepository dataRepository = factory.create(dataset.getDatasetType());
                 DatasetEntity entity = seriesRepository.getInstanceEntity(id, query, session);
-                AbstractValue<?> valueToCheck = dataRepository.getLastValue(entity, session, query);
+                AbstractValue< ? > valueToCheck = dataRepository.getLastValue(entity, session, query);
                 currentLastValue = getLaterValue(currentLastValue, valueToCheck);
             } catch (DatasetFactoryException e) {
-                LOGGER.error("Couldn't create data repository to determing last value of dataset '{}'", dataset.getId());
+                LOGGER.error("Couldn't create data repository to determing last value of dataset '{}'",
+                             dataset.getId());
             }
         }
 
@@ -242,7 +255,7 @@ public class PlatformRepository extends SessionAwareRepository implements Output
         FeatureDao featureDao = new FeatureDao(session);
         FeatureEntity feature = featureDao.getInstance(Long.parseLong(featureId), parameters);
         if (feature == null) {
-            throw new ResourceNotFoundException("Resource with id '" + id + "' could not be found.");
+            throwNewResourceNotFoundException("Station", id);
         }
         return PlatformType.isInsitu(id)
                 ? convertInsitu(feature)
@@ -254,7 +267,7 @@ public class PlatformRepository extends SessionAwareRepository implements Output
         String platformId = PlatformType.extractId(id);
         PlatformEntity result = dao.getInstance(Long.parseLong(platformId), parameters);
         if (result == null) {
-            throw new ResourceNotFoundException("Resource with id '" + id + "' could not be found.");
+            throwNewResourceNotFoundException("Platform", id);
         }
         return result;
     }
@@ -273,11 +286,12 @@ public class PlatformRepository extends SessionAwareRepository implements Output
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found, DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         List<SearchResult> results = new ArrayList<>();
         String locale = query.getLocale();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = searchResult.getPkid()
+                                      .toString();
             String label = searchResult.getLabelFrom(locale);
             String hrefBase = urHelper.getPlatformsHrefBaseUrl(query.getHrefBase());
             results.add(new PlatformSearchResult(pkid, label, hrefBase));
@@ -309,19 +323,17 @@ public class PlatformRepository extends SessionAwareRepository implements Output
         return platforms;
     }
 
-    private List<PlatformEntity> getAllStationaryInsitu(DbQuery parameters, Session session) throws DataAccessException {
+    private List<PlatformEntity> getAllStationaryInsitu(DbQuery parameters, Session session)
+            throws DataAccessException {
         FeatureDao featureDao = new FeatureDao(session);
-        DbQuery query = getDbQuery(parameters.getParameters()
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "stationary", "insitu"));
+        DbQuery query = createPlatformFilter(parameters, FILTER_STATIONARY, FILTER_INSITU);
         return convertAllInsitu(featureDao.getAllInstances(query));
     }
 
-    private List<PlatformEntity> getAllStationaryRemote(DbQuery parameters, Session session) throws DataAccessException {
+    private List<PlatformEntity> getAllStationaryRemote(DbQuery parameters, Session session)
+            throws DataAccessException {
         FeatureDao featureDao = new FeatureDao(session);
-        DbQuery query = getDbQuery(parameters.getParameters()
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "stationary", "remote"));
+        DbQuery query = createPlatformFilter(parameters, FILTER_STATIONARY, FILTER_REMOTE);
         return convertAllRemote(featureDao.getAllInstances(query));
     }
 
@@ -338,19 +350,21 @@ public class PlatformRepository extends SessionAwareRepository implements Output
     }
 
     private List<PlatformEntity> getAllMobileInsitu(DbQuery parameters, Session session) throws DataAccessException {
-        DbQuery query = getDbQuery(parameters.getParameters()
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "mobile", "insitu"));
+        DbQuery query = createPlatformFilter(parameters, FILTER_MOBILE, FILTER_INSITU);
         PlatformDao dao = new PlatformDao(session);
         return dao.getAllInstances(query);
     }
 
     private List<PlatformEntity> getAllMobileRemote(DbQuery parameters, Session session) throws DataAccessException {
-        DbQuery query = getDbQuery(parameters.getParameters()
-                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
-                .extendWith(Parameters.FILTER_PLATFORM_TYPES, "mobile", "remote"));
+        DbQuery query = createPlatformFilter(parameters, FILTER_MOBILE, FILTER_REMOTE);
         PlatformDao dao = new PlatformDao(session);
         return dao.getAllInstances(query);
+    }
+
+    private DbQuery createPlatformFilter(DbQuery parameters, String... filterValues) {
+        return getDbQuery(parameters.getParameters()
+                .removeAllOf(Parameters.FILTER_PLATFORM_TYPES)
+                .extendWith(Parameters.FILTER_PLATFORM_TYPES, filterValues));
     }
 
     private List<PlatformEntity> convertAllInsitu(List<FeatureEntity> entities) {
@@ -393,17 +407,25 @@ public class PlatformRepository extends SessionAwareRepository implements Output
         return result;
     }
 
-    protected PlatformEntity getPlatformEntity(DatasetEntity<?> series, DbQuery query, Session session) throws DataAccessException {
+    protected PlatformEntity getPlatformEntity(DatasetEntity< ? > series, DbQuery query, Session session)
+            throws DataAccessException {
         // platform has to be handled dynamically (see #309)
         return getEntity(getPlatformId(series), query, session);
     }
 
-    private String getPlatformId(DatasetEntity<?> series) {
-        PlatformType platformType = series.getProcedure().getPlatformType();
+    private String getPlatformId(DatasetEntity< ? > series) {
+        PlatformType platformType = series.getProcedure()
+                                          .getPlatformType();
         Long rawId = platformType.isStationary()
-                ? series.getFeature().getPkid()
-                : series.getProcedure().getPkid();
+                ? series.getFeature()
+                        .getPkid()
+                : series.getProcedure()
+                        .getPkid();
         return platformType.createId(rawId);
+    }
+
+    private void throwNewResourceNotFoundException(String resource, String id) throws ResourceNotFoundException {
+        throw new ResourceNotFoundException(resource + " with id '" + id + "' could not be found.");
     }
 
 }

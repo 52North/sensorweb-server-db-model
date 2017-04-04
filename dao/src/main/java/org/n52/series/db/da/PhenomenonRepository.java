@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ import org.n52.series.spi.search.PhenomenonSearchResult;
 import org.n52.series.spi.search.SearchResult;
 import org.n52.web.exception.ResourceNotFoundException;
 
-public class PhenomenonRepository extends HierarchicalParameterRepository<PhenomenonEntity,PhenomenonOutput> {
+public class PhenomenonRepository extends HierarchicalParameterRepository<PhenomenonEntity, PhenomenonOutput> {
 
     @Override
     public boolean exists(String id, DbQuery parameters) throws DataAccessException {
@@ -75,12 +76,13 @@ public class PhenomenonRepository extends HierarchicalParameterRepository<Phenom
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found, DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         String locale = query.getLocale();
         String hrefBase = urHelper.getPhenomenaHrefBaseUrl(query.getHrefBase());
         List<SearchResult> results = new ArrayList<>();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = searchResult.getPkid()
+                                      .toString();
             String label = searchResult.getLabelFrom(locale);
             results.add(new PhenomenonSearchResult(pkid, label, hrefBase));
         }
@@ -133,10 +135,6 @@ public class PhenomenonRepository extends HierarchicalParameterRepository<Phenom
         return createExpanded(result, parameters);
     }
 
-    private List<PhenomenonEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
-        return createDao(session).getAllInstances(parameters);
-    }
-
     private PhenomenonEntity getInstance(Long id, DbQuery parameters, Session session) throws DataAccessException {
         PhenomenonDao phenomenonDao = createDao(session);
         PhenomenonEntity result = phenomenonDao.getInstance(id, parameters);
@@ -144,6 +142,10 @@ public class PhenomenonRepository extends HierarchicalParameterRepository<Phenom
             throw new ResourceNotFoundException("Resource with id '" + id + "' could not be found.");
         }
         return result;
+    }
+
+    private List<PhenomenonEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
+        return createDao(session).getAllInstances(parameters);
     }
 
     @Override

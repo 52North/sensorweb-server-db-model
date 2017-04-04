@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import static org.junit.Assert.assertFalse;
@@ -61,22 +62,26 @@ public class DataRepositoryFactoryTest {
         IDataRepositoryFactory m = new DefaultDataRepositoryFactory();
         assertFalse(m.isKnown("text"));
         assertFalse(m.isKnown("count"));
-        assertTrue(m.create("measurement").getClass() == MeasurementDataRepository.class);
+        assertTrue(m.create("measurement")
+                    .getClass() == MeasurementDataRepository.class);
     }
 
     @Test
     public void when_mapToText_then_returnTextDataRepository() throws DatasetFactoryException {
-        assertTrue(factory.create("text").getClass() == TextDataRepository.class);
+        assertTrue(factory.create("text")
+                          .getClass() == TextDataRepository.class);
     }
 
     @Test
     public void when_mapToText_then_returnCountDataRepository() throws DatasetFactoryException {
-        assertTrue(factory.create("count").getClass() == CountDataRepository.class);
+        assertTrue(factory.create("count")
+                          .getClass() == CountDataRepository.class);
     }
 
     @Test
     public void when_mapToText_then_returnMeasurementDataRepository() throws DatasetFactoryException {
-        assertTrue(factory.create("measurement").getClass() == MeasurementDataRepository.class);
+        assertTrue(factory.create("measurement")
+                          .getClass() == MeasurementDataRepository.class);
     }
 
     @Test
@@ -87,8 +92,10 @@ public class DataRepositoryFactoryTest {
     }
 
     private File getConfigFile(String name) throws URISyntaxException {
-        Path root = Paths.get(getClass().getResource("/files").toURI());
-        return root.resolve(name).toFile();
+        Path root = Paths.get(getClass().getResource("/files")
+                                        .toURI());
+        return root.resolve(name)
+                   .toFile();
     }
 
 }

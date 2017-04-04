@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.List;
@@ -44,86 +45,91 @@ import org.n52.series.db.dao.DataDao;
 import org.n52.series.db.dao.DatasetDao;
 import org.n52.series.db.dao.DbQuery;
 
-public abstract class AbstractDataRepository<D extends Data<?>, DSE extends DatasetEntity<?>, DE extends DataEntity<?>, V extends AbstractValue<?>>
-        extends SessionAwareRepository implements DataRepository<DSE, V> {
+public abstract class AbstractDataRepository<D extends Data< ? >,
+                                             S extends DatasetEntity< ? >,
+                                             E extends DataEntity< ? >,
+                                             V extends AbstractValue< ? >>
+        extends SessionAwareRepository implements DataRepository<S, V> {
 
     @Override
-    public Data<?> getData(String seriesId, DbQuery dbQuery) throws DataAccessException {
+    public Data< ? > getData(String seriesId, DbQuery dbQuery) throws DataAccessException {
         Session session = getSession();
         try {
-            DatasetDao<DSE> seriesDao = getSeriesDao(session);
+            DatasetDao<S> seriesDao = getSeriesDao(session);
             String id = DatasetType.extractId(seriesId);
-            DSE series = seriesDao.getInstance(id, dbQuery);
+            S series = seriesDao.getInstance(id, dbQuery);
             if (series.getService() == null) {
-                series.setService(getStaticServiceEntity());
+                series.setService(getServiceEntity());
             }
             return dbQuery.isExpanded()
-                ? assembleDataWithReferenceValues(series, dbQuery, session)
-                : assembleData(series, dbQuery, session);
-        }
-        finally {
+                    ? assembleDataWithReferenceValues(series, dbQuery, session)
+                    : assembleData(series, dbQuery, session);
+        } finally {
             returnSession(session);
         }
     }
 
     @Override
-    public V getFirstValue(DSE entity, Session session, DbQuery query) {
-        DataDao<DE> dao = createDataDao(session);
-        DE valueEntity = dao.getDataValueViaTimestart(entity, query);
+    public V getFirstValue(S entity, Session session, DbQuery query) {
+        DataDao<E> dao = createDataDao(session);
+        E valueEntity = dao.getDataValueViaTimestart(entity, query);
         return createSeriesValueFor(valueEntity, entity, query);
     }
 
     @Override
-    public V getLastValue(DSE entity, Session session, DbQuery query) {
-        DataDao<DE> dao = createDataDao(session);
-        DE valueEntity = dao.getDataValueViaTimeend(entity, query);
+    public V getLastValue(S entity, Session session, DbQuery query) {
+        DataDao<E> dao = createDataDao(session);
+        E valueEntity = dao.getDataValueViaTimeend(entity, query);
         return createSeriesValueFor(valueEntity, entity, query);
     }
 
-    protected DatasetDao<DSE> getSeriesDao(Session session) {
+    protected DatasetDao<S> getSeriesDao(Session session) {
         return new DatasetDao<>(session);
     }
 
-    protected DataDao<DE> createDataDao(Session session) {
+    protected DataDao<E> createDataDao(Session session) {
         return new DataDao<>(session);
     }
 
-    protected abstract V createSeriesValueFor(DE valueEntity, DSE datasetEntity, DbQuery query);
+    protected abstract V createSeriesValueFor(E valueEntity, S datasetEntity, DbQuery query);
 
-    protected abstract D assembleData(DSE datasetEntity, DbQuery query, Session session) throws DataAccessException;
+    protected abstract D assembleData(S datasetEntity, DbQuery query, Session session) throws DataAccessException;
 
-    protected abstract D assembleDataWithReferenceValues(DSE datasetEntity, DbQuery dbQuery, Session session) throws DataAccessException;
+    protected abstract D assembleDataWithReferenceValues(S datasetEntity, DbQuery dbQuery, Session session)
+            throws DataAccessException;
 
-    protected boolean hasValidEntriesWithinRequestedTimespan(List<?> observations) {
+    protected boolean hasValidEntriesWithinRequestedTimespan(List< ? > observations) {
         return observations.size() > 0;
     }
 
-    protected boolean hasSingleValidReferenceValue(List<?> observations) {
+    protected boolean hasSingleValidReferenceValue(List< ? > observations) {
         return observations.size() == 1;
     }
 
-    protected void addGeometry(DataEntity<?> dataEntity, AbstractValue<?> value) {
+    protected void addGeometry(DataEntity< ? > dataEntity, AbstractValue< ? > value) {
         if (dataEntity.isSetGeometry()) {
             GeometryEntity geometry = dataEntity.getGeometry();
             value.setGeometry(geometry.getGeometry(getDatabaseSrid()));
         }
     }
 
-    protected void addValidTime(DataEntity<?> observation, AbstractValue<?> value) {
+    protected void addValidTime(DataEntity< ? > observation, AbstractValue< ? > value) {
         if (observation.isSetValidStartTime() || observation.isSetValidEndTime()) {
             Long validFrom = observation.isSetValidStartTime()
-                    ? observation.getValidTimeStart().getTime()
+                    ? observation.getValidTimeStart()
+                                 .getTime()
                     : null;
             Long validUntil = observation.isSetValidEndTime()
-                    ? observation.getValidTimeEnd().getTime()
+                    ? observation.getValidTimeEnd()
+                                 .getTime()
                     : null;
             value.setValidTime(new ValidTime(validFrom, validUntil));
         }
     }
 
-    protected void addParameters(DataEntity<?> observation, AbstractValue<?> value) {
+    protected void addParameters(DataEntity< ? > observation, AbstractValue< ? > value) {
         if (observation.hasParameters()) {
-            for (Parameter<?> parameter : observation.getParameters()) {
+            for (Parameter< ? > parameter : observation.getParameters()) {
                 value.addParameter(parameter.toValueMap());
             }
         }

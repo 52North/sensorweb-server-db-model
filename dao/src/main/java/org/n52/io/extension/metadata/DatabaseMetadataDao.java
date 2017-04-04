@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension.metadata;
 
 import java.util.List;
@@ -45,39 +46,39 @@ public class DatabaseMetadataDao {
         this.session = session;
     }
 
-    public MetadataEntity<?> getInstance(Long key) {
-        return (MetadataEntity<?>) session.get(MetadataEntity.class, key);
+    public MetadataEntity< ? > getInstance(Long key) {
+        return (MetadataEntity< ? >) session.get(MetadataEntity.class, key);
     }
 
-    @SuppressWarnings("unchecked") // Hibernate
-    public List<MetadataEntity<?>> getAllFor(Long id) {
+    @SuppressWarnings("unchecked")
+    public List<MetadataEntity< ? >> getAllFor(Long id) {
         Criteria criteria = session.createCriteria(MetadataEntity.class)
-                .add(Restrictions.eq("seriesId", id));
-        return (List<MetadataEntity<?>>) criteria.list();
+                                   .add(Restrictions.eq(MetadataEntity.PROPERTY_SERIES_ID, id));
+        return (List<MetadataEntity< ? >>) criteria.list();
     }
 
-    @SuppressWarnings("unchecked") // Hibernate
-    List<MetadataEntity<?>> getSelected(Long id, Set<String> fields) {
+    @SuppressWarnings("unchecked")
+    List<MetadataEntity< ? >> getSelected(Long id, Set<String> fields) {
         Criteria criteria = session.createCriteria(MetadataEntity.class)
-                .add(Restrictions.eq("seriesId", id));
+                                   .add(Restrictions.eq(MetadataEntity.PROPERTY_SERIES_ID, id));
         addCaseInsensitivePropertyMatch(criteria, fields);
-//        criteria.add(Restrictions.in("name", fields)); // not case insensitive
-        return (List<MetadataEntity<?>>) criteria.list();
+        return (List<MetadataEntity< ? >>) criteria.list();
     }
 
     private void addCaseInsensitivePropertyMatch(Criteria criteria, Set<String> fields) {
         Disjunction disjunction = Restrictions.disjunction();
         for (String field : fields) {
-            disjunction.add(Restrictions.eq("name", field).ignoreCase());
+            disjunction.add(Restrictions.eq(MetadataEntity.PROPERTY_NAME, field)
+                                        .ignoreCase());
         }
         criteria.add(disjunction);
     }
 
-    @SuppressWarnings("unchecked") // Hibernate
+    @SuppressWarnings("unchecked")
     List<String> getMetadataNames(Long id) {
         Criteria criteria = session.createCriteria(MetadataEntity.class)
-                .add(Restrictions.eq("seriesId", id))
-                .setProjection(Projections.property("name"));
+                                   .add(Restrictions.eq(MetadataEntity.PROPERTY_SERIES_ID, id))
+                                   .setProjection(Projections.property(MetadataEntity.PROPERTY_NAME));
         return (List<String>) criteria.list();
     }
 

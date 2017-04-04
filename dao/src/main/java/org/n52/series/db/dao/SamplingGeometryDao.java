@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.dao;
 
 import java.util.List;
@@ -48,7 +49,7 @@ public class SamplingGeometryDao {
         this.session = session;
     }
 
-    @SuppressWarnings("unchecked") // Hibernate
+    @SuppressWarnings("unchecked")
     public List<GeometryEntity> getGeometriesOrderedByTimestamp(DbQuery parameters) {
         Criteria criteria = session.createCriteria(SamplingGeometryEntity.class);
         parameters.addDetachedFilters(COLUMN_SERIES_PKID, criteria);

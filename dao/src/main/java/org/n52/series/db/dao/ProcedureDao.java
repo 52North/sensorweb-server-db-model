@@ -26,9 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
 
-import static org.hibernate.criterion.Restrictions.eq;
+package org.n52.series.db.dao;
 
 import java.util.List;
 
@@ -36,14 +35,13 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
 import org.n52.series.db.DataAccessException;
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.I18nProcedureEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
 public class ProcedureDao extends AbstractDao<ProcedureEntity> {
-
-    private static final String SERIES_PROPERTY = "procedure";
 
     private static final String COLUMN_REFERENCE = "reference";
 
@@ -54,27 +52,28 @@ public class ProcedureDao extends AbstractDao<ProcedureEntity> {
     @Override
     @SuppressWarnings("unchecked")
     public List<ProcedureEntity> find(DbQuery query) {
-        Criteria criteria = translate(I18nProcedureEntity.class, getDefaultCriteria(), query)
-                .add(Restrictions.ilike("name", "%" + query.getSearchTerm() + "%"));
-        return query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nProcedureEntity.class, getDefaultCriteria(), query);
+        criteria.add(Restrictions.ilike(ProcedureEntity.PROPERTY_NAME, "%" + query.getSearchTerm() + "%"));
+        return query.addFilters(criteria, getDatasetProperty())
+                    .list();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<ProcedureEntity> getAllInstances(DbQuery query) throws DataAccessException {
-        Criteria criteria = translate(I18nProcedureEntity.class, getDefaultCriteria(), query);
-        return (List<ProcedureEntity>) query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nProcedureEntity.class, getDefaultCriteria(), query);
+        return (List<ProcedureEntity>) query.addFilters(criteria, getDatasetProperty())
+                                            .list();
     }
 
     @Override
     protected Criteria getDefaultCriteria() {
-        return super.getDefaultCriteria()
-                .add(eq(COLUMN_REFERENCE, Boolean.FALSE));
+        return super.getDefaultCriteria().add(Restrictions.eq(COLUMN_REFERENCE, Boolean.FALSE));
     }
 
     @Override
-    protected String getSeriesProperty() {
-        return SERIES_PROPERTY;
+    protected String getDatasetProperty() {
+        return DatasetEntity.PROPERTY_PROCEDURE;
     }
 
     @Override

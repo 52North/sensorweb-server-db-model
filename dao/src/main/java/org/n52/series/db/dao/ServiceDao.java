@@ -26,15 +26,17 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.dao;
 
 import java.util.List;
+
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.n52.series.db.DataAccessException;
 import org.n52.series.db.beans.ServiceEntity;
 
-public class ServiceDao extends AbstractDao<ServiceEntity>{
+public class ServiceDao extends AbstractDao<ServiceEntity> {
 
     private static final String SERIES_PROPERTY = "service";
 
@@ -44,7 +46,8 @@ public class ServiceDao extends AbstractDao<ServiceEntity>{
 
     @Override
     public List<ServiceEntity> find(DbQuery query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        // TODO implement
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
@@ -53,7 +56,7 @@ public class ServiceDao extends AbstractDao<ServiceEntity>{
     }
 
     @Override
-    protected String getSeriesProperty() {
+    protected String getDatasetProperty() {
         return SERIES_PROPERTY;
     }
 

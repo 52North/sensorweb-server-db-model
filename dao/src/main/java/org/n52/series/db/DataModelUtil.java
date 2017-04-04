@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db;
 
 import org.hibernate.Criteria;
@@ -42,23 +43,30 @@ public final class DataModelUtil {
         CriteriaImpl criteriaImpl = (CriteriaImpl) criteria;
         SessionImplementor session = criteriaImpl.getSession();
         SessionFactoryImplementor factory = extractSessionFactory(criteria);
-        CriteriaQueryTranslator translator
-                = new CriteriaQueryTranslator(factory, criteriaImpl, criteriaImpl.getEntityOrClassName(),
-                        CriteriaQueryTranslator.ROOT_SQL_ALIAS);
+        CriteriaQueryTranslator translator = new CriteriaQueryTranslator(factory,
+                                                                         criteriaImpl,
+                                                                         criteriaImpl.getEntityOrClassName(),
+                                                                         CriteriaQueryTranslator.ROOT_SQL_ALIAS);
         String[] implementors = factory.getImplementors(criteriaImpl.getEntityOrClassName());
 
-        CriteriaJoinWalker walker
-                = new CriteriaJoinWalker((OuterJoinLoadable) factory.getEntityPersister(implementors[0]), translator,
-                        factory, criteriaImpl, criteriaImpl.getEntityOrClassName(), session.getLoadQueryInfluencers());
+        OuterJoinLoadable joinLoader = (OuterJoinLoadable) factory.getEntityPersister(implementors[0]);
+        CriteriaJoinWalker walker = new CriteriaJoinWalker(joinLoader,
+                                                           translator,
+                                                           factory,
+                                                           criteriaImpl,
+                                                           criteriaImpl.getEntityOrClassName(),
+                                                           session.getLoadQueryInfluencers());
 
         return walker.getSQLString();
     }
 
-    public static boolean isEntitySupported(Class< ?> clazz, Criteria criteria) {
+    public static boolean isEntitySupported(Class< ? > clazz, Criteria criteria) {
         SessionFactoryImplementor factory = extractSessionFactory(criteria);
 
         if (factory != null) {
-            return factory.getAllClassMetadata().keySet().contains(clazz.getName());
+            return factory.getAllClassMetadata()
+                          .keySet()
+                          .contains(clazz.getName());
         }
         return false;
     }
@@ -73,7 +81,7 @@ public final class DataModelUtil {
     private static SessionImplementor getSessionImplementor(Criteria criteria) {
         SessionImplementor session = null;
         if (criteria instanceof CriteriaImpl) {
-            session = ((CriteriaImpl) criteria).getSession(); // ugly!
+            session = ((CriteriaImpl) criteria).getSession();
         } else if (criteria instanceof CriteriaImpl.Subcriteria) {
             CriteriaImpl temp = (CriteriaImpl) ((CriteriaImpl.Subcriteria) criteria).getParent();
             session = temp.getSession();

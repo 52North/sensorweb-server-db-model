@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.ArrayList;
@@ -61,8 +62,7 @@ public class CountDataEntity extends DataEntity<Integer> {
             String trimmed = value.trim();
             try {
                 validatedValues.add(Integer.parseInt(trimmed));
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 LOGGER.debug("Ignoring NO_DATA value {} (not an integer).", trimmed);
             }
         }

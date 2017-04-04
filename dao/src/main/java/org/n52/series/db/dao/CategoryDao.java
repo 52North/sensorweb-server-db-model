@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.dao;
 
 import java.util.List;
@@ -55,21 +56,23 @@ public class CategoryDao extends AbstractDao<CategoryEntity> {
     @SuppressWarnings("unchecked")
     public List<CategoryEntity> find(DbQuery query) {
         LOGGER.debug("find instance: {}", query);
-        Criteria criteria = translate(I18nCategoryEntity.class, getDefaultCriteria(), query)
-                .add(Restrictions.ilike("name", "%" + query.getSearchTerm() + "%"));
-        return query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nCategoryEntity.class, getDefaultCriteria(), query);
+        criteria.add(Restrictions.ilike(CategoryEntity.PROPERTY_NAME, "%" + query.getSearchTerm() + "%"));
+        return query.addFilters(criteria, getDatasetProperty())
+                    .list();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<CategoryEntity> getAllInstances(DbQuery query) throws DataAccessException {
         LOGGER.debug("get all instances: {}", query);
-        Criteria criteria = translate(I18nCategoryEntity.class, getDefaultCriteria(), query);
-        return query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nCategoryEntity.class, getDefaultCriteria(), query);
+        return query.addFilters(criteria, getDatasetProperty())
+                    .list();
     }
 
     @Override
-    protected String getSeriesProperty() {
+    protected String getDatasetProperty() {
         return SERIES_PROPERTY;
     }
 

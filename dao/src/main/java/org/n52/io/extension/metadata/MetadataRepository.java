@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension.metadata;
 
 import java.util.Collections;
@@ -57,19 +58,19 @@ class MetadataRepository extends SessionAwareRepository {
             DatabaseMetadataDao dao = new DatabaseMetadataDao(session);
             final Set<String> fields = parameters.getFields();
             return fields == null
-                    ? convertToOutputs(dao.getAllFor(parseId(output.getId())))
-                    : convertToOutputs(dao.getSelected(parseId(output.getId()), fields));
+                ? convertToOutputs(dao.getAllFor(parseId(output.getId())))
+                : convertToOutputs(dao.getSelected(parseId(output.getId()), fields));
         } finally {
             returnSession(session);
         }
     }
 
-    private Map<String, Object> convertToOutputs(List<MetadataEntity<?>> allInstances) {
+    private Map<String, Object> convertToOutputs(List<MetadataEntity< ? >> allInstances) {
         if (allInstances == null) {
             return Collections.emptyMap();
         }
         Map<String, Object> outputs = new HashMap<>();
-        for (MetadataEntity<?> entity : allInstances) {
+        for (MetadataEntity< ? > entity : allInstances) {
             outputs.put(entity.getName(), entity.toOutput());
         }
         return outputs;

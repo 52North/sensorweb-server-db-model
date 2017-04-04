@@ -26,9 +26,8 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
-package org.n52.series.db.dao;
 
-import static org.hibernate.criterion.Restrictions.eq;
+package org.n52.series.db.dao;
 
 import java.util.List;
 
@@ -57,23 +56,25 @@ public class PlatformDao extends AbstractDao<PlatformEntity> {
     @SuppressWarnings("unchecked")
     public List<PlatformEntity> find(DbQuery query) {
         LOGGER.debug("find instance: {}", query);
-        Criteria criteria = translate(I18nPlatformEntity.class, getDefaultCriteria(), query);
-        criteria.add(Restrictions.ilike("name", "%" + query.getSearchTerm() + "%"));
-        return query.addFilters(criteria, getSeriesProperty()).list();
+        Criteria criteria = i18n(I18nPlatformEntity.class, getDefaultCriteria(), query);
+        criteria.add(Restrictions.ilike(PlatformEntity.PROPERTY_NAME, "%" + query.getSearchTerm() + "%"));
+        return query.addFilters(criteria, getDatasetProperty())
+                    .list();
     }
 
     @Override
     @SuppressWarnings("unchecked")
     public List<PlatformEntity> getAllInstances(DbQuery query) throws DataAccessException {
-        Criteria criteria = translate(I18nPlatformEntity.class, getDefaultCriteria(SERIES_PROPERTY), query);
-        return (List<PlatformEntity>) query.addFilters(criteria, getSeriesProperty()).list();
+        final String seriesProperty = getDatasetProperty();
+        Criteria criteria = i18n(I18nPlatformEntity.class, getDefaultCriteria(seriesProperty), query);
+        return (List<PlatformEntity>) query.addFilters(criteria, seriesProperty)
+                                           .list();
     }
 
     @Override
-    protected String getSeriesProperty() {
+    protected String getDatasetProperty() {
         return SERIES_PROPERTY;
     }
-
 
     @Override
     protected Class<PlatformEntity> getEntityClass() {

@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ import org.n52.series.spi.search.OfferingSearchResult;
 import org.n52.series.spi.search.SearchResult;
 import org.n52.web.exception.ResourceNotFoundException;
 
-public class OfferingRepository extends HierarchicalParameterRepository<OfferingEntity, OfferingOutput>{
+public class OfferingRepository extends HierarchicalParameterRepository<OfferingEntity, OfferingOutput> {
 
     @Override
     public boolean exists(String id, DbQuery parameters) throws DataAccessException {
@@ -75,12 +76,13 @@ public class OfferingRepository extends HierarchicalParameterRepository<Offering
     }
 
     @Override
-    public List<SearchResult> convertToSearchResults(List<? extends DescribableEntity> found, DbQuery query) {
+    public List<SearchResult> convertToSearchResults(List< ? extends DescribableEntity> found, DbQuery query) {
         String locale = query.getLocale();
         String hrefBase = urHelper.getOfferingsHrefBaseUrl(query.getHrefBase());
         List<SearchResult> results = new ArrayList<>();
         for (DescribableEntity searchResult : found) {
-            String pkid = searchResult.getPkid().toString();
+            String pkid = searchResult.getPkid()
+                                      .toString();
             String label = searchResult.getLabelFrom(locale);
             results.add(new OfferingSearchResult(pkid, label, hrefBase));
         }
@@ -118,6 +120,17 @@ public class OfferingRepository extends HierarchicalParameterRepository<Offering
     }
 
     @Override
+    protected OfferingOutput createExpanded(OfferingEntity entity, DbQuery parameters) throws DataAccessException {
+        OfferingOutput result = createCondensed(entity, parameters);
+        if (parameters.getHrefBase() != null) {
+            result.setService(getCondensedExtendedService(entity.getService(), parameters));
+        } else {
+            result.setService(getCondensedService(entity.getService(), parameters));
+        }
+        return result;
+    }
+
+    @Override
     public OfferingOutput getInstance(String id, DbQuery parameters) throws DataAccessException {
         Session session = getSession();
         try {
@@ -133,10 +146,6 @@ public class OfferingRepository extends HierarchicalParameterRepository<Offering
         return createExpanded(result, parameters);
     }
 
-    private List<OfferingEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
-        return createDao(session).getAllInstances(parameters);
-    }
-
     private OfferingEntity getInstance(Long id, DbQuery parameters, Session session) throws DataAccessException {
         OfferingDao dao = createDao(session);
         OfferingEntity result = dao.getInstance(id, parameters);
@@ -146,15 +155,8 @@ public class OfferingRepository extends HierarchicalParameterRepository<Offering
         return result;
     }
 
-    @Override
-    protected OfferingOutput createExpanded(OfferingEntity entity, DbQuery parameters) throws DataAccessException {
-        OfferingOutput result = createCondensed(entity, parameters);
-        if (parameters.getHrefBase() != null) {
-            result.setService(getCondensedExtendedService(entity.getService(), parameters));
-        } else {
-            result.setService(getCondensedService(entity.getService(), parameters));
-        }
-        return result;
+    private List<OfferingEntity> getAllInstances(DbQuery parameters, Session session) throws DataAccessException {
+        return createDao(session).getAllInstances(parameters);
     }
 
     @Override

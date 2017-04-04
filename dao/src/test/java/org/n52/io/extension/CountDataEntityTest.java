@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.io.extension;
 
 import static org.junit.Assert.assertTrue;
@@ -40,7 +41,10 @@ public class CountDataEntityTest {
 
     @Test
     public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] {"9999","-9999.9"});
+        Collection<String> noDataValues = Arrays.asList(new String[] {
+            "9999",
+            "-9999.9"
+        });
         CountDataEntity entity = new CountDataEntity();
         entity.setValue(9999);
         assertTrue(entity.isNoDataValue(noDataValues));

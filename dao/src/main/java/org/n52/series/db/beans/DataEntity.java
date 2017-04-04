@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.sql.Timestamp;
@@ -33,18 +34,24 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import org.n52.series.db.beans.parameter.Parameter;
 
+import org.n52.series.db.beans.parameter.Parameter;
 
 public abstract class DataEntity<T> {
 
     public static final String SERIES_PKID = "seriesPkid";
 
+    public static final String PROPERTY_TIMESTART = "timestart";
+
+    public static final String PROPERTY_TIMEEND = "timeend";
+
     private Long pkid;
 
-    private Date timestart; // optional
+    // optional
+    private Date timestart;
 
-    private Date timeend; // required
+    // required
+    private Date timeend;
 
     private T value;
 
@@ -60,7 +67,7 @@ public abstract class DataEntity<T> {
 
     private Date resultTime;
 
-    private final Set<Parameter<?>> parameters = new HashSet<>(0);
+    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
 
     public Long getPkid() {
         return pkid;
@@ -74,6 +81,7 @@ public abstract class DataEntity<T> {
      * @return timestamp
      * @deprecated use {@link #getTimeend()}
      */
+    @Deprecated
     public Date getTimestamp() {
         return timeend != null
                 ? new Timestamp(timeend.getTime())
@@ -82,8 +90,10 @@ public abstract class DataEntity<T> {
 
     /**
      * @param timestamp
+     *        the timestamp
      * @deprecated use {@link #setTimeend(java.util.Date)}
      */
+    @Deprecated
     public void setTimestamp(Date timestamp) {
         this.timeend = timestamp != null
                 ? new Timestamp(timestamp.getTime())
@@ -102,6 +112,7 @@ public abstract class DataEntity<T> {
 
     /**
      * @param timestart
+     *        the timestart
      * @since 2.0.0
      */
     public void setTimestart(Date timestart) {
@@ -121,8 +132,8 @@ public abstract class DataEntity<T> {
     }
 
     /**
-     *
      * @param timeend
+     *        the timeend
      * @since 2.0.0
      */
     public void setTimeend(Date timeend) {
@@ -217,11 +228,11 @@ public abstract class DataEntity<T> {
                 : null;
     }
 
-    public Set<Parameter<?>> getParameters() {
+    public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter<?>> parameters) {
+    public void setParameters(Set<Parameter< ? >> parameters) {
         if (parameters != null) {
             this.parameters.addAll(parameters);
         }
@@ -234,8 +245,11 @@ public abstract class DataEntity<T> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName()).append(" [");
-        sb.append(" id: ").append(pkid);
-        return sb.append(" ]").toString();
+        sb.append(getClass().getSimpleName())
+          .append(" [");
+        sb.append(" id: ")
+          .append(pkid);
+        return sb.append(" ]")
+                 .toString();
     }
 }

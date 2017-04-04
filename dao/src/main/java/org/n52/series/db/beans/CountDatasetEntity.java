@@ -26,10 +26,12 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.HashSet;
 import java.util.Set;
+
 import org.n52.io.response.dataset.count.CountDatasetOutput;
 
 public class CountDatasetEntity extends DatasetEntity<CountDataEntity> {

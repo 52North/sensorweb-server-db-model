@@ -26,6 +26,7 @@
  * or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License
  * for more details.
  */
+
 package org.n52.series.db.da;
 
 import java.util.ArrayList;
@@ -39,7 +40,8 @@ import org.n52.series.db.DataAccessException;
 import org.n52.series.db.beans.HierarchicalEntity;
 import org.n52.series.db.dao.DbQuery;
 
-public abstract class HierarchicalParameterRepository<E extends HierarchicalEntity<E>, O extends AbstractOutput> extends SessionAwareRepository implements OutputAssembler<O> {
+public abstract class HierarchicalParameterRepository<E extends HierarchicalEntity<E>, O extends AbstractOutput>
+        extends SessionAwareRepository implements OutputAssembler<O> {
 
     protected List<O> createExpanded(Collection<E> entities, DbQuery parameters) throws DataAccessException {
         Set<O> results = new HashSet<>();
