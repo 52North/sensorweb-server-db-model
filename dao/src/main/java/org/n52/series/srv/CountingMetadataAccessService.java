@@ -124,7 +124,7 @@ public class CountingMetadataAccessService implements CountingMetadataService {
             DbQuery query = dbQueryFactory.createFrom(parameters);
             return counter.countDatasets(query);
         } catch (DataAccessException e) {
-            throwCouldNotCountEntityException("phenomena", e);
+            throwCouldNotCountEntityException("dataset", e);
             return -1;
         }
     }
