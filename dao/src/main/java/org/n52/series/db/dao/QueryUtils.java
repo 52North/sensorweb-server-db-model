@@ -35,23 +35,23 @@ import java.util.stream.Collectors;
 import org.hibernate.criterion.Restrictions;
 import org.hibernate.criterion.SimpleExpression;
 
-final class QueryUtils {
+public class QueryUtils {
 
     static final String PROPERTY_PKID = "pkid";
 
-    static String createAssociation(String alias, String property) {
+    public static String createAssociation(String alias, String property) {
         return alias != null && !alias.isEmpty()
                 ? alias + "." + property
                 : property;
     }
 
-    static Set<Long> parseToIds(Set<String> ids) {
+    public static Set<Long> parseToIds(Set<String> ids) {
         return ids.stream()
                   .map(e -> parseToId(e))
                   .collect(Collectors.toSet());
     }
 
-    static SimpleExpression matchesPkid(String pkid) {
+    public static SimpleExpression matchesPkid(String pkid) {
         return Restrictions.eq(PROPERTY_PKID, QueryUtils.parseToId(pkid));
     }
 
@@ -61,7 +61,7 @@ final class QueryUtils {
      * @return the long value of given string or {@link Long#MIN_VALUE} if string could not be parsed to type
      *         long.
      */
-    static Long parseToId(String id) {
+    public static Long parseToId(String id) {
         try {
             return Long.parseLong(id);
         } catch (NumberFormatException e) {
