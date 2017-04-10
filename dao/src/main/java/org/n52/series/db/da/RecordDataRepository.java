@@ -29,6 +29,7 @@
 
 package org.n52.series.db.da;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -149,19 +150,19 @@ public class RecordDataRepository
             return null;
         }
 
-        ServiceEntity service = series.getService();
+        ServiceEntity service = getServiceEntity(series);
         Map<String, Object> observationValue = !service.isNoDataValue(observation)
                 ? observation.getValue()
                 : null;
 
-        long timeend = observation.getTimeend()
-                                  .getTime();
-        long timestart = observation.getTimestart()
-                                    .getTime();
+        Date timeend = observation.getTimeend();
+        Date timestart = observation.getTimestart();
+        long end = timeend.getTime();
+        long start = timestart.getTime();
         IoParameters parameters = query.getParameters();
         RecordValue value = parameters.isShowTimeIntervals()
-                ? new RecordValue(timestart, timeend, observationValue)
-                : new RecordValue(timeend, observationValue);
+                ? new RecordValue(start, end, observationValue)
+                : new RecordValue(end, observationValue);
 
         if (query.isExpanded()) {
             addGeometry(observation, value);
