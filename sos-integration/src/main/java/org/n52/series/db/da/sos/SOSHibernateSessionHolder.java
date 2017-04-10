@@ -69,7 +69,7 @@ public class SOSHibernateSessionHolder implements HibernateSessionStore {
                 LOGGER.error("Could not establish database connection. Check '{}'", DATASOURCE_PROPERTIES, e);
                 throwNewDatabaseConnectionException();
             }
-        } 
+        }
         return new HibernateSessionHolder();
     }
 

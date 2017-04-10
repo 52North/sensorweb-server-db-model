@@ -51,8 +51,6 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
 
-    public static final String DEFAULT_DATASET_TYPE = "measurement";
-
     private CategoryEntity category;
 
     private PhenomenonEntity phenomenon;

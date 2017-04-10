@@ -40,9 +40,9 @@ import org.n52.io.DatasetFactoryException;
 import org.n52.io.request.IoParameters;
 import org.n52.io.response.StationOutput;
 import org.n52.io.response.TimeseriesMetadataOutput;
+import org.n52.io.response.dataset.DatasetType;
 import org.n52.io.response.dataset.measurement.MeasurementReferenceValueOutput;
 import org.n52.series.db.DataAccessException;
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.MeasurementDataEntity;
@@ -194,7 +194,7 @@ public class TimeseriesRepository extends SessionAwareRepository implements Outp
             throws DataAccessException {
         TimeseriesMetadataOutput output = createCondensed(series, query, session);
         output.setSeriesParameters(createTimeseriesOutput(series, query));
-        MeasurementDataRepository repository = createRepository(DatasetEntity.DEFAULT_DATASET_TYPE);
+        MeasurementDataRepository repository = createRepository(DatasetType.DEFAULT_DATASET_TYPE);
 
         output.setReferenceValues(createReferenceValueOutputs(series, query, repository));
         output.setFirstValue(repository.getFirstValue(series, session, query));
@@ -203,11 +203,11 @@ public class TimeseriesRepository extends SessionAwareRepository implements Outp
     }
 
     private MeasurementDataRepository createRepository(String datasetType) throws DataAccessException {
-        if (!DatasetEntity.DEFAULT_DATASET_TYPE.equalsIgnoreCase(datasetType)) {
+        if (!DatasetType.DEFAULT_DATASET_TYPE.equalsIgnoreCase(datasetType)) {
             throw new ResourceNotFoundException("unknown dataset type: " + datasetType);
         }
         try {
-            return (MeasurementDataRepository) factory.create(DatasetEntity.DEFAULT_DATASET_TYPE);
+            return (MeasurementDataRepository) factory.create(DatasetType.DEFAULT_DATASET_TYPE);
         } catch (DatasetFactoryException e) {
             throw new DataAccessException(e.getMessage());
         }
