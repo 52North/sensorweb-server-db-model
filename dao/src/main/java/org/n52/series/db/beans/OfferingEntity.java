@@ -128,7 +128,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     public boolean hasPhenomenonTimeStart() {
-        return getPhenomenonTimeStart() != null;
+        return phenomenonTimeStart != null;
     }
 
     /**
@@ -151,7 +151,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     public boolean hasPhenomenonTimeEnd() {
-        return getPhenomenonTimeEnd() != null;
+        return phenomenonTimeEnd != null;
     }
 
     /**
@@ -174,7 +174,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     public boolean hasResultTimeStart() {
-        return getResultTimeStart() != null;
+        return resultTimeStart != null;
     }
 
     /**
@@ -197,7 +197,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     }
 
     public boolean hasResultTimeEnd() {
-        return getResultTimeEnd() != null;
+        return resultTimeEnd != null;
     }
 
     @Override
