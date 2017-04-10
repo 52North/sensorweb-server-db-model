@@ -359,7 +359,7 @@ public class DbQuery {
             filter.createCriteria(entity, "e")
                   // join the parents to enable filtering via parent ids
                   .createAlias("e.parents", "p", JoinType.LEFT_OUTER_JOIN)
-                  .add(Restrictions.or(createIdCriterion(values, "e"),
+                  .add(Restrictions.or(createIdCriterion(values, "v"),
                                        Restrictions.in("p.pkid", QueryUtils.parseToIds(values))));
         }
         return filter;
