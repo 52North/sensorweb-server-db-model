@@ -29,6 +29,7 @@
 
 package org.n52.series.db.da;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -145,19 +146,19 @@ public class TextDataRepository extends AbstractDataRepository<TextData, TextDat
             return null;
         }
 
-        ServiceEntity service = series.getService();
+        ServiceEntity service = getServiceEntity(series);
         String observationValue = !service.isNoDataValue(observation)
                 ? observation.getValue()
                 : null;
 
-        long timeend = observation.getTimeend()
-                                  .getTime();
-        long timestart = observation.getTimestart()
-                                    .getTime();
+        Date timeend = observation.getTimeend();
+        Date timestart = observation.getTimestart();
+        long end = timeend.getTime();
+        long start = timestart.getTime();
         IoParameters parameters = query.getParameters();
         TextValue value = parameters.isShowTimeIntervals()
-                ? new TextValue(timestart, timeend, observationValue)
-                : new TextValue(timeend, observationValue);
+                ? new TextValue(start, end, observationValue)
+                : new TextValue(end, observationValue);
 
         if (query.isExpanded()) {
             addGeometry(observation, value);

@@ -31,18 +31,21 @@ package org.n52.series.db.da;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.n52.io.request.IoParameters;
 import org.n52.io.response.dataset.measurement.MeasurementData;
 import org.n52.io.response.dataset.measurement.MeasurementDatasetMetadata;
 import org.n52.io.response.dataset.measurement.MeasurementValue;
 import org.n52.series.db.DataAccessException;
 import org.n52.series.db.beans.MeasurementDataEntity;
 import org.n52.series.db.beans.MeasurementDatasetEntity;
+import org.n52.series.db.beans.ServiceEntity;
 import org.n52.series.db.dao.DataDao;
 import org.n52.series.db.dao.DbQuery;
 
@@ -153,18 +156,19 @@ public class MeasurementDataRepository extends
             return null;
         }
 
-        long timeend = observation.getTimeend()
-                                  .getTime();
-        long timestart = observation.getTimestart()
-                                    .getTime();
-        Double observationValue = !series.getService()
-                                         .isNoDataValue(observation)
-                                                 ? format(observation, series)
-                                                 : null;
-        MeasurementValue value = query.getParameters()
-                                      .isShowTimeIntervals()
-                                              ? new MeasurementValue(timestart, timeend, observationValue)
-                                              : new MeasurementValue(timeend, observationValue);
+        ServiceEntity service = getServiceEntity(series);
+        Double observationValue = !service.isNoDataValue(observation)
+                ? format(observation, series)
+                : null;
+
+        Date timeend = observation.getTimeend();
+        Date timestart = observation.getTimestart();
+        long end = timeend.getTime();
+        long start = timestart.getTime();
+        IoParameters parameters = query.getParameters();
+        MeasurementValue value = parameters.isShowTimeIntervals()
+                ? new MeasurementValue(start, end, observationValue)
+                : new MeasurementValue(end, observationValue);
 
         if (query.isExpanded()) {
             addGeometry(observation, value);

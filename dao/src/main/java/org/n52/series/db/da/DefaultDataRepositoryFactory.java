@@ -61,7 +61,7 @@ public class DefaultDataRepositoryFactory extends ConfigTypedFactory<DataReposit
         instance.setSessionStore(sessionStore);
         if (serviceEntity != null) {
             // static instance available from Spring config
-            instance.setStaticServiceEntity(serviceEntity);
+            instance.setServiceEntity(serviceEntity);
         }
         return instance;
     }
