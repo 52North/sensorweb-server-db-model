@@ -154,7 +154,7 @@ public class FeatureRepository extends HierarchicalParameterRepository<FeatureEn
         }
         if (entity.hasParameters()) {
             for (Parameter< ? > parameter : entity.getParameters()) {
-                result.addParameter(parameter.toValueMap());
+                result.addParameter(parameter.toValueMap(parameters.getLocale()));
             }
         }
         return result;
