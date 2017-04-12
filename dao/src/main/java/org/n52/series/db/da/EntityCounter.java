@@ -32,6 +32,7 @@ package org.n52.series.db.da;
 import org.hibernate.Session;
 import org.n52.io.request.IoParameters;
 import org.n52.io.request.Parameters;
+import org.n52.io.response.dataset.DatasetType;
 import org.n52.series.db.DataAccessException;
 import org.n52.series.db.HibernateSessionStore;
 import org.n52.series.db.beans.DatasetEntity;
@@ -140,7 +141,7 @@ public class EntityCounter {
                                                                  "stationary",
                                                                  "insitu")
                                                      .extendWith(Parameters.FILTER_DATASET_TYPES,
-                                                                 DatasetEntity.DEFAULT_DATASET_TYPE));
+                                                                 DatasetType.DEFAULT_DATASET_TYPE));
     }
 
 }

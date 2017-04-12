@@ -29,18 +29,21 @@
 
 package org.n52.series.db.da;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import org.hibernate.Session;
+import org.n52.io.request.IoParameters;
 import org.n52.io.response.dataset.count.CountData;
 import org.n52.io.response.dataset.count.CountDatasetMetadata;
 import org.n52.io.response.dataset.count.CountValue;
 import org.n52.series.db.DataAccessException;
 import org.n52.series.db.beans.CountDataEntity;
 import org.n52.series.db.beans.CountDatasetEntity;
+import org.n52.series.db.beans.ServiceEntity;
 import org.n52.series.db.dao.DataDao;
 import org.n52.series.db.dao.DbQuery;
 
@@ -144,18 +147,19 @@ public class CountDataRepository
             return null;
         }
 
-        long timestart = observation.getTimestart()
-                                    .getTime();
-        long timeend = observation.getTimeend()
-                                  .getTime();
-        Integer observationValue = !series.getService()
-                                          .isNoDataValue(observation)
-                                                  ? observation.getValue()
-                                                  : null;
-        CountValue value = query.getParameters()
-                                .isShowTimeIntervals()
-                                        ? new CountValue(timestart, timeend, observationValue)
-                                        : new CountValue(timeend, observationValue);
+        ServiceEntity service = getServiceEntity(series);
+        Integer observationValue = !service.isNoDataValue(observation)
+                ? observation.getValue()
+                : null;
+
+        IoParameters parameters = query.getParameters();
+        Date timeend = observation.getTimeend();
+        Date timestart = observation.getTimestart();
+        long end = timeend.getTime();
+        long start = timestart.getTime();
+        CountValue value = parameters.isShowTimeIntervals()
+                ? new CountValue(start, end, observationValue)
+                : new CountValue(end, observationValue);
 
         if (query.isExpanded()) {
             addGeometry(observation, value);

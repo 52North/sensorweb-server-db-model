@@ -138,7 +138,7 @@ public class DbQuery {
     public String getHandleAsDatasetTypeFallback() {
         return parameters.containsParameter(Parameters.HANDLE_AS_DATASET_TYPE)
                 ? parameters.getAsString(Parameters.HANDLE_AS_DATASET_TYPE)
-                : DatasetEntity.DEFAULT_DATASET_TYPE;
+                : DatasetType.DEFAULT_DATASET_TYPE;
     }
 
     public boolean checkTranslationForLocale(Criteria criteria) {

@@ -185,10 +185,8 @@ public abstract class SessionAwareRepository {
     }
 
     protected ServiceOutput getCondensedService(ServiceEntity entity, DbQuery parameters) {
-        assertServiceAvailable(entity);
-        return serviceEntity == null
-                ? createCondensed(new ServiceOutput(), entity, parameters)
-                : createCondensed(new ServiceOutput(), serviceEntity, parameters);
+        ServiceEntity service = getServiceEntity(entity);
+        return createCondensed(new ServiceOutput(), service, parameters);
     }
 
     protected OfferingOutput getCondensedExtendedOffering(OfferingEntity entity, DbQuery parameters) {
@@ -206,12 +204,17 @@ public abstract class SessionAwareRepository {
         return serviceEntity;
     }
 
-    protected ServiceOutput getCondensedExtendedService(ServiceEntity entity, DbQuery parameters) {
+    protected ServiceEntity getServiceEntity(DescribableEntity entity) {
         assertServiceAvailable(entity);
+        return entity.getService() != null
+                ? entity.getService()
+                : serviceEntity;
+    }
+
+    protected ServiceOutput getCondensedExtendedService(ServiceEntity entity, DbQuery parameters) {
+        ServiceEntity service = getServiceEntity(entity);
         final String hrefBase = urHelper.getServicesHrefBaseUrl(parameters.getHrefBase());
-        return serviceEntity == null
-                ? createCondensed(new ServiceOutput(), entity, parameters, hrefBase)
-                : createCondensed(new ServiceOutput(), serviceEntity, parameters, hrefBase);
+        return createCondensed(new ServiceOutput(), service, parameters, hrefBase);
     }
 
     protected <T extends ParameterOutput> T createCondensed(T outputvalue,
@@ -264,7 +267,7 @@ public abstract class SessionAwareRepository {
                                urHelper.getCategoriesHrefBaseUrl(parameters.getHrefBase()));
     }
 
-    private void assertServiceAvailable(ServiceEntity entity) throws IllegalStateException {
+    private void assertServiceAvailable(DescribableEntity entity) throws IllegalStateException {
         if (serviceEntity == null && entity == null) {
             throw new IllegalStateException("No service instance available");
         }
