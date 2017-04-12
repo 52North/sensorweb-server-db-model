@@ -208,8 +208,9 @@ public class PlatformRepository extends SessionAwareRepository implements Output
                 ? getLastSamplingGeometry(datasets, query, session)
                 : geometry);
         if (entity.hasParameters()) {
+            String locale = parameters.getLocale();
             for (Parameter< ? > parameter : entity.getParameters()) {
-                result.addParameter(parameter.toValueMap());
+                result.addParameter(parameter.toValueMap(locale));
             }
         }
         return result;

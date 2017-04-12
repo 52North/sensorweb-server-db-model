@@ -127,10 +127,10 @@ public abstract class AbstractDataRepository<D extends Data< ? >,
         }
     }
 
-    protected void addParameters(DataEntity< ? > observation, AbstractValue< ? > value) {
+    protected void addParameters(DataEntity< ? > observation, AbstractValue< ? > value, DbQuery query) {
         if (observation.hasParameters()) {
             for (Parameter< ? > parameter : observation.getParameters()) {
-                value.addParameter(parameter.toValueMap());
+                value.addParameter(parameter.toValueMap(query.getLocale()));
             }
         }
     }

@@ -41,7 +41,7 @@ public abstract class Parameter<T> {
 
     private T value;
 
-    public Map<String, Object> toValueMap() {
+    public Map<String, Object> toValueMap(String locale) {
         Map<String, Object> valueMap = new HashMap<>();
         valueMap.put("name", getName());
         valueMap.put("value", getValue());

@@ -38,10 +38,10 @@ public class ParameterCategory extends Parameter<String> {
     private UnitEntity unit;
 
     @Override
-    public Map<String, Object> toValueMap() {
-        Map<String, Object> valueMap = super.toValueMap();
+    public Map<String, Object> toValueMap(String locale) {
+        Map<String, Object> valueMap = super.toValueMap(locale);
         if (isSetUnit()) {
-            valueMap.put("unit", getUnit());
+            valueMap.put("unit", getUnit().getNameI18n(locale));
         }
         return valueMap;
     }
