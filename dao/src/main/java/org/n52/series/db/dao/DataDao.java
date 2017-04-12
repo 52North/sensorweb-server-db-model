@@ -75,6 +75,7 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
 
     private static final String COLUMN_TIMEEND = "timeend";
 
+    private static final String COLUMN_PARENT = "parent";
     private final Class<T> entityType;
 
     @Autowired
@@ -164,19 +165,23 @@ public class DataDao<T extends DataEntity> extends AbstractDao<T> {
         return "";
     }
 
-    private Criteria getDefaultCriteria(DbQuery parameters) {
-        Criteria criteria = getDefaultCriteria();
-        return parameters.getResultTime() != null
-                ? criteria.add(Restrictions.eq(COLUMN_RESULTTIME, parameters.getResultTime()))
-                : criteria;
-    }
-
     @Override
     protected Criteria getDefaultCriteria() {
-        return session.createCriteria(entityType)
-                      // TODO check odering when `showtimeintervals=true`
-                      .addOrder(Order.asc(COLUMN_TIMEEND))
-                      .add(Restrictions.eq(COLUMN_DELETED, Boolean.FALSE));
+        return getDefaultCriteria((DbQuery) null);
+    }
+
+    protected Criteria getDefaultCriteria(DbQuery parameters) {
+        Criteria criteria = session.createCriteria(entityType)
+                                   // TODO check ordering when `showtimeintervals=true`
+                                   .addOrder(Order.asc(COLUMN_TIMEEND))
+                                   .add(Restrictions.eq(COLUMN_DELETED, Boolean.FALSE));
+        if (parameters != null) {
+            criteria = parameters.getResultTime() != null
+                    ? criteria.add(Restrictions.eq(COLUMN_RESULTTIME, parameters.getResultTime()))
+                    : criteria;
+        }
+
+        return criteria.add(Restrictions.eq(COLUMN_PARENT, false));
     }
 
     @Override
