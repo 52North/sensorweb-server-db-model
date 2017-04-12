@@ -13,6 +13,8 @@
         <property column="validtimestart" name="validTimeStart" not-null="false" type="timestamp"/>
         <property column="validtimeend" name="validTimeEnd" not-null="false" type="timestamp"/>
         <property column="resulttime" name="resultTime" not-null="false" type="timestamp"/>
+        <property column="parent" name="parent" type="org.hibernate.type.TrueFalseType" />
+        <property column="child" name="child" type="org.hibernate.type.TrueFalseType" />
         <component class="GeometryEntity" name="geometryEntity">
             <!--
            <property column="lat" name="lat" type="double" />

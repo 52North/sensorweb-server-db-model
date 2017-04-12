@@ -66,6 +66,10 @@ public abstract class DataEntity<T> {
     private Date validTimeEnd;
 
     private Date resultTime;
+    
+    private boolean parent;
+    
+    private boolean child;
 
     private final Set<Parameter< ? >> parameters = new HashSet<>(0);
 
@@ -226,6 +230,22 @@ public abstract class DataEntity<T> {
         this.resultTime = resultTime != null
                 ? new Timestamp(resultTime.getTime())
                 : null;
+    }
+
+    public boolean isParent() {
+        return parent;
+    }
+
+    public void setParent(boolean parent) {
+        this.parent = parent;
+    }
+
+    public boolean isChild() {
+        return child;
+    }
+
+    public void setChild(boolean child) {
+        this.child = child;
     }
 
     public Set<Parameter< ? >> getParameters() {
