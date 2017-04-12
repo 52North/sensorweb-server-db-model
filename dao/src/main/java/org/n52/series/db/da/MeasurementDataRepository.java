@@ -173,7 +173,7 @@ public class MeasurementDataRepository extends
         if (query.isExpanded()) {
             addGeometry(observation, value);
             addValidTime(observation, value);
-            addParameters(observation, value);
+            addParameters(observation, value, query);
         } else if (series.getPlatform()
                          .isMobile()) {
             addGeometry(observation, value);
