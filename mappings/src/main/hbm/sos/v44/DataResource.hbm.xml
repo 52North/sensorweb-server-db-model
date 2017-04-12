@@ -41,5 +41,13 @@
             <key column="observationid"/>
             <property column="value" name="value" type="integer"/>
         </joined-subclass>
+
+        <joined-subclass extends="DataEntity" name="ProfileDataEntity" table="profilevalue">
+            <key column="observationid"/>
+            <set name="value" table="profileobservation">
+                <key column="observationid" />
+                <many-to-many class="DataEntity" column="childObservationId" />
+            </set>
+        </joined-subclass>
     </class>
 </hibernate-mapping>

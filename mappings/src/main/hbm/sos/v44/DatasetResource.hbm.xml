@@ -61,5 +61,13 @@
         <one-to-many class="DataEntity"/>
       </list>
     </subclass>
+
+    <subclass discriminator-value="profile" name="ProfileDatasetEntity">
+      <list fetch="select" inverse="true" name="observations" table="observation">
+        <key column="observationid"/>
+        <index column="seriesid"/>
+        <one-to-many class="DataEntity"/>
+      </list>
+    </subclass>
   </class>
 </hibernate-mapping>
