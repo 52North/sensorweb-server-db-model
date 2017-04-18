@@ -27,8 +27,9 @@
 
     <licenses>
         <license>
-            <name>GNU General Public License, Version 2.0</name>
-            <url>http://www.gnu.de/documents/gpl-2.0.en.html</url>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <comments>A business-friendly OSS license</comments>
         </license>
     </licenses>
 
