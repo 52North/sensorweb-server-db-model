@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -29,7 +30,7 @@ public class GeometryEntity {
 
     public static final String PROPERTY_GEOMETRY = "geometry";
 
-    public GeometryFactory geometryFactory;
+    private GeometryFactory geometryFactory;
 
     private Geometry geometry;
 
@@ -112,13 +113,13 @@ public class GeometryEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName())
-          .append(" [");
-        sb.append(" latitude: ")
-          .append(getLat());
-        sb.append(", longitude: ")
-          .append(getLon());
-        return sb.append(" ]")
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" latitude: ")
+                 .append(getLat())
+                 .append(", longitude: ")
+                 .append(getLon())
+                 .append(" ]")
                  .toString();
     }
 

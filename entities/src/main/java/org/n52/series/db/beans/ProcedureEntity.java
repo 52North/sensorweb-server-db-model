@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
@@ -65,13 +66,13 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName())
-          .append(" [");
-        sb.append(" Domain id: ")
-          .append(getDomainId());
-        sb.append(", service: ")
-          .append(getService());
-        return sb.append(" ]")
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" Domain id: ")
+                 .append(getDomainId())
+                 .append(", service: ")
+                 .append(getService())
+                 .append(" ]")
                  .toString();
     }
 }

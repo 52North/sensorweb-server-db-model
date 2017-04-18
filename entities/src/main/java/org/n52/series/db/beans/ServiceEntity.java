@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Arrays;
@@ -22,8 +23,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class ServiceEntity extends DescribableEntity {
 
@@ -57,7 +56,6 @@ public class ServiceEntity extends DescribableEntity {
         this.type = type;
     }
 
-    @JsonIgnore
     public boolean isNoDataValue(DataEntity< ? > observation) {
         return observation.isNoDataValue(noDataValues);
     }
@@ -90,17 +88,17 @@ public class ServiceEntity extends DescribableEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName())
-          .append(" [");
-        sb.append(" url: ")
-          .append(getUrl());
-        sb.append(", type: ")
-          .append(getType());
-        sb.append(", version: ")
-          .append(getVersion());
-        sb.append(", noDataValues: ")
-          .append(getNoDataValues());
-        return sb.append(" ]")
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" url: ")
+                 .append(getUrl())
+                 .append(", type: ")
+                 .append(getType())
+                 .append(", version: ")
+                 .append(getVersion())
+                 .append(", noDataValues: ")
+                 .append(getNoDataValues())
+                 .append(" ]")
                  .toString();
     }
 

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.sql.Timestamp;
@@ -190,11 +191,11 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName())
-          .append(" [");
-        sb.append(" Domain id: ")
-          .append(getDomainId());
-        return sb.append(" ]")
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" Domain id: ")
+                 .append(getDomainId())
+                 .append(" ]")
                  .toString();
     }
 

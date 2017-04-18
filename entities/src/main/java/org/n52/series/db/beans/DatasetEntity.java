@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.sql.Timestamp;
@@ -246,27 +247,27 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName())
-          .append(" [");
-        sb.append(" id: ")
-          .append(getPkid());
-        sb.append(" , category: ")
-          .append(category);
-        sb.append(" , phenomenon: ")
-          .append(phenomenon);
-        sb.append(" , procedure: ")
-          .append(procedure);
-        sb.append(" , offering: ")
-          .append(offering);
-        sb.append(" , feature: ")
-          .append(feature);
-        sb.append(" , service: ")
-          .append(getService());
-        sb.append(" , #observations: ")
-          .append(getObservationCount() >= 0
-                  ? getObservationCount()
-                  : observations.size());
-        return sb.append(" ]")
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" id: ")
+                 .append(getPkid())
+                 .append(" , category: ")
+                 .append(category)
+                 .append(" , phenomenon: ")
+                 .append(phenomenon)
+                 .append(" , procedure: ")
+                 .append(procedure)
+                 .append(" , offering: ")
+                 .append(offering)
+                 .append(" , feature: ")
+                 .append(feature)
+                 .append(" , service: ")
+                 .append(getService())
+                 .append(" , #observations: ")
+                 .append(getObservationCount() >= 0
+                         ? getObservationCount()
+                         : observations.size())
+                 .append(" ]")
                  .toString();
     }
 
