@@ -2,10 +2,5 @@ target
 .settings
 .project
 .classpath
-docs
-nbactions.xml
-/scratchpad.txt
-*.swp
-*.swo
 nbactions.xml
 
