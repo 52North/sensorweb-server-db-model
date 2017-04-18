@@ -425,9 +425,7 @@
                     <configuration>
                         <header>misc/52N_license-header.txt</header>
                         <properties>
-                            <inceptionYear>${project.inceptionYear}</inceptionYear>
-                            <latestYearOfContribution>${currentYear}</latestYearOfContribution>
-                            <latestYearOfContribution>${currentYearDynamic}</latestYearOfContribution>
+                            <year>${project.inceptionYear}-${currentYearDynamic}</year>
                         </properties>
                         <includes>
                             <include>**/src/**/*.java</include>
