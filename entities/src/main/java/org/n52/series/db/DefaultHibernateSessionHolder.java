@@ -24,9 +24,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 @Transactional
-public class SeriesHibernateSessionHolder implements HibernateSessionStore {
+public class DefaultHibernateSessionHolder implements HibernateSessionStore {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(SeriesHibernateSessionHolder.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(DefaultHibernateSessionHolder.class);
 
     @Autowired
     private SessionFactory seriesSessionFactory;

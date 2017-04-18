@@ -22,12 +22,6 @@ import org.n52.series.db.beans.parameter.Parameter;
 
 import com.vividsolutions.jts.geom.Geometry;
 
-/**
- * TODO: JavaDoc
- *
- * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- * @since 2.0.0
- */
 public class PlatformEntity extends DescribableEntity {
 
     public static final String PROPERTY_INSITU = "insitu";

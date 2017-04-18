@@ -35,8 +35,6 @@ import org.hibernate.type.descriptor.java.JdbcTimestampTypeDescriptor;
  * so that times from the database can be configured to have a specific timezone.
  *
  * @see <a href="http://stackoverflow.com/a/3430957/2299448"> http://stackoverflow.com/a/3430957/2299448</a>
- * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- * @since 2.0.0
  */
 public class ZonalTimestampType extends AbstractSingleColumnStandardBasicType<Date> implements
         VersionType<Date>,

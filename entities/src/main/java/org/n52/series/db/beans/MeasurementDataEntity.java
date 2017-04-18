@@ -23,11 +23,6 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**
- * TODO: JavaDoc
- *
- * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- */
 public class MeasurementDataEntity extends DataEntity<Double> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MeasurementDataEntity.class);

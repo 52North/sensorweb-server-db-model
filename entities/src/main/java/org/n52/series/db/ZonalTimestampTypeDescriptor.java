@@ -35,9 +35,6 @@ import org.hibernate.type.descriptor.sql.TimestampTypeDescriptor;
 /**
  * Hibernate TypeDescriptor which forces all Timestamps queried from/inserted to the database to use a
  * configurable TimeZone instead of the JVM's timezone.
- *
- * @author <a href="mailto:h.bredel@52north.org">Henning Bredel</a>
- * @since 2.0.0
  */
 public final class ZonalTimestampTypeDescriptor extends TimestampTypeDescriptor {
 

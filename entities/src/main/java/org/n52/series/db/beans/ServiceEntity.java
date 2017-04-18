@@ -30,7 +30,7 @@ public class ServiceEntity extends DescribableEntity {
 
     private String url;
 
-    private String type = "Thin DB access layer service.";
+    private String type = "RESTful series data access layer.";
 
     private List<String> noDataValues;
 
