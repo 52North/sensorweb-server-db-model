@@ -31,6 +31,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     public static final String ENTITY_ALIAS = "dataset";
 
+    public static final String PROPERTY_OBSERVATION_CONSTELLATION = "observationConstellation";
     public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
@@ -40,15 +41,11 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
 
-    private CategoryEntity category;
-
-    private PhenomenonEntity phenomenon;
-
-    private ProcedureEntity procedure;
-
-    private OfferingEntity offering;
+    private ObservationConstellationEntity observationConstellation;
 
     private FeatureEntity feature;
+    
+    private CategoryEntity category;
 
     private PlatformEntity platform;
 
@@ -87,28 +84,43 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
         this.category = category;
     }
 
+    public ObservationConstellationEntity getObservationConstellation() {
+        return observationConstellation;
+    }
+
+    public void setObservationConstellation(ObservationConstellationEntity observationConstellation) {
+        this.observationConstellation = observationConstellation;
+    }
+
     public PhenomenonEntity getPhenomenon() {
-        return phenomenon;
+        return getObservationConstellation().getObservableProperty();
     }
 
     public void setPhenomenon(PhenomenonEntity phenomenon) {
-        this.phenomenon = phenomenon;
+        existsOrCreateObservationConstellation().setObservableProperty(phenomenon);
+    }
+
+    private ObservationConstellationEntity existsOrCreateObservationConstellation() {
+        if (getObservationConstellation() == null) {
+            setObservationConstellation(new ObservationConstellationEntity());
+        }
+        return getObservationConstellation();
     }
 
     public ProcedureEntity getProcedure() {
-        return procedure;
+        return getObservationConstellation().getProcedure();
     }
 
     public void setProcedure(ProcedureEntity procedure) {
-        this.procedure = procedure;
+        existsOrCreateObservationConstellation().setProcedure(procedure);
     }
 
     public OfferingEntity getOffering() {
-        return offering;
+        return getObservationConstellation().getOffering();
     }
 
     public void setOffering(OfferingEntity offering) {
-        this.offering = offering;
+        existsOrCreateObservationConstellation().setOffering(offering);
     }
 
     public FeatureEntity getFeature() {
@@ -254,11 +266,11 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
                  .append(" , category: ")
                  .append(category)
                  .append(" , phenomenon: ")
-                 .append(phenomenon)
+                 .append(getPhenomenon())
                  .append(" , procedure: ")
-                 .append(procedure)
+                 .append(getProcedure())
                  .append(" , offering: ")
-                 .append(offering)
+                 .append(getOffering())
                  .append(" , feature: ")
                  .append(feature)
                  .append(" , service: ")

@@ -19,11 +19,9 @@ package org.n52.series.db.beans.parameter;
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Parameter<T> {
+import org.n52.series.db.beans.PkidEntity;
 
-    private long parameterId;
-
-    private long fkId;
+public abstract class Parameter<T> extends PkidEntity implements ValuedParameter<T, Parameter<T>>{
 
     private String name;
 
@@ -36,32 +34,17 @@ public abstract class Parameter<T> {
         return valueMap;
     }
 
-    public long getParameterId() {
-        return parameterId;
-    }
-
-    public void setParameterId(long parameterId) {
-        this.parameterId = parameterId;
-    }
-
-    public long getFkId() {
-        return fkId;
-    }
-
-    public void setFkId(long fkId) {
-        this.fkId = fkId;
-    }
-
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public Parameter<T> setName(String name) {
         this.name = name;
+        return this;
     }
 
     public boolean isSetName() {
-        return getName() != null;
+        return getName() != null && !getName().isEmpty();
     }
 
     public T getValue() {

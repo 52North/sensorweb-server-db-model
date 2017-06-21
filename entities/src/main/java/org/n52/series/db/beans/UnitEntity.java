@@ -18,5 +18,33 @@ package org.n52.series.db.beans;
 
 public class UnitEntity extends DescribableEntity {
 
-    // allows explicit mapping
+    private String link;
+    
+    /**
+     * @return the link
+     */
+    public String getLink() {
+        return link;
+    }
+
+    /**
+     * @param link the link to set
+     */
+    public void setLink(String link) {
+        this.link = link;
+    }
+    
+    public boolean isSetLink() {
+        return getLink() != null && !getLink().isEmpty();
+    }
+    
+    
+    // TODO SOS compatible
+    public String getUnit() {
+        return getDomainId();
+    }
+
+    public void setUnit(String unit) {
+        setDomainId(unit);
+    }
 }

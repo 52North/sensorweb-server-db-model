@@ -16,21 +16,15 @@
  */
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.feature.FeatureVisitor;
-import org.n52.series.db.beans.feature.GeometryVisitor;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
+import java.util.Collection;
+import java.util.Set;
 
-import com.vividsolutions.jts.geom.Geometry;
-
-public class FeatureEntity extends AbstractFeatureEntity {
+public class ComplexDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
     @Override
-    public AbstractFeatureEntity accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
+    public boolean isNoDataValue(Collection<String> noDataValues) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
-    @Override
-    public Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
-    }
 }

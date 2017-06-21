@@ -16,23 +16,13 @@
  */
 package org.n52.series.db.beans;
 
-public class I18nEntity {
-
-    private Long pkid;
+public class I18nEntity extends PkidEntity{
 
     private String locale;
 
     private String name;
 
     private String description;
-
-    public Long getPkid() {
-        return pkid;
-    }
-
-    public void setPkid(Long pkid) {
-        this.pkid = pkid;
-    }
 
     public String getLocale() {
         return locale;

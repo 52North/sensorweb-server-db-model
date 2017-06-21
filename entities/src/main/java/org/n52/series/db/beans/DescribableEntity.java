@@ -20,30 +20,28 @@ import java.util.Set;
 
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity {
+public class DescribableEntity extends PkidEntity implements IdentifierNameDescriptionEntity<DescribableEntity> {
 
-    public static final String PROPERTY_PKID = "pkid";
-
-    public static final String PROPERTY_NAME = "name";
-
+    public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DOMAIN_ID = "domainId";
-
-    public static final String PROPERTY_SERVICE_ID = "serviceid";
-
-    /**
-     * A serial primary key.
-     */
-    private Long pkid;
+    public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
+    public static final String PROPERTY_SERVICE = "service";
+    public static final String PROPERTY_CODESPACE = CODESPACE;
+    public static final String PROPERTY_CODESPACE_NAME = CODESPACE_NAME;
 
     /**
      * Identification of the entity without special chars.
      */
     private String domainId;
+    
+    private CodespaceEntity codespace;
 
     /**
      * Default name of the entity.
      */
     private String name;
+    
+    private CodespaceEntity codespaceName;
 
     /**
      * Default description of the entity.
@@ -56,44 +54,49 @@ public class DescribableEntity {
 
     private Set<Parameter< ? >> parameters;
 
-    public Long getPkid() {
-        return pkid;
-    }
-
-    public void setPkid(Long pkid) {
-        this.pkid = pkid;
-    }
-
     public String getDomainId() {
         return domainId;
     }
 
-    public void setDomainId(String domainId) {
+    public DescribableEntity setDomainId(String domainId) {
         this.domainId = domainId;
+        return this;
+    }
+    
+    public CodespaceEntity getCodespace() {
+        return this.codespace;
+    }
+
+    public DescribableEntity setCodespace(CodespaceEntity codespace) {
+        this.codespace = codespace;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public DescribableEntity setName(String name) {
         this.name = name;
+        return this;
+    }
+    
+    public CodespaceEntity getCodespaceName() {
+        return codespaceName;
     }
 
-    public boolean isSetName() {
-        return getName() != null && !getName().isEmpty();
+    public DescribableEntity setCodespaceName(CodespaceEntity codespaceName) {
+        this.codespaceName = codespaceName;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public DescribableEntity setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isSetDescription() {
-        return getDescription() != null && !getDescription().isEmpty();
+        return this;
     }
 
     public Set<I18nEntity> getTranslations() {
@@ -156,7 +159,7 @@ public class DescribableEntity {
             return Long.toString(getPkid());
         }
     }
-
+    
     private boolean isNameAvailable() {
         return getName() != null && !getName().isEmpty();
     }

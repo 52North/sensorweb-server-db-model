@@ -34,6 +34,8 @@ public class GeometryEntity {
     private Double lat;
 
     private Double alt;
+    
+    private int srid;
 
     public boolean isSetGeometry() {
         return geometry != null && !geometry.isEmpty();
@@ -91,6 +93,15 @@ public class GeometryEntity {
 
     public void setAlt(Double alt) {
         this.alt = alt;
+    }
+    
+    public int getSrid() {
+        return srid;
+    }
+
+    public GeometryEntity setSrid(final int srid) {
+        this.srid = srid;
+        return this;
     }
 
     public boolean isEmpty() {
