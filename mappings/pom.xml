@@ -10,13 +10,18 @@
     <packaging>jar</packaging>
     <name>Series Database Model - Mappings</name>
 
+
     <build>
         <resources>
             <resource>
                 <directory>src/main/hbm</directory>
                 <targetPath>hbm</targetPath>
             </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
         </resources>
     </build>
+
 </project>
 

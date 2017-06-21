@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright ${year} 52°North Initiative for Geospatial Open Source Software
+	GmbH Licensed under the Apache License, Version 2.0 (the "License"); you
+	may not use this file except in compliance with the License. You may obtain
+	a copy of the License at http://www.apache.org/licenses/LICENSE-2.0 Unless
+	required by applicable law or agreed to in writing, software distributed
+	under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES
+	OR CONDITIONS OF ANY KIND, either express or implied. See the License for
+	the specific language governing permissions and limitations under the License. -->
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.series.db.beans">
+	<class name="DatasetEntity" table="dataset">
+		<id name="pkid" type="long">
+			<column name="pkid">
+                <comment>Table primary key, used for relations</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence">datasetid_seq</param>
+            </generator>
+		</id>
+		<discriminator column="datasetType" force="true" type="string" />
+		<many-to-one class="ObservationConstellationEntity" column="observationconstellation"
+			name="observationConstellation" foreign-key="datasetobsconstfk" unique-key="seriesIdentity"/>
+		<!--
+		<many-to-one class="ProcedureEntity" column="procedure"
+			name="procedure" unique-key="datasetIdentity" />
+		<many-to-one class="OfferingEntity" column="offering"
+			name="offering" unique-key="datasetIdentity" />
+		<many-to-one class="PhenomenonEntity" column="observableproperty"
+			name="phenomenon" unique-key="datasetIdentity" />
+			 -->
+		<many-to-one class="FeatureEntity" column="feature"
+			name="feature" unique-key="datasetIdentity" foreign-key="datasetfeaturefk" unique-key="seriesIdentity"/>
+		<many-to-one class="CategoryEntity" column="category"
+			name="category" foreign-key="datasetcategoryfk" unique-key="seriesIdentity"/>
+		<many-to-one class="PlatformEntity" column="procedure"
+			name="platform" insert="false" update="false" foreign-key="datasetplatformfk"/>
+		<property name="deleted"
+                  type="org.hibernate.type.TrueFalseType">
+            <column name="deleted"
+                    not-null="true"
+                    default="'F'"
+                    check="deleted in ('T','F')">
+                <comment>Flag to indicate that this series is deleted or not. Set if the related procedure is deleted via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+            </column>
+        </property>
+        <property name="published"
+                    type="org.hibernate.type.TrueFalseType">
+            <column name="published"
+                    not-null="true"
+                    default="'T'"
+                    check="published in ('T','F')">
+                <comment>Flag to indicate that this series is published or not. A not published series is not contained in GetObservation and GetDataAvailability responses</comment>
+            </column>
+        </property>
+		<property name="hiddenChild" type="org.hibernate.type.TrueFalseType">
+			<column name="hiddenChild" not-null="true" default="'F'"
+				check="hiddenChild in ('T','F')">
+			</column>
+		</property>
+		<property column="datasetType" name="datasetType" type="string" />
+
+
+		<property name="domainId" type="string">
+			<column name="domainId" not-null="false" unique-key="datasetIdentifierUK">
+				<comment>The identifier of the dataset, gml:identifier. Unique</comment>
+			</column>
+		</property>
+		<many-to-one name="codespace"
+			class="CodespaceEntity" foreign-key="datasetCodespaceEntityIdentifierFk">
+			<column name="codespace">
+				<comment>Relation/foreign key to the codespace table. Contains the
+					gml:identifier codespace. Optional</comment>
+			</column>
+		</many-to-one>
+		<property name="name" type="string">
+			<column name="name">
+				<comment>The name of the dataset, gml:name. Optional</comment>
+			</column>
+		</property>
+		<many-to-one name="codespaceName"
+			class="CodespaceEntity" foreign-key="datasetCodespaceEntityNameFk">
+			<column name="codespaceName">
+				<comment>Relation/foreign key to the codespace table. Contains the
+					gml:name codespace. Optional</comment>
+			</column>
+		</many-to-one>
+		<property name="description" type="string">
+			<column name="description">
+				<comment>Description of the dataset, gml:description. Optional</comment>
+			</column>
+		</property>
+
+		<property column="firsttimestamp" name="firstValueAt" type="timestamp" />
+		<property column="lasttimestamp" name="lastValueAt" type="timestamp" />
+
+		<!-- Possible performance issue!!!  -->
+		<set inverse="true" name="resultTimes" table="observation">
+			<key column="dataset" foreign-key="datasetresulttimefk"/>
+			<element column="resulttime" type="string" />
+		</set>
+
+		<set inverse="false" name="parameters" table="datasetparameter" cascade="delete-orphan">
+			<key column="dataset" not-null="true" foreign-key="datasetparamdatasetfk"/>
+			<many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter" foreign-key="datasetparamparamfk"/>
+		</set>
+
+		<subclass discriminator-value="measurement" name="MeasurementDatasetEntity">
+			<property formula="3" name="numberOfDecimals" type="int" />
+			<!-- first value for backwards compatibility -->
+			<component class="ObservationEntity" name="firstValue">
+				<property column="firsttimestamp" name="timestamp" type="timestamp" />
+				<property column="firstnumericvalue" name="value" type="double" />
+			</component>
+			<!-- last value for backwards compatibility -->
+			<component class="ObservationEntity" name="lastValue">
+				<property column="lasttimestamp" name="timestamp" type="timestamp" />
+				<property column="lastnumericvalue" name="value" type="double" />
+			</component>
+			<many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="data" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="text" name="TextDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="count" name="CountDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+	</class>
+</hibernate-mapping>
