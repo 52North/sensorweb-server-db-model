@@ -86,6 +86,13 @@
                 <groupId>org.n52.shetland</groupId>
                 <artifactId>shetland</artifactId>
                 <version>${shetland.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <!-- uses older xml-apis than other fop dependencies -->
+                        <groupId>com.google.guava</groupId>
+                        <artifactId>guava</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             
             <dependency>
@@ -202,12 +209,6 @@
                         <artifactId>xercesImpl</artifactId>
                     </exclusion>
                 </exclusions>
-            </dependency>
-            
-             <dependency>
-                <groupId>com.google.guava</groupId>
-                <artifactId>guava</artifactId>
-                <version>22.0</version>
             </dependency>
             
             <dependency>
