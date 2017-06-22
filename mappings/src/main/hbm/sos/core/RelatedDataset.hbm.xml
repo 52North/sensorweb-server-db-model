@@ -11,11 +11,11 @@
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
-                <param name="sequence">seriesRelation_seq</param>
+                <param name="sequence">datasetrelation_seq</param>
             </generator>
         </id>
          <property name="dataset" type="long">
-            <column name="dataset" not-null="true" index="seriesRelationIdx">
+            <column name="dataset" not-null="true" index="datasetRelationIdx">
                 <comment>Foreign Key (FK) to the series. Contains "series".seriesId</comment>
             </column>
         </property>
