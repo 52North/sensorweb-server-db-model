@@ -23,7 +23,7 @@ public class SamplingGeometryEntity extends GeometryEntity {
 
     private Date timestamp;
 
-    private Long seriesPkid;
+    private Long dataset;
 
     public Date getTimestamp() {
         return timestamp != null
@@ -37,11 +37,21 @@ public class SamplingGeometryEntity extends GeometryEntity {
                 : null;
     }
 
+    @Deprecated
     public Long getSeriesPkid() {
-        return seriesPkid;
+        return dataset;
     }
 
-    public void setSeriesPkid(Long seriesPkid) {
-        this.seriesPkid = seriesPkid;
+    @Deprecated
+    public void setSeriesPkid(Long dataset) {
+        this.dataset = dataset;
+    }
+
+    public Long getDataset() {
+        return dataset;
+    }
+
+    public void setDataset(Long dataset) {
+        this.dataset = dataset;
     }
 }

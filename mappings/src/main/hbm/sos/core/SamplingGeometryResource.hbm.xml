@@ -29,6 +29,6 @@
         <property column="lon" name="lon" type="double" />
          -->
     <property column="samplingGeometry" name="geometry" type="org.hibernate.spatial.GeometryType"/>
-    <property column="seriesid" name="seriesPkid" type="long"/>
+    <property column="dataset" name="dataset" type="long"/>
   </class>
 </hibernate-mapping>
