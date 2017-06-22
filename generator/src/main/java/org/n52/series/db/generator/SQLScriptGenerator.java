@@ -52,12 +52,17 @@ import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 
 /**
  * Class to generate the create and drop scripts for different databases.
- * Currently supported spatial databases to create scripts - PostgreSQL/PostGIS
- * - Oracle - H2/GeoDB
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.0.0
- * 
+ * Currently supported spatial databases to create scripts
+ *   - PostgreSQL/PostGIS
+ *   - Oracle
+ *   - MySQL
+ *   - SQL Server
+ *   - H2/GeoDB
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ *
+ * @since 1.0.0
+ *
  */
 public class SQLScriptGenerator {
 
@@ -118,8 +123,6 @@ public class SQLScriptGenerator {
     private void addConceptDirectories(int concept, Configuration configuration) throws Exception {
         switch (concept) {
         case 1:
-            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/dataset")
-                    .toURI()));
             break;
         case 2:
             configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/ereporting").toURI()));
@@ -240,7 +243,7 @@ public class SQLScriptGenerator {
                                 printToScreen("ERROR: " + e.getMessage());
                                 System.exit(1);
                             }
-                        }   
+                        }
                     }
                 }
             } else {
@@ -261,7 +264,7 @@ public class SQLScriptGenerator {
                     System.exit(1);
                 }
             }
-            
+
         } catch (IOException ioe) {
             printToScreen("ERROR: IO error trying to read your input!");
             System.exit(1);

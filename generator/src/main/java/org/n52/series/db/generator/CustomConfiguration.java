@@ -66,15 +66,15 @@ import org.hibernate.tool.hbm2ddl.TableMetadata;
 import org.hibernate.tool.hbm2ddl.UniqueConstraintSchemaUpdateStrategy;
 
 /**
- * @author Christian Autermann <c.autermann@52north.org>
- * 
- * @since 4.0.0
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
+ *
+ * @since 1.0.0
  */
 public class CustomConfiguration extends Configuration {
     private static final long serialVersionUID = 149360549522727961L;
-    
+
     private transient Mapping mappingCC = buildMapping();
-    
+
     @SuppressWarnings({ "unchecked" })
     public String[] generateSchemaCreationScript(Dialect dialect) throws HibernateException {
         secondPassCompile();
@@ -156,7 +156,7 @@ public class CustomConfiguration extends Configuration {
 
         return ArrayHelper.toStringArray(script);
     }
-    
+
     @SuppressWarnings("unchecked")
     public List<SchemaUpdateScript> generateSchemaUpdateScriptList(Dialect dialect, DatabaseMetadata databaseMetadata)
             throws HibernateException {
@@ -318,13 +318,13 @@ public class CustomConfiguration extends Configuration {
      * Based on
      * {@link org.hibernate.cfg.Configuration#generateDropSchemaScript(Dialect)}
      * . Rewritten to only create drop commands for existing tables/sequences.
-     * 
-     * 
+     *
+     *
      * @param d
      * @param m
-     * 
+     *
      * @return SQL script to drop schema as String array
-     * 
+     *
      * @throws HibernateException
      */
     public String[] generateDropSchemaScript(final Dialect d, final DatabaseMetadata m) throws HibernateException {
@@ -414,7 +414,7 @@ public class CustomConfiguration extends Configuration {
         }
         return script;
     }
-    
+
     protected boolean checkTable(Table table, DatabaseMetadata m) {
         return table.isPhysicalTable() && m.isTable(table.getQuotedName());
     }
