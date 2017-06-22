@@ -20,7 +20,7 @@
 		</id>
 		<discriminator column="datasetType" force="true" type="string" />
 		<many-to-one class="ObservationConstellationEntity" column="observationconstellation"
-			name="observationConstellation" foreign-key="datasetobsconstfk" unique-key="seriesIdentity"/>
+			name="observationConstellation" foreign-key="datasetobsconstfk" unique-key="datasetIdentity"/>
 		<!--
 		<many-to-one class="ProcedureEntity" column="procedure"
 			name="procedure" unique-key="datasetIdentity" />
@@ -30,9 +30,9 @@
 			name="phenomenon" unique-key="datasetIdentity" />
 			 -->
 		<many-to-one class="FeatureEntity" column="feature"
-			name="feature" unique-key="datasetIdentity" foreign-key="datasetfeaturefk" unique-key="seriesIdentity"/>
+			name="feature" unique-key="datasetIdentity" foreign-key="datasetfeaturefk"/>
 		<many-to-one class="CategoryEntity" column="category"
-			name="category" foreign-key="datasetcategoryfk" unique-key="seriesIdentity"/>
+			name="category" foreign-key="datasetcategoryfk" unique-key="datasetIdentity"/>
 		<many-to-one class="PlatformEntity" column="procedure"
 			name="platform" insert="false" update="false" foreign-key="datasetplatformfk"/>
 		<property name="deleted"
@@ -107,16 +107,6 @@
 
 		<subclass discriminator-value="measurement" name="MeasurementDatasetEntity">
 			<property formula="3" name="numberOfDecimals" type="int" />
-			<!-- first value for backwards compatibility -->
-			<component class="ObservationEntity" name="firstValue">
-				<property column="firsttimestamp" name="timestamp" type="timestamp" />
-				<property column="firstnumericvalue" name="value" type="double" />
-			</component>
-			<!-- last value for backwards compatibility -->
-			<component class="ObservationEntity" name="lastValue">
-				<property column="lasttimestamp" name="timestamp" type="timestamp" />
-				<property column="lastnumericvalue" name="value" type="double" />
-			</component>
 			<many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
 				<key column="data" />
@@ -134,6 +124,55 @@
 		</subclass>
 
 		<subclass discriminator-value="count" name="CountDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="blob" name="BlobDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="boolean" name="BooleanDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="category" name="CategoryDatasetEntity">
+			<many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="complex" name="ComplexDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="geometry" name="GeometryDatasetEntity">
+			<list fetch="select" inverse="true" name="observations" table="datasetdata">
+				<key column="data" />
+				<index column="dataset" />
+				<one-to-many class="DataEntity" />
+			</list>
+		</subclass>
+
+		<subclass discriminator-value="swedataarray" name="SweDataArrayDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
 				<key column="data" />
 				<index column="dataset" />
