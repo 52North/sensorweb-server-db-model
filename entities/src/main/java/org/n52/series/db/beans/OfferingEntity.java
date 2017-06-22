@@ -30,13 +30,10 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
-                            implements HasObservationTypes<OfferingEntity>, 
-                                        HasFeatureTypes<OfferingEntity>, 
-                                        HasRelatedFeatures<OfferingEntity>,
-                                        HasPhenomenonTime<OfferingEntity>,
-                                        HasResultTimes<OfferingEntity>{
+        implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
+        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity> {
 
-    private Geometry envelope;
+    private GeometryEntity geometryEntity;
 
     private Set<ObservationTypeEntity> observationTypes;
 
@@ -52,26 +49,20 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     private Set<RelatedFeatureEntity> relatedFeatures;
 
-    /**
-     * @return the envelope
-     */
-    public Geometry getEnvelope() {
-        return envelope;
+    public Geometry getGeometry() {
+        return geometryEntity != null
+                ? geometryEntity.getGeometry()
+                : null;
     }
-    
-    
 
-    /**
-     * @param envelope
-     *        the envelope to set
-     */
-    public OfferingEntity setEnvelope(Geometry envelope) {
-        this.envelope = envelope;
+    public OfferingEntity setGeometry(Geometry geometry) {
+        this.geometryEntity = new GeometryEntity();
+        this.geometryEntity.setGeometry(geometry);
         return this;
     }
 
-    public boolean hasEnvelope() {
-        return getEnvelope() != null && !getEnvelope().isEmpty();
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
     }
 
     /**
@@ -83,13 +74,12 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param observationTypes
-     *        the observationTypes to set
+     *            the observationTypes to set
      */
     public OfferingEntity setObservationTypes(Set<ObservationTypeEntity> observationTypes) {
         this.observationTypes = observationTypes;
         return this;
     }
-
 
     /**
      * @return the featureTypes
@@ -100,7 +90,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param featureTypes
-     *        the featureTypes to set
+     *            the featureTypes to set
      */
     public OfferingEntity setFeatureTypes(Set<FeatureTypeEntity> featureTypes) {
         this.featureTypes = featureTypes;
@@ -111,19 +101,15 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @return the phenomenonTimeStart
      */
     public Date getPhenomenonTimeStart() {
-        return hasPhenomenonTimeStart()
-                ? new Timestamp(phenomenonTimeStart.getTime())
-                : null;
+        return hasPhenomenonTimeStart() ? new Timestamp(phenomenonTimeStart.getTime()) : null;
     }
 
     /**
      * @param phenomenonTimeStart
-     *        the phenomenonTimeStart to set
+     *            the phenomenonTimeStart to set
      */
     public OfferingEntity setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = phenomenonTimeStart != null
-                ? new Timestamp(phenomenonTimeStart.getTime())
-                : null;
+        this.phenomenonTimeStart = phenomenonTimeStart != null ? new Timestamp(phenomenonTimeStart.getTime()) : null;
         return this;
     }
 
@@ -131,19 +117,15 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @return the phenomenonTimeEnd
      */
     public Date getPhenomenonTimeEnd() {
-        return hasPhenomenonTimeEnd()
-                ? new Timestamp(phenomenonTimeEnd.getTime())
-                : null;
+        return hasPhenomenonTimeEnd() ? new Timestamp(phenomenonTimeEnd.getTime()) : null;
     }
 
     /**
      * @param phenomenonTimeEnd
-     *        the phenomenonTimeEnd to set
+     *            the phenomenonTimeEnd to set
      */
     public OfferingEntity setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = phenomenonTimeEnd != null
-                ? new Timestamp(phenomenonTimeEnd.getTime())
-                : null;
+        this.phenomenonTimeEnd = phenomenonTimeEnd != null ? new Timestamp(phenomenonTimeEnd.getTime()) : null;
         return this;
     }
 
@@ -151,19 +133,15 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @return the resultTimeStart
      */
     public Date getResultTimeStart() {
-        return hasResultTimeStart()
-                ? new Timestamp(resultTimeStart.getTime())
-                : null;
+        return hasResultTimeStart() ? new Timestamp(resultTimeStart.getTime()) : null;
     }
 
     /**
      * @param resultTimeStart
-     *        the resultTimeStart to set
+     *            the resultTimeStart to set
      */
     public OfferingEntity setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = resultTimeStart != null
-                ? new Timestamp(resultTimeStart.getTime())
-                : null;
+        this.resultTimeStart = resultTimeStart != null ? new Timestamp(resultTimeStart.getTime()) : null;
         return this;
     }
 
@@ -171,19 +149,15 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @return the resultTimeEnd
      */
     public Date getResultTimeEnd() {
-        return hasResultTimeEnd()
-                ? new Timestamp(resultTimeEnd.getTime())
-                : null;
+        return hasResultTimeEnd() ? new Timestamp(resultTimeEnd.getTime()) : null;
     }
 
     /**
      * @param resultTimeEnd
-     *        the resultTimeEnd to set
+     *            the resultTimeEnd to set
      */
     public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = resultTimeEnd != null
-                ? new Timestamp(resultTimeEnd.getTime())
-                : null;
+        this.resultTimeEnd = resultTimeEnd != null ? new Timestamp(resultTimeEnd.getTime()) : null;
         return this;
     }
 
@@ -198,17 +172,11 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         return this;
     }
 
-
-
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" Domain id: ").append(getDomainId())
+                .append(" ]").toString();
     }
 
 }

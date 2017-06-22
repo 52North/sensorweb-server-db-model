@@ -86,6 +86,13 @@
                 <comment>Time stamp when the offering was published or result was published/available</comment>
             </column>
         </property>
+        <component class="GeometryEntity" name="geometryEntity">
+            <!--
+            <property column="lat" name="lat" type="double" />
+            <property column="lon" name="lon" type="double" />
+             -->
+            <property column="geom" name="geometry" type="org.hibernate.spatial.GeometryType"/>
+        </component>
 		<property name="disabled" type="org.hibernate.type.TrueFalseType">
 			<column name="disabled" not-null="true" default="'F'"
 				check="disabled in ('T','F')">
