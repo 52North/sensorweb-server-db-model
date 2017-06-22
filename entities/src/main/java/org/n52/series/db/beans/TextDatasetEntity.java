@@ -19,9 +19,9 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class TextDatasetEntity extends DatasetEntity<TextDataEntity> {
+import org.n52.series.db.beans.dataset.TextDataset;
 
-    private static final String DATASET_TYPE = "text";
+public class TextDatasetEntity extends DatasetEntity<TextDataEntity> implements TextDataset<TextDatasetEntity> {
 
     private Set<TextDatasetEntity> referenceValues = new HashSet<>();
 
@@ -33,8 +33,9 @@ public class TextDatasetEntity extends DatasetEntity<TextDataEntity> {
         return referenceValues;
     }
 
-    public void setReferenceValues(Set<TextDatasetEntity> referenceValues) {
+    public TextDatasetEntity setReferenceValues(Set<TextDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
+        return this;
     }
 
 }

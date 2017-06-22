@@ -49,7 +49,7 @@ public abstract class MetadataEntity<T> extends PkidEntity {
     private T value;
 
     private Date lastUpdate;
-    
+
     private String domain;
 
     public Long getDataset() {

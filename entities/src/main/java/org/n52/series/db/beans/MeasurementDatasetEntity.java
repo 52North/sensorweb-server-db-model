@@ -19,9 +19,9 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity> {
+import org.n52.series.db.beans.dataset.MeasurementDataset;
 
-    private static final String DATASET_TYPE = "measurement";
+public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity> implements MeasurementDataset<MeasurementDatasetEntity>{
 
     private Set<MeasurementDatasetEntity> referenceValues = new HashSet<>();
 
@@ -35,16 +35,18 @@ public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntit
         return referenceValues;
     }
 
-    public void setReferenceValues(Set<MeasurementDatasetEntity> referenceValues) {
+    public MeasurementDatasetEntity setReferenceValues(Set<MeasurementDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
+        return this;
     }
 
     public int getNumberOfDecimals() {
         return numberOfDecimals;
     }
 
-    public void setNumberOfDecimals(int numberOfDecimals) {
+    public MeasurementDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
+        return this;
     }
 
 }

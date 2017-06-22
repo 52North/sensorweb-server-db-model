@@ -35,9 +35,9 @@ import org.n52.series.db.beans.UnitEntity;
 
 /**
  * Hibernate entiity for the coordinateSystemAxis
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks<CoordinateSystemAxisEntity> {

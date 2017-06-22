@@ -30,11 +30,11 @@ package org.n52.series.db.beans;
 
 
 public class RelatedDatasetEntity extends AbstractRelationEntity {
-    
+
     public static final String SERIES_ID = "dataset";
     private long dataset;
     private DatasetEntity<DataEntity<?>> relatedDataset;
-    
+
     /**
      * @return the dataset
      */
@@ -64,7 +64,7 @@ public class RelatedDatasetEntity extends AbstractRelationEntity {
     public void setRelatedDataset(DatasetEntity<DataEntity<?>> relatedDataset) {
         this.relatedDataset = relatedDataset;
     }
-    
+
     public boolean isSetRelatedDataset() {
         return getRelatedDataset() != null;
     }

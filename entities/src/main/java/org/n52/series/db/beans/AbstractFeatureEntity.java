@@ -13,7 +13,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
     private FeatureTypeEntity featureType;
     private String url;
     private String descriptionXml;
-    
+
     public abstract AbstractFeatureEntity accept(FeatureVisitor<?> visitor) throws OwsExceptionReport;
 
     public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
@@ -75,7 +75,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
         this.featureType = featureType;
         return this;
     }
-    
+
     public boolean isSetFeatureType() {
         return getFeatureType() != null;
     }
@@ -88,7 +88,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
         this.url = url;
         return this;
     }
-    
+
     public boolean isSetUrl() {
         return getUrl() != null && !getUrl().isEmpty();
     }

@@ -41,36 +41,36 @@ import com.vividsolutions.jts.geom.Geometry;
  * which entities have which relations. Allows to throw compile time errors for
  * non existing relations.
  *
- * @author Christian Autermann <c.autermann@52north.org>
- * @since 4.0.0
+ * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
+ * @since 1.0.0
  */
 public interface HibernateRelations {
 
-   interface HasIdentifier<T> {
-       String getDomainId();
+    interface HasIdentifier<T> {
+        String getDomainId();
 
-       T setDomainId(String domainId);
-       
-       default boolean isSetDomainId() {
-           return getDomainId() != null && !getDomainId().isEmpty();
-       }
-       
-       default String getIdentifier() {
-           return getDomainId();
-       }
+        T setDomainId(String domainId);
 
-       default T setIdentifier(String identifier) {
-           return setDomainId(identifier);
-       }
+        default boolean isSetDomainId() {
+            return getDomainId() != null && !getDomainId().isEmpty();
+        }
 
-       /**
-        * Is identifier set
-        *
-        * @return <code>true</code>, if identifier is set
-        */
-       default boolean isSetIdentifier() {
-           return isSetDomainId();
-       }
+        default String getIdentifier() {
+            return getDomainId();
+        }
+
+        default T setIdentifier(String identifier) {
+            return setDomainId(identifier);
+        }
+
+        /**
+         * Is identifier set
+         *
+         * @return <code>true</code>, if identifier is set
+         */
+        default boolean isSetIdentifier() {
+            return isSetDomainId();
+        }
     }
 
     interface HasObservationConstellation {
@@ -78,8 +78,7 @@ public interface HibernateRelations {
 
         ObservationConstellationEntity getObservationConstellation();
 
-        void setObservationConstellation(
-                ObservationConstellationEntity observationConstellation);
+        void setObservationConstellation(ObservationConstellationEntity observationConstellation);
     }
 
     interface HasObservationConstellations {
@@ -87,8 +86,7 @@ public interface HibernateRelations {
 
         Set<ObservationConstellationEntity> getObservationConstellations();
 
-        void setObservationConstellations(
-                Set<ObservationConstellationEntity> observationConstellations);
+        void setObservationConstellations(Set<ObservationConstellationEntity> observationConstellations);
     }
 
     interface HasDescription<T> {
@@ -151,7 +149,7 @@ public interface HibernateRelations {
 
         boolean isDeleted();
     }
-    
+
     interface HasPublishedFlag {
         String PUBLISHED = "published";
 
@@ -165,8 +163,7 @@ public interface HibernateRelations {
 
         FeatureTypeEntity getFeatureType();
 
-        void setFeatureType(
-                FeatureTypeEntity featureOfInterestType);
+        void setFeatureType(FeatureTypeEntity featureOfInterestType);
     }
 
     interface HasFeatureTypes<T> {
@@ -174,13 +171,12 @@ public interface HibernateRelations {
 
         Set<FeatureTypeEntity> getFeatureTypes();
 
-        T setFeatureTypes(
-                Set<FeatureTypeEntity> featureOfInterestTypes);
-        
+        T setFeatureTypes(Set<FeatureTypeEntity> featureOfInterestTypes);
+
         default boolean HasFeaturTypes() {
             return getFeatureTypes() != null && !getFeatureTypes().isEmpty();
         }
-        
+
     }
 
     interface HasFeatureGetter {
@@ -194,18 +190,11 @@ public interface HibernateRelations {
         T setFeature(AbstractFeatureEntity feature);
     }
 
-    interface HasReadableObservationContext
-            extends HasObservablePropertyGetter,
-                    HasProcedureGetter,
-                    HasFeatureGetter {
+    interface HasReadableObservationContext extends HasObservablePropertyGetter, HasProcedureGetter, HasFeatureGetter {
     }
 
-    interface HasWriteableObservationContext<T>
-            extends HasReadableObservationContext,
-                    HasObservableProperty<T>,
-                    HasProcedure<T>,
-                    HasFeature<T>,
-                    HasOffering<T> {
+    interface HasWriteableObservationContext<T> extends HasReadableObservationContext, HasObservableProperty<T>,
+            HasProcedure<T>, HasFeature<T>, HasOffering<T> {
     }
 
     interface HasGeometry {
@@ -233,13 +222,17 @@ public interface HibernateRelations {
 
     interface HasChildFlag {
         String CHILD = "child";
+
         void setChild(boolean child);
+
         boolean isChild();
     }
 
     interface HasParentFlag {
         String PARENT = "parent";
+
         void setParent(boolean parent);
+
         boolean isParent();
     }
 
@@ -308,7 +301,7 @@ public interface HibernateRelations {
         Set<ObservationTypeEntity> getObservationTypes();
 
         T setObservationTypes(Set<ObservationTypeEntity> observationTypes);
-        
+
         default boolean hasObservationTypes() {
             return getObservationTypes() != null && !getObservationTypes().isEmpty();
         }
@@ -320,7 +313,7 @@ public interface HibernateRelations {
         T setOffering(OfferingEntity offering);
 
         OfferingEntity getOffering();
-        
+
         boolean isSetOffering();
     }
 
@@ -341,10 +334,12 @@ public interface HibernateRelations {
          * Set the start phenomenon time
          *
          * @param phenomenonTimeStart
-         *                            Start phenomenon time to set
+         *            Start phenomenon time to set
+         *
+         * @return this
          */
         T setPhenomenonTimeStart(Date phenomenonTimeStart);
-        
+
         default boolean hasPhenomenonTimeStart() {
             return getPhenomenonTimeStart() != null;
         }
@@ -360,10 +355,12 @@ public interface HibernateRelations {
          * Set the end phenomenon time
          *
          * @param phenomenonTimeEnd
-         *                          End phenomenon time to set
+         *            End phenomenon time to set
+         *
+         * @return this
          */
         T setPhenomenonTimeEnd(Date phenomenonTimeEnd);
-        
+
         default boolean hasPhenomenonTimeEnd() {
             return getPhenomenonTimeEnd() != null;
         }
@@ -386,10 +383,12 @@ public interface HibernateRelations {
          * Set the start result time
          *
          * @param resultTimeStart
-         *                            Start result time to set
+         *            Start result time to set
+         *
+         * @return this
          */
         T setResultTimeStart(Date resultTimeStart);
-        
+
         default boolean hasResultTimeStart() {
             return getResultTimeStart() != null;
         }
@@ -405,16 +404,16 @@ public interface HibernateRelations {
          * Set the end result time
          *
          * @param resultTimeEnd
-         *                          End result time to set
+         *            End result time to set
+         * @return this
          */
         T setResultTimeEnd(Date resultTimeEnd);
-        
+
         default boolean hasResultTimeEnd() {
             return getResultTimeEnd() != null;
         }
     }
 
-    
     interface HasProcedureGetter {
         String PROCEDURE = "procedure";
 
@@ -425,14 +424,13 @@ public interface HibernateRelations {
 
         T setProcedure(ProcedureEntity procedure);
     }
-    
+
     interface HasProcedureDescriptionFormat<T> {
         String PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
 
         ProcedureDescriptionFormatEntity getProcedureDescriptionFormat();
 
-        T setProcedureDescriptionFormat(
-                ProcedureDescriptionFormatEntity procedureDescriptionFormat);
+        T setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat);
     }
 
     interface HasRelatedFeatureRoles<T> {
@@ -449,7 +447,7 @@ public interface HibernateRelations {
         Set<RelatedFeatureEntity> getRelatedFeatures();
 
         T setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures);
-        
+
         default boolean hasRelatedFeatures() {
             return getRelatedFeatures() != null && !getRelatedFeatures().isEmpty();
         }
@@ -490,7 +488,7 @@ public interface HibernateRelations {
          * Set the result time
          *
          * @param resultTime
-         *                   Result tiem to set
+         *            Result tiem to set
          */
         void setResultTime(Date resultTime);
     }
@@ -527,7 +525,7 @@ public interface HibernateRelations {
          * Set the start valid time
          *
          * @param validTimeStart
-         *                       Start valid time to set
+         *            Start valid time to set
          */
         void setValidTimeStart(Date validTimeStart);
 
@@ -542,7 +540,7 @@ public interface HibernateRelations {
          * Set the end valid time
          *
          * @param validTimeEnd
-         *                     End valid time to set
+         *            End valid time to set
          */
         void setValidTimeEnd(Date validTimeEnd);
 
@@ -555,11 +553,10 @@ public interface HibernateRelations {
         String getUrl();
 
         void setUrl(String url);
-        
+
         boolean isSetUrl();
     }
-    
-    
+
     interface GetStringValue {
 
         boolean isSetValue();
@@ -577,38 +574,39 @@ public interface HibernateRelations {
 
     }
 
-    interface HasUnitValue<T> extends HasUnit, HasValue<T> {}
+    interface HasUnitValue<T> extends HasUnit, HasValue<T> {
+    }
 
     interface HasOfferings<T> {
         String OFFERINGS = "offerings";
 
         Set<OfferingEntity> getOfferings();
 
-//        Object getOffering();
+        // Object getOffering();
         T setOfferings(Object offerings);
-        
+
         boolean isSetOfferings();
 
     }
-    
+
     interface HasParameters {
         String PARAMETERS = "parameters";
 
         Set<Parameter<?>> getParameters();
 
         void setParameters(Object parameters);
-        
+
         boolean hasParameters();
 
     }
-    
+
     interface HasRelatedObservations {
         String PARAMETERS = "relatedObservations";
 
         Set<RelatedDataEntity> getRelatedObservations();
 
         void setRelatedObservations(Set<RelatedDataEntity> relatedObservations);
-        
+
         boolean hasRelatedObservations();
 
     }
@@ -618,8 +616,7 @@ public interface HibernateRelations {
 
         Set<PhenomenonEntity> getObservableProperties();
 
-        void setObservableProperties(
-                Set<PhenomenonEntity> observableProperties);
+        void setObservableProperties(Set<PhenomenonEntity> observableProperties);
     }
 
     interface GeoColumnsId {
@@ -716,8 +713,7 @@ public interface HibernateRelations {
 
         Set<ValidProcedureTimeEntity> getValidProcedureTimes();
 
-        void setValidProcedureTimes(
-                Set<ValidProcedureTimeEntity> validProcedureTimes);
+        void setValidProcedureTimes(Set<ValidProcedureTimeEntity> validProcedureTimes);
     }
 
     interface HasParentChilds<T> {
@@ -730,7 +726,7 @@ public interface HibernateRelations {
         void setParents(Set<T> parents);
 
         void addParent(T parent);
-        
+
         boolean hasParents();
 
         Set<T> getChilds();
@@ -738,7 +734,7 @@ public interface HibernateRelations {
         void setChilds(Set<T> childs);
 
         void addChild(T child);
-        
+
         boolean hasChilds();
     }
 
@@ -756,12 +752,11 @@ public interface HibernateRelations {
          * Set the observation id
          *
          * @param observationId
-         *                      Observation id to set
+         *            Observation id to set
          */
         void setObservationId(final long observationId);
     }
-    
-    
+
     interface HasLocale {
         String LOCALE = "locale";
 
@@ -783,9 +778,9 @@ public interface HibernateRelations {
         boolean hasSamplingGeometry();
 
     }
-    
+
     interface HasDescriptionXml<T> {
-        
+
         String DESCRIPTION_XML = "descriptionXml";
 
         String getDescriptionXml();
@@ -806,6 +801,7 @@ public interface HibernateRelations {
         /**
          * @param remarks
          *            the remarks to set
+         *             @return this
          */
         T setRemarks(String remarks);
 

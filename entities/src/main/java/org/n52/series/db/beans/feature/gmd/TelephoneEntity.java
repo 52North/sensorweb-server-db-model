@@ -32,9 +32,9 @@ import java.util.Set;
 
 /**
  * Hibernate entity for telephone.
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class TelephoneEntity extends AbstractCiEntity {
@@ -60,7 +60,7 @@ public class TelephoneEntity extends AbstractCiEntity {
     public boolean hasVoice() {
         return getVoice() != null && !getVoice().isEmpty();
     }
-    
+
     /**
      * @return the facsimile
      */
@@ -75,7 +75,7 @@ public class TelephoneEntity extends AbstractCiEntity {
     public void setFacsimile(Set<String> facsimile) {
         this.facsimile = facsimile;
     }
-    
+
     public boolean hasFacsimile() {
         return getFacsimile() != null && !getFacsimile().isEmpty();
     }

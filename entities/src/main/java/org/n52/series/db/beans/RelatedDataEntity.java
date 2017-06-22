@@ -29,10 +29,10 @@
 package org.n52.series.db.beans;
 
 public class RelatedDataEntity extends AbstractRelationEntity {
-    
+
     private DatasetEntity<DataEntity<?>> data;
-    private DatasetEntity<DataEntity<?>> relatedData; 
-    
+    private DatasetEntity<DataEntity<?>> relatedData;
+
     /**
      * @return the data
      */
@@ -62,7 +62,7 @@ public class RelatedDataEntity extends AbstractRelationEntity {
     public void setRelatedData(DatasetEntity<DataEntity<?>> relatedData) {
         this.relatedData = relatedData;
     }
-    
+
     public boolean isSetRelatedData() {
         return getRelatedData() != null;
     }

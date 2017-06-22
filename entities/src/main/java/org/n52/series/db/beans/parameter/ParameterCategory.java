@@ -56,7 +56,7 @@ public class ParameterCategory extends Parameter<String> {
     public <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
-    
+
     @Override
     public String getValueAsString() {
         return getValue();

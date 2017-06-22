@@ -32,9 +32,9 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
 
 /**
  * Hibernate entity for CI entities.
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public abstract class AbstractCiEntity extends ReferenceEntity {
@@ -56,7 +56,7 @@ public abstract class AbstractCiEntity extends ReferenceEntity {
     public void setId(String id) {
         this.id = id;
     }
-    
+
     public boolean isSetId() {
         return getId() != null && !getId().isEmpty();
     }
@@ -75,7 +75,7 @@ public abstract class AbstractCiEntity extends ReferenceEntity {
     public void setUuid(String uuid) {
         this.uuid = uuid;
     }
-    
+
     public boolean isSetUuid() {
         return getUuid() != null && !getUuid().isEmpty();
     }

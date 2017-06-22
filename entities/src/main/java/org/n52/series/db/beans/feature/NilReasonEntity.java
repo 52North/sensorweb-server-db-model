@@ -31,8 +31,8 @@ package org.n52.series.db.beans.feature;
 import org.n52.series.db.beans.DescribableEntity;
 
 /**
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public abstract class NilReasonEntity extends DescribableEntity {
@@ -53,7 +53,7 @@ public abstract class NilReasonEntity extends DescribableEntity {
     public void setNilReason(String nilReason) {
         this.nilReason = nilReason;
     }
-    
+
     public boolean isSetNilReason() {
         return getNilReason() != null && !getNilReason().isEmpty();
     }

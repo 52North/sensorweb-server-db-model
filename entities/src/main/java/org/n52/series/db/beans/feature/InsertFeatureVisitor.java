@@ -34,7 +34,7 @@ import org.n52.shetland.ogc.om.features.samplingFeatures.SfSpecimen;
 import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public interface InsertFeatureVisitor {
-    
+
     FeatureEntity visit(SamplingFeature value)
             throws OwsExceptionReport;
 

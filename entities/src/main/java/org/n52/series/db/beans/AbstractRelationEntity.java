@@ -32,7 +32,7 @@ public abstract class AbstractRelationEntity extends PkidEntity  {
 
     private String role;
     private String relatedUrl;
-    
+
     /**
      * @return the role
      */
@@ -46,11 +46,11 @@ public abstract class AbstractRelationEntity extends PkidEntity  {
     public void setRole(String role) {
         this.role = role;
     }
-    
+
     public boolean isSetRole() {
         return getRole() != null && !getRole().isEmpty();
     }
-    
+
     /**
      * @return the relatedUrl
      */
@@ -64,7 +64,7 @@ public abstract class AbstractRelationEntity extends PkidEntity  {
     public void setRelatedUrl(String relatedUrl) {
         this.relatedUrl = relatedUrl;
     }
-    
+
     public boolean isSetRelatedUrl() {
         return getRelatedUrl() != null && !getRelatedUrl().isEmpty();
     }

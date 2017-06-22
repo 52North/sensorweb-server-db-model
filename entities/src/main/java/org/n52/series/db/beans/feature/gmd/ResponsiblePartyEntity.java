@@ -30,9 +30,9 @@ package org.n52.series.db.beans.feature.gmd;
 
 /**
  * Hibernate entity for responsibleParty.
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class ResponsiblePartyEntity extends AbstractCiEntity {
@@ -57,7 +57,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
     public void setIndividualName(String individualName) {
         this.individualName = individualName;
     }
-    
+
     public boolean isSetIndividualName() {
         return getIndividualName() != null && !getIndividualName().isEmpty();
     }
@@ -76,7 +76,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
     public void setOrganizationName(String organizationName) {
         this.organizationName = organizationName;
     }
-    
+
     public boolean isSetOrganizationName() {
         return getOrganizationName() != null && !getOrganizationName().isEmpty();
     }
@@ -95,7 +95,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
     public void setPositionName(String positionName) {
         this.positionName = positionName;
     }
-    
+
     public boolean isSetPositionName() {
         return getPositionName() != null && !getPositionName().isEmpty();
     }
@@ -114,7 +114,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
     public void setContactInfo(ContactEntity contactInfo) {
         this.contactInfo = contactInfo;
     }
-    
+
     public boolean isSetContactInfo() {
         return getContactInfo() != null;
     }

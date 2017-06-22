@@ -31,7 +31,7 @@ package org.n52.series.db.beans.feature.inspire;
 import java.util.Set;
 
 public class MediaMonitored {
-    
+
     private long feature;
     private Set<String> mediaMonitored;
 
@@ -42,7 +42,7 @@ public class MediaMonitored {
     public void setFeature(long feature) {
         this.feature = feature;
     }
-    
+
     /**
      * @return the mediaMonitored
      */

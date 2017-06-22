@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 public class UnitEntity extends DescribableEntity {
 
     private String link;
-    
+
     /**
      * @return the link
      */
@@ -33,12 +33,12 @@ public class UnitEntity extends DescribableEntity {
     public void setLink(String link) {
         this.link = link;
     }
-    
+
     public boolean isSetLink() {
         return getLink() != null && !getLink().isEmpty();
     }
-    
-    
+
+
     // TODO SOS compatible
     public String getUnit() {
         return getDomainId();

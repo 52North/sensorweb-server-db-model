@@ -34,7 +34,7 @@ import org.n52.series.db.beans.HibernateRelations.HasResultEncoding;
 import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
 
 /**
- * @since 4.0.0
+ * @since 1.0.0
  *
  */
 public class ResultTemplateEntity extends PkidEntity implements Serializable,  HasResultStructure, HasResultEncoding {

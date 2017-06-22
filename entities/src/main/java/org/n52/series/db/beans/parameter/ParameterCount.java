@@ -25,7 +25,7 @@ public class ParameterCount extends Parameter<Integer>{
     public String getValueAsString() {
         return getValue().toString();
     }
-    
+
     @Override
     public void accept(VoidParameterVisitor visitor) throws OwsExceptionReport {
         visitor.visit(this);

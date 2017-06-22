@@ -36,7 +36,7 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 
 /**
- * @since 4.0.0
+ * @since 1.0.0
  *
  */
 public class ValidProcedureTimeEntity extends PkidEntity implements Serializable, HasProcedure<ValidProcedureTimeEntity>,

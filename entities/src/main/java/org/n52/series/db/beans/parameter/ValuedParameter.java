@@ -34,7 +34,7 @@ import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasValue;
 
 public interface ValuedParameter<T, S> extends HasValue<T>, HasName<S> {
-    
+
     void accept(VoidParameterVisitor visitor) throws OwsExceptionReport;
 
     <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport;

@@ -47,7 +47,7 @@ public class SpecimenEntity extends FeatureEntity {
     private UnitEntity sizeUnit;
     private String currentLocation;
     private String  specimenType;
-    
+
     /**
      * @return the materialClass
      */
@@ -75,7 +75,7 @@ public class SpecimenEntity extends FeatureEntity {
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = samplingTimeStart;
     }
-    
+
     /**
      * @return the samplingTimeEnd
      */
@@ -96,14 +96,14 @@ public class SpecimenEntity extends FeatureEntity {
     public String getSamplingMethod() {
         return samplingMethod;
     }
-    
+
     /**
      * @param samplingMethod the samplingMethod to set
      */
     public void setSamplingMethod(String samplingMethod) {
         this.samplingMethod = samplingMethod;
     }
-    
+
     public boolean isSetSamplingMethod() {
         return getSamplingMethod() != null && !getSamplingMethod().isEmpty();
     }
@@ -121,11 +121,11 @@ public class SpecimenEntity extends FeatureEntity {
     public void setSize(Double size) {
         this.size = size;
     }
-    
+
     public boolean isSetSize() {
         return getSize() != null;
     }
-    
+
     public UnitEntity getSizeUnit() {
         return sizeUnit;
     }
@@ -151,7 +151,7 @@ public class SpecimenEntity extends FeatureEntity {
     public void setCurrentLocation(String currentLocation) {
         this.currentLocation = currentLocation;
     }
-    
+
     public boolean isSetCurrentLocation() {
         return getCurrentLocation() != null && !getCurrentLocation().isEmpty();
     }
@@ -175,7 +175,7 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     @Override
-    public AbstractFeatureEntity accept(FeatureVisitor visitor) throws OwsExceptionReport {
+    public AbstractFeatureEntity accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 

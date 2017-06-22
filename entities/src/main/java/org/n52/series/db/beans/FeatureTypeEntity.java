@@ -31,8 +31,8 @@ package org.n52.series.db.beans;
 import java.io.Serializable;
 
 /**
- * @since 4.0.0
- * 
+ * @since 1.0.0
+ *
  */
 public class FeatureTypeEntity extends TypeEntity<FeatureTypeEntity> implements Serializable {
 

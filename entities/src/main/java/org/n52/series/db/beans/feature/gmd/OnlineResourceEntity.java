@@ -28,20 +28,21 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
-import com.google.common.base.Strings;
-
 /**
  * Hibernate entity for onlineResource.
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class OnlineResourceEntity extends AbstractCiEntity {
 
     private String linkage;
+
     private String protocol;
+
     private String applicationProfile;
+
     private String function;
 
     /**
@@ -54,13 +55,15 @@ public class OnlineResourceEntity extends AbstractCiEntity {
     /**
      * @param linkage
      *            the linkage to set
+     * @return this
      */
-    public void setLinkage(String linkage) {
+    public OnlineResourceEntity setLinkage(String linkage) {
         this.linkage = linkage;
+        return this;
     }
-    
+
     public boolean isSetLinkage() {
-        return !Strings.isNullOrEmpty(getLinkage());
+        return getLinkage() != null && !getLinkage().isEmpty();
     }
 
     /**
@@ -73,13 +76,15 @@ public class OnlineResourceEntity extends AbstractCiEntity {
     /**
      * @param protocol
      *            the protocol to set
+     * @return this
      */
-    public void setProtocol(String protocol) {
+    public OnlineResourceEntity setProtocol(String protocol) {
         this.protocol = protocol;
+        return this;
     }
-    
+
     public boolean isSetProtocol() {
-        return !Strings.isNullOrEmpty(getProtocol());
+        return getProtocol() != null && !getProtocol().isEmpty();
     }
 
     /**
@@ -92,13 +97,15 @@ public class OnlineResourceEntity extends AbstractCiEntity {
     /**
      * @param applicationProfile
      *            the applicationProfile to set
+     * @return this
      */
-    public void setApplicationProfile(String applicationProfile) {
+    public OnlineResourceEntity setApplicationProfile(String applicationProfile) {
         this.applicationProfile = applicationProfile;
+        return this;
     }
-    
+
     public boolean isSetApplicationProfile() {
-        return !Strings.isNullOrEmpty(getApplicationProfile());
+        return getApplicationProfile() != null && !getApplicationProfile().isEmpty();
     }
 
     /**
@@ -111,13 +118,15 @@ public class OnlineResourceEntity extends AbstractCiEntity {
     /**
      * @param function
      *            the function to set
+     * @return this
      */
-    public void setFunction(String function) {
+    public OnlineResourceEntity setFunction(String function) {
         this.function = function;
+        return this;
     }
-    
+
     public boolean isSetFunction() {
-        return !Strings.isNullOrEmpty(getFunction());
+        return getFunction() != null && !getFunction().isEmpty();
     }
 
 }

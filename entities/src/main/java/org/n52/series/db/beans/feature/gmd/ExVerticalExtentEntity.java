@@ -32,19 +32,19 @@ import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
 
 /**
  * Hibernate entity for exVerticalExtent.
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class ExVerticalExtentEntity extends AbstractCiEntity {
-    
+
     private Double minimumValue;
     private String minValuNilReason;
     private Double maximumValue;
     private String maxValuNilReason;
     private VerticalCRSEntity verticalCRS;
-    
+
     /**
      * @return the minimumValue
      */
@@ -60,7 +60,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public boolean isSetMinimumValue() {
         return getMinimumValue() != null;
     }
-    
+
     /**
      * @return the minValuNilReason
      */
@@ -73,7 +73,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public void setMinValuNilReason(String minValuNilReason) {
         this.minValuNilReason = minValuNilReason;
     }
-    
+
     public boolean isSetMinValuNilReason() {
         return getMinValuNilReason() != null && getMinValuNilReason().isEmpty();
     }
@@ -89,7 +89,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public void setMaximumValue(Double maximumValue) {
         this.maximumValue = maximumValue;
     }
-    
+
     public boolean isSetMaximumValue() {
         return getMaximumValue() != null;
     }
@@ -105,7 +105,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public void setMaxValuNilReason(String maxValuNilReason) {
         this.maxValuNilReason = maxValuNilReason;
     }
-    
+
     public boolean isSetMaxValuNilReason() {
         return getMaxValuNilReason() != null && getMaxValuNilReason().isEmpty();
     }
@@ -121,7 +121,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public void setVerticalCRS(VerticalCRSEntity verticalCRS) {
         this.verticalCRS = verticalCRS;
     }
-    
+
     public boolean isSetVerticalCRS() {
         return getVerticalCRS() != null;
     }

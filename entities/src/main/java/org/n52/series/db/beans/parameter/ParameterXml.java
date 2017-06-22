@@ -9,7 +9,7 @@ public class ParameterXml extends Parameter<String> {
     public String getValueAsString() {
         return getValue();
     }
-    
+
     @Override
     public void accept(VoidParameterVisitor visitor) throws OwsExceptionReport {
         visitor.visit(this);

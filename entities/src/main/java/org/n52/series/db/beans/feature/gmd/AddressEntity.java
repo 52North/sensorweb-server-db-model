@@ -32,9 +32,9 @@ import java.util.Set;
 
 /**
  * Hibernate entity for address.
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class AddressEntity extends AbstractCiEntity {
@@ -64,7 +64,7 @@ public class AddressEntity extends AbstractCiEntity {
     public boolean hasSetDeliveryPoint() {
         return getDeliveryPoint() != null && !getDeliveryPoint().isEmpty();
     }
-    
+
     /**
      * @return the city
      */
@@ -79,7 +79,7 @@ public class AddressEntity extends AbstractCiEntity {
     public void setCity(String city) {
         this.city = city;
     }
-    
+
     public boolean isSetCity() {
         return getCity() != null && !getCity().isEmpty();
     }
@@ -98,7 +98,7 @@ public class AddressEntity extends AbstractCiEntity {
     public void setAdministrativeArea(String administrativeArea) {
         this.administrativeArea = administrativeArea;
     }
-    
+
     public boolean isSetAdministrativeArea() {
         return getAdministrativeArea() != null && !getAdministrativeArea().isEmpty();
     }
@@ -121,7 +121,7 @@ public class AddressEntity extends AbstractCiEntity {
     public boolean isSetPostalCode() {
         return getPostalCode() != null && !getPostalCode().isEmpty();
     }
-    
+
     /**
      * @return the country
      */
@@ -136,7 +136,7 @@ public class AddressEntity extends AbstractCiEntity {
     public void setCountry(String country) {
         this.country = country;
     }
-    
+
     public boolean isSetCountry() {
         return getCountry() != null && !getCountry().isEmpty();
     }
@@ -155,7 +155,7 @@ public class AddressEntity extends AbstractCiEntity {
     public void setElectronicMailAddress(Set<String> electronicMailAddress) {
         this.electronicMailAddress = electronicMailAddress;
     }
-    
+
     public boolean hasElectronicMailAddress() {
         return getElectronicMailAddress() != null && !getElectronicMailAddress().isEmpty();
     }

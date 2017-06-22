@@ -33,9 +33,9 @@ import org.n52.series.db.beans.feature.gmd.ExExtentEntity;
 
 /**
  * Hibernate entiity for the domainOfValidity
- * 
- * @author Carsten Hollmann <c.hollmann@52north.org>
- * @since 4.4.0
+ *
+ * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
+ * @since 1.0.0
  *
  */
 public class DomainOfValidityEntity extends ReferenceEntity {

@@ -36,7 +36,7 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 import com.vividsolutions.jts.geom.Geometry;
 
 public interface GeometryVisitor {
-    
+
     Geometry visit(FeatureEntity f) throws OwsExceptionReport;
 
     Geometry visit(SpecimenEntity f) throws OwsExceptionReport;

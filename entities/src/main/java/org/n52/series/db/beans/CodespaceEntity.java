@@ -33,7 +33,7 @@ import java.io.Serializable;
 import org.n52.series.db.beans.HibernateRelations.HasCodespace;
 
 /**
- * @since 4.0.0
+ * @since 1.0.0
  *
  */
 public class CodespaceEntity extends PkidEntity implements Serializable {
@@ -41,7 +41,7 @@ public class CodespaceEntity extends PkidEntity implements Serializable {
     private static final long serialVersionUID = 8795086004488469603L;
     public static final String ID = "codespaceId";
     public static final String CODESPACE = HasCodespace.CODESPACE;
-    
+
     private String codespace;
 
     public String getCodespace() {

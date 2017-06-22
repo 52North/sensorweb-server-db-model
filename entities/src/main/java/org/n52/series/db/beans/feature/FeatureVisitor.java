@@ -35,11 +35,11 @@ import org.n52.series.db.beans.feature.wml.MonitoringPointEntity;
 import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public interface FeatureVisitor<T extends AbstractFeatureEntity> {
-    
+
     T visit(FeatureEntity f) throws OwsExceptionReport;
 
     T visit(SpecimenEntity f) throws OwsExceptionReport;
-    
+
     T visit(EnvironmentalMonitoringFacilityEntity f) throws OwsExceptionReport;
 
     T visit(MonitoringPointEntity f) throws OwsExceptionReport;

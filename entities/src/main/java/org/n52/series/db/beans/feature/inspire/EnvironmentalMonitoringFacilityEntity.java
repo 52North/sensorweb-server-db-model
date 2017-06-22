@@ -34,9 +34,9 @@ import org.n52.series.db.beans.FeatureEntity;
 public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
 
     private MediaMonitored mediaMonitored;
-    
+
     private String measurementRegime;
-    
+
     private boolean mobile;
 
     /**
@@ -80,5 +80,5 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     public void setMobile(boolean mobile) {
         this.mobile = mobile;
     }
-    
+
 }

@@ -18,6 +18,7 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
+import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
 public class DescribableEntity extends PkidEntity implements IdentifierNameDescriptionEntity<DescribableEntity> {
@@ -33,14 +34,14 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
      * Identification of the entity without special chars.
      */
     private String domainId;
-    
+
     private CodespaceEntity codespace;
 
     /**
      * Default name of the entity.
      */
     private String name;
-    
+
     private CodespaceEntity codespaceName;
 
     /**
@@ -62,7 +63,7 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
         this.domainId = domainId;
         return this;
     }
-    
+
     public CodespaceEntity getCodespace() {
         return this.codespace;
     }
@@ -80,7 +81,7 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
         this.name = name;
         return this;
     }
-    
+
     public CodespaceEntity getCodespaceName() {
         return codespaceName;
     }
@@ -159,7 +160,7 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
             return Long.toString(getPkid());
         }
     }
-    
+
     private boolean isNameAvailable() {
         return getName() != null && !getName().isEmpty();
     }

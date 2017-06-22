@@ -41,7 +41,7 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 //import org.n52.sos.ogc.series.wml.Metadata;
 
 /**
- * @since 4.0.0
+ * @since 1.0.0
  *
  */
 public class ObservationConstellationEntity extends PkidEntity
@@ -109,7 +109,7 @@ public class ObservationConstellationEntity extends PkidEntity
         this.offering = offering;
         return this;
     }
-    
+
     @Override
     public boolean isSetOffering() {
         return getOffering() != null;

@@ -38,12 +38,12 @@ import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatureRoles;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 
 /**
- * @since 4.0.0
- * 
+ * @since 1.0.0
+ *
  */
-public class RelatedFeatureEntity extends PkidEntity implements Serializable, 
-HasFeature<RelatedFeatureEntity>, 
-HasRelatedFeatureRoles<RelatedFeatureEntity>, 
+public class RelatedFeatureEntity extends PkidEntity implements Serializable,
+HasFeature<RelatedFeatureEntity>,
+HasRelatedFeatureRoles<RelatedFeatureEntity>,
 HasOfferings<RelatedFeatureEntity> {
 
     private static final long serialVersionUID = -8143897383050691280L;
@@ -53,7 +53,7 @@ HasOfferings<RelatedFeatureEntity> {
     private Set<RelatedFeatureRoleEntity> relatedFeatureRoles = new HashSet<RelatedFeatureRoleEntity>(0);
 
     private Set<OfferingEntity> offerings = new HashSet<OfferingEntity>(0);
-    
+
     public RelatedFeatureEntity() {
     }
 
@@ -88,16 +88,16 @@ HasOfferings<RelatedFeatureEntity> {
     @Override
     public RelatedFeatureEntity setOfferings(final Object offerings) {
         if (offerings instanceof Set<?>) {
-            this.offerings = (Set<OfferingEntity>) offerings; 
+            this.offerings = (Set<OfferingEntity>) offerings;
         } else {
             getOfferings().add((OfferingEntity)offerings);
         }
         return this;
     }
-    
+
     @Override
     public boolean isSetOfferings() {
         return getOfferings() != null && !getOfferings().isEmpty();
     }
-    
+
 }

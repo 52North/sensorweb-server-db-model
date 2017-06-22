@@ -44,7 +44,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     private ObservationConstellationEntity observationConstellation;
 
     private FeatureEntity feature;
-    
+
     private CategoryEntity category;
 
     private PlatformEntity platform;
