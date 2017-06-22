@@ -21,7 +21,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
   <class name="PlatformEntity" table="`procedure`">
     <id name="pkid" type="long">
-      <column name="procedureid"/>
+      <column name="pkid"/>
       <generator class="assigned"/>
     </id>
     <many-to-one name="service" class="ServiceEntity" foreign-key="platformServiceFk">

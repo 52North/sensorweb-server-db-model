@@ -24,7 +24,7 @@
 			<column name="service" not-null="true" />
 		</many-to-one>
 		<property name="domainId" type="string">
-			<column name="domainid" not-null="true" unique-key="offIdentifierUK">
+			<column name="domainId" not-null="true" unique-key="offIdentifierUK">
 				<comment>The identifier of the offering, gml:identifier. Used as
 					parameter for queries. Unique</comment>
 			</column>
@@ -170,11 +170,11 @@
 		<set name="translations" table="i18noffering" inverse="true"
 			fetch="select">
 			<key column="offering" foreign-key="offtransofffk"/>
-			<many-to-many unique="true" column="pkid" class="I18nOfferingEntity" foreign-key="offtransi18nfk"/>
+			<many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nOfferingEntity" foreign-key="offtransi18nfk"/>
 		</set>
 	</class>
 
-	<class name="I18nOfferingEntity" table="i18noffering">
+	<class name="org.n52.series.db.beans.i18n.I18nOfferingEntity" table="i18noffering">
 		<id name="pkid" type="long">
 			<column name="pkid" />
 			<generator class="native">

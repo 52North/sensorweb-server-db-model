@@ -96,7 +96,7 @@
 
 		<set name="translations" table="i18nfeature" inverse="true" fetch="select">
             <key column="feature" foreign-key="feattransfeatfk"/>
-            <many-to-many unique="true" column="pkid" class="I18nFeatureEntity" foreign-key="proctransi18n"/>
+            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nFeatureEntity" foreign-key="proctransi18n"/>
         </set>
 
         <subclass name="FeatureEntity"
@@ -106,7 +106,7 @@
 
     </class>
 
-    <class name="I18nFeatureEntity" table="i18nfeature">
+    <class name="org.n52.series.db.beans.i18n.I18nFeatureEntity" table="i18nfeature">
         <id name="pkid" type="long">
             <column name="pkid" />
             <generator class="native">

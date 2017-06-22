@@ -26,7 +26,7 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">procedureid_seq</param>
+                <param name="sequence">procedure_seq</param>
             </generator>
         </id>
         <many-to-one name="service" class="ServiceEntity" foreign-key="procedureServiceFk">
@@ -123,11 +123,11 @@
         </set>
     <set name="translations" table="i18nprocedure" inverse="true" fetch="select">
             <key column="procedure" foreign-key="proctransprocfk"/>
-            <many-to-many unique="true" column="pkid" class="I18nProcedureEntity" foreign-key="proctransi18nfk"/>
+            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nProcedureEntity" foreign-key="proctransi18nfk"/>
         </set>
     </class>
 
-     <class name="I18nProcedureEntity" table="i18nprocedure">
+     <class name="org.n52.series.db.beans.i18n.I18nProcedureEntity" table="i18nprocedure">
         <id name="pkid" type="long">
             <column name="pkid" />
             <generator class="native">

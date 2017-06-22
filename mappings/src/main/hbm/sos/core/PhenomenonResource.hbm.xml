@@ -88,11 +88,11 @@
         </set>
     <set name="translations" table="i18nphenomenon" inverse="true" fetch="select">
             <key column="phenomenon" foreign-key="phentransphenfk"/>
-            <many-to-many unique="true" column="pkid" class="I18nPhenomenonEntity" foreign-key="phentransi18nfk"/>
+            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" foreign-key="phentransi18nfk"/>
         </set>
     </class>
 
-    <class name="I18nPhenomenonEntity" table="i18nphenomenon">
+    <class name="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" table="i18nphenomenon">
         <id name="pkid" type="long">
             <column name="pkid" />
             <generator class="native">

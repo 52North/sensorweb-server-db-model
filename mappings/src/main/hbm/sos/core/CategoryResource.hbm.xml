@@ -43,11 +43,11 @@
 		<set name="translations" table="i18category" inverse="true"
 			fetch="select">
 			<key column="category" foreign-key="cattranscatfk"/>
-			<many-to-many unique="true" column="pkid" class="I18nCategoryEntity" foreign-key="cattransi18nfk"/>
+			<many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nCategoryEntity" foreign-key="cattransi18nfk"/>
 		</set>
 	</class>
 
-	<class name="I18nCategoryEntity" table="i18ncategory">
+	<class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="i18ncategory">
 		<id name="pkid" type="long">
 			<column name="pkid" />
 			<generator class="native">
