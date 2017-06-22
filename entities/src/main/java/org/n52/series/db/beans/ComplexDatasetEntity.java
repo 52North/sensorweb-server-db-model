@@ -16,12 +16,26 @@
  */
 package org.n52.series.db.beans;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-public class BlobDataEntity extends DataEntity<Object> {
+import org.n52.series.db.beans.dataset.ComplexDataset;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        return getValue() == null;
+public class ComplexDatasetEntity extends DatasetEntity<ComplexDataEntity> implements ComplexDataset<ComplexDatasetEntity>{
+
+    private Set<ComplexDatasetEntity> referenceValues = new HashSet<>();
+
+    public ComplexDatasetEntity() {
+        super(DATASET_TYPE);
     }
+
+    public Set<ComplexDatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
+
+    public ComplexDatasetEntity setReferenceValues(Set<ComplexDatasetEntity> referenceValues) {
+        this.referenceValues = referenceValues;
+        return this;
+    }
+
 }

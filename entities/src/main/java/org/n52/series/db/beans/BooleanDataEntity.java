@@ -18,12 +18,12 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-public class BooleanDataEntity extends DataEntity<String> {
+public class BooleanDataEntity extends DataEntity<Boolean> {
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
+        Boolean value = getValue();
         return value == null
-                || noDataValues.contains(value);
+                || noDataValues.contains(value.toString());
     }
 }

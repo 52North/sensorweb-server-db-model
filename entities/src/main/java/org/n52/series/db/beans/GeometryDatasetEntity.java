@@ -16,12 +16,25 @@
  */
 package org.n52.series.db.beans;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-public class BlobDataEntity extends DataEntity<Object> {
+public class GeometryDatasetEntity extends DatasetEntity<GeometryDataEntity> {
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        return getValue() == null;
+    private static final String DATASET_TYPE = "geometry";
+
+    private Set<GeometryDatasetEntity> referenceValues = new HashSet<>();
+
+    public GeometryDatasetEntity() {
+        super(DATASET_TYPE);
     }
+
+    public Set<GeometryDatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
+
+    public void setReferenceValues(Set<GeometryDatasetEntity> referenceValues) {
+        this.referenceValues = referenceValues;
+    }
+
 }

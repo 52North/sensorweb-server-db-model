@@ -18,12 +18,12 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-public class GeometryDataEntity extends DataEntity<String> {
+public class GeometryDataEntity extends DataEntity<GeometryEntity> {
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
+        GeometryEntity value = getValue();
         return value == null
-                || noDataValues.contains(value);
+                || value.isEmpty();
     }
 }

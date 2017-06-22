@@ -16,12 +16,25 @@
  */
 package org.n52.series.db.beans;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-public class BlobDataEntity extends DataEntity<Object> {
+import org.n52.series.db.beans.dataset.BlobDataset;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        return getValue() == null;
+public class BlobDatasetEntity extends DatasetEntity<BlobDataEntity> implements BlobDataset<BlobDatasetEntity> {
+    private Set<BlobDatasetEntity> referenceValues = new HashSet<>();
+
+    public BlobDatasetEntity() {
+        super(DATASET_TYPE);
     }
+
+    public Set<BlobDatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
+
+    public BlobDatasetEntity setReferenceValues(Set<BlobDatasetEntity> referenceValues) {
+        this.referenceValues = referenceValues;
+        return this;
+    }
+
 }
