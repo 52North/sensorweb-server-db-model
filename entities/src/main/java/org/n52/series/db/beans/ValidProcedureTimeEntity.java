@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.n52.series.common.DbUtils;
 import org.n52.series.db.beans.HibernateRelations.HasDescriptionXml;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
@@ -35,7 +36,6 @@ public class ValidProcedureTimeEntity extends PkidEntity implements Serializable
     public static final String START_TIME = "startTime";
 
     public static final String END_TIME = "endTime";
-
 
     private ProcedureEntity procedure;
 
@@ -70,20 +70,20 @@ public class ValidProcedureTimeEntity extends PkidEntity implements Serializable
     }
 
     public Date getStartTime() {
-        return this.startTime;
+        return DbUtils.createUnmutableTimestamp(this.startTime);
     }
 
     public ValidProcedureTimeEntity setStartTime(Date startTime) {
-        this.startTime = startTime;
+        this.startTime = DbUtils.createUnmutableTimestamp(startTime);
         return this;
     }
 
     public Date getEndTime() {
-        return this.endTime;
+        return DbUtils.createUnmutableTimestamp(this.endTime);
     }
 
     public ValidProcedureTimeEntity setEndTime(Date endTime) {
-        this.endTime = endTime;
+        this.endTime = DbUtils.createUnmutableTimestamp(endTime);
         return this;
     }
 

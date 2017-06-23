@@ -19,6 +19,7 @@ package org.n52.series.db.beans.feature.gml;
 import java.util.Date;
 import java.util.Set;
 
+import org.n52.series.common.DbUtils;
 import org.n52.series.db.beans.CodespaceEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
@@ -125,7 +126,7 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
      * @return the realizationEpoch
      */
     public Date getRealizationEpoch() {
-        return realizationEpoch;
+        return DbUtils.createUnmutableTimestamp(realizationEpoch);
     }
 
     /**
@@ -133,7 +134,7 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
      *            the realizationEpoch to set
      */
     public void setRealizationEpoch(Date realizationEpoch) {
-        this.realizationEpoch = realizationEpoch;
+        this.realizationEpoch = DbUtils.createUnmutableTimestamp(realizationEpoch);
     }
 
     public boolean isSetRealizationEpoch() {

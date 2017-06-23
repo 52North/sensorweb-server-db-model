@@ -18,6 +18,7 @@ package org.n52.series.db.beans.feature;
 
 import java.util.Date;
 
+import org.n52.series.common.DbUtils;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
@@ -56,28 +57,28 @@ public class SpecimenEntity extends FeatureEntity {
      * @return the samplingTimeStart
      */
     public Date getSamplingTimeStart() {
-        return samplingTimeStart;
+        return DbUtils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @param samplingTimeStart the samplingTimeStart to set
      */
     public void setSamplingTimeStart(Date samplingTimeStart) {
-        this.samplingTimeStart = samplingTimeStart;
+        this.samplingTimeStart = DbUtils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @return the samplingTimeEnd
      */
     public Date getSamplingTimeEnd() {
-        return samplingTimeEnd;
+        return DbUtils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
      * @param samplingTimeEnd the samplingTimeEnd to set
      */
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        this.samplingTimeEnd = samplingTimeEnd;
+        this.samplingTimeEnd = DbUtils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
