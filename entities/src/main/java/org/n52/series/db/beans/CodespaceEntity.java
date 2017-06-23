@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -22,26 +23,27 @@ import org.n52.series.db.beans.HibernateRelations.HasCodespace;
 
 /**
  * @since 1.0.0
- *
  */
 public class CodespaceEntity extends PkidEntity implements Serializable {
 
-    private static final long serialVersionUID = 8795086004488469603L;
     public static final String ID = "codespaceId";
+
     public static final String CODESPACE = HasCodespace.CODESPACE;
 
-    private String codespace;
+    private static final long serialVersionUID = 8795086004488469603L;
 
-    public String getCodespace() {
-        return this.codespace;
+    private String codespaceEntity;
+
+    public String getCodespaceEntity() {
+        return this.codespaceEntity;
     }
 
     public CodespaceEntity setCodespace(String codespace) {
-        this.codespace = codespace;
+        this.codespaceEntity = codespace;
         return this;
     }
 
-    public boolean isSetCodespace() {
-        return getCodespace() != null && !getCodespace().isEmpty();
+    public boolean isSetCodespaceEntity() {
+        return getCodespaceEntity() != null && !getCodespaceEntity().isEmpty();
     }
 }

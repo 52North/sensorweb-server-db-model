@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature.gmd;
 
 import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
@@ -23,7 +24,6 @@ import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class ExVerticalExtentEntity extends AbstractCiEntity {
 
@@ -41,12 +41,15 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public Double getMinimumValue() {
         return minimumValue;
     }
+
     /**
-     * @param minimumValue the minimumValue to set
+     * @param minimumValue
+     *        the minimumValue to set
      */
     public void setMinimumValue(Double minimumValue) {
         this.minimumValue = minimumValue;
     }
+
     public boolean isSetMinimumValue() {
         return getMinimumValue() != null;
     }
@@ -57,8 +60,10 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public String getMinValuNilReason() {
         return minValuNilReason;
     }
+
     /**
-     * @param minValuNilReason the minValuNilReason to set
+     * @param minValuNilReason
+     *        the minValuNilReason to set
      */
     public void setMinValuNilReason(String minValuNilReason) {
         this.minValuNilReason = minValuNilReason;
@@ -67,14 +72,17 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public boolean isSetMinValuNilReason() {
         return getMinValuNilReason() != null && getMinValuNilReason().isEmpty();
     }
+
     /**
      * @return the maximumValue
      */
     public Double getMaximumValue() {
         return maximumValue;
     }
+
     /**
-     * @param maximumValue the maximumValue to set
+     * @param maximumValue
+     *        the maximumValue to set
      */
     public void setMaximumValue(Double maximumValue) {
         this.maximumValue = maximumValue;
@@ -83,14 +91,17 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public boolean isSetMaximumValue() {
         return getMaximumValue() != null;
     }
+
     /**
      * @return the maxValuNilReason
      */
     public String getMaxValuNilReason() {
         return maxValuNilReason;
     }
+
     /**
-     * @param maxValuNilReason the maxValuNilReason to set
+     * @param maxValuNilReason
+     *        the maxValuNilReason to set
      */
     public void setMaxValuNilReason(String maxValuNilReason) {
         this.maxValuNilReason = maxValuNilReason;
@@ -99,14 +110,17 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public boolean isSetMaxValuNilReason() {
         return getMaxValuNilReason() != null && getMaxValuNilReason().isEmpty();
     }
+
     /**
      * @return the verticalCRS
      */
     public VerticalCRSEntity getVerticalCRS() {
         return verticalCRS;
     }
+
     /**
-     * @param verticalCRS the verticalCRS to set
+     * @param verticalCRS
+     *        the verticalCRS to set
      */
     public void setVerticalCRS(VerticalCRSEntity verticalCRS) {
         this.verticalCRS = verticalCRS;

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
 
 import java.util.HashMap;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 import org.n52.series.db.beans.PkidEntity;
 
-public abstract class Parameter<T> extends PkidEntity implements ValuedParameter<T, Parameter<T>>{
+public abstract class Parameter<T> extends PkidEntity implements ValuedParameter<T, Parameter<T>> {
 
     private static final long serialVersionUID = -1489503368673412638L;
 

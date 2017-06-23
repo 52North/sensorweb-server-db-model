@@ -31,7 +31,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
     private String organizationName;
     private String positionName;
     private ContactEntity contactInfo;
-    private RoleEntity role;
+    private RoleEntity ciRole;
 
     /**
      * @return the individualName
@@ -110,17 +110,17 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
     }
 
     /**
-     * @return the role
+     * @return the ciRole
      */
     public RoleEntity getCiRole() {
-        return role;
+        return ciRole;
     }
 
     /**
-     * @param role
-     *            the role to set
+     * @param ciRole
+     *            the ciRole to set
      */
-    public void setCiRole(RoleEntity role) {
-        this.role = role;
+    public void setCiRole(RoleEntity ciRole) {
+        this.ciRole = ciRole;
     }
 }

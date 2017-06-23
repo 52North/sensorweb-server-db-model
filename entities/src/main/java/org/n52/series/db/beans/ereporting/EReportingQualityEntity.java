@@ -14,10 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
-import  org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
-import  org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
 
 public class EReportingQualityEntity implements HasPrimaryObservation, EReportingQualityData {
 
@@ -41,8 +42,6 @@ public class EReportingQualityEntity implements HasPrimaryObservation, EReportin
 
     private Double uncertaintyEstimation;
 
-
-
     /**
      * @return the id
      */
@@ -51,7 +50,8 @@ public class EReportingQualityEntity implements HasPrimaryObservation, EReportin
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *        the id to set
      */
     public void setId(long id) {
         this.id = id;
@@ -65,7 +65,8 @@ public class EReportingQualityEntity implements HasPrimaryObservation, EReportin
     }
 
     /**
-     * @param year the year to set
+     * @param year
+     *        the year to set
      */
     public void setYear(int year) {
         this.year = year;
@@ -79,7 +80,8 @@ public class EReportingQualityEntity implements HasPrimaryObservation, EReportin
     }
 
     /**
-     * @param series the series to set
+     * @param series
+     *        the series to set
      */
     public void setSeries(long series) {
         this.series = series;

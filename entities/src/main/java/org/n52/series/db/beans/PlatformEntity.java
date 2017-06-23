@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Set;
@@ -24,11 +25,11 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class PlatformEntity extends DescribableEntity {
 
-    private static final long serialVersionUID = 3615089936334873353L;
-
     public static final String PROPERTY_INSITU = "insitu";
 
     public static final String PROPERTY_MOBILE = "mobile";
+
+    private static final long serialVersionUID = 3615089936334873353L;
 
     private boolean insitu = true;
 

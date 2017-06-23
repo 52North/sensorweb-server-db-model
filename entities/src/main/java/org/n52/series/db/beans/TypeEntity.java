@@ -20,16 +20,17 @@ public abstract class TypeEntity<T> extends PkidEntity {
 
     public static final String TYPE = "type";
 
+    private static final long serialVersionUID = -8428858401445365107L;
+
     private String type;
 
     public String getType() {
         return this.type;
     }
 
-    @SuppressWarnings("unchecked")
-    public T setType(String type) {
+    public TypeEntity<T> setType(String type) {
         this.type = type;
-        return (T)this;
+        return this;
     }
 
     public boolean isSetType() {

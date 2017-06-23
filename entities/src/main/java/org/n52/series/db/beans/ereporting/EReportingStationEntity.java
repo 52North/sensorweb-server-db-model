@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.DescribableEntity;
@@ -23,7 +24,6 @@ import org.n52.series.db.beans.DescribableEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class EReportingStationEntity extends DescribableEntity {
 
@@ -41,7 +41,8 @@ public class EReportingStationEntity extends DescribableEntity {
     }
 
     /**
-     * @param station the station to set
+     * @param station
+     *        the station to set
      * @return this
      */
     public EReportingStationEntity setStation(Long station) {

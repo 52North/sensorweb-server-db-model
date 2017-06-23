@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.shetland.aqd.AqdConstants;
@@ -22,8 +23,11 @@ public interface HiberanteEReportingRelations {
 
     interface HasEReportingSamplingPoint {
         String SAMPLING_POINT = "samplingPoint";
+
         EReportingSamplingPointEntity getSamplingPoint();
+
         void setSamplingPoint(EReportingSamplingPointEntity samplingPoint);
+
         default boolean hasSamplingPoint() {
             return getSamplingPoint() != null;
         }
@@ -31,8 +35,11 @@ public interface HiberanteEReportingRelations {
 
     interface HasInspireId {
         String INSPIRE_ID = "inspireId";
+
         String getInspireId();
+
         void setInspireId(String inspireId);
+
         default boolean isSetInspireId() {
             return getInspireId() != null && !getInspireId().isEmpty();
         }
@@ -43,8 +50,11 @@ public interface HiberanteEReportingRelations {
         Integer DEFAULT_VALIDATION = -1;
 
         String VALIDATION = "validation";
+
         Integer getValidation();
+
         void setValidation(Integer validation);
+
         default boolean isSetValidation() {
             return getValidation() != null;
         }
@@ -54,8 +64,11 @@ public interface HiberanteEReportingRelations {
 
         Integer DEFAULT_VERIFICATION = 3;
         String VERIFICATION = "verification";
+
         Integer getVerification();
+
         void setVerification(Integer verification);
+
         default boolean isSetVerification() {
             return getVerification() != null;
         }
@@ -129,10 +142,10 @@ public interface HiberanteEReportingRelations {
 
     }
 
-    interface EReportingValues extends HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
+    interface EReportingValues
+            extends HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
 
-
-     }
+    }
 
     interface HasAssessmentType {
         String ASSESSMENTTYPE = "assessmentType";
@@ -144,7 +157,7 @@ public interface HiberanteEReportingRelations {
 
         /**
          * @param assessmentType
-         *            the assessmentType to set
+         *        the assessmentType to set
          */
         void setAssessmentType(EReportingAssessmentTypeEntity assessmentType);
 
@@ -155,7 +168,6 @@ public interface HiberanteEReportingRelations {
 
     /**
      * Interface for AQD EReporting Station elements
-     *
      */
     interface HasStation {
         String STATION = "station";
@@ -163,26 +175,25 @@ public interface HiberanteEReportingRelations {
         /**
          * @return the station
          */
-        EReportingStationEntity getStation();
+        EReportingStationEntity getEReportingStationEntity();
 
         /**
          * @param station
-         *            the station to set
+         *        the station to set
          * @return this
          */
-        HasStation setStation(EReportingStationEntity station);
+        HasStation setEReportingStationEntity(EReportingStationEntity station);
 
         /**
          * @return <code>true</code>, if station is not null
          */
-       default boolean isSetStation() {
-           return getStation() != null;
-       }
+        default boolean isSetEReportingStationEntity() {
+            return getEReportingStationEntity() != null;
+        }
     }
 
     /**
      * Interface for AQD EReporting Network elements
-     *
      */
     interface HasNetwork {
         String NETWORK = "network";
@@ -190,20 +201,20 @@ public interface HiberanteEReportingRelations {
         /**
          * @return the network
          */
-        EReportingNetworkEntity getNetwork();
+        EReportingNetworkEntity getEReportingNetworkEntity();
 
         /**
          * @param network
-         *            the network to set
+         *        the network to set
          * @return this
          */
-        HasNetwork setNetwork(EReportingNetworkEntity network);
+        HasNetwork setEReportingNetworkEntity(EReportingNetworkEntity network);
 
         /**
          * @return <code>true</code>, if network is not null
          */
-        default boolean isSetNetwork() {
-            return getNetwork() != null;
+        default boolean isSetEReportingNetworkEntity() {
+            return getEReportingNetworkEntity() != null;
         }
     }
 }

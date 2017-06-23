@@ -18,7 +18,6 @@ package org.n52.series.db.beans.feature;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity;
 import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
@@ -27,61 +26,62 @@ import org.n52.shetland.util.CollectionHelper;
 public class MonitoringPointContent {
 
     /* 0..* */
-    private List<ResponsiblePartyEntity> relatedParty = new ArrayList<>();
-    /* 0..* */
-    private List<VerticalDatumEntity> verticalDatum = new ArrayList<>();
+    private Collection<ResponsiblePartyEntity> relatedParties = new ArrayList<>();
 
-    public List<ResponsiblePartyEntity> getRelatedParty() {
-        return relatedParty;
+    /* 0..* */
+    private Collection<VerticalDatumEntity> verticalDatums = new ArrayList<>();
+
+    public Collection<ResponsiblePartyEntity> getRelatedParties() {
+        return relatedParties;
     }
 
-    public void setRelatedParty(Collection<ResponsiblePartyEntity> relatedParty) {
-        this.relatedParty.clear();
-        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(relatedParty)) {
-            this.relatedParty.addAll(relatedParty);
+    public void setRelatedParties(Collection<ResponsiblePartyEntity> relatedParties) {
+        this.relatedParties.clear();
+        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(relatedParties)) {
+            this.relatedParties.addAll(relatedParties);
         }
     }
 
-    public void addRelatedParty(Collection<ResponsiblePartyEntity> relatedParty) {
-        if (relatedParty != null) {
-            this.relatedParty.addAll(relatedParty);
+    public void addAllRelatedParties(Collection<ResponsiblePartyEntity> relatedPartiesToAdd) {
+        if (relatedPartiesToAdd != null) {
+            this.relatedParties.addAll(relatedPartiesToAdd);
         }
     }
 
     public void addRelatedParty(ResponsiblePartyEntity relatedParty) {
         if (relatedParty != null) {
-            this.relatedParty.add(relatedParty);
+            this.relatedParties.add(relatedParty);
         }
     }
 
-    public boolean hasRelatedParty() {
-        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getRelatedParty());
+    public boolean hasRelatedParties() {
+        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getRelatedParties());
     }
 
-    public List<VerticalDatumEntity> getVerticalDatum() {
-        return verticalDatum;
+    public Collection<VerticalDatumEntity> getVerticalDatums() {
+        return verticalDatums;
     }
 
-    public void setVerticalDatum(Collection<VerticalDatumEntity> verticalDatum) {
-        this.verticalDatum.clear();
-        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(verticalDatum)) {
-            this.verticalDatum.addAll(verticalDatum);
+    public void setVerticalDatums(Collection<VerticalDatumEntity> verticalDatums) {
+        this.verticalDatums.clear();
+        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(verticalDatums)) {
+            this.verticalDatums.addAll(verticalDatums);
         }
     }
 
-    public void addVerticalDatum(Collection<VerticalDatumEntity> verticalDatum) {
-        if (verticalDatum != null) {
-            this.verticalDatum.addAll(verticalDatum);
+    public void addAllVerticalDatums(Collection<VerticalDatumEntity> verticalDatumsToAdd) {
+        if (verticalDatumsToAdd != null) {
+            this.verticalDatums.addAll(verticalDatumsToAdd);
         }
     }
 
     public void addVerticalDatum(VerticalDatumEntity verticalDatum) {
         if (verticalDatum != null) {
-            this.verticalDatum.add(verticalDatum);
+            this.verticalDatums.add(verticalDatum);
         }
     }
 
-    public boolean hasVerticalDatum() {
-        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getVerticalDatum());
+    public boolean hasVerticalDatums() {
+        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getVerticalDatums());
     }
 }

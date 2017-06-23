@@ -27,6 +27,8 @@ public abstract class MetadataEntity<T> extends PkidEntity {
 
     static final String PROPERTY_SERIES_ID = "dataset";
 
+    private static final long serialVersionUID = -8312685947116728741L;
+
     private Long dataset;
 
     private String name;
@@ -90,11 +92,5 @@ public abstract class MetadataEntity<T> extends PkidEntity {
     public void setDomain(String domain) {
         this.domain = domain;
     }
-
-//    public DatabaseMetadataOutput<T> toOutput() {
-//        return DatabaseMetadataOutput.<T> create()
-//                                     .setValue(value)
-//                                     .setLastUpdatedAt(lastUpdate);
-//    }
 
 }

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature.gml;
 
 import org.n52.series.db.beans.CodespaceEntity;
@@ -26,7 +27,6 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks<CoordinateSystemAxisEntity> {
 
@@ -34,13 +34,13 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     private String remarks;
     private String axisAbbrev;
-    private CodespaceEntity axisAbbrevCodespaceEntity;
     private String axisDirection;
-    private CodespaceEntity axisDirectionCodespaceEntity;
+    private String rangeMeaning;
+    private CodespaceEntity codespaceEntityAxisAbbrev;
+    private CodespaceEntity codespaceEntityAxisDirection;
+    private CodespaceEntity codespaceEntityRangeMeaning;
     private Double minimumValue;
     private Double maximumValue;
-    private String rangeMeaning;
-    private CodespaceEntity rangeMeaningCodespaceEntity;
     private UnitEntity uom;
 
     /**
@@ -53,13 +53,14 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param remarks
-     *            the remarks to set
+     *        the remarks to set
      */
     @Override
     public CoordinateSystemAxisEntity setRemarks(String remarks) {
         this.remarks = remarks;
         return this;
     }
+
     /**
      * @return the axisAbbrev
      */
@@ -69,29 +70,29 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param axisAbbrev
-     *            the axisAbbrev to set
+     *        the axisAbbrev to set
      */
     public void setAxisAbbrev(String axisAbbrev) {
         this.axisAbbrev = axisAbbrev;
     }
 
     /**
-     * @return the axisAbbrevCodespaceEntity
+     * @return the codespaceEntityAxisAbbrev
      */
     public CodespaceEntity getCodespaceEntityAxisAbbrev() {
-        return axisAbbrevCodespaceEntity;
+        return codespaceEntityAxisAbbrev;
     }
 
     /**
-     * @param axisAbbrevCodespaceEntity
-     *            the axisAbbrevCodespaceEntity to set
+     * @param codespaceEntityAxisAbbrev
+     *        the codespaceEntityAxisAbbrev to set
      */
-    public void setCodespaceEntityAxisAbbrev(CodespaceEntity axisAbbrevCodespaceEntity) {
-        this.axisAbbrevCodespaceEntity = axisAbbrevCodespaceEntity;
+    public void setCodespaceEntityAxisAbbrev(CodespaceEntity codespaceEntityAxisAbbrev) {
+        this.codespaceEntityAxisAbbrev = codespaceEntityAxisAbbrev;
     }
 
     public boolean isSetCodespaceEntityAxisAbbrev() {
-        return getCodespaceEntityAxisAbbrev() != null && getCodespaceEntityAxisAbbrev().isSetCodespace();
+        return getCodespaceEntityAxisAbbrev() != null && getCodespaceEntityAxisAbbrev().isSetCodespaceEntity();
     }
 
     /**
@@ -103,29 +104,29 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param axisDirection
-     *            the axisDirection to set
+     *        the axisDirection to set
      */
     public void setAxisDirection(String axisDirection) {
         this.axisDirection = axisDirection;
     }
 
     /**
-     * @return the axisDirectionCodespaceEntity
+     * @return the codespaceEntityAxisDirection
      */
     public CodespaceEntity getCodespaceEntityAxisDirection() {
-        return axisDirectionCodespaceEntity;
+        return codespaceEntityAxisDirection;
     }
 
     /**
-     * @param axisDirectionCodespaceEntity
-     *            the axisDirectionCodespaceEntity to set
+     * @param codespaceEntityAxisDirection
+     *        the codespaceEntityAxisDirection to set
      */
-    public void setCodespaceEntityAxisDirection(CodespaceEntity axisDirectionCodespaceEntity) {
-        this.axisDirectionCodespaceEntity = axisDirectionCodespaceEntity;
+    public void setCodespaceEntityAxisDirection(CodespaceEntity codespaceEntityAxisDirection) {
+        this.codespaceEntityAxisDirection = codespaceEntityAxisDirection;
     }
 
     public boolean isSetCodespaceEntityAxisDirection() {
-        return getCodespaceEntityAxisDirection() != null && getCodespaceEntityAxisDirection().isSetCodespace();
+        return getCodespaceEntityAxisDirection() != null && getCodespaceEntityAxisDirection().isSetCodespaceEntity();
     }
 
     /**
@@ -137,7 +138,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param minimumValue
-     *            the minimumValue to set
+     *        the minimumValue to set
      */
     public void setMinimumValue(double minimumValue) {
         this.minimumValue = minimumValue;
@@ -156,7 +157,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param maximumValue
-     *            the maximumValue to set
+     *        the maximumValue to set
      */
     public void setMaximumValue(double maximumValue) {
         this.maximumValue = maximumValue;
@@ -175,7 +176,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param rangeMeaning
-     *            the rangeMeaning to set
+     *        the rangeMeaning to set
      */
     public void setRangeMeaning(String rangeMeaning) {
         this.rangeMeaning = rangeMeaning;
@@ -189,19 +190,19 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
      * @return the rangeMeaningCodespaceEntity
      */
     public CodespaceEntity getCodespaceEntityRangeMeaning() {
-        return rangeMeaningCodespaceEntity;
+        return codespaceEntityRangeMeaning;
     }
 
     /**
-     * @param rangeMeaningCodespaceEntity
-     *            the rangeMeaningCodespaceEntity to set
+     * @param codespaceEntityRangeMeaning
+     *        the codespaceEntityRangeMeaning to set
      */
-    public void setCodespaceEntityRangeMeaning(CodespaceEntity rangeMeaningCodespaceEntity) {
-        this.rangeMeaningCodespaceEntity = rangeMeaningCodespaceEntity;
+    public void setCodespaceEntityRangeMeaning(CodespaceEntity codespaceEntityRangeMeaning) {
+        this.codespaceEntityRangeMeaning = codespaceEntityRangeMeaning;
     }
 
     public boolean isSetCodespaceEntityRangeMeaning() {
-        return getCodespaceEntityRangeMeaning() != null && getCodespaceEntityRangeMeaning().isSetCodespace();
+        return getCodespaceEntityRangeMeaning() != null && getCodespaceEntityRangeMeaning().isSetCodespaceEntity();
     }
 
     /**
@@ -213,7 +214,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param uom
-     *            the uom to set
+     *        the uom to set
      */
     public void setUom(UnitEntity uom) {
         this.uom = uom;

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
@@ -22,7 +23,8 @@ import java.util.Set;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.dataset.MeasurementDataset;
 
-public class EReportingMeasurementDatasetEntity extends DatasetEntity<EReportingMeasurementDataEntity> implements MeasurementDataset<EReportingMeasurementDatasetEntity>{
+public class EReportingMeasurementDatasetEntity extends DatasetEntity<EReportingMeasurementDataEntity>
+        implements MeasurementDataset<EReportingMeasurementDatasetEntity> {
 
     private static final long serialVersionUID = -8934345303908852017L;
 
@@ -40,8 +42,8 @@ public class EReportingMeasurementDatasetEntity extends DatasetEntity<EReporting
     }
 
     @Override
-    public EReportingMeasurementDatasetEntity setReferenceValues(Set<EReportingMeasurementDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
+    public EReportingMeasurementDatasetEntity setReferenceValues(Set<EReportingMeasurementDatasetEntity> refValues) {
+        this.referenceValues = refValues;
         return this;
     }
 

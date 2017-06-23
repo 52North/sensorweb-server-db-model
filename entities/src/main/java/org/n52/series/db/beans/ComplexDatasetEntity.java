@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
-public class ComplexDatasetEntity extends DatasetEntity<ComplexDataEntity> implements ComplexDataset<ComplexDatasetEntity>{
+public class ComplexDatasetEntity extends DatasetEntity<ComplexDataEntity>
+        implements ComplexDataset<ComplexDatasetEntity> {
 
     private static final long serialVersionUID = -3164247954562059026L;
 

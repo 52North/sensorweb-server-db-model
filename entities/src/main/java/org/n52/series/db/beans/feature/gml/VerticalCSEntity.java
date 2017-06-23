@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature.gml;
 
 import java.util.Set;
@@ -26,9 +27,8 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
-public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<VerticalCSEntity>{
+public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<VerticalCSEntity> {
 
     private static final long serialVersionUID = 8459136724611955821L;
 
@@ -46,7 +46,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
 
     /**
      * @param remarks
-     *            the remarks to set
+     *        the remarks to set
      */
     @Override
     public VerticalCSEntity setRemarks(String remarks) {
@@ -63,7 +63,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
 
     /**
      * @param coordinateSystemAxis
-     *            the coordinateSystemAxis to set
+     *        the coordinateSystemAxis to set
      */
     public void setCoordinateSystemAxis(Set<CoordinateSystemAxisEntity> coordinateSystemAxis) {
         this.coordinateSystemAxis = coordinateSystemAxis;
@@ -82,7 +82,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
 
     /**
      * @param aggregation
-     *            the aggregation to set
+     *        the aggregation to set
      */
     public void setAggregation(String aggregation) {
         this.aggregation = aggregation;

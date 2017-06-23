@@ -114,12 +114,12 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
         return codespaceAnchorDefinition;
     }
 
-    public void setCodespaceAnchorDef(CodespaceEntity codespaceAnchorDefinition) {
+    public void setCodespaceAnchorDefinition(CodespaceEntity codespaceAnchorDefinition) {
         this.codespaceAnchorDefinition = codespaceAnchorDefinition;
     }
 
     public boolean isSetCodespaceAnchorDefinition() {
-        return getCodespaceAnchorDef() != null && getCodespaceAnchorDef().isSetCodespace();
+        return getCodespaceAnchorDef() != null && getCodespaceAnchorDef().isSetCodespaceEntity();
     }
 
     /**

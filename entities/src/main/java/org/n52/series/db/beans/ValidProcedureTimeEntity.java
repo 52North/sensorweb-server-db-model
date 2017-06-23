@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -26,20 +27,20 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 
 /**
  * @since 1.0.0
- *
  */
-public class ValidProcedureTimeEntity extends PkidEntity implements Serializable, HasProcedure<ValidProcedureTimeEntity>,
-        HasProcedureDescriptionFormat<ValidProcedureTimeEntity>, HasDescriptionXml<ValidProcedureTimeEntity> {
-
-    private static final long serialVersionUID = -3658568714438752174L;
+public class ValidProcedureTimeEntity extends PkidEntity implements Serializable,
+        HasProcedure<ValidProcedureTimeEntity>, HasProcedureDescriptionFormat<ValidProcedureTimeEntity>,
+        HasDescriptionXml<ValidProcedureTimeEntity> {
 
     public static final String START_TIME = "startTime";
 
     public static final String END_TIME = "endTime";
 
-    private ProcedureEntity procedure;
+    private static final long serialVersionUID = -3658568714438752174L;
 
-    private ProcedureDescriptionFormatEntity procedureDescriptionFormat;
+    private ProcedureDescriptionFormatEntity procedureDescriptionFormatEntity;
+
+    private ProcedureEntity procedure;
 
     private Date startTime;
 
@@ -60,12 +61,12 @@ public class ValidProcedureTimeEntity extends PkidEntity implements Serializable
 
     @Override
     public ProcedureDescriptionFormatEntity getProcedureDescriptionFormat() {
-        return this.procedureDescriptionFormat;
+        return this.procedureDescriptionFormatEntity;
     }
 
     @Override
-    public ValidProcedureTimeEntity setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat) {
-        this.procedureDescriptionFormat = procedureDescriptionFormat;
+    public ValidProcedureTimeEntity setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity format) {
+        this.procedureDescriptionFormatEntity = format;
         return this;
     }
 

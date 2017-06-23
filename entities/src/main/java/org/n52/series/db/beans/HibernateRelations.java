@@ -34,6 +34,8 @@ import com.vividsolutions.jts.geom.Geometry;
  */
 public interface HibernateRelations {
 
+    String SRID = "srid";
+
     interface HasIdentifier<T> {
         String getDomainId();
 
@@ -102,7 +104,7 @@ public interface HibernateRelations {
         T setCodespace(CodespaceEntity codespace);
 
         default boolean isSetCodespace() {
-            return getCodespace() != null && !getCodespace().isSetCodespace();
+            return getCodespace() != null && !getCodespace().isSetCodespaceEntity();
         }
     }
 
@@ -114,7 +116,7 @@ public interface HibernateRelations {
         T setCodespaceName(CodespaceEntity codespaceName);
 
         default boolean isSetCodespaceName() {
-            return getCodespaceName() != null && !getCodespaceName().isSetCodespace();
+            return getCodespaceName() != null && !getCodespaceName().isSetCodespaceEntity();
         }
     }
 
@@ -610,7 +612,7 @@ public interface HibernateRelations {
     interface GeoColumnsId {
         String COORD_DIMENSION = "coordDimension";
 
-        String SRID = "srid";
+        String SRID = HibernateRelations.SRID;
 
         String TABLE_CATALOG = "FTableCatalog";
 
@@ -646,7 +648,7 @@ public interface HibernateRelations {
     }
 
     interface HasSrid {
-        String SRID = "srid";
+        String SRID = HibernateRelations.SRID;
 
         int getSrid();
 
@@ -742,7 +744,7 @@ public interface HibernateRelations {
          * @param observationId
          *            Observation id to set
          */
-        void setObservationId(final long observationId);
+        void setObservationId(long observationId);
     }
 
     interface HasLocale {

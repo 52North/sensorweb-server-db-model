@@ -21,9 +21,11 @@ import java.util.Date;
 
 public class SamplingGeometryEntity extends GeometryEntity {
 
+    private static final long serialVersionUID = -3036211037882973515L;
+
     private Date timestamp;
 
-    private Long dataset;
+    private Long datasetId;
 
     public Date getTimestamp() {
         return timestamp != null
@@ -39,19 +41,19 @@ public class SamplingGeometryEntity extends GeometryEntity {
 
     @Deprecated
     public Long getSeriesPkid() {
-        return dataset;
+        return datasetId;
     }
 
     @Deprecated
-    public void setSeriesPkid(Long dataset) {
-        this.dataset = dataset;
+    public void setSeriesPkid(Long pkid) {
+        this.datasetId = pkid;
     }
 
-    public Long getDataset() {
-        return dataset;
+    public Long getDatasetId() {
+        return datasetId;
     }
 
-    public void setDataset(Long dataset) {
-        this.dataset = dataset;
+    public void setDatasetId(Long dataset) {
+        this.datasetId = dataset;
     }
 }

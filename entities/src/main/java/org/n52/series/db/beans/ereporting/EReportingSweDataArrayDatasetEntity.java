@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.SweDataArrayDataset;
 
-public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity<EReportingSweDataArrayDataEntity> implements SweDataArrayDataset<EReportingSweDataArrayDatasetEntity> {
+public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity<EReportingSweDataArrayDataEntity>
+        implements SweDataArrayDataset<EReportingSweDataArrayDatasetEntity> {
 
     private static final long serialVersionUID = 8734427623675385749L;
 
@@ -37,8 +39,8 @@ public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
     }
 
     @Override
-    public EReportingSweDataArrayDatasetEntity setReferenceValues(Set<EReportingSweDataArrayDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
+    public EReportingSweDataArrayDatasetEntity setReferenceValues(Set<EReportingSweDataArrayDatasetEntity> refValues) {
+        this.referenceValues = refValues;
         return this;
     }
 

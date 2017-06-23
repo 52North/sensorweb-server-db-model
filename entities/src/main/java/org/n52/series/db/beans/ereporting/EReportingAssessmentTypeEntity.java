@@ -20,11 +20,11 @@ import java.io.Serializable;
 
 public class EReportingAssessmentTypeEntity implements Serializable {
 
-    private static final long serialVersionUID = 1721670905098408954L;
-
     public static final String ID = "assessmentType";
 
     public static final String ASSESSMENT_TYPE = ID;
+
+    private static final long serialVersionUID = 1721670905098408954L;
 
     private String assessmentType;
 

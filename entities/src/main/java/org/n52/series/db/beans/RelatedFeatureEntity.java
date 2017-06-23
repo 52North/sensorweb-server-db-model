@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -23,20 +24,17 @@ import java.util.Set;
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasOfferings;
 import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatureRoles;
-import org.n52.series.db.beans.AbstractFeatureEntity;
 
 /**
  * @since 1.0.0
- *
  */
-public class RelatedFeatureEntity extends PkidEntity implements Serializable,
-HasFeature<RelatedFeatureEntity>,
-HasRelatedFeatureRoles<RelatedFeatureEntity>,
-HasOfferings<RelatedFeatureEntity> {
+public class RelatedFeatureEntity extends PkidEntity
+        implements Serializable, HasFeature<RelatedFeatureEntity>, HasRelatedFeatureRoles<RelatedFeatureEntity>,
+        HasOfferings<RelatedFeatureEntity> {
 
     private static final long serialVersionUID = -8143897383050691280L;
 
-    private AbstractFeatureEntity featureOfInterest;
+    private AbstractFeatureEntity feature;
 
     private Set<RelatedFeatureRoleEntity> relatedFeatureRoles = new HashSet<RelatedFeatureRoleEntity>(0);
 
@@ -47,12 +45,12 @@ HasOfferings<RelatedFeatureEntity> {
 
     @Override
     public AbstractFeatureEntity getFeature() {
-        return this.featureOfInterest;
+        return this.feature;
     }
 
     @Override
-    public RelatedFeatureEntity setFeature(AbstractFeatureEntity featureOfInterest) {
-        this.featureOfInterest = featureOfInterest;
+    public RelatedFeatureEntity setFeature(AbstractFeatureEntity feature) {
+        this.feature = feature;
         return this;
     }
 
@@ -75,10 +73,10 @@ HasOfferings<RelatedFeatureEntity> {
     @SuppressWarnings("unchecked")
     @Override
     public RelatedFeatureEntity setOfferings(final Object offerings) {
-        if (offerings instanceof Set<?>) {
+        if (offerings instanceof Set< ? >) {
             this.offerings = (Set<OfferingEntity>) offerings;
         } else {
-            getOfferings().add((OfferingEntity)offerings);
+            getOfferings().add((OfferingEntity) offerings);
         }
         return this;
     }

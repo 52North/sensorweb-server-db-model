@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -22,14 +23,13 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 
 /**
  * @since 1.0.0
- *
  */
 public class ProcedureDescriptionFormatEntity extends PkidEntity implements Serializable {
 
-    private static final long serialVersionUID = 5252037145878336688L;
-
     public static final String PROCEDURE_DESCRIPTION_FORMAT =
             HasProcedureDescriptionFormat.PROCEDURE_DESCRIPTION_FORMAT;
+
+    private static final long serialVersionUID = 5252037145878336688L;
 
     private String procedureDescriptionFormat;
 

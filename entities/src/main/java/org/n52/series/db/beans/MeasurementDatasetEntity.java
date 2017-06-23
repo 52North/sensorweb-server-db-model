@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.MeasurementDataset;
 
-public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity> implements MeasurementDataset<MeasurementDatasetEntity>{
+public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity>
+        implements MeasurementDataset<MeasurementDatasetEntity> {
 
     private static final long serialVersionUID = 4788481449399555710L;
 

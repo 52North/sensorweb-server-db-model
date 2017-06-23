@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
-public class EReportingComplexDatasetEntity extends EReportingDatasetEntity<EReportingComplexDataEntity> implements ComplexDataset<EReportingComplexDatasetEntity>{
+public class EReportingComplexDatasetEntity extends EReportingDatasetEntity<EReportingComplexDataEntity>
+        implements ComplexDataset<EReportingComplexDatasetEntity> {
 
     private static final long serialVersionUID = -7514394037111286838L;
 

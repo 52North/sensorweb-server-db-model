@@ -24,9 +24,9 @@ import java.io.Serializable;
  */
 public class RelatedFeatureRoleEntity extends PkidEntity implements Serializable {
 
-    private static final long serialVersionUID = 8118960371061251274L;
-
     public static final String RELATED_FEATURE_ROLE = "relatedFeatureRole";
+
+    private static final long serialVersionUID = 8118960371061251274L;
 
     private String relatedFeatureRole;
 

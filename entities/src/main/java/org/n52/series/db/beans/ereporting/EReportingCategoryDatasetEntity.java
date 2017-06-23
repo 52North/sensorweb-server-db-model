@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.CategoryDataset;
 
-public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity<EReportingCategoryDataEntity> implements CategoryDataset<EReportingCategoryDatasetEntity> {
+public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity<EReportingCategoryDataEntity>
+        implements CategoryDataset<EReportingCategoryDatasetEntity> {
 
     private static final long serialVersionUID = -6644598309866325949L;
 

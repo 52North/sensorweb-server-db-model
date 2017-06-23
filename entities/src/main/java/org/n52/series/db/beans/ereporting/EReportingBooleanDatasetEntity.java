@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.BooleanDataset;
 
-public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity<EReportingBooleanDataEntity> implements BooleanDataset<EReportingBooleanDatasetEntity> {
+public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity<EReportingBooleanDataEntity>
+        implements BooleanDataset<EReportingBooleanDatasetEntity> {
 
     private static final long serialVersionUID = 5026545130550522586L;
 

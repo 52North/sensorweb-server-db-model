@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.HashSet;
@@ -21,7 +22,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.CategoryDataset;
 
-public class CategoryDatasetEntity extends DatasetEntity<CategoryDataEntity> implements CategoryDataset<CategoryDatasetEntity> {
+public class CategoryDatasetEntity extends DatasetEntity<CategoryDataEntity>
+        implements CategoryDataset<CategoryDatasetEntity> {
 
     private static final long serialVersionUID = -3225007112833816443L;
 
