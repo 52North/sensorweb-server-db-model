@@ -32,7 +32,7 @@ public class ParameterXml extends Parameter<String> {
     }
 
     @Override
-    public <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport {
+    public NamedValue<String> accept(ParameterVisitor<String> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 }

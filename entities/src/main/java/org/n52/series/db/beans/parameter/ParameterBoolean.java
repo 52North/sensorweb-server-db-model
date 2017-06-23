@@ -32,7 +32,7 @@ public class ParameterBoolean extends Parameter<Boolean> {
     }
 
     @Override
-    public <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport {
+    public NamedValue<Boolean> accept(ParameterVisitor<Boolean> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 

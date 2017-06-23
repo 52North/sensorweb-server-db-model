@@ -58,7 +58,7 @@ public class ParameterQuantity extends Parameter<Double> {
     }
 
     @Override
-    public <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport {
+    public NamedValue<Double> accept(ParameterVisitor<Double> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 }

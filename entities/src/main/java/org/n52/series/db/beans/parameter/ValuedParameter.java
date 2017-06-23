@@ -28,5 +28,5 @@ public interface ValuedParameter<T, S> extends HasValue<T>, HasName<S>, Serializ
 
     void accept(VoidParameterVisitor visitor) throws OwsExceptionReport;
 
-    <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport;
+    NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport;
 }

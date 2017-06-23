@@ -32,7 +32,7 @@ public class ParameterCount extends Parameter<Integer>{
     }
 
     @Override
-    public <T> NamedValue<T> accept(ParameterVisitor<T> visitor) throws OwsExceptionReport {
+    public NamedValue<Integer> accept(ParameterVisitor<Integer> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 

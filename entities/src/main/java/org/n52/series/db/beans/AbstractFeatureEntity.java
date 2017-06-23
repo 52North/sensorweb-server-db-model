@@ -34,7 +34,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
     private String url;
     private String descriptionXml;
 
-    public abstract AbstractFeatureEntity accept(FeatureVisitor<?> visitor) throws OwsExceptionReport;
+    public abstract AbstractFeatureEntity accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport;
 
     public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
 
