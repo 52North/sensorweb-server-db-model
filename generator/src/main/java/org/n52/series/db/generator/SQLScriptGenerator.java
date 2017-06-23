@@ -14,13 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.generator;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
+import java.net.URISyntaxException;
+import java.nio.charset.Charset;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -34,23 +39,21 @@ import org.hibernate.spatial.dialect.mysql.MySQLSpatial5InnoDBDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisDialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 
-
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
 
-
 /**
- * Class to generate the create and drop scripts for different databases.
- * Currently supported spatial databases to create scripts
- *   - PostgreSQL/PostGIS
- *   - Oracle
- *   - MySQL
- *   - SQL Server
- *   - H2/GeoDB
+ * Class to generate the create and drop scripts for different databases. Currently supported spatial
+ * databases to create scripts
+ * <ul>
+ * <li>PostgreSQL/PostGIS</li>
+ * <li>Oracle</li>
+ * <li>MySQL</li>
+ * <li>SQL Server</li>
+ * <li>H2/GeoDB</li>
+ * </ul>
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
- *
  * @since 1.0.0
- *
  */
 public class SQLScriptGenerator {
 
@@ -63,16 +66,17 @@ public class SQLScriptGenerator {
         case 1:
             return new PostgisDialect();
         case 2:
-//            try {
-//                return new OracleSpatial10gDoubleFloatDialect();
-//            } catch (ExceptionInInitializerError eiie) {
-//                printToScreen("The Oracle JDBC driver is missing!");
-//                printToScreen("To execute the SQL script generator for Oracle you have to uncomment the dependency in the pom.xml.");
-//                printToScreen("If the Oracle JDBC driver is not installed in your local Maven repository, ");
-//                printToScreen("follow the first steps describes here: ");
-//                printToScreen("https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Oracle_support.");
-//                throw new MissingDriverException();
-//            }
+            // try {
+            // return new OracleSpatial10gDoubleFloatDialect();
+            // } catch (ExceptionInInitializerError eiie) {
+            // printToScreen("The Oracle JDBC driver is missing!");
+            // printToScreen("To execute the SQL script generator for Oracle you have to uncomment the
+            // dependency in the pom.xml.");
+            // printToScreen("If the Oracle JDBC driver is not installed in your local Maven repository, ");
+            // printToScreen("follow the first steps describes here: ");
+            // printToScreen("https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Oracle_support.");
+            // throw new MissingDriverException();
+            // }
 
         case 3:
             return new GeoDBDialect();
@@ -87,24 +91,27 @@ public class SQLScriptGenerator {
 
     private void setDirectoriesForModelSelection(int selection, int concept, Configuration configuration)
             throws Exception {
-//        switch (selection) {
-//        case 1:
-//            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
-//            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/fea").toURI()));
-//            break;
-//        case 2:
-//            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
-//            configuration
-//                    .addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/transactional").toURI()));
-//            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/parameter").toURI()));
-//            break;
-//        case 3:
-            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
-            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/feature").toURI()));
-//            break;
-//        default:
-//            throw new Exception("The entered value is invalid!");
-//        }
+        // switch (selection) {
+        // case 1:
+        // configuration.addDirectory(new
+        // File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
+        // configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/fea").toURI()));
+        // break;
+        // case 2:
+        // configuration.addDirectory(new
+        // File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
+        // configuration
+        // .addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/transactional").toURI()));
+        // configuration.addDirectory(new
+        // File(SQLScriptGenerator.class.getResource("/hbm/sos/parameter").toURI()));
+        // break;
+        // case 3:
+        configuration.addDirectory(getDirectory("/hbm/sos/core"));
+        configuration.addDirectory(getDirectory("/hbm/sos/feature"));
+        // break;
+        // default:
+        // throw new Exception("The entered value is invalid!");
+        // }
         addConceptDirectories(concept, configuration);
     }
 
@@ -113,11 +120,15 @@ public class SQLScriptGenerator {
         case 1:
             break;
         case 2:
-            configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/ereporting").toURI()));
+            configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
             break;
         default:
             throw new Exception("The entered value is invalid!");
         }
+    }
+
+    private File getDirectory(String path) throws URISyntaxException {
+        return new File(SQLScriptGenerator.class.getResource(path).toURI());
     }
 
     private int getSelection() throws IOException {
@@ -127,10 +138,7 @@ public class SQLScriptGenerator {
         printToScreen("");
         printToScreen("Enter your selection: ");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String selection = null;
-        selection = br.readLine();
-        return Integer.parseInt(selection);
+        return readSelectionFromStdIo();
     }
 
     private int getDialectSelection() throws IOException {
@@ -143,25 +151,30 @@ public class SQLScriptGenerator {
         printToScreen("");
         printToScreen("Enter your selection: ");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String selection = null;
-        selection = br.readLine();
-        return Integer.parseInt(selection);
+        return readSelectionFromStdIo();
     }
 
-//    private int getModelSelection() throws IOException {
-//        printToScreen("Which database model should be created:");
-//        printToScreen("1   Core");
-//        printToScreen("2   Transcational");
-//        printToScreen("3   All");
-//        printToScreen("");
-//        printToScreen("Enter your selection: ");
-//
-//        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//        String selection = null;
-//        selection = br.readLine();
-//        return Integer.parseInt(selection);
-//    }
+    private int readSelectionFromStdIo() throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
+        String selection = br.readLine();
+        return selection != null
+                ? Integer.parseInt(selection)
+                : -1;
+    }
+
+    // private int getModelSelection() throws IOException {
+    // printToScreen("Which database model should be created:");
+    // printToScreen("1 Core");
+    // printToScreen("2 Transcational");
+    // printToScreen("3 All");
+    // printToScreen("");
+    // printToScreen("Enter your selection: ");
+    //
+    // BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
+    // String selection = null;
+    // selection = br.readLine();
+    // return Integer.parseInt(selection);
+    // }
 
     private int getConceptSelection() throws IOException {
         printToScreen("Which observation concept should be created:");
@@ -170,10 +183,7 @@ public class SQLScriptGenerator {
         printToScreen("");
         printToScreen("Enter your selection: ");
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        String selection = null;
-        selection = br.readLine();
-        return Integer.parseInt(selection);
+        return readSelectionFromStdIo();
     }
 
     private String getSchema() throws IOException {
@@ -181,7 +191,7 @@ public class SQLScriptGenerator {
         printToScreen("No schema is also valid!");
         printToScreen("");
         printToScreen("Enter your selection: ");
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
         String selection = null;
         selection = br.readLine();
         return selection;
@@ -192,9 +202,9 @@ public class SQLScriptGenerator {
     }
 
     private Set<String> checkSchema(Dialect dia, String[] create) {
-        String hexStringToCheck =
-                new StringBuilder("FK").append(Integer.toHexString("observationHasOffering".hashCode()).toUpperCase())
-                        .toString();
+        String hexStringToCheck = new StringBuilder("FK").append(Integer.toHexString("observationHasOffering".hashCode())
+                                                                        .toUpperCase())
+                                                         .toString();
         boolean duplicate = false;
         List<String> checkedSchema = new LinkedList<>();
         for (String string : create) {
@@ -237,7 +247,7 @@ public class SQLScriptGenerator {
             } else {
                 try {
                     int dialectSelection = sqlScriptGenerator.getDialectSelection();
-//                    int modelSelection = sqlScriptGenerator.getModelSelection();
+                    // int modelSelection = sqlScriptGenerator.getModelSelection();
                     int modelSelection = 0;
                     int concept = sqlScriptGenerator.getConceptSelection();
                     String schema = sqlScriptGenerator.getSchema();
@@ -276,13 +286,18 @@ public class SQLScriptGenerator {
         }
     }
 
-    private static void execute(SQLScriptGenerator sqlScriptGenerator, int dialectSelection, int modelSelection, int concept, String schema) throws Exception {
-        FileWriter writer = null;
+    private static void execute(SQLScriptGenerator sqlScriptGenerator,
+                                int dialectSelection,
+                                int modelSelection,
+                                int concept,
+                                String schema)
+            throws Exception {
+        Writer writer = null;
         try {
             Configuration configuration = new CustomConfiguration().configure("/hibernate.cfg.xml");
             Dialect dia = sqlScriptGenerator.getDialect(dialectSelection);
             String fileName = "target/" + dialectSelection + "_" + modelSelection + "_" + concept + ".sql";
-            writer = new FileWriter(fileName);
+            writer = new OutputStreamWriter(new FileOutputStream(fileName), Charset.forName("UTF-8"));
             if (schema != null && !schema.isEmpty()) {
                 Properties p = new Properties();
                 p.put("hibernate.default_schema", schema);
@@ -292,28 +307,14 @@ public class SQLScriptGenerator {
             // create script
             String[] create = configuration.generateSchemaCreationScript(dia);
             Set<String> checkedSchema = sqlScriptGenerator.checkSchema(dia, create);
-            writer.write("Scripts are created for: " + dia.toString() + "\n");
-            writer.write("\n");
-            writer.write("#######################################\n");
-            writer.write("##           Create-Script           ##\n");
-            writer.write("#######################################\n");
-            writer.write("\n");
-            for (String t : checkedSchema) {
-                writer.write(t + ";\n");
-            }
+            writeln("Scripts are created for: " + dia.toString(), writer);
+            writeSection("Create-Script", checkedSchema, writer);
+
             // drop script
             String[] drop = configuration.generateDropSchemaScript(dia);
             Set<String> checkedDrop = sqlScriptGenerator.checkSchema(dia, drop);
-            writer.write("\n");
-            writer.write("#######################################\n");
-            writer.write("##            Drop-Script            ##\n");
-            writer.write("#######################################\n");
-            writer.write("\n");
-            for (String t : checkedDrop) {
-                writer.write(t + ";\n");
-            }
-            writer.write("\n");
-            writer.write("#######################################\n");
+            writeSection("Drop-Script", checkedDrop, writer);
+
             printToScreen("Finished! Check for file: " + fileName + "\n");
         } catch (Exception e) {
             System.out.println(e);
@@ -324,11 +325,30 @@ public class SQLScriptGenerator {
         }
     }
 
-    private class MissingDriverException extends Exception {
+    private static void writeSection(String header, Set<String> entries, Writer writer) throws IOException {
+        writeEmpty(writer);
+        writeln("#######################################\n", writer);
+        writeln("## \t" + header, writer);
+        writeEmpty(writer);
+        for (String e : entries) {
+            writeln(e + ";", writer);
+        }
+    }
+
+    private static void writeEmpty(Writer writer) throws IOException {
+        writer.write("\n");
+    }
+
+
+    private static void writeln(String line, Writer writer) throws IOException {
+        writer.write(line + "\n");
+    }
+
+    private static class MissingDriverException extends Exception {
 
         private static final long serialVersionUID = -5681526838468633998L;
 
-        public MissingDriverException() {
+        MissingDriverException() {
             super();
         }
 
