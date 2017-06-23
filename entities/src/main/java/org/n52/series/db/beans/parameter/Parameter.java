@@ -36,27 +36,33 @@ public abstract class Parameter<T> extends PkidEntity implements ValuedParameter
         return valueMap;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public Parameter<T> setName(String name) {
         this.name = name;
         return this;
     }
 
+    @Override
     public boolean isSetName() {
         return getName() != null && !getName().isEmpty();
     }
 
+    @Override
     public T getValue() {
         return value;
     }
 
+    @Override
     public void setValue(T value) {
         this.value = value;
     }
 
+    @Override
     public boolean isSetValue() {
         return getValue() != null;
     }

@@ -33,10 +33,12 @@ public class EReportingBlobDatasetEntity extends EReportingDatasetEntity<EReport
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingBlobDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingBlobDatasetEntity setReferenceValues(Set<EReportingBlobDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

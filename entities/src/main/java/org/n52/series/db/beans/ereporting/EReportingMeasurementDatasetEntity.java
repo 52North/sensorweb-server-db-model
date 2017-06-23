@@ -34,19 +34,23 @@ public class EReportingMeasurementDatasetEntity extends DatasetEntity<EReporting
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingMeasurementDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingMeasurementDatasetEntity setReferenceValues(Set<EReportingMeasurementDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;
     }
 
+    @Override
     public int getNumberOfDecimals() {
         return numberOfDecimals;
     }
 
+    @Override
     public EReportingMeasurementDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
         return this;

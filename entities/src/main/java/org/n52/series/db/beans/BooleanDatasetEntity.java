@@ -31,10 +31,12 @@ public class BooleanDatasetEntity extends DatasetEntity<BooleanDataEntity> imple
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<BooleanDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public BooleanDatasetEntity setReferenceValues(Set<BooleanDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

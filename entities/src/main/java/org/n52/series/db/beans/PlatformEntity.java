@@ -66,14 +66,17 @@ public class PlatformEntity extends DescribableEntity {
         this.geometry = geometry;
     }
 
+    @Override
     public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
+    @Override
     public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 
+    @Override
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }

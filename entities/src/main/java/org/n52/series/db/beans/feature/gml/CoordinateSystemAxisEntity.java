@@ -46,6 +46,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     /**
      * @return the remarks
      */
+    @Override
     public String getRemarks() {
         return remarks;
     }
@@ -54,6 +55,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
      * @param remarks
      *            the remarks to set
      */
+    @Override
     public CoordinateSystemAxisEntity setRemarks(String remarks) {
         this.remarks = remarks;
         return this;

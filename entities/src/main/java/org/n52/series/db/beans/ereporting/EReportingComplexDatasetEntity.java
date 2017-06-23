@@ -31,10 +31,12 @@ public class EReportingComplexDatasetEntity extends EReportingDatasetEntity<ERep
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingComplexDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingComplexDatasetEntity setReferenceValues(Set<EReportingComplexDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

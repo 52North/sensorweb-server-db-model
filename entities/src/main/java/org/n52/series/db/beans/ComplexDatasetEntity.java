@@ -31,10 +31,12 @@ public class ComplexDatasetEntity extends DatasetEntity<ComplexDataEntity> imple
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<ComplexDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public ComplexDatasetEntity setReferenceValues(Set<ComplexDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

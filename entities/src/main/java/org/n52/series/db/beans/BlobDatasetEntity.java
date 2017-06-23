@@ -31,10 +31,12 @@ public class BlobDatasetEntity extends DatasetEntity<BlobDataEntity> implements 
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<BlobDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public BlobDatasetEntity setReferenceValues(Set<BlobDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

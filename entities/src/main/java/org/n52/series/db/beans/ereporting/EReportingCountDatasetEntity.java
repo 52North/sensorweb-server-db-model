@@ -31,10 +31,12 @@ public class EReportingCountDatasetEntity extends EReportingDatasetEntity<ERepor
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingCountDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingCountDatasetEntity setReferenceValues(Set<EReportingCountDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

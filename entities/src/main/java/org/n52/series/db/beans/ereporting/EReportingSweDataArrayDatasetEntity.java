@@ -31,10 +31,12 @@ public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingSweDataArrayDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingSweDataArrayDatasetEntity setReferenceValues(Set<EReportingSweDataArrayDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

@@ -33,19 +33,23 @@ public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntit
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<MeasurementDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public MeasurementDatasetEntity setReferenceValues(Set<MeasurementDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;
     }
 
+    @Override
     public int getNumberOfDecimals() {
         return numberOfDecimals;
     }
 
+    @Override
     public MeasurementDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
         return this;

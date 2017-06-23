@@ -33,10 +33,12 @@ public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity<ERep
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingBooleanDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingBooleanDatasetEntity setReferenceValues(Set<EReportingBooleanDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

@@ -60,46 +60,56 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
 
     private Set<Parameter< ? >> parameters;
 
+    @Override
     public String getDomainId() {
         return domainId;
     }
 
+    @Override
     public DescribableEntity setDomainId(String domainId) {
         this.domainId = domainId;
         return this;
     }
 
+    @Override
     public CodespaceEntity getCodespace() {
         return this.codespace;
     }
 
+    @Override
     public DescribableEntity setCodespace(CodespaceEntity codespace) {
         this.codespace = codespace;
         return this;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public DescribableEntity setName(String name) {
         this.name = name;
         return this;
     }
 
+    @Override
     public CodespaceEntity getCodespaceName() {
         return codespaceName;
     }
 
+    @Override
     public DescribableEntity setCodespaceName(CodespaceEntity codespaceName) {
         this.codespaceName = codespaceName;
         return this;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public DescribableEntity setDescription(String description) {
         this.description = description;
         return this;

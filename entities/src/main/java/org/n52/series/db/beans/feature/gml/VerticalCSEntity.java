@@ -39,6 +39,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
     /**
      * @return the remarks
      */
+    @Override
     public String getRemarks() {
         return remarks;
     }
@@ -47,6 +48,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
      * @param remarks
      *            the remarks to set
      */
+    @Override
     public VerticalCSEntity setRemarks(String remarks) {
         this.remarks = remarks;
         return this;

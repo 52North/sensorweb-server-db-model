@@ -31,10 +31,12 @@ public class TextDatasetEntity extends DatasetEntity<TextDataEntity> implements 
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<TextDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public TextDatasetEntity setReferenceValues(Set<TextDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

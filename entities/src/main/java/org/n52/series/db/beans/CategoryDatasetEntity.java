@@ -33,10 +33,12 @@ public class CategoryDatasetEntity extends DatasetEntity<CategoryDataEntity> imp
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<CategoryDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public CategoryDatasetEntity setReferenceValues(Set<CategoryDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

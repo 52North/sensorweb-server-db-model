@@ -70,6 +70,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     /**
      * @return the observationTypes
      */
+    @Override
     public Set<ObservationTypeEntity> getObservationTypes() {
         return observationTypes;
     }
@@ -78,6 +79,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @param observationTypes
      *            the observationTypes to set
      */
+    @Override
     public OfferingEntity setObservationTypes(Set<ObservationTypeEntity> observationTypes) {
         this.observationTypes = observationTypes;
         return this;
@@ -86,6 +88,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     /**
      * @return the featureTypes
      */
+    @Override
     public Set<FeatureTypeEntity> getFeatureTypes() {
         return featureTypes;
     }
@@ -94,6 +97,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @param featureTypes
      *            the featureTypes to set
      */
+    @Override
     public OfferingEntity setFeatureTypes(Set<FeatureTypeEntity> featureTypes) {
         this.featureTypes = featureTypes;
         return this;
@@ -102,6 +106,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     /**
      * @return the phenomenonTimeStart
      */
+    @Override
     public Date getPhenomenonTimeStart() {
         return hasPhenomenonTimeStart() ? new Timestamp(phenomenonTimeStart.getTime()) : null;
     }
@@ -110,6 +115,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @param phenomenonTimeStart
      *            the phenomenonTimeStart to set
      */
+    @Override
     public OfferingEntity setPhenomenonTimeStart(Date phenomenonTimeStart) {
         this.phenomenonTimeStart = phenomenonTimeStart != null ? new Timestamp(phenomenonTimeStart.getTime()) : null;
         return this;
@@ -118,6 +124,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     /**
      * @return the phenomenonTimeEnd
      */
+    @Override
     public Date getPhenomenonTimeEnd() {
         return hasPhenomenonTimeEnd() ? new Timestamp(phenomenonTimeEnd.getTime()) : null;
     }
@@ -126,6 +133,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @param phenomenonTimeEnd
      *            the phenomenonTimeEnd to set
      */
+    @Override
     public OfferingEntity setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
         this.phenomenonTimeEnd = phenomenonTimeEnd != null ? new Timestamp(phenomenonTimeEnd.getTime()) : null;
         return this;
@@ -134,6 +142,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     /**
      * @return the resultTimeStart
      */
+    @Override
     public Date getResultTimeStart() {
         return hasResultTimeStart() ? new Timestamp(resultTimeStart.getTime()) : null;
     }
@@ -142,6 +151,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @param resultTimeStart
      *            the resultTimeStart to set
      */
+    @Override
     public OfferingEntity setResultTimeStart(Date resultTimeStart) {
         this.resultTimeStart = resultTimeStart != null ? new Timestamp(resultTimeStart.getTime()) : null;
         return this;
@@ -150,6 +160,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     /**
      * @return the resultTimeEnd
      */
+    @Override
     public Date getResultTimeEnd() {
         return hasResultTimeEnd() ? new Timestamp(resultTimeEnd.getTime()) : null;
     }
@@ -158,6 +169,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @param resultTimeEnd
      *            the resultTimeEnd to set
      */
+    @Override
     public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = resultTimeEnd != null ? new Timestamp(resultTimeEnd.getTime()) : null;
         return this;

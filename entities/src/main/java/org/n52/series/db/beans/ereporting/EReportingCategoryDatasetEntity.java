@@ -33,10 +33,12 @@ public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity<ERe
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<EReportingCategoryDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
+    @Override
     public EReportingCategoryDatasetEntity setReferenceValues(Set<EReportingCategoryDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;

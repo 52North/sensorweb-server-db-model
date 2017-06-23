@@ -41,10 +41,12 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
     private CodespaceEntity codespaceAnchorDefinition;
     private Date realizationEpoch;
 
+    @Override
     public String getRemarks() {
         return remarks;
     }
 
+    @Override
     public VerticalDatumEntity setRemarks(String remarks) {
         this.remarks = remarks;
         return this;
