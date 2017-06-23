@@ -18,6 +18,8 @@ package org.n52.series.db.beans;
 
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
 
+    private static final long serialVersionUID = 2302654989683191424L;
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

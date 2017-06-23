@@ -18,6 +18,8 @@ package org.n52.series.db.beans;
 
 public class ProfileDatasetEntity extends DatasetEntity<ProfileDataEntity> {
 
+    private static final long serialVersionUID = 8000392773970672194L;
+
     private static final String DATASET_TYPE = "profile";
 
     public ProfileDatasetEntity() {

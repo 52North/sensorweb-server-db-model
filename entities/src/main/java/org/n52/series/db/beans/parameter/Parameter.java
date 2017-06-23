@@ -14,16 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public abstract class Parameter<T> {
+import org.n52.series.db.beans.PkidEntity;
 
-    private long parameterId;
+public abstract class Parameter<T> extends PkidEntity implements ValuedParameter<T, Parameter<T>> {
 
-    private long fkId;
+    private static final long serialVersionUID = -1489503368673412638L;
 
     private String name;
 
@@ -36,42 +37,33 @@ public abstract class Parameter<T> {
         return valueMap;
     }
 
-    public long getParameterId() {
-        return parameterId;
-    }
-
-    public void setParameterId(long parameterId) {
-        this.parameterId = parameterId;
-    }
-
-    public long getFkId() {
-        return fkId;
-    }
-
-    public void setFkId(long fkId) {
-        this.fkId = fkId;
-    }
-
+    @Override
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    @Override
+    public Parameter<T> setName(String name) {
         this.name = name;
+        return this;
     }
 
+    @Override
     public boolean isSetName() {
-        return getName() != null;
+        return getName() != null && !getName().isEmpty();
     }
 
+    @Override
     public T getValue() {
         return value;
     }
 
+    @Override
     public void setValue(T value) {
         this.value = value;
     }
 
+    @Override
     public boolean isSetValue() {
         return getValue() != null;
     }

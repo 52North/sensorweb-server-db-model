@@ -17,13 +17,17 @@
 
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
+
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
 
-public class GeometryEntity {
+public class GeometryEntity implements Serializable {
 
     public static final String PROPERTY_GEOMETRY = "geometry";
+
+    private static final long serialVersionUID = -1411829809704409439L;
 
     private GeometryFactory geometryFactory;
 
@@ -34,6 +38,8 @@ public class GeometryEntity {
     private Double lat;
 
     private Double alt;
+
+    private int srid;
 
     public boolean isSetGeometry() {
         return geometry != null && !geometry.isEmpty();
@@ -91,6 +97,15 @@ public class GeometryEntity {
 
     public void setAlt(Double alt) {
         this.alt = alt;
+    }
+
+    public int getSrid() {
+        return srid;
+    }
+
+    public GeometryEntity setSrid(final int srid) {
+        this.srid = srid;
+        return this;
     }
 
     public boolean isEmpty() {

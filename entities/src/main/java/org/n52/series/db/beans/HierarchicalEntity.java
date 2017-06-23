@@ -20,6 +20,8 @@ import java.util.Set;
 
 public abstract class HierarchicalEntity<T> extends DescribableEntity {
 
+    private static final long serialVersionUID = -530148269689996337L;
+
     private Set<T> children;
 
     private Set<T> parents;

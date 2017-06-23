@@ -14,14 +14,18 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.HashSet;
 import java.util.Set;
 
-public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity> {
+import org.n52.series.db.beans.dataset.MeasurementDataset;
 
-    private static final String DATASET_TYPE = "measurement";
+public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity>
+        implements MeasurementDataset<MeasurementDatasetEntity> {
+
+    private static final long serialVersionUID = 4788481449399555710L;
 
     private Set<MeasurementDatasetEntity> referenceValues = new HashSet<>();
 
@@ -31,20 +35,26 @@ public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntit
         super(DATASET_TYPE);
     }
 
+    @Override
     public Set<MeasurementDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
-    public void setReferenceValues(Set<MeasurementDatasetEntity> referenceValues) {
+    @Override
+    public MeasurementDatasetEntity setReferenceValues(Set<MeasurementDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
+        return this;
     }
 
+    @Override
     public int getNumberOfDecimals() {
         return numberOfDecimals;
     }
 
-    public void setNumberOfDecimals(int numberOfDecimals) {
+    @Override
+    public MeasurementDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
+        return this;
     }
 
 }

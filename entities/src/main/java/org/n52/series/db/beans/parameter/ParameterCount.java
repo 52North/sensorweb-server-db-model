@@ -14,10 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
 
-public class ParameterCount extends Parameter<Integer>{
+import org.n52.shetland.ogc.om.NamedValue;
+import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
-    // allows explicit mapping
+public class ParameterCount extends Parameter<Integer> {
+
+    private static final long serialVersionUID = -7778025481981408886L;
+
+    @Override
+    public String getValueAsString() {
+        return getValue().toString();
+    }
+
+    @Override
+    public void accept(VoidParameterVisitor visitor) throws OwsExceptionReport {
+        visitor.visit(this);
+    }
+
+    @Override
+    public NamedValue<Integer> accept(ParameterVisitor<Integer> visitor) throws OwsExceptionReport {
+        return visitor.visit(this);
+    }
 
 }
