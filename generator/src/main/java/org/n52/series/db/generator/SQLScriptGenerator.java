@@ -61,11 +61,25 @@ public class SQLScriptGenerator {
 
     }
 
-    private Dialect getDialect(int selection) throws Exception {
+    enum DialectSelector {
+        POSTGIS,
+        ORACLE,
+        GEODB,
+        MY_SQL_SPATIAL_5,
+        SQL_SERVER_2008;
+
+        @Override
+        public String toString() {
+            return name().replaceAll("_", "-")
+                         .toLowerCase();
+        }
+    }
+
+    private Dialect getDialect(DialectSelector selection) throws Exception {
         switch (selection) {
-        case 1:
+        case POSTGIS:
             return new PostgisDialect();
-        case 2:
+        case ORACLE:
             // try {
             // return new OracleSpatial10gDoubleFloatDialect();
             // } catch (ExceptionInInitializerError eiie) {
@@ -78,18 +92,18 @@ public class SQLScriptGenerator {
             // throw new MissingDriverException();
             // }
 
-        case 3:
+        case GEODB:
             return new GeoDBDialect();
-        case 4:
+        case MY_SQL_SPATIAL_5:
             return new MySQLSpatial5InnoDBDialect();
-        case 5:
+        case SQL_SERVER_2008:
             return new SqlServer2008SpatialDialect();
         default:
-            throw new Exception("The entered value is invalid!");
+            throw new Exception("The entered value is invalid: " + selection);
         }
     }
 
-    private void setDirectoriesForModelSelection(int selection, int concept, Configuration configuration)
+    private void setDirectoriesForModelSelection(int selection, Concept concept, Configuration configuration)
             throws Exception {
         // switch (selection) {
         // case 1:
@@ -115,20 +129,32 @@ public class SQLScriptGenerator {
         addConceptDirectories(concept, configuration);
     }
 
-    private void addConceptDirectories(int concept, Configuration configuration) throws Exception {
+    enum Concept {
+        DEFAULT,
+        E_REPORTING;
+
+        @Override
+        public String toString() {
+            return name().replaceAll("_", "-")
+                         .toLowerCase();
+        }
+    }
+
+    private void addConceptDirectories(Concept concept, Configuration configuration) throws Exception {
         switch (concept) {
-        case 1:
+        case DEFAULT:
             break;
-        case 2:
+        case E_REPORTING:
             configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
             break;
         default:
-            throw new Exception("The entered value is invalid!");
+            throw new Exception("The entered value is invalid: " + concept);
         }
     }
 
     private File getDirectory(String path) throws URISyntaxException {
-        return new File(SQLScriptGenerator.class.getResource(path).toURI());
+        return new File(SQLScriptGenerator.class.getResource(path)
+                                                .toURI());
     }
 
     private int getSelection() throws IOException {
@@ -227,38 +253,37 @@ public class SQLScriptGenerator {
             if (select == 1) {
                 String schema = "public";
                 // dialectSelection
-                for (int i = 1; i < 6; i++) {
+                for (int i = 0; i < 5; i++) {
                     schema = getSchema(i);
                     // modelSelection
-                    for (int j = 1; j < 4; j++) {
-                        // concept
-                        for (int k = 1; k < 4; k++) {
-                            try {
-                                execute(sqlScriptGenerator, i, j, k, schema);
-                            } catch (MissingDriverException mde) {
-                                System.exit(1);
-                            } catch (Exception e) {
-                                printToScreen("ERROR: " + e.getMessage());
-                                System.exit(1);
-                            }
+                    // for (int j = 1; j < 4; j++) {
+                    // concept
+                    for (int k = 0; k < 2; k++) {
+                        try {
+                            // execute(sqlScriptGenerator, i, j, k, schema);
+                            execute(sqlScriptGenerator, i, -1, k, schema);
+                        } catch (Exception e) {
+                            printToScreen("ERROR: " + e.getMessage());
+                            e.printStackTrace();
+                            System.exit(1);
                         }
                     }
+                    // }
                 }
             } else {
                 try {
                     int dialectSelection = sqlScriptGenerator.getDialectSelection();
                     // int modelSelection = sqlScriptGenerator.getModelSelection();
-                    int modelSelection = 0;
+                    int modelSelection = -1;
                     int concept = sqlScriptGenerator.getConceptSelection();
                     String schema = sqlScriptGenerator.getSchema();
                     execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema);
                 } catch (IOException ioe) {
                     printToScreen("ERROR: IO error trying to read your input!");
                     System.exit(1);
-                } catch (MissingDriverException mde) {
-                    System.exit(1);
                 } catch (Exception e) {
                     printToScreen("ERROR: " + e.getMessage());
+                    e.printStackTrace();
                     System.exit(1);
                 }
             }
@@ -289,14 +314,18 @@ public class SQLScriptGenerator {
     private static void execute(SQLScriptGenerator sqlScriptGenerator,
                                 int dialectSelection,
                                 int modelSelection,
-                                int concept,
+                                int conceptSelection,
                                 String schema)
             throws Exception {
         Writer writer = null;
         try {
+            Concept concept = Concept.values()[conceptSelection];
             Configuration configuration = new CustomConfiguration().configure("/hibernate.cfg.xml");
-            Dialect dia = sqlScriptGenerator.getDialect(dialectSelection);
-            String fileName = "target/" + dialectSelection + "_" + modelSelection + "_" + concept + ".sql";
+            DialectSelector dialect = DialectSelector.values()[dialectSelection];
+            Dialect dia = sqlScriptGenerator.getDialect(dialect);
+            // String fileName = "target/" + dialectSelection + "_" + modelSelection + "_" + conceptSelection
+            // + ".sql";
+            String fileName = "target/" + dialect + "_" + concept + ".sql";
             writer = new OutputStreamWriter(new FileOutputStream(fileName), Charset.forName("UTF-8"));
             if (schema != null && !schema.isEmpty()) {
                 Properties p = new Properties();
@@ -307,7 +336,7 @@ public class SQLScriptGenerator {
             // create script
             String[] create = configuration.generateSchemaCreationScript(dia);
             Set<String> checkedSchema = sqlScriptGenerator.checkSchema(dia, create);
-            writeln("Scripts are created for: " + dia.toString(), writer);
+            writeln("-- Scripts are created for: " + dia.toString(), writer);
             writeSection("Create-Script", checkedSchema, writer);
 
             // drop script
@@ -316,8 +345,6 @@ public class SQLScriptGenerator {
             writeSection("Drop-Script", checkedDrop, writer);
 
             printToScreen("Finished! Check for file: " + fileName + "\n");
-        } catch (Exception e) {
-            System.out.println(e);
         } finally {
             if (writer != null) {
                 writer.close();
@@ -327,8 +354,8 @@ public class SQLScriptGenerator {
 
     private static void writeSection(String header, Set<String> entries, Writer writer) throws IOException {
         writeEmpty(writer);
-        writeln("#######################################\n", writer);
-        writeln("## \t" + header, writer);
+        writeln("-- #######################################", writer);
+        writeln("-- ##  " + header, writer);
         writeEmpty(writer);
         for (String e : entries) {
             writeln(e + ";", writer);
@@ -338,7 +365,6 @@ public class SQLScriptGenerator {
     private static void writeEmpty(Writer writer) throws IOException {
         writer.write("\n");
     }
-
 
     private static void writeln(String line, Writer writer) throws IOException {
         writer.write(line + "\n");
