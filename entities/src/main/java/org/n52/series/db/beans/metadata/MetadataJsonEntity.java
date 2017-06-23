@@ -16,19 +16,14 @@
  */
 package org.n52.series.db.beans.metadata;
 
-import java.io.IOException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 //import com.fasterxml.jackson.annotation.JsonGetter;
 //import com.fasterxml.jackson.databind.JsonNode;
 //import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class MetadataJsonEntity extends MetadataEntity<String> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MetadataJsonEntity.class);
-
+//    private static final Logger LOGGER = LoggerFactory.getLogger(MetadataJsonEntity.class);
+//
 //    @JsonGetter(value = "value")
 //    public JsonNode getJsonValue() {
 //        ObjectMapper om = new ObjectMapper();
