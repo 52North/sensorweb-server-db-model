@@ -27,6 +27,8 @@ import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
  */
 public class ExVerticalExtentEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = 4387639041569175476L;
+
     private Double minimumValue;
     private String minValuNilReason;
     private Double maximumValue;

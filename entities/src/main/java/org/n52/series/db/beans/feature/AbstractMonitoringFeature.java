@@ -32,6 +32,8 @@ import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
  */
 public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
+    private static final long serialVersionUID = 3379003106634935899L;
+
     private MonitoringPointContent content;
 
     /**

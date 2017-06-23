@@ -24,6 +24,8 @@ import org.n52.series.db.beans.dataset.MeasurementDataset;
 
 public class EReportingMeasurementDatasetEntity extends DatasetEntity<EReportingMeasurementDataEntity> implements MeasurementDataset<EReportingMeasurementDatasetEntity>{
 
+    private static final long serialVersionUID = -8934345303908852017L;
+
     private Set<EReportingMeasurementDatasetEntity> referenceValues = new HashSet<>();
 
     private int numberOfDecimals;

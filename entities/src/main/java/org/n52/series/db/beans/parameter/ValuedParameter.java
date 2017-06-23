@@ -17,12 +17,14 @@
 
 package org.n52.series.db.beans.parameter;
 
-import org.n52.shetland.ogc.om.NamedValue;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
+import java.io.Serializable;
+
 import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasValue;
+import org.n52.shetland.ogc.om.NamedValue;
+import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
-public interface ValuedParameter<T, S> extends HasValue<T>, HasName<S> {
+public interface ValuedParameter<T, S> extends HasValue<T>, HasName<S>, Serializable {
 
     void accept(VoidParameterVisitor visitor) throws OwsExceptionReport;
 

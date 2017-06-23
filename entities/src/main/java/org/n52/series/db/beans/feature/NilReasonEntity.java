@@ -25,8 +25,9 @@ import org.n52.series.db.beans.DescribableEntity;
  */
 public abstract class NilReasonEntity extends DescribableEntity {
 
-    private String nilReason;
+    private static final long serialVersionUID = -4118970139033618118L;
 
+    private String nilReason;
 
     /**
      * @return the nilReason

@@ -23,6 +23,8 @@ import org.n52.series.db.beans.dataset.TextDataset;
 
 public class TextDatasetEntity extends DatasetEntity<TextDataEntity> implements TextDataset<TextDatasetEntity> {
 
+    private static final long serialVersionUID = 9155135337309735800L;
+
     private Set<TextDatasetEntity> referenceValues = new HashSet<>();
 
     public TextDatasetEntity() {

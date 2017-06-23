@@ -16,9 +16,12 @@
  */
 package org.n52.series.db.beans.feature.inspire;
 
+import java.io.Serializable;
 import java.util.Set;
 
-public class MediaMonitored {
+public class MediaMonitored implements Serializable {
+
+    private static final long serialVersionUID = 6901599832181367565L;
 
     private long feature;
     private Set<String> mediaMonitored;

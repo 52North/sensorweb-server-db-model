@@ -27,6 +27,8 @@ import java.util.Set;
  */
 public class AddressEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = -1303589675919102730L;
+
     private Set<String> deliveryPoint;
     private String city;
     private String administrativeArea;

@@ -27,6 +27,8 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  */
 public abstract class AbstractCiEntity extends ReferenceEntity {
 
+    private static final long serialVersionUID = 7398216647031698387L;
+
     private String id;
     private String uuid;
 

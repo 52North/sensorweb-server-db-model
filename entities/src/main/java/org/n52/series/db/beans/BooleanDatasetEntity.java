@@ -23,6 +23,8 @@ import org.n52.series.db.beans.dataset.BooleanDataset;
 
 public class BooleanDatasetEntity extends DatasetEntity<BooleanDataEntity> implements BooleanDataset<BooleanDatasetEntity> {
 
+    private static final long serialVersionUID = -4006760517778156199L;
+
     private Set<BooleanDatasetEntity> referenceValues = new HashSet<>();
 
     public BooleanDatasetEntity() {

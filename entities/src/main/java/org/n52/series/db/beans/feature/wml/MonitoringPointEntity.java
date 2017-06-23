@@ -26,4 +26,6 @@ import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
  */
 public class MonitoringPointEntity extends AbstractMonitoringFeature {
 
+    private static final long serialVersionUID = -7745394070855227473L;
+
 }

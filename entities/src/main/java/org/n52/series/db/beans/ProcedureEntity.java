@@ -19,6 +19,8 @@ package org.n52.series.db.beans;
 
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
+    private static final long serialVersionUID = 4028002933920185756L;
+
     private boolean reference;
 
     private boolean mobile;

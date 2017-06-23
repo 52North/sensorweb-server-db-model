@@ -24,6 +24,8 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class FeatureEntity extends AbstractFeatureEntity {
 
+    private static final long serialVersionUID = 3926633318714623558L;
+
     @Override
     public AbstractFeatureEntity accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
         return visitor.visit(this);

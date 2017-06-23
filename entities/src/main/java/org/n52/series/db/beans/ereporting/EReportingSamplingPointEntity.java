@@ -33,6 +33,8 @@ public class EReportingSamplingPointEntity extends DescribableEntity implements 
 
     public static final String ID = "samplingPointId";
 
+    private static final long serialVersionUID = 506067361074437086L;
+
     private Long samplingPointId;
 
     private EReportingAssessmentTypeEntity assessmentType;

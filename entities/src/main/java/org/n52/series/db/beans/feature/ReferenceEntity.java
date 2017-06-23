@@ -28,6 +28,8 @@ import org.n52.shetland.w3c.xlink.Reference;
  */
 public abstract class ReferenceEntity extends NilReasonEntity {
 
+    private static final long serialVersionUID = -5926562773130484266L;
+
     private String href;
     private String type;
     private String role;

@@ -26,6 +26,8 @@ package org.n52.series.db.beans.feature.gmd;
  */
 public class ContactEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = 8049831514286990626L;
+
     private TelephoneEntity phone;
     private AddressEntity address;
     private OnlineResourceEntity onlineResource;

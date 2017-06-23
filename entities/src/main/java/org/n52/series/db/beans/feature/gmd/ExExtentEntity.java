@@ -27,6 +27,8 @@ import java.util.Set;
  */
 public class ExExtentEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = -5851468464823597666L;
+
     private Set<ExVerticalExtentEntity> verticalExtent;
 
     /**

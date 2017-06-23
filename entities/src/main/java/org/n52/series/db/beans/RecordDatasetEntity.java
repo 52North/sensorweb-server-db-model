@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class RecordDatasetEntity extends DatasetEntity<RecordDataEntity> {
 
+    private static final long serialVersionUID = 2357248511291918028L;
+
     private static final String DATASET_TYPE = "record";
 
     private Set<RecordDatasetEntity> referenceValues = new HashSet<>();

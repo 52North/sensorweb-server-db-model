@@ -25,6 +25,8 @@ package org.n52.series.db.beans.feature.gmd;
  */
 public class ResponsiblePartyEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = -371431604695988543L;
+
     private String individualName;
     private String organizationName;
     private String positionName;

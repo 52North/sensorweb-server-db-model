@@ -29,6 +29,8 @@ public class EReportingStationEntity extends DescribableEntity {
 
     public static final String ID = "station";
 
+    private static final long serialVersionUID = 743675189477493870L;
+
     private Long station;
 
     /**

@@ -23,6 +23,8 @@ import org.n52.series.db.beans.dataset.SweDataArrayDataset;
 
 public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity<EReportingSweDataArrayDataEntity> implements SweDataArrayDataset<EReportingSweDataArrayDatasetEntity> {
 
+    private static final long serialVersionUID = 8734427623675385749L;
+
     private Set<EReportingSweDataArrayDatasetEntity> referenceValues = new HashSet<>();
 
     public EReportingSweDataArrayDatasetEntity() {

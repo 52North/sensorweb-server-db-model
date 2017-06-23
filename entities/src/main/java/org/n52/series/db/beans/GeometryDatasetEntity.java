@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class GeometryDatasetEntity extends DatasetEntity<GeometryDataEntity> {
 
+    private static final long serialVersionUID = -5257221102121501687L;
+
     private static final String DATASET_TYPE = "geometry";
 
     private Set<GeometryDatasetEntity> referenceValues = new HashSet<>();

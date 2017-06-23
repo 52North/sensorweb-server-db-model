@@ -21,6 +21,8 @@ import org.n52.series.db.beans.DatasetEntity;
 
 public class EReportingDatasetEntity<T extends DataEntity< ? >> extends DatasetEntity<T> {
 
+    private static final long serialVersionUID = -182651044543274208L;
+
     private EReportingSamplingPointEntity samplingPoint;
 
     public EReportingDatasetEntity(String datasetType) {

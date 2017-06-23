@@ -20,8 +20,8 @@ import java.util.Date;
 import java.util.Set;
 
 import org.n52.series.db.beans.CodespaceEntity;
-import org.n52.series.db.beans.feature.ReferenceEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
+import org.n52.series.db.beans.feature.ReferenceEntity;
 
 /**
  * Hibernate entiity for the verticalDatum
@@ -31,6 +31,8 @@ import org.n52.series.db.beans.HibernateRelations.HasRemarks;
  *
  */
 public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<VerticalDatumEntity> {
+
+    private static final long serialVersionUID = -2829473090233745827L;
 
     private String remarks;
     private DomainOfValidityEntity domainOfValidity;

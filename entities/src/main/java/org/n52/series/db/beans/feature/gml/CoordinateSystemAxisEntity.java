@@ -17,9 +17,9 @@
 package org.n52.series.db.beans.feature.gml;
 
 import org.n52.series.db.beans.CodespaceEntity;
-import org.n52.series.db.beans.feature.ReferenceEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.feature.ReferenceEntity;
 
 /**
  * Hibernate entiity for the coordinateSystemAxis
@@ -29,6 +29,8 @@ import org.n52.series.db.beans.UnitEntity;
  *
  */
 public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks<CoordinateSystemAxisEntity> {
+
+    private static final long serialVersionUID = 1841614376918978967L;
 
     private String remarks;
     private String axisAbbrev;

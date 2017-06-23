@@ -18,5 +18,7 @@ package org.n52.series.db.beans.i18n;
 
 public class I18nServiceEntity extends I18nEntity {
 
+    private static final long serialVersionUID = 3194966888990805278L;
+
     // serves for clear distinction
 }

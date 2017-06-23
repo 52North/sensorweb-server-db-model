@@ -23,6 +23,8 @@ import org.n52.series.db.beans.PkidEntity;
 
 public abstract class Parameter<T> extends PkidEntity implements ValuedParameter<T, Parameter<T>>{
 
+    private static final long serialVersionUID = -1489503368673412638L;
+
     private String name;
 
     private T value;

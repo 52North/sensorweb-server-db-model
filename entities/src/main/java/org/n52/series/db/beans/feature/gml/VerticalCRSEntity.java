@@ -18,8 +18,8 @@ package org.n52.series.db.beans.feature.gml;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.feature.ReferenceEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
+import org.n52.series.db.beans.feature.ReferenceEntity;
 
 /**
  * Hibernate entiity for the verticalCRS
@@ -29,6 +29,8 @@ import org.n52.series.db.beans.HibernateRelations.HasRemarks;
  *
  */
 public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<VerticalCRSEntity> {
+
+    private static final long serialVersionUID = 2282402634799023149L;
 
     private String remarks;
     private Set<DomainOfValidityEntity> domainOfValidity;

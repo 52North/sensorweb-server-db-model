@@ -14,14 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
 import java.util.Set;
 
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity extends PkidEntity implements IdentifierNameDescriptionEntity<DescribableEntity> {
+public class DescribableEntity extends PkidEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
+        Serializable {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DOMAIN_ID = "domainId";
@@ -29,6 +32,8 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
     public static final String PROPERTY_SERVICE = "service";
     public static final String PROPERTY_CODESPACE = CODESPACE;
     public static final String PROPERTY_CODESPACE_NAME = CODESPACE_NAME;
+
+    private static final long serialVersionUID = -4448231483118864847L;
 
     /**
      * Identification of the entity without special chars.

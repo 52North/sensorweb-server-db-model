@@ -21,6 +21,8 @@ import org.n52.series.db.beans.FeatureEntity;
 
 public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
 
+    private static final long serialVersionUID = -6086090544397897675L;
+
     private MediaMonitored mediaMonitored;
 
     private String measurementRegime;

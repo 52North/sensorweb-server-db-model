@@ -29,6 +29,8 @@ public class EReportingNetworkEntity extends DescribableEntity {
 
     public static final String ID = "network";
 
+    private static final long serialVersionUID = -6039520306580755303L;
+
     private Long network;
 
     /**

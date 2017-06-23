@@ -41,6 +41,8 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
 
+    private static final long serialVersionUID = -7491530543976690237L;
+
     private ObservationConstellationEntity observationConstellation;
 
     private FeatureEntity feature;

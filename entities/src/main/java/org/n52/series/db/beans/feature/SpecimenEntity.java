@@ -27,6 +27,8 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class SpecimenEntity extends FeatureEntity {
 
+    private static final long serialVersionUID = -1128862083434595324L;
+
     private String materialClass;
     private Date samplingTimeStart;
     private Date samplingTimeEnd;

@@ -33,6 +33,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
         HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity> {
 
+    private static final long serialVersionUID = 5862607025737865794L;
+
     private GeometryEntity geometryEntity;
 
     private Set<ObservationTypeEntity> observationTypes;

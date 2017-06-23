@@ -24,7 +24,10 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 import com.vividsolutions.jts.geom.Geometry;
 
-public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractFeatureEntity> implements HasDescriptionXml<AbstractFeatureEntity> {
+public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractFeatureEntity>
+        implements HasDescriptionXml<AbstractFeatureEntity> {
+
+    private static final long serialVersionUID = 6712642995944229067L;
 
     private GeometryEntity geometryEntity;
     private FeatureTypeEntity featureType;

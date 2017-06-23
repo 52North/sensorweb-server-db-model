@@ -24,6 +24,8 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class PlatformEntity extends DescribableEntity {
 
+    private static final long serialVersionUID = 3615089936334873353L;
+
     public static final String PROPERTY_INSITU = "insitu";
 
     public static final String PROPERTY_MOBILE = "mobile";

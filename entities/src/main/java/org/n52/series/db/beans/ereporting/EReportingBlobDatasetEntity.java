@@ -23,6 +23,8 @@ import org.n52.series.db.beans.dataset.BlobDataset;
 
 public class EReportingBlobDatasetEntity extends EReportingDatasetEntity<EReportingBlobDataEntity> implements BlobDataset<EReportingBlobDatasetEntity> {
 
+    private static final long serialVersionUID = 365032550010162204L;
+
     private static final String DATASET_TYPE = "blob";
 
     private Set<EReportingBlobDatasetEntity> referenceValues = new HashSet<>();

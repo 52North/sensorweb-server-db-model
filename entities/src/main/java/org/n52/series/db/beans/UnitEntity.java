@@ -18,6 +18,8 @@ package org.n52.series.db.beans;
 
 public class UnitEntity extends DescribableEntity {
 
+    private static final long serialVersionUID = -7512483445911729980L;
+
     private String link;
 
     /**

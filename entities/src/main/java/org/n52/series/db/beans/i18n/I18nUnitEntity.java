@@ -18,6 +18,8 @@ package org.n52.series.db.beans.i18n;
 
 public class I18nUnitEntity extends I18nEntity {
 
+    private static final long serialVersionUID = -611501137242466095L;
+
     // re-uses existing i18n logic
     // maps attribute 'unit' to internationalizable attribute 'name'
 }

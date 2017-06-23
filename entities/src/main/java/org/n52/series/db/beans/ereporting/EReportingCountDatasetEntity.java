@@ -23,6 +23,8 @@ import org.n52.series.db.beans.dataset.CountDataset;
 
 public class EReportingCountDatasetEntity extends EReportingDatasetEntity<EReportingCountDataEntity> implements CountDataset<EReportingCountDatasetEntity> {
 
+    private static final long serialVersionUID = 1131133156959629606L;
+
     private Set<EReportingCountDatasetEntity> referenceValues = new HashSet<>();
 
     public EReportingCountDatasetEntity() {

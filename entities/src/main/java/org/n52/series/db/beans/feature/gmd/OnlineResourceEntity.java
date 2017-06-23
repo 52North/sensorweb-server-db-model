@@ -25,6 +25,8 @@ package org.n52.series.db.beans.feature.gmd;
  */
 public class OnlineResourceEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = -7852109322377425189L;
+
     private String linkage;
 
     private String protocol;

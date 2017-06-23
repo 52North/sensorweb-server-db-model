@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory;
 
 public class ServiceEntity extends DescribableEntity {
 
+    private static final long serialVersionUID = 8926184900932191238L;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceEntity.class);
 
     private String url;

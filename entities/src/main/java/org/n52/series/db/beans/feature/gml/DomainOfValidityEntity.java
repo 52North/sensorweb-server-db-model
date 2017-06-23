@@ -28,6 +28,8 @@ import org.n52.series.db.beans.feature.gmd.ExExtentEntity;
  */
 public class DomainOfValidityEntity extends ReferenceEntity {
 
+    private static final long serialVersionUID = -8008081097916414101L;
+
     private ExExtentEntity exExtent;
 
     /**

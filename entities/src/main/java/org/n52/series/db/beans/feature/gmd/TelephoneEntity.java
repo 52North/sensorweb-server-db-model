@@ -27,6 +27,8 @@ import java.util.Set;
  */
 public class TelephoneEntity extends AbstractCiEntity {
 
+    private static final long serialVersionUID = -3871291699397692580L;
+
     private Set<String> voice;
     private Set<String> facsimile;
 

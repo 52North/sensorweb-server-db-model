@@ -16,9 +16,13 @@
  */
 package org.n52.series.db.beans;
 
-public abstract class PkidEntity {
+import java.io.Serializable;
+
+public abstract class PkidEntity implements Serializable {
 
     public static final String PROPERTY_PKID = "pkid";
+
+    private static final long serialVersionUID = 1608995723035752862L;
 
     /**
      * A serial primary key.

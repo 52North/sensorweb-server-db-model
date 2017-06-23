@@ -23,6 +23,8 @@ import org.n52.series.db.beans.dataset.CategoryDataset;
 
 public class CategoryDatasetEntity extends DatasetEntity<CategoryDataEntity> implements CategoryDataset<CategoryDatasetEntity> {
 
+    private static final long serialVersionUID = -3225007112833816443L;
+
     private static final String DATASET_TYPE = "category";
 
     private Set<CategoryDatasetEntity> referenceValues = new HashSet<>();

@@ -18,8 +18,8 @@ package org.n52.series.db.beans.feature.gml;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.feature.ReferenceEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
+import org.n52.series.db.beans.feature.ReferenceEntity;
 
 /**
  * Hibernate entiity for the verticalCS
@@ -29,6 +29,8 @@ import org.n52.series.db.beans.HibernateRelations.HasRemarks;
  *
  */
 public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<VerticalCSEntity>{
+
+    private static final long serialVersionUID = 8459136724611955821L;
 
     private String remarks;
     private Set<CoordinateSystemAxisEntity> coordinateSystemAxis;
