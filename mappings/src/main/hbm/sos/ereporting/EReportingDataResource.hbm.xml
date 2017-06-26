@@ -190,7 +190,7 @@
             </column>
         </property>
 
-        <joined-subclass extends="EReportingDataEntity" name="EReportingMeasurementDataEntity" table="numericValue">
+        <joined-subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" table="numericValue">
             <key column="data" foreign-key="dataNumericValueFk"/>
             <property column="value" name="value" type="double"/>
         </joined-subclass>

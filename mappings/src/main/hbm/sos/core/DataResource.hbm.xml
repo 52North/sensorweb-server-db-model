@@ -155,7 +155,7 @@
 	        <one-to-many class="RelatedDataEntity" />
     	</set>
 
-        <joined-subclass extends="DataEntity" name="MeasurementDataEntity" table="numericValue">
+        <joined-subclass extends="DataEntity" name="QuantityDataEntity" table="numericValue">
             <key column="data" foreign-key="dataNumericValueFk"/>
             <property column="value" name="value" type="double"/>
         </joined-subclass>

@@ -111,7 +111,7 @@
 			<many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter" foreign-key="datasetparamparamfk"/>
 		</set>
 
-		<subclass discriminator-value="measurement" name="EReportingMeasurementDatasetEntity">
+		<subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
 			<property formula="3" name="numberOfDecimals" type="int" />
 			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">

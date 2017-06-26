@@ -23,9 +23,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MeasurementDataEntity extends DataEntity<Double> {
+public class QuantityDataEntity extends DataEntity<Double> {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MeasurementDataEntity.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
 
     private static final Double DOUBLE_THRESHOLD = 0.01;
 

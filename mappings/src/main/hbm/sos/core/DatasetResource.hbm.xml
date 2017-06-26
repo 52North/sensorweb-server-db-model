@@ -104,16 +104,16 @@
 			<key column="dataset" not-null="true" foreign-key="datasetparamdatasetfk"/>
 			<many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter" foreign-key="datasetparamparamfk"/>
 		</set>
+        <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
+            <property formula="3" name="numberOfDecimals" type="int" />
+            <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk" />
+            <list fetch="select" inverse="true" name="observations" table="datasetdata">
+                <key column="data" />
+                <index column="data" />
+                <one-to-many class="DataEntity" />
+            </list>
+        </subclass>
 
-		<subclass discriminator-value="measurement" name="MeasurementDatasetEntity">
-			<property formula="3" name="numberOfDecimals" type="int" />
-			<many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
-			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
-				<index column="data" />
-				<one-to-many class="DataEntity" />
-			</list>
-		</subclass>
 
 		<subclass discriminator-value="text" name="TextDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
@@ -180,4 +180,13 @@
 			</list>
 		</subclass>
 	</class>
+         <subclass discriminator-value="quantity-profile" name="ProfileDatasetEntity">
+            <property name="verticalParameterName" formula="'depth'" type="string" />
+            <many-to-one class="UnitEntity" column="unitid" insert="false" name="unit" update="false" />
+            <list fetch="select" inverse="true" name="observations" table="datasetdata">
+                <key column="data" />
+                <index column="dataset" />
+                <one-to-many class="DataEntity" />
+            </list>
+        </subclass>
 </hibernate-mapping>

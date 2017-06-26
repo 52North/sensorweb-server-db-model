@@ -22,7 +22,17 @@ public class ProfileDatasetEntity extends DatasetEntity<ProfileDataEntity> {
 
     private static final String DATASET_TYPE = "profile";
 
+    private String verticalParameterName;
+
     public ProfileDatasetEntity() {
         super(DATASET_TYPE);
+    }
+
+    public String getVerticalParameterName() {
+        return verticalParameterName;
+    }
+
+    public void setVerticalParameterName(String verticalParameterName) {
+        this.verticalParameterName = verticalParameterName;
     }
 }

@@ -15,34 +15,35 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
 import java.util.Set;
 
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.dataset.MeasurementDataset;
 
-public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntity>
-        implements MeasurementDataset<MeasurementDatasetEntity> {
+public class EQuantityMeasurementDatasetEntity extends DatasetEntity<EReportingQuantityDataEntity>
+        implements MeasurementDataset<EQuantityMeasurementDatasetEntity> {
 
-    private static final long serialVersionUID = 4788481449399555710L;
+    private static final long serialVersionUID = -8934345303908852017L;
 
-    private Set<MeasurementDatasetEntity> referenceValues = new HashSet<>();
+    private Set<EQuantityMeasurementDatasetEntity> referenceValues = new HashSet<>();
 
     private int numberOfDecimals;
 
-    public MeasurementDatasetEntity() {
+    public EQuantityMeasurementDatasetEntity() {
         super(DATASET_TYPE);
     }
 
     @Override
-    public Set<MeasurementDatasetEntity> getReferenceValues() {
+    public Set<EQuantityMeasurementDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
     @Override
-    public MeasurementDatasetEntity setReferenceValues(Set<MeasurementDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
+    public EQuantityMeasurementDatasetEntity setReferenceValues(Set<EQuantityMeasurementDatasetEntity> refValues) {
+        this.referenceValues = refValues;
         return this;
     }
 
@@ -52,7 +53,7 @@ public class MeasurementDatasetEntity extends DatasetEntity<MeasurementDataEntit
     }
 
     @Override
-    public MeasurementDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
+    public EQuantityMeasurementDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
         return this;
     }
