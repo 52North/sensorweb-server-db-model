@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 
 public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
 
-    public static final String DEFAULT_DATASET_TYPE = "measurement";
+    public static final String DEFAULT_VALUE_TYPE = "quantity";
 
     public static final String ENTITY_ALIAS = "dataset";
 
@@ -38,8 +38,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_PLATFORM = "platform";
-    public static final String PROPERTY_DATASET_TYPE = "datasetType";
-    public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
+    public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_PUBLISHED = "published";
@@ -61,7 +60,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     private List<T> observations;
 
-    private String datasetType;
+    private String valueType;
 
     private Set<Date> resultTimes;
 
@@ -79,7 +78,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     public DatasetEntity(String type) {
         this.observations = new ArrayList<>();
-        this.datasetType = type;
+        this.valueType = type;
     }
 
     public CategoryEntity getCategory() {
@@ -193,15 +192,15 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
                 : null;
     }
 
-    public String getDatasetType() {
-        return datasetType == null || datasetType.isEmpty()
+    public String getValueType() {
+        return valueType == null || valueType.isEmpty()
                 // backward compatible
-                ? DEFAULT_DATASET_TYPE
-                : datasetType;
+                ? DEFAULT_VALUE_TYPE
+                : valueType;
     }
 
-    public void setDatasetType(String datasetType) {
-        this.datasetType = datasetType;
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
     }
 
     /**
