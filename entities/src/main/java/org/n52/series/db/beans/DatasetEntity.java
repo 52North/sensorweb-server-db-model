@@ -40,6 +40,10 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String PROPERTY_PLATFORM = "platform";
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
+    public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
+    public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
+    public static final String PROPERTY_PUBLISHED = "published";
+    public static final String PROPERTY_DELETED = "deleted";
 
     private static final long serialVersionUID = -7491530543976690237L;
 
