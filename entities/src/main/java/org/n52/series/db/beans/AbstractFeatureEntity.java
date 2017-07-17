@@ -38,18 +38,6 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
 
     public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
 
-    public Geometry getGeometry() {
-        return geometryEntity != null
-                ? geometryEntity.getGeometry()
-                : null;
-    }
-
-    public AbstractFeatureEntity setGeometry(Geometry geometry) {
-        this.geometryEntity = new GeometryEntity();
-        this.geometryEntity.setGeometry(geometry);
-        return this;
-    }
-
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }

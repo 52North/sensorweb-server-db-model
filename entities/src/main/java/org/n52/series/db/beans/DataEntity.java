@@ -160,7 +160,7 @@ public abstract class DataEntity<T> {
         this.geometryEntity = geometryEntity;
     }
 
-    public boolean isSetGeometry() {
+    public boolean isSetGeometryEntity() {
         return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
