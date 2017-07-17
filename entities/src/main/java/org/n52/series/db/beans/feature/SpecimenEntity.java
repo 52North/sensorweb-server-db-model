@@ -18,9 +18,9 @@ package org.n52.series.db.beans.feature;
 
 import java.util.Date;
 
-import org.n52.series.common.DbUtils;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.common.Utils;
 import org.n52.shetland.ogc.gml.AbstractFeature;
 import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
@@ -57,28 +57,28 @@ public class SpecimenEntity extends FeatureEntity {
      * @return the samplingTimeStart
      */
     public Date getSamplingTimeStart() {
-        return DbUtils.createUnmutableTimestamp(samplingTimeStart);
+        return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @param samplingTimeStart the samplingTimeStart to set
      */
     public void setSamplingTimeStart(Date samplingTimeStart) {
-        this.samplingTimeStart = DbUtils.createUnmutableTimestamp(samplingTimeStart);
+        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @return the samplingTimeEnd
      */
     public Date getSamplingTimeEnd() {
-        return DbUtils.createUnmutableTimestamp(samplingTimeEnd);
+        return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
      * @param samplingTimeEnd the samplingTimeEnd to set
      */
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        this.samplingTimeEnd = DbUtils.createUnmutableTimestamp(samplingTimeEnd);
+        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**

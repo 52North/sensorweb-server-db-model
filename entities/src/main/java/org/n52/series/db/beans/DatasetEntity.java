@@ -25,7 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.n52.series.common.DbUtils;
+import org.n52.series.db.common.Utils;
 
 public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
 
@@ -171,19 +171,19 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     }
 
     public Date getFirstValueAt() {
-        return DbUtils.createUnmutableTimestamp(firstValueAt);
+        return Utils.createUnmutableTimestamp(firstValueAt);
     }
 
     public void setFirstValueAt(Date firstValueAt) {
-        this.firstValueAt = DbUtils.createUnmutableTimestamp(firstValueAt);
+        this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
     }
 
     public Date getLastValueAt() {
-        return DbUtils.createUnmutableTimestamp(lastValueAt);
+        return Utils.createUnmutableTimestamp(lastValueAt);
     }
 
     public void setLastValueAt(Date lastValueAt) {
-        this.lastValueAt = DbUtils.createUnmutableTimestamp(lastValueAt);
+        this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
     }
 
     public String getValueType() {

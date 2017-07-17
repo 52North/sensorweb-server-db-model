@@ -22,8 +22,8 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.common.DbUtils;
 import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.common.Utils;
 
 public abstract class DataEntity<T> {
 
@@ -93,7 +93,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimestart() {
-        return DbUtils.createUnmutableTimestamp(timestart);
+        return Utils.createUnmutableTimestamp(timestart);
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public void setTimestart(Date timestart) {
-        this.timestart = DbUtils.createUnmutableTimestamp(timestart);
+        this.timestart = Utils.createUnmutableTimestamp(timestart);
     }
 
     /**
@@ -110,7 +110,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimeend() {
-        return DbUtils.createUnmutableTimestamp(timeend);
+        return Utils.createUnmutableTimestamp(timeend);
     }
 
     /**
@@ -119,7 +119,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public void setTimeend(Date timeend) {
-        this.timeend = DbUtils.createUnmutableTimestamp(timeend);
+        this.timeend = Utils.createUnmutableTimestamp(timeend);
     }
 
     public T getValue() {
@@ -161,19 +161,19 @@ public abstract class DataEntity<T> {
     }
 
     public Date getValidTimeStart() {
-        return DbUtils.createUnmutableTimestamp(validTimeStart);
+        return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public void setValidTimeStart(Date validTimeStart) {
-        this.validTimeStart = DbUtils.createUnmutableTimestamp(validTimeStart);
+        this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public Date getValidTimeEnd() {
-        return DbUtils.createUnmutableTimestamp(validTimeEnd);
+        return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public void setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = DbUtils.createUnmutableTimestamp(validTimeEnd);
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public boolean isSetValidTime() {
@@ -189,11 +189,11 @@ public abstract class DataEntity<T> {
     }
 
     public Date getResultTime() {
-        return DbUtils.createUnmutableTimestamp(resultTime);
+        return Utils.createUnmutableTimestamp(resultTime);
     }
 
     public void setResultTime(Date resultTime) {
-        this.resultTime = DbUtils.createUnmutableTimestamp(resultTime);
+        this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
     public boolean isParent() {

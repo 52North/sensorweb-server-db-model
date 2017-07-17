@@ -20,12 +20,12 @@ package org.n52.series.db.beans;
 import java.util.Date;
 import java.util.Set;
 
-import org.n52.series.common.DbUtils;
 import org.n52.series.db.beans.HibernateRelations.HasFeatureTypes;
 import org.n52.series.db.beans.HibernateRelations.HasObservationTypes;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatures;
 import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
+import org.n52.series.db.common.Utils;
 
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -108,7 +108,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public Date getPhenomenonTimeStart() {
-        return DbUtils.createUnmutableTimestamp(phenomenonTimeStart);
+        return Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
     /**
@@ -117,7 +117,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public OfferingEntity setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = DbUtils.createUnmutableTimestamp(phenomenonTimeStart);
+        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
         return this;
     }
 
@@ -126,7 +126,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public Date getPhenomenonTimeEnd() {
-        return DbUtils.createUnmutableTimestamp(phenomenonTimeEnd);
+        return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
     /**
@@ -135,7 +135,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public OfferingEntity setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = DbUtils.createUnmutableTimestamp(phenomenonTimeEnd);
+        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
         return this;
     }
 
@@ -144,7 +144,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public Date getResultTimeStart() {
-        return DbUtils.createUnmutableTimestamp(resultTimeStart);
+        return Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
     /**
@@ -153,7 +153,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public OfferingEntity setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = DbUtils.createUnmutableTimestamp(resultTimeStart);
+        this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
         return this;
     }
 
@@ -162,7 +162,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public Date getResultTimeEnd() {
-        return DbUtils.createUnmutableTimestamp(resultTimeEnd);
+        return Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
     /**
@@ -171,7 +171,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      */
     @Override
     public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = DbUtils.createUnmutableTimestamp(resultTimeEnd);
+        this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
         return this;
     }
 

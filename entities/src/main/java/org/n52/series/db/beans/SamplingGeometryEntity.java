@@ -18,7 +18,7 @@ package org.n52.series.db.beans;
 
 import java.util.Date;
 
-import org.n52.series.common.DbUtils;
+import org.n52.series.db.common.Utils;
 
 public class SamplingGeometryEntity extends GeometryEntity {
 
@@ -29,11 +29,11 @@ public class SamplingGeometryEntity extends GeometryEntity {
     private Long datasetId;
 
     public Date getTimestamp() {
-        return DbUtils.createUnmutableTimestamp(timestamp);
+        return Utils.createUnmutableTimestamp(timestamp);
     }
 
     public void setTimestamp(Date timestamp) {
-        this.timestamp = DbUtils.createUnmutableTimestamp(timestamp);
+        this.timestamp = Utils.createUnmutableTimestamp(timestamp);
     }
 
     @Deprecated

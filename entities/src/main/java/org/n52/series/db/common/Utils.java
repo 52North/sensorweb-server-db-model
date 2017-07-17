@@ -14,12 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.common;
+package org.n52.series.db.common;
 
 import java.sql.Timestamp;
 import java.util.Date;
 
-public final class DbUtils {
+public final class Utils {
 
     public static Date createUnmutableTimestamp(Date value) {
         if (value == null) {
