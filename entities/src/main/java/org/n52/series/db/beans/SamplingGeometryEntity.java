@@ -16,32 +16,41 @@
  */
 package org.n52.series.db.beans;
 
-import java.sql.Timestamp;
 import java.util.Date;
+
+import org.n52.series.db.common.Utils;
 
 public class SamplingGeometryEntity extends GeometryEntity {
 
+    private static final long serialVersionUID = -3036211037882973515L;
+
     private Date timestamp;
 
-    private Long seriesPkid;
+    private Long datasetId;
 
     public Date getTimestamp() {
-        return timestamp != null
-                ? new Timestamp(timestamp.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(timestamp);
     }
 
     public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp != null
-                ? new Timestamp(timestamp.getTime())
-                : null;
+        this.timestamp = Utils.createUnmutableTimestamp(timestamp);
     }
 
+    @Deprecated
     public Long getSeriesPkid() {
-        return seriesPkid;
+        return datasetId;
     }
 
-    public void setSeriesPkid(Long seriesPkid) {
-        this.seriesPkid = seriesPkid;
+    @Deprecated
+    public void setSeriesPkid(Long pkid) {
+        this.datasetId = pkid;
+    }
+
+    public Long getDatasetId() {
+        return datasetId;
+    }
+
+    public void setDatasetId(Long dataset) {
+        this.datasetId = dataset;
     }
 }

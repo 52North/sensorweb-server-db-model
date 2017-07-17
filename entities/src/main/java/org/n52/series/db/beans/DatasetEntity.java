@@ -25,30 +25,34 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.series.db.common.Utils;
+
 public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
 
-    public static final String DEFAULT_DATASET_TYPE = "measurement";
+    public static final String DEFAULT_VALUE_TYPE = "quantity";
 
     public static final String ENTITY_ALIAS = "dataset";
 
+    public static final String PROPERTY_OBSERVATION_CONSTELLATION = "observationConstellation";
     public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_PLATFORM = "platform";
-    public static final String PROPERTY_DATASET_TYPE = "datasetType";
-    public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
+    public static final String PROPERTY_VALUE_TYPE = "valueType";
+    public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
+    public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
+    public static final String PROPERTY_PUBLISHED = "published";
+    public static final String PROPERTY_DELETED = "deleted";
 
-    private CategoryEntity category;
+    private static final long serialVersionUID = -7491530543976690237L;
 
-    private PhenomenonEntity phenomenon;
-
-    private ProcedureEntity procedure;
-
-    private OfferingEntity offering;
+    private ObservationConstellationEntity observationConstellation;
 
     private FeatureEntity feature;
+
+    private CategoryEntity category;
 
     private PlatformEntity platform;
 
@@ -58,7 +62,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     private List<T> observations;
 
-    private String datasetType;
+    private String valueType;
 
     private Set<Date> resultTimes;
 
@@ -76,7 +80,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     public DatasetEntity(String type) {
         this.observations = new ArrayList<>();
-        this.datasetType = type;
+        this.valueType = type;
     }
 
     public CategoryEntity getCategory() {
@@ -87,28 +91,43 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
         this.category = category;
     }
 
+    public ObservationConstellationEntity getObservationConstellation() {
+        return observationConstellation;
+    }
+
+    public void setObservationConstellation(ObservationConstellationEntity observationConstellation) {
+        this.observationConstellation = observationConstellation;
+    }
+
     public PhenomenonEntity getPhenomenon() {
-        return phenomenon;
+        return getObservationConstellation().getObservableProperty();
     }
 
     public void setPhenomenon(PhenomenonEntity phenomenon) {
-        this.phenomenon = phenomenon;
+        existsOrCreateObservationConstellation().setObservableProperty(phenomenon);
+    }
+
+    private ObservationConstellationEntity existsOrCreateObservationConstellation() {
+        if (getObservationConstellation() == null) {
+            setObservationConstellation(new ObservationConstellationEntity());
+        }
+        return getObservationConstellation();
     }
 
     public ProcedureEntity getProcedure() {
-        return procedure;
+        return getObservationConstellation().getProcedure();
     }
 
     public void setProcedure(ProcedureEntity procedure) {
-        this.procedure = procedure;
+        existsOrCreateObservationConstellation().setProcedure(procedure);
     }
 
     public OfferingEntity getOffering() {
-        return offering;
+        return getObservationConstellation().getOffering();
     }
 
     public void setOffering(OfferingEntity offering) {
-        this.offering = offering;
+        existsOrCreateObservationConstellation().setOffering(offering);
     }
 
     public FeatureEntity getFeature() {
@@ -152,38 +171,30 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     }
 
     public Date getFirstValueAt() {
-        return firstValueAt != null
-                ? new Timestamp(firstValueAt.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(firstValueAt);
     }
 
     public void setFirstValueAt(Date firstValueAt) {
-        this.firstValueAt = firstValueAt != null
-                ? new Timestamp(firstValueAt.getTime())
-                : null;
+        this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
     }
 
     public Date getLastValueAt() {
-        return lastValueAt != null
-                ? new Timestamp(lastValueAt.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(lastValueAt);
     }
 
     public void setLastValueAt(Date lastValueAt) {
-        this.lastValueAt = lastValueAt != null
-                ? new Timestamp(lastValueAt.getTime())
-                : null;
+        this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
     }
 
-    public String getDatasetType() {
-        return datasetType == null || datasetType.isEmpty()
+    public String getValueType() {
+        return valueType == null || valueType.isEmpty()
                 // backward compatible
-                ? DEFAULT_DATASET_TYPE
-                : datasetType;
+                ? DEFAULT_VALUE_TYPE
+                : valueType;
     }
 
-    public void setDatasetType(String datasetType) {
-        this.datasetType = datasetType;
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
     }
 
     /**
@@ -254,11 +265,11 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
                  .append(" , category: ")
                  .append(category)
                  .append(" , phenomenon: ")
-                 .append(phenomenon)
+                 .append(getPhenomenon())
                  .append(" , procedure: ")
-                 .append(procedure)
+                 .append(getProcedure())
                  .append(" , offering: ")
-                 .append(offering)
+                 .append(getOffering())
                  .append(" , feature: ")
                  .append(feature)
                  .append(" , service: ")

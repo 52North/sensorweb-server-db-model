@@ -16,46 +16,24 @@
  */
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.feature.FeatureVisitor;
+import org.n52.series.db.beans.feature.GeometryVisitor;
+import org.n52.shetland.ogc.gml.AbstractFeature;
+import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
+
 import com.vividsolutions.jts.geom.Geometry;
 
-public class FeatureEntity extends HierarchicalEntity<FeatureEntity> {
+public class FeatureEntity extends AbstractFeatureEntity<FeatureEntity> {
 
-    private GeometryEntity geometryEntity;
+    private static final long serialVersionUID = 3926633318714623558L;
 
-    public Geometry getGeometry() {
-        return geometryEntity != null
-                ? geometryEntity.getGeometry()
-                : null;
-    }
-
-    public void setGeometry(Geometry geometry) {
-        this.geometryEntity = new GeometryEntity();
-        this.geometryEntity.setGeometry(geometry);
-    }
-
-    public GeometryEntity getGeometryEntity() {
-        return geometryEntity;
-    }
-
-    public void setGeometryEntity(GeometryEntity geometryEntity) {
-        this.geometryEntity = geometryEntity;
-    }
-
-    public boolean isSetGeometry() {
-        return geometryEntity != null;
+    @Override
+    public AbstractFeature accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
+        return visitor.visit(this);
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-          .append(" [")
-          .append(" Domain id: ")
-          .append(getDomainId())
-          .append(", service: ")
-          .append(getService())
-          .append(" ]")
-          .toString();
+    public Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport {
+        return visitor.visit(this);
     }
-
 }

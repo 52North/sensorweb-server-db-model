@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.series.db.beans.ereporting">
+    <class name="EReportingStationEntity" table="station">
+        <comment>Table to store the AQD e-Reporting Station information. Mapping file: mapping/ereporting/EReportingStation.hbm.xml</comment>
+        <id name="pkid" type="long">
+            <column name="pkid">
+                <comment>Table primary key, used for relations</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence">station_seq</param>
+            </generator>
+        </id>
+       <property name="domainId" type="string">
+            <column name="domainId" not-null="true" unique-key="stationIdentifierUK">
+                <comment>The identifier of the station, gml:identifier. Used as parameter for queries. Optional but unique</comment>
+            </column>
+        </property>
+        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="stationCodespaceEntityIdFk">
+            <column name="codespace">
+                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>The name of the station, gml:name. Optional</comment>
+            </column>
+        </property>
+        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="stationCodespaceEntityNameFk">
+            <column name="codespaceName">
+                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
+            </column>
+        </many-to-one>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>Description of the station, gml:description. Optional</comment>
+            </column>
+        </property>
+        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
+           <!--
+            <property column="lat" name="lat" type="double" />
+            <property column="lon" name="lon" type="double" />
+             -->
+            <property column="geom" name="geometry" type="org.hibernate.spatial.GeometryType"/>
+        </component>
+    </class>
+</hibernate-mapping>

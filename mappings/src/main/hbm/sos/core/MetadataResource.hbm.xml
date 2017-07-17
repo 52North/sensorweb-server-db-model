@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.io.extension">
+    <class name="MetadataEntity" table="datasetmetadata">
+        <id name="pkid" type="long">
+            <column name="pkid">
+            	<comment>Table primary key, used for relations</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence">metadata_seq</param>
+            </generator>
+        </id>
+
+        <discriminator column="type" type="string" />
+        <property name="type" column="type" type="string"  insert="false" update="false"/>
+
+        <property name="name" column="name" type="string" />
+        <property name="lastUpdate" column="lastupdate" type="timestamp" />
+        <property name="dataset" column="dataset" type="long" />
+      	<property name="domain"
+                  type="string">
+            <column name="domain"
+                    not-null="true">
+                <comment>The metadata value domain.</comment>
+            </column>
+        </property>
+        <subclass name="MetadataStringEntity" discriminator-value="string">
+            <property name="value" column="value" type="string" />
+        </subclass>
+
+        <subclass name="MetadataJsonEntity" discriminator-value="json">
+            <property name="value" column="value" type="string" />
+        </subclass>
+
+        <subclass name="MetadataBooleanEntity" discriminator-value="boolean">
+            <property name="value" column="vvalue" type="org.hibernate.type.BooleanType" />
+        </subclass>
+
+        <subclass name="MetadataDoubleEntity" discriminator-value="double">
+            <property name="value" column="value" type="double" />
+        </subclass>
+
+        <subclass name="MetadataIntegerEntity" discriminator-value="integer">
+            <property name="value" column="value" type="integer" />
+        </subclass>
+
+    </class>
+</hibernate-mapping>
