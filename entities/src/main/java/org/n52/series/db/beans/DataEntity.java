@@ -17,13 +17,13 @@
 
 package org.n52.series.db.beans;
 
-import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.common.Utils;
 
 public abstract class DataEntity<T> {
 
@@ -75,9 +75,7 @@ public abstract class DataEntity<T> {
      */
     @Deprecated
     public Date getTimestamp() {
-        return timeend != null
-                ? new Timestamp(timeend.getTime())
-                : null;
+        return getTimeend();
     }
 
     /**
@@ -87,9 +85,7 @@ public abstract class DataEntity<T> {
      */
     @Deprecated
     public void setTimestamp(Date timestamp) {
-        this.timeend = timestamp != null
-                ? new Timestamp(timestamp.getTime())
-                : null;
+        setTimeend(timestamp);
     }
 
     /**
@@ -97,9 +93,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimestart() {
-        return timestart != null
-                ? new Timestamp(timestart.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(timestart);
     }
 
     /**
@@ -108,9 +102,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public void setTimestart(Date timestart) {
-        this.timestart = timestart != null
-                ? new Timestamp(timestart.getTime())
-                : null;
+        this.timestart = Utils.createUnmutableTimestamp(timestart);
     }
 
     /**
@@ -118,9 +110,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public Date getTimeend() {
-        return timeend != null
-                ? new Timestamp(timeend.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(timeend);
     }
 
     /**
@@ -129,9 +119,7 @@ public abstract class DataEntity<T> {
      * @since 2.0.0
      */
     public void setTimeend(Date timeend) {
-        this.timeend = timeend != null
-                ? new Timestamp(timeend.getTime())
-                : null;
+        this.timeend = Utils.createUnmutableTimestamp(timeend);
     }
 
     public T getValue() {
@@ -160,7 +148,7 @@ public abstract class DataEntity<T> {
         this.geometryEntity = geometryEntity;
     }
 
-    public boolean isSetGeometry() {
+    public boolean isSetGeometryEntity() {
         return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
@@ -173,27 +161,19 @@ public abstract class DataEntity<T> {
     }
 
     public Date getValidTimeStart() {
-        return validTimeStart != null
-                ? new Timestamp(validTimeStart.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public void setValidTimeStart(Date validTimeStart) {
-        this.validTimeStart = validTimeStart != null
-                ? new Timestamp(validTimeStart.getTime())
-                : null;
+        this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public Date getValidTimeEnd() {
-        return validTimeEnd != null
-                ? new Timestamp(validTimeEnd.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public void setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = validTimeEnd != null
-                ? new Timestamp(validTimeEnd.getTime())
-                : null;
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public boolean isSetValidTime() {
@@ -209,15 +189,11 @@ public abstract class DataEntity<T> {
     }
 
     public Date getResultTime() {
-        return resultTime != null
-                ? new Timestamp(resultTime.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(resultTime);
     }
 
     public void setResultTime(Date resultTime) {
-        this.resultTime = resultTime != null
-                ? new Timestamp(resultTime.getTime())
-                : null;
+        this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
     public boolean isParent() {

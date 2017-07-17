@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.series.db.beans">
+	<class
+		name="RelatedDataEntity"
+		table="relateddata">
+		<comment>The related observation of an observation.</comment>
+		<id name="pkid" type="long">
+            <column name="pkid">
+                <comment>Table primary key</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence">relateddata_seq</param>
+            </generator>
+        </id>
+		<many-to-one name="data"
+			class="DataEntity" foreign-key="reldatadatafk">
+			<column name="data" not-null="false">
+				<comment>Foreign Key (FK) to the observation. Contains "observation".observationId</comment>
+			</column>
+		</many-to-one>
+		<many-to-one name="relatedData"
+			class="DataEntity" foreign-key="reldatareldatafk">
+			<column name="relatedData" >
+				<comment>Relation/foreign key to the associated observation table. Contains "observation".observationId</comment>
+			</column>
+		</many-to-one>
+		<property name="role" type="string">
+			<column name="role">
+				<comment>The role of the relation</comment>
+			</column>
+		</property>
+		<property name="relatedUrl" type="string" not-null="false">
+			<column name="relatedUrl">
+				<comment>An url to a related observation</comment>
+			</column>
+		</property>
+	</class>
+</hibernate-mapping>

@@ -17,19 +17,29 @@
 
 package org.n52.series.db.beans;
 
-import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Set;
 
+import org.n52.series.db.beans.HibernateRelations.HasFeatureTypes;
+import org.n52.series.db.beans.HibernateRelations.HasObservationTypes;
+import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
+import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatures;
+import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
+import org.n52.series.db.common.Utils;
+
 import com.vividsolutions.jts.geom.Geometry;
 
-public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
+public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
+        implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
+        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity> {
 
-    private Geometry envelope;
+    private static final long serialVersionUID = 5862607025737865794L;
 
-    private Set<String> observationTypes;
+    private GeometryEntity geometryEntity;
 
-    private Set<String> featureTypes;
+    private Set<ObservationTypeEntity> observationTypes;
+
+    private Set<FeatureTypeEntity> featureTypes;
 
     private Date phenomenonTimeStart;
 
@@ -39,29 +49,29 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
 
     private Date resultTimeEnd;
 
-    /**
-     * @return the envelope
-     */
-    public Geometry getEnvelope() {
-        return envelope;
+    private Set<RelatedFeatureEntity> relatedFeatures;
+
+    public Geometry getGeometry() {
+        return geometryEntity != null
+                ? geometryEntity.getGeometry()
+                : null;
     }
 
-    /**
-     * @param envelope
-     *        the envelope to set
-     */
-    public void setEnvelope(Geometry envelope) {
-        this.envelope = envelope;
+    public OfferingEntity setGeometry(Geometry geometry) {
+        this.geometryEntity = new GeometryEntity();
+        this.geometryEntity.setGeometry(geometry);
+        return this;
     }
 
-    public boolean hasEnvelope() {
-        return getEnvelope() != null && !getEnvelope().isEmpty();
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
     }
 
     /**
      * @return the observationTypes
      */
-    public Set<String> getObservationTypes() {
+    @Override
+    public Set<ObservationTypeEntity> getObservationTypes() {
         return observationTypes;
     }
 
@@ -69,18 +79,17 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @param observationTypes
      *        the observationTypes to set
      */
-    public void setObservationTypes(Set<String> observationTypes) {
+    @Override
+    public OfferingEntity setObservationTypes(Set<ObservationTypeEntity> observationTypes) {
         this.observationTypes = observationTypes;
-    }
-
-    public boolean hasObservationTypes() {
-        return getObservationTypes() != null && !getObservationTypes().isEmpty();
+        return this;
     }
 
     /**
      * @return the featureTypes
      */
-    public Set<String> getFeatureTypes() {
+    @Override
+    public Set<FeatureTypeEntity> getFeatureTypes() {
         return featureTypes;
     }
 
@@ -88,104 +97,93 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> {
      * @param featureTypes
      *        the featureTypes to set
      */
-    public void setFeatureTypes(Set<String> featureTypes) {
+    @Override
+    public OfferingEntity setFeatureTypes(Set<FeatureTypeEntity> featureTypes) {
         this.featureTypes = featureTypes;
-    }
-
-    public boolean hasFeatureTypes() {
-        return getFeatureTypes() != null && !getFeatureTypes().isEmpty();
+        return this;
     }
 
     /**
      * @return the phenomenonTimeStart
      */
+    @Override
     public Date getPhenomenonTimeStart() {
-        return hasPhenomenonTimeStart()
-                ? new Timestamp(phenomenonTimeStart.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
     /**
      * @param phenomenonTimeStart
      *        the phenomenonTimeStart to set
      */
-    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = phenomenonTimeStart != null
-                ? new Timestamp(phenomenonTimeStart.getTime())
-                : null;
-    }
-
-    public boolean hasPhenomenonTimeStart() {
-        return phenomenonTimeStart != null;
+    @Override
+    public OfferingEntity setPhenomenonTimeStart(Date phenomenonTimeStart) {
+        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
+        return this;
     }
 
     /**
      * @return the phenomenonTimeEnd
      */
+    @Override
     public Date getPhenomenonTimeEnd() {
-        return hasPhenomenonTimeEnd()
-                ? new Timestamp(phenomenonTimeEnd.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
     /**
      * @param phenomenonTimeEnd
      *        the phenomenonTimeEnd to set
      */
-    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = phenomenonTimeEnd != null
-                ? new Timestamp(phenomenonTimeEnd.getTime())
-                : null;
-    }
-
-    public boolean hasPhenomenonTimeEnd() {
-        return phenomenonTimeEnd != null;
+    @Override
+    public OfferingEntity setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
+        return this;
     }
 
     /**
      * @return the resultTimeStart
      */
+    @Override
     public Date getResultTimeStart() {
-        return hasResultTimeStart()
-                ? new Timestamp(resultTimeStart.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
     /**
      * @param resultTimeStart
      *        the resultTimeStart to set
      */
-    public void setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = resultTimeStart != null
-                ? new Timestamp(resultTimeStart.getTime())
-                : null;
-    }
-
-    public boolean hasResultTimeStart() {
-        return resultTimeStart != null;
+    @Override
+    public OfferingEntity setResultTimeStart(Date resultTimeStart) {
+        this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
+        return this;
     }
 
     /**
      * @return the resultTimeEnd
      */
+    @Override
     public Date getResultTimeEnd() {
-        return hasResultTimeEnd()
-                ? new Timestamp(resultTimeEnd.getTime())
-                : null;
+        return Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
     /**
      * @param resultTimeEnd
      *        the resultTimeEnd to set
      */
-    public void setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = resultTimeEnd != null
-                ? new Timestamp(resultTimeEnd.getTime())
-                : null;
+    @Override
+    public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
+        this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
+        return this;
     }
 
-    public boolean hasResultTimeEnd() {
-        return resultTimeEnd != null;
+    @Override
+    public Set<RelatedFeatureEntity> getRelatedFeatures() {
+        return relatedFeatures;
+    }
+
+    @Override
+    public OfferingEntity setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
+        this.relatedFeatures = relatedFeatures;
+        return this;
     }
 
     @Override

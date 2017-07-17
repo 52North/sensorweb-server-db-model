@@ -19,6 +19,8 @@ package org.n52.series.db.beans;
 
 public class CategoryEntity extends DescribableEntity {
 
+    private static final long serialVersionUID = -5508957540970020954L;
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

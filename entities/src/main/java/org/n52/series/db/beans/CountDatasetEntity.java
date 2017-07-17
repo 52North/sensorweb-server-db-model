@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class CountDatasetEntity extends DatasetEntity<CountDataEntity> {
 
+    private static final long serialVersionUID = -3770736881206526817L;
+
     private static final String DATASET_TYPE = "count";
 
     private Set<CountDatasetEntity> referenceValues = new HashSet<>();

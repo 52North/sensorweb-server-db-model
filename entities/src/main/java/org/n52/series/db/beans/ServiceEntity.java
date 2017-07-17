@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory;
 
 public class ServiceEntity extends DescribableEntity {
 
+    private static final long serialVersionUID = 8926184900932191238L;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceEntity.class);
 
     private String url;
@@ -35,6 +37,8 @@ public class ServiceEntity extends DescribableEntity {
     private List<String> noDataValues;
 
     private String version;
+
+    private boolean supportsFirstLatest = true;
 
     public ServiceEntity() {
         noDataValues = Collections.emptyList();
@@ -75,6 +79,14 @@ public class ServiceEntity extends DescribableEntity {
             String[] values = noDataValues.split(",");
             this.noDataValues = Arrays.asList(values);
         }
+    }
+
+    public boolean isSupportsFirstLatest() {
+        return supportsFirstLatest;
+    }
+
+    public void setSupportsFirstLatest(boolean supportsFirstLatest) {
+        this.supportsFirstLatest = supportsFirstLatest;
     }
 
     public String getVersion() {

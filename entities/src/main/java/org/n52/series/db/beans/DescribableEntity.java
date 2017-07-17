@@ -14,36 +14,40 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
 import java.util.Set;
 
+import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity {
+public class DescribableEntity extends PkidEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
+        Serializable {
 
-    public static final String PROPERTY_PKID = "pkid";
-
-    public static final String PROPERTY_NAME = "name";
-
+    public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DOMAIN_ID = "domainId";
+    public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
+    public static final String PROPERTY_SERVICE = "service";
+    public static final String PROPERTY_CODESPACE = CODESPACE;
+    public static final String PROPERTY_CODESPACE_NAME = CODESPACE_NAME;
 
-    public static final String PROPERTY_SERVICE_ID = "serviceid";
-
-    /**
-     * A serial primary key.
-     */
-    private Long pkid;
+    private static final long serialVersionUID = -4448231483118864847L;
 
     /**
      * Identification of the entity without special chars.
      */
     private String domainId;
 
+    private CodespaceEntity codespace;
+
     /**
      * Default name of the entity.
      */
     private String name;
+
+    private CodespaceEntity codespaceName;
 
     /**
      * Default description of the entity.
@@ -56,44 +60,59 @@ public class DescribableEntity {
 
     private Set<Parameter< ? >> parameters;
 
-    public Long getPkid() {
-        return pkid;
-    }
-
-    public void setPkid(Long pkid) {
-        this.pkid = pkid;
-    }
-
+    @Override
     public String getDomainId() {
         return domainId;
     }
 
-    public void setDomainId(String domainId) {
+    @Override
+    public DescribableEntity setDomainId(String domainId) {
         this.domainId = domainId;
+        return this;
     }
 
+    @Override
+    public CodespaceEntity getCodespace() {
+        return this.codespace;
+    }
+
+    @Override
+    public DescribableEntity setCodespace(CodespaceEntity codespace) {
+        this.codespace = codespace;
+        return this;
+    }
+
+    @Override
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    @Override
+    public DescribableEntity setName(String name) {
         this.name = name;
+        return this;
     }
 
-    public boolean isSetName() {
-        return getName() != null && !getName().isEmpty();
+    @Override
+    public CodespaceEntity getCodespaceName() {
+        return codespaceName;
     }
 
+    @Override
+    public DescribableEntity setCodespaceName(CodespaceEntity codespaceName) {
+        this.codespaceName = codespaceName;
+        return this;
+    }
+
+    @Override
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    @Override
+    public DescribableEntity setDescription(String description) {
         this.description = description;
-    }
-
-    public boolean isSetDescription() {
-        return getDescription() != null && !getDescription().isEmpty();
+        return this;
     }
 
     public Set<I18nEntity> getTranslations() {

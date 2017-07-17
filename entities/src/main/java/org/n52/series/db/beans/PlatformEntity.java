@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Set;
@@ -27,6 +28,8 @@ public class PlatformEntity extends DescribableEntity {
     public static final String PROPERTY_INSITU = "insitu";
 
     public static final String PROPERTY_MOBILE = "mobile";
+
+    private static final long serialVersionUID = 3615089936334873353L;
 
     private boolean insitu = true;
 
@@ -64,14 +67,17 @@ public class PlatformEntity extends DescribableEntity {
         this.geometry = geometry;
     }
 
+    @Override
     public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
+    @Override
     public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 
+    @Override
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }

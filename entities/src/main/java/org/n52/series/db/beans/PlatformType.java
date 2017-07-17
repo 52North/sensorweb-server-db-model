@@ -55,6 +55,16 @@ public enum PlatformType {
         return getIdPrefix() + "_" + id;
     }
 
+    public boolean isInsitu() {
+        return this == PlatformType.STATIONARY_INSITU
+                || this == PlatformType.MOBILE_INSITU;
+    }
+
+    public boolean isRemote() {
+        return this == PlatformType.STATIONARY_REMOTE
+                || this == PlatformType.MOBILE_REMOTE;
+    }
+
     public boolean isStationary() {
         return this == STATIONARY_INSITU
                 || this == STATIONARY_REMOTE;

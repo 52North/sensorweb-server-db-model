@@ -41,21 +41,21 @@ public class ServiceEntityTest {
 
     @Test
     public void shouldTreatNullAsNoDataValue() {
-        MeasurementDataEntity entity = new MeasurementDataEntity();
+        QuantityDataEntity entity = new QuantityDataEntity();
         entity.setValue(null);
         MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
     }
 
     @Test
     public void shouldTreatNaNAsNoDataValue() {
-        MeasurementDataEntity entity = new MeasurementDataEntity();
+        QuantityDataEntity entity = new QuantityDataEntity();
         MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
     }
 
     @Test
     public void shouldHandleDoubleValues() {
         serviceInfo.setNoDataValues("4.3,9,foo");
-        MeasurementDataEntity entity = new MeasurementDataEntity();
+        QuantityDataEntity entity = new QuantityDataEntity();
         entity.setValue(new Double(9));
         MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
 
