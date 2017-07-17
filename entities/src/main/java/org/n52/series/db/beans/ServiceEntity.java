@@ -38,6 +38,8 @@ public class ServiceEntity extends DescribableEntity {
 
     private String version;
 
+    private boolean supportsFirstLatest = true;
+
     public ServiceEntity() {
         noDataValues = Collections.emptyList();
     }
@@ -77,6 +79,14 @@ public class ServiceEntity extends DescribableEntity {
             String[] values = noDataValues.split(",");
             this.noDataValues = Arrays.asList(values);
         }
+    }
+
+    public boolean isSupportsFirstLatest() {
+        return supportsFirstLatest;
+    }
+
+    public void setSupportsFirstLatest(boolean supportsFirstLatest) {
+        this.supportsFirstLatest = supportsFirstLatest;
     }
 
     public String getVersion() {
