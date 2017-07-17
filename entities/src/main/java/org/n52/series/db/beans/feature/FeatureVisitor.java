@@ -16,13 +16,13 @@
  */
 package org.n52.series.db.beans.feature;
 
-import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.feature.inspire.EnvironmentalMonitoringFacilityEntity;
 import org.n52.series.db.beans.feature.wml.MonitoringPointEntity;
+import org.n52.shetland.ogc.gml.AbstractFeature;
 import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
-public interface FeatureVisitor<T extends AbstractFeatureEntity> {
+public interface FeatureVisitor<T extends AbstractFeature> {
 
     T visit(FeatureEntity f) throws OwsExceptionReport;
 

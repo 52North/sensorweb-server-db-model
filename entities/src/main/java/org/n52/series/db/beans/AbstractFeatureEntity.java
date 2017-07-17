@@ -20,6 +20,7 @@ package org.n52.series.db.beans;
 import org.n52.series.db.beans.HibernateRelations.HasDescriptionXml;
 import org.n52.series.db.beans.feature.FeatureVisitor;
 import org.n52.series.db.beans.feature.GeometryVisitor;
+import org.n52.shetland.ogc.gml.AbstractFeature;
 import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -34,7 +35,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
     private String url;
     private String descriptionXml;
 
-    public abstract AbstractFeatureEntity accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport;
+    public abstract AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport;
 
     public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
 

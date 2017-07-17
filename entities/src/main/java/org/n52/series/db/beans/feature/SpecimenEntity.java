@@ -19,9 +19,9 @@ package org.n52.series.db.beans.feature;
 import java.util.Date;
 
 import org.n52.series.common.DbUtils;
-import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.shetland.ogc.gml.AbstractFeature;
 import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -166,7 +166,7 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     @Override
-    public AbstractFeatureEntity accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
+    public AbstractFeature accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 
