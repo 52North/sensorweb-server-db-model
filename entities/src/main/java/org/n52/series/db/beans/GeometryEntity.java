@@ -65,7 +65,6 @@ public class GeometryEntity implements Serializable {
 
     private Geometry createPoint() {
         Coordinate coordinate = alt != null && !alt.isNaN()
-                // XXX configure axis switch here
                 ? new Coordinate(lon, lat, alt)
                 : new Coordinate(lon, lat);
         return geometryFactory.createPoint(coordinate);
