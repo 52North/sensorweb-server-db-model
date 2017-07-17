@@ -64,19 +64,6 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
     }
 
     @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
-    }
-
-    @Override
     public String getDescriptionXml() {
         return descriptionXml;
     }
@@ -111,6 +98,19 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
 
     public boolean isSetUrl() {
         return getUrl() != null && !getUrl().isEmpty();
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" Domain id: ")
+                 .append(getDomainId())
+                 .append(", service: ")
+                 .append(getService())
+                 .append(" ]")
+                 .toString();
     }
 
 }
