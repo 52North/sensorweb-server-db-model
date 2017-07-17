@@ -25,6 +25,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.series.common.DbUtils;
+
 public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
 
     public static final String DEFAULT_VALUE_TYPE = "quantity";
@@ -169,27 +171,19 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     }
 
     public Date getFirstValueAt() {
-        return firstValueAt != null
-                ? new Timestamp(firstValueAt.getTime())
-                : null;
+        return DbUtils.createUnmutableTimestamp(firstValueAt);
     }
 
     public void setFirstValueAt(Date firstValueAt) {
-        this.firstValueAt = firstValueAt != null
-                ? new Timestamp(firstValueAt.getTime())
-                : null;
+        this.firstValueAt = DbUtils.createUnmutableTimestamp(firstValueAt);
     }
 
     public Date getLastValueAt() {
-        return lastValueAt != null
-                ? new Timestamp(lastValueAt.getTime())
-                : null;
+        return DbUtils.createUnmutableTimestamp(lastValueAt);
     }
 
     public void setLastValueAt(Date lastValueAt) {
-        this.lastValueAt = lastValueAt != null
-                ? new Timestamp(lastValueAt.getTime())
-                : null;
+        this.lastValueAt = DbUtils.createUnmutableTimestamp(lastValueAt);
     }
 
     public String getValueType() {
