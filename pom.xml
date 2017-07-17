@@ -36,9 +36,9 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/52North/series-hibernate-mapping.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/52North/series-hibernate-mapping.git</developerConnection>
-        <url>https://github.com/52North/series-hibernate-mapping</url>
+        <connection>scm:git:git://github.com/52North/series-hibernate.git</connection>
+        <developerConnection>scm:git:ssh://git@github.com/52North/series-hibernate.git</developerConnection>
+        <url>https://github.com/52North/series-hibernate</url>
         <tag>HEAD</tag>
     </scm>
 
