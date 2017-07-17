@@ -34,7 +34,7 @@ public class RelatedFeatureEntity extends PkidEntity
 
     private static final long serialVersionUID = -8143897383050691280L;
 
-    private AbstractFeatureEntity feature;
+    private AbstractFeatureEntity<RelatedFeatureEntity> feature;
 
     private Set<RelatedFeatureRoleEntity> relatedFeatureRoles = new HashSet<RelatedFeatureRoleEntity>(0);
 
@@ -44,12 +44,12 @@ public class RelatedFeatureEntity extends PkidEntity
     }
 
     @Override
-    public AbstractFeatureEntity getFeature() {
+    public AbstractFeatureEntity<RelatedFeatureEntity> getFeature() {
         return this.feature;
     }
 
     @Override
-    public RelatedFeatureEntity setFeature(AbstractFeatureEntity feature) {
+    public RelatedFeatureEntity setFeature(AbstractFeatureEntity<RelatedFeatureEntity> feature) {
         this.feature = feature;
         return this;
     }

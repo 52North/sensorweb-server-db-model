@@ -172,12 +172,12 @@ public interface HibernateRelations {
     interface HasFeatureGetter {
         String FEATURE_OF_INTEREST = "featureOfInterest";
 
-        AbstractFeatureEntity getFeature();
+        AbstractFeatureEntity<?> getFeature();
     }
 
     interface HasFeature<T> extends HasFeatureGetter {
 
-        T setFeature(AbstractFeatureEntity feature);
+        T setFeature(AbstractFeatureEntity<T> feature);
     }
 
     interface HasReadableObservationContext extends HasObservablePropertyGetter, HasProcedureGetter, HasFeatureGetter {

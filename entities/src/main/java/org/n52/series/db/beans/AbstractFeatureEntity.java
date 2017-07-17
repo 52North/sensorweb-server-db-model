@@ -25,8 +25,8 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 import com.vividsolutions.jts.geom.Geometry;
 
-public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractFeatureEntity>
-        implements HasDescriptionXml<AbstractFeatureEntity> {
+public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
+        implements HasDescriptionXml<AbstractFeatureEntity<E>> {
 
     private static final long serialVersionUID = 6712642995944229067L;
 
@@ -43,7 +43,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
         return geometryEntity;
     }
 
-    public AbstractFeatureEntity setGeometryEntity(GeometryEntity geometryEntity) {
+    public AbstractFeatureEntity<E> setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
     }
@@ -58,7 +58,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
     }
 
     @Override
-    public AbstractFeatureEntity setDescriptionXml(String descriptionXml) {
+    public AbstractFeatureEntity<E> setDescriptionXml(String descriptionXml) {
         this.descriptionXml = descriptionXml;
         return this;
     }
@@ -67,7 +67,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
         return featureType;
     }
 
-    public AbstractFeatureEntity setFeatureType(FeatureTypeEntity featureType) {
+    public AbstractFeatureEntity<E> setFeatureType(FeatureTypeEntity featureType) {
         this.featureType = featureType;
         return this;
     }
@@ -80,7 +80,7 @@ public abstract class AbstractFeatureEntity extends HierarchicalEntity<AbstractF
         return url;
     }
 
-    public AbstractFeatureEntity setUrl(String url) {
+    public AbstractFeatureEntity<E> setUrl(String url) {
         this.url = url;
         return this;
     }
