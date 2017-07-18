@@ -29,17 +29,16 @@ public abstract class DataEntity<T> {
 
     public static final String SERIES_PKID = "seriesPkid";
 
-    public static final String PROPERTY_TIMESTART = "timestart";
+    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
 
-    public static final String PROPERTY_TIMEEND = "timeend";
+    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
 
     private Long pkid;
 
-    // optional
-    private Date timestart;
 
-    // required
-    private Date timeend;
+    private Date phenomenonTimeStart;
+
+    private Date phenomenonTimeEnd;
 
     private T value;
 
@@ -69,57 +68,36 @@ public abstract class DataEntity<T> {
         this.pkid = pkid;
     }
 
-    /**
-     * @return timestamp
-     * @deprecated use {@link #getTimeend()}
-     */
-    @Deprecated
-    public Date getTimestamp() {
-        return getTimeend();
     }
 
     /**
-     * @param timestamp
-     *        the timestamp
-     * @deprecated use {@link #setTimeend(java.util.Date)}
+     * @return the phenomenonTimeStart
      */
-    @Deprecated
-    public void setTimestamp(Date timestamp) {
-        setTimeend(timestamp);
+    public Date getPhenomenonTimeStart() {
+        return Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
     /**
-     * @return the timestart
-     * @since 2.0.0
+     * @param phenomenonTimeStart
+     *        the phenomenonTimeStart
      */
-    public Date getTimestart() {
-        return Utils.createUnmutableTimestamp(timestart);
+    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
+        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
     /**
-     * @param timestart
-     *        the timestart
-     * @since 2.0.0
+     * @return the phenomenonTimeEnd
      */
-    public void setTimestart(Date timestart) {
-        this.timestart = Utils.createUnmutableTimestamp(timestart);
+    public Date getPhenomenonTimeEnd() {
+        return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
     /**
-     * @return the timeend
-     * @since 2.0.0
+     * @param phenomenonTimeEnd
+     *        the phenomenonTimeEnd
      */
-    public Date getTimeend() {
-        return Utils.createUnmutableTimestamp(timeend);
-    }
-
-    /**
-     * @param timeend
-     *        the timeend
-     * @since 2.0.0
-     */
-    public void setTimeend(Date timeend) {
-        this.timeend = Utils.createUnmutableTimestamp(timeend);
+    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
     public T getValue() {
