@@ -73,6 +73,8 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     private UnitEntity unit;
 
     private long observationCount = -1;
+    
+    private boolean hiddenChild;
 
     public DatasetEntity() {
         this.observations = new ArrayList<>();
@@ -253,6 +255,14 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     public long getObservationCount() {
         return observationCount;
+    }
+
+    public boolean isHiddenChild() {
+        return hiddenChild;
+    }
+
+    public void setHiddenChild(boolean hiddenChild) {
+        this.hiddenChild = hiddenChild;
     }
 
     @Override

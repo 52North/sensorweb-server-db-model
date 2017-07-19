@@ -21,10 +21,42 @@ import java.util.Set;
 
 public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
+    private Double fromLevel;
+    
+    private Double toLevel;
+    
+    private UnitEntity levelUnit;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         // TODO Auto-generated method stub
         return false;
     }
+
+    public Double getFromLevel() {
+        return fromLevel;
+    }
+
+    public void setFromLevel(Double fromLevel) {
+        this.fromLevel = fromLevel;
+    }
+
+    public Double getToLevel() {
+        return toLevel;
+    }
+
+    public void setToLevel(Double toLevel) {
+        this.toLevel = toLevel;
+    }
+
+    public UnitEntity getLevelUnit() {
+        return levelUnit;
+    }
+
+    public void setLevelUnit(UnitEntity levelUnit) {
+        this.levelUnit = levelUnit;
+    }
+    
+    
 
 }

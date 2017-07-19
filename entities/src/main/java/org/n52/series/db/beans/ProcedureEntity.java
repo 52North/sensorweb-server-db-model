@@ -28,6 +28,10 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     private boolean insitu;
 
     private String procedureDescriptionFormat;
+    
+    private boolean disabled;
+    
+    private boolean deleted;
 
     public boolean isReference() {
         return reference;
@@ -63,6 +67,22 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     public PlatformType getPlatformType() {
         return PlatformType.toInstance(mobile, insitu);
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     @Override

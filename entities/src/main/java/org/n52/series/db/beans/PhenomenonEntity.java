@@ -20,6 +20,26 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
 
     private static final long serialVersionUID = 2302654989683191424L;
 
+    private boolean hiddenChild;
+
+    private boolean disabled;
+
+    public boolean isHiddenChild() {
+        return hiddenChild;
+    }
+
+    public void setHiddenChild(boolean hiddenChild) {
+        this.hiddenChild = hiddenChild;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

@@ -35,6 +35,24 @@ public abstract class DataEntity<T> {
 
     private Long pkid;
 
+    /**
+     * Identification of the entity without special chars.
+     */
+    private String domainId;
+
+    private CodespaceEntity codespace;
+
+    /**
+     * Default name of the entity.
+     */
+    private String name;
+
+    private CodespaceEntity codespaceName;
+
+    /**
+     * Default description of the entity.
+     */
+    private String description;
 
     private Date phenomenonTimeStart;
 
@@ -60,6 +78,10 @@ public abstract class DataEntity<T> {
 
     private final Set<Parameter< ? >> parameters = new HashSet<>(0);
 
+    private final Set<DatasetEntity<DataEntity< ? >>> datasets = new HashSet<>(0);
+    
+    private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
+
     public Long getPkid() {
         return pkid;
     }
@@ -68,6 +90,44 @@ public abstract class DataEntity<T> {
         this.pkid = pkid;
     }
 
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
+
+    public CodespaceEntity getCodespace() {
+        return codespace;
+    }
+
+    public void setCodespace(CodespaceEntity codespace) {
+        this.codespace = codespace;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CodespaceEntity getCodespaceName() {
+        return codespaceName;
+    }
+
+    public void setCodespaceName(CodespaceEntity codespaceName) {
+        this.codespaceName = codespaceName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -202,6 +262,26 @@ public abstract class DataEntity<T> {
 
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
+    }
+
+    public Set<DatasetEntity<DataEntity< ? >>> getDatasets() {
+        return datasets;
+    }
+
+    public void setDatasets(Set<DatasetEntity<DataEntity< ? >>> datasets) {
+        if (datasets != null) {
+            this.datasets.addAll(datasets);
+        }
+    }
+
+    public Set<RelatedDataEntity> getRelatedObservations() {
+        return relatedObservations;
+    }
+    
+    public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
+        if (relatedObservations != null) {
+            this.relatedObservations.addAll(relatedObservations);
+        }
     }
 
     @Override
