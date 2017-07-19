@@ -49,31 +49,34 @@
                 <comment>For later use by the SOS. Indicator if this procedure should not be provided by the SOS.</comment>
             </column>
         </property>
-<!--         <property name="descriptionFile" type="org.hibernate.type.StringClobType"> -->
-<!--             <column name="descriptionFile"> -->
-<!--                 <comment>Field for full (XML) encoded procedure description or link to a procedure description file. Optional</comment> -->
-<!--             </column> -->
-<!--         </property> -->
-        <property name="reference" type="org.hibernate.type.TrueFalseType">
-            <column name="referenceFlag" default="'F'" check="referenceFlag in ('T','F')">
-                <comment>Flag to indicate that this procedure is a reference procedure of another procedure. Not used by the SOS but by the Sensor Web REST-API</comment>
+        <property name="descriptionFile" type="org.hibernate.type.StringClobType">
+            <column name="descriptionFile">
+                <comment>Field for full (XML) encoded procedure description or link to a procedure description file.
+                    Optional</comment>
             </column>
         </property>
-<!--         <many-to-one name="typeOf" class="ProcedureEntity" not-null="false"  foreign-key="typeOfFk"> -->
-<!--             <column name="typeOf" not-null="false"> -->
-<!--                 <comment>Relation/foreign key to procedure table. Optional, contains procedureId if this procedure is typeOf another procedure</comment> -->
-<!--             </column> -->
-<!--         </many-to-one> -->
-<!--         <property name="isType" type="org.hibernate.type.TrueFalseType"> -->
-<!--             <column name="isType" default="'F'" check="isType in ('T','F')"> -->
-<!--                 <comment>Flag to indicate that this procedure is a type description, has no observations.</comment> -->
-<!--             </column> -->
-<!--         </property> -->
-<!--         <property name="isAggregation" type="org.hibernate.type.TrueFalseType"> -->
-<!--             <column name="isAggregation" default="'T'" check="isAggregation in ('T','F')"> -->
-<!--                 <comment>Flag to indicate that this procedure is an aggregation (e.g. System, PhysicalSystem).</comment> -->
-<!--             </column> -->
-<!--         </property> -->
+        <property name="reference" type="org.hibernate.type.TrueFalseType">
+            <column name="referenceFlag" default="'F'" check="referenceFlag in ('T','F')">
+                <comment>Flag to indicate that this procedure is a reference procedure of another procedure. Not used by
+                    the SOS but by the Sensor Web REST-API</comment>
+            </column>
+        </property>
+        <many-to-one name="typeOf" class="ProcedureEntity" not-null="false" foreign-key="typeOfFk">
+            <column name="typeOf" not-null="false">
+                <comment>Relation/foreign key to procedure table. Optional, contains procedureId if this procedure is
+                    typeOf another procedure</comment>
+            </column>
+        </many-to-one>
+        <property name="type" type="org.hibernate.type.TrueFalseType">
+            <column name="isType" default="'F'" check="isType in ('T','F')">
+                <comment>Flag to indicate that this procedure is a type description, has no observations.</comment>
+            </column>
+        </property>
+        <property name="aggregation" type="org.hibernate.type.TrueFalseType">
+            <column name="isAggregation" default="'T'" check="isAggregation in ('T','F')">
+                <comment>Flag to indicate that this procedure is an aggregation (e.g. System, PhysicalSystem).</comment>
+            </column>
+        </property>
         <property name="mobile" type="org.hibernate.type.TrueFalseType">
             <column name="mobile" not-null="false" default="'F'" check="mobile in ('T','F')">
                 <comment>Flag to indicate that this procedure is stationary (false) or mobile (true). Optional</comment>
@@ -85,31 +88,33 @@
             </column>
         </property>
         <set name="parents" table="procedurerelation" inverse="false" fetch="select">
-            <key column="child" not-null="true" foreign-key="procparentschildfk"/>
-            <many-to-many class="ProcedureEntity" column="parent" foreign-key="procparentparentfk"/>
+            <key column="child" not-null="true" foreign-key="procparentschildfk" />
+            <many-to-many class="ProcedureEntity" column="parent" foreign-key="procparentparentfk" />
         </set>
         <set name="children" table="procedurerelation" inverse="false" fetch="select">
-            <key column="parent" not-null="true" foreign-key="procchildrenparentfk"/>
-            <many-to-many class="ProcedureEntity" column="child" foreign-key="procchildrenchildfk"/>
+            <key column="parent" not-null="true" foreign-key="procchildrenparentfk" />
+            <many-to-many class="ProcedureEntity" column="child" foreign-key="procchildrenchildfk" />
         </set>
         <many-to-one name="procedureDescriptionFormat" class="ProcedureDescriptionFormatEntity" foreign-key="procProcDescFormatFk">
             <column name="procedureDescriptionFormat" not-null="true">
-                <comment>Relation/foreign key to the procedureDescriptionFormat table. Describes the format of the procedure description.</comment>
+                <comment>Relation/foreign key to the procedureDescriptionFormat table. Describes the format of the
+                    procedure description.</comment>
             </column>
         </many-to-one>
-<!--         <set name="validProcedureTimes" table="validproceduretime" inverse="true"> -->
-<!--             <key foreign-key="procvalidproctimeprocfk"> -->
-<!--                 <column name="procedure" not-null="true" /> -->
-<!--             </key> -->
-<!--             <one-to-many class="ValidProcedureTimeEntity" /> -->
-<!--         </set> -->
-<!--         <set name="translations" table="i18nprocedure" inverse="true" fetch="select"> -->
-<!--             <key column="procedure" foreign-key="proctransprocfk"/> -->
-<!--             <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nProcedureEntity" foreign-key="proctransi18nfk"/> -->
-<!--         </set> -->
+        <set name="validProcedureTimes" table="validproceduretime" inverse="true">
+            <key foreign-key="procvalidproctimeprocfk">
+                <column name="procedure" not-null="true" />
+            </key>
+            <one-to-many class="ValidProcedureTimeEntity" />
+        </set>
+        <set name="translations" table="i18nprocedure" inverse="true" fetch="select">
+            <key column="procedure" foreign-key="proctransprocfk" />
+            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nProcedureEntity"
+                foreign-key="proctransi18nfk" />
+        </set>
     </class>
 
-     <class name="org.n52.series.db.beans.i18n.I18nProcedureEntity" table="i18nprocedure">
+    <class name="org.n52.series.db.beans.i18n.I18nProcedureEntity" table="i18nprocedure">
         <id name="pkid" type="long">
             <column name="pkid" />
             <generator class="native">

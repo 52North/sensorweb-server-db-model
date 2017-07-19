@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans;
 
+import java.util.Set;
+
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     private static final long serialVersionUID = 4028002933920185756L;
@@ -32,7 +34,17 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     private boolean disabled;
 
     private boolean deleted;
+    
+    private String descriptionFile;
+    
+    private ProcedureEntity typeOf;
+    
+    private boolean type;
 
+    private boolean aggregation;
+    
+    private Set<ValidProcedureTimeEntity> validProcedureTimes;
+    
     public boolean isReference() {
         return reference;
     }
@@ -83,6 +95,46 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     public void setDeleted(boolean deleted) {
         this.deleted = deleted;
+    }
+
+    public String getDescriptionFile() {
+        return descriptionFile;
+    }
+
+    public void setDescriptionFile(String descriptionFile) {
+        this.descriptionFile = descriptionFile;
+    }
+
+    public ProcedureEntity getTypeOf() {
+        return typeOf;
+    }
+
+    public void setTypeOf(ProcedureEntity typeOf) {
+        this.typeOf = typeOf;
+    }
+
+    public boolean isType() {
+        return type;
+    }
+
+    public void setType(boolean isType) {
+        this.type = isType;
+    }
+
+    public boolean isAggregation() {
+        return aggregation;
+    }
+
+    public void setAggregation(boolean isAggregation) {
+        this.aggregation = isAggregation;
+    }
+    
+    public Set<ValidProcedureTimeEntity> getValidProcedureTimes() {
+        return validProcedureTimes;
+    }
+
+    public void setValidProcedureTimes(Set<ValidProcedureTimeEntity> validProcedureTimes) {
+        this.validProcedureTimes = validProcedureTimes;
     }
 
     @Override
