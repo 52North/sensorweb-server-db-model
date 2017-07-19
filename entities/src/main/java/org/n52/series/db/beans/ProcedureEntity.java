@@ -28,9 +28,9 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     private boolean insitu;
 
     private String procedureDescriptionFormat;
-    
+
     private boolean disabled;
-    
+
     private boolean deleted;
 
     public boolean isReference() {

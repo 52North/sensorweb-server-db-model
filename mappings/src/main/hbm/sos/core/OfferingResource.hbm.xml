@@ -1,9 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Copyright ${year} 52°North Initiative for Geospatial Open Source Software GmbH Licensed under the Apache License, Version 
-    2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License 
-    at http://www.apache.org/licenses/LICENSE-2.0 Unless required by applicable law or agreed to in writing, software distributed 
-    under the License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
-    See the License for the specific language governing permissions and limitations under the License. -->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="OfferingEntity" table="offering">
@@ -17,81 +12,81 @@
                 <param name="sequence">offering_seq</param>
             </generator>
         </id>
-        
+
         <many-to-one name="service" class="ServiceEntity" foreign-key="offeringServiceFk">
             <column name="service" not-null="true" />
         </many-to-one>
-        
+
         <many-to-one name="codespace" class="CodespaceEntity" foreign-key="offCodespaceEntityIdentifierFk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
-        
+
         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="offCodespaceEntityNameFk">
             <column name="codespaceName">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:name codespace. Optional</comment>
             </column>
         </many-to-one>
-        
+
         <property name="domainId" type="string">
             <column name="domainId" not-null="true" unique-key="offIdentifierUK">
                 <comment>The identifier of the offering, gml:identifier. Used as
                     parameter for queries. Unique</comment>
             </column>
         </property>
-        
+
         <property name="name" type="string">
             <column name="name">
                 <comment>The name of the offering, gml:name. If available, displyed
                     in the contents of the Capabilites. Optional</comment>
             </column>
         </property>
-        
+
         <property name="description" type="string">
             <column name="description">
                 <comment>Description of the offering, gml:description. Optional</comment>
             </column>
         </property>
-        
+
         <property name="phenomenonTimeStart" type="timestamp">
             <column name="phenomenonTimeStart" length="29" not-null="true">
                 <comment>Time stamp when the offering was started or phenomenon was observed</comment>
             </column>
         </property>
-        
+
         <property name="phenomenonTimeEnd" type="timestamp">
             <column name="phenomenonTimeEnd" length="29" not-null="true">
                 <comment>Time stamp when the offering was stopped or phenomenon was observed</comment>
             </column>
         </property>
-        
+
         <property name="resultTimeStart" type="timestamp">
             <column name="resultTimeStart" length="29" not-null="true">
                 <comment>Time stamp when the offering was published or result was published/available</comment>
             </column>
         </property>
-        
+
         <property name="resultTimeEnd" type="timestamp">
             <column name="resultTimeEnd" length="29" not-null="true">
                 <comment>Time stamp when the offering was published or result was published/available</comment>
             </column>
         </property>
-        
+
         <property name="disabled" type="org.hibernate.type.TrueFalseType">
             <column name="disabled" not-null="true" default="'F'" check="disabled in ('T','F')">
                 <comment>For later use by the SOS. Indicator if this offering should
                     not be provided by the SOS.</comment>
             </column>
         </property>
-        
+
         <component class="GeometryEntity" name="geometryEntity">
             <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
             <property column="geom" name="geometry" type="org.hibernate.spatial.GeometryType" />
         </component>
-        
+
         <set name="children" table="offeringrelation" inverse="false" fetch="select">
             <comment>Relation table to store offering hierarchies. E.g. define a
                 parent in a query and all childs are also contained in the response.
@@ -99,12 +94,12 @@
             <key column="parent" not-null="true" foreign-key="offchildrenparentfk" />
             <many-to-many class="OfferingEntity" column="child" foreign-key="offchildrenchildfk" />
         </set>
-        
+
         <set name="parents" table="offeringrelation" inverse="false" fetch="select">
             <key column="child" not-null="true" foreign-key="offparentschildfk" />
             <many-to-many class="OfferingEntity" column="parent" foreign-key="offparentsparentfk" />
         </set>
-        
+
         <set name="observationTypes" table="offeringallowedobservationtype" inverse="false" fetch="select">
             <comment>Table to store relations between offering and allowed
                 observationTypes, defined in InsertSensor request. Mapping file:
@@ -122,7 +117,7 @@
                 </column>
             </many-to-many>
         </set>
-        
+
         <set name="relatedFeatures" table="offeringhasrelatedfeature" inverse="false">
             <comment>Table to store relations between offering and associated
                 relatedFeatures. Mapping file:
@@ -140,7 +135,7 @@
                 </column>
             </many-to-many>
         </set>
-        
+
         <set name="featureTypes" table="offeringallowedfeaturetype" inverse="false">
             <comment>Table to store relations between offering and allowed
                 featureOfInterestTypes, defined in InsertSensor request. Mapping
@@ -158,7 +153,7 @@
                 </column>
             </many-to-many>
         </set>
-        
+
         <set name="translations" table="i18noffering" inverse="true" fetch="select">
             <key column="offering" foreign-key="offtransofffk" />
             <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nOfferingEntity"

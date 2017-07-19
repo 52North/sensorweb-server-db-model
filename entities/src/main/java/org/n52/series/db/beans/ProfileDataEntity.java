@@ -22,9 +22,9 @@ import java.util.Set;
 public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
     private Double fromLevel;
-    
+
     private Double toLevel;
-    
+
     private UnitEntity levelUnit;
 
     @Override
@@ -56,7 +56,7 @@ public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
     public void setLevelUnit(UnitEntity levelUnit) {
         this.levelUnit = levelUnit;
     }
-    
-    
+
+
 
 }

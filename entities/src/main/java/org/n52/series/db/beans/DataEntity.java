@@ -79,7 +79,7 @@ public abstract class DataEntity<T> {
     private final Set<Parameter< ? >> parameters = new HashSet<>(0);
 
     private final Set<DatasetEntity<DataEntity< ? >>> datasets = new HashSet<>(0);
-    
+
     private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
     public Long getPkid() {
@@ -279,7 +279,7 @@ public abstract class DataEntity<T> {
     public Set<RelatedDataEntity> getRelatedObservations() {
         return relatedObservations;
     }
-    
+
     public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
         if (relatedObservations != null) {
             this.relatedObservations.clear();

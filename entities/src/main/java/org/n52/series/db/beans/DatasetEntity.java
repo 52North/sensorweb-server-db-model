@@ -73,7 +73,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     private UnitEntity unit;
 
     private long observationCount = -1;
-    
+
     private boolean hiddenChild;
 
     public DatasetEntity() {

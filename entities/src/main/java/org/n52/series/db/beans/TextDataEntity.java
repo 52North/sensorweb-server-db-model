@@ -21,11 +21,11 @@ import java.util.Collection;
 public class TextDataEntity extends DataEntity<String> {
 
     private String valueIdentifier;
-    
+
     private String valueName;
-    
+
     private String valueDescription;
-    
+
     public String getValueIdentifier() {
         return valueIdentifier;
     }

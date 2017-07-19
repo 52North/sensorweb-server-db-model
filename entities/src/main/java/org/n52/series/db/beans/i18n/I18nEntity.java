@@ -25,9 +25,9 @@ public class I18nEntity extends PkidEntity {
     private String locale;
 
     private String name;
-    
+
     private String shortName;
-    
+
     private String longName;
 
     private String description;

@@ -50,7 +50,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     private Date resultTimeEnd;
 
     private Set<RelatedFeatureEntity> relatedFeatures;
-    
+
     private boolean disabled;
 
     public Geometry getGeometry() {
@@ -68,7 +68,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public void setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
     }
-    
+
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
