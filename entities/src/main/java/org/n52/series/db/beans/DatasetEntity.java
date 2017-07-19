@@ -56,9 +56,9 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     private PlatformEntity platform;
 
-    private Boolean published = Boolean.TRUE;
+    private boolean published = true;
 
-    private Boolean deleted = Boolean.FALSE;
+    private boolean deleted;
 
     private List<T> observations;
 
@@ -160,7 +160,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
         return published;
     }
 
-    public void setPublished(Boolean published) {
+    public void setPublished(boolean published) {
         this.published = published;
     }
 
@@ -168,7 +168,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
 
