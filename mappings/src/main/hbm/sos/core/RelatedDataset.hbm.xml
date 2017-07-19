@@ -2,11 +2,9 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-	<class
-		name="RelatedDatasetEntity"
-		table="relateddataset">
-		<comment>The series relation should be used if the series table represents a timeseries.</comment>
-		<id name="pkid" type="long">
+    <class name="RelatedDatasetEntity" table="relateddataset">
+        <comment>The series relation should be used if the series table represents a timeseries.</comment>
+        <id name="pkid" type="long">
             <column name="pkid">
                 <comment>Table primary key</comment>
             </column>
@@ -14,27 +12,25 @@
                 <param name="sequence">datasetrelation_seq</param>
             </generator>
         </id>
-         <property name="dataset" type="long">
+        <many-to-one name="relatedDataset" class="DatasetEntity" foreign-key="relatedDatasetFk">
+            <column name="relatedDataset">
+                <comment>Relation/foreign key to the associated series table. Contains "series".seriesId</comment>
+            </column>
+        </many-to-one>
+        <property name="dataset" type="long">
             <column name="dataset" not-null="true" index="datasetRelationIdx">
                 <comment>Foreign Key (FK) to the series. Contains "series".seriesId</comment>
             </column>
         </property>
-        <many-to-one name="relatedDataset"
-                     class="DatasetEntity"
-                     foreign-key="relatedDatasetFk">
-            <column name="relatedDataset">
-                   <comment>Relation/foreign key to the associated series table. Contains "series".seriesId</comment>
-               </column>
-        </many-to-one>
-		<property name="role" type="string">
-			<column name="role">
-				<comment>The role of the relation</comment>
-			</column>
-		</property>
-		<property name="relatedUrl" type="string" not-null="false">
-			<column name="relatedUrl">
-				<comment>An url to a related observation</comment>
-			</column>
-		</property>
-	</class>
+        <property name="role" type="string">
+            <column name="role">
+                <comment>The role of the relation</comment>
+            </column>
+        </property>
+        <property name="relatedUrl" type="string" not-null="false">
+            <column name="relatedUrl">
+                <comment>An url to a related observation</comment>
+            </column>
+        </property>
+    </class>
 </hibernate-mapping>

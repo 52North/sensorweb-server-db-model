@@ -13,9 +13,9 @@
 
         <discriminator column="hibernatediscriminator" type="string" not-null="false"/>
 
-        <many-to-one name="service" class="ServiceEntity" foreign-key="featureServiceFk">
-        	<column name="service" not-null="true"/>
-        </many-to-one>
+<!--         <many-to-one name="service" class="ServiceEntity" foreign-key="featureServiceFk"> -->
+<!--         	<column name="service" not-null="true"/> -->
+<!--         </many-to-one> -->
 
         <many-to-one name="featureType" class="FeatureTypeEntity" foreign-key="featureFeatureTypeFk">
             <column name="featuretype" not-null="true">

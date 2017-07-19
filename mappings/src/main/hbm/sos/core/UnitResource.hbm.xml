@@ -11,9 +11,9 @@
                 <param name="sequence">unitid_seq</param>
             </generator>
         </id>
-        <many-to-one name="service" class="ServiceEntity" foreign-key="unitServiceFk">
-        	<column name="service" not-null="true"/>
-        </many-to-one>
+<!--         <many-to-one name="service" class="ServiceEntity" foreign-key="unitServiceFk"> -->
+<!--         	<column name="service" not-null="true"/> -->
+<!--         </many-to-one> -->
         <property name="unit" type="string">
             <column name="unit" not-null="true" unique-key="unitUK">
                 <comment>The unit of measure of observations. See http://unitsofmeasure.org/ucum.html</comment>
