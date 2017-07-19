@@ -256,6 +256,7 @@ public abstract class DataEntity<T> {
 
     public void setParameters(Set<Parameter< ? >> parameters) {
         if (parameters != null) {
+            this.parameters.clear();
             this.parameters.addAll(parameters);
         }
     }
@@ -270,6 +271,7 @@ public abstract class DataEntity<T> {
 
     public void setDatasets(Set<DatasetEntity<DataEntity< ? >>> datasets) {
         if (datasets != null) {
+            this.datasets.clear();
             this.datasets.addAll(datasets);
         }
     }
@@ -280,6 +282,7 @@ public abstract class DataEntity<T> {
     
     public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
         if (relatedObservations != null) {
+            this.relatedObservations.clear();
             this.relatedObservations.addAll(relatedObservations);
         }
     }
