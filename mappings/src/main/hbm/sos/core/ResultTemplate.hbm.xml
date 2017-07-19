@@ -17,11 +17,11 @@
                 <comment>Foreign Key (FK) to the related dataset. Contains "dataset".pkid</comment>
             </column>
         </many-to-one>
-        <property name="domainId" type="string">
-            <column index="resultTempIdentifierIdx" name="domainId" not-null="true">
-                <comment>The resultTemplate identifier, required for InsertResult requests.</comment>
-            </column>
-        </property>
+<!--         <property name="domainId" type="string"> -->
+<!--             <column index="resultTempIdentifierIdx" name="domainId" not-null="true"> -->
+<!--                 <comment>The resultTemplate identifier, required for InsertResult requests.</comment> -->
+<!--             </column> -->
+<!--         </property> -->
         <property name="resultStructure" type="org.hibernate.type.StringClobType">
             <column name="resultStructure" not-null="true">
                 <comment>The resultStructure as XML string. Describes the types and order of the values in a GetResultResponse/InsertResultRequest</comment>
