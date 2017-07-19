@@ -1,22 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-
-    Copyright ${year} 52°North Initiative for Geospatial Open Source
-    Software GmbH
-
-    Licensed under the Apache License, Version 2.0 (the "License");
-    you may not use this file except in compliance with the License.
-    You may obtain a copy of the License at
-
-       http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing, software
-    distributed under the License is distributed on an "AS IS" BASIS,
-    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-    See the License for the specific language governing permissions and
-    limitations under the License.
-
--->
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingDataEntity" table="observation">
@@ -27,7 +9,7 @@
             </generator>
         </id>
         <set inverse="true" name="datasets" table="datasetdata" >
-            <key column="data" not-null="true" foreign-key="datadatafk"/>
+            <key column="observation" not-null="true" foreign-key="datadatafk"/>
             <one-to-many class="EReportingDatasetEntity"/>
         </set>
         <property name="phenomenonTimeStart"
@@ -125,7 +107,7 @@
         </component>
         <!-- Or add only to specific joined-subclasses -->
         <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan">
-            <key column="data" not-null="true" foreign-key="dataparamdatafk"/>
+            <key column="observation" not-null="true" foreign-key="dataparamdatafk"/>
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter" foreign-key="dataparamparamfk"/>
         </set>
          <property name="child"
@@ -191,12 +173,12 @@
         </property>
 
         <joined-subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" table="numericValue">
-            <key column="data" foreign-key="dataNumericValueFk"/>
+            <key column="observation" foreign-key="dataNumericValueFk"/>
             <property column="value" name="value" type="double"/>
         </joined-subclass>
 
         <joined-subclass extends="EReportingDataEntity" name="EReportingTextDataEntity" table="textValue">
-            <key column="data" foreign-key="dataTextValueFk"/>
+            <key column="observation" foreign-key="dataTextValueFk"/>
             <property column="value" name="value" type="string"/>
             <property name="valueIdentifier"
                        type="string">
@@ -219,7 +201,7 @@
         </joined-subclass>
 
         <joined-subclass extends="EReportingDataEntity" name="EReportingCountDataEntity" table="countValue">
-            <key column="data" foreign-key="dataCountValueFk"/>
+            <key column="observation" foreign-key="dataCountValueFk"/>
             <property column="value" name="value" type="integer"/>
         </joined-subclass>
         <joined-subclass name="EReportingBlobDataEntity"

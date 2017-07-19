@@ -95,15 +95,15 @@
         </component>
 
         <set inverse="true" name="datasets" table="datasetdata">
-            <key column="data" not-null="true" foreign-key="datadatafk" />
+            <key column="pkid" not-null="true" foreign-key="datadatafk" />
             <one-to-many class="DatasetEntity" />
         </set>
 
         <!-- Or add only to specific joined-subclasses -->
         <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan">
-            <key column="data" not-null="true" foreign-key="dataparamdatafk" />
+            <key column="observation" not-null="true" foreign-key="obsparamdatafk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
-                foreign-key="dataparamparamfk" />
+                foreign-key="obsparamparamfk" />
         </set>
 
         <set name="relatedObservations" table="relatedobservations" fetch="join" access="field" cascade="all">
@@ -114,12 +114,12 @@
         </set>
 
         <joined-subclass extends="DataEntity" name="QuantityDataEntity" table="numericValue">
-            <key column="data" foreign-key="dataNumericValueFk" />
+            <key column="observation" foreign-key="dataNumericValueFk" />
             <property column="value" name="value" type="double" />
         </joined-subclass>
 
         <joined-subclass extends="DataEntity" name="TextDataEntity" table="textValue">
-            <key column="data" foreign-key="dataTextValueFk" />
+            <key column="observation" foreign-key="dataTextValueFk" />
             <property column="value" name="value" type="string" />
             <property name="valueIdentifier" type="string">
                 <column name="domainId">
@@ -139,7 +139,7 @@
         </joined-subclass>
 
         <joined-subclass extends="DataEntity" name="CountDataEntity" table="countValue">
-            <key column="data" foreign-key="dataCountValueFk" />
+            <key column="observation" foreign-key="dataCountValueFk" />
             <property column="value" name="value" type="integer" />
         </joined-subclass>
 
