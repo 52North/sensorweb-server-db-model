@@ -52,25 +52,25 @@
         </property>
 
         <property name="phenomenonTimeStart" type="timestamp">
-            <column name="phenomenonTimeStart" length="29" not-null="true">
+            <column name="phenomenontimestart" length="29" not-null="true">
                 <comment>Time stamp when the offering was started or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="phenomenonTimeEnd" type="timestamp">
-            <column name="phenomenonTimeEnd" length="29" not-null="true">
+            <column name="phenomenontimeend" length="29" not-null="true">
                 <comment>Time stamp when the offering was stopped or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="resultTimeStart" type="timestamp">
-            <column name="resultTimeStart" length="29" not-null="true">
+            <column name="resulttimestart" length="29" not-null="true">
                 <comment>Time stamp when the offering was published or result was published/available</comment>
             </column>
         </property>
 
         <property name="resultTimeEnd" type="timestamp">
-            <column name="resultTimeEnd" length="29" not-null="true">
+            <column name="resulttimeend" length="29" not-null="true">
                 <comment>Time stamp when the offering was published or result was published/available</comment>
             </column>
         </property>
