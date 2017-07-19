@@ -25,7 +25,7 @@ import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
  * @since 1.0.0
  *
  */
-public class ResultTemplateEntity extends PkidEntity implements Serializable,  HasResultStructure, HasResultEncoding {
+public class ResultTemplateEntity extends PkidEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
     private static final long serialVersionUID = -8847952458819368733L;
 
