@@ -34,11 +34,8 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String ENTITY_ALIAS = "dataset";
 
     public static final String PROPERTY_OBSERVATION_CONSTELLATION = "observationConstellation";
-    public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_CATEGORY = "category";
-    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_FEATURE = "feature";
-    public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_PLATFORM = "platform";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
