@@ -85,90 +85,45 @@
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
                 foreign-key="datasetparamparamfk" />
         </set>
-
+        
+        <bag fetch="select" name="observations" table="datasetobservation" >
+            <key column="dataset" not-null="true" foreign-key="datasetfk"/>
+            <many-to-many column="data" class="DataEntity" />
+        </bag>
+        
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
             <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk" />
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="text" name="TextDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="count" name="CountDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="blob" name="BlobDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="boolean" name="BooleanDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="category" name="CategoryDatasetEntity">
             <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk" />
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="complex" name="ComplexDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="geometry" name="GeometryDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="swedataarray" name="SweDataArrayDatasetEntity">
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
         </subclass>
 
         <subclass discriminator-value="quantity-profile" name="ProfileDatasetEntity">
-            <property name="verticalParameterName" formula="'depth'" type="string" />
             <many-to-one class="UnitEntity" column="unit" insert="false" name="unit" update="false" />
-            <list fetch="select" inverse="true" name="observations" table="datasetdata">
-                <key column="pkid" />
-                <index column="dataset" />
-                <one-to-many class="DataEntity" />
-            </list>
+            <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
     </class>
 </hibernate-mapping>
