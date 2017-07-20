@@ -96,7 +96,7 @@
 
         <set name="datasets" table="datasetobservation">
             <key column="data" not-null="true" foreign-key="datafk" />
-            <many-to-many column="dataset" class="DatasetEntity" />
+            <many-to-many column="dataset" class="DatasetEntity" foreign-key="datasetfk" />
         </set>
 
         <!-- Or add only to specific joined-subclasses -->

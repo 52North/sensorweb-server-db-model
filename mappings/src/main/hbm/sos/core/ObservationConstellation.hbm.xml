@@ -15,23 +15,23 @@
             </generator>
         </id>
         <many-to-one name="observableProperty" class="PhenomenonEntity" foreign-key="obsConstObsPropFk"
-            unique-key="obsnConstellationIdentity">
+            unique-key="obsConstellationIdentity">
             <column index="obsConstObsPropIdx" name="observableProperty" not-null="true">
                 <comment>Foreign Key (FK) to the related observableProperty. Contains
                     "observableproperty".observablepropertyid</comment>
             </column>
         </many-to-one>
-        <many-to-one name="procedure" class="ProcedureEntity" foreign-key="obsnConstProcedureFk" unique-key="obsnConstellationIdentity">
+        <many-to-one name="procedure" class="ProcedureEntity" foreign-key="obsConstProcedureFk" unique-key="obsConstellationIdentity">
             <column index="obsConstProcedureIdx" name="procedure" not-null="true">
                 <comment>Foreign Key (FK) to the related procedure. Contains "procedure".procedureid</comment>
             </column>
         </many-to-one>
-        <many-to-one name="offering" class="OfferingEntity" foreign-key="obsConstOfferingFk" unique-key="obsnConstellationIdentity">
+        <many-to-one name="offering" class="OfferingEntity" foreign-key="obsConstOfferingFk" unique-key="obsConstellationIdentity">
             <column index="obsConstOfferingIdx" name="offering" not-null="true">
                 <comment>Foreign Key (FK) to the related offering. Contains "offering".offeringid</comment>
             </column>
         </many-to-one>
-        <many-to-one name="observationType" class="ObservationTypeEntity" foreign-key="obsConstObservationIypeFk">
+        <many-to-one name="observationType" class="ObservationTypeEntity" foreign-key="obsConstObservationTypeFk">
             <column name="observationtype">
                 <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
             </column>

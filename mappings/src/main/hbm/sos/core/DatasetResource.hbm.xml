@@ -74,19 +74,19 @@
 
         <!-- Possible performance issue!!! -->
         <set inverse="true" name="resultTimes" table="observation">
-            <key column="dataset" foreign-key="datasetresulttimefk" />
+            <key column="dataset" property-ref="pkid" foreign-key="datasetresulttimefk" />
             <element column="resulttime" type="string" />
         </set>
 
         <set inverse="false" name="parameters" table="datasetparameter" cascade="delete-orphan">
-            <key column="dataset" not-null="true" foreign-key="datasetparamdatasetfk" />
+            <key column="dataset" property-ref="pkid" not-null="true" foreign-key="datasetparamdatasetfk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
                 foreign-key="datasetparamparamfk" />
         </set>
         
         <bag fetch="select" name="observations" table="datasetobservation" >
-            <key column="dataset" not-null="true" foreign-key="datasetfk"/>
-            <many-to-many column="data" class="DataEntity" />
+            <key column="dataset" not-null="true" foreign-key="datasetfk" />
+            <many-to-many column="data" class="DataEntity" foreign-key="datafk" />
         </bag>
         
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
