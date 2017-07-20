@@ -42,17 +42,15 @@ public class ObservationConstellationEntity extends PkidEntity
                    HasDeletedFlag<ObservationConstellationEntity>,
                    HasDisabledFlag<ObservationConstellationEntity> {
 
-    public static final String ID = "observationConstellationId";
-
     private static final long serialVersionUID = -3890149740562709928L;
+    
     private PhenomenonEntity observableProperty;
     private ProcedureEntity procedure;
-    private ObservationTypeEntity observationType;
     private OfferingEntity offering;
+    private ObservationTypeEntity observationType;
     private Boolean deleted = false;
     private Boolean disabled = false;
     private Boolean hiddenChild = false;
-
 
     @Override
     public PhenomenonEntity getObservableProperty() {
