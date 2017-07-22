@@ -79,7 +79,7 @@
         </set>
 
         <set inverse="false" name="parameters" table="datasetparameter" cascade="delete-orphan">
-            <key column="dataset" property-ref="pkid" not-null="true" foreign-key="datasetparamdatasetfk" />
+            <key column="dataset" not-null="true" foreign-key="datasetparamdatasetfk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
                 foreign-key="datasetparamparamfk" />
         </set>
