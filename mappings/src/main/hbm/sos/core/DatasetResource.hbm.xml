@@ -73,10 +73,10 @@
         </property>
 
         <!-- Possible performance issue!!! -->
-        <set inverse="true" name="resultTimes" table="observation">
-            <key column="dataset" property-ref="pkid" foreign-key="datasetresulttimefk" />
-            <element column="resulttime" type="string" />
-        </set>
+<!--         <set inverse="true" name="resultTimes" table="observation"> -->
+<!--             <key column="pkid" foreign-key="datasetresulttimefk" /> -->
+<!--             <element column="resulttime" type="string" /> -->
+<!--         </set> -->
 
         <set inverse="false" name="parameters" table="datasetparameter" cascade="delete-orphan">
             <key column="dataset" not-null="true" foreign-key="datasetparamdatasetfk" />
