@@ -29,7 +29,7 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     private boolean insitu;
 
-    private String procedureDescriptionFormat;
+    private ProcedureDescriptionFormatEntity procedureDescriptionFormat;
 
     private boolean disabled;
 
@@ -69,11 +69,11 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
         this.insitu = insitu;
     }
 
-    public String getProcedureDescriptionFormat() {
+    public ProcedureDescriptionFormatEntity getProcedureDescriptionFormat() {
         return this.procedureDescriptionFormat;
     }
 
-    public void setProcedureDescriptionFormat(String procedureDescriptionFormat) {
+    public void setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat) {
         this.procedureDescriptionFormat = procedureDescriptionFormat;
     }
 
