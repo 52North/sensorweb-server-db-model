@@ -7,11 +7,15 @@
             <generator class="assigned" />
         </id>
         <property name="timestamp" column="phenomenontimestart" type="timestamp"/>
-        <property column="dataset" name="datasetId" type="long" />
         
         <component class="GeometryEntity" name="geometryEntity">
             <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
             <property column="samplingGeometry" name="geometry" type="org.hibernate.spatial.GeometryType" />
         </component>
+        
+        <set name="datasetIds" table="datasetobservation">
+            <key column="data" foreign-key="samplinggeomobservationfk"/>
+            <element column="dataset" type="long" />
+        </set>
     </class>
 </hibernate-mapping>

@@ -17,6 +17,7 @@
 package org.n52.series.db.beans;
 
 import java.util.Date;
+import java.util.Set;
 
 import org.n52.series.db.common.Utils;
 
@@ -28,7 +29,7 @@ public class SamplingGeometryEntity extends PkidEntity {
     
     private GeometryEntity geometryEntity;
 
-    private Long datasetId;
+    private Set<Long> datasetIds;
 
     public Date getTimestamp() {
         return Utils.createUnmutableTimestamp(timestamp);
@@ -36,16 +37,6 @@ public class SamplingGeometryEntity extends PkidEntity {
 
     public void setTimestamp(Date timestamp) {
         this.timestamp = Utils.createUnmutableTimestamp(timestamp);
-    }
-
-    @Deprecated
-    public Long getSeriesPkid() {
-        return datasetId;
-    }
-
-    @Deprecated
-    public void setSeriesPkid(Long pkid) {
-        this.datasetId = pkid;
     }
 
     public GeometryEntity getGeometryEntity() {
@@ -56,11 +47,11 @@ public class SamplingGeometryEntity extends PkidEntity {
         this.geometryEntity = geometryEntity;
     }
 
-    public Long getDatasetId() {
-        return datasetId;
+    public Set<Long> getDatasetIds() {
+        return datasetIds;
     }
 
-    public void setDatasetId(Long dataset) {
-        this.datasetId = dataset;
+    public void setDatasetIds(Set<Long> datasets) {
+        this.datasetIds = datasets;
     }
 }
