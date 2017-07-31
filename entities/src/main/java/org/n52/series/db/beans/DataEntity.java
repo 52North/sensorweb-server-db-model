@@ -25,7 +25,7 @@ import java.util.Set;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> {
+public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     public static final String SERIES_PKID = "seriesPkid";
 
@@ -285,6 +285,13 @@ public abstract class DataEntity<T> {
             this.relatedObservations.clear();
             this.relatedObservations.addAll(relatedObservations);
         }
+    }
+
+    @Override
+    public int compareTo(DataEntity<T> o) {
+        return (int) (phenomenonTimeEnd.equals(o.getPhenomenonTimeEnd())
+                ? phenomenonTimeStart.getTime() - o.getPhenomenonTimeStart().getTime()
+                : phenomenonTimeEnd.getTime() - o.getPhenomenonTimeEnd().getTime());
     }
 
     @Override
