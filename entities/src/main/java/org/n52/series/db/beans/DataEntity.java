@@ -27,8 +27,6 @@ import org.n52.series.db.common.Utils;
 
 public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
-    public static final String SERIES_PKID = "seriesPkid";
-
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
 
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
@@ -60,7 +58,6 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     private T value;
 
-    private Long seriesPkid;
 
     private GeometryEntity geometryEntity;
 
@@ -170,13 +167,6 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
-    public Long getSeriesPkid() {
-        return seriesPkid;
-    }
-
-    public void setSeriesPkid(Long seriesPkid) {
-        this.seriesPkid = seriesPkid;
-    }
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
