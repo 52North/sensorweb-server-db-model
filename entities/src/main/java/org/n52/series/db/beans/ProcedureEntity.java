@@ -34,17 +34,17 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     private boolean disabled;
 
     private boolean deleted;
-    
+
     private String descriptionFile;
-    
+
     private ProcedureEntity typeOf;
-    
+
     private boolean type;
 
     private boolean aggregation;
-    
+
     private Set<ValidProcedureTimeEntity> validProcedureTimes;
-    
+
     public boolean isReference() {
         return reference;
     }
@@ -128,7 +128,7 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     public void setAggregation(boolean isAggregation) {
         this.aggregation = isAggregation;
     }
-    
+
     public Set<ValidProcedureTimeEntity> getValidProcedureTimes() {
         return validProcedureTimes;
     }

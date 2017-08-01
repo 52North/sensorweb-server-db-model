@@ -28,9 +28,9 @@ import org.n52.series.db.common.Utils;
 public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     public static final String PROPERTY_PKID = "pkid";
-    
+
     public static final String PROPERTY_DATASETS = "datasets";
-    
+
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
 
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";

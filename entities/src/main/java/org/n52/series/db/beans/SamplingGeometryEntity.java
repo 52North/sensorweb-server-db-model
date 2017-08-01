@@ -26,7 +26,7 @@ public class SamplingGeometryEntity extends PkidEntity {
     private static final long serialVersionUID = -3036211037882973515L;
 
     private Date timestamp;
-    
+
     private GeometryEntity geometryEntity;
 
     private Set<Long> datasetIds;

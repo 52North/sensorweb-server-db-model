@@ -32,7 +32,7 @@ public class ResultTemplateEntity extends PkidEntity implements Serializable, Ha
     private DatasetEntity<DataEntity<?>> dataset;
 
     private String identifier;
-    
+
     private String domainId;
 
     private String resultStructure;
