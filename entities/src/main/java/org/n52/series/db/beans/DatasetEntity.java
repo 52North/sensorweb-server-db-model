@@ -262,6 +262,23 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     }
 
     @Override
+    public String getLabelFrom(String locale) {
+        ProcedureEntity procedure = observationConstellation.getProcedure();
+        PhenomenonEntity phenomenon = observationConstellation.getObservableProperty();
+        OfferingEntity offering = observationConstellation.getOffering();
+        StringBuilder sb = new StringBuilder();
+        sb.append(phenomenon.getLabelFrom(locale))
+          .append(" ");
+        sb.append(procedure.getLabelFrom(locale))
+          .append(", ");
+        sb.append(feature.getLabelFrom(locale))
+          .append(", ");
+        return sb.append(offering.getLabelFrom(locale))
+                 .toString();
+
+    }
+
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName())

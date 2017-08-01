@@ -43,7 +43,7 @@ public class ObservationConstellationEntity extends PkidEntity
                    HasDisabledFlag<ObservationConstellationEntity> {
 
     private static final long serialVersionUID = -3890149740562709928L;
-
+    
     private PhenomenonEntity observableProperty;
     private ProcedureEntity procedure;
     private OfferingEntity offering;
