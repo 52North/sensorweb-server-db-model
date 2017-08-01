@@ -5,6 +5,7 @@ script: mvn -fae -U -B clean install -Pcreate-docs -P check
 after_success: "./.travis/deploy.sh"
 env:
   global:
+    - SNAPSHOT_BRANCH=develop
     - secure: "Q7Ry1dyB/6+0TEJN3fyBiCC1HlEK2pTQzWxywRmMgIxnJVXHq33y1sU9i78v6Skb9KozyfD4Uyu8Y8k+6dRf4dqWrT5+bYJIMXrTt4MLnkCtri3sd6G/oEkIZfgPJKGZdPnxBS4LvSfpNnbnlppDBmYd3pXU1cNVZHR4Mn4uzaE="
 cache:
   directories
