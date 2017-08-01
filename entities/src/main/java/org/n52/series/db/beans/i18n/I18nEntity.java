@@ -26,6 +26,10 @@ public class I18nEntity extends PkidEntity {
 
     private String name;
 
+    private String shortName;
+
+    private String longName;
+
     private String description;
 
     public String getLocale() {
@@ -42,6 +46,22 @@ public class I18nEntity extends PkidEntity {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getLongName() {
+        return longName;
+    }
+
+    public void setLongName(String longName) {
+        this.longName = longName;
     }
 
     public String getDescription() {

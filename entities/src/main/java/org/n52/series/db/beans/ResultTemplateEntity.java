@@ -25,7 +25,7 @@ import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
  * @since 1.0.0
  *
  */
-public class ResultTemplateEntity extends PkidEntity implements Serializable,  HasResultStructure, HasResultEncoding {
+public class ResultTemplateEntity extends PkidEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
     private static final long serialVersionUID = -8847952458819368733L;
 
@@ -33,11 +33,21 @@ public class ResultTemplateEntity extends PkidEntity implements Serializable,  H
 
     private String identifier;
 
+    private String domainId;
+
     private String resultStructure;
 
     private String resultEncoding;
 
     public ResultTemplateEntity() {
+    }
+
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
     }
 
     public DatasetEntity<DataEntity<?>> getDataset() {

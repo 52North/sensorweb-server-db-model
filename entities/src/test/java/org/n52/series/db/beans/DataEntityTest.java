@@ -32,8 +32,8 @@ public class DataEntityTest {
         DataEntity<Object> dataEntity = createDataDummy();
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
-        dataEntity.setTimestart(timestamp);
-        Timestamp timestart = (Timestamp) dataEntity.getTimestart();
+        dataEntity.setPhenomenonTimeStart(timestamp);
+        Timestamp timestart = (Timestamp) dataEntity.getPhenomenonTimeStart();
         MatcherAssert.assertThat(timestart.getNanos(), is(timestamp.getNanos()));
     }
 
@@ -42,8 +42,8 @@ public class DataEntityTest {
         DataEntity<Object> dataEntity = createDataDummy();
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
-        dataEntity.setTimeend(timestamp);
-        Timestamp timeend = (Timestamp) dataEntity.getTimeend();
+        dataEntity.setPhenomenonTimeEnd(timestamp);
+        Timestamp timeend = (Timestamp) dataEntity.getPhenomenonTimeEnd();
         MatcherAssert.assertThat(timeend.getNanos(), is(timestamp.getNanos()));
     }
 
@@ -55,16 +55,6 @@ public class DataEntityTest {
         dataEntity.setResultTime(timestamp);
         Timestamp resulttime = (Timestamp) dataEntity.getResultTime();
         MatcherAssert.assertThat(resulttime.getNanos(), is(timestamp.getNanos()));
-    }
-
-    @Test
-    public void when_settingTimestampWithNanos_then_nanosAvailableOnGetting() {
-        DataEntity<Object> dataEntity = createDataDummy();
-        Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
-
-        dataEntity.setTimestamp(timestamp);
-        Timestamp timestamp2 = (Timestamp) dataEntity.getTimestamp();
-        MatcherAssert.assertThat(timestamp2.getNanos(), is(timestamp.getNanos()));
     }
 
     @Test
@@ -85,16 +75,6 @@ public class DataEntityTest {
         dataEntity.setValidTimeEnd(timestamp);
         Timestamp validTimeend = (Timestamp) dataEntity.getValidTimeEnd();
         MatcherAssert.assertThat(validTimeend.getNanos(), is(timestamp.getNanos()));
-    }
-
-    @Test
-    public void when_settingTimestamp_then_timeendIsSet() {
-        DataEntity<Object> dataEntity = createDataDummy();
-        Timestamp now = new Timestamp(System.currentTimeMillis());
-
-        dataEntity.setTimestamp(now);
-        Timestamp timeend = (Timestamp) dataEntity.getTimeend();
-        MatcherAssert.assertThat(timeend, is(now));
     }
 
     private DataEntity<Object> createDataDummy() {

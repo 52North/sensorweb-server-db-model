@@ -20,6 +20,36 @@ import java.util.Collection;
 
 public class CategoryDataEntity extends DataEntity<String> {
 
+    private String valueIdentifier;
+
+    private String valueName;
+
+    private String valueDescription;
+
+    public String getValueIdentifier() {
+        return valueIdentifier;
+    }
+
+    public void setValueIdentifier(String valueIdentifier) {
+        this.valueIdentifier = valueIdentifier;
+    }
+
+    public String getValueName() {
+        return valueName;
+    }
+
+    public void setValueName(String valueName) {
+        this.valueName = valueName;
+    }
+
+    public String getValueDescription() {
+        return valueDescription;
+    }
+
+    public void setValueDescription(String valueDescription) {
+        this.valueDescription = valueDescription;
+    }
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();

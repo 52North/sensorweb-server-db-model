@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ValidProcedureTimeEntity" table="validproceduretime">
-        <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile. Mapping file: mapping/transactionl/ValidProcedureTime.hbm.xml</comment>
+        <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile.
+            Mapping file: mapping/transactionl/ValidProcedureTime.hbm.xml</comment>
         <id name="pkid" type="long">
             <column name="pkid">
                 <comment>Table primary key</comment>
@@ -12,14 +12,15 @@
                 <param name="sequence">validProcedureTime_seq</param>
             </generator>
         </id>
-       <many-to-one name="procedure" class="ProcedureEntity"  foreign-key="validProcedureTimeProcedureFk">
+        <many-to-one name="procedure" class="ProcedureEntity" foreign-key="validProcedureTimeProcedureFk">
             <column name="procedure" not-null="true">
                 <comment>Foreign Key (FK) to the related procedure. Contains "procedure".procedureid</comment>
             </column>
         </many-to-one>
-        <many-to-one name="procedureDescriptionFormat" class="ProcedureDescriptionFormatEntity"  foreign-key="validProcProcDescFormatFk">
+        <many-to-one name="procedureDescriptionFormat" class="ProcedureDescriptionFormatEntity" foreign-key="validProcProcDescFormatFk">
             <column name="procedureDescriptionFormat" not-null="true">
-                <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains "procedureDescriptionFormat".procedureDescriptionFormatid</comment>
+                <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains
+                    "procedureDescriptionFormat".procedureDescriptionFormatid</comment>
             </column>
         </many-to-one>
         <property name="startTime" type="timestamp">
@@ -32,7 +33,7 @@
                 <comment>Timestamp until this procedure description is invalid</comment>
             </column>
         </property>
-        <property name="descriptionXml" type="org.hibernate.type.StringClobType" >
+        <property name="descriptionXml" type="org.hibernate.type.StringClobType">
             <column name="descriptionXml" not-null="true">
                 <comment>Procedure description as XML string</comment>
             </column>

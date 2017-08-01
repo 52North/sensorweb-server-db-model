@@ -115,7 +115,7 @@
 			<property formula="3" name="numberOfDecimals" type="int" />
 			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="data" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -123,7 +123,7 @@
 
 		<subclass discriminator-value="text" name="EReportingTextDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -131,7 +131,7 @@
 
 		<subclass discriminator-value="count" name="EReportingCountDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -139,7 +139,7 @@
 
 		<subclass discriminator-value="blob" name="EReportingBlobDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -147,7 +147,7 @@
 
 		<subclass discriminator-value="boolean" name="EReportingBooleanDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -156,7 +156,7 @@
 		<subclass discriminator-value="category" name="EReportingCategoryDatasetEntity">
 			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk"/>
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -164,7 +164,7 @@
 
 		<subclass discriminator-value="complex" name="EReportingComplexDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -172,7 +172,7 @@
 
 		<subclass discriminator-value="geometry" name="EReportingGeometryDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>
@@ -180,7 +180,7 @@
 
 		<subclass discriminator-value="swedataarray" name="EReportingSweDataArrayDatasetEntity">
 			<list fetch="select" inverse="true" name="observations" table="datasetdata">
-				<key column="data" />
+				<key column="pkid" />
 				<index column="dataset" />
 				<one-to-many class="EReportingDataEntity" />
 			</list>

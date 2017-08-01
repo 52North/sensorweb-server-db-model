@@ -25,25 +25,42 @@ import java.util.Set;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> {
+public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
-    public static final String SERIES_PKID = "seriesPkid";
+    public static final String PROPERTY_PKID = "pkid";
 
-    public static final String PROPERTY_TIMESTART = "timestart";
+    public static final String PROPERTY_DATASETS = "datasets";
 
-    public static final String PROPERTY_TIMEEND = "timeend";
+    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
+
+    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
 
     private Long pkid;
 
-    // optional
-    private Date timestart;
+    /**
+     * Identification of the entity without special chars.
+     */
+    private String domainId;
 
-    // required
-    private Date timeend;
+    private CodespaceEntity codespace;
+
+    /**
+     * Default name of the entity.
+     */
+    private String name;
+
+    private CodespaceEntity codespaceName;
+
+    /**
+     * Default description of the entity.
+     */
+    private String description;
+
+    private Date phenomenonTimeStart;
+
+    private Date phenomenonTimeEnd;
 
     private T value;
-
-    private Long seriesPkid;
 
     private GeometryEntity geometryEntity;
 
@@ -61,6 +78,10 @@ public abstract class DataEntity<T> {
 
     private final Set<Parameter< ? >> parameters = new HashSet<>(0);
 
+    private final Set<DatasetEntity<DataEntity< ? >>> datasets = new HashSet<>(0);
+
+    private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
+
     public Long getPkid() {
         return pkid;
     }
@@ -69,57 +90,74 @@ public abstract class DataEntity<T> {
         this.pkid = pkid;
     }
 
-    /**
-     * @return timestamp
-     * @deprecated use {@link #getTimeend()}
-     */
-    @Deprecated
-    public Date getTimestamp() {
-        return getTimeend();
+    public String getDomainId() {
+        return domainId;
+    }
+
+    public void setDomainId(String domainId) {
+        this.domainId = domainId;
+    }
+
+    public CodespaceEntity getCodespace() {
+        return codespace;
+    }
+
+    public void setCodespace(CodespaceEntity codespace) {
+        this.codespace = codespace;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public CodespaceEntity getCodespaceName() {
+        return codespaceName;
+    }
+
+    public void setCodespaceName(CodespaceEntity codespaceName) {
+        this.codespaceName = codespaceName;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**
-     * @param timestamp
-     *        the timestamp
-     * @deprecated use {@link #setTimeend(java.util.Date)}
+     * @return the phenomenonTimeStart
      */
-    @Deprecated
-    public void setTimestamp(Date timestamp) {
-        setTimeend(timestamp);
+    public Date getPhenomenonTimeStart() {
+        return Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
     /**
-     * @return the timestart
-     * @since 2.0.0
+     * @param phenomenonTimeStart
+     *        the phenomenonTimeStart
      */
-    public Date getTimestart() {
-        return Utils.createUnmutableTimestamp(timestart);
+    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
+        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
     /**
-     * @param timestart
-     *        the timestart
-     * @since 2.0.0
+     * @return the phenomenonTimeEnd
      */
-    public void setTimestart(Date timestart) {
-        this.timestart = Utils.createUnmutableTimestamp(timestart);
+    public Date getPhenomenonTimeEnd() {
+        return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
     /**
-     * @return the timeend
-     * @since 2.0.0
+     * @param phenomenonTimeEnd
+     *        the phenomenonTimeEnd
      */
-    public Date getTimeend() {
-        return Utils.createUnmutableTimestamp(timeend);
-    }
-
-    /**
-     * @param timeend
-     *        the timeend
-     * @since 2.0.0
-     */
-    public void setTimeend(Date timeend) {
-        this.timeend = Utils.createUnmutableTimestamp(timeend);
+    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
     public T getValue() {
@@ -132,13 +170,6 @@ public abstract class DataEntity<T> {
 
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
-    public Long getSeriesPkid() {
-        return seriesPkid;
-    }
-
-    public void setSeriesPkid(Long seriesPkid) {
-        this.seriesPkid = seriesPkid;
-    }
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -218,12 +249,42 @@ public abstract class DataEntity<T> {
 
     public void setParameters(Set<Parameter< ? >> parameters) {
         if (parameters != null) {
+            this.parameters.clear();
             this.parameters.addAll(parameters);
         }
     }
 
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
+    }
+
+    public Set<DatasetEntity<DataEntity< ? >>> getDatasets() {
+        return datasets;
+    }
+
+    public void setDatasets(Set<DatasetEntity<DataEntity< ? >>> datasets) {
+        if (datasets != null) {
+            this.datasets.clear();
+            this.datasets.addAll(datasets);
+        }
+    }
+
+    public Set<RelatedDataEntity> getRelatedObservations() {
+        return relatedObservations;
+    }
+
+    public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
+        if (relatedObservations != null) {
+            this.relatedObservations.clear();
+            this.relatedObservations.addAll(relatedObservations);
+        }
+    }
+
+    @Override
+    public int compareTo(DataEntity<T> o) {
+        return (int) (phenomenonTimeEnd.equals(o.getPhenomenonTimeEnd())
+                ? phenomenonTimeStart.getTime() - o.getPhenomenonTimeStart().getTime()
+                : phenomenonTimeEnd.getTime() - o.getPhenomenonTimeEnd().getTime());
     }
 
     @Override

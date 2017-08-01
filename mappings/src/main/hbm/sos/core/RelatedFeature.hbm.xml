@@ -3,7 +3,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="RelatedFeatureEntity" table="relatedfeature">
-        <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES 2.0). Mapping file: mapping/transactionl/RelatedFeature.hbm.xml</comment>
+        <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
+            2.0). Mapping file: mapping/transactionl/RelatedFeature.hbm.xml</comment>
         <id name="pkid" type="long">
             <column name="pkid">
                 <comment>Table primary key, used for relations</comment>
@@ -12,13 +13,14 @@
                 <param name="sequence">relatedFeature_seq</param>
             </generator>
         </id>
-        <many-to-one name="featureOfInterest" class="AbstractFeatureEntity"  foreign-key="relatedFeatureFeatureFk">
+        <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="relatedFeatureFeatureFk">
             <column name="featureOfInterest" not-null="true">
-                <comment>Foreign Key (FK) to the related featureOfInterest. Contains "featureOfInterest".featureOfInterestid</comment>
+                <comment>Foreign Key (FK) to the related feature. Contains "featureOfInterest".featureOfInterestid</comment>
             </column>
         </many-to-one>
         <set name="relatedFeatureRoles" table="relatedfeaturehasrole" inverse="false">
-            <comment>Relation table to store relatedFeatures and their associated relatedFeatureRoles. Mapping file: mapping/transactionl/RelatedFeature.hbm.xml</comment>
+            <comment>Relation table to store relatedFeatures and their associated relatedFeatureRoles. Mapping file:
+                mapping/transactionl/RelatedFeature.hbm.xml</comment>
             <key foreign-key="relffeatrolerelfeatfk">
                 <column name="relatedFeature" not-null="true">
                     <comment>Foreign Key (FK) to the related relatedFeature. Contains "relatedFeature".relatedFeatureid</comment>
@@ -26,12 +28,14 @@
             </key>
             <many-to-many class="RelatedFeatureRoleEntity" foreign-key="relatedFeatRelatedFeatRoleFk">
                 <column name="relatedFeatureRole" not-null="true">
-                    <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains "relatedFeatureRole".relatedFeatureRoleid</comment>
+                    <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains
+                        "relatedFeatureRole".relatedFeatureRoleid</comment>
                 </column>
             </many-to-many>
         </set>
         <set name="offerings" table="offeringhasrelatedfeature" inverse="true">
-            <comment>Relation table to store relatedFeatures and their associated offerings. Mapping file: mapping/transactionl/RelatedFeature.hbm.xml</comment>
+            <comment>Relation table to store relatedFeatures and their associated offerings. Mapping file:
+                mapping/transactionl/RelatedFeature.hbm.xml</comment>
             <key foreign-key="relfeatoffrelfeatfk">
                 <column name="relatedFeature" not-null="true">
                     <comment>Foreign Key (FK) to the related relatedFeature. Contains "relatedFeature".relatedFeatureid</comment>

@@ -34,12 +34,8 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     public static final String ENTITY_ALIAS = "dataset";
 
     public static final String PROPERTY_OBSERVATION_CONSTELLATION = "observationConstellation";
-    public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_CATEGORY = "category";
-    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_FEATURE = "feature";
-    public static final String PROPERTY_OFFERING = "offering";
-    public static final String PROPERTY_PLATFORM = "platform";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
@@ -56,9 +52,9 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     private PlatformEntity platform;
 
-    private Boolean published = Boolean.TRUE;
+    private boolean published = true;
 
-    private Boolean deleted = Boolean.FALSE;
+    private boolean deleted;
 
     private List<T> observations;
 
@@ -73,6 +69,8 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     private UnitEntity unit;
 
     private long observationCount = -1;
+
+    private boolean hiddenChild;
 
     public DatasetEntity() {
         this.observations = new ArrayList<>();
@@ -158,7 +156,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
         return published;
     }
 
-    public void setPublished(Boolean published) {
+    public void setPublished(boolean published) {
         this.published = published;
     }
 
@@ -166,7 +164,7 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
 
@@ -253,6 +251,14 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     public long getObservationCount() {
         return observationCount;
+    }
+
+    public boolean isHiddenChild() {
+        return hiddenChild;
+    }
+
+    public void setHiddenChild(boolean hiddenChild) {
+        this.hiddenChild = hiddenChild;
     }
 
     @Override

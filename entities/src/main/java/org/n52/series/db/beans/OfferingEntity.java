@@ -51,6 +51,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     private Set<RelatedFeatureEntity> relatedFeatures;
 
+    private boolean disabled;
+
     public Geometry getGeometry() {
         return geometryEntity != null
                 ? geometryEntity.getGeometry()
@@ -61,6 +63,10 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
         return this;
+    }
+
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
+        this.geometryEntity = geometryEntity;
     }
 
     public GeometryEntity getGeometryEntity() {
@@ -184,6 +190,14 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
         this.relatedFeatures = relatedFeatures;
         return this;
+    }
+
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    public void setDisabled(boolean disabled) {
+        this.disabled = disabled;
     }
 
     @Override

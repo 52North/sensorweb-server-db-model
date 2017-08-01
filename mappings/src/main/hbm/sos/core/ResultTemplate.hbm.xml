@@ -3,7 +3,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ResultTemplateEntity" table="resulttemplate">
-    <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file: mapping/transactionl/ResultTemplate.hbm.xml</comment>
+        <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file:
+            mapping/transactionl/ResultTemplate.hbm.xml</comment>
         <id name="pkid" type="long">
             <column name="pkid">
                 <comment>Table primary key</comment>
@@ -17,19 +18,24 @@
                 <comment>Foreign Key (FK) to the related dataset. Contains "dataset".pkid</comment>
             </column>
         </many-to-one>
+
         <property name="domainId" type="string">
             <column index="resultTempIdentifierIdx" name="domainId" not-null="true">
                 <comment>The resultTemplate identifier, required for InsertResult requests.</comment>
             </column>
         </property>
+
         <property name="resultStructure" type="org.hibernate.type.StringClobType">
             <column name="resultStructure" not-null="true">
-                <comment>The resultStructure as XML string. Describes the types and order of the values in a GetResultResponse/InsertResultRequest</comment>
+                <comment>The resultStructure as XML string. Describes the types and order of the values in a
+                    GetResultResponse/InsertResultRequest</comment>
             </column>
         </property>
+
         <property name="resultEncoding" type="org.hibernate.type.StringClobType">
             <column name="resultEncoding" not-null="true">
-                <comment>The resultEncoding as XML string. Describes the encoding of the values in a GetResultResponse/InsertResultRequest</comment>
+                <comment>The resultEncoding as XML string. Describes the encoding of the values in a
+                    GetResultResponse/InsertResultRequest</comment>
             </column>
         </property>
     </class>
