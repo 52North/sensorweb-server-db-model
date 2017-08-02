@@ -1,7 +1,7 @@
 language: java
 jdk:
   - oraclejdk8
-script: mvn -fae -U -B clean install -Pcreate-docs -P check
+script: mvn -fae -U -B clean license:check notice:check install -P check
 after_success: "./.travis/deploy.sh"
 env:
   global:
