@@ -1,54 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-	<class name="CategoryEntity" table="category">
-		<id name="pkid" type="long">
-			<column name="pkid" />
-			<generator class="native">
+    <class name="CategoryEntity" table="category">
+        <id name="pkid" type="long">
+            <column name="pkid" />
+            <generator class="native">
                 <param name="sequence">category_seq</param>
             </generator>
-		</id>
-    <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="featureServiceFk"> -->
-    <!-- <column name="service" not-null="true"/> -->
-    <!-- </many-to-one> -->
-		<property column="domainId" name="domainId" type="string" />
-		 <many-to-one name="codespace" class="CodespaceEntity" foreign-key="featureCodespaceEntityIdentifierFk">
-            <column name="codespace">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
-            </column>
-        </many-to-one>
+        </id>
+        <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="featureServiceFk"> -->
+        <!-- <column name="service" not-null="true"/> -->
+        <!-- </many-to-one> -->
+        <property column="domainId" name="domainId" type="string" />
         <property name="name" type="string">
             <column name="name">
                 <comment>The name of the featureOfInterest, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="featureCodespaceEntityNameFk">
-            <column name="codespaceName">
-                <comment>The name of the featureOfInterest, gml:name. Optional</comment>
-            </column>
-        </many-to-one>
         <property name="description" type="string">
             <column name="description">
                 <comment>Description of the featureOfInterest, gml:description. Optional</comment>
             </column>
         </property>
-		<set name="translations" table="i18category" inverse="true"
-			fetch="select">
-			<key column="category" foreign-key="cattranscatfk"/>
-			<many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nCategoryEntity" foreign-key="cattransi18nfk"/>
-		</set>
-	</class>
+        <set name="translations" table="i18category" inverse="true" fetch="select">
+            <key column="category" foreign-key="cattranscatfk" />
+            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"
+                foreign-key="cattransi18nfk" />
+        </set>
+    </class>
 
-	<class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="i18ncategory">
-		<id name="pkid" type="long">
-			<column name="pkid" />
-			<generator class="native">
+    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="i18ncategory">
+        <id name="pkid" type="long">
+            <column name="pkid" />
+            <generator class="native">
                 <param name="sequence">i18ncategory_seq</param>
             </generator>
-		</id>
+        </id>
 
-		<property name="locale" type="string" />
-		<property name="name" type="string" />
-		<property name="description" type="string" />
-	</class>
+        <property name="locale" type="string" />
+        <property name="name" type="string" />
+        <property name="description" type="string" />
+    </class>
 </hibernate-mapping>
