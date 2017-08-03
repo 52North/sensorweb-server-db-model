@@ -15,7 +15,7 @@
 
         <set name="datasetIds" table="datasetobservation">
             <key column="data" foreign-key="samplinggeomobservationfk"/>
-            <element column="dataset" type="long" />
+            <many-to-many column="dataset" class="DatasetEntity" />
         </set>
     </class>
 </hibernate-mapping>
