@@ -14,41 +14,36 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
 import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
 import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
 import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
 import org.n52.series.db.beans.HibernateRelations.HasObservationType;
 import org.n52.series.db.beans.HibernateRelations.HasOffering;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
-//import org.n52.sos.ogc.series.wml.DefaultPointMetadata;
-//import org.n52.sos.ogc.series.wml.Metadata;
 
 /**
  * @since 1.0.0
- *
  */
 public class ObservationConstellationEntity extends PkidEntity
         implements Serializable,
-                   HasProcedure<ObservationConstellationEntity>,
-                   HasObservableProperty<ObservationConstellationEntity>,
-                   HasOffering<ObservationConstellationEntity>,
-                   HasObservationType<ObservationConstellationEntity>,
-                   HasHiddenChildFlag<ObservationConstellationEntity>,
-                   HasDeletedFlag<ObservationConstellationEntity>,
-                   HasDisabledFlag<ObservationConstellationEntity> {
+        HasProcedure<ObservationConstellationEntity>,
+        HasObservableProperty<ObservationConstellationEntity>,
+        HasOffering<ObservationConstellationEntity>,
+        HasObservationType<ObservationConstellationEntity>,
+        HasHiddenChildFlag<ObservationConstellationEntity>,
+        HasDisabledFlag<ObservationConstellationEntity> {
 
     private static final long serialVersionUID = -3890149740562709928L;
-    
+
     private PhenomenonEntity observableProperty;
     private ProcedureEntity procedure;
     private OfferingEntity offering;
     private ObservationTypeEntity observationType;
-    private Boolean deleted = false;
     private Boolean disabled = false;
     private Boolean hiddenChild = false;
 
@@ -102,22 +97,6 @@ public class ObservationConstellationEntity extends PkidEntity
     }
 
     @Override
-    public boolean getDeleted() {
-        return deleted;
-    }
-
-    @Override
-    public ObservationConstellationEntity setDeleted(boolean deleted) {
-        this.deleted = deleted;
-        return this;
-    }
-
-    @Override
-    public boolean isDeleted() {
-        return deleted;
-    }
-
-    @Override
     public ObservationConstellationEntity setDisabled(boolean disabled) {
         this.disabled = disabled;
         return this;
@@ -150,17 +129,22 @@ public class ObservationConstellationEntity extends PkidEntity
 
     @Override
     public boolean isSetObservationType() {
-        return getObservationType() != null &&
-               getObservationType().isSetType();
+        return getObservationType() != null
+                &&
+                getObservationType().isSetType();
     }
 
     @Override
     public String toString() {
         return String
-                .format("ObservationConstellation [pkid=%s, observableProperty=%s, procedure=%s, "
-                        + "observationType=%s, offering=%s, deleted=%s, hiddenChild=%s",
-                        getPkid(), observableProperty, procedure, observationType, offering, deleted,
-                        hiddenChild);
+                     .format("ObservationConstellation [pkid=%s, observableProperty=%s, procedure=%s, "
+                             + "observationType=%s, offering=%s, hiddenChild=%s",
+                             getPkid(),
+                             observableProperty,
+                             procedure,
+                             observationType,
+                             offering,
+                             hiddenChild);
     }
 
 }
