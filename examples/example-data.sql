@@ -55,7 +55,7 @@ COPY feature (pkid, hibernatediscriminator, featuretype, domainid, codespace, na
 6	\N	2	http://www.52north.org/test/featureOfInterest/5	1	TU-Dresden	1	\N	0101000020E6100000404EB4AB90722B401DE6CB0BB0834940	\N	\N
 7	\N	2	http://www.52north.org/test/featureOfInterest/6	1	Hochschule Bochum	1	\N	0101000020E6100000083E062B4E151D4090D959F44EB94940	\N	\N
 8	\N	2	http://www.52north.org/test/featureOfInterest/7	1	ITC	1	\N	0101000020E610000000958FEE31221140E45F15B9F1054A40	\N	\N
-9	\N	2	http://www.52north.org/test/featureOfInterest/8	1	DLZ-IT	1	\N	0101000020E61000000055A4C2D8E22540008C67D0D0574940	\N	\N
+9	\N	2	http://www.52north.org/test/featureOfInterest/8	1	DLZ-IT	1	\N	\N	\N	\N
 10	\N	2	http://www.52north.org/test/featureOfInterest/Heiden	1	Heiden	1	\N	0101000020E61000008C118942CBBA1B404D874ECFBBE94940	\N	\N
 11	\N	2	http://www.52north.org/test/featureOfInterest/Münster/FE101	1	Münster/FE101	1	\N	0101000020E610000099B9C0E5B1861E405473B9C150F94940	\N	\N
 12	\N	2	http://www.52north.org/test/featureOfInterest/Portland	1	Portland	1	\N	0101000020E61000001DC9E53FA4AB5EC0C3F5285C8FC24640	\N	\N
@@ -138,10 +138,10 @@ COPY procedure (pkid, proceduredescriptionformat, domainid, codespace, name, cod
 2	1	http://www.52north.org/test/procedure/2	\N	ESRI	\N	\N	F	F	\N	F	\N	F	F	F	T
 3	1	http://www.52north.org/test/procedure/3	\N	Kisters	\N	\N	F	F	\N	F	\N	F	F	F	T
 4	1	http://www.52north.org/test/procedure/4	\N	IfGI	\N	\N	F	F	\N	F	\N	F	F	F	T
-5	1	http://www.52north.org/test/procedure/5	\N	TU-Dresden	\N	\N	F	F	\N	F	\N	F	F	F	T
+5	1	http://www.52north.org/test/procedure/5	\N	TU-Dresden	\N	\N	T	F	\N	F	\N	F	F	F	T
 6	1	http://www.52north.org/test/procedure/6	\N	Hochschule Bochum	\N	\N	F	F	\N	F	\N	F	F	F	T
 7	1	http://www.52north.org/test/procedure/7	\N	ITC	\N	\N	F	F	\N	F	\N	F	F	F	T
-8	1	http://www.52north.org/test/procedure/8	\N	DLZ-IT	\N	\N	F	F	\N	F	\N	F	F	F	T
+8	1	http://www.52north.org/test/procedure/8	\N	DLZ-IT	\N	\N	F	F	\N	F	\N	F	F	T	T
 9	1	http://www.52north.org/test/procedure/developer	\N	http://www.52north.org/test/procedure/developer	\N	\N	F	F	\N	F	\N	F	F	F	T
 \.
 
@@ -184,16 +184,16 @@ COPY observationtype (pkid, type) FROM stdin;
 -- Data for Name: observationconstellation; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY observationconstellation (pkid, observableproperty, procedure, observationtype, offering, deleted, hiddenchild) FROM stdin;
-1	1	1	1	1	F	F
-2	2	2	2	2	F	F
-3	3	3	3	3	F	F
-4	4	4	4	4	F	F
-5	5	5	5	5	F	F
-6	6	6	1	6	F	F
-7	7	7	1	7	F	F
-8	8	8	1	8	F	F
-9	9	9	5	9	F	F
+COPY observationconstellation (pkid, observableproperty, procedure, observationtype, offering, hiddenchild) FROM stdin;
+1	1	1	1	1	F
+2	2	2	2	2	F
+3	3	3	3	3	F
+4	4	4	4	4	F
+5	5	5	5	5	F
+6	6	6	1	6	F
+7	7	7	1	7	F
+8	8	8	1	8	F
+9	9	9	5	9	F
 \.
 
 
@@ -216,7 +216,7 @@ COPY dataset (pkid, feature, category, observationconstellation, deleted, publis
 2	3	2	2	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	count
 9	10	9	9	F	T	F	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
 3	4	3	3	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	boolean
-10	11	9	9	F	T	F	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
+10	11	9	9	F	F	F	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
 11	12	9	9	F	T	F	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
 12	13	9	9	F	T	F	2012-12-31 23:00:00	2012-12-31 23:00:00	\N	\N	\N	\N	\N	\N	text
 6	7	6	6	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	3	\N	\N	\N	\N	\N	quantity
@@ -224,7 +224,7 @@ COPY dataset (pkid, feature, category, observationconstellation, deleted, publis
 4	5	4	4	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	category
 8	9	8	8	F	T	F	2012-11-19 13:00:00	2012-11-19 13:49:59	5	\N	\N	\N	\N	\N	quantity
 1	2	1	1	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	1	\N	\N	\N	\N	\N	quantity-profile
-5	6	5	5	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	text
+5	6	5	5	T	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	text --marked as deleted
 \.
 
 
@@ -303,17 +303,17 @@ COPY observation (pkid, phenomenontimestart, phenomenontimeend, resulttime, doma
 68	2012-11-19 13:07:00	2012-11-19 13:07:00	2012-11-19 13:07:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 69	2012-11-19 13:08:00	2012-11-19 13:08:00	2012-11-19 13:08:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 70	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-71	2012-11-19 13:00:00	2012-11-19 13:04:59	2012-11-19 13:05:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-72	2012-11-19 13:05:00	2012-11-19 13:09:59	2012-11-19 13:10:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-73	2012-11-19 13:10:00	2012-11-19 13:14:59	2012-11-19 13:15:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-74	2012-11-19 13:15:00	2012-11-19 13:19:59	2012-11-19 13:20:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-75	2012-11-19 13:20:00	2012-11-19 13:24:59	2012-11-19 13:25:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-76	2012-11-19 13:25:00	2012-11-19 13:29:59	2012-11-19 13:30:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
+71	2012-11-19 13:00:00	2012-11-19 13:04:59	2012-11-19 13:05:00	\N	1	\N	1	\N	F	F	F	\N	\N	01010000000000000000001C400000000000004940
+72	2012-11-19 13:05:00	2012-11-19 13:09:59	2012-11-19 13:10:00	\N	1	\N	1	\N	F	F	F	\N	\N	0101000000CDCCCCCCCCCC1C40CDCCCCCCCC4C4940
+73	2012-11-19 13:10:00	2012-11-19 13:14:59	2012-11-19 13:15:00	\N	1	\N	1	\N	F	F	F	\N	\N	01010000003333333333331F40CDCCCCCCCCCC4940
+74	2012-11-19 13:15:00	2012-11-19 13:19:59	2012-11-19 13:20:00	\N	1	\N	1	\N	F	F	F	\N	\N	0101000000CDCCCCCCCCCC20409A99999999994940
+75	2012-11-19 13:20:00	2012-11-19 13:24:59	2012-11-19 13:25:00	\N	1	\N	1	\N	F	F	F	\N	\N	01010000009A99999999991D409A99999999194940
+76	2012-11-19 13:25:00	2012-11-19 13:29:59	2012-11-19 13:30:00	\N	1	\N	1	\N	F	F	F	\N	\N	01010000006666666666661E406666666666664940
 10	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	\N	1	\N	1	\N	F	F	T	\N	\N	\N
-77	2012-11-19 13:30:00	2012-11-19 13:34:59	2012-11-19 13:35:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-78	2012-11-19 13:35:00	2012-11-19 13:39:59	2012-11-19 13:40:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-79	2012-11-19 13:40:00	2012-11-19 13:44:59	2012-11-19 13:45:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-80	2012-11-19 13:45:00	2012-11-19 13:49:59	2012-11-19 13:50:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
+77	2012-11-19 13:30:00	2012-11-19 13:34:59	2012-11-19 13:35:00	\N	1	\N	1	\N	F	F	F	\N	\N	010100000000000000000020406666666666664940
+78	2012-11-19 13:35:00	2012-11-19 13:39:59	2012-11-19 13:40:00	\N	1	\N	1	\N	F	F	F	\N	\N	010100000000000000000021406666666666664940
+79	2012-11-19 13:40:00	2012-11-19 13:44:59	2012-11-19 13:45:00	\N	1	\N	1	\N	F	F	F	\N	\N	010100000033333333333320409A99999999194940
+80	2012-11-19 13:45:00	2012-11-19 13:49:59	2012-11-19 13:50:00	\N	1	\N	1	\N	F	F	F	\N	\N	010100000033333333333321400000000000404940
 81	2008-10-29 00:00:00	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 82	2008-10-29 00:00:00	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 83	2008-10-29 00:00:00	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
