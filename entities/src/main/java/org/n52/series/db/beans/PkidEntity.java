@@ -36,4 +36,37 @@ public abstract class PkidEntity implements Serializable {
     public void setPkid(Long pkid) {
         this.pkid = pkid;
     }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((pkid == null)
+                ? 0
+                : pkid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        PkidEntity other = (PkidEntity) obj;
+        if (pkid == null) {
+            if (other.pkid != null) {
+                return false;
+            }
+        } else if (!pkid.equals(other.pkid)) {
+            return false;
+        }
+        return true;
+    }
+    
 }
