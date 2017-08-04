@@ -172,7 +172,6 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
-
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
@@ -285,8 +284,11 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
     @Override
     public int compareTo(DataEntity<T> o) {
         return (int) (phenomenonTimeEnd.equals(o.getPhenomenonTimeEnd())
-                ? phenomenonTimeStart.getTime() - o.getPhenomenonTimeStart().getTime()
-                : phenomenonTimeEnd.getTime() - o.getPhenomenonTimeEnd().getTime());
+                ? phenomenonTimeStart.getTime() - o.getPhenomenonTimeStart()
+                                                   .getTime()
+                : phenomenonTimeEnd.getTime() - o.getPhenomenonTimeEnd()
+                                                 .getTime());
+    }
     }
 
     @Override
