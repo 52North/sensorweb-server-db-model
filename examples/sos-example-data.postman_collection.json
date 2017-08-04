@@ -718,9 +718,103 @@
 			"response": []
 		},
 		{
-			"name": "GET datasets with platform filter",
+			"name": "GET datasets (stationary && insitu)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"No datasets from mobile_insitu platforms\"] = !responseBody.has(\"mobile_insitu\");",
+							"tests[\"No datasets from mobile_remote platforms\"] = !responseBody.has(\"mobile_remote\");",
+							"tests[\"No datasets from stationary_remote platforms\"] = !responseBody.has(\"stationary_remote\");"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets?platformtypes=stationary,insitu",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets?platformtypes=stationary,insitu",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets"
+					],
+					"query": [
+						{
+							"key": "platformtypes",
+							"value": "stationary,insitu",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET datasets (mobile)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"No datasets from stationary_insitu platforms\"] = !responseBody.has(\"stationary_insitu\");",
+							"tests[\"No datasets from stationary_remote platforms\"] = !responseBody.has(\"stationary_remote\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets?platformtypes=mobile",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets"
+					],
+					"query": [
+						{
+							"key": "platformtypes",
+							"value": "mobile",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -751,14 +845,32 @@
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Your test name\"] = jsonData.length === 5;"
+							"",
+							"var navigateTo = function(path, json) {",
+							"    path = path || [];",
+							"    return path.reduce((o, n) => o[n], json);",
+							"};",
+							"",
+							"var checkFilteredParameters = function(parameter, ids) {",
+							"    for (var i = 0; i < jsonData.length; i++) {",
+							"    var path = [\"datasetParameters\", parameter, \"id\"];",
+							"        var parameterId = navigateTo(path, jsonData[i]);",
+							"        if (!ids.includes(parameterId)) {",
+							"            return false;",
+							"        }",
+							"    }",
+							"    return true;",
+							"};",
+							"",
+							"// phenomenon 5 is linked with unpublished dataset",
+							"tests[\"Contains filtered phenomena only\"] = checkFilteredParameters(\"phenomenon\", [\"9\",\"6\"])"
 						]
 					}
 				}
 			],
 			"request": {
 				"url": {
-					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets?phenomena=9,5&expanded=true",
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets?phenomena=9,5,6&expanded=true",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -771,7 +883,7 @@
 					"query": [
 						{
 							"key": "phenomena",
-							"value": "9,5",
+							"value": "9,5,6",
 							"equals": true,
 							"description": ""
 						},
@@ -813,14 +925,56 @@
 					"script": {
 						"type": "text/javascript",
 						"exec": [
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Your test name\"] = jsonData.length === 5;"
+							"tests[\"Correct count of datasets with valuetype 'text'\"] = jsonData.length === 3;",
+							"",
+							"var navigateTo = function(path, json) {",
+							"    path = path || [];",
+							"    return path.reduce((o, n) => o[n], json);",
+							"};",
+							"",
+							"var checkFilteredParameters = function(filter) {",
+							"    for (var i = 0; i < jsonData.length; i++) {",
+							"        var valueType = navigateTo([\"valueType\"], jsonData[i]);",
+							"        if (!filter.includes(valueType)) {",
+							"            return false;",
+							"        }",
+							"    }",
+							"    return true;",
+							"};",
+							"",
+							"",
+							"tests[\"Contains filtered valueTypes only\"] = checkFilteredParameters([\"text\"])",
+							""
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets?valueTypes=text",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets?valueTypes=text",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets"
+					],
+					"query": [
+						{
+							"key": "valueTypes",
+							"value": "text",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -851,13 +1005,50 @@
 						"type": "text/javascript",
 						"exec": [
 							"var jsonData = JSON.parse(responseBody);",
-							"tests[\"Your test name\"] = jsonData.length === 8;"
+							"tests[\"Your test name\"] = jsonData.length === 6;",
+							"",
+							"var navigateTo = function(path, json) {",
+							"    path = path || [];",
+							"    return path.reduce((o, n) => o[n], json);",
+							"};",
+							"",
+							"var checkFilteredParameters = function(filter) {",
+							"    for (var i = 0; i < jsonData.length; i++) {",
+							"        var valueType = navigateTo([\"valueType\"], jsonData[i]);",
+							"        if (!filter.includes(valueType)) {",
+							"            return false;",
+							"        }",
+							"    }",
+							"    return true;",
+							"};",
+							"",
+							"tests[\"Contains filtered valueTypes only\"] = checkFilteredParameters([\"text\", \"quantity\"]);"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets?valueTypes=text,quantity",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets?valueTypes=text,quantity",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets"
+					],
+					"query": [
+						{
+							"key": "valueTypes",
+							"value": "text,quantity",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -881,6 +1072,27 @@
 		},
 		{
 			"name": "GET datasets quantity_7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"item has correct id\"] = jsonData.id === \"quantity_7\";",
+							"tests[\"item has correct valueType\"] = jsonData.valueType === \"quantity\";",
+							"tests[\"item has first value\"] = jsonData.firstValue !== undefined;",
+							"tests[\"item has last value\"] = jsonData.lastValue !== undefined;",
+							"tests[\"platformType matches type of platform\"] = jsonData.platformType === jsonData.datasetParameters.platform.platformType;",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7",
 				"method": "GET",
@@ -906,6 +1118,21 @@
 		},
 		{
 			"name": "GET datasets quantity_7 extras",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"dataset has resultTime extras\"] = jsonData.resultTimes !== undefined;"
+						]
+					}
+				}
+			],
 			"request": {
 				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7/extras",
 				"method": "GET",
@@ -931,8 +1158,43 @@
 		},
 		{
 			"name": "GET phenomena with platform filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"correct count of filtered phenomena\"] = jsonData.length === 1;"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/phenomena?platformtypes=mobile",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/phenomena?platformtypes=mobile",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"phenomena"
+					],
+					"query": [
+						{
+							"key": "platformtypes",
+							"value": "mobile",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -956,9 +1218,23 @@
 		},
 		{
 			"name": "GET geometries with dataset filter",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"url": {
-					"raw": "http://{{host}}:{{port}}{{context}}/api/geometries?expanded=true&datasets=platform_track_9",
+					"raw": "http://{{host}}:{{port}}{{context}}/api/geometries?expanded=true&datasets=quantity_8",
 					"protocol": "http",
 					"host": [
 						"{{host}}"
@@ -977,13 +1253,55 @@
 						},
 						{
 							"key": "datasets",
-							"value": "platform_track_9",
+							"value": "quantity_8",
 							"equals": true,
 							"description": ""
 						}
 					],
 					"variable": []
 				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+				},
+				"description": "filters on\n* FlowRate_Inlet"
+			},
+			"response": []
+		},
+		{
+			"name": "GET geometries platform_track_9",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"geometry type is LineString\"] = jsonData.geometry.type === \"LineString\";",
+							"tests[\"properties contain platform reference\"] = jsonData.properties.platform !== undefined;",
+							"tests[\"platform reference is of type mobile\"] = jsonData.properties.platform.platformType.startsWith(\"mobile\")"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{host}}:{{port}}{{context}}/api/geometries/platform_track_9",
 				"method": "GET",
 				"header": [
 					{
