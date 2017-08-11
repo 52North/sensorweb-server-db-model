@@ -24,10 +24,6 @@ public class ProfileDatasetEntity extends DatasetEntity {
 
     private String verticalParameterName;
 
-    public ProfileDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     public String getVerticalParameterName() {
         return verticalParameterName;
     }

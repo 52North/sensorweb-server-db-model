@@ -89,6 +89,10 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
+    protected DataEntity() {
+
+    }
+
     public Long getPkid() {
         return pkid;
     }

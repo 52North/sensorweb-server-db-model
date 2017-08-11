@@ -68,6 +68,10 @@ public class DatasetEntity extends DescribableEntity {
 
     private boolean hiddenChild;
 
+    public DatasetEntity() {
+        this((String) null);
+    }
+    
     public DatasetEntity(String type) {
         this.valueType = type;
     }
