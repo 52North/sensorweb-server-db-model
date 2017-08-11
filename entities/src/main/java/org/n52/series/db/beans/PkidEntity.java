@@ -68,5 +68,5 @@ public abstract class PkidEntity implements Serializable {
         }
         return true;
     }
-    
+
 }

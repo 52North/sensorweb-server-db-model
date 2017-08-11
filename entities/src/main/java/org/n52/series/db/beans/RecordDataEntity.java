@@ -21,6 +21,8 @@ import java.util.Map;
 
 public class RecordDataEntity extends DataEntity<Map<String, Object>> {
 
+    private static final long serialVersionUID = -7378123892897587598L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         return getValue() == null || getValue().isEmpty();

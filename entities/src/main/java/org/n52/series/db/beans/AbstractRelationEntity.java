@@ -18,7 +18,10 @@ package org.n52.series.db.beans;
 
 public abstract class AbstractRelationEntity extends PkidEntity  {
 
+    private static final long serialVersionUID = -2573767006446257428L;
+
     private String role;
+
     private String relatedUrl;
 
     /**

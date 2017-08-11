@@ -26,6 +26,8 @@ import org.slf4j.LoggerFactory;
 
 public class EReportingQuantityDataEntity extends EReportingDataEntity<Double> {
 
+    private static final long serialVersionUID = 5870100531719269673L;
+
     private static final Logger LOGGER = LoggerFactory.getLogger(EReportingQuantityDataEntity.class);
 
     private static final Double DOUBLE_THRESHOLD = 0.01;

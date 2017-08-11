@@ -20,6 +20,8 @@ public class RelatedDataEntity extends AbstractRelationEntity {
 
     private DatasetEntity<DataEntity<?>> data;
     private DatasetEntity<DataEntity<?>> relatedData;
+    private static final long serialVersionUID = 2436177373903826414L;
+
 
     /**
      * @return the data

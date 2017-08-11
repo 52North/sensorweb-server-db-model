@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class TextDataEntity extends DataEntity<String> {
 
+    private static final long serialVersionUID = 4925354534934095827L;
+
     private String valueIdentifier;
 
     private String valueName;

@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class EReportingBooleanDataEntity extends EReportingDataEntity<Boolean> {
 
+    private static final long serialVersionUID = 4231187253999943944L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         Boolean value = getValue();

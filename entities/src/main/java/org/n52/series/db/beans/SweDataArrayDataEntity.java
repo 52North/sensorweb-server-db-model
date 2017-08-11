@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class SweDataArrayDataEntity extends DataEntity<String> {
 
+    private static final long serialVersionUID = -1618516259763515255L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();

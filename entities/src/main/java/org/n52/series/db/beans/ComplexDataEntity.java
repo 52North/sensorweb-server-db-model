@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class ComplexDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
+    private static final long serialVersionUID = 2206385928964743369L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         // TODO Auto-generated method stub

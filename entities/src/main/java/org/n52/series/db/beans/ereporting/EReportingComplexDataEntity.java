@@ -23,6 +23,8 @@ import org.n52.series.db.beans.DataEntity;
 
 public class EReportingComplexDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
+    private static final long serialVersionUID = -3450153841771781000L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         // TODO Auto-generated method stub

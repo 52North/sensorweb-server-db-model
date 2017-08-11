@@ -22,6 +22,8 @@ import org.n52.series.db.beans.DataEntity;
 
 public class EReportingSweDataArrayDataEntity extends DataEntity<String> {
 
+    private static final long serialVersionUID = -357644664672153647L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();

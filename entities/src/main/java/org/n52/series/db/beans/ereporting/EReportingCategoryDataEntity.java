@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class EReportingCategoryDataEntity extends EReportingDataEntity<String> {
 
+    private static final long serialVersionUID = -5900304161795877220L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();

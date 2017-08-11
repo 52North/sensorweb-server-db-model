@@ -22,6 +22,8 @@ package org.n52.series.db.beans.metadata;
 
 public class MetadataJsonEntity extends MetadataEntity<String> {
 
+    private static final long serialVersionUID = 3211811882145169931L;
+
 //    private static final Logger LOGGER = LoggerFactory.getLogger(MetadataJsonEntity.class);
 //
 //    @JsonGetter(value = "value")

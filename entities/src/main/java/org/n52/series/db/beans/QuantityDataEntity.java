@@ -27,6 +27,8 @@ public class QuantityDataEntity extends DataEntity<Double> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
 
+    private static final long serialVersionUID = 7619426522406105659L;
+
     private static final Double DOUBLE_THRESHOLD = 0.01;
 
     @Override

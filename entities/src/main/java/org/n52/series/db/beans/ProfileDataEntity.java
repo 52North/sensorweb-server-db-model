@@ -21,6 +21,8 @@ import java.util.Set;
 
 public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
+    private static final long serialVersionUID = -7431276500677067329L;
+
     private Double fromLevel;
 
     private Double toLevel;

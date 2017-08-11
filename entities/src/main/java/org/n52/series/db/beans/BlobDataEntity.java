@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class BlobDataEntity extends DataEntity<Object> {
 
+    private static final long serialVersionUID = 2881474333508410655L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         return getValue() == null;
