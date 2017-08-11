@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashSet;
@@ -25,7 +26,7 @@ import java.util.Set;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
+public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serializable {
 
     public static final String PROPERTY_PKID = "pkid";
 
@@ -36,6 +37,8 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
 
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
+
+    private static final long serialVersionUID = 273612846605300612L;
 
     private Long pkid;
 
