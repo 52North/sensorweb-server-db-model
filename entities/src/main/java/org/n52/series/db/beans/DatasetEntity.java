@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
+public class DatasetEntity extends DescribableEntity {
 
     public static final String DEFAULT_VALUE_TYPE = "quantity";
 

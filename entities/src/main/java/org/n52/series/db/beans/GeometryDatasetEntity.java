@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GeometryDatasetEntity extends DatasetEntity<GeometryDataEntity> {
+public class GeometryDatasetEntity extends DatasetEntity {
 
     private static final long serialVersionUID = -5257221102121501687L;
 

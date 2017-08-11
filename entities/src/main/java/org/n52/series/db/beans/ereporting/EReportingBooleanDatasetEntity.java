@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.BooleanDataset;
 
-public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity<EReportingBooleanDataEntity>
+public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity
         implements BooleanDataset<EReportingBooleanDatasetEntity> {
 
     private static final long serialVersionUID = 5026545130550522586L;

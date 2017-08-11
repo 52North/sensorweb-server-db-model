@@ -22,8 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.MeasurementDataset;
 
-public class QuantityDatasetEntity extends DatasetEntity<QuantityDataEntity>
-        implements MeasurementDataset<QuantityDatasetEntity> {
+public class QuantityDatasetEntity extends DatasetEntity implements MeasurementDataset<QuantityDatasetEntity> {
 
     private static final long serialVersionUID = 4788481449399555710L;
 

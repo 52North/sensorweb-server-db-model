@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.BlobDataset;
 
-public class EReportingBlobDatasetEntity extends EReportingDatasetEntity<EReportingBlobDataEntity>
+public class EReportingBlobDatasetEntity extends EReportingDatasetEntity
         implements BlobDataset<EReportingBlobDatasetEntity> {
 
     private static final long serialVersionUID = 365032550010162204L;

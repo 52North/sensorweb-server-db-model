@@ -24,7 +24,8 @@ public class RelatedDatasetEntity extends AbstractRelationEntity {
     private static final long serialVersionUID = 280165490758286290L;
 
     private long dataset;
-    private DatasetEntity<DataEntity<?>> relatedDataset;
+
+    private DatasetEntity relatedDataset;
 
     /**
      * @return the dataset
@@ -44,7 +45,7 @@ public class RelatedDatasetEntity extends AbstractRelationEntity {
     /**
      * @return the relatedDataset
      */
-    public DatasetEntity<DataEntity<?>> getRelatedDataset() {
+    public DatasetEntity getRelatedDataset() {
         return relatedDataset;
     }
 
@@ -52,7 +53,7 @@ public class RelatedDatasetEntity extends AbstractRelationEntity {
      * @param relatedDataset
      *            the relatedDataset to set
      */
-    public void setRelatedDataset(DatasetEntity<DataEntity<?>> relatedDataset) {
+    public void setRelatedDataset(DatasetEntity relatedDataset) {
         this.relatedDataset = relatedDataset;
     }
 

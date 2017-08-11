@@ -18,15 +18,16 @@ package org.n52.series.db.beans;
 
 public class RelatedDataEntity extends AbstractRelationEntity {
 
-    private DatasetEntity<DataEntity<?>> data;
-    private DatasetEntity<DataEntity<?>> relatedData;
     private static final long serialVersionUID = 2436177373903826414L;
 
+    private DatasetEntity data;
+
+    private DatasetEntity relatedData;
 
     /**
      * @return the data
      */
-    public DatasetEntity<DataEntity<?>> getData() {
+    public DatasetEntity getData() {
         return data;
     }
 
@@ -34,14 +35,14 @@ public class RelatedDataEntity extends AbstractRelationEntity {
      * @param data
      *            the data to set
      */
-    public void setData(DatasetEntity<DataEntity<?>> data) {
+    public void setData(DatasetEntity data) {
         this.data = data;
     }
 
     /**
      * @return the relatedData
      */
-    public DatasetEntity<DataEntity<?>> getRelatedData() {
+    public DatasetEntity getRelatedData() {
         return relatedData;
     }
 
@@ -49,7 +50,7 @@ public class RelatedDataEntity extends AbstractRelationEntity {
      * @param relatedData
      *            the relatedData to set
      */
-    public void setRelatedData(DatasetEntity<DataEntity<?>> relatedData) {
+    public void setRelatedData(DatasetEntity relatedData) {
         this.relatedData = relatedData;
     }
 

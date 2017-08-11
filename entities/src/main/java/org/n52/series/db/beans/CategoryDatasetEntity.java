@@ -22,8 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.CategoryDataset;
 
-public class CategoryDatasetEntity extends DatasetEntity<CategoryDataEntity>
-        implements CategoryDataset<CategoryDatasetEntity> {
+public class CategoryDatasetEntity extends DatasetEntity implements CategoryDataset<CategoryDatasetEntity> {
 
     private static final long serialVersionUID = -3225007112833816443L;
 

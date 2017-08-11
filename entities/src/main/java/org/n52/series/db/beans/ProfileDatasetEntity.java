@@ -16,7 +16,7 @@
  */
 package org.n52.series.db.beans;
 
-public class ProfileDatasetEntity extends DatasetEntity<ProfileDataEntity> {
+public class ProfileDatasetEntity extends DatasetEntity {
 
     private static final long serialVersionUID = 8000392773970672194L;
 

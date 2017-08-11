@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.SweDataArrayDataset;
 
-public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity<EReportingSweDataArrayDataEntity>
+public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
         implements SweDataArrayDataset<EReportingSweDataArrayDatasetEntity> {
 
     private static final long serialVersionUID = 8734427623675385749L;

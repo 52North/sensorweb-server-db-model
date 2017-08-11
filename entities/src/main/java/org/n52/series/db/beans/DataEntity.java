@@ -84,7 +84,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 //    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
      private Set<Parameter> parameters = new HashSet<>(0);
 
-    private final Set<DatasetEntity<DataEntity< ? >>> datasets = new HashSet<>(0);
+    private final Set<DatasetEntity> datasets = new HashSet<>(0);
 
     private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -273,11 +273,11 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
         return getParameters() != null && !getParameters().isEmpty();
     }
 
-    public Set<DatasetEntity<DataEntity< ? >>> getDatasets() {
+    public Set<DatasetEntity> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(Set<DatasetEntity<DataEntity< ? >>> datasets) {
+    public void setDatasets(Set<DatasetEntity> datasets) {
         if (datasets != null) {
             this.datasets.clear();
             this.datasets.addAll(datasets);

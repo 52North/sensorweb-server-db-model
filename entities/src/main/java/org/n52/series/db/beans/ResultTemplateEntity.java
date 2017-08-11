@@ -29,7 +29,7 @@ public class ResultTemplateEntity extends PkidEntity implements Serializable, Ha
 
     private static final long serialVersionUID = -8847952458819368733L;
 
-    private DatasetEntity<DataEntity<?>> dataset;
+    private DatasetEntity dataset;
 
     private String identifier;
 
@@ -50,11 +50,11 @@ public class ResultTemplateEntity extends PkidEntity implements Serializable, Ha
         this.domainId = domainId;
     }
 
-    public DatasetEntity<DataEntity<?>> getDataset() {
+    public DatasetEntity getDataset() {
         return dataset;
     }
 
-    public void setDataset(DatasetEntity<DataEntity<?>> dataset) {
+    public void setDataset(DatasetEntity dataset) {
         this.dataset = dataset;
     }
 

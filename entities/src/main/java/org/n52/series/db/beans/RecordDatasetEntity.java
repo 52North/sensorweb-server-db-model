@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RecordDatasetEntity extends DatasetEntity<RecordDataEntity> {
+public class RecordDatasetEntity extends DatasetEntity {
 
     private static final long serialVersionUID = 2357248511291918028L;
 
