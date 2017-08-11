@@ -21,6 +21,8 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public class ParameterText extends Parameter<String> {
 
+    private static final long serialVersionUID = 3300965770609382377L;
+
     @Override
     public String getValueAsString() {
         return getValue();

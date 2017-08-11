@@ -19,7 +19,7 @@ package org.n52.series.db.beans.ereporting;
 import java.util.HashSet;
 import java.util.Set;
 
-public class EReportingGeometryDatasetEntity extends EReportingDatasetEntity<EReportingGeometryDataEntity> {
+public class EReportingGeometryDatasetEntity extends EReportingDatasetEntity {
 
     private static final long serialVersionUID = -6212212763954201384L;
 

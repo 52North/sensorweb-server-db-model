@@ -28,6 +28,8 @@ public class EReportingCountDataEntity extends EReportingDataEntity<Integer> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EReportingCountDataEntity.class);
 
+    private static final long serialVersionUID = 1753251418906573384L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         Integer value = getValue();

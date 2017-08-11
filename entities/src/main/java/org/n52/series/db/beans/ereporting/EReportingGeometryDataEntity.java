@@ -22,6 +22,8 @@ import org.n52.series.db.beans.GeometryEntity;
 
 public class EReportingGeometryDataEntity extends EReportingDataEntity<GeometryEntity> {
 
+    private static final long serialVersionUID = -3578232304258898505L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         GeometryEntity value = getValue();

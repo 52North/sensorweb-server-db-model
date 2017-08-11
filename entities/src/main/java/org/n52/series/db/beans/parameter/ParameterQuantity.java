@@ -24,6 +24,8 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public class ParameterQuantity extends Parameter<Double> {
 
+    private static final long serialVersionUID = 7528516075676290716L;
+
     private UnitEntity unit;
 
     @Override

@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class CategoryDataEntity extends DataEntity<String> {
 
+    private static final long serialVersionUID = -4691677115635740162L;
+
     private String valueIdentifier;
 
     private String valueName;

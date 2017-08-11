@@ -21,6 +21,8 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportin
 
 public abstract class EReportingDataEntity<T> extends DataEntity<T> implements EReportingValues {
 
+    private static final long serialVersionUID = 6718001163355558735L;
+
     private Integer validation = EReportingValues.DEFAULT_VALIDATION;
 
     private Integer verification = EReportingValues.DEFAULT_VERIFICATION;

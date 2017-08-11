@@ -22,11 +22,11 @@ import java.util.Set;
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     public static final String PROPERTY_MOBILE = "mobile";
-    
+
     public static final String PROPERTY_INSITU = "insitu";
 
     private static final long serialVersionUID = 4028002933920185756L;
-    
+
     private boolean reference;
 
     private boolean mobile;

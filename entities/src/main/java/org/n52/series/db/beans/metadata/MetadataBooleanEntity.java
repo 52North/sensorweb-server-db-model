@@ -18,4 +18,6 @@ package org.n52.series.db.beans.metadata;
 
 public class MetadataBooleanEntity extends MetadataEntity<Boolean> {
 
+    private static final long serialVersionUID = 5500604224302975389L;
+
 }

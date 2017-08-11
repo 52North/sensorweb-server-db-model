@@ -20,7 +20,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.DatasetEntity;
 
-public interface Dataset<T extends DatasetEntity<?>> {
+public interface Dataset<T extends DatasetEntity> {
 
     Set<T> getReferenceValues();
 

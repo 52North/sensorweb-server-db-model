@@ -134,7 +134,7 @@
 							"postman.setEnvironmentVariable(\"services.quantities.categories\", jsonData[0].quantities.categories);",
 							"postman.setEnvironmentVariable(\"services.quantities.platforms\", jsonData[0].quantities.platforms);",
 							"",
-							"tests[\"procedures count does not include deleted items\"] = data[\"procedureCount\"] === 8;"
+							"tests[\"procedures count does not include deleted items\"] = jsonData[0].quantities.procedures === 8;"
 						]
 					}
 				}
@@ -837,7 +837,7 @@
 			"response": []
 		},
 		{
-			"name": "GET datasets with phenomena filter",
+			"name": "GET datasets via phenomena filter (5,6,9)",
 			"event": [
 				{
 					"listen": "test",
@@ -997,7 +997,7 @@
 			"response": []
 		},
 		{
-			"name": "GET datasets with valuetype (quantity|text) filter",
+			"name": "GET datasets  (quantity || text)",
 			"event": [
 				{
 					"listen": "test",
@@ -1071,7 +1071,7 @@
 			"response": []
 		},
 		{
-			"name": "GET datasets quantity_7",
+			"name": "GET datasets quantity_8",
 			"event": [
 				{
 					"listen": "test",
@@ -1083,18 +1083,45 @@
 							"",
 							"var jsonData = JSON.parse(responseBody);",
 							"",
-							"tests[\"item has correct id\"] = jsonData.id === \"quantity_7\";",
+							"tests[\"item has correct id\"] = jsonData.id === \"quantity_8\";",
 							"tests[\"item has correct valueType\"] = jsonData.valueType === \"quantity\";",
 							"tests[\"item has first value\"] = jsonData.firstValue !== undefined;",
+							"tests[\"first value has geometry\"] = jsonData.firstValue.geometry !== undefined;",
+							"tests[\"first value is POINT(10 10)\"] = jsonData.firstValue.geometry.coordinates[0] == 10 && jsonData.firstValue.geometry.coordinates[1] == 10;",
 							"tests[\"item has last value\"] = jsonData.lastValue !== undefined;",
-							"tests[\"platformType matches type of platform\"] = jsonData.platformType === jsonData.datasetParameters.platform.platformType;",
+							"tests[\"last value has geometry\"] = jsonData.lastValue.geometry !== undefined;",
+							"tests[\"first value is POINT(20 20)\"] = jsonData.lastValue.geometry.coordinates[0] == 20 && jsonData.lastValue.geometry.coordinates[1] == 20;",
+							"tests[\"platformType matches type of platform\"] = jsonData.datasetParameters && jsonData.platformType === jsonData.datasetParameters.platform.platformType;",
+							"tests[\"platformType is mobile\"] = jsonData.platformType.startsWith('mobile');",
+							"",
 							""
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_8?expanded=true",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"quantity_8"
+					],
+					"query": [
+						{
+							"key": "expanded",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -1128,13 +1155,15 @@
 							"",
 							"var jsonData = JSON.parse(responseBody);",
 							"",
-							"tests[\"dataset has resultTime extras\"] = jsonData.resultTimes !== undefined;"
+							"tests[\"dataset has resultTime extras\"] = jsonData.resultTimes !== undefined;",
+							"tests[\"result times has 2012-11-18T14:00:00.000+01:00\"] = jsonData.resultTimes.includes(\"2012-11-18T14:00:00.000+01:00\");",
+							"tests[\"result times has 2012-11-19T14:00:00.000+01:00\"] = jsonData.resultTimes.includes(\"2012-11-19T14:00:00.000+01:00\");"
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7/extras",
+				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_8/extras",
 				"method": "GET",
 				"header": [
 					{
@@ -1157,7 +1186,7 @@
 			"response": []
 		},
 		{
-			"name": "GET phenomena with platform filter",
+			"name": "GET phenomena (mobile)",
 			"event": [
 				{
 					"listen": "test",
@@ -1217,7 +1246,7 @@
 			"response": []
 		},
 		{
-			"name": "GET geometries with dataset filter",
+			"name": "GET geometries (quantity_8)",
 			"event": [
 				{
 					"listen": "test",
@@ -1324,9 +1353,44 @@
 			"response": []
 		},
 		{
-			"name": "GET geometries with value type filter",
+			"name": "GET geometries (quantity)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"has correct number of items\"] = jsonData.length === 3;"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/geometries?datasets=quantity_7",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/geometries?valuetypes=quantity",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"geometries"
+					],
+					"query": [
+						{
+							"key": "valuetypes",
+							"value": "quantity",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -1349,9 +1413,50 @@
 			"response": []
 		},
 		{
-			"name": "GET geometries, expanded with csv-filter",
+			"name": "GET geometries via phenomenon filter (5,9)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"has correct number of items\"] = jsonData.length === 3;"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/geometries?phenomena=9,5&expanded=true",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/geometries?phenomena=9,5&expanded=true",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"geometries"
+					],
+					"query": [
+						{
+							"key": "phenomena",
+							"value": "9,5",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expanded",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -1375,6 +1480,24 @@
 		},
 		{
 			"name": "GET site instance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"has correct id\"] = jsonData.id === \"platform_site_10\";",
+							"tests[\"is geoJson feature\"] = jsonData.type === \"Feature\";",
+							"tests[\"has reference to platform\"] = jsonData.properties.platform !== undefined;",
+							"tests[\"is stationary platform\"] = jsonData.properties.platform.platformType.startsWith(\"stationary\") && jsonData.geometry.type === \"Point\";"
+						]
+					}
+				}
+			],
 			"request": {
 				"url": "http://{{host}}:{{port}}{{context}}/api/geometries/platform_site_10",
 				"method": "GET",
@@ -1400,8 +1523,49 @@
 		},
 		{
 			"name": "GET data (quantity_7)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Content-Type is image/png\"] = postman.getResponseHeader(\"Content-Type\") === \"image/png\";"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7/data.png?timespan=P10M/2012-12-01&locale=de",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7/data.png?timespan=P10M/2012-12-01&locale=de",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"quantity_7",
+						"data.png"
+					],
+					"query": [
+						{
+							"key": "timespan",
+							"value": "P10M/2012-12-01",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "locale",
+							"value": "de",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -1422,7 +1586,20 @@
 			"response": []
 		},
 		{
-			"name": "GET data (quantity_7), csv/zip via header",
+			"name": "GET data (quantity_7), csv via header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Content-Type is text/csv\"] = postman.getResponseHeader(\"Content-Type\").startsWith(\"text/csv\");"
+						]
+					}
+				}
+			],
 			"request": {
 				"url": {
 					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7/data?timespan=P10M/2012-12-01",
@@ -1453,12 +1630,6 @@
 						"key": "Accept",
 						"value": "text/csv",
 						"description": ""
-					},
-					{
-						"key": "Accept",
-						"value": "application/zip",
-						"description": "",
-						"disabled": true
 					}
 				],
 				"body": {},
@@ -1467,7 +1638,72 @@
 			"response": []
 		},
 		{
-			"name": "GET data (timeseries  7), csv/zip via header",
+			"name": "GET data (quantity_7), zip via header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Content-Type is application/zip\"] = postman.getResponseHeader(\"Content-Type\").startsWith(\"application/zip\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_7/data?timespan=P10M/2012-12-01",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"quantity_7",
+						"data"
+					],
+					"query": [
+						{
+							"key": "timespan",
+							"value": "P10M/2012-12-01",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/zip",
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET data (timeseries  7), csv via header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Content-Type is text/csv\"] = postman.getResponseHeader(\"Content-Type\").startsWith(\"text/csv\");"
+						]
+					}
+				}
+			],
 			"request": {
 				"url": {
 					"raw": "http://{{host}}:{{port}}{{context}}/api/timeseries/7/getData?timespan=P10M/2012-12-01",
@@ -1497,9 +1733,55 @@
 					{
 						"key": "Accept",
 						"value": "text/csv",
-						"description": "",
-						"disabled": true
-					},
+						"description": ""
+					}
+				],
+				"body": {},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GET data (timeseries  7), zip via header",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Content-Type is application/zip\"] = postman.getResponseHeader(\"Content-Type\").startsWith(\"application/zip\");"
+						]
+					}
+				}
+			],
+			"request": {
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/timeseries/7/getData?timespan=P10M/2012-12-01",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"timeseries",
+						"7",
+						"getData"
+					],
+					"query": [
+						{
+							"key": "timespan",
+							"value": "P10M/2012-12-01",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
 					{
 						"key": "Accept",
 						"value": "application/zip",
@@ -1513,8 +1795,43 @@
 		},
 		{
 			"name": "GET data (text_5)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"tests[\"text_5 not found as marked deleted\"] = responseCode.code === 404;",
+							""
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/text_5/data?timespan=P10M/2012-12-01",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/text_5/data?timespan=P10M/2012-12-01",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"text_5",
+						"data"
+					],
+					"query": [
+						{
+							"key": "timespan",
+							"value": "P10M/2012-12-01",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [],
 				"body": {},
@@ -1524,6 +1841,20 @@
 		},
 		{
 			"name": "POST data (text_5, quantity_7)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"",
+							"",
+							"tests[\"text_5 not found as marked deleted\"] = responseCode.code === 404;",
+							""
+						]
+					}
+				}
+			],
 			"request": {
 				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/data",
 				"method": "POST",
@@ -1563,7 +1894,40 @@
 				}
 			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/8?expanded=true&platformtypes=all&showTimeIntervals=true",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_8?expanded=true&platformtypes=all&showTimeIntervals=true",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"quantity_8"
+					],
+					"query": [
+						{
+							"key": "expanded",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "platformtypes",
+							"value": "all",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "showTimeIntervals",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -1586,9 +1950,68 @@
 			"response": []
 		},
 		{
-			"name": "GET data (show interval)",
+			"name": "GET mobile observations (expanded && interval)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"var jsonData = JSON.parse(responseBody);",
+							"",
+							"tests[\"expanded=true lists values explicitly (TODO: add reference datasets later)\"] = jsonData.quantity_8 !== undefined;",
+							"",
+							"var checkAllContainsGeometry = function(values) {",
+							"    for (var i = 0; i < values.length; i++) {",
+							"        var geometry = values[i].geometry;",
+							"        if (geometry === undefined) {",
+							"            return false;",
+							"        }",
+							"    }",
+							"    return true;",
+							"};",
+							"tests[\"show samplinggeometries along values\"] = checkAllContainsGeometry(jsonData.quantity_8.values);"
+						]
+					}
+				}
+			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/8/data?timespan=P200D/2012-11-20TZ&expanded=true&platformtypes=all&showTimeIntervals=true",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity_8/data?timespan=P200D/2012-11-20TZ&expanded=true&showTimeIntervals=true",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"quantity_8",
+						"data"
+					],
+					"query": [
+						{
+							"key": "timespan",
+							"value": "P200D/2012-11-20TZ",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "expanded",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						},
+						{
+							"key": "showTimeIntervals",
+							"value": "true",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{
@@ -1623,6 +2046,22 @@
 							"",
 							"tests[\"platformType is stationary_insitu\"] = jsonData.platformType === 'stationary_insitu';",
 							"tests[\"valueType is quantity-profile\"] = jsonData.valueType === 'quantity-profile';",
+							"",
+							"var isProfileValue = function(data) {",
+							"    for (var i = 0; i < data.length ; i++) {",
+							"        if (data[i]",
+							"            && (data[i].vertical !== undefined",
+							"                || data[i].value !== undefined)) {",
+							"            return true;",
+							"        }",
+							"    }",
+							"    return false;",
+							"};",
+							"tests[\"firstValue is profile value\"] = isProfileValue(jsonData.firstValue.value);",
+							"tests[\"lastValue is profile value\"] = isProfileValue(jsonData.lastValue.value);",
+							"",
+							"tests[\"firstValue has 2 child values\"] = jsonData.firstValue.value.length === 2;",
+							"tests[\"lastValue has 2 child values\"] = jsonData.lastValue.value.length === 2;",
 							""
 						]
 					}
@@ -1652,7 +2091,7 @@
 			"response": []
 		},
 		{
-			"name": "GET data quantity-profile",
+			"name": "GET data quantity-profile data",
 			"event": [
 				{
 					"listen": "test",
@@ -1662,15 +2101,55 @@
 							"tests[\"Status code is 200\"] = responseCode.code === 200;",
 							"var jsonData = JSON.parse(responseBody);",
 							"",
-							"tests[\"platformType is stationary_insitu\"] = jsonData.platformType === 'stationary_insitu';",
-							"tests[\"valueType is quantity-profile\"] = jsonData.valueType === 'quantity-profile';",
+							"var isProfileValue = function(data) {",
+							"    for (var i = 0; i < data.length ; i++) {",
+							"        var values = data[i].value;",
+							"        console.log(values);",
+							"        for (var j = 0; j < values.length; j++) {",
+							"            var value = values[j];",
+							"            console.log(\"value \" + j + \": \" + value);",
+							"            if (value",
+							"                && (value.vertical !== undefined",
+							"                    && value.value !== undefined)) {",
+							"                return true;",
+							"            }",
+							"        }",
+							"       ",
+							"    }",
+							"    return false;",
+							"};",
+							"",
+							"tests[\"firstValue is profile value\"] = isProfileValue(jsonData.values);",
+							"",
 							""
 						]
 					}
 				}
 			],
 			"request": {
-				"url": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity-profile_1/data?timespan=P1D/2012-11-20TZ&expanded=true",
+				"url": {
+					"raw": "http://{{host}}:{{port}}{{context}}/api/datasets/quantity-profile_1/data?timespan=P1D/2012-11-20TZ",
+					"protocol": "http",
+					"host": [
+						"{{host}}"
+					],
+					"port": "{{port}}{{context}}",
+					"path": [
+						"api",
+						"datasets",
+						"quantity-profile_1",
+						"data"
+					],
+					"query": [
+						{
+							"key": "timespan",
+							"value": "P1D/2012-11-20TZ",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
 				"method": "GET",
 				"header": [
 					{

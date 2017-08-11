@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.TextDataset;
 
-public class EReportingTextDatasetEntity extends EReportingDatasetEntity<EReportingTextDataEntity>
+public class EReportingTextDatasetEntity extends EReportingDatasetEntity
         implements TextDataset<EReportingTextDatasetEntity> {
 
     private static final long serialVersionUID = -1403740854226908585L;

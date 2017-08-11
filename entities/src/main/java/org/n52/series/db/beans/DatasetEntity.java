@@ -18,16 +18,14 @@
 package org.n52.series.db.beans;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity {
+public class DatasetEntity extends DescribableEntity {
 
     public static final String DEFAULT_VALUE_TYPE = "quantity";
 
@@ -56,8 +54,6 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     private boolean deleted;
 
-    private List<T> observations;
-
     private String valueType;
 
     private Set<Date> resultTimes;
@@ -73,11 +69,10 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
     private boolean hiddenChild;
 
     public DatasetEntity() {
-        this.observations = new ArrayList<>();
+        this((String) null);
     }
-
+    
     public DatasetEntity(String type) {
-        this.observations = new ArrayList<>();
         this.valueType = type;
     }
 
@@ -142,14 +137,6 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
 
     public void setPlatform(PlatformEntity platform) {
         this.platform = platform;
-    }
-
-    public List<T> getObservations() {
-        return observations;
-    }
-
-    public void setObservations(List<T> observations) {
-        this.observations = observations;
     }
 
     public Boolean isPublished() {
@@ -307,10 +294,6 @@ public class DatasetEntity<T extends DataEntity< ? >> extends DescribableEntity 
                  .append(feature)
                  .append(" , service: ")
                  .append(getService())
-                 .append(" , #observations: ")
-                 .append(getObservationCount() >= 0
-                         ? getObservationCount()
-                         : observations.size())
                  .append(" ]")
                  .toString();
     }

@@ -94,13 +94,13 @@
             <property column="samplingGeometry" name="geometry" type="org.hibernate.spatial.GeometryType" />
         </component>
 
-        <set name="datasets" table="datasetobservation">
+        <set name="datasets" table="datasetobservation" fetch="join">
             <key column="data" not-null="true" foreign-key="datafk" />
             <many-to-many column="dataset" class="DatasetEntity" foreign-key="datasetfk" />
         </set>
 
         <!-- Or add only to specific joined-subclasses -->
-        <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan">
+        <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan" fetch="join">
             <key column="observation" not-null="true" foreign-key="obsparamdatafk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
                 foreign-key="obsparamparamfk" />

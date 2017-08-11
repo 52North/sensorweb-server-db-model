@@ -27,6 +27,8 @@ public class CountDataEntity extends DataEntity<Integer> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountDataEntity.class);
 
+    private static final long serialVersionUID = -8559375927338360585L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         Integer value = getValue();

@@ -17,7 +17,9 @@
 
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -25,7 +27,7 @@ import java.util.Set;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
+public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serializable {
 
     public static final String PROPERTY_PKID = "pkid";
 
@@ -36,6 +38,8 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
 
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
+
+    private static final long serialVersionUID = 273612846605300612L;
 
     private Long pkid;
 
@@ -78,11 +82,16 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     private boolean child;
 
-    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
+    // private final Set<Parameter< ? >> parameters = new HashSet<>(0);
+    private Set<Parameter> parameters = new HashSet<>(0);
 
-    private final Set<DatasetEntity<DataEntity< ? >>> datasets = new HashSet<>(0);
+    private final Set<DatasetEntity> datasets = new HashSet<>(0);
 
     private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
+
+    protected DataEntity() {
+
+    }
 
     public Long getPkid() {
         return pkid;
@@ -172,7 +181,6 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
-
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
@@ -245,14 +253,24 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
         this.child = child;
     }
 
-    public Set<Parameter< ? >> getParameters() {
+    // public Set<Parameter< ? >> getParameters() {
+    public Set<Parameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter< ? >> parameters) {
-        if (parameters != null) {
-            this.parameters.clear();
-            this.parameters.addAll(parameters);
+    // public void setParameters(Set<Parameter< ? >> parameters) {
+    // if (parameters != null) {
+    // this.parameters.clear();
+    // this.parameters.addAll(parameters);
+    // }
+    // }
+
+    @SuppressWarnings(value = "unchecked")
+    public void setParameters(Object parameters) {
+        if (parameters instanceof Set< ? >) {
+            this.parameters = (Set<Parameter>) parameters;
+        } else {
+            getParameters().add((Parameter) parameters);
         }
     }
 
@@ -260,11 +278,11 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
         return getParameters() != null && !getParameters().isEmpty();
     }
 
-    public Set<DatasetEntity<DataEntity< ? >>> getDatasets() {
+    public Set<DatasetEntity> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(Set<DatasetEntity<DataEntity< ? >>> datasets) {
+    public void setDatasets(Set<DatasetEntity> datasets) {
         if (datasets != null) {
             this.datasets.clear();
             this.datasets.addAll(datasets);
@@ -284,9 +302,42 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     @Override
     public int compareTo(DataEntity<T> o) {
-        return (int) (phenomenonTimeEnd.equals(o.getPhenomenonTimeEnd())
-                ? phenomenonTimeStart.getTime() - o.getPhenomenonTimeStart().getTime()
-                : phenomenonTimeEnd.getTime() - o.getPhenomenonTimeEnd().getTime());
+        return Comparator.comparing(DataEntity<T>::getPhenomenonTimeEnd)
+                         .thenComparing(DataEntity<T>::getPhenomenonTimeStart)
+                         .thenComparing(DataEntity<T>::getPkid)
+                         .compare(this, o);
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((pkid == null)
+                ? 0
+                : pkid.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        DataEntity< ? > other = (DataEntity< ? >) obj;
+        if (pkid == null) {
+            if (other.pkid != null) {
+                return false;
+            }
+        } else if (!pkid.equals(other.pkid)) {
+            return false;
+        }
+        return true;
     }
 
     @Override

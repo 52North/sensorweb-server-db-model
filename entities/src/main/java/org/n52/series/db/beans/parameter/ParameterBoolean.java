@@ -21,6 +21,8 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public class ParameterBoolean extends Parameter<Boolean> {
 
+    private static final long serialVersionUID = -1280123654095577480L;
+
     @Override
     public String getValueAsString() {
         return getValue().toString();

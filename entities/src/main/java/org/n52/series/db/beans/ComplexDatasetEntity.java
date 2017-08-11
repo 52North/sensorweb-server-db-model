@@ -22,8 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
-public class ComplexDatasetEntity extends DatasetEntity<ComplexDataEntity>
-        implements ComplexDataset<ComplexDatasetEntity> {
+public class ComplexDatasetEntity extends DatasetEntity implements ComplexDataset<ComplexDatasetEntity> {
 
     private static final long serialVersionUID = -3164247954562059026L;
 

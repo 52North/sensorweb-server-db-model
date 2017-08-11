@@ -18,4 +18,6 @@ package org.n52.series.db.beans.metadata;
 
 public class MetadataStringEntity extends MetadataEntity<String> {
 
+    private static final long serialVersionUID = -229398495834355485L;
+
 }

@@ -24,6 +24,8 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public class ParameterCategory extends Parameter<String> {
 
+    private static final long serialVersionUID = -6262887605542676492L;
+
     private UnitEntity unit;
 
     @Override

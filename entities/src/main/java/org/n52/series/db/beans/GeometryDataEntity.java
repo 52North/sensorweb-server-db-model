@@ -20,6 +20,8 @@ import java.util.Collection;
 
 public class GeometryDataEntity extends DataEntity<GeometryEntity> {
 
+    private static final long serialVersionUID = 3759168838980730712L;
+
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         GeometryEntity value = getValue();
