@@ -235,14 +235,8 @@ COPY dataset (pkid, feature, category, observationconstellation, deleted, publis
 --
 
 COPY observation (pkid, phenomenontimestart, phenomenontimeend, resulttime, domainid, codespace, name, codespacename, description, deleted, child, parent, validtimestart, validtimeend, samplinggeometry) FROM stdin;
-2	2012-11-19 13:01:00	2012-11-19 13:01:00	2012-11-19 13:01:00	http://www.52north.org/test/observation/2	1	\N	1	\N	F	F	F	\N	\N	\N
-3	2012-11-19 13:02:00	2012-11-19 13:02:00	2012-11-19 13:02:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-4	2012-11-19 13:03:00	2012-11-19 13:03:00	2012-11-19 13:03:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-5	2012-11-19 13:04:00	2012-11-19 13:04:00	2012-11-19 13:04:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-6	2012-11-19 13:05:00	2012-11-19 13:05:00	2012-11-19 13:05:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-7	2012-11-19 13:06:00	2012-11-19 13:06:00	2012-11-19 13:06:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-8	2012-11-19 13:07:00	2012-11-19 13:07:00	2012-11-19 13:07:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-9	2012-11-19 13:08:00	2012-11-19 13:08:00	2012-11-19 13:08:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
+1	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/profile-observation/1	1	\N	1	\N	F	F	T	\N	\N	\N
+10	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	http://www.52north.org/test/profile-observation/10	1	\N	1	\N	F	F	T	\N	\N	\N
 11	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 12	2012-11-19 13:01:00	2012-11-19 13:01:00	2012-11-19 13:01:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 13	2012-11-19 13:02:00	2012-11-19 13:02:00	2012-11-19 13:02:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
@@ -309,7 +303,6 @@ COPY observation (pkid, phenomenontimestart, phenomenontimeend, resulttime, doma
 74	2012-11-19 13:15:00	2012-11-19 13:19:59	2012-11-18 13:00:00	http://www.52north.org/test/observation/8_74_resulttime_2012-11-18	1	\N	1	\N	F	F	F	\N	\N	0101000000CDCCCCCCCCCC20409A99999999994940
 75	2012-11-19 13:20:00	2012-11-19 13:24:59	2012-11-18 13:00:00	http://www.52north.org/test/observation/8_75_resulttime_2012-11-18	1	\N	1	\N	F	F	F	\N	\N	01010000009A99999999991D409A99999999194940
 76	2012-11-19 13:25:00	2012-11-19 13:29:59	2012-11-18 13:00:00	http://www.52north.org/test/observation/8_76_resulttime_2012-11-18	1	\N	1	\N	F	F	F	\N	\N	01010000006666666666661E406666666666664940
-10	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	\N	1	\N	1	\N	F	F	T	\N	\N	\N
 77	2012-11-19 13:30:00	2012-11-19 13:34:59	2012-11-18 13:00:00	http://www.52north.org/test/observation/8_77_resulttime_2012-11-18	1	\N	1	\N	F	F	F	\N	\N	010100000000000000000020406666666666664940
 78	2012-11-19 13:35:00	2012-11-19 13:39:59	2012-11-18 13:00:00	http://www.52north.org/test/observation/8_78_resulttime_2012-11-18	1	\N	1	\N	F	F	F	\N	\N	010100000000000000000021406666666666664940
 79	2012-11-19 13:40:00	2012-11-19 13:44:59	2012-11-18 13:00:00	http://www.52north.org/test/observation/8_79_resulttime_2012-11-18	1	\N	1	\N	F	F	F	\N	\N	010100000033333333333320409A99999999194940
@@ -318,7 +311,6 @@ COPY observation (pkid, phenomenontimestart, phenomenontimeend, resulttime, doma
 82	2008-10-29 00:00:00	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 83	2008-10-29 00:00:00	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
 84	2012-12-31 23:00:00	2012-12-31 23:00:00	2012-12-31 22:01:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
-1	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/observation/1	1	\N	1	\N	F	F	T	\N	\N	\N
 86	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/observation/1_firstValue_vertical_1	1	\N	1	\N	F	T	F	\N	\N	\N
 85	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/observation/1_firstValue_vertical_0	1	\N	1	\N	F	T	F	\N	\N	\N
 87	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	http://www.52north.org/test/observation/1_lastValue_vertical_0	1	\N	1	\N	F	T	F	\N	\N	\N
@@ -340,14 +332,6 @@ COPY observation (pkid, phenomenontimestart, phenomenontimeend, resulttime, doma
 
 COPY datasetobservation (data, dataset) FROM stdin;
 1	1
-2	1
-3	1
-4	1
-5	1
-6	1
-7	1
-8	1
-9	1
 10	1
 11	2
 12	2
