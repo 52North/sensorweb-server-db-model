@@ -82,8 +82,8 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     private boolean child;
 
-//    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
-     private Set<Parameter> parameters = new HashSet<>(0);
+    // private final Set<Parameter< ? >> parameters = new HashSet<>(0);
+    private Set<Parameter> parameters = new HashSet<>(0);
 
     private final Set<DatasetEntity> datasets = new HashSet<>(0);
 
