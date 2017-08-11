@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -297,11 +298,10 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     @Override
     public int compareTo(DataEntity<T> o) {
-        return (int) (phenomenonTimeEnd.equals(o.getPhenomenonTimeEnd())
-                ? phenomenonTimeStart.getTime() - o.getPhenomenonTimeStart()
-                                                   .getTime()
-                : phenomenonTimeEnd.getTime() - o.getPhenomenonTimeEnd()
-                                                 .getTime());
+        return Comparator.comparing(DataEntity<T>::getPhenomenonTimeEnd)
+                         .thenComparing(DataEntity<T>::getPhenomenonTimeStart)
+                         .thenComparing(DataEntity<T>::getPkid)
+                         .compare(this, o);
     }
 
     @Override
