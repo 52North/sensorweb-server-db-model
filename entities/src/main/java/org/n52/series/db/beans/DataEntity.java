@@ -78,7 +78,8 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
 
     private boolean child;
 
-    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
+//    private final Set<Parameter< ? >> parameters = new HashSet<>(0);
+     private Set<Parameter> parameters = new HashSet<>(0);
 
     private final Set<DatasetEntity<DataEntity< ? >>> datasets = new HashSet<>(0);
 
@@ -244,14 +245,24 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>> {
         this.child = child;
     }
 
-    public Set<Parameter< ? >> getParameters() {
+    // public Set<Parameter< ? >> getParameters() {
+    public Set<Parameter> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter< ? >> parameters) {
-        if (parameters != null) {
-            this.parameters.clear();
-            this.parameters.addAll(parameters);
+    // public void setParameters(Set<Parameter< ? >> parameters) {
+    // if (parameters != null) {
+    // this.parameters.clear();
+    // this.parameters.addAll(parameters);
+    // }
+    // }
+
+    @SuppressWarnings(value = "unchecked")
+    public void setParameters(Object parameters) {
+        if (parameters instanceof Set< ? >) {
+            this.parameters = (Set<Parameter>) parameters;
+        } else {
+            getParameters().add((Parameter) parameters);
         }
     }
 

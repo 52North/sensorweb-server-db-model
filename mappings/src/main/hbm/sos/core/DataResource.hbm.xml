@@ -100,7 +100,7 @@
         </set>
 
         <!-- Or add only to specific joined-subclasses -->
-        <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan">
+        <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan" fetch="join">
             <key column="observation" not-null="true" foreign-key="obsparamdatafk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
                 foreign-key="obsparamparamfk" />
