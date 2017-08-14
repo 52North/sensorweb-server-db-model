@@ -82,12 +82,11 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     private boolean child;
 
-    // private final Set<Parameter< ? >> parameters = new HashSet<>(0);
-    private Set<Parameter> parameters = new HashSet<>(0);
+    private Set<DatasetEntity> datasets = new HashSet<>(0);
 
-    private final Set<DatasetEntity> datasets = new HashSet<>(0);
+    private Set<Parameter< ? >> parameters = new HashSet<>(0);
 
-    private final Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
+    private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
     protected DataEntity() {
 
@@ -253,25 +252,12 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
         this.child = child;
     }
 
-    // public Set<Parameter< ? >> getParameters() {
-    public Set<Parameter> getParameters() {
+    public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
-    // public void setParameters(Set<Parameter< ? >> parameters) {
-    // if (parameters != null) {
-    // this.parameters.clear();
-    // this.parameters.addAll(parameters);
-    // }
-    // }
-
-    @SuppressWarnings(value = "unchecked")
-    public void setParameters(Object parameters) {
-        if (parameters instanceof Set< ? >) {
-            this.parameters = (Set<Parameter>) parameters;
-        } else {
-            getParameters().add((Parameter) parameters);
-        }
+    public void setParameters(Set<Parameter< ? >> parameters) {
+        this.parameters = parameters;
     }
 
     public boolean hasParameters() {
@@ -283,10 +269,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     }
 
     public void setDatasets(Set<DatasetEntity> datasets) {
-        if (datasets != null) {
-            this.datasets.clear();
-            this.datasets.addAll(datasets);
-        }
+        this.datasets = datasets;
     }
 
     public Set<RelatedDataEntity> getRelatedObservations() {
@@ -294,10 +277,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     }
 
     public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
-        if (relatedObservations != null) {
-            this.relatedObservations.clear();
-            this.relatedObservations.addAll(relatedObservations);
-        }
+        this.relatedObservations = relatedObservations;
     }
 
     @Override
