@@ -39,10 +39,6 @@ public class PlatformEntity extends DescribableEntity {
 
     private Set<Parameter< ? >> parameters;
 
-    public PlatformType getPlatformType() {
-        return PlatformType.toInstance(mobile, insitu);
-    }
-
     public boolean isMobile() {
         return mobile;
     }

@@ -248,17 +248,6 @@ public class DatasetEntity extends DescribableEntity {
         this.hiddenChild = hiddenChild;
     }
 
-    public String getPlatformId() {
-        ProcedureEntity procedure = observationConstellation.getProcedure();
-        boolean mobile = procedure.isMobile();
-        boolean insitu = procedure.isInsitu();
-        PlatformType type = PlatformType.toInstance(mobile, insitu);
-        DescribableEntity entity = type.isStationary()
-                ? feature
-                : procedure;
-        return type.createId(entity.getPkid());
-    }
-
     @Override
     public String getLabelFrom(String locale) {
         ProcedureEntity procedure = observationConstellation.getProcedure();

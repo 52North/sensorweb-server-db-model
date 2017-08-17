@@ -81,10 +81,6 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
         this.procedureDescriptionFormat = procedureDescriptionFormat;
     }
 
-    public PlatformType getPlatformType() {
-        return PlatformType.toInstance(mobile, insitu);
-    }
-
     public boolean isDisabled() {
         return disabled;
     }
