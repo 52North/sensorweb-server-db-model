@@ -24,6 +24,8 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     public static final String PROPERTY_MOBILE = "mobile";
 
     public static final String PROPERTY_INSITU = "insitu";
+    
+    public static final String PROPERTY_REFERENCE = "reference";
 
     private static final long serialVersionUID = 4028002933920185756L;
 
