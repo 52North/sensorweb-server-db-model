@@ -119,27 +119,7 @@
 						}
 					],
 					"request": {
-						"url": {
-							"raw": "https://echo.getpostman.com/get?plusOne=postman-app-support-882",
-							"protocol": "https",
-							"host": [
-								"echo",
-								"getpostman",
-								"com"
-							],
-							"path": [
-								"get"
-							],
-							"query": [
-								{
-									"key": "plusOne",
-									"value": "postman-app-support-882",
-									"equals": true,
-									"description": ""
-								}
-							],
-							"variable": []
-						},
+						"url": "http://{{host}}:{{port}}{{context}}/api/",
 						"method": "GET",
 						"header": [],
 						"body": {},
@@ -269,23 +249,29 @@
 									"script": {
 										"type": "text/javascript",
 										"exec": [
-											"tests[\"Status code is 200\"] = responseCode.code === 200;",
-											"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\").startsWith(\"application/json\");",
+											"var helpers = eval(globals.loadHelpers);",
+											"",
+											"helpers.test200();",
+											"helpers.testContentTypeStartsWith(\"application/json\");",
+											"",
 											"",
 											"var jsonData = JSON.parse(responseBody);",
-											"tests[\"Counts are available\"] = jsonData[0].quantities !== undefined;",
 											"",
-											"tests[\"datasets count does not include unpublished/deleted items\"] = jsonData[0].quantities.datasets === 10;",
+											"var features = jsonData[0].features || {};",
+											"var quantities = features.quantities || {};",
+											"tests[\"Counts are available\"] = features.quantities !== undefined;",
 											"",
-											"postman.setEnvironmentVariable(\"services.quantities.datasets\", jsonData[0].quantities.datasets);",
-											"postman.setEnvironmentVariable(\"services.quantities.features\", jsonData[0].quantities.features);",
-											"postman.setEnvironmentVariable(\"services.quantities.phenomena\", jsonData[0].quantities.phenomena);",
-											"postman.setEnvironmentVariable(\"services.quantities.offerings\", jsonData[0].quantities.offerings);",
-											"postman.setEnvironmentVariable(\"services.quantities.procedures\", jsonData[0].quantities.procedures);",
-											"postman.setEnvironmentVariable(\"services.quantities.categories\", jsonData[0].quantities.categories);",
-											"postman.setEnvironmentVariable(\"services.quantities.platforms\", jsonData[0].quantities.platforms);",
+											"tests[\"datasets count does not include unpublished/deleted items\"] = quantities.datasets === 10;",
+											"tests[\"procedures count does not include deleted items\"] = quantities.procedures === 8;",
 											"",
-											"tests[\"procedures count does not include deleted items\"] = jsonData[0].quantities.procedures === 8;"
+											"// save counts for later assertion",
+											"postman.setEnvironmentVariable(\"services.quantities.datasets\", quantities.datasets);",
+											"postman.setEnvironmentVariable(\"services.quantities.features\", quantities.features);",
+											"postman.setEnvironmentVariable(\"services.quantities.phenomena\", quantities.phenomena);",
+											"postman.setEnvironmentVariable(\"services.quantities.offerings\", quantities.offerings);",
+											"postman.setEnvironmentVariable(\"services.quantities.procedures\", quantities.procedures);",
+											"postman.setEnvironmentVariable(\"services.quantities.categories\", quantities.categories);",
+											"postman.setEnvironmentVariable(\"services.quantities.platforms\", quantities.platforms);"
 										]
 									}
 								}
@@ -844,7 +830,7 @@
 											"helpers.testContentTypeStartsWith(\"application/json\");",
 											"",
 											"var jsonData = JSON.parse(responseBody);",
-											"tests[\"One filter result: platform 8\"] = jsonData[0].id === \"mobile_insitu_8\";"
+											"tests[\"One filter result: platform 8\"] = helpers.containsId(jsonData, \"mobile_insitu_8\");"
 										]
 									}
 								}
@@ -1527,7 +1513,10 @@
 							"script": {
 								"type": "text/javascript",
 								"exec": [
-									"helpers.checkFilteredValueTypes",
+									"var helpers = eval(globals.loadHelpers);",
+									"",
+									"helpers.test200();",
+									"helpers.testContentTypeStartsWith(\"application/json\");",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
 									"",
@@ -4555,6 +4544,44 @@
 					"_postman_isSubFolder": true
 				}
 			]
+		},
+		{
+			"name": "GET resources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{host}}:{{port}}{{context}}/api/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
