@@ -86,7 +86,7 @@ public class PlatformTypeTest {
 
     @Test
     public void when_idWithInsituSuffix_then_detectType() {
-        Assert.assertTrue(PlatformType.isInsitu("mobile_insitu_10"));
+        Assert.assertTrue(PlatformType.isInsituId("mobile_insitu_10"));
     }
 
 }

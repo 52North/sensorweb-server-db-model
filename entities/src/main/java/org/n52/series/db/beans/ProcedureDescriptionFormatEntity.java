@@ -24,7 +24,7 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 /**
  * @since 1.0.0
  */
-public class ProcedureDescriptionFormatEntity extends PkidEntity implements Serializable {
+public class ProcedureDescriptionFormatEntity extends IdEntity implements Serializable {
 
     public static final String PROCEDURE_DESCRIPTION_FORMAT =
             HasProcedureDescriptionFormat.PROCEDURE_DESCRIPTION_FORMAT;

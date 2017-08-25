@@ -16,7 +16,7 @@
  */
 package org.n52.series.db.beans;
 
-public abstract class TypeEntity<T> extends PkidEntity {
+public abstract class TypeEntity<T> extends IdEntity {
 
     public static final String TYPE = "type";
 

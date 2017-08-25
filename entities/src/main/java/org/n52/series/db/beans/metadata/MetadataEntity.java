@@ -19,9 +19,9 @@ package org.n52.series.db.beans.metadata;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.n52.series.db.beans.PkidEntity;
+import org.n52.series.db.beans.IdEntity;
 
-public abstract class MetadataEntity<T> extends PkidEntity {
+public abstract class MetadataEntity<T> extends IdEntity {
 
     static final String PROPERTY_NAME = "name";
 

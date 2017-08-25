@@ -16,9 +16,9 @@
  */
 package org.n52.series.db.beans.i18n;
 
-import org.n52.series.db.beans.PkidEntity;
+import org.n52.series.db.beans.IdEntity;
 
-public class I18nEntity extends PkidEntity {
+public class I18nEntity extends IdEntity {
 
     private static final long serialVersionUID = 693520332508628558L;
 

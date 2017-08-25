@@ -22,9 +22,10 @@ import java.util.Set;
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     public static final String PROPERTY_MOBILE = "mobile";
-
     public static final String PROPERTY_INSITU = "insitu";
-
+    public static final String PROPERTY_REFERENCE = "reference";
+    public static final String PROPERTY_VALID_PROCEDURE_TIME = "validProceduretime";
+    public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
     private static final long serialVersionUID = 4028002933920185756L;
 
     private boolean reference;
@@ -34,8 +35,6 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     private boolean insitu;
 
     private ProcedureDescriptionFormatEntity procedureDescriptionFormat;
-
-    private boolean disabled;
 
     private boolean deleted;
 
@@ -85,14 +84,6 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
         return PlatformType.toInstance(mobile, insitu);
     }
 
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
-    }
-
     public boolean isDeleted() {
         return deleted;
     }
@@ -115,6 +106,10 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     public void setTypeOf(ProcedureEntity typeOf) {
         this.typeOf = typeOf;
+    }
+
+    public boolean isSetTypeOf() {
+        return getTypeOf() != null;
     }
 
     public boolean isType() {

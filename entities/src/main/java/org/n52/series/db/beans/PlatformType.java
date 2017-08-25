@@ -77,11 +77,11 @@ public enum PlatformType {
 
     public static String extractId(String id) {
         if (isStationaryId(id)) {
-            return isInsitu(id)
+            return isInsituId(id)
                     ? extractId(STATIONARY_INSITU, id)
                     : extractId(STATIONARY_REMOTE, id);
         } else if (isMobileId(id)) {
-            return isInsitu(id)
+            return isInsituId(id)
                     ? extractId(MOBILE_INSITU, id)
                     : extractId(MOBILE_REMOTE, id);
         } else {
@@ -119,7 +119,7 @@ public enum PlatformType {
         return hasSuffix(PLATFORM_TYPE_REMOTE, id);
     }
 
-    public static boolean isInsitu(String id) {
+    public static boolean isInsituId(String id) {
         return hasSuffix(PLATFORM_TYPE_INSITU, id);
     }
 

@@ -256,7 +256,7 @@ public class DatasetEntity extends DescribableEntity {
         DescribableEntity entity = type.isStationary()
                 ? feature
                 : procedure;
-        return type.createId(entity.getPkid());
+        return type.createId(entity.getId());
     }
 
     @Override
@@ -265,14 +265,10 @@ public class DatasetEntity extends DescribableEntity {
         PhenomenonEntity phenomenon = observationConstellation.getObservableProperty();
         OfferingEntity offering = observationConstellation.getOffering();
         StringBuilder sb = new StringBuilder();
-        sb.append(phenomenon.getLabelFrom(locale))
-          .append(" ");
-        sb.append(procedure.getLabelFrom(locale))
-          .append(", ");
-        sb.append(feature.getLabelFrom(locale))
-          .append(", ");
-        return sb.append(offering.getLabelFrom(locale))
-                 .toString();
+        sb.append(phenomenon.getLabelFrom(locale)).append(" ");
+        sb.append(procedure.getLabelFrom(locale)).append(", ");
+        sb.append(feature.getLabelFrom(locale)).append(", ");
+        return sb.append(offering.getLabelFrom(locale)).toString();
     }
 
     @Override
@@ -281,7 +277,7 @@ public class DatasetEntity extends DescribableEntity {
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" id: ")
-                 .append(getPkid())
+                 .append(getId())
                  .append(" , category: ")
                  .append(category)
                  .append(" , phenomenon: ")

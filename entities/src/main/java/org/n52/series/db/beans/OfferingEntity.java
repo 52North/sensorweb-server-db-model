@@ -33,6 +33,11 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
         HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity> {
 
+    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
+    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
+    public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
+    public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
+    
     private static final long serialVersionUID = 5862607025737865794L;
 
     private GeometryEntity geometryEntity;
@@ -51,8 +56,6 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     private Set<RelatedFeatureEntity> relatedFeatures;
 
-    private boolean disabled;
-
     public Geometry getGeometry() {
         return geometryEntity != null
                 ? geometryEntity.getGeometry()
@@ -62,6 +65,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
+        this.geometryEntity.setSrid(geometry.getSRID());
         return this;
     }
 
@@ -71,6 +75,10 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
+    }
+
+    public boolean isSetGeometry() {
+        return geometryEntity != null;
     }
 
     /**
@@ -190,14 +198,6 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
         this.relatedFeatures = relatedFeatures;
         return this;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
     }
 
     @Override

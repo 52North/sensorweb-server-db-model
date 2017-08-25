@@ -29,26 +29,26 @@ public abstract class AbstractCiEntity extends ReferenceEntity {
 
     private static final long serialVersionUID = 7398216647031698387L;
 
-    private String id;
+    private String gmdid;
     private String uuid;
 
     /**
-     * @return the id
+     * @return the gmd id
      */
-    public String getId() {
-        return id;
+    public String getGmdid() {
+        return gmdid;
     }
 
     /**
-     * @param id
-     *            the id to set
+     * @param gmdid
+     *            the gmd id to set
      */
-    public void setId(String id) {
-        this.id = id;
+    public void setGmdid(String gmdid) {
+        this.gmdid = gmdid;
     }
 
     public boolean isSetId() {
-        return getId() != null && !getId().isEmpty();
+        return getGmdid() != null && !getGmdid().isEmpty();
     }
 
     /**

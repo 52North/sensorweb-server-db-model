@@ -23,7 +23,7 @@ import java.util.Set;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity extends PkidEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
+public class DescribableEntity extends IdEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
         Serializable {
 
     public static final String PROPERTY_NAME = NAME;
@@ -172,7 +172,7 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
             return getDomainId();
         } else {
             // absolute fallback
-            return Long.toString(getPkid());
+            return Long.toString(getId());
         }
     }
 

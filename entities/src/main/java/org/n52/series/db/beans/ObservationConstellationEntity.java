@@ -29,7 +29,7 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 /**
  * @since 1.0.0
  */
-public class ObservationConstellationEntity extends PkidEntity
+public class ObservationConstellationEntity extends IdEntity
         implements Serializable,
         HasProcedure<ObservationConstellationEntity>,
         HasObservableProperty<ObservationConstellationEntity>,
@@ -139,7 +139,7 @@ public class ObservationConstellationEntity extends PkidEntity
         return String
                      .format("ObservationConstellation [pkid=%s, observableProperty=%s, procedure=%s, "
                              + "observationType=%s, offering=%s, hiddenChild=%s",
-                             getPkid(),
+                             getId(),
                              observableProperty,
                              procedure,
                              observationType,

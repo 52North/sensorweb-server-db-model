@@ -20,9 +20,9 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.dataset.MeasurementDataset;
+import org.n52.series.db.beans.dataset.QuantityDataset;
 
-public class QuantityDatasetEntity extends DatasetEntity implements MeasurementDataset<QuantityDatasetEntity> {
+public class QuantityDatasetEntity extends DatasetEntity implements QuantityDataset<QuantityDatasetEntity> {
 
     private static final long serialVersionUID = 4788481449399555710L;
 
