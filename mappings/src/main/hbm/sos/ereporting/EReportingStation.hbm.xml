@@ -4,8 +4,8 @@
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingStationEntity" table="station">
         <comment>Table to store the AQD e-Reporting Station information. Mapping file: mapping/ereporting/EReportingStation.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

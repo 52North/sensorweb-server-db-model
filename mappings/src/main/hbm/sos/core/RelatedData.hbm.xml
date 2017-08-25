@@ -4,8 +4,8 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="RelatedDataEntity" table="relatedobservation">
         <comment>The related observation of an observation.</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">

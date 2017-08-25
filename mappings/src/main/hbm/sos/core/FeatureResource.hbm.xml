@@ -2,8 +2,8 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="AbstractFeatureEntity" table="feature">
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -90,7 +90,7 @@
 
 		<set name="translations" table="i18nfeature" inverse="true" fetch="select">
             <key column="feature" foreign-key="feattransfeatfk"/>
-            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nFeatureEntity" foreign-key="proctransi18n"/>
+            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nFeatureEntity" foreign-key="proctransi18n"/>
         </set>
 
         <subclass name="FeatureEntity"
@@ -101,8 +101,8 @@
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nFeatureEntity" table="i18nfeature">
-        <id name="pkid" type="long">
-            <column name="pkid" />
+        <id name="id" type="long">
+            <column name="id" />
             <generator class="native">
                 <param name="sequence">i18nfeature_seq</param>
             </generator>

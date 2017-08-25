@@ -4,8 +4,8 @@
     <class name="PhenomenonEntity" table="observableproperty">
         <comment>Table to store the ObservedProperty/Phenomenon information. Mapping file:
             mapping/core/ObservableProperty.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -47,13 +47,6 @@
             </column>
         </property>
 
-        <property name="disabled" type="org.hibernate.type.TrueFalseType">
-            <column name="disabled" not-null="true" default="'F'" check="disabled in ('T','F')">
-                <comment>For later use by the SOS. Indicator if this observableProperty should not be provided by the
-                    SOS.</comment>
-            </column>
-        </property>
-
         <property name="hiddenChild" type="org.hibernate.type.TrueFalseType">
             <column name="hiddenChild" not-null="true" default="'F'" check="hiddenChild in ('T','F')" />
         </property>
@@ -87,14 +80,14 @@
 
         <set name="translations" table="i18nphenomenon" inverse="true" fetch="select">
             <key column="phenomenon" foreign-key="phentransphenfk" />
-            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity"
+            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity"
                 foreign-key="phentransi18nfk" />
         </set>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" table="i18nphenomenon">
-        <id name="pkid" type="long">
-            <column name="pkid" />
+        <id name="id" type="long">
+            <column name="id" />
             <generator class="native">
                 <param name="sequence">i18nphenomenon_seq</param>
             </generator>

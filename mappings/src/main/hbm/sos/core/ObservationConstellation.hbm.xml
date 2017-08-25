@@ -6,8 +6,8 @@
         <comment>Table to store the ObservationConstellation information. Contains information about the constellation
             of observableProperty, procedure, offering and the observationType. Mapping file:
             mapping/core/ObservationConstellation.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
