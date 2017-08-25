@@ -18,7 +18,9 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.util.Map;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
@@ -133,6 +135,14 @@ public class DescribableEntity extends PkidEntity implements IdentifierNameDescr
 
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
+    }
+
+    public Set<Map<String, Object>> getMappedParameters(String locale) {
+        return hasParameters()
+                ? parameters.stream()
+                            .map(e -> e.toValueMap(locale))
+                            .collect(Collectors.toSet())
+                : null;
     }
 
     public ServiceEntity getService() {
