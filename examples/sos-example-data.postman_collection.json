@@ -25,7 +25,7 @@
 									"",
 									"    var navigateTo = function(path, json) {",
 									"        path = path || [];",
-									"        return path.reduce((o, n) => o[n], json);",
+									"        return path.reduce((o, n) => (o && o[n]) ? o[n] : undefined, json);",
 									"    };",
 									"",
 									"    var logFailWarning = function logFailWarning(name, expected, actual) {",
@@ -35,7 +35,7 @@
 									"    helpers.test200 = function test200(contentType) {",
 									"        tests[\"Response returned 200\"] = responseCode.code === 200;",
 									"        if (contentType) {",
-									"            helpers.testContentTypeStartsWith(contentType)",
+									"            helpers.testContentTypeStartsWith(contentType);",
 									"        }",
 									"    };",
 									"    ",
@@ -77,10 +77,15 @@
 									"        return false;",
 									"    };",
 									"    ",
-									"    helpers.testAllMembersPresent = function(collection = [], members = [], failOnEmpty = true) {",
+									"    var assertNonEmpty = function(collection=[],failOnEmpty=true) {",
 									"        if (collection.length === 0 && failOnEmpty) {",
 									"            tests[\"Couldn't perform members check on empty collection!\"] = false;",
 									"        }",
+									"    };",
+									"    ",
+									"    helpers.testAllMembersPresent = function(collection=[], members=[], failOnEmpty=true) {",
+									"        collection = Array.isArray(collection) ? collection : [collection];",
+									"        assertNonEmpty(collection, failOnEmpty);",
 									"        for (let i = 0; i < collection.length; i++) {",
 									"            const currentItem = collection[i];",
 									"            for (var j = 0; j < members.length ; j++) {",
@@ -90,7 +95,6 @@
 									"            }",
 									"        }",
 									"    };",
-									"    ",
 									"    ",
 									"    var checkAllValuesPresent = function(path, values) {",
 									"        for (var i = 0; i < jsonData.length; i++) {",
@@ -110,17 +114,33 @@
 									"        return checkAllValuesPresent([\"valueType\"], valueTypes);",
 									"    };",
 									"    ",
-									"    helpers.allWithinBBox = function(bbox) {",
-									"        for (var i = 0; i < jsonData.length; i++) {",
+									"    helpers.testOneOf = function(allowedValues=[], path=[], json=[]) {",
+									"        for (let i = 0 ; i < json.length ; i++) {",
+									"            tests[\"Value \" + path + \" is one of '\" + allowedValues + \"'\"] = allowedValues.includes(navigateTo(path, json[i]));",
+									"        }",
+									"    };",
+									"    ",
+									"    helpers.allWithinBBox = function(features=[], bbox=[], failOnEmpty=true) {",
+									"        features = Array.isArray(features) ? features : [features];",
+									"        console.log(features);",
+									"        assertNonEmpty(features, failOnEmpty);",
+									"        if (bbox.length !== 4) {",
+									"            console.warn(\"Expected [lon,lat,lon,lat] bbox: \" + bbox);",
+									"            return false;",
+									"        }",
+									"        var ll_lon = bbox[0];",
+									"        var ll_lat = bbox[1];",
+									"        var ur_lon = bbox[2];",
+									"        var ur_lat = bbox[3];",
+									"        for (var i = 0; i < features.length; i++) {",
 									"            var path = [\"geometry\", \"coordinates\"];",
-									"            var ll_lon = bbox[0];",
-									"            var ll_lat = bbox[1];",
-									"            var ur_lon = bbox[2];",
-									"            var ur_lat = bbox[3];",
-									"            var coords = navigateTo(path, jsonData[i]);",
+									"            var coords = navigateTo(path, features[i]);",
+									"            if (coords === undefined) {",
+									"                console.warn(\"Excepted an array of GeoJSON POINT Features!\");",
+									"                return false;",
+									"            }",
 									"            if (coords[0] < ll_lon || coords[0] > ur_lon",
 									"                || coords[1] < ll_lat || coords[1] > ur_lat) {",
-									"                console.log(coords);",
 									"                return false;",
 									"            }",
 									"        }",
@@ -908,6 +928,88 @@
 								"description": ""
 							},
 							"response": []
+						},
+						{
+							"name": "GET platforms via bbox expanded",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var helpers = eval(globals.loadHelpers);",
+											"",
+											"helpers.test200();",
+											"helpers.testContentTypeStartsWith(\"application/json\");",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"// can't be determined as depending on mobile/insitu flags either procedures or features are used to construct platform entities from",
+											"// tests[\"element count match those counted at services\"] = jsonData.length == postman.getEnvironmentVariable(\"services.quantities.platforms\");",
+											"",
+											"tests[\"Platform stationary_insitu_6 is not listed as it is only referenced from deleted dataset\"] = !helpers.containsId(jsonData, \"stationary_insitu_6\");",
+											"",
+											"tests[\"Platforms within bbox\"] = helpers.allWithinBBox(jsonData, [7.0,50.5,7.9,52]);",
+											""
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "http://{{host}}:{{port}}{{context}}/api/platforms/?platformtypes=all&expanded=true&bbox=7.0,50.5,7.9,52",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{context}}",
+									"path": [
+										"api",
+										"platforms",
+										""
+									],
+									"query": [
+										{
+											"key": "platformtypes",
+											"value": "all",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "expanded",
+											"value": "true",
+											"equals": true,
+											"description": ""
+										},
+										{
+											"key": "bbox",
+											"value": "7.0,50.5,7.9,52",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -1021,6 +1123,74 @@
 						}
 					],
 					"_postman_isSubFolder": true
+				},
+				{
+					"name": "GET search",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"var helpers = eval(globals.loadHelpers);",
+									"",
+									"helpers.test200(\"application/json\");",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"url": {
+							"raw": "http://{{host}}:{{port}}{{context}}/api/search?q=dlz&platformtypes=all",
+							"protocol": "http",
+							"host": [
+								"{{host}}"
+							],
+							"port": "{{port}}{{context}}",
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "dlz",
+									"equals": true,
+									"description": ""
+								},
+								{
+									"key": "platformtypes",
+									"value": "all",
+									"equals": true,
+									"description": ""
+								}
+							],
+							"variable": []
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+						},
+						"description": ""
+					},
+					"response": []
 				}
 			]
 		},
@@ -1482,100 +1652,6 @@
 								"description": ""
 							},
 							"response": []
-						},
-						{
-							"name": "GET platforms via bbox expanded",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"type": "text/javascript",
-										"exec": [
-											"var helpers = eval(globals.loadHelpers);",
-											"",
-											"helpers.test200();",
-											"helpers.testContentTypeStartsWith(\"application/json\");",
-											"",
-											"var jsonData = JSON.parse(responseBody);",
-											"",
-											"// can't be determined as depending on mobile/insitu flags either procedures or features are used to construct platform entities from",
-											"// tests[\"element count match those counted at services\"] = jsonData.length == postman.getEnvironmentVariable(\"services.quantities.platforms\");",
-											"",
-											"var containsId = function(data, id) {",
-											"    for (var i = 0; i < data.length ; i++) {",
-											"        if (data[i] && data[i].id === id) {",
-											"            return true;",
-											"        }",
-											"    }",
-											"    return false;",
-											"};",
-											"tests[\"Platform stationary_insitu_6 is not listed as it is only referenced from deleted dataset\"] = !containsId(jsonData, \"stationary_insitu_6\");",
-											"",
-											"var navigateTo = function(path, json) {",
-											"    path = path || [];",
-											"    return path.reduce((o, n) => o[n], json);",
-											"};",
-											"",
-											"tests[\"Platforms within bbox\"] = helpers.allWithinBBox([7.0,50.5,7.9,52]);",
-											""
-										]
-									}
-								}
-							],
-							"request": {
-								"url": {
-									"raw": "http://{{host}}:{{port}}{{context}}/api/platforms?platformtypes=all&expanded=true&bbox=7.0,50.5,7.9,52",
-									"protocol": "http",
-									"host": [
-										"{{host}}"
-									],
-									"port": "{{port}}{{context}}",
-									"path": [
-										"api",
-										"platforms"
-									],
-									"query": [
-										{
-											"description": "",
-											"equals": true,
-											"key": "platformtypes",
-											"value": "all"
-										},
-										{
-											"description": "",
-											"equals": true,
-											"key": "expanded",
-											"value": "true"
-										},
-										{
-											"description": "",
-											"equals": true,
-											"key": "bbox",
-											"value": "7.0,50.5,7.9,52"
-										}
-									],
-									"variable": []
-								},
-								"method": "GET",
-								"header": [
-									{
-										"description": "",
-										"key": "Content-Type",
-										"value": "application/json"
-									},
-									{
-										"description": "",
-										"key": "Accept",
-										"value": "application/json"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
-								},
-								"description": ""
-							},
-							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -1595,6 +1671,7 @@
 									"var jsonData = JSON.parse(responseBody);",
 									"",
 									"tests[\"element count match those counted at services\"] = jsonData.length == postman.getEnvironmentVariable(\"services.quantities.datasets\");",
+									"helpers.testAllMembersPresent(jsonData, [\"id\", \"href\", \"uom\", \"label\", \"platformType\"]);",
 									"",
 									"tests[\"Deleted Dataset text_5 is not listed\"] = !helpers.containsId(jsonData, \"text_5\");",
 									"tests[\"Unpublished Dataset quantity_10 is not listed\"] = !helpers.containsId(jsonData, \"quantity_10\");"
@@ -1639,6 +1716,7 @@
 									"helpers.testContentTypeStartsWith(\"application/json\");",
 									"",
 									"var jsonData = JSON.parse(responseBody);",
+									"helpers.testAllMembersPresent([jsonData], [\"id\", \"label\", \"href\", \"uom\", \"platformType\", \"valueType\", \"parameters\", \"firstValue\", \"lastValue\"]);",
 									"",
 									"tests[\"item has correct id\"] = jsonData.id === \"quantity_8\";",
 									"tests[\"item has correct valueType\"] = jsonData.valueType === \"quantity\";",
@@ -4004,8 +4082,7 @@
 												"exec": [
 													"var helpers = eval(globals.loadHelpers);",
 													"",
-													"helpers.test200();",
-													"helpers.testContentTypeStartsWith(\"application/json\");",
+													"helpers.test200(\"application/json\");",
 													"",
 													"var jsonData = JSON.parse(responseBody);",
 													"",
@@ -4437,6 +4514,66 @@
 								"description": ""
 							},
 							"response": []
+						},
+						{
+							"name": "GET search",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var helpers = eval(globals.loadHelpers);",
+											"",
+											"helpers.test200(\"application/json\");",
+											"",
+											"var jsonData = JSON.parse(responseBody);"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "http://{{host}}:{{port}}{{context}}/api/search?q=DLZ",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{context}}",
+									"path": [
+										"api",
+										"search"
+									],
+									"query": [
+										{
+											"key": "q",
+											"value": "DLZ",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+								},
+								"description": ""
+							},
+							"response": []
 						}
 					],
 					"_postman_isSubFolder": true
@@ -4445,6 +4582,218 @@
 					"name": "timeseries",
 					"description": "",
 					"item": [
+						{
+							"name": "filtered",
+							"description": "",
+							"item": [
+								{
+									"name": "GET timeseries via bbox",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"var helpers = eval(globals.loadHelpers);",
+													"",
+													"helpers.test200(\"application/json\");",
+													"",
+													"var jsonData = JSON.parse(responseBody);",
+													"",
+													"// can't be determined as depending on mobile/insitu flags either procedures or features are used to construct platform entities from",
+													"// tests[\"element count match those counted at services\"] = jsonData.length == postman.getEnvironmentVariable(\"services.quantities.platforms\");",
+													"",
+													"tests[\"Platform stationary_insitu_6 is not listed as it is only referenced from deleted dataset\"] = !helpers.containsId(jsonData, \"stationary_insitu_6\");",
+													"",
+													"let stations = jsonData.map(function(item) {",
+													"    return item.station;",
+													"});",
+													"tests[\"Timeseries within bbox\"] = helpers.allWithinBBox(stations,[7.0,50.5,7.9,52]);",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "http://{{host}}:{{port}}{{context}}/api/timeseries?bbox=7.0,50.5,7.9,52",
+											"protocol": "http",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}{{context}}",
+											"path": [
+												"api",
+												"timeseries"
+											],
+											"query": [
+												{
+													"key": "bbox",
+													"value": "7.0,50.5,7.9,52",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GET stations via bbox",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"var helpers = eval(globals.loadHelpers);",
+													"",
+													"helpers.test200();",
+													"helpers.testContentTypeStartsWith(\"application/json\");",
+													"",
+													"var jsonData = JSON.parse(responseBody);",
+													"",
+													"// can't be determined as depending on mobile/insitu flags either procedures or features are used to construct platform entities from",
+													"// tests[\"element count match those counted at services\"] = jsonData.length == postman.getEnvironmentVariable(\"services.quantities.platforms\");",
+													"",
+													"tests[\"Platform stationary_insitu_6 is not listed as it is only referenced from deleted dataset\"] = !helpers.containsId(jsonData, \"stationary_insitu_6\");",
+													"",
+													"tests[\"Timeseries within bbox\"] = helpers.allWithinBBox(jsonData,[7.0,50.5,7.9,52]);",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "http://{{host}}:{{port}}{{context}}/api/stations?bbox=7.0,50.5,7.9,52",
+											"protocol": "http",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}{{context}}",
+											"path": [
+												"api",
+												"stations"
+											],
+											"query": [
+												{
+													"key": "bbox",
+													"value": "7.0,50.5,7.9,52",
+													"equals": true,
+													"description": ""
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json",
+												"description": ""
+											},
+											{
+												"key": "Accept",
+												"value": "application/json",
+												"description": ""
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								},
+								{
+									"name": "GET datasets (feature filter)",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													"var helpers = eval(globals.loadHelpers);",
+													"",
+													"helpers.test200();",
+													"helpers.testContentTypeStartsWith(\"application/json\");",
+													"",
+													"",
+													"var jsonData = JSON.parse(responseBody);",
+													"",
+													"helpers.testOneOf([\"7\"], [\"station\", \"id\"], jsonData);",
+													""
+												]
+											}
+										}
+									],
+									"request": {
+										"url": {
+											"raw": "http://{{host}}:{{port}}{{context}}/api/timeseries?features=7",
+											"protocol": "http",
+											"host": [
+												"{{host}}"
+											],
+											"port": "{{port}}{{context}}",
+											"path": [
+												"api",
+												"timeseries"
+											],
+											"query": [
+												{
+													"description": "",
+													"equals": true,
+													"key": "features",
+													"value": "7"
+												}
+											],
+											"variable": []
+										},
+										"method": "GET",
+										"header": [
+											{
+												"description": "",
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"description": "",
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+										},
+										"description": ""
+									},
+									"response": []
+								}
+							],
+							"_postman_isSubFolder": true
+						},
 						{
 							"name": "GET timeseries",
 							"event": [
@@ -4550,6 +4899,69 @@
 								"method": "GET",
 								"header": [],
 								"body": {},
+								"description": ""
+							},
+							"response": []
+						},
+						{
+							"name": "GET datasets expanded",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var helpers = eval(globals.loadHelpers);",
+											"",
+											"helpers.test200();",
+											"helpers.testContentTypeStartsWith(\"application/json\");",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"",
+											"helpers.testAllMembersPresent(jsonData, [\"id\", \"label\", \"uom\", \"station\", \"parameters\", \"firstValue\", \"lastValue\"]);"
+										]
+									}
+								}
+							],
+							"request": {
+								"url": {
+									"raw": "http://{{host}}:{{port}}{{context}}/api/timeseries?expanded=true",
+									"protocol": "http",
+									"host": [
+										"{{host}}"
+									],
+									"port": "{{port}}{{context}}",
+									"path": [
+										"api",
+										"timeseries"
+									],
+									"query": [
+										{
+											"key": "expanded",
+											"value": "true",
+											"equals": true,
+											"description": ""
+										}
+									],
+									"variable": []
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"description": ""
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"description": ""
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"legend\": true,\r\n  \"timespan\": \"P0Y0M3D/2013-01-31TZ\",\r\n  \"width\": 400,\r\n  \"height\": 300,\r\n  \"language\": \"de\",\r\n  \"grid\": true,\r\n  \"styleOptions\": {\r\n    \"328\": {\r\n      \"chartType\": \"line\",\r\n      \"properties\": {\r\n        \"color\": \"#0000FF\",\r\n        \"lineType\": \"solid\",\r\n        \"width\": 1\r\n      }\r\n    },\r\n    \"159\": {\r\n      \"chartType\": \"bar\",\r\n      \"properties\": {\r\n        \"color\": \"#2f2f2f\",\r\n        \"interval\": \"byHour\",\r\n        \"width\": 0.7\r\n      }\r\n    }\r\n  }\r\n}"
+								},
 								"description": ""
 							},
 							"response": []
@@ -4811,6 +5223,44 @@
 					"_postman_isSubFolder": true
 				}
 			]
+		},
+		{
+			"name": "GET resources",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							""
+						]
+					}
+				}
+			],
+			"request": {
+				"url": "http://{{host}}:{{port}}{{context}}/api/",
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"description": ""
+			},
+			"response": []
 		}
 	]
 }
