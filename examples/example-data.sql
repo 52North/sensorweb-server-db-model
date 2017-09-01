@@ -23,7 +23,7 @@ SET search_path = public, pg_catalog;
 -- Data for Name: codespace; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY codespace (pkid, codespace) FROM stdin;
+COPY codespace (id, codespace) FROM stdin;
 1	http://www.opengis.net/def/nil/OGC/0/unknown
 \.
 
@@ -34,7 +34,7 @@ COPY codespace (pkid, codespace) FROM stdin;
 -- Data for Name: featuretype; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY featuretype (pkid, type) FROM stdin;
+COPY featuretype (id, type) FROM stdin;
 1	http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint
 2	http://www.opengis.net/def/nil/OGC/0/unknown
 \.
@@ -46,7 +46,7 @@ COPY featuretype (pkid, type) FROM stdin;
 -- Data for Name: feature; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY feature (pkid, hibernatediscriminator, featuretype, domainid, codespace, name, codespacename, description, geom, descriptionxml, url) FROM stdin;
+COPY feature (id, hibernatediscriminator, featuretype, domainid, codespace, name, codespacename, description, geom, descriptionxml, url) FROM stdin;
 1	\N	2	http://www.52north.org/test/featureOfInterest/world	1	\N	1	\N	\N	\N	\N
 2	\N	2	http://www.52north.org/test/featureOfInterest/1	1	con terra	1	\N	0101000020E61000003F726BD26DE91E407D5EF1D423F14940	\N	\N
 3	\N	2	http://www.52north.org/test/featureOfInterest/2	1	ESRI	1	\N	0101000020E6100000EB1D6E87864C5DC08255F5F23B074140	\N	\N
@@ -69,7 +69,7 @@ COPY feature (pkid, hibernatediscriminator, featuretype, domainid, codespace, na
 -- Data for Name: observableproperty; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY observableproperty (pkid, domainid, codespace, name, codespacename, description, disabled, hiddenchild) FROM stdin;
+COPY observableproperty (id, domainid, codespace, name, codespacename, description, disabled, hiddenchild) FROM stdin;
 1	http://www.52north.org/test/observableProperty/1	1	test_observable_property_1	1	\N	F	F
 2	http://www.52north.org/test/observableProperty/2	1	test_observable_property_2	1	\N	F	F
 3	http://www.52north.org/test/observableProperty/3	1	test_observable_property_3	1	\N	F	F
@@ -83,7 +83,7 @@ COPY observableproperty (pkid, domainid, codespace, name, codespacename, descrip
 
 
 
-COPY category (pkid, domainid, name, description) FROM stdin;
+COPY category (id, domainid, name, description) FROM stdin;
 1	http://www.52north.org/test/observableProperty/1	test_observable_property_1	\N
 2	http://www.52north.org/test/observableProperty/2	test_observable_property_2	\N
 3	http://www.52north.org/test/observableProperty/3	test_observable_property_3	\N
@@ -103,7 +103,7 @@ COPY category (pkid, domainid, name, description) FROM stdin;
 -- Data for Name: offering; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY offering (pkid, domainid, codespace, name, codespacename, description, disabled, phenomenontimestart, phenomenontimeend, resulttimestart, resulttimeend) FROM stdin;
+COPY offering (id, domainid, codespace, name, codespacename, description, disabled, phenomenontimestart, phenomenontimeend, resulttimestart, resulttimeend) FROM stdin;
 1	http://www.52north.org/test/offering/1	\N	Offering for sensor 1	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
 2	http://www.52north.org/test/offering/2	\N	Offering for sensor 2	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
 3	http://www.52north.org/test/offering/3	\N	Offering for sensor 3	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
@@ -122,7 +122,7 @@ COPY offering (pkid, domainid, codespace, name, codespacename, description, disa
 -- Data for Name: proceduredescriptionformat; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY proceduredescriptionformat (pkid, proceduredescriptionformat) FROM stdin;
+COPY proceduredescriptionformat (id, proceduredescriptionformat) FROM stdin;
 1	http://www.opengis.net/sensorML/1.0.1
 \.
 
@@ -133,7 +133,7 @@ COPY proceduredescriptionformat (pkid, proceduredescriptionformat) FROM stdin;
 -- Data for Name: procedure; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY procedure (pkid, proceduredescriptionformat, domainid, codespace, name, codespacename, description, deleted, disabled, descriptionfile, referenceflag, typeof, istype, isaggregation, mobile, insitu) FROM stdin;
+COPY procedure (id, proceduredescriptionformat, domainid, codespace, name, codespacename, description, deleted, disabled, descriptionfile, referenceflag, typeof, istype, isaggregation, mobile, insitu) FROM stdin;
 1	1	http://www.52north.org/test/procedure/1	\N	con terra	\N	\N	F	F	\N	F	\N	F	F	F	T
 2	1	http://www.52north.org/test/procedure/2	\N	ESRI	\N	\N	F	F	\N	F	\N	F	F	F	T
 3	1	http://www.52north.org/test/procedure/3	\N	Kisters	\N	\N	F	F	\N	F	\N	F	F	F	T
@@ -152,7 +152,7 @@ COPY procedure (pkid, proceduredescriptionformat, domainid, codespace, name, cod
 -- Data for Name: unit; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY unit (pkid, unit, name, link) FROM stdin;
+COPY unit (id, unit, name, link) FROM stdin;
 1	test_unit_1	\N	\N
 2	test_unit_4	\N	\N
 3	test_unit_6	\N	\N
@@ -169,7 +169,7 @@ COPY unit (pkid, unit, name, link) FROM stdin;
 -- Data for Name: observationtype; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY observationtype (pkid, type) FROM stdin;
+COPY observationtype (id, type) FROM stdin;
 1	http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement
 2	http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_CountObservation
 3	http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_TruthObservation
@@ -184,7 +184,7 @@ COPY observationtype (pkid, type) FROM stdin;
 -- Data for Name: observationconstellation; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY observationconstellation (pkid, observableproperty, procedure, observationtype, offering, hiddenchild) FROM stdin;
+COPY observationconstellation (id, observableproperty, procedure, observationtype, offering, hiddenchild) FROM stdin;
 1	1	1	1	1	F
 2	2	2	2	2	F
 3	3	3	3	3	F
@@ -212,7 +212,7 @@ SELECT pg_catalog.setval('observationconstellation_seq', 9, true);
 -- Data for Name: dataset; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY dataset (pkid, feature, category, observationconstellation, deleted, published, hiddenchild, firsttimestamp, lasttimestamp, unit, domainid, codespace, name, codespacename, description, valuetype) FROM stdin;
+COPY dataset (id, feature, category, observationconstellation, deleted, published, hiddenchild, firsttimestamp, lasttimestamp, unit, domainid, codespace, name, codespacename, description, valuetype) FROM stdin;
 2	3	2	2	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	count
 9	10	9	9	F	T	F	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
 3	4	3	3	F	T	F	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	boolean
@@ -234,7 +234,7 @@ COPY dataset (pkid, feature, category, observationconstellation, deleted, publis
 -- Data for Name: observation; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY observation (pkid, phenomenontimestart, phenomenontimeend, resulttime, domainid, codespace, name, codespacename, description, deleted, child, parent, validtimestart, validtimeend, samplinggeometry) FROM stdin;
+COPY observation (id, phenomenontimestart, phenomenontimeend, resulttime, domainid, codespace, name, codespacename, description, deleted, child, parent, validtimestart, validtimeend, samplinggeometry) FROM stdin;
 1	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/profile-observation/1	1	\N	1	\N	F	F	T	\N	\N	\N
 10	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	http://www.52north.org/test/profile-observation/10	1	\N	1	\N	F	F	T	\N	\N	\N
 11	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	\N	1	\N	1	\N	F	F	F	\N	\N	\N
@@ -454,7 +454,7 @@ COPY booleanparametervalue (parameter, value) FROM stdin;
 
 
 
-COPY parameter (pkid, name) FROM stdin;
+COPY parameter (id, name) FROM stdin;
 1	depth
 2	depth
 3	depth
@@ -791,7 +791,7 @@ COPY offeringallowedobservationtype (offering, observationtype) FROM stdin;
 -- Data for Name: relatedfeature; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY relatedfeature (pkid, featureofinterest) FROM stdin;
+COPY relatedfeature (id, featureofinterest) FROM stdin;
 \.
 
 
@@ -883,7 +883,7 @@ COPY profileobservation (observation, child) FROM stdin;
 -- Data for Name: relatedfeaturerole; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY relatedfeaturerole (pkid, relatedfeaturerole) FROM stdin;
+COPY relatedfeaturerole (id, relatedfeaturerole) FROM stdin;
 \.
 
 
@@ -921,7 +921,7 @@ SELECT pg_catalog.setval('relatedfeaturerole_seq', 1, false);
 -- Data for Name: relatedobservation; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY relatedobservation (pkid, observation, relatedobservation, role, relatedurl) FROM stdin;
+COPY relatedobservation (id, observation, relatedobservation, role, relatedurl) FROM stdin;
 \.
 
 
@@ -940,7 +940,7 @@ SELECT pg_catalog.setval('relatedobservation_seq', 1, false);
 -- Data for Name: resulttemplate; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY resulttemplate (pkid, dataset, domainid, resultstructure, resultencoding) FROM stdin;
+COPY resulttemplate (id, dataset, domainid, resultstructure, resultencoding) FROM stdin;
 1	6	http://www.52north.org/test/procedure/6/template/1	<swe:DataRecord xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">\n  <swe:field name="phenomenonTime">\n    <swe:TimeRange definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">\n      <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>\n    </swe:TimeRange>\n  </swe:field>\n  <swe:field name="resultTime">\n    <swe:Time definition="http://www.opengis.net/def/property/OGC/0/ResultTime">\n      <swe:uom code="testunit1"/>\n    </swe:Time>\n  </swe:field>\n  <swe:field name="observable_property_6">\n    <swe:Quantity definition="http://www.52north.org/test/observableProperty/6">\n      <swe:uom code="test_unit_6"/>\n    </swe:Quantity>\n  </swe:field>\n</swe:DataRecord>	<swe:TextEncoding xmlns:swe="http://www.opengis.net/swe/2.0" blockSeparator="#" tokenSeparator=","/>
 \.
 
@@ -1044,7 +1044,7 @@ SELECT pg_catalog.setval('unit_seq', 5, true);
 -- Data for Name: validproceduretime; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY validproceduretime (pkid, procedure, proceduredescriptionformat, starttime, endtime, descriptionxml) FROM stdin;
+COPY validproceduretime (id, procedure, proceduredescriptionformat, starttime, endtime, descriptionxml) FROM stdin;
 1	1	1	2017-03-04 13:49:27.394	\N	<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" version="1.0.1">\n  <sml:member>\n    <sml:System xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n      <sml:identification>\n        <sml:IdentifierList>\n          <sml:identifier name="uniqueID">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">\n              <sml:value>http://www.52north.org/test/procedure/1</sml:value>\n            </sml:Term>\n          </sml:identifier>\n          <sml:identifier name="longName">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">\n              <sml:value>con terra GmbH (www.conterra.de)</sml:value>\n            </sml:Term>\n          </sml:identifier>\n          <sml:identifier name="shortName">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">\n              <sml:value>con terra</sml:value>\n            </sml:Term>\n          </sml:identifier>\n        </sml:IdentifierList>\n      </sml:identification>\n      <sml:capabilities name="featuresOfInterest">\n        <swe:SimpleDataRecord>\n          <swe:field name="featureOfInterestID">\n            <swe:Text>\n              <swe:value>http://www.52north.org/test/featureOfInterest/1</swe:value>\n            </swe:Text>\n          </swe:field>\n        </swe:SimpleDataRecord>\n      </sml:capabilities>\n      <sml:position name="sensorPosition">\n        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">\n          <swe:location>\n            <swe:Vector gml:id="STATION_LOCATION">\n              <swe:coordinate name="easting">\n                <swe:Quantity axisID="x">\n                  <swe:uom code="degree"/>\n                  <swe:value>7.727958</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n              <swe:coordinate name="northing">\n                <swe:Quantity axisID="y">\n                  <swe:uom code="degree"/>\n                  <swe:value>51.883906</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n              <swe:coordinate name="altitude">\n                <swe:Quantity axisID="z">\n                  <swe:uom code="m"/>\n                  <swe:value>52.0</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n            </swe:Vector>\n          </swe:location>\n        </swe:Position>\n      </sml:position>\n      <sml:inputs>\n        <sml:InputList>\n          <sml:input name="test_observable_property_1">\n            <swe:ObservableProperty definition="http://www.52north.org/test/observableProperty/1"/>\n          </sml:input>\n        </sml:InputList>\n      </sml:inputs>\n      <sml:outputs>\n        <sml:OutputList>\n          <sml:output name="test_observable_property_1">\n            <swe:Category definition="http://www.52north.org/test/observableProperty/1">\n              <swe:codeSpace xlink:href="test_unit_1"/>\n            </swe:Category>\n          </sml:output>\n        </sml:OutputList>\n      </sml:outputs>\n    </sml:System>\n  </sml:member>\n</sml:SensorML>
 2	2	1	2017-03-04 13:49:27.951	\N	<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" version="1.0.1">\n  <sml:member>\n    <sml:System xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n      <sml:identification>\n        <sml:IdentifierList>\n          <sml:identifier name="uniqueID">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">\n              <sml:value>http://www.52north.org/test/procedure/2</sml:value>\n            </sml:Term>\n          </sml:identifier>\n          <sml:identifier name="longName">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">\n              <sml:value>ESRI (www.esri.com)</sml:value>\n            </sml:Term>\n          </sml:identifier>\n          <sml:identifier name="shortName">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">\n              <sml:value>ESRI</sml:value>\n            </sml:Term>\n          </sml:identifier>\n        </sml:IdentifierList>\n      </sml:identification>\n      <sml:capabilities name="featuresOfInterest">\n        <swe:SimpleDataRecord>\n          <swe:field name="featureOfInterestID">\n            <swe:Text>\n              <swe:value>http://www.52north.org/test/featureOfInterest/2</swe:value>\n            </swe:Text>\n          </swe:field>\n        </swe:SimpleDataRecord>\n      </sml:capabilities>\n      <sml:position name="sensorPosition">\n        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">\n          <swe:location>\n            <swe:Vector gml:id="STATION_LOCATION">\n              <swe:coordinate name="easting">\n                <swe:Quantity axisID="x">\n                  <swe:uom code="degree"/>\n                  <swe:value>-117.195711</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n              <swe:coordinate name="northing">\n                <swe:Quantity axisID="y">\n                  <swe:uom code="degree"/>\n                  <swe:value>34.056517</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n              <swe:coordinate name="altitude">\n                <swe:Quantity axisID="z">\n                  <swe:uom code="m"/>\n                  <swe:value>52.0</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n            </swe:Vector>\n          </swe:location>\n        </swe:Position>\n      </sml:position>\n      <sml:inputs>\n        <sml:InputList>\n          <sml:input name="test_observable_property_2">\n            <swe:ObservableProperty definition="http://www.52north.org/test/observableProperty/2"/>\n          </sml:input>\n        </sml:InputList>\n      </sml:inputs>\n      <sml:outputs>\n        <sml:OutputList>\n          <sml:output name="test_observable_property_2">\n            <swe:Count definition="http://www.52north.org/test/observableProperty/2"/>\n          </sml:output>\n        </sml:OutputList>\n      </sml:outputs>\n    </sml:System>\n  </sml:member>\n</sml:SensorML>
 3	3	1	2017-03-04 13:49:28.117	\N	<sml:SensorML xmlns:sml="http://www.opengis.net/sensorML/1.0.1" version="1.0.1">\n  <sml:member>\n    <sml:System xmlns:swe="http://www.opengis.net/swe/1.0.1" xmlns:swes="http://www.opengis.net/swes/2.0" xmlns:sos="http://www.opengis.net/sos/2.0" xmlns:gml="http://www.opengis.net/gml" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">\n      <sml:identification>\n        <sml:IdentifierList>\n          <sml:identifier name="uniqueID">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:uniqueID">\n              <sml:value>http://www.52north.org/test/procedure/3</sml:value>\n            </sml:Term>\n          </sml:identifier>\n          <sml:identifier name="longName">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:longName">\n              <sml:value>Kisters AG (www.kisters.de)</sml:value>\n            </sml:Term>\n          </sml:identifier>\n          <sml:identifier name="shortName">\n            <sml:Term definition="urn:ogc:def:identifier:OGC:1.0:shortName">\n              <sml:value>Kisters</sml:value>\n            </sml:Term>\n          </sml:identifier>\n        </sml:IdentifierList>\n      </sml:identification>\n      <sml:capabilities name="featuresOfInterest">\n        <swe:SimpleDataRecord>\n          <swe:field name="featureOfInterestID">\n            <swe:Text>\n              <swe:value>http://www.52north.org/test/featureOfInterest/3</swe:value>\n            </swe:Text>\n          </swe:field>\n        </swe:SimpleDataRecord>\n      </sml:capabilities>\n      <sml:position name="sensorPosition">\n        <swe:Position referenceFrame="urn:ogc:def:crs:EPSG::4326">\n          <swe:location>\n            <swe:Vector gml:id="STATION_LOCATION">\n              <swe:coordinate name="easting">\n                <swe:Quantity axisID="x">\n                  <swe:uom code="degree"/>\n                  <swe:value>6.1320144042060925</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n              <swe:coordinate name="northing">\n                <swe:Quantity axisID="y">\n                  <swe:uom code="degree"/>\n                  <swe:value>50.78570661296184</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n              <swe:coordinate name="altitude">\n                <swe:Quantity axisID="z">\n                  <swe:uom code="m"/>\n                  <swe:value>52.0</swe:value>\n                </swe:Quantity>\n              </swe:coordinate>\n            </swe:Vector>\n          </swe:location>\n        </swe:Position>\n      </sml:position>\n      <sml:inputs>\n        <sml:InputList>\n          <sml:input name="test_observable_property_3">\n            <swe:ObservableProperty definition="http://www.52north.org/test/observableProperty/3"/>\n          </sml:input>\n        </sml:InputList>\n      </sml:inputs>\n      <sml:outputs>\n        <sml:OutputList>\n          <sml:output name="test_observable_property_3">\n            <swe:Boolean definition="http://www.52north.org/test/observableProperty/3"/>\n          </sml:output>\n        </sml:OutputList>\n      </sml:outputs>\n    </sml:System>\n  </sml:member>\n</sml:SensorML>
