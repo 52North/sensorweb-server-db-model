@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.HasCodespace;
@@ -23,14 +24,13 @@ import org.n52.series.db.beans.HibernateRelations.HasIdentifier;
 import org.n52.series.db.beans.HibernateRelations.HasName;
 
 /**
- *
  * @author Christian Autermann
  */
 public interface IdentifierNameDescriptionEntity<T>
         extends HasIdentifier<T>,
-                HasCodespace<T>,
-                HasName<T>,
-                HasCodespaceName<T>,
-                HasDescription<T> {
+        HasCodespace<T>,
+        HasName<T>,
+        HasCodespaceName<T>,
+        HasDescription<T> {
 
 }

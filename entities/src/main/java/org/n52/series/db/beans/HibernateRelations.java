@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Date;
@@ -172,7 +173,7 @@ public interface HibernateRelations {
     interface HasFeatureGetter {
         String FEATURE_OF_INTEREST = "featureOfInterest";
 
-        AbstractFeatureEntity<?> getFeature();
+        AbstractFeatureEntity< ? > getFeature();
     }
 
     interface HasFeature<T> extends HasFeatureGetter {
@@ -258,9 +259,9 @@ public interface HibernateRelations {
     interface HasObservation {
         String OBSERVATION = "observation";
 
-        DataEntity<?> getObservation();
+        DataEntity< ? > getObservation();
 
-        void setObservation(DataEntity<?> observation);
+        void setObservation(DataEntity< ? > observation);
     }
 
     interface HasObservablePropertyGetter {
@@ -582,7 +583,7 @@ public interface HibernateRelations {
     interface HasParameters {
         String PARAMETERS = "parameters";
 
-        Set<Parameter<?>> getParameters();
+        Set<Parameter< ? >> getParameters();
 
         void setParameters(Object parameters);
 

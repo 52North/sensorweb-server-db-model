@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
 
 import org.n52.shetland.ogc.om.NamedValue;
@@ -38,7 +39,6 @@ public abstract class VoidParameterVisitor implements ParameterVisitor<Void> {
 
     protected abstract void _visit(ParameterXml p)
             throws OwsExceptionReport;
-
 
     @Override
     public NamedValue<Void> visit(ParameterQuantity p)

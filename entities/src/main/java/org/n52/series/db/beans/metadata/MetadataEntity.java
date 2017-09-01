@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.metadata;
 
 import java.sql.Timestamp;
@@ -75,14 +76,14 @@ public abstract class MetadataEntity<T> extends PkidEntity {
 
     public Date getLastUpdate() {
         return lastUpdate != null
-            ? new Timestamp(lastUpdate.getTime())
-            : null;
+                ? new Timestamp(lastUpdate.getTime())
+                : null;
     }
 
     public void setLastUpdate(Date lastUpdate) {
         this.lastUpdate = lastUpdate != null
-            ? new Timestamp(lastUpdate.getTime())
-            : null;
+                ? new Timestamp(lastUpdate.getTime())
+                : null;
     }
 
     public String getDomain() {
