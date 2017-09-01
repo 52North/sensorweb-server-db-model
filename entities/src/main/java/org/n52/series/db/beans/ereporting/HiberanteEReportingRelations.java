@@ -17,9 +17,10 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import org.n52.series.db.beans.HibernateRelations;
 import org.n52.shetland.aqd.AqdConstants;
 
-public interface HiberanteEReportingRelations {
+public interface HiberanteEReportingRelations extends HibernateRelations {
 
     interface HasEReportingSamplingPoint {
         String SAMPLING_POINT = "samplingPoint";
@@ -143,7 +144,7 @@ public interface HiberanteEReportingRelations {
     }
 
     interface EReportingValues
-            extends HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
+            extends HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData, GetStringValue {
 
     }
 
