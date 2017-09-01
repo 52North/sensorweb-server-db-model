@@ -75,6 +75,18 @@
             </column>
         </property>
 
+        <property name="validTimeStart" type="timestamp">
+            <column name="validtimestart" length="29" not-null="true">
+                <comment>Time stamp until when the offering is valid or results are valid</comment>
+            </column>
+        </property>
+
+        <property name="validTimeEnd" type="timestamp">
+            <column name="validtimeend" length="29" not-null="true">
+                <comment>Time stamp until when the offering is valid or results are valid<</comment>
+            </column>
+        </property>
+
         <component class="GeometryEntity" name="geometryEntity">
             <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
             <property column="geom" name="geometry" type="org.hibernate.spatial.GeometryType" />

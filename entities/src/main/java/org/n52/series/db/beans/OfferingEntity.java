@@ -25,19 +25,21 @@ import org.n52.series.db.beans.HibernateRelations.HasObservationTypes;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatures;
 import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
+import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
 import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
-        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity> {
+        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity>,
+        HasValidTime<OfferingEntity> {
 
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
     public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
-    
+
     private static final long serialVersionUID = 5862607025737865794L;
 
     private GeometryEntity geometryEntity;
@@ -55,6 +57,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     private Date resultTimeEnd;
 
     private Set<RelatedFeatureEntity> relatedFeatures;
+    private Date validTimeStart;
+    private Date validTimeEnd;
 
     public Geometry getGeometry() {
         return geometryEntity != null
@@ -187,6 +191,47 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
         return this;
+    }
+
+    /**
+     * @return the validTimeStart
+     */
+    @Override
+    public Date getValidTimeStart() {
+        return Utils.createUnmutableTimestamp(validTimeStart);
+    }
+
+    /**
+     * @param validTimeStart
+     *        the validTimeStart to set
+     */
+    @Override
+    public OfferingEntity setValidTimeStart(Date validTimeStart) {
+        this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
+        return this;
+    }
+
+    /**
+     * @return the validTimeEnd
+     */
+    @Override
+    public Date getValidTimeEnd() {
+        return Utils.createUnmutableTimestamp(validTimeEnd);
+    }
+
+    /**
+     * @param validTimeEnd
+     *        the validTimeEnd to set
+     */
+    @Override
+    public OfferingEntity setValidTimeEnd(Date validTimeEnd) {
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
+        return this;
+    }
+
+    @Override
+    public boolean isSetValidTime() {
+        return getValidTimeStart() != null && getValidTimeEnd() != null;
     }
 
     @Override
