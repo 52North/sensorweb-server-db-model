@@ -63,6 +63,7 @@
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <file.encoding>UTF-8</file.encoding>
+        
     </properties>
 
     <dependencyManagement>
@@ -334,7 +335,19 @@
                     </execution>
                 </executions>
             </plugin>
-
+            
+            <plugin>
+                <groupId>net.revelc.code.formatter</groupId>
+                <artifactId>formatter-maven-plugin</artifactId>
+                <inherited>false</inherited>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>format</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
 
         <pluginManagement>
@@ -373,6 +386,7 @@
                         <excludes>
                             <exclude>**/logback.xml</exclude>
                             <exclude>**/logback-test.xml</exclude>
+                            <exclude>etc/**</exclude>
                         </excludes>
                         <strictCheck>true</strictCheck>
                     </configuration>
@@ -387,17 +401,13 @@
                         <useMissingFile>true</useMissingFile>
                         <fileTemplate>etc/license-as-csv.ftl</fileTemplate>
                         <licenseMerges>
-                            <licenseMerge>The Apache Software License, Version 2.0|Apache 2|Apache License, Version
-                                2.0|Apache License, version 2.0|Apache Public License 2.0|AL 2.0</licenseMerge>
+                            <licenseMerge>The Apache Software License, Version 2.0|Apache 2|Apache License, Version 2.0|Apache License, version 2.0|Apache Public License 2.0|AL 2.0</licenseMerge>
                             <licenseMerge>Apache Software Licenses|Apache Software License|Apache License</licenseMerge>
-                            <licenseMerge>GNU General Public License, v2.0|GNU GENERAL PUBLIC LICENSE Version 2, June
-                                1991|GNU General Public License, Version 2.0</licenseMerge>
-                            <licenseMerge>Common Development and Distribution License (CDDL), version 1.0| Common
-                                Development and Distribution License (CDDL) v1.0</licenseMerge>
+                            <licenseMerge>GNU General Public License, v2.0|GNU GENERAL PUBLIC LICENSE Version 2, June 1991|GNU General Public License, Version 2.0</licenseMerge>
+                            <licenseMerge>Common Development and Distribution License (CDDL), version 1.0| Common Development and Distribution License (CDDL) v1.0</licenseMerge>
                             <licenseMerge>GNU Lesser General Public License, version 2.1|LGPL 2.1</licenseMerge>
                             <licenseMerge>Mozilla Public License version 1.1|MPL 1.1</licenseMerge>
-                            <licenseMerge>Eclipse Public License, Version 1.0|Eclipse Public License (EPL), Version
-                                1.0|Eclipse Public License - v 1.0</licenseMerge>
+                            <licenseMerge>Eclipse Public License, Version 1.0|Eclipse Public License (EPL), Version 1.0|Eclipse Public License - v 1.0</licenseMerge>
                             <licenseMerge>GNU Lesser General Public Licence|LGPL</licenseMerge>
                         </licenseMerges>
                     </configuration>
@@ -426,10 +436,8 @@
                         <source>
                             import java.util.Date
                             import java.text.MessageFormat
-                            def vartimestamp =
-                            MessageFormat.format("{0,date,yyyy}", new Date())
-                            project.properties['currentYearDynamic'] =
-                            vartimestamp
+                            def vartimestamp = MessageFormat.format("{0,date,yyyy}", new Date())
+                            project.properties['currentYearDynamic'] = vartimestamp
                         </source>
                     </configuration>
                 </plugin>
@@ -447,6 +455,30 @@
                         <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
                         <timestampFormat>{0,date,yyyy-MM-dd HH:mm:ss}</timestampFormat>
                     </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>net.revelc.code.formatter</groupId>
+                    <artifactId>formatter-maven-plugin</artifactId>
+                    <version>2.0.1</version>
+                    <configuration>
+                        <configFile>${project.basedir}/etc/eclipse_formatter.xml</configFile>
+                        <lineEnding>LF</lineEnding>
+                        <sourceDirectory>${project.basedir}</sourceDirectory>
+                        <includes>
+                            <include>**/src/**/*.java</include>
+                        </includes>
+                        <excludes>
+                            <exclude>**/generator/**</exclude>
+                        </excludes>
+                    </configuration>
+<!--                     <dependencies> -->
+<!--                         <dependency> -->
+<!--                             <groupId>${project.groupId}</groupId> -->
+<!--                             <artifactId>entities</artifactId> -->
+<!--                             <version>${project.version}</version> -->
+<!--                         </dependency> -->
+<!--                     </dependencies> -->
                 </plugin>
 
                 <plugin>
