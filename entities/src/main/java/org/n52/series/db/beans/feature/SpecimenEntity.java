@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature;
 
 import java.util.Date;
@@ -37,7 +38,7 @@ public class SpecimenEntity extends FeatureEntity {
     private Double size;
     private UnitEntity sizeUnit;
     private String currentLocation;
-    private String  specimenType;
+    private String specimenType;
 
     /**
      * @return the materialClass
@@ -166,7 +167,7 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     @Override
-    public AbstractFeature accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
+    public AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 

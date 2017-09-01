@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.feature.FeatureVisitor;
@@ -28,7 +29,7 @@ public class FeatureEntity extends AbstractFeatureEntity<FeatureEntity> {
     private static final long serialVersionUID = 3926633318714623558L;
 
     @Override
-    public AbstractFeature accept(FeatureVisitor<?> visitor) throws OwsExceptionReport {
+    public AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport {
         return visitor.visit(this);
     }
 

@@ -14,8 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.feature.inspire;
 
+package org.n52.series.db.beans.feature.inspire;
 
 import org.n52.series.db.beans.FeatureEntity;
 

@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature;
 
 import java.util.Collection;
@@ -85,7 +86,9 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
     }
 
     public boolean hasRelatedParty() {
-        return isSetContent() ? getContent().hasRelatedParties() : false;
+        return isSetContent()
+                ? getContent().hasRelatedParties()
+                : false;
     }
 
     public Collection<VerticalDatumEntity> getVerticalDatum() {
@@ -120,6 +123,8 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
     }
 
     public boolean hasVerticalDatum() {
-        return isSetContent() ? getContent().hasVerticalDatums() : false;
+        return isSetContent()
+                ? getContent().hasVerticalDatums()
+                : false;
     }
 }

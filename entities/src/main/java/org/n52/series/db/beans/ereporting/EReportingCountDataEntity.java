@@ -66,7 +66,9 @@ public class EReportingCountDataEntity extends EReportingDataEntity<Integer> {
 
     @Override
     public String getValueAsString() {
-        return isSetValue() ? getValue().toString() : "";
+        return isSetValue()
+                ? getValue().toString()
+                : "";
     }
 
 }

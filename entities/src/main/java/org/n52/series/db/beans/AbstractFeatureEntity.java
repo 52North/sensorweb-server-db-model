@@ -61,7 +61,6 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return this;
     }
 
-
     public AbstractFeatureEntity<E> setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
