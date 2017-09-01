@@ -472,13 +472,6 @@
                             <exclude>**/generator/**</exclude>
                         </excludes>
                     </configuration>
-<!--                     <dependencies> -->
-<!--                         <dependency> -->
-<!--                             <groupId>${project.groupId}</groupId> -->
-<!--                             <artifactId>entities</artifactId> -->
-<!--                             <version>${project.version}</version> -->
-<!--                         </dependency> -->
-<!--                     </dependencies> -->
                 </plugin>
 
                 <plugin>
