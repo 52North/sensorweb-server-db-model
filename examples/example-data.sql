@@ -69,16 +69,16 @@ COPY feature (id, hibernatediscriminator, featuretype, domainid, codespace, name
 -- Data for Name: observableproperty; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY observableproperty (id, domainid, codespace, name, codespacename, description, disabled, hiddenchild) FROM stdin;
-1	http://www.52north.org/test/observableProperty/1	1	test_observable_property_1	1	\N	F	F
-2	http://www.52north.org/test/observableProperty/2	1	test_observable_property_2	1	\N	F	F
-3	http://www.52north.org/test/observableProperty/3	1	test_observable_property_3	1	\N	F	F
-4	http://www.52north.org/test/observableProperty/4	1	test_observable_property_4	1	\N	F	F
-5	http://www.52north.org/test/observableProperty/5	1	test_observable_property_5	1	\N	F	F
-6	http://www.52north.org/test/observableProperty/6	1	test_observable_property_6	1	\N	F	F
-7	http://www.52north.org/test/observableProperty/7	1	test_observable_property_7	1	\N	F	F
-8	http://www.52north.org/test/observableProperty/8	1	test_observable_property_8	1	\N	F	F
-9	http://www.52north.org/test/observableProperty/developer	1	developer	1	\N	F	F
+COPY observableproperty (id, domainid, codespace, name, codespacename, description, hiddenchild) FROM stdin;
+1	http://www.52north.org/test/observableProperty/1	1	test_observable_property_1	1	\N	F
+2	http://www.52north.org/test/observableProperty/2	1	test_observable_property_2	1	\N	F
+3	http://www.52north.org/test/observableProperty/3	1	test_observable_property_3	1	\N	F
+4	http://www.52north.org/test/observableProperty/4	1	test_observable_property_4	1	\N	F
+5	http://www.52north.org/test/observableProperty/5	1	test_observable_property_5	1	\N	F
+6	http://www.52north.org/test/observableProperty/6	1	test_observable_property_6	1	\N	F
+7	http://www.52north.org/test/observableProperty/7	1	test_observable_property_7	1	\N	F
+8	http://www.52north.org/test/observableProperty/8	1	test_observable_property_8	1	\N	F
+9	http://www.52north.org/test/observableProperty/developer	1	developer	1	\N	F
 \.
 
 
@@ -103,16 +103,16 @@ COPY category (id, domainid, name, description) FROM stdin;
 -- Data for Name: offering; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY offering (id, domainid, codespace, name, codespacename, description, disabled, phenomenontimestart, phenomenontimeend, resulttimestart, resulttimeend) FROM stdin;
-1	http://www.52north.org/test/offering/1	\N	Offering for sensor 1	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-2	http://www.52north.org/test/offering/2	\N	Offering for sensor 2	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-3	http://www.52north.org/test/offering/3	\N	Offering for sensor 3	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-4	http://www.52north.org/test/offering/4	\N	Offering for sensor 2	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-5	http://www.52north.org/test/offering/5	\N	Offering for sensor 5	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-6	http://www.52north.org/test/offering/6	\N	Offering for sensor 6	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-7	http://www.52north.org/test/offering/7	\N	Offering for sensor 7	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-8	http://www.52north.org/test/offering/8	\N	Offering for sensor 8	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
-9	http://www.52north.org/test/offering/developer	\N	Offering for procedure developer	\N	\N	F	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00
+COPY offering (id, domainid, codespace, name, codespacename, description, phenomenontimestart, phenomenontimeend, resulttimestart, resulttimeend,validtimestart,validtimeend) FROM stdin;
+1	http://www.52north.org/test/offering/1	\N	Offering for sensor 1	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+2	http://www.52north.org/test/offering/2	\N	Offering for sensor 2	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+3	http://www.52north.org/test/offering/3	\N	Offering for sensor 3	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+4	http://www.52north.org/test/offering/4	\N	Offering for sensor 2	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+5	http://www.52north.org/test/offering/5	\N	Offering for sensor 5	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+6	http://www.52north.org/test/offering/6	\N	Offering for sensor 6	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+7	http://www.52north.org/test/offering/7	\N	Offering for sensor 7	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+8	http://www.52north.org/test/offering/8	\N	Offering for sensor 8	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
+9	http://www.52north.org/test/offering/developer	\N	Offering for procedure developer	\N	\N	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	1970-01-01 00:00:00	\N	\N
 \.
 
 
@@ -133,16 +133,16 @@ COPY proceduredescriptionformat (id, proceduredescriptionformat) FROM stdin;
 -- Data for Name: procedure; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY procedure (id, proceduredescriptionformat, domainid, codespace, name, codespacename, description, deleted, disabled, descriptionfile, referenceflag, typeof, istype, isaggregation, mobile, insitu) FROM stdin;
-1	1	http://www.52north.org/test/procedure/1	\N	con terra	\N	\N	F	F	\N	F	\N	F	F	F	T
-2	1	http://www.52north.org/test/procedure/2	\N	ESRI	\N	\N	F	F	\N	F	\N	F	F	F	T
-3	1	http://www.52north.org/test/procedure/3	\N	Kisters	\N	\N	F	F	\N	F	\N	F	F	F	T
-4	1	http://www.52north.org/test/procedure/4	\N	IfGI	\N	\N	F	F	\N	F	\N	F	F	F	T
-5	1	http://www.52north.org/test/procedure/5	\N	TU-Dresden	\N	\N	T	F	\N	F	\N	F	F	F	T
-6	1	http://www.52north.org/test/procedure/6	\N	Hochschule Bochum	\N	\N	F	F	\N	F	\N	F	F	F	T
-7	1	http://www.52north.org/test/procedure/7	\N	ITC	\N	\N	F	F	\N	F	\N	F	F	F	T
-8	1	http://www.52north.org/test/procedure/8	\N	DLZ-IT	\N	\N	F	F	\N	F	\N	F	F	T	T
-9	1	http://www.52north.org/test/procedure/developer	\N	http://www.52north.org/test/procedure/developer	\N	\N	F	F	\N	F	\N	F	F	F	T
+COPY procedure (id, proceduredescriptionformat, domainid, codespace, name, codespacename, description, deleted, descriptionfile, referenceflag, typeof, istype, isaggregation, mobile, insitu) FROM stdin;
+1	1	http://www.52north.org/test/procedure/1	\N	con terra	\N	\N	F	\N	F	\N	F	F	F	T
+2	1	http://www.52north.org/test/procedure/2	\N	ESRI	\N	\N	F	\N	F	\N	F	F	F	T
+3	1	http://www.52north.org/test/procedure/3	\N	Kisters	\N	\N	F	\N	F	\N	F	F	F	T
+4	1	http://www.52north.org/test/procedure/4	\N	IfGI	\N	\N	F	\N	F	\N	F	F	F	T
+5	1	http://www.52north.org/test/procedure/5	\N	TU-Dresden	\N	\N	T	\N	F	\N	F	F	F	T
+6	1	http://www.52north.org/test/procedure/6	\N	Hochschule Bochum	\N	\N	F	\N	F	\N	F	F	F	T
+7	1	http://www.52north.org/test/procedure/7	\N	ITC	\N	\N	F	\N	F	\N	F	F	F	T
+8	1	http://www.52north.org/test/procedure/8	\N	DLZ-IT	\N	\N	F	\N	F	\N	F	F	T	T
+9	1	http://www.52north.org/test/procedure/developer	\N	http://www.52north.org/test/procedure/developer	\N	\N	F	\N	F	\N	F	F	F	T
 \.
 
 
@@ -940,8 +940,12 @@ SELECT pg_catalog.setval('relatedobservation_seq', 1, false);
 -- Data for Name: resulttemplate; Type: TABLE DATA; Schema: public; Owner: sos_user
 --
 
-COPY resulttemplate (id, dataset, domainid, resultstructure, resultencoding) FROM stdin;
-1	6	http://www.52north.org/test/procedure/6/template/1	<swe:DataRecord xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">\n  <swe:field name="phenomenonTime">\n    <swe:TimeRange definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">\n      <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>\n    </swe:TimeRange>\n  </swe:field>\n  <swe:field name="resultTime">\n    <swe:Time definition="http://www.opengis.net/def/property/OGC/0/ResultTime">\n      <swe:uom code="testunit1"/>\n    </swe:Time>\n  </swe:field>\n  <swe:field name="observable_property_6">\n    <swe:Quantity definition="http://www.52north.org/test/observableProperty/6">\n      <swe:uom code="test_unit_6"/>\n    </swe:Quantity>\n  </swe:field>\n</swe:DataRecord>	<swe:TextEncoding xmlns:swe="http://www.opengis.net/swe/2.0" blockSeparator="#" tokenSeparator=","/>
+--COPY resulttemplate (id, dataset, domainid, resultstructure, resultencoding) FROM stdin;
+--1	6	http://www.52north.org/test/procedure/6/template/1	<swe:DataRecord xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">\n  <swe:field name="phenomenonTime">\n    <swe:TimeRange definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">\n      <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>\n    </swe:TimeRange>\n  </swe:field>\n  <swe:field name="resultTime">\n    <swe:Time definition="http://www.opengis.net/def/property/OGC/0/ResultTime">\n      <swe:uom code="testunit1"/>\n    </swe:Time>\n  </swe:field>\n  <swe:field name="observable_property_6">\n    <swe:Quantity definition="http://www.52north.org/test/observableProperty/6">\n      <swe:uom code="test_unit_6"/>\n    </swe:Quantity>\n  </swe:field>\n</swe:DataRecord>	<swe:TextEncoding xmlns:swe="http://www.opengis.net/swe/2.0" blockSeparator="#" tokenSeparator=","/>
+--\.
+
+COPY resulttemplate (id, offering, observableProperty, procedure, featureOfInterest, domainid, resultstructure, resultencoding) FROM stdin;
+1	6	6	6	7	http://www.52north.org/test/procedure/6/template/1	<swe:DataRecord xmlns:swe="http://www.opengis.net/swe/2.0" xmlns:xlink="http://www.w3.org/1999/xlink">\n  <swe:field name="phenomenonTime">\n    <swe:TimeRange definition="http://www.opengis.net/def/property/OGC/0/PhenomenonTime">\n      <swe:uom xlink:href="http://www.opengis.net/def/uom/ISO-8601/0/Gregorian"/>\n    </swe:TimeRange>\n  </swe:field>\n  <swe:field name="resultTime">\n    <swe:Time definition="http://www.opengis.net/def/property/OGC/0/ResultTime">\n      <swe:uom code="testunit1"/>\n    </swe:Time>\n  </swe:field>\n  <swe:field name="observable_property_6">\n    <swe:Quantity definition="http://www.52north.org/test/observableProperty/6">\n      <swe:uom code="test_unit_6"/>\n    </swe:Quantity>\n  </swe:field>\n</swe:DataRecord>	<swe:TextEncoding xmlns:swe="http://www.opengis.net/swe/2.0" blockSeparator="#" tokenSeparator=","/>
 \.
 
 
