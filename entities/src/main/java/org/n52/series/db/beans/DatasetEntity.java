@@ -235,7 +235,7 @@ public class DatasetEntity extends DescribableEntity {
 
     public String getUnitI18nName(String locale) {
         return unit != null
-//                ? unit.getNameI18n(locale)
+                //                ? unit.getNameI18n(locale)
                 ? unit.getUnit()
                 : "";
     }
@@ -262,10 +262,14 @@ public class DatasetEntity extends DescribableEntity {
         PhenomenonEntity phenomenon = observationConstellation.getObservableProperty();
         OfferingEntity offering = observationConstellation.getOffering();
         StringBuilder sb = new StringBuilder();
-        sb.append(phenomenon.getLabelFrom(locale)).append(" ");
-        sb.append(procedure.getLabelFrom(locale)).append(", ");
-        sb.append(feature.getLabelFrom(locale)).append(", ");
-        return sb.append(offering.getLabelFrom(locale)).toString();
+        sb.append(phenomenon.getLabelFrom(locale))
+          .append(" ");
+        sb.append(procedure.getLabelFrom(locale))
+          .append(", ");
+        sb.append(feature.getLabelFrom(locale))
+          .append(", ");
+        return sb.append(offering.getLabelFrom(locale))
+                 .toString();
     }
 
     @Override

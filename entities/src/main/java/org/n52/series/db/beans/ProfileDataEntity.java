@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Collection;
@@ -58,7 +59,5 @@ public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
     public void setLevelUnit(UnitEntity levelUnit) {
         this.levelUnit = levelUnit;
     }
-
-
 
 }

@@ -32,9 +32,12 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public class ValuedParameterVisitor
         implements
-        ParameterVisitor<NamedValue<?>> {
+        ParameterVisitor<NamedValue< ? >> {
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+        "unchecked",
+        "rawtypes"
+    })
     @Override
     public NamedValue visit(ParameterQuantity p)
             throws OwsExceptionReport {
@@ -45,7 +48,10 @@ public class ValuedParameterVisitor
         return namedValue;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+        "unchecked",
+        "rawtypes"
+    })
     @Override
     public NamedValue visit(ParameterBoolean p)
             throws OwsExceptionReport {
@@ -55,7 +61,10 @@ public class ValuedParameterVisitor
         return namedValue;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+        "unchecked",
+        "rawtypes"
+    })
     @Override
     public NamedValue visit(ParameterCategory p)
             throws OwsExceptionReport {
@@ -66,7 +75,10 @@ public class ValuedParameterVisitor
         return namedValue;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+        "unchecked",
+        "rawtypes"
+    })
     @Override
     public NamedValue visit(ParameterCount p)
             throws OwsExceptionReport {
@@ -76,7 +88,10 @@ public class ValuedParameterVisitor
         return namedValue;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+        "unchecked",
+        "rawtypes"
+    })
     @Override
     public NamedValue visit(ParameterText p)
             throws OwsExceptionReport {
@@ -86,7 +101,10 @@ public class ValuedParameterVisitor
         return namedValue;
     }
 
-    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @SuppressWarnings({
+        "unchecked",
+        "rawtypes"
+    })
     @Override
     public NamedValue visit(ParameterXml p)
             throws OwsExceptionReport {
@@ -100,7 +118,7 @@ public class ValuedParameterVisitor
         return namedValue;
     }
 
-    protected void addUnit(ValuedParameter<?, ?> vp, Value<?> v) {
+    protected void addUnit(ValuedParameter< ? , ? > vp, Value< ? > v) {
         if (!v.isSetUnit() && vp instanceof HasUnit && ((HasUnit) vp).isSetUnit()) {
             UnitEntity unit = ((HasUnit) vp).getUnit();
             UoM uom = new UoM(unit.getUnit());
@@ -114,7 +132,7 @@ public class ValuedParameterVisitor
         }
     }
 
-    protected NamedValue<?> addName(NamedValue<?> namedValue, ValuedParameter<?, ?> p) {
+    protected NamedValue< ? > addName(NamedValue< ? > namedValue, ValuedParameter< ? , ? > p) {
         ReferenceType referenceType = new ReferenceType(p.getName());
         namedValue.setName(referenceType);
         return namedValue;

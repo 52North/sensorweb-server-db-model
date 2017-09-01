@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.DataEntity;
@@ -37,7 +38,6 @@ public abstract class EReportingDataEntity<T> extends DataEntity<T> implements E
 
     private Double uncertaintyEstimation;
 
-
     @Override
     public Integer getVerification() {
         return verification;
@@ -47,7 +47,6 @@ public abstract class EReportingDataEntity<T> extends DataEntity<T> implements E
     public void setVerification(Integer verification) {
         this.verification = verification;
     }
-
 
     @Override
     public Integer getValidation() {
@@ -68,7 +67,6 @@ public abstract class EReportingDataEntity<T> extends DataEntity<T> implements E
     public void setPrimaryObservation(String primaryObservation) {
         this.primaryObservation = primaryObservation;
     }
-
 
     @Override
     public Boolean getDataCaptureFlag() {

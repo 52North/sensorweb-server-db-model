@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
@@ -34,7 +35,9 @@ public class EReportingBlobDataEntity extends EReportingDataEntity<Object> {
 
     @Override
     public String getValueAsString() {
-        return isSetValue() ? getValue().toString() : "";
+        return isSetValue()
+                ? getValue().toString()
+                : "";
     }
 
 }
