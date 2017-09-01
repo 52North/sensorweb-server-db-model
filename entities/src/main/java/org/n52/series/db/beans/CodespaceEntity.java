@@ -24,11 +24,9 @@ import org.n52.series.db.beans.HibernateRelations.HasCodespace;
 /**
  * @since 1.0.0
  */
-public class CodespaceEntity extends PkidEntity implements Serializable {
+public class CodespaceEntity extends IdEntity implements Serializable {
 
-    public static final String ID = "codespaceId";
-
-    public static final String CODESPACE = HasCodespace.CODESPACE;
+    public static final String PROPERTY_CODESPACE = HasCodespace.CODESPACE;
 
     private static final long serialVersionUID = 8795086004488469603L;
 

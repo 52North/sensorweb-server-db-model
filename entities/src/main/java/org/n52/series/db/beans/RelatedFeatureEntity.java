@@ -28,7 +28,7 @@ import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatureRoles;
 /**
  * @since 1.0.0
  */
-public class RelatedFeatureEntity extends PkidEntity
+public class RelatedFeatureEntity extends IdEntity
         implements Serializable, HasFeature<RelatedFeatureEntity>, HasRelatedFeatureRoles<RelatedFeatureEntity>,
         HasOfferings<RelatedFeatureEntity> {
 

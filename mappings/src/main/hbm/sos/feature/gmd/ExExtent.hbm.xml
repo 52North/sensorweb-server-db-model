@@ -4,16 +4,16 @@
 <hibernate-mapping package="org.n52.series.db.beans.feature.gmd">
     <class name="ExExtentEntity"
            table="exextent">
-        <id name="pkid"
+        <id name="id"
             type="long">
-            <column name="pkid">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
                 <param name="sequence">exExtent_seq</param>
             </generator>
         </id>
-        <property name="id" column="id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
         <set name="verticalExtent" table="exextentverticalext">

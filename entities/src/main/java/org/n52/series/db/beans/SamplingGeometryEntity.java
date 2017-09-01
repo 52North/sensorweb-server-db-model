@@ -22,7 +22,7 @@ import java.util.Set;
 
 import org.n52.series.db.common.Utils;
 
-public class SamplingGeometryEntity extends PkidEntity {
+public class SamplingGeometryEntity extends IdEntity {
 
     private static final long serialVersionUID = -3036211037882973515L;
 

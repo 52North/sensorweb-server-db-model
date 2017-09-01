@@ -4,9 +4,9 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="org.n52.series.db.beans.feature.gml.VerticalDatumEntity"
            table="verticaldatum">
-        <id name="pkid"
+        <id name="id"
             type="long">
-            <column name="pkid">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

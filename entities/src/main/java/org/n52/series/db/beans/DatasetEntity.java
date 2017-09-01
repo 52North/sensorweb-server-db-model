@@ -39,12 +39,13 @@ public class DatasetEntity extends DescribableEntity {
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
+    public static final String HIDDEN_CHILD = "hiddenChild";
 
     private static final long serialVersionUID = -7491530543976690237L;
 
     private ObservationConstellationEntity observationConstellation;
 
-    private FeatureEntity feature;
+    private AbstractFeatureEntity feature;
 
     private CategoryEntity category;
 
@@ -123,11 +124,11 @@ public class DatasetEntity extends DescribableEntity {
         existsOrCreateObservationConstellation().setOffering(offering);
     }
 
-    public FeatureEntity getFeature() {
+    public AbstractFeatureEntity getFeature() {
         return feature;
     }
 
-    public void setFeature(FeatureEntity feature) {
+    public void setFeature(AbstractFeatureEntity feature) {
         this.feature = feature;
     }
 
@@ -163,12 +164,20 @@ public class DatasetEntity extends DescribableEntity {
         this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
     }
 
+    public boolean isSetFirstValueAt() {
+        return getFirstValueAt() != null;
+    }
+
     public Date getLastValueAt() {
         return Utils.createUnmutableTimestamp(lastValueAt);
     }
 
     public void setLastValueAt(Date lastValueAt) {
         this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
+    }
+
+    public boolean isSetLastValueAt() {
+        return getLastValueAt() != null;
     }
 
     public String getValueType() {
@@ -269,7 +278,7 @@ public class DatasetEntity extends DescribableEntity {
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" id: ")
-                 .append(getPkid())
+                 .append(getId())
                  .append(" , category: ")
                  .append(category)
                  .append(" , phenomenon: ")

@@ -4,8 +4,8 @@
     <class name="ValidProcedureTimeEntity" table="validproceduretime">
         <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile.
             Mapping file: mapping/transactionl/ValidProcedureTime.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">

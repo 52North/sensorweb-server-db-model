@@ -21,6 +21,6 @@ import org.n52.series.db.beans.DatasetEntity;
 
 public interface CountDataset<T extends DatasetEntity> extends Dataset<T> {
 
-    String DATASET_TYPE = "text";
+    String DATASET_TYPE = "count";
 
 }

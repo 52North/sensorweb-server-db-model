@@ -17,18 +17,27 @@
 
 package org.n52.series.db.beans;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public abstract class HierarchicalEntity<T> extends DescribableEntity {
 
+    public static final String PROPERTY_PARENTS = "parents";
+    public static final String PROPERTY_CHILDREN = "children";
     private static final long serialVersionUID = -530148269689996337L;
 
-    private Set<T> children;
+    private Set<T> children = new HashSet<>();
 
-    private Set<T> parents;
+    private Set<T> parents = new HashSet<>();
 
     public void setChildren(Set<T> children) {
         this.children = children;
+    }
+
+    public void addChild(T child) {
+        if (children != null) {
+            this.children.add(child);
+        }
     }
 
     public Set<T> getChildren() {
@@ -37,7 +46,12 @@ public abstract class HierarchicalEntity<T> extends DescribableEntity {
 
     public void setParents(Set<T> parents) {
         this.parents = parents;
+    }
 
+    public void addParent(T parent) {
+        if (parents != null) {
+            this.parents.add(parent);
+        }
     }
 
     public Set<T> getParents() {

@@ -19,32 +19,32 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-public abstract class PkidEntity implements Serializable {
+public abstract class IdEntity implements Serializable {
 
-    public static final String PROPERTY_PKID = "pkid";
+    public static final String PROPERTY_ID = "id";
 
     private static final long serialVersionUID = 1608995723035752862L;
 
     /**
      * A serial primary key.
      */
-    private Long pkid;
+    private Long id;
 
-    public Long getPkid() {
-        return pkid;
+    public Long getId() {
+        return id;
     }
 
-    public void setPkid(Long pkid) {
-        this.pkid = pkid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((pkid == null)
+        result = prime * result + ((id == null)
                 ? 0
-                : pkid.hashCode());
+                : id.hashCode());
         return result;
     }
 
@@ -59,12 +59,12 @@ public abstract class PkidEntity implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        PkidEntity other = (PkidEntity) obj;
-        if (pkid == null) {
-            if (other.pkid != null) {
+        IdEntity other = (IdEntity) obj;
+        if (id == null) {
+            if (other.id != null) {
                 return false;
             }
-        } else if (!pkid.equals(other.pkid)) {
+        } else if (!id.equals(other.id)) {
             return false;
         }
         return true;

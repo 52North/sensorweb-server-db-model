@@ -5,9 +5,9 @@
     <class name="EReportingSamplingPointEntity"
            table="samplingpoint">
         <comment>Table to store the AQD e-Reporting Sampling Point information. Mapping file: mapping/ereporting/EReportingSamplingPoint.hbm.xml</comment>
-        <id name="pkid"
+        <id name="id"
             type="long">
-            <column name="pkid">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

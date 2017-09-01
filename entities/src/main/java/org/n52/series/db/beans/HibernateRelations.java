@@ -499,7 +499,7 @@ public interface HibernateRelations {
         boolean isSetUnit();
     }
 
-    interface HasValidTime {
+    interface HasValidTime<T> {
 
         String VALID_TIME_START = "validTimeStart";
 
@@ -518,7 +518,7 @@ public interface HibernateRelations {
          * @param validTimeStart
          *            Start valid time to set
          */
-        void setValidTimeStart(Date validTimeStart);
+        T setValidTimeStart(Date validTimeStart);
 
         /**
          * Get the end valid time
@@ -533,7 +533,7 @@ public interface HibernateRelations {
          * @param validTimeEnd
          *            End valid time to set
          */
-        void setValidTimeEnd(Date validTimeEnd);
+        T setValidTimeEnd(Date validTimeEnd);
 
         boolean isSetValidTime();
     }
@@ -799,5 +799,14 @@ public interface HibernateRelations {
         default boolean isSetRemarks() {
             return getRemarks() != null && !getRemarks().isEmpty();
         }
+    }
+
+    interface HasDatasetType {
+
+        void setDatasetType(String datasetType);
+
+        String getDatasetType();
+
+        boolean isSetDatasetType();
     }
 }

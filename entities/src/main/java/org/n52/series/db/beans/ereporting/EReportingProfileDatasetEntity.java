@@ -15,44 +15,32 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.ereporting;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.dataset.QuantityDataset;
+import org.n52.series.db.beans.dataset.ProfileDataset;
 
-public class QuantityDatasetEntity extends DatasetEntity implements QuantityDataset<QuantityDatasetEntity> {
+public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
+        implements ProfileDataset<EReportingProfileDatasetEntity> {
 
-    private static final long serialVersionUID = 4788481449399555710L;
+    private static final long serialVersionUID = -7514394037111286838L;
 
-    private Set<QuantityDatasetEntity> referenceValues = new HashSet<>();
+    private Set<EReportingProfileDatasetEntity> referenceValues = new HashSet<>();
 
-    private int numberOfDecimals;
-
-    public QuantityDatasetEntity() {
+    public EReportingProfileDatasetEntity() {
         super(DATASET_TYPE);
     }
 
     @Override
-    public Set<QuantityDatasetEntity> getReferenceValues() {
+    public Set<EReportingProfileDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
     @Override
-    public QuantityDatasetEntity setReferenceValues(Set<QuantityDatasetEntity> referenceValues) {
+    public EReportingProfileDatasetEntity setReferenceValues(Set<EReportingProfileDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
-        return this;
-    }
-
-    @Override
-    public int getNumberOfDecimals() {
-        return numberOfDecimals;
-    }
-
-    @Override
-    public QuantityDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
-        this.numberOfDecimals = numberOfDecimals;
         return this;
     }
 

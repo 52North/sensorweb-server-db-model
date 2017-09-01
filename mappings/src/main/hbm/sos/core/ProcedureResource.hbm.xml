@@ -3,8 +3,8 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ProcedureEntity" table="`procedure`">
         <comment>Table to store the procedure/sensor. Mapping file: mapping/core/Procedure.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -42,11 +42,6 @@
         <property name="deleted" type="org.hibernate.type.TrueFalseType">
             <column name="deleted" not-null="true" default="'F'" check="deleted in ('T','F')">
                 <comment>Flag to indicate that this procedure is deleted or not (OGC SWES 2.0 - DeleteSensor operation)</comment>
-            </column>
-        </property>
-        <property name="disabled" type="org.hibernate.type.TrueFalseType">
-            <column name="disabled" not-null="true" default="'F'" check="disabled in ('T','F')">
-                <comment>For later use by the SOS. Indicator if this procedure should not be provided by the SOS.</comment>
             </column>
         </property>
         <property name="descriptionFile" type="org.hibernate.type.StringClobType">
@@ -109,14 +104,14 @@
         </set>
         <set name="translations" table="i18nprocedure" inverse="true" fetch="select">
             <key column="procedure" foreign-key="proctransprocfk" />
-            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nProcedureEntity"
+            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nProcedureEntity"
                 foreign-key="proctransi18nfk" />
         </set>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nProcedureEntity" table="i18nprocedure">
-        <id name="pkid" type="long">
-            <column name="pkid" />
+        <id name="id" type="long">
+            <column name="id" />
             <generator class="native">
                 <param name="sequence">i18nprocedure_seq</param>
             </generator>

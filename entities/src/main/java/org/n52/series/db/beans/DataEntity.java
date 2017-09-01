@@ -29,7 +29,7 @@ import org.n52.series.db.common.Utils;
 
 public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serializable {
 
-    public static final String PROPERTY_PKID = "pkid";
+    public static final String PROPERTY_ID = "id";
 
     public static final String PROPERTY_DATASETS = "datasets";
 
@@ -45,9 +45,13 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     public static final String PROPERTY_PARENT = "parent";
 
+    public static final String PROPERTY_DOMAIN_ID = "domainId";
+
+    public static final String PROPERTY_CHILD = "child";
+
     private static final long serialVersionUID = 273612846605300612L;
 
-    private Long pkid;
+    private Long id;
 
     /**
      * Identification of the entity without special chars.
@@ -98,12 +102,12 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     }
 
-    public Long getPkid() {
-        return pkid;
+    public Long getId() {
+        return id;
     }
 
-    public void setPkid(Long pkid) {
-        this.pkid = pkid;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getDomainId() {
@@ -275,7 +279,16 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     }
 
     public void setDatasets(Set<DatasetEntity> datasets) {
-        this.datasets = datasets;
+        this.datasets.clear();
+        if (datasets != null) {
+            this.datasets.addAll(datasets);
+        }
+    }
+
+    public void addDataset(DatasetEntity dataset) {
+        if (dataset != null) {
+            datasets.add(dataset);
+        }
     }
 
     public Set<RelatedDataEntity> getRelatedObservations() {
@@ -290,7 +303,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     public int compareTo(DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getPhenomenonTimeEnd)
                          .thenComparing(DataEntity<T>::getPhenomenonTimeStart)
-                         .thenComparing(DataEntity<T>::getPkid)
+                         .thenComparing(DataEntity<T>::getId)
                          .compare(this, o);
     }
 
@@ -298,9 +311,9 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((pkid == null)
+        result = prime * result + ((id == null)
                 ? 0
-                : pkid.hashCode());
+                : id.hashCode());
         return result;
     }
 
@@ -316,11 +329,11 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
             return false;
         }
         DataEntity< ? > other = (DataEntity< ? >) obj;
-        if (pkid == null) {
-            if (other.pkid != null) {
+        if (id == null) {
+            if (other.id != null) {
                 return false;
             }
-        } else if (!pkid.equals(other.pkid)) {
+        } else if (!id.equals(other.id)) {
             return false;
         }
         return true;
@@ -332,7 +345,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" id: ")
-                 .append(pkid)
+                 .append(id)
                  .append(" ]")
                  .toString();
     }

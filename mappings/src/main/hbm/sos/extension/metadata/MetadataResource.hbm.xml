@@ -3,8 +3,8 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.io.extension">
     <class name="MetadataEntity" table="datasetmetadata">
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
             	<comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
