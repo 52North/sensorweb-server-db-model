@@ -234,11 +234,10 @@ public class DatasetEntity extends DescribableEntity {
     }
 
     public String getUnitI18nName(String locale) {
-        String name = null;
-        if (unit != null) {
-            name = unit.getNameI18n(locale);
-        }
-        return name;
+        return unit != null
+//                ? unit.getNameI18n(locale)
+                ? unit.getUnit()
+                : "";
     }
 
     public void setObservationCount(long count) {
@@ -255,17 +254,6 @@ public class DatasetEntity extends DescribableEntity {
 
     public void setHiddenChild(boolean hiddenChild) {
         this.hiddenChild = hiddenChild;
-    }
-
-    public String getPlatformId() {
-        ProcedureEntity procedure = observationConstellation.getProcedure();
-        boolean mobile = procedure.isMobile();
-        boolean insitu = procedure.isInsitu();
-        PlatformType type = PlatformType.toInstance(mobile, insitu);
-        DescribableEntity entity = type.isStationary()
-                ? feature
-                : procedure;
-        return type.createId(entity.getId());
     }
 
     @Override

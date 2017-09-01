@@ -26,6 +26,8 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "validProceduretime";
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
+    public static final String PROPERTY_REFERENCE = "reference";
+
     private static final long serialVersionUID = 4028002933920185756L;
 
     private boolean reference;
@@ -78,10 +80,6 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     public void setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat) {
         this.procedureDescriptionFormat = procedureDescriptionFormat;
-    }
-
-    public PlatformType getPlatformType() {
-        return PlatformType.toInstance(mobile, insitu);
     }
 
     public boolean isDeleted() {
