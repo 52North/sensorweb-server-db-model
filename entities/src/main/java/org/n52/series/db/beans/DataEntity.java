@@ -38,22 +38,16 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
 
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
-    
+
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
-    
-    public static final String PROPERTY_DELETED = "deleted";
-    
-    public static final String PROPERTY_PARENT = "parent";
 
     public static final String PROPERTY_DELETED = "deleted";
+
+    public static final String PROPERTY_PARENT = "parent";
 
     public static final String PROPERTY_DOMAIN_ID = "domainId";
 
     public static final String PROPERTY_CHILD = "child";
-
-    public static final String PROPERTY_PARENT = "parent";
-
-    public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
 
     private static final long serialVersionUID = 273612846605300612L;
 
