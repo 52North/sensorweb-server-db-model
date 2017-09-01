@@ -28,7 +28,7 @@ import org.n52.series.db.common.Utils;
 /**
  * @since 1.0.0
  */
-public class ValidProcedureTimeEntity extends PkidEntity implements Serializable,
+public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
         HasProcedure<ValidProcedureTimeEntity>, HasProcedureDescriptionFormat<ValidProcedureTimeEntity>,
         HasDescriptionXml<ValidProcedureTimeEntity> {
 

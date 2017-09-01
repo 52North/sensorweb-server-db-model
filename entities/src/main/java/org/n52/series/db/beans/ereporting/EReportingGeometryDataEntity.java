@@ -30,4 +30,14 @@ public class EReportingGeometryDataEntity extends EReportingDataEntity<GeometryE
         return value == null
                 || value.isEmpty();
     }
+
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue() ? getValue().getGeometry().toText() : "";
+    }
 }

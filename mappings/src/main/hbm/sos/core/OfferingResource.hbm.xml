@@ -4,8 +4,8 @@
     <class name="OfferingEntity" table="offering">
         <comment>Table to store the offering information. Mapping file:
             mapping/core/Offering.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -75,10 +75,15 @@
             </column>
         </property>
 
-        <property name="disabled" type="org.hibernate.type.TrueFalseType">
-            <column name="disabled" not-null="true" default="'F'" check="disabled in ('T','F')">
-                <comment>For later use by the SOS. Indicator if this offering should
-                    not be provided by the SOS.</comment>
+        <property name="validTimeStart" type="timestamp">
+            <column name="validtimestart" length="29" not-null="true">
+                <comment>Time stamp until when the offering is valid or results are valid</comment>
+            </column>
+        </property>
+
+        <property name="validTimeEnd" type="timestamp">
+            <column name="validtimeend" length="29" not-null="true">
+                <comment>Time stamp until when the offering is valid or results are valid<</comment>
             </column>
         </property>
 
@@ -156,14 +161,14 @@
 
         <set name="translations" table="i18noffering" inverse="true" fetch="select">
             <key column="offering" foreign-key="offtransofffk" />
-            <many-to-many unique="true" column="pkid" class="org.n52.series.db.beans.i18n.I18nOfferingEntity"
+            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nOfferingEntity"
                 foreign-key="offtransi18nfk" />
         </set>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nOfferingEntity" table="i18noffering">
-        <id name="pkid" type="long">
-            <column name="pkid" />
+        <id name="id" type="long">
+            <column name="id" />
             <generator class="native">
                 <param name="sequence">i18noffering_seq</param>
             </generator>

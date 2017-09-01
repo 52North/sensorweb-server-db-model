@@ -27,4 +27,14 @@ public class EReportingBlobDataEntity extends EReportingDataEntity<Object> {
         return getValue() == null;
     }
 
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue() ? getValue().toString() : "";
+    }
+
 }

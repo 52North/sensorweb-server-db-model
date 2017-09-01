@@ -28,6 +28,11 @@ import com.vividsolutions.jts.geom.Geometry;
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         implements HasDescriptionXml<AbstractFeatureEntity<E>> {
 
+    public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
+    public static final String PROPERTY_GEOMETRY_ENTITY_GEOMETRY = PROPERTY_GEOMETRY_ENTITY + ".geometry";
+    public static final String PROPERTY_GEOMETRY_ENTITY_LAT = PROPERTY_GEOMETRY_ENTITY + ".lat";
+    public static final String PROPERTY_GEOMETRY_ENTITY_LON = PROPERTY_GEOMETRY_ENTITY + ".lon";
+
     private static final long serialVersionUID = 6712642995944229067L;
 
     private GeometryEntity geometryEntity;
@@ -39,9 +44,23 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
 
     public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
 
+    public Geometry getGeometry() {
+        return geometryEntity != null
+                ? geometryEntity.getGeometry()
+                : null;
+    }
+
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
+
+    public AbstractFeatureEntity<E> setGeometry(Geometry geometry) {
+        this.geometryEntity = new GeometryEntity();
+        this.geometryEntity.setGeometry(geometry);
+        this.geometryEntity.setSrid(geometry.getSRID());
+        return this;
+    }
+
 
     public AbstractFeatureEntity<E> setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;

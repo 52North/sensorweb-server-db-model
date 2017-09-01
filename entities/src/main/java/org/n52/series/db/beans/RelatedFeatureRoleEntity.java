@@ -22,7 +22,7 @@ import java.io.Serializable;
  * @since 1.0.0
  *
  */
-public class RelatedFeatureRoleEntity extends PkidEntity implements Serializable {
+public class RelatedFeatureRoleEntity extends IdEntity implements Serializable {
 
     public static final String RELATED_FEATURE_ROLE = "relatedFeatureRole";
 

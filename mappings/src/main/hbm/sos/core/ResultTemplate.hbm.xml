@@ -4,21 +4,35 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ResultTemplateEntity" table="resulttemplate">
         <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file:
-            mapping/transactionl/ResultTemplate.hbm.xml</comment>
-        <id name="pkid" type="long">
-            <column name="pkid">
+            mapping/core/ResultTemplate.hbm.xml</comment>
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
                 <param name="sequence">resulttemplate_seq</param>
             </generator>
         </id>
-        <many-to-one name="dataset" class="DatasetEntity" foreign-key="resultTemplateDatasetFk">
-            <column index="resultTemplateDatasetIdx" name="dataset" not-null="true">
-                <comment>Foreign Key (FK) to the related dataset. Contains "dataset".pkid</comment>
+        <many-to-one name="offering" class="OfferingEntity" foreign-key="resultTemplateOfferingIdx">
+            <column index="resultTempOfferingIdx" name="offering" not-null="true">
+                <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
             </column>
         </many-to-one>
-
+        <many-to-one name="observableProperty" class="PhenomenonEntity" foreign-key="resultTemplateObsPropFk">
+            <column index="resultTempeObsPropIdx" name="observableProperty" not-null="true">
+                <comment>Foreign Key (FK) to the related observableProperty. Contains "observableProperty".Id</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="procedure" class="ProcedureEntity" foreign-key="resultTemplateProcedureFk">
+            <column index="resultTempProcedureIdx" name="procedure" not-null="false">
+                <comment>Foreign Key (FK) to the related procedure. Contains "procedure".id</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="featureOfInterest" class="AbstractFeatureEntity" foreign-key="resultTemplateFeatureIdx">
+            <column name="featureOfInterest" not-null="false">
+                <comment>Foreign Key (FK) to the related featureOfInterest. Contains "featureOfInterest".id</comment>
+            </column>
+        </many-to-one>
         <property name="domainId" type="string">
             <column index="resultTempIdentifierIdx" name="domainId" not-null="true">
                 <comment>The resultTemplate identifier, required for InsertResult requests.</comment>

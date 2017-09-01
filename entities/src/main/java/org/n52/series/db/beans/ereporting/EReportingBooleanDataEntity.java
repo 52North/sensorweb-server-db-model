@@ -29,4 +29,14 @@ public class EReportingBooleanDataEntity extends EReportingDataEntity<Boolean> {
                 || noDataValues.contains(value.toString());
     }
 
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue() ? getValue().toString() : "";
+    }
+
 }

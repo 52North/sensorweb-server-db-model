@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
+import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
 import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
 import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
 import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
@@ -29,13 +30,14 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 /**
  * @since 1.0.0
  */
-public class ObservationConstellationEntity extends PkidEntity
+public class ObservationConstellationEntity extends IdEntity
         implements Serializable,
         HasProcedure<ObservationConstellationEntity>,
         HasObservableProperty<ObservationConstellationEntity>,
         HasOffering<ObservationConstellationEntity>,
         HasObservationType<ObservationConstellationEntity>,
         HasHiddenChildFlag<ObservationConstellationEntity>,
+        HasDeletedFlag<ObservationConstellationEntity>,
         HasDisabledFlag<ObservationConstellationEntity> {
 
     private static final long serialVersionUID = -3890149740562709928L;
@@ -44,6 +46,8 @@ public class ObservationConstellationEntity extends PkidEntity
     private ProcedureEntity procedure;
     private OfferingEntity offering;
     private ObservationTypeEntity observationType;
+    private boolean deleted;
+
     private Boolean disabled = false;
     private Boolean hiddenChild = false;
 
@@ -97,6 +101,22 @@ public class ObservationConstellationEntity extends PkidEntity
     }
 
     @Override
+    public ObservationConstellationEntity setDeleted(boolean deleted) {
+        this.deleted = deleted;
+        return this;
+    }
+
+    @Override
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return getDeleted();
+    }
+
+    @Override
     public ObservationConstellationEntity setDisabled(boolean disabled) {
         this.disabled = disabled;
         return this;
@@ -139,7 +159,7 @@ public class ObservationConstellationEntity extends PkidEntity
         return String
                      .format("ObservationConstellation [pkid=%s, observableProperty=%s, procedure=%s, "
                              + "observationType=%s, offering=%s, hiddenChild=%s",
-                             getPkid(),
+                             getId(),
                              observableProperty,
                              procedure,
                              observationType,

@@ -64,4 +64,14 @@ public class EReportingQuantityDataEntity extends EReportingDataEntity<Double> {
         }
         return validatedValues;
     }
+
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue() ? getValue().toString() : "";
+    }
 }

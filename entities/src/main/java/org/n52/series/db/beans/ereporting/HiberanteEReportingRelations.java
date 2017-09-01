@@ -17,9 +17,12 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import org.n52.series.db.beans.HibernateRelations;
 import org.n52.shetland.aqd.AqdConstants;
 
-public interface HiberanteEReportingRelations {
+public interface HiberanteEReportingRelations
+        extends
+        HibernateRelations {
 
     interface HasEReportingSamplingPoint {
         String SAMPLING_POINT = "samplingPoint";
@@ -138,12 +141,22 @@ public interface HiberanteEReportingRelations {
         }
     }
 
-    interface EReportingQualityData extends HasTimeCoverageFlag, HasDataCaptureFlag, HasUncertaintyEstimation {
+    interface EReportingQualityData
+            extends
+            HasTimeCoverageFlag,
+            HasDataCaptureFlag,
+            HasUncertaintyEstimation {
 
     }
 
     interface EReportingValues
-            extends HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
+            extends
+            HasValidation,
+            HasVerification,
+            HasPrimaryObservation,
+            HasDataCapture,
+            EReportingQualityData,
+            GetStringValue {
 
     }
 
@@ -157,7 +170,7 @@ public interface HiberanteEReportingRelations {
 
         /**
          * @param assessmentType
-         *        the assessmentType to set
+         *            the assessmentType to set
          */
         void setAssessmentType(EReportingAssessmentTypeEntity assessmentType);
 
@@ -179,7 +192,7 @@ public interface HiberanteEReportingRelations {
 
         /**
          * @param station
-         *        the station to set
+         *            the station to set
          * @return this
          */
         HasStation setEReportingStationEntity(EReportingStationEntity station);
@@ -205,7 +218,7 @@ public interface HiberanteEReportingRelations {
 
         /**
          * @param network
-         *        the network to set
+         *            the network to set
          * @return this
          */
         HasNetwork setEReportingNetworkEntity(EReportingNetworkEntity network);

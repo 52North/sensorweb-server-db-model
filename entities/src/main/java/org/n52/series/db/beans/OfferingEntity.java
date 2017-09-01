@@ -25,13 +25,20 @@ import org.n52.series.db.beans.HibernateRelations.HasObservationTypes;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatures;
 import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
+import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
 import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
-        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity> {
+        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity>,
+        HasValidTime<OfferingEntity> {
+
+    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
+    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
+    public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
+    public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
 
     private static final long serialVersionUID = 5862607025737865794L;
 
@@ -50,8 +57,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     private Date resultTimeEnd;
 
     private Set<RelatedFeatureEntity> relatedFeatures;
-
-    private boolean disabled;
+    private Date validTimeStart;
+    private Date validTimeEnd;
 
     public Geometry getGeometry() {
         return geometryEntity != null
@@ -62,6 +69,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
+        this.geometryEntity.setSrid(geometry.getSRID());
         return this;
     }
 
@@ -71,6 +79,10 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
+    }
+
+    public boolean isSetGeometry() {
+        return geometryEntity != null;
     }
 
     /**
@@ -181,6 +193,47 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         return this;
     }
 
+    /**
+     * @return the validTimeStart
+     */
+    @Override
+    public Date getValidTimeStart() {
+        return Utils.createUnmutableTimestamp(validTimeStart);
+    }
+
+    /**
+     * @param validTimeStart
+     *        the validTimeStart to set
+     */
+    @Override
+    public OfferingEntity setValidTimeStart(Date validTimeStart) {
+        this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
+        return this;
+    }
+
+    /**
+     * @return the validTimeEnd
+     */
+    @Override
+    public Date getValidTimeEnd() {
+        return Utils.createUnmutableTimestamp(validTimeEnd);
+    }
+
+    /**
+     * @param validTimeEnd
+     *        the validTimeEnd to set
+     */
+    @Override
+    public OfferingEntity setValidTimeEnd(Date validTimeEnd) {
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
+        return this;
+    }
+
+    @Override
+    public boolean isSetValidTime() {
+        return getValidTimeStart() != null && getValidTimeEnd() != null;
+    }
+
     @Override
     public Set<RelatedFeatureEntity> getRelatedFeatures() {
         return relatedFeatures;
@@ -190,14 +243,6 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
         this.relatedFeatures = relatedFeatures;
         return this;
-    }
-
-    public boolean isDisabled() {
-        return disabled;
-    }
-
-    public void setDisabled(boolean disabled) {
-        this.disabled = disabled;
     }
 
     @Override
