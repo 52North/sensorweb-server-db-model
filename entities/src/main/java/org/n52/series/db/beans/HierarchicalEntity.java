@@ -21,6 +21,8 @@ import java.util.Set;
 
 public abstract class HierarchicalEntity<T> extends DescribableEntity {
 
+    public static final String PROPERTY_PARENTS = "parents";
+    public static final String PROPERTY_CHILDREN = "children";
     private static final long serialVersionUID = -530148269689996337L;
 
     private Set<T> children = new HashSet<>();

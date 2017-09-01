@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
+import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
 import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
 import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
 import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
@@ -36,6 +37,7 @@ public class ObservationConstellationEntity extends IdEntity
         HasOffering<ObservationConstellationEntity>,
         HasObservationType<ObservationConstellationEntity>,
         HasHiddenChildFlag<ObservationConstellationEntity>,
+        HasDeletedFlag<ObservationConstellationEntity>,
         HasDisabledFlag<ObservationConstellationEntity> {
 
     private static final long serialVersionUID = -3890149740562709928L;
@@ -44,6 +46,8 @@ public class ObservationConstellationEntity extends IdEntity
     private ProcedureEntity procedure;
     private OfferingEntity offering;
     private ObservationTypeEntity observationType;
+    private boolean deleted;
+
     private Boolean disabled = false;
     private Boolean hiddenChild = false;
 
@@ -94,6 +98,22 @@ public class ObservationConstellationEntity extends IdEntity
     @Override
     public boolean isSetOffering() {
         return getOffering() != null;
+    }
+
+    @Override
+    public ObservationConstellationEntity setDeleted(boolean deleted) {
+        this.deleted = deleted;
+        return this;
+    }
+
+    @Override
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    @Override
+    public boolean isDeleted() {
+        return getDeleted();
     }
 
     @Override

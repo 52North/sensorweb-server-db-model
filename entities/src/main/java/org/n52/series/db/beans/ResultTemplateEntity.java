@@ -32,7 +32,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     public static final String PROPERTY_OBSERVABLE_PROPERTY = "observableProperty";
 
     public static final String PROPERTY_DOMAIN_ID = "domainId";
-    
+
     public static final String PROPERTY_FEATURE_OF_INTEREST = "featureOfInterest";
 
     private static final long serialVersionUID = -8847952458819368733L;
@@ -40,9 +40,9 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     private PhenomenonEntity observableProperty;
 
     private OfferingEntity offering;
-    
+
     private ProcedureEntity procedure;
-    
+
     private AbstractFeatureEntity featureOfInterest;
 
     private String identifier;
