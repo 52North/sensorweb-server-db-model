@@ -83,7 +83,7 @@
 
         <property name="validTimeEnd" type="timestamp">
             <column name="validtimeend" length="29" not-null="true">
-                <comment>Time stamp until when the offering is valid or results are valid<</comment>
+                <comment>Time stamp until when the offering is valid or results are valid</comment>
             </column>
         </property>
 
