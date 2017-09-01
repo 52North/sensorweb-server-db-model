@@ -29,4 +29,13 @@ public class EReportingCategoryDataEntity extends EReportingDataEntity<String> {
                 || noDataValues.contains(value);
     }
 
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue() ? getValue() : "";
+    }
 }
