@@ -28,7 +28,7 @@ This project includes:
   javax.inject under The Apache Software License, Version 2.0
   JBoss Logging 3 under Apache License, version 2.0
   JBoss Logging I18n Annotations under Public Domain
-  JCL 1.1.1 implemented over SLF4J under MIT License
+  JCL 1.2 implemented over SLF4J under MIT License
   Joda-Time under Apache 2
   JTS Topology Suite under Lesser General Public License (LGPL)
   JUnit under Eclipse Public License 1.0
