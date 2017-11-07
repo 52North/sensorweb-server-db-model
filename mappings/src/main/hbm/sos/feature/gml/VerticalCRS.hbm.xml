@@ -10,7 +10,7 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">verticalCRS_seq</param>
+                <param name="sequence_name">verticalCRS_seq</param>
             </generator>
         </id>
         <property name="nilReason" column="nilReason" type="string" />

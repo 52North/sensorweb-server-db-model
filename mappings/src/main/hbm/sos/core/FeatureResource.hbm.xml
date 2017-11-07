@@ -7,7 +7,7 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">featureOfInterest_seq</param>
+                <param name="sequence_name">feature_seq</param>
             </generator>
         </id>
 
@@ -41,7 +41,7 @@
             </column>
         </property>
 
-        <property name="descriptionXml" type="org.hibernate.type.StringClobType">
+        <property name="descriptionXml" type="org.hibernate.type.StringType">
             <column name="descriptionXml">
                 <comment>XML description of the feature, used when transactional profile is supported . Optional</comment>
             </column>
@@ -70,7 +70,7 @@
             <property column="lat" name="lat" type="double" />
             <property column="lon" name="lon" type="double" />
              -->
-            <property column="geom" name="geometry" type="org.hibernate.spatial.GeometryType"/>
+            <property column="geom" name="geometry" type="jts_geometry"/>
         </component>
 
         <set name="children" table="featurerelation" inverse="false" fetch="select">

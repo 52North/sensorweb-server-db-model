@@ -5,7 +5,7 @@
         <id name="id" type="long">
             <column name="id"/>
             <generator class="native">
-                <param name="sequence">observation_seq</param>
+                <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
         <set inverse="true" name="datasets" table="datasetdata" >
@@ -103,7 +103,7 @@
            <property column="lat" name="lat" type="double" />
            <property column="lon" name="lon" type="double" />
             -->
-            <property column="samplingGeometry" name="geometry" type="org.hibernate.spatial.GeometryType"/>
+            <property column="samplingGeometry" name="geometry" type="jts_geometry"/>
         </component>
         <!-- Or add only to specific joined-subclasses -->
         <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan">
@@ -285,7 +285,7 @@
 	           <property column="lat" name="lat" type="double" />
 	           <property column="lon" name="lon" type="double" />
 	            -->
-	            <property column="value" name="geometry" type="org.hibernate.spatial.GeometryType"/>
+	            <property column="value" name="geometry" type="jts_geometry"/>
 	        </component>
         </joined-subclass>
         <joined-subclass name="EReportingSweDataArrayDataEntity"
@@ -298,7 +298,7 @@
                 </column>
             </key>
             <property name="value"
-                      type="org.hibernate.type.StringClobType">
+                      type="org.hibernate.type.StringType">
                  <column name="value">
                      <comment>SweDataArray observation value</comment>
                  </column>

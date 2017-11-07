@@ -10,7 +10,7 @@
 
         <component class="GeometryEntity" name="geometryEntity">
             <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
-            <property column="samplingGeometry" name="geometry" type="org.hibernate.spatial.GeometryType" />
+            <property column="samplingGeometry" name="geometry" type="jts_geometry" />
         </component>
 
         <set name="datasetIds" table="datasetobservation">

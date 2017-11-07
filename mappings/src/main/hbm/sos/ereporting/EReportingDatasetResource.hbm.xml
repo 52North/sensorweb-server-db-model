@@ -10,7 +10,7 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">datasetid_seq</param>
+                <param name="sequence_name">datasetid_seq</param>
             </generator>
 		</id>
 		<discriminator column="datasetType" force="true" type="string" />

@@ -8,7 +8,7 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">procedure_seq</param>
+                <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
 <!--         <many-to-one name="service" class="ServiceEntity" foreign-key="procedureServiceFk"> -->
@@ -44,7 +44,7 @@
                 <comment>Flag to indicate that this procedure is deleted or not (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
-        <property name="descriptionFile" type="org.hibernate.type.StringClobType">
+        <property name="descriptionFile" type="org.hibernate.type.StringType">
             <column name="descriptionFile">
                 <comment>Field for full (XML) encoded procedure description or link to a procedure description file.
                     Optional</comment>

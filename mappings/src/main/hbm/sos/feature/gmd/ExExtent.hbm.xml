@@ -10,7 +10,7 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">exExtent_seq</param>
+                <param name="sequence_name">exExtent_seq</param>
             </generator>
         </id>
         <property name="gmdid" column="gmdid" type="string" />
