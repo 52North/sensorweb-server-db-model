@@ -8,14 +8,11 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native" >
-                <param name="sequence">unit_seq</param>
+                <param name="sequence_name">unit_seq</param>
             </generator>
         </id>
-<!--         <many-to-one name="service" class="ServiceEntity" foreign-key="unitServiceFk"> -->
-<!--         	<column name="service" not-null="true"/> -->
-<!--         </many-to-one> -->
         <property name="unit" type="string">
-            <column name="unit" not-null="true" unique-key="unitUK">
+            <column name="unit" not-null="true" unique-key="unit_uk">
                 <comment>The unit of measure of observations. See http://unitsofmeasure.org/ucum.html</comment>
             </column>
         </property>

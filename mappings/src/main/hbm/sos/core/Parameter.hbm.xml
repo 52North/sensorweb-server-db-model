@@ -45,7 +45,7 @@
         <joined-subclass extends="Parameter" name="ParameterCategory" table="categoryparametervalue">
             <key column="parameter" foreign-key="categoryparamvaluefk"/>
             <property column="value" name="value" type="string"/>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="categoryparamunitfk"/>
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="numericparamunitfk"/>
         </joined-subclass>
 
         <joined-subclass extends="Parameter" name="ParameterCount" table="countparametervalue">
@@ -68,5 +68,6 @@
             <key column="parameter" foreign-key="bxmlparamvaluefk"/>
             <property column="value" name="value" type="string"/>
         </joined-subclass>
+         -->
     </class>
 </hibernate-mapping>
