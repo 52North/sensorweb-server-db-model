@@ -19,25 +19,30 @@ package org.n52.series.db.generator;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.io.Writer;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.EnumSet;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
 
+import org.hibernate.boot.Metadata;
+import org.hibernate.boot.MetadataSources;
+import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
-import org.hibernate.spatial.dialect.mysql.MySQLSpatial5InnoDBDialect;
-import org.hibernate.spatial.dialect.postgis.PostgisDialect;
+import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
+import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
+import org.hibernate.tool.hbm2ddl.SchemaExport;
+import org.hibernate.tool.schema.TargetType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
 
@@ -78,7 +83,7 @@ public class SQLScriptGenerator {
     private Dialect getDialect(DialectSelector selection) throws Exception {
         switch (selection) {
         case POSTGIS:
-            return new PostgisDialect();
+            return new PostgisPG95Dialect();
         case ORACLE:
             // try {
             // return new OracleSpatial10gDoubleFloatDialect();
@@ -95,7 +100,7 @@ public class SQLScriptGenerator {
         case GEODB:
             return new GeoDBDialect();
         case MY_SQL_SPATIAL_5:
-            return new MySQLSpatial5InnoDBDialect();
+            return new MySQL56SpatialDialect();
         case SQL_SERVER_2008:
             return new SqlServer2008SpatialDialect();
         default:
@@ -121,7 +126,8 @@ public class SQLScriptGenerator {
         // break;
         // case 3:
         configuration.addDirectory(getDirectory("/hbm/sos/core"));
-        configuration.addDirectory(getDirectory("/hbm/sos/feature"));
+        configuration.addDirectory(getDirectory("/hbm/sos/dataset"));
+//        configuration.addDirectory(getDirectory("/hbm/sos/feature"));
         // break;
         // default:
         // throw new Exception("The entered value is invalid!");
@@ -152,7 +158,7 @@ public class SQLScriptGenerator {
         }
     }
 
-    private File getDirectory(String path) throws URISyntaxException {
+    private static File getDirectory(String path) throws URISyntaxException {
         return new File(SQLScriptGenerator.class.getResource(path)
                                                 .toURI());
     }
@@ -169,11 +175,11 @@ public class SQLScriptGenerator {
 
     private int getDialectSelection() throws IOException {
         printToScreen("This SQL script generator supports:");
-        printToScreen("1   PostgreSQL/PostGIS");
-        printToScreen("2   Oracle");
-        printToScreen("3   H2/GeoDB");
-        printToScreen("4   MySQL");
-        printToScreen("5   SQL Server");
+        printToScreen("0   PostgreSQL/PostGIS");
+        printToScreen("1   Oracle");
+        printToScreen("2   H2/GeoDB");
+        printToScreen("3   MySQL");
+        printToScreen("4   SQL Server");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -183,7 +189,7 @@ public class SQLScriptGenerator {
     private int readSelectionFromStdIo() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
         String selection = br.readLine();
-        return selection != null
+        return (selection != null && !selection.isEmpty())
                 ? Integer.parseInt(selection)
                 : -1;
     }
@@ -204,8 +210,8 @@ public class SQLScriptGenerator {
 
     private int getConceptSelection() throws IOException {
         printToScreen("Which observation concept should be created:");
-        printToScreen("1   series");
-        printToScreen("2   ereporting");
+        printToScreen("0   series");
+        printToScreen("1   ereporting");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -317,66 +323,39 @@ public class SQLScriptGenerator {
                                 int conceptSelection,
                                 String schema)
             throws Exception {
-        Writer writer = null;
-        try {
             Concept concept = Concept.values()[conceptSelection];
-            Configuration configuration = new CustomConfiguration().configure("/hibernate.cfg.xml");
+            Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
             DialectSelector dialect = DialectSelector.values()[dialectSelection];
             Dialect dia = sqlScriptGenerator.getDialect(dialect);
-            // String fileName = "target/" + dialectSelection + "_" + modelSelection + "_" + conceptSelection
-            // + ".sql";
-            String fileName = "target/" + dialect + "_" + concept + ".sql";
-            writer = new OutputStreamWriter(new FileOutputStream(fileName), Charset.forName("UTF-8"));
+            Properties p = new Properties();
+            p.put("hibernate.dialect", dia.getClass().getName());
+            String fileNameCreate = "target/" + dialect + "_" + concept + "_create.sql";
+            String fileNameDrop = "target/" + dialect + "_" + concept + "_drop.sql";
+            Files.deleteIfExists(Paths.get(fileNameCreate));
+            Files.deleteIfExists(Paths.get(fileNameDrop));
             if (schema != null && !schema.isEmpty()) {
-                Properties p = new Properties();
                 p.put("hibernate.default_schema", schema);
-                configuration.addProperties(p);
             }
+            configuration.addProperties(p);
             sqlScriptGenerator.setDirectoriesForModelSelection(modelSelection, concept, configuration);
+            
+            configuration.buildSessionFactory();
+            StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().build();
+            MetadataSources metadataSources = new MetadataSources(serviceRegistry);
+            metadataSources.addDirectory(getDirectory("/hbm/sos/core"));
+            metadataSources.addDirectory(getDirectory("/hbm/sos/dataset"));
+            Metadata metadata = metadataSources.buildMetadata();
+            
             // create script
-            String[] create = configuration.generateSchemaCreationScript(dia);
-            Set<String> checkedSchema = sqlScriptGenerator.checkSchema(dia, create);
-            writeln("-- Scripts are created for: " + dia.toString(), writer);
-            writeSection("Create-Script", checkedSchema, writer);
-
-            // drop script
-            String[] drop = configuration.generateDropSchemaScript(dia);
-            Set<String> checkedDrop = sqlScriptGenerator.checkSchema(dia, drop);
-            writeSection("Drop-Script", checkedDrop, writer);
-
-            printToScreen("Finished! Check for file: " + fileName + "\n");
-        } finally {
-            if (writer != null) {
-                writer.close();
-            }
-        }
+            SchemaExport schemaExport = new SchemaExport();
+            EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
+            schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
+            schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
+            printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
+            // create drop
+            schemaExport.setOutputFile(fileNameDrop);
+            schemaExport.execute(targetTypes, SchemaExport.Action.DROP, metadata);
+            printToScreen("Finished! Check for file: " + fileNameDrop + "\n");
     }
 
-    private static void writeSection(String header, Set<String> entries, Writer writer) throws IOException {
-        writeEmpty(writer);
-        writeln("-- #######################################", writer);
-        writeln("-- ##  " + header, writer);
-        writeEmpty(writer);
-        for (String e : entries) {
-            writeln(e + ";", writer);
-        }
-    }
-
-    private static void writeEmpty(Writer writer) throws IOException {
-        writer.write("\n");
-    }
-
-    private static void writeln(String line, Writer writer) throws IOException {
-        writer.write(line + "\n");
-    }
-
-    private static class MissingDriverException extends Exception {
-
-        private static final long serialVersionUID = -5681526838468633998L;
-
-        MissingDriverException() {
-            super();
-        }
-
-    }
 }
