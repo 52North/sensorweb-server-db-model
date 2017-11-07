@@ -22,18 +22,18 @@
                 <comment>Description of the featureOfInterest, gml:description. Optional</comment>
             </column>
         </property>
-        <set name="translations" table="i18category" inverse="true" fetch="select">
+        <set name="translations" table="category_i18" inverse="true" fetch="select">
             <key column="category" foreign-key="cattranscatfk" />
             <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"
                 foreign-key="cattransi18nfk" />
         </set>
     </class>
 
-    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="i18ncategory">
+    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="category_i18">
         <id name="id" type="long">
             <column name="id" />
             <generator class="native">
-                <param name="sequence">i18ncategory_seq</param>
+                <param name="sequence_name">category_i18n_seq</param>
             </generator>
         </id>
 
