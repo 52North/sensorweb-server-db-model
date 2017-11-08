@@ -47,8 +47,8 @@
             </column>
         </property>
 
-        <property name="hiddenChild" type="org.hibernate.type.TrueFalseType">
-            <column name="hiddenChild" not-null="true" default="'F'" check="hiddenChild in ('T','F')" />
+        <property name="hiddenChild" type="org.hibernate.type.NumericBooleanType">
+            <column name="hiddenChild" not-null="true" default="0" check="hiddenChild in (1,0)" />
         </property>
 
         <set name="children" table="compositephenomenon" inverse="false">

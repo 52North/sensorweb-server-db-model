@@ -340,7 +340,7 @@ public class SQLScriptGenerator {
             sqlScriptGenerator.setDirectoriesForModelSelection(modelSelection, concept, configuration);
             
             configuration.buildSessionFactory();
-            StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().build();
+            StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             MetadataSources metadataSources = new MetadataSources(serviceRegistry);
             metadataSources.addDirectory(getDirectory("/hbm/sos/core"));
             metadataSources.addDirectory(getDirectory("/hbm/sos/dataset"));

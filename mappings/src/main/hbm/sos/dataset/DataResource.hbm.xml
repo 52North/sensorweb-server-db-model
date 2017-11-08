@@ -58,8 +58,8 @@
             </column>
         </property>
 
-        <property name="deleted" type="org.hibernate.type.TrueFalseType">
-            <column name="deleted" not-null="true" default="'F'" check="deleted in ('T','F')">
+        <property name="deleted" type="org.hibernate.type.NumericBooleanType">
+            <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
                 <comment>Flag to indicate that this series is deleted or not. Set if the related procedure is deleted
                     via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
@@ -77,14 +77,14 @@
             </column>
         </property>
 
-        <property name="child" type="org.hibernate.type.TrueFalseType">
-            <column name="child" not-null="true" default="'F'" length="1" check="child in ('T','F')">
+        <property name="child" type="org.hibernate.type.NumericBooleanType">
+            <column name="child" not-null="true" default="0" length="1" check="child in (1,0)">
                 <comment>Flag to indicate that this observation is a child observation for complex observation</comment>
             </column>
         </property>
 
-        <property name="parent" type="org.hibernate.type.TrueFalseType">
-            <column name="parent" not-null="true" default="'F'" length="1" check="parent in ('T','F')">
+        <property name="parent" type="org.hibernate.type.NumericBooleanType">
+            <column name="parent" not-null="true" default="0" length="1" check="parent in (1,0)">
                 <comment>Flag to indicate that this observation is a parent observation for complex observation</comment>
             </column>
         </property>
@@ -158,7 +158,7 @@
             </property>
         </joined-subclass>
 
-        <joined-subclass name="BooleanDataEntity" extends="DataEntity" table="booleanvalue" check="value in ('T','F')">
+        <joined-subclass name="BooleanDataEntity" extends="DataEntity" table="booleanvalue" check="value in (1,0)">
             <comment>Value table for boolean observation</comment>
             <key foreign-key="observationBooleanValueFk">
                 <column name="observation">
@@ -166,7 +166,7 @@
                         "observation".data</comment>
                 </column>
             </key>
-            <property name="value" type="org.hibernate.type.TrueFalseType">
+            <property name="value" type="org.hibernate.type.NumericBooleanType">
                 <column name="value">
                     <comment>Boolean observation value</comment>
                 </column>

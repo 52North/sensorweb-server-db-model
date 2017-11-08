@@ -27,13 +27,13 @@
                    <comment>primaryObservation flag, see http://dd.eionet.europa.eu/vocabulary/aq/primaryObservation/view</comment>
                </column>
         </property>
-        <property name="timeCoverageFlag" type="org.hibernate.type.TrueFalseType">
-            <column name="timeCoverageFlag" check="timeCoverageFlag in ('T','F')" length="1">
+        <property name="timeCoverageFlag" type="org.hibernate.type.NumericBooleanType">
+            <column name="timeCoverageFlag" check="timeCoverageFlag in (1,0)" length="1">
                    <comment>indicator for time coverage </comment>
                </column>
         </property>
-        <property name="dataCaptureFlag" type="org.hibernate.type.TrueFalseType">
-            <column name="dataCaptureFlag" check="dataCaptureFlag in ('T','F')" length="1">
+        <property name="dataCaptureFlag" type="org.hibernate.type.NumericBooleanType">
+            <column name="dataCaptureFlag" check="dataCaptureFlag in (1,0)" length="1">
                    <comment>Data capture value, used for multi day aggregations</comment>
                </column>
         </property>

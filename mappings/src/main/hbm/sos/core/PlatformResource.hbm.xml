@@ -11,7 +11,7 @@
         <!-- </many-to-one> -->
         <property column="domainId" insert="false" name="domainId" type="string" update="false" />
         <property column="name" name="name" type="string" />
-        <property column="mobile" insert="false" name="mobile" type="org.hibernate.type.TrueFalseType" update="false" />
-        <property column="insitu" insert="false" name="insitu" type="org.hibernate.type.TrueFalseType" update="false" />
+        <property column="mobile" insert="false" name="mobile" type="org.hibernate.type.NumericBooleanType" update="false" />
+        <property column="insitu" insert="false" name="insitu" type="org.hibernate.type.NumericBooleanType" update="false" />
     </class>
 </hibernate-mapping>
