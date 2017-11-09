@@ -37,8 +37,10 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.PostgreSQL95Dialect;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
+import org.hibernate.spatial.dialect.oracle.OracleSpatial10gDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -84,9 +86,10 @@ public class SQLScriptGenerator {
         switch (selection) {
         case POSTGIS:
             return new PostgisPG95Dialect();
+//            return new PostgreSQL95Dialect();
         case ORACLE:
             // try {
-            // return new OracleSpatial10gDoubleFloatDialect();
+//             return new OracleSpatial10gDialect();
             // } catch (ExceptionInInitializerError eiie) {
             // printToScreen("The Oracle JDBC driver is missing!");
             // printToScreen("To execute the SQL script generator for Oracle you have to uncomment the
@@ -108,31 +111,28 @@ public class SQLScriptGenerator {
         }
     }
 
-    private void setDirectoriesForModelSelection(int selection, Concept concept, Configuration configuration)
-            throws Exception {
-        // switch (selection) {
-        // case 1:
-        // configuration.addDirectory(new
-        // File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
-        // configuration.addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/fea").toURI()));
-        // break;
-        // case 2:
-        // configuration.addDirectory(new
-        // File(SQLScriptGenerator.class.getResource("/hbm/sos/core").toURI()));
-        // configuration
-        // .addDirectory(new File(SQLScriptGenerator.class.getResource("/hbm/sos/transactional").toURI()));
-        // configuration.addDirectory(new
-        // File(SQLScriptGenerator.class.getResource("/hbm/sos/parameter").toURI()));
-        // break;
-        // case 3:
-        configuration.addDirectory(getDirectory("/hbm/sos/core"));
-        configuration.addDirectory(getDirectory("/hbm/sos/dataset"));
-//        configuration.addDirectory(getDirectory("/hbm/sos/feature"));
-        // break;
-        // default:
-        // throw new Exception("The entered value is invalid!");
-        // }
-        addConceptDirectories(concept, configuration);
+    private void setDirectoriesForModelSelection(Concept concept, Configuration configuration,
+            MetadataSources metadataSources) throws Exception {
+        List<File> files = new LinkedList<>();
+//        files.add(getDirectory("/hbm/sos/core/Codespace.hbm.xml"));
+//        files.add(getDirectory("/hbm/sos/core/ProcedureDescriptionFormat.hbm.xml"));
+//        files.add(getDirectory("/hbm/sos/core/ProcedureResource.hbm.xml"));
+//        files.add(getDirectory("/hbm/sos/core/ProcedureHistory.hbm.xml"));
+         files.add(getDirectory("/hbm/sos/core"));
+         files.add(getDirectory("/hbm/sos/dataset"));
+//         files.add(getDirectory("/hbm/sos/feature"));
+//         files.add(getDirectory("/hbm/sos/extension"));
+        for (File file : files) {
+            if (configuration != null) {
+//                configuration.addFile(file);
+                configuration.addDirectory(file);
+            }
+            if (metadataSources != null) {
+//                metadataSources.addFile(file);
+                metadataSources.addDirectory(file);
+            }
+        }
+        addConceptDirectories(concept, configuration, metadataSources);
     }
 
     enum Concept {
@@ -146,12 +146,20 @@ public class SQLScriptGenerator {
         }
     }
 
-    private void addConceptDirectories(Concept concept, Configuration configuration) throws Exception {
+    private void addConceptDirectories(Concept concept, Configuration configuration, MetadataSources metadataSources)
+            throws Exception {
         switch (concept) {
         case DEFAULT:
             break;
         case E_REPORTING:
-            configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
+
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory("/hbm/sos/ereporting"));
+            }
+
             break;
         default:
             throw new Exception("The entered value is invalid: " + concept);
@@ -337,15 +345,14 @@ public class SQLScriptGenerator {
                 p.put("hibernate.default_schema", schema);
             }
             configuration.addProperties(p);
-            sqlScriptGenerator.setDirectoriesForModelSelection(modelSelection, concept, configuration);
-            
+            sqlScriptGenerator.setDirectoriesForModelSelection(concept, configuration, null);
+
             configuration.buildSessionFactory();
             StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
             MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-            metadataSources.addDirectory(getDirectory("/hbm/sos/core"));
-            metadataSources.addDirectory(getDirectory("/hbm/sos/dataset"));
+            sqlScriptGenerator.setDirectoriesForModelSelection(concept, null, metadataSources);
             Metadata metadata = metadataSources.buildMetadata();
-            
+
             // create script
             SchemaExport schemaExport = new SchemaExport();
             EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
