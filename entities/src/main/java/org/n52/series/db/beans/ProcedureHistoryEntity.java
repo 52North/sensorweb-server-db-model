@@ -20,7 +20,7 @@ package org.n52.series.db.beans;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.n52.series.db.beans.HibernateRelations.HasDescriptionXml;
+import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 import org.n52.series.db.common.Utils;
@@ -28,9 +28,9 @@ import org.n52.series.db.common.Utils;
 /**
  * @since 1.0.0
  */
-public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
-        HasProcedure<ValidProcedureTimeEntity>, HasProcedureDescriptionFormat<ValidProcedureTimeEntity>,
-        HasDescriptionXml<ValidProcedureTimeEntity> {
+public class ProcedureHistoryEntity extends IdEntity implements Serializable,
+        HasProcedure<ProcedureHistoryEntity>, HasProcedureDescriptionFormat<ProcedureHistoryEntity>,
+        HasXml<ProcedureHistoryEntity> {
 
     public static final String START_TIME = "startTime";
 
@@ -38,7 +38,7 @@ public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
 
     private static final long serialVersionUID = -3658568714438752174L;
 
-    private ProcedureDescriptionFormatEntity procedureDescriptionFormatEntity;
+    private ProcedureDescriptionFormatEntity format;
 
     private ProcedureEntity procedure;
 
@@ -46,7 +46,7 @@ public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
 
     private Date endTime;
 
-    private String descriptionXml;
+    private String xml;
 
     @Override
     public ProcedureEntity getProcedure() {
@@ -54,19 +54,19 @@ public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
     }
 
     @Override
-    public ValidProcedureTimeEntity setProcedure(ProcedureEntity procedure) {
+    public ProcedureHistoryEntity setProcedure(ProcedureEntity procedure) {
         this.procedure = procedure;
         return this;
     }
 
     @Override
-    public ProcedureDescriptionFormatEntity getProcedureDescriptionFormat() {
-        return this.procedureDescriptionFormatEntity;
+    public ProcedureDescriptionFormatEntity getFormat() {
+        return this.format;
     }
 
     @Override
-    public ValidProcedureTimeEntity setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity format) {
-        this.procedureDescriptionFormatEntity = format;
+    public ProcedureHistoryEntity setFormat(ProcedureDescriptionFormatEntity format) {
+        this.format = format;
         return this;
     }
 
@@ -74,7 +74,7 @@ public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
         return Utils.createUnmutableTimestamp(this.startTime);
     }
 
-    public ValidProcedureTimeEntity setStartTime(Date startTime) {
+    public ProcedureHistoryEntity setStartTime(Date startTime) {
         this.startTime = Utils.createUnmutableTimestamp(startTime);
         return this;
     }
@@ -83,19 +83,19 @@ public class ValidProcedureTimeEntity extends IdEntity implements Serializable,
         return Utils.createUnmutableTimestamp(this.endTime);
     }
 
-    public ValidProcedureTimeEntity setEndTime(Date endTime) {
+    public ProcedureHistoryEntity setEndTime(Date endTime) {
         this.endTime = Utils.createUnmutableTimestamp(endTime);
         return this;
     }
 
     @Override
-    public String getDescriptionXml() {
-        return descriptionXml;
+    public String getXml() {
+        return xml;
     }
 
     @Override
-    public ValidProcedureTimeEntity setDescriptionXml(String descriptionXml) {
-        this.descriptionXml = descriptionXml;
+    public ProcedureHistoryEntity setXml(String xml) {
+        this.xml = xml;
         return this;
     }
 }

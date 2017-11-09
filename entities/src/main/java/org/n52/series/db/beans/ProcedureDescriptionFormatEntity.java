@@ -31,17 +31,17 @@ public class ProcedureDescriptionFormatEntity extends IdEntity implements Serial
 
     private static final long serialVersionUID = 5252037145878336688L;
 
-    private String procedureDescriptionFormat;
+    private String format;
 
     public ProcedureDescriptionFormatEntity() {
     }
 
-    public String getProcedureDescriptionFormat() {
-        return this.procedureDescriptionFormat;
+    public String getFormat() {
+        return this.format;
     }
 
-    public ProcedureDescriptionFormatEntity setProcedureDescriptionFormat(String procedureDescriptionFormat) {
-        this.procedureDescriptionFormat = procedureDescriptionFormat;
+    public ProcedureDescriptionFormatEntity setFormat(String procedureDescriptionFormat) {
+        this.format = procedureDescriptionFormat;
         return this;
     }
 

@@ -19,7 +19,11 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
+import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
+import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
+
+public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
+        implements HasProcedureHistory, HasProcedureDescriptionFormat<ProcedureEntity> {
 
     public static final String PROPERTY_MOBILE = "mobile";
     public static final String PROPERTY_INSITU = "insitu";
@@ -35,7 +39,7 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     private boolean insitu;
 
-    private ProcedureDescriptionFormatEntity procedureDescriptionFormat;
+    private ProcedureDescriptionFormatEntity format;
 
     private boolean deleted;
 
@@ -47,7 +51,7 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
 
     private boolean aggregation;
 
-    private Set<ValidProcedureTimeEntity> validProcedureTimes;
+    private Set<ProcedureHistoryEntity> procedureHistory;
 
     public boolean isReference() {
         return reference;
@@ -73,12 +77,13 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
         this.insitu = insitu;
     }
 
-    public ProcedureDescriptionFormatEntity getProcedureDescriptionFormat() {
-        return this.procedureDescriptionFormat;
+    public ProcedureDescriptionFormatEntity getFormat() {
+        return this.format;
     }
 
-    public void setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat) {
-        this.procedureDescriptionFormat = procedureDescriptionFormat;
+    public ProcedureEntity setFormat(ProcedureDescriptionFormatEntity format) {
+        this.format = format;
+        return this;
     }
 
     public boolean isDeleted() {
@@ -125,12 +130,12 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> {
         this.aggregation = isAggregation;
     }
 
-    public Set<ValidProcedureTimeEntity> getValidProcedureTimes() {
-        return validProcedureTimes;
+    public Set<ProcedureHistoryEntity> getProcedureHistory() {
+        return procedureHistory;
     }
 
-    public void setValidProcedureTimes(Set<ValidProcedureTimeEntity> validProcedureTimes) {
-        this.validProcedureTimes = validProcedureTimes;
+    public void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory) {
+        this.procedureHistory = procedureHistory;
     }
 
     @Override

@@ -56,7 +56,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
     public Collection<ResponsiblePartyEntity> getRelatedParty() {
         if (isSetContent()) {
-            return getContent().getRelatedParties();
+            return getContent().getRelatedParty();
         }
         return Collections.emptyList();
     }
@@ -65,7 +65,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
         if (!isSetContent()) {
             setContent(new MonitoringPointContent());
         }
-        getContent().setRelatedParties(relatedParty);
+        getContent().setRelatedParty(relatedParty);
         return this;
     }
 
@@ -93,7 +93,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
     public Collection<VerticalDatumEntity> getVerticalDatum() {
         if (isSetContent()) {
-            return getContent().getVerticalDatums();
+            return getContent().getVerticalDatum();
         }
         return Collections.emptyList();
     }
@@ -102,7 +102,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
         if (!isSetContent()) {
             setContent(new MonitoringPointContent());
         }
-        getContent().setVerticalDatums(verticalDatum);
+        getContent().setVerticalDatum(verticalDatum);
         return this;
     }
 
@@ -110,7 +110,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
         if (!isSetContent()) {
             setContent(new MonitoringPointContent());
         }
-        getContent().addAllVerticalDatums(verticalDatum);
+        getContent().addAllVerticalDatum(verticalDatum);
         return this;
     }
 
@@ -124,7 +124,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
     public boolean hasVerticalDatum() {
         return isSetContent()
-                ? getContent().hasVerticalDatums()
+                ? getContent().hasVerticalDatum()
                 : false;
     }
 }

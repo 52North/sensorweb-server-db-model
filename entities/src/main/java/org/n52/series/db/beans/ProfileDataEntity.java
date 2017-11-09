@@ -35,7 +35,7 @@ public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
         // TODO Auto-generated method stub
         return false;
     }
-    
+
     @Override
     public Set<DataEntity< ? >> getValue() {
         return super.getValue();

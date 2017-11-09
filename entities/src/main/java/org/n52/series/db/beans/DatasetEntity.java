@@ -63,11 +63,21 @@ public class DatasetEntity extends DescribableEntity {
 
     private Date lastValueAt;
 
+    private DataEntity firstObservation;
+
+    private DataEntity lastObservation;
+
+    private double firstValue;
+
+    private double lastValue;
+
     private UnitEntity unit;
 
     private long observationCount = -1;
 
     private boolean hiddenChild;
+
+    private ObservationTypeEntity observationType;
 
     public DatasetEntity() {
         this((String) null);
@@ -132,6 +142,10 @@ public class DatasetEntity extends DescribableEntity {
         this.feature = feature;
     }
 
+    public boolean isSetFeature() {
+        return getFeature() != null;
+    }
+
     public PlatformEntity getPlatform() {
         return platform;
     }
@@ -178,6 +192,38 @@ public class DatasetEntity extends DescribableEntity {
 
     public boolean isSetLastValueAt() {
         return getLastValueAt() != null;
+    }
+
+    public DataEntity getFirstObservation() {
+        return firstObservation;
+    }
+
+    public void setFirstObservation(DataEntity firstObservation) {
+        this.firstObservation = firstObservation;
+    }
+
+    public DataEntity getLastObservation() {
+        return lastObservation;
+    }
+
+    public void setLastObservation(DataEntity lastObservation) {
+        this.lastObservation = lastObservation;
+    }
+
+    public double getFirstValue() {
+        return firstValue;
+    }
+
+    public void setFirstValue(double firstValue) {
+        this.firstValue = firstValue;
+    }
+
+    public double getLastValue() {
+        return lastValue;
+    }
+
+    public void setLastValue(double lastValue) {
+        this.lastValue = lastValue;
     }
 
     public String getValueType() {
@@ -254,6 +300,18 @@ public class DatasetEntity extends DescribableEntity {
 
     public void setHiddenChild(boolean hiddenChild) {
         this.hiddenChild = hiddenChild;
+    }
+
+    public ObservationTypeEntity getObservationType() {
+        return observationType;
+    }
+
+    public void setObservationType(ObservationTypeEntity observationType) {
+        this.observationType = observationType;
+    }
+
+    public boolean isSetObservationtype() {
+        return getObservationType() != null && getObservationType().isSetType();
     }
 
     @Override

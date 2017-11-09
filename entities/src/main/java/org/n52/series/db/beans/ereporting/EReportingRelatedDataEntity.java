@@ -19,46 +19,8 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.AbstractRelationEntity;
 
-public class RelatedDataEntity extends AbstractRelationEntity {
+public class EReportingRelatedDataEntity extends AbstractRelationEntity<EReportingDataEntity> {
 
     private static final long serialVersionUID = 2436177373903826414L;
-
-    private RelatedDataEntity data;
-
-    private RelatedDataEntity relatedData;
-
-    /**
-     * @return the data
-     */
-    public RelatedDataEntity getData() {
-        return data;
-    }
-
-    /**
-     * @param data
-     *            the data to set
-     */
-    public void setData(RelatedDataEntity data) {
-        this.data = data;
-    }
-
-    /**
-     * @return the relatedData
-     */
-    public RelatedDataEntity getRelatedData() {
-        return relatedData;
-    }
-
-    /**
-     * @param relatedData
-     *            the relatedData to set
-     */
-    public void setRelatedData(RelatedDataEntity relatedData) {
-        this.relatedData = relatedData;
-    }
-
-    public boolean isSetRelatedData() {
-        return getRelatedData() != null;
-    }
 
 }

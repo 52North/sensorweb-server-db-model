@@ -19,48 +19,8 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.AbstractRelationEntity;
 
-public class RelatedDatasetEntity extends AbstractRelationEntity {
-
-    public static final String SERIES_ID = "dataset";
+public class EReportingRelatedDatasetEntity extends AbstractRelationEntity<EReportingDatasetEntity> {
 
     private static final long serialVersionUID = 280165490758286290L;
-
-    private long dataset;
-
-    private EReportingDatasetEntity relatedDataset;
-
-    /**
-     * @return the dataset
-     */
-    public long getDataset() {
-        return dataset;
-    }
-
-    /**
-     * @param dataset
-     *            the dataset to set
-     */
-    public void setDataset(long dataset) {
-        this.dataset = dataset;
-    }
-
-    /**
-     * @return the relatedDataset
-     */
-    public EReportingDatasetEntity getRelatedDataset() {
-        return relatedDataset;
-    }
-
-    /**
-     * @param relatedDataset
-     *            the relatedDataset to set
-     */
-    public void setRelatedDataset(EReportingDatasetEntity relatedDataset) {
-        this.relatedDataset = relatedDataset;
-    }
-
-    public boolean isSetRelatedDataset() {
-        return getRelatedDataset() != null;
-    }
 
 }

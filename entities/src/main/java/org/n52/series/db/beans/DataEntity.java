@@ -31,13 +31,13 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     public static final String PROPERTY_ID = "id";
 
-    public static final String PROPERTY_DATASETS = "datasets";
+    public static final String PROPERTY_DATASET = "dataset";
 
-    public static final String PROPERTY_RESULT_TIME = "resultTime";
+    public static final String PROPERTY_RESULT_TIME = "result_time";
 
-    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
+    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenon_time_start";
 
-    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
+    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenon_time_end";
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
 
@@ -45,9 +45,9 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     public static final String PROPERTY_PARENT = "parent";
 
-    public static final String PROPERTY_DOMAIN_ID = "domainId";
+    public static final String PROPERTY_DOMAIN_ID = "domain_id";
 
-    public static final String PROPERTY_CHILD = "child";
+    public static final String PROPERTY_CHILDREN = "children";
 
     private static final long serialVersionUID = 273612846605300612L;
 
@@ -92,11 +92,17 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     private boolean child;
 
-    private Set<DatasetEntity> datasets = new HashSet<>(0);
+    private DatasetEntity dataset;
 
     private Set<Parameter< ? >> parameters = new HashSet<>(0);
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
+
+    private String valueIdentifier;
+
+    private String valueName;
+
+    private String valueDescription;
 
     protected DataEntity() {
 
@@ -274,21 +280,12 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
         return getParameters() != null && !getParameters().isEmpty();
     }
 
-    public Set<DatasetEntity> getDatasets() {
-        return datasets;
+    public DatasetEntity getDataset() {
+        return dataset;
     }
 
-    public void setDatasets(Set<DatasetEntity> datasets) {
-        this.datasets.clear();
-        if (datasets != null) {
-            this.datasets.addAll(datasets);
-        }
-    }
-
-    public void addDataset(DatasetEntity dataset) {
-        if (dataset != null) {
-            datasets.add(dataset);
-        }
+    public void setDataset(DatasetEntity dataset) {
+        this.dataset = dataset;
     }
 
     public Set<RelatedDataEntity> getRelatedObservations() {
@@ -297,6 +294,42 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
         this.relatedObservations = relatedObservations;
+    }
+
+    public String getValueIdentifier() {
+        return valueIdentifier;
+    }
+
+    public void setValueIdentifier(String valueIdentifier) {
+        this.valueIdentifier = valueIdentifier;
+    }
+
+    public boolean has() {
+        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
+    }
+
+    public String getValueName() {
+        return valueName;
+    }
+
+    public void setValueName(String valueName) {
+        this.valueName = valueName;
+    }
+
+    public boolean hasgetValueName() {
+        return getValueName() != null && !getValueName().isEmpty();
+    }
+
+    public String getValueDescription() {
+        return valueDescription;
+    }
+
+    public void setValueDescription(String valueDescription) {
+        this.valueDescription = valueDescription;
+    }
+
+    public boolean hasValueDescription() {
+        return getValueDescription() != null && !getValueDescription().isEmpty();
     }
 
     @Override

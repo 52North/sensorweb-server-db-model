@@ -17,7 +17,8 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.HibernateRelations.HasDescriptionXml;
+import org.n52.series.db.beans.HibernateRelations.HasGeometry;
+import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.beans.feature.FeatureVisitor;
 import org.n52.series.db.beans.feature.GeometryVisitor;
 import org.n52.shetland.ogc.gml.AbstractFeature;
@@ -26,7 +27,7 @@ import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 import com.vividsolutions.jts.geom.Geometry;
 
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
-        implements HasDescriptionXml<AbstractFeatureEntity<E>> {
+        implements HasXml<AbstractFeatureEntity<E>>, HasGeometry<AbstractFeatureEntity<E>> {
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
     public static final String PROPERTY_GEOMETRY_ENTITY_GEOMETRY = PROPERTY_GEOMETRY_ENTITY + ".geometry";
@@ -38,17 +39,11 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private GeometryEntity geometryEntity;
     private FeatureTypeEntity featureType;
     private String url;
-    private String descriptionXml;
+    private String xml;
 
     public abstract AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport;
 
     public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
-
-    public Geometry getGeometry() {
-        return geometryEntity != null
-                ? geometryEntity.getGeometry()
-                : null;
-    }
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -66,18 +61,14 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return this;
     }
 
-    public boolean isSetGeometry() {
-        return geometryEntity != null;
+    @Override
+    public String getXml() {
+        return xml;
     }
 
     @Override
-    public String getDescriptionXml() {
-        return descriptionXml;
-    }
-
-    @Override
-    public AbstractFeatureEntity<E> setDescriptionXml(String descriptionXml) {
-        this.descriptionXml = descriptionXml;
+    public AbstractFeatureEntity<E> setXml(String xml) {
+        this.xml = xml;
         return this;
     }
 

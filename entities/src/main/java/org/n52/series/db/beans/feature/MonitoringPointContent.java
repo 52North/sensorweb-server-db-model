@@ -30,13 +30,13 @@ public class MonitoringPointContent {
     private Collection<ResponsiblePartyEntity> relatedParties = new ArrayList<>();
 
     /* 0..* */
-    private Collection<VerticalDatumEntity> verticalDatums = new ArrayList<>();
+    private Collection<VerticalDatumEntity> verticalDatum = new ArrayList<>();
 
-    public Collection<ResponsiblePartyEntity> getRelatedParties() {
+    public Collection<ResponsiblePartyEntity> getRelatedParty() {
         return relatedParties;
     }
 
-    public void setRelatedParties(Collection<ResponsiblePartyEntity> relatedParties) {
+    public void setRelatedParty(Collection<ResponsiblePartyEntity> relatedParties) {
         this.relatedParties.clear();
         if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(relatedParties)) {
             this.relatedParties.addAll(relatedParties);
@@ -56,33 +56,33 @@ public class MonitoringPointContent {
     }
 
     public boolean hasRelatedParties() {
-        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getRelatedParties());
+        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getRelatedParty());
     }
 
-    public Collection<VerticalDatumEntity> getVerticalDatums() {
-        return verticalDatums;
+    public Collection<VerticalDatumEntity> getVerticalDatum() {
+        return verticalDatum;
     }
 
-    public void setVerticalDatums(Collection<VerticalDatumEntity> verticalDatums) {
-        this.verticalDatums.clear();
-        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(verticalDatums)) {
-            this.verticalDatums.addAll(verticalDatums);
+    public void setVerticalDatum(Collection<VerticalDatumEntity> verticalDatum) {
+        this.verticalDatum.clear();
+        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(verticalDatum)) {
+            this.verticalDatum.addAll(verticalDatum);
         }
     }
 
-    public void addAllVerticalDatums(Collection<VerticalDatumEntity> verticalDatumsToAdd) {
-        if (verticalDatumsToAdd != null) {
-            this.verticalDatums.addAll(verticalDatumsToAdd);
+    public void addAllVerticalDatum(Collection<VerticalDatumEntity> verticalDatum) {
+        if (verticalDatum != null) {
+            this.verticalDatum.addAll(verticalDatum);
         }
     }
 
     public void addVerticalDatum(VerticalDatumEntity verticalDatum) {
         if (verticalDatum != null) {
-            this.verticalDatums.add(verticalDatum);
+            this.verticalDatum.add(verticalDatum);
         }
     }
 
-    public boolean hasVerticalDatums() {
-        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getVerticalDatums());
+    public boolean hasVerticalDatum() {
+        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getVerticalDatum());
     }
 }

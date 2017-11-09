@@ -17,10 +17,13 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
 
-public class EReportingQualityEntity implements HasPrimaryObservation, EReportingQualityData {
+public class EReportingQualityEntity extends IdEntity implements HasPrimaryObservation, EReportingQualityData {
+
+    private static final long serialVersionUID = 1891418800348199576L;
 
     public static final String YEAR = "year";
 
@@ -28,7 +31,7 @@ public class EReportingQualityEntity implements HasPrimaryObservation, EReportin
 
     public static final String PRIMARY_OBSERVATION = "primaryObservation";
 
-    private long id;
+    private long dataset;
 
     private int year;
 
@@ -43,18 +46,18 @@ public class EReportingQualityEntity implements HasPrimaryObservation, EReportin
     private Double uncertaintyEstimation;
 
     /**
-     * @return the id
+     * @return the dataset
      */
-    public long getId() {
-        return id;
+    public long getDataset() {
+        return dataset;
     }
 
     /**
-     * @param id
-     *        the id to set
+     * @param dataset
+     *        the dataset to set
      */
-    public void setId(long id) {
-        this.id = id;
+    public void setDataset(long dataset) {
+        this.dataset = dataset;
     }
 
     /**

@@ -17,46 +17,8 @@
 
 package org.n52.series.db.beans;
 
-public class RelatedDataEntity extends AbstractRelationEntity {
+public class RelatedDataEntity extends AbstractRelationEntity<DataEntity> {
 
     private static final long serialVersionUID = 2436177373903826414L;
-
-    private DatasetEntity data;
-
-    private DatasetEntity relatedData;
-
-    /**
-     * @return the data
-     */
-    public DatasetEntity getData() {
-        return data;
-    }
-
-    /**
-     * @param data
-     *            the data to set
-     */
-    public void setData(DatasetEntity data) {
-        this.data = data;
-    }
-
-    /**
-     * @return the relatedData
-     */
-    public DatasetEntity getRelatedData() {
-        return relatedData;
-    }
-
-    /**
-     * @param relatedData
-     *            the relatedData to set
-     */
-    public void setRelatedData(DatasetEntity relatedData) {
-        this.relatedData = relatedData;
-    }
-
-    public boolean isSetRelatedData() {
-        return getRelatedData() != null;
-    }
 
 }
