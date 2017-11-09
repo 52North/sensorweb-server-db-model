@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.io.extension">
-    <class name="MetadataEntity" table="datasetmetadata">
+<hibernate-mapping package="org.n52.series.db.beans.metadata">
+    <class name="MetadataEntity" table="dataset_metadata">
         <id name="id" type="long">
             <column name="id">
             	<comment>Table primary key, used for relations</comment>
@@ -16,7 +16,7 @@
         <property name="type" column="type" type="string"  insert="false" update="false"/>
 
         <property name="name" column="name" type="string" />
-        <property name="lastUpdate" column="lastupdate" type="timestamp" />
+        <property name="lastUpdate" column="last_update" type="timestamp" />
         <property name="dataset" column="dataset" type="long" />
       	<property name="domain"
                   type="string">
@@ -26,23 +26,23 @@
             </column>
         </property>
         <subclass name="MetadataStringEntity" discriminator-value="string">
-            <property name="value" column="value" type="string" />
+            <property name="value" column="value_string" type="string" />
         </subclass>
 
         <subclass name="MetadataJsonEntity" discriminator-value="json">
-            <property name="value" column="value" type="string" />
+            <property name="value" column="value_json" type="string" />
         </subclass>
 
         <subclass name="MetadataBooleanEntity" discriminator-value="boolean">
-            <property name="value" column="vvalue" type="org.hibernate.type.BooleanType" />
+            <property name="value" column="value_boolean" type="org.hibernate.type.BooleanType" />
         </subclass>
 
         <subclass name="MetadataDoubleEntity" discriminator-value="double">
-            <property name="value" column="value" type="double" />
+            <property name="value" column="value_double" type="double" precision="29"/>
         </subclass>
 
         <subclass name="MetadataIntegerEntity" discriminator-value="integer">
-            <property name="value" column="value" type="integer" />
+            <property name="value" column="value_integer" type="integer" />
         </subclass>
 
     </class>

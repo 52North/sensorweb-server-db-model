@@ -3,23 +3,23 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.feature.gmd">
     <class name="ExExtentEntity"
-           table="exextent">
+           table="ex_extent">
         <id name="id"
             type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">exExtent_seq</param>
+                <param name="sequence_name">ex_extent_seq</param>
             </generator>
         </id>
-        <property name="gmdid" column="gmdid" type="string" />
+        <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
-        <set name="verticalExtent" table="exextentverticalext">
-          <key column="exExtent" not-null="true" foreign-key="exextentextentfk"/>
-          <many-to-many column="exVerticalExtent"
-                        class="ExVerticalExtentEntity" foreign-key="exextentverticalfk"/>
+        <set name="verticalExtent" table="ex_extent_vertical_ext">
+          <key column="ex_extent" not-null="true" foreign-key="ex_extent_fk"/>
+          <many-to-many column="vertical_extent"
+                        class="ExVerticalExtentEntity" foreign-key="vertical_extent_fk"/>
         </set>
     </class>
 </hibernate-mapping>

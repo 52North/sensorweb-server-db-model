@@ -2,33 +2,33 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-    <subclass name="org.n52.series.db.beans.feature.wml.MonitoringPoint"
+    <subclass name="org.n52.series.db.beans.feature.wml.MonitoringPointEntity"
     				 extends="AbstractFeatureEntity"
                      discriminator-value="WmlMonitoringPointEntity">
-        <join table="wmlmonitoringpoint">
-            <key foreign-key="wmlmpFeatureFk">
+        <join table="wml_monitoring_point">
+            <key foreign-key="wml_monitoring_point_fk">
                 <column name="feature">
                     <comment>Foreign Key (FK) to the related featureOfInterest
-                        from the featureOfInterest table. Contains
-                        "featureOfInterest".featureOfInterestId</comment>
+                        from the feature table. Contains
+                        "feature".id</comment>
                 </column>
             </key>
             <component name="content" class="org.n52.series.db.beans.feature.MonitoringPointContent">
-                <set name="relatedParty" table="wmlmprelatedparty">
-                    <key foreign-key="wmlmprpfFk">
+                <set name="relatedParty" table="wml_mp_related_party">
+                    <key foreign-key="wml_mp_related_party_fk">
                         <column name="feature" not-null="true" />
                     </key>
                     <many-to-many class="org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity"
-                        foreign-key="wmlmprprpFk">
-                        <column name="responsibleParty" not-null="true" />
+                        foreign-key="wml_related_party_mp_fk">
+                        <column name="responsible_party" not-null="true" />
                     </many-to-many>
                 </set>
-                <set name="verticalDatum" table="wmlmpverticaldatum">
-                    <key foreign-key="wmlmpvdfFk">
+                <set name="verticalDatum" table="wml_mp_vertical_datum">
+                    <key foreign-key="wml_mp_vertical_datum_fk">
                         <column name="feature"/>
                     </key>
-                    <many-to-many class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity" foreign-key="wmlmpvdvdFk">
-                        <column name="verticalDatum" not-null="true" />
+                    <many-to-many class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity" foreign-key="wml_vertical_datum__mpfk">
+                        <column name="vertical_datum" not-null="true" />
                     </many-to-many>
                 </set>
             </component>

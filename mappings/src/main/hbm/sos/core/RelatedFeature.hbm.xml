@@ -2,7 +2,7 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-    <class name="RelatedFeatureEntity" table="relatedfeature">
+    <class name="RelatedFeatureEntity" table="related_feature">
         <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
             2.0). Mapping file: mapping/transactionl/RelatedFeature.hbm.xml</comment>
         <id name="id" type="long">
@@ -10,40 +10,40 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">relatedFeature_seq</param>
+                <param name="sequence_name">related_feature_seq</param>
             </generator>
         </id>
-        <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="relatedFeatureFeatureFk">
-            <column name="featureOfInterest" not-null="true">
-                <comment>Foreign Key (FK) to the related feature. Contains "featureOfInterest".featureOfInterestid</comment>
+        <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="related_feature_fk">
+            <column name="feature" not-null="true">
+                <comment>Foreign Key (FK) to the related feature. Contains "feature".id</comment>
             </column>
         </many-to-one>
-        <set name="relatedFeatureRoles" table="relatedfeaturehasrole" inverse="false">
+        <set name="relatedFeatureRoles" table="related_feature_roles" inverse="false">
             <comment>Relation table to store relatedFeatures and their associated relatedFeatureRoles. Mapping file:
                 mapping/transactionl/RelatedFeature.hbm.xml</comment>
-            <key foreign-key="relffeatrolerelfeatfk">
-                <column name="relatedFeature" not-null="true">
-                    <comment>Foreign Key (FK) to the related relatedFeature. Contains "relatedFeature".relatedFeatureid</comment>
+            <key foreign-key="related_feature_role_fk">
+                <column name="related_feature" not-null="true">
+                    <comment>Foreign Key (FK) to the related relatedFeature. Contains "related_feature".id</comment>
                 </column>
             </key>
-            <many-to-many class="RelatedFeatureRoleEntity" foreign-key="relatedFeatRelatedFeatRoleFk">
-                <column name="relatedFeatureRole" not-null="true">
+            <many-to-many class="RelatedFeatureRoleEntity" foreign-key="role_related_feature_fk">
+                <column name="role" not-null="true">
                     <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains
-                        "relatedFeatureRole".relatedFeatureRoleid</comment>
+                        "related_feature_role".id</comment>
                 </column>
             </many-to-many>
         </set>
-        <set name="offerings" table="offeringhasrelatedfeature" inverse="true">
+        <set name="offerings" table="offering_related_feature" inverse="true">
             <comment>Relation table to store relatedFeatures and their associated offerings. Mapping file:
                 mapping/transactionl/RelatedFeature.hbm.xml</comment>
-            <key foreign-key="relfeatoffrelfeatfk">
-                <column name="relatedFeature" not-null="true">
-                    <comment>Foreign Key (FK) to the related relatedFeature. Contains "relatedFeature".relatedFeatureid</comment>
+            <key foreign-key="offering_related_feature_fk">
+                <column name="related_feature" not-null="true">
+                    <comment>Foreign Key (FK) to the related relatedFeature. Contains "related_eature".id</comment>
                 </column>
             </key>
-            <many-to-many class="OfferingEntity" foreign-key="relatedFeatureOfferingFk">
+            <many-to-many class="OfferingEntity" foreign-key="related_feature_offering_fk">
                 <column name="offering" not-null="true">
-                    <comment>Foreign Key (FK) to the related offering. Contains "offering".offeringid</comment>
+                    <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
                 </column>
             </many-to-many>
         </set>

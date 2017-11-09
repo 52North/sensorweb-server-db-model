@@ -2,24 +2,24 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-    <class name="RelatedDataEntity" table="relatedobservation">
+    <class name="RelatedDataEntity" table="related_observation">
         <comment>The related observation of an observation.</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">relatedobservation_seq</param>
+                <param name="sequence_name">related_observation_seq</param>
             </generator>
         </id>
-        <many-to-one name="data" class="DataEntity" foreign-key="reldataobservationfk">
-            <column name="observation" not-null="false">
-                <comment>Foreign Key (FK) to the observation. Contains "observation".observationId</comment>
+        <many-to-one name="item" class="DataEntity" foreign-key="rel_obs_observation_fk">
+            <column name="observation" not-null="true">
+                <comment>Foreign Key (FK) to the observation. Contains "observation".id</comment>
             </column>
         </many-to-one>
-        <many-to-one name="relatedData" class="DataEntity" foreign-key="reldatarelobservationfk">
-            <column name="relatedobservation">
-                <comment>Relation/foreign key to the associated observation table. Contains "observation".observationId</comment>
+        <many-to-one name="relatedItem" class="DataEntity" foreign-key="rel_obs_related_fk">
+            <column name="related_observation" not-null="true">
+                <comment>Relation/foreign key to the associated observation table. Contains "observation".id</comment>
             </column>
         </many-to-one>
         <property name="role" type="string">
@@ -28,7 +28,7 @@
             </column>
         </property>
         <property name="relatedUrl" type="string" not-null="false">
-            <column name="relatedUrl">
+            <column name="url">
                 <comment>An url to a related observation</comment>
             </column>
         </property>

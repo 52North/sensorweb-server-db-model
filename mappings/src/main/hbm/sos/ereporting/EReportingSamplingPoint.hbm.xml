@@ -3,7 +3,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingSamplingPointEntity"
-           table="samplingpoint">
+           table="sampling_point">
         <comment>Table to store the AQD e-Reporting Sampling Point information. Mapping file: mapping/ereporting/EReportingSamplingPoint.hbm.xml</comment>
         <id name="id"
             type="long">
@@ -11,20 +11,20 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">samplingPoint_seq</param>
+                <param name="sequence_name">sampling_point_seq</param>
             </generator>
         </id>
         <property name="domainId"
                  type="string">
-            <column name="domainId"
+            <column name="domain_id"
                     not-null="true"
-                    unique-key="sampFeatIdentifierUK">
+                    unique-key="sampling_point_uk">
                 <comment>The identifier of the samplingPoint, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
         <many-to-one name="codespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="sampFeatCodespaceEntityIdFk">
+                     foreign-key="sampling_point_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -37,8 +37,8 @@
         </property>
         <many-to-one name="codespaceName"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="sampFeatCodespaceEntityNameFk">
-            <column name="codespaceName">
+                     foreign-key="sp_codespace_name_fk">
+            <column name="codespace_name">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -50,19 +50,19 @@
         </property>
         <many-to-one name="assessmentType"
                      class="EReportingAssessmentTypeEntity"
-                     foreign-key="sampPointAssessTypeIdFk">
-            <column name="assessmentType">
-                <comment>Relation/foreign key to the assessmentType table. Describes the type of the assessmentType. Contains "assessmentType".assessmentType</comment>
+                     foreign-key="sp_assessment_type_fk">
+            <column name="assessment_type">
+                <comment>Relation/foreign key to the assessment_type table. Describes the type of the assessmentType. Contains "assessment_type".assessment_type</comment>
             </column>
         </many-to-one>
-        <many-to-one name="station" class="EReportingStationEntity" foreign-key="sampPointStationFk">
+        <many-to-one name="station" class="EReportingStationEntity" foreign-key="sp_station_fk">
             <column name="station">
-                <comment>Relation/foreign key to the station table. Describes the type of the station. Contains "station".stationId</comment>
+                <comment>Relation/foreign key to the station table. Describes the type of the station. Contains "station".id</comment>
             </column>
         </many-to-one>
-        <many-to-one name="network" class="EReportingNetworkEntity" foreign-key="sampPointNetworkFk">
+        <many-to-one name="network" class="EReportingNetworkEntity" foreign-key="sp_network_fk">
             <column name="network">
-                <comment>Relation/foreign key to the network table. Describes the type of the network. Contains "network".networkId</comment>
+                <comment>Relation/foreign key to the network table. Describes the type of the network. Contains "network".id</comment>
             </column>
         </many-to-one>
     </class>

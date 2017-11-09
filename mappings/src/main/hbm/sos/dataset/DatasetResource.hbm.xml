@@ -10,30 +10,31 @@
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
-        <discriminator column="valueType" force="true" type="string" />
+        <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
-        <many-to-one class="ObservationConstellationEntity" column="observationconstellation" name="observationConstellation"
-            foreign-key="datasetobsconstfk" unique-key="datasetIdentity" />
-        <many-to-one class="FeatureEntity" column="feature" name="feature" unique-key="datasetIdentity"
-            foreign-key="datasetfeaturefk" />
-        <many-to-one class="CategoryEntity" column="category" name="category" foreign-key="datasetcategoryfk"
+        <many-to-one class="ProcedureEntity" column="procedure" name="procedure" not-null="true" unique-key="datasetIdentity"
+           foreign-key="dataset_procedure_fk" />
+        <many-to-one class="PhenomenonEntity" column="phenomenon" name="phenomenon" not-null="true" unique-key="datasetIdentity"
+           foreign-key="dataset_phenomenon_fk" />
+        <many-to-one class="CategoryEntity" column="category" name="category" not-null="true" foreign-key="dataset_category_fk"
             unique-key="datasetIdentity" />
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="datasetCodespaceEntityIdentifierFk">
-            <column name="codespace">
-                <comment>Relation/foreign key to the codespace table. Contains the
-                    gml:identifier codespace. Optional</comment>
-            </column>
-        </many-to-one>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="datasetCodespaceEntityNameFk">
-            <column name="codespaceName">
-                <comment>Relation/foreign key to the codespace table. Contains the
-                    gml:name codespace. Optional</comment>
+        <many-to-one class="FeatureEntity" column="feature" name="feature" not-null="false" unique-key="datasetIdentity"
+            foreign-key="dataset_feature_fk" />
+
+        <many-to-one name="observationType" class="ObservationTypeEntity" not-null="false" foreign-key="dataset_observation_type_fk">
+            <column name="observation_type">
+                <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
             </column>
         </many-to-one>
 
-        <property column="valueType" name="valueType" type="string" insert="false" update="false" />
-        <property column="firsttimestamp" name="firstValueAt" type="timestamp" />
-        <property column="lasttimestamp" name="lastValueAt" type="timestamp" />
+        <property column="first_time_stamp" name="firstValueAt" type="timestamp" />
+        <property column="last_time_stamp" name="lastValueAt" type="timestamp" />
+
+        <property column="first_value" name="firstValue" type="timestamp" />
+        <property column="last_value" name="lastValue" type="timestamp" />
+
+        <many-to-one class="DataEntity" column="first_observation" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
+        <many-to-one class="DataEntity" column="last_observation" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
 
         <property name="deleted" type="org.hibernate.type.NumericBooleanType">
             <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
@@ -50,21 +51,31 @@
         </property>
 
         <property name="hiddenChild" type="org.hibernate.type.NumericBooleanType">
-            <column name="hiddenChild" not-null="true" default="0" check="hiddenChild in (1,0)">
+            <column name="hidden_child" not-null="true" default="0" check="hidden_child in (1,0)">
             </column>
         </property>
 
         <property name="domainId" type="string">
-            <column name="domainId" not-null="false" unique-key="datasetIdentifierUK">
+            <column name="domain_id" not-null="false" unique-key="datasetIdentifierUK">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>
             </column>
         </property>
 
-        <property name="name" type="string">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="datasetCodespaceEntityIdentifierFk">
+            <column name="codespace">
+                <comment>Relation/foreign key to the codespace table. Contains the
+                    gml:identifier codespace. Optional</comment>
+            </column>
+        </many-to-one><property name="name" type="string">
             <column name="name">
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
-        </property>
+        </property><many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="datasetCodespaceEntityNameFk">
+            <column name="codespace_mame">
+                <comment>Relation/foreign key to the codespace table. Contains the
+                    gml:name codespace. Optional</comment>
+            </column>
+        </many-to-one>
 
         <property name="description" type="string">
             <column name="description">
@@ -73,43 +84,27 @@
         </property>
 
         <set inverse="false" name="parameters" table="datasetparameter" cascade="delete-orphan">
-            <key column="dataset" not-null="true" foreign-key="datasetparamdatasetfk" />
+            <key column="dataset" not-null="true" foreign-key="dataset_parameter_fk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
-                foreign-key="datasetparamparamfk" />
+                foreign-key="parameter_dataset_fk" />
         </set>
 
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
-            <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk" />
+            <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="dataset_unit_fk" />
         </subclass>
-
-        <subclass discriminator-value="text" name="TextDatasetEntity">
-        </subclass>
-
-        <subclass discriminator-value="count" name="CountDatasetEntity">
-        </subclass>
-
-        <subclass discriminator-value="blob" name="BlobDatasetEntity">
-        </subclass>
-
-        <subclass discriminator-value="boolean" name="BooleanDatasetEntity">
-        </subclass>
-
+        <subclass discriminator-value="text" name="TextDatasetEntity"/>
+        <subclass discriminator-value="count" name="CountDatasetEntity"/>
+        <subclass discriminator-value="blob" name="BlobDatasetEntity"/>
+        <subclass discriminator-value="boolean" name="BooleanDatasetEntity" />
         <subclass discriminator-value="category" name="CategoryDatasetEntity">
-            <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="datasetunitfk" />
+            <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="dataset_unit_fk" />
         </subclass>
-
-        <subclass discriminator-value="complex" name="ComplexDatasetEntity">
-        </subclass>
-
-        <subclass discriminator-value="geometry" name="GeometryDatasetEntity">
-        </subclass>
-
-        <subclass discriminator-value="swedataarray" name="SweDataArrayDatasetEntity">
-        </subclass>
-
+        <subclass discriminator-value="geometry" name="GeometryDatasetEntity"/>
+        <subclass discriminator-value="swedataarray" name="SweDataArrayDatasetEntity"/>
+        <subclass discriminator-value="complex" name="ComplexDatasetEntity"/>
         <subclass discriminator-value="quantity-profile" name="ProfileDatasetEntity">
-            <many-to-one class="UnitEntity" column="unit" insert="false" name="unit" update="false" />
+            <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="dataset_unit_fk" />
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
     </class>

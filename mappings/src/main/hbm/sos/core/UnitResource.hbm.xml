@@ -11,8 +11,8 @@
                 <param name="sequence_name">unit_seq</param>
             </generator>
         </id>
-        <property name="unit" type="string">
-            <column name="unit" not-null="true" unique-key="unit_uk">
+        <property name="domainId" type="string">
+            <column name="symbol" not-null="true" unique-key="unit_uk">
                 <comment>The unit of measure of observations. See http://unitsofmeasure.org/ucum.html</comment>
             </column>
         </property>

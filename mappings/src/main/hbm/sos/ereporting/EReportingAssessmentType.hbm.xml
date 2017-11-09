@@ -3,11 +3,11 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingAssessmentTypeEntity"
-           table="assessmenttype">
+           table="assessment_type">
         <comment>Table to store the AQD e-Reporting assessmentType information. Mapping file: mapping/ereporting/EReportingAssessmentType.hbm.xml</comment>
         <id name="assessmentType"
             type="string">
-            <column name="assessmentType">
+            <column name="assessment_type">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="assigned" />

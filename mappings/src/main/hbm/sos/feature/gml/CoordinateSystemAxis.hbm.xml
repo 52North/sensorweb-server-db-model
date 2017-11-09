@@ -3,17 +3,17 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="org.n52.series.db.beans.feature.gml.CoordinateSystemAxisEntity"
-           table="coordinatesystemaxis">
+           table="coordinate_system_axis">
         <id name="id"
             type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">coordSysAxis_seq</param>
+                <param name="sequence_name">coordinate_system_axis_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,13 +21,13 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="domainId" type="string" >
-            <column name="domainId" unique-key="csaIdentifierUK">
+            <column name="domain_id" unique-key="coordinate_system_axis_uk">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="csaCodespaceEntityIdentifierFk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="csa_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -37,8 +37,8 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="csaCodespaceEntityNameFk">
-            <column name="codespaceName">
+        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="csa_codespace_name_fk">
+            <column name="codespace_name">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -48,18 +48,18 @@
             </column>
         </property>
         <property name="remarks" column="remarks" type="string" />
-        <property name="axisAbbrev" column="axisAbbrev"  type="string" />
-        <many-to-one name="codespaceAxisAbbrev" column="codespaceAxisAbbrev" class="CodespaceEntity" foreign-key="scsacodeaaFk" />
-        <property name="axisDirection" column="axisDirection" type="string" />
-        <many-to-one name="codespaceAxisDirection" column="codespaceAxisDirection"  class="CodespaceEntity" foreign-key="scsacodeadFk" />
-        <property name="minimumValue" column="minimumValue" type="double" length="29" />
-        <property name="maximumValue" column="maximumValue" type="double" length="29"  />
-        <property name="rangeMeaning" column="rangeMeaning" type="string" />
-        <many-to-one name="codespaceRangeMeaning" column="codespaceRangeMeaning" class="CodespaceEntity" foreign-key="scsacodermFk" />
+        <property name="axisAbbrev" column="axis_abbrev"  type="string" />
+        <many-to-one name="codespaceAxisAbbrev" column="codespace_axis_abbrev" class="CodespaceEntity" foreign-key="codespace_axis_abbrev_fk" />
+        <property name="axisDirection" column="axis_direction" type="string" />
+        <many-to-one name="codespaceAxisDirection" column="codespace_axis_direction" class="CodespaceEntity" foreign-key="codespace_axis_direction_fk" />
+        <property name="minimumValue" column="minimum_value" type="double" length="29" />
+        <property name="maximumValue" column="maximum_value" type="double" length="29"  />
+        <property name="rangeMeaning" column="range_meaning" type="string" />
+        <many-to-one name="codespaceRangeMeaning" column="codespace_range_meaning" class="CodespaceEntity" foreign-key="codespace_range_meaning_fk" />
         <many-to-one name="uom"
                      column="unit"
                      class="UnitEntity"
                      not-null="true"
-                     foreign-key="csaUnitFk" />
+                     foreign-key="coordinate_system_axis_unit_fk" />
     </class>
 </hibernate-mapping>

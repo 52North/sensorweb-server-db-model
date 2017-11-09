@@ -3,139 +3,129 @@
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingDataEntity" table="observation">
         <id name="id" type="long">
-            <column name="id"/>
+            <column name="id" />
             <generator class="native">
                 <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
-        <set inverse="true" name="datasets" table="datasetdata" >
-            <key column="observation" not-null="true" foreign-key="datadatafk"/>
-            <one-to-many class="EReportingDatasetEntity"/>
-        </set>
-        <property name="phenomenonTimeStart"
-                  type="timestamp" >
-            <column index="obsPhenTimeStartIdx"
-                    name="phenomenonTimeStart"
-                    length="29"
-                    not-null="true">
+		<discriminator column="value_type" force="true" type="string" not-null="true"/>
+        <many-to-one column="dataset" name="dataset" class="EReportingDatasetEntity" foreign-key="dataset_fk" not-null="true"/>
+
+        <property name="phenomenonTimeStart" type="timestamp">
+            <column index="phenomenon_time_start_idx" name="phenomenon_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
-        <property name="phenomenonTimeEnd"
-                  type="timestamp">
-            <column index="obsPhenTimeEndIdx"
-                    name="phenomenonTimeEnd"
-                    length="29"
-                    not-null="true">
+
+        <property name="phenomenonTimeEnd" type="timestamp">
+            <column index="phenhenomenon_time_end_idx" name="phenomenon_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>
-        <property name="resultTime"
-                  type="timestamp" >
-            <column index="obsResultTimeIdx"
-                    name="resultTime"
-                    length="29"
-                    not-null="true">
+
+        <property name="resultTime" type="timestamp">
+            <column index="result_time_idx" name="resultTime" length="29" not-null="true">
                 <comment>Time stamp when the observation was published or result was published/available</comment>
             </column>
         </property>
-        <property name="domainId"
-                  type="string">
-            <column name="domainId" >
-                <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but unique</comment>
+
+        <property name="domainId" type="string">
+            <column name="domain_id">
+                <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but
+                    unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace"
-                     class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="obsCodespaceEntityIdentifierFk">
+        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="data_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
-        <property name="name"
-                  type="string">
+
+        <property name="name" type="string">
             <column name="name">
                 <comment>The name of the observation, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName"
-                     class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="obsCodespaceEntityNameFk">
-            <column name="codespaceName">
+
+        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="data_codespace_name_fk">
+            <column name="codespace_name">
                 <comment>The name of the observation, gml:name. Optional</comment>
             </column>
         </many-to-one>
-        <property name="description"
-                  type="string">
+        <property name="description" type="string">
             <column name="description">
                 <comment>Description of the observation, gml:description. Optional</comment>
             </column>
         </property>
-        <property name="deleted"
-                  type="org.hibernate.type.NumericBooleanType">
-            <column name="deleted"
-                    not-null="true"
-                    default="0"
-                    check="deleted in (1,0)">
-                <comment>Flag to indicate that this series is deleted or not. Set if the related procedure is deleted via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+
+        <property name="deleted" type="org.hibernate.type.NumericBooleanType">
+            <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
+                <comment>Flag to indicate that this series is deleted or not. Set if the related procedure is deleted
+                    via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
-        <property name="validTimeStart"
-                  type="timestamp">
-            <column name="validTimeStart"
-                    length="29"
-                    not-null="false"
-                    default="NULL">
+
+        <property name="validTimeStart" type="timestamp">
+            <column name="valid_time_start" length="29" not-null="false" default="NULL">
                 <comment>Start time stamp for which the observation/result is valid, e.g. used for forecasting. Optional</comment>
             </column>
         </property>
-        <property name="validTimeEnd"
-                  type="timestamp">
-            <column name="validTimeEnd"
-                    length="29"
-                    not-null="false"
-                    default="NULL">
+
+        <property name="validTimeEnd" type="timestamp">
+            <column name="valid_time_end" length="29" not-null="false" default="NULL">
                 <comment>End time stamp for which the observation/result is valid, e.g. used for forecasting. Optional</comment>
             </column>
         </property>
-        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
-            <!--
-           <property column="lat" name="lat" type="double" />
-           <property column="lon" name="lon" type="double" />
-            -->
-            <property column="samplingGeometry" name="geometry" type="jts_geometry"/>
-        </component>
-        <!-- Or add only to specific joined-subclasses -->
-        <set inverse="false" name="parameters" table="observationparameter" cascade="delete-orphan">
-            <key column="observation" not-null="true" foreign-key="dataparamdatafk"/>
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter" foreign-key="dataparamparamfk"/>
-        </set>
-         <property name="child"
-                  type="org.hibernate.type.NumericBooleanType">
-            <column name="child"
-                    not-null="true"
-                    default="0"
-                    length="1"
-                    check="child in (1,0)">
+
+        <property name="child" type="org.hibernate.type.NumericBooleanType">
+            <column name="child" not-null="true" default="0"  check="child in (1,0)">
                 <comment>Flag to indicate that this observation is a child observation for complex observation</comment>
             </column>
         </property>
-        <property name="parent"
-                  type="org.hibernate.type.NumericBooleanType">
-            <column name="parent"
-                    not-null="true"
-                    default="0"
-                    length="1"
-                    check="parent in (1,0)">
+
+        <property name="parent" type="org.hibernate.type.NumericBooleanType">
+            <column name="parent" not-null="true" default="0"  check="parent in (1,0)">
                 <comment>Flag to indicate that this observation is a parent observation for complex observation</comment>
             </column>
         </property>
-        <set name="relatedObservations" table="relatedobservations" fetch="join" access="field" cascade="all">
-	        <key>
-	            <column name="observation" not-null="true" index="relatedObsObsIdx" />
-	        </key>
-	        <one-to-many class="org.n52.series.db.beans.RelatedDataEntity" />
-    	</set>
+
+        <component  name="geometryEntity" class="org.n52.series.db.beans.GeometryEntity">
+            <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
+            <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
+        </component>
+
+
+
+        <!-- Or add only to specific subclasses -->
+        <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
+            <key column="observation" not-null="true" foreign-key="observation_parameter_fk" />
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
+                foreign-key="parameter_observation_fk" />
+        </set>
+
+        <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
+            <key foreign-key="related_observation_fk">
+                <column name="observation" not-null="true" index="related_observation_idx" />
+            </key>
+            <one-to-many class="EReportingRelatedDataEntity" />
+        </set>
+
+        <property name="valueIdentifier" type="string">
+               <column name="value_domain_id">
+                   <comment>SweText observation identifier</comment>
+               </column>
+          </property>
+          <property name="valueName" type="string">
+              <column name="value_name">
+                  <comment>SweText observation name</comment>
+              </column>
+          </property>
+          <property name="valueDescription" type="string">
+              <column name="value_description">
+                  <comment>SweText observation description</comment>
+              </column>
+          </property>
+
     	<property name="validation" type="int">
             <column name="validation" not-null="true" default="-1">
                 <comment>AQD e-Reporting validation flag, see http://dd.eionet.europa.eu/vocabulary/aq/observationvalidity/view</comment>
@@ -147,17 +137,17 @@
             </column>
         </property>
         <property name="primaryObservation" type="string">
-            <column name="primaryObservation" not-null="true" default="'var'">
+            <column name="primary_observation" not-null="true" default="'var'">
                 <comment>AQD e-Reporting primaryObservation type, see http://dd.eionet.europa.eu/vocabulary/aq/primaryObservation/view</comment>
             </column>
         </property>
         <property name="timeCoverageFlag" type="org.hibernate.type.NumericBooleanType">
-            <column name="timeCoverageFlag" check="timeCoverageFlag in (1,0)" length="1">
+            <column name="time_coverage_flag" check="time_coverage_flag in (1,0)">
                 <comment>AQD e-Reporting time coverage quality flag</comment>
             </column>
         </property>
         <property name="dataCaptureFlag" type="org.hibernate.type.NumericBooleanType">
-            <column name="dataCaptureFlag" check="dataCaptureFlag in (1,0)" length="1">
+            <column name="data_capture_flag" check="data_capture_flag in (1,0)">
                 <comment>AQD e-Reporting data capture quality flag</comment>
             </column>
         </property>
@@ -167,222 +157,13 @@
             </column>
         </property>
         <property name="uncertaintyEstimation" type="double">
-            <column name="uncertaintyEstimation" not-null="false">
+            <column name="uncertainty_estimation" not-null="false">
                 <comment>AQD e-Reporting uncertainty estimation quality value</comment>
             </column>
         </property>
 
-        <joined-subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" table="numericValue">
-            <key column="observation" foreign-key="dataNumericValueFk"/>
-            <property column="value" name="value" type="double"/>
-        </joined-subclass>
-
-        <joined-subclass extends="EReportingDataEntity" name="EReportingTextDataEntity" table="textValue">
-            <key column="observation" foreign-key="dataTextValueFk"/>
-            <property column="value" name="value" type="string"/>
-            <property name="valueIdentifier"
-                       type="string">
-                 <column name="domainId">
-                     <comment>SweText observation identifier</comment>
-                 </column>
-             </property>
-             <property name="valueName"
-                       type="string">
-                 <column name="name">
-                     <comment>SweText observation name</comment>
-                 </column>
-             </property>
-             <property name="valueDescription"
-                       type="string">
-                 <column name="description">
-                     <comment>SweText observation description</comment>
-                 </column>
-             </property>
-        </joined-subclass>
-
-        <joined-subclass extends="EReportingDataEntity" name="EReportingCountDataEntity" table="countValue">
-            <key column="observation" foreign-key="dataCountValueFk"/>
-            <property column="value" name="value" type="integer"/>
-        </joined-subclass>
-        <joined-subclass name="EReportingBlobDataEntity"
-                         extends="EReportingDataEntity"
-                         table="blobvalue">
-            <comment>Value table for blob observation</comment>
-            <key foreign-key="dataBlobValueFk">
-                <column name="observation" >
-                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-                </column>
-            </key>
-             <property name="value"
-                       type="blob">
-                 <column name="value">
-                     <comment>Blob observation value</comment>
-                 </column>
-             </property>
-        </joined-subclass>
-        <joined-subclass name="EReportingBooleanDataEntity"
-                         extends="EReportingDataEntity"
-                         table="booleanvalue"
-                         check="value in (1,0)">
-            <comment>Value table for boolean observation</comment>
-            <key foreign-key="observationBooleanValueFk">
-                <column name="observation" >
-                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-                </column>
-            </key>
-            <property name="value"
-                      type="org.hibernate.type.NumericBooleanType">
-                 <column name="value">
-                     <comment>Boolean observation value</comment>
-                 </column>
-             </property>
-        </joined-subclass>
-        <joined-subclass name="EReportingCategoryDataEntity"
-                         extends="EReportingDataEntity"
-                         table="categoryvalue">
-            <comment>Value table for category observation</comment>
-            <key foreign-key="observationCategoryValueFk">
-                <column name="observation" >
-                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-                </column>
-            </key>
-             <property name="value"
-                       type="string">
-                 <column name="value">
-                     <comment>Category observation value</comment>
-                 </column>
-             </property>
-             <property name="valueIdentifier"
-                       type="string">
-                 <column name="domainId">
-                     <comment>SweCategory observation identifier</comment>
-                 </column>
-             </property>
-             <property name="valueName"
-                       type="string">
-                 <column name="name">
-                     <comment>SweCategory observation name</comment>
-                 </column>
-             </property>
-             <property name="valueDescription"
-                       type="string">
-                 <column name="description">
-                     <comment>SweCategory observation description</comment>
-                 </column>
-             </property>
-        </joined-subclass>
-        <joined-subclass name="EReportingGeometryDataEntity"
-                         extends="EReportingDataEntity"
-                         table="geometryvalue">
-            <comment>Value table for geometry observation</comment>
-            <key foreign-key="observationGeometryValueFk">
-                <column name="observation" >
-                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-                </column>
-            </key>
-            <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
-	            <!--
-	           <property column="lat" name="lat" type="double" />
-	           <property column="lon" name="lon" type="double" />
-	            -->
-	            <property column="value" name="geometry" type="jts_geometry"/>
-	        </component>
-        </joined-subclass>
-        <joined-subclass name="EReportingSweDataArrayDataEntity"
-                         extends="EReportingDataEntity"
-                         table="swedataarrayvalue">
-            <comment>Value table for SweDataArray observation</comment>
-            <key foreign-key="observationSweDataArrayValueFk">
-                <column name="observation" >
-                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-                </column>
-            </key>
-            <property name="value"
-                      type="org.hibernate.type.StringType">
-                 <column name="value">
-                     <comment>SweDataArray observation value</comment>
-                 </column>
-             </property>
-        </joined-subclass>
-        <joined-subclass name="EReportingComplexDataEntity"
-                         extends="EReportingDataEntity"
-                         table="complexvalue">
-            <comment>Value table for complex observation</comment>
-            <key foreign-key="observationComplexValueFk">
-                <column name="observation" >
-                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-                </column>
-            </key>
-            <set name="value"
-                 table="compositeobservation"
-                 inverse="false"
-                 sort="natural"
-                 cascade="delete-orphan">
-                <comment>Relation table for complex parent/child observations</comment>
-                <key foreign-key="observationParentFK" >
-                     <column name="observation" not-null="true">
-                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
-                    </column>
-                </key>
-                <many-to-many class="EReportingDataEntity"
-                              foreign-key="observationChildFk">
-                    <column name="child" not-null="true">
-                        <comment>Foreign Key (FK) to the related child complex observation. Contains "observation".data</comment>
-                    </column>
-                </many-to-many>
-            </set>
-        </joined-subclass>
-        <joined-subclass name="EReportingProfileDataEntity"
-                         extends="EReportingDataEntity"
-                         table="profilevalue">
-            <comment>Value table for profile observation</comment>
-        	<key foreign-key="observationProfileValueFk">
-	        	<column name="observation" >
-	        		<comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".data</comment>
-	        	</column>
-        	</key>
-        	<property name="fromLevel"
-        			  type="double">
-         		<column name="fromlevel"
-         				not-null="false">
-         			<comment>Value of fromLevel</comment>
-         		</column>
-         	</property>
-         	<property name="toLevel"
-        			  type="double">
-         		<column name="tolevel"
-         				not-null="false">
-         			<comment>Value of toLevel</comment>
-         		</column>
-         	</property>
-         	<many-to-one name="levelUnit"
-                     class="org.n52.series.db.beans.UnitEntity"
-                     fetch="select"
-                     lazy="no-proxy"
-                     foreign-key="profileUnitFk">
-	            <column name="levelunit"
-	                    not-null="false">
-	            	<comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
-	            </column>
-        	</many-to-one>
-            <set name="value"
-                 table="profileobservation"
-                 inverse="false"
-                 sort="natural"
-                 cascade="delete-orphan">
-                <comment>Relation table for complex parent/child observations</comment>
-                <key foreign-key="profileObsParentFK" >
-                     <column name="observation" not-null="true">
-                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
-                    </column>
-                </key>
-                <many-to-many class="EReportingDataEntity"
-                              foreign-key="oprofileObsChildFk">
-                    <column name="child" not-null="true">
-                        <comment>Foreign Key (FK) to the related child complex observation. Contains "observation".data</comment>
-                    </column>
-                </many-to-many>
-            </set>
-        </joined-subclass>
+       <subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" discriminator-value="quantity">
+            <property column="value_quantity" name="value" type="double" />
+        </subclass>
     </class>
 </hibernate-mapping>

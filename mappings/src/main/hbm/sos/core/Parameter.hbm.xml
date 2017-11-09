@@ -17,24 +17,24 @@
             </column>
         </property>
 		<subclass discriminator-value="boolean" extends="Parameter" name="ParameterBoolean">
-			<property column="value" name="value" type="org.hibernate.type.NumericBooleanType" />
+			<property column="value_boolean" name="value" type="org.hibernate.type.NumericBooleanType" />
 		</subclass>
 		<subclass discriminator-value="category" extends="Parameter" name="ParameterCategory">
-			<property column="value" name="value" type="string" />
-			 <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
+			<property column="value_category" name="value" type="string" />
+			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
 		</subclass>
 		<subclass discriminator-value="count" extends="Parameter" name="ParameterCount">
-			<property column="value" name="value" type="integer" />
+			<property column="value_count" name="value" type="integer" />
 		</subclass>
 		<subclass discriminator-value="quantity" extends="Parameter" name="ParameterQuantity">
-			<property column="value" name="value" type="double" />
-			 <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
+			<property column="value_quantity" name="value" type="double" />
+			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
 		</subclass>
 		<subclass discriminator-value="text" extends="Parameter" name="ParameterText">
-			<property column="value" name="value" type="string" />
+			<property column="value_text" name="value" type="string" />
 		</subclass>
 		<subclass discriminator-value="xml" extends="Parameter" name="ParameterXml">
-			<property column="value" name="value" type="string" />
+			<property column="value_xml" name="value" type="string" />
 		</subclass>
 		<!--
         <joined-subclass extends="Parameter" name="ParameterBoolean" table="booleanparametervalue">

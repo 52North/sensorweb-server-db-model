@@ -2,110 +2,107 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ProcedureEntity" table="`procedure`">
-        <comment>Table to store the procedure/sensor. Mapping file: mapping/core/Procedure.hbm.xml</comment>
+        <!-- <comment>Table to store the procedure/sensor. Mapping file: mapping/core/Procedure.hbm.xml</comment> -->
         <id name="id" type="long">
             <column name="id">
-                <comment>Table primary key, used for relations</comment>
+                <!-- <comment>Table primary key, used for relations</comment> -->
             </column>
             <generator class="native">
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
-<!--         <many-to-one name="service" class="ServiceEntity" foreign-key="procedureServiceFk"> -->
-<!--             <column name="service" not-null="true" /> -->
-<!--         </many-to-one> -->
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="procCodespaceEntityIdentifierFk">
-            <column name="codespace">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
-            </column>
-        </many-to-one>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="procCodespaceEntityNameFk">
-            <column name="codespaceName">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
-            </column>
-        </many-to-one>
         <property name="domainId" type="string">
-            <column name="domainId" not-null="true" unique-key="procIdentifierUK">
-                <comment>The identifier of the procedure, gml:identifier. Used as parameter for queries. Unique</comment>
+            <column name="domain_id" not-null="true" unique-key="procedure_id_uk">
+                <!-- <comment>The identifier of the procedure, gml:identifier. Used as parameter for queries. Unique</comment> -->
             </column>
         </property>
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="procedure_codespace_fk">
+            <column name="codespace">
+                <!-- <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment> -->
+            </column>
+        </many-to-one>
         <property name="name" type="string">
             <column name="name">
-                <comment>The name of the procedure, gml:name. Optional</comment>
+                <!-- <comment>The name of the procedure, gml:name. Optional</comment> -->
             </column>
         </property>
+         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="procedure_codespace_name_fk">
+            <column name="codespace_name">
+                <!-- <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment> -->
+            </column>
+        </many-to-one>
         <property name="description" type="string">
             <column name="description">
-                <comment>Description of the procedure, gml:description. Optional</comment>
+                <!-- <comment>Description of the procedure, gml:description. Optional</comment> -->
             </column>
         </property>
         <property name="deleted" type="org.hibernate.type.NumericBooleanType">
             <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
-                <comment>Flag to indicate that this procedure is deleted or not (OGC SWES 2.0 - DeleteSensor operation)</comment>
+                <!-- <comment>Flag to indicate that this procedure is deleted or not (OGC SWES 2.0 - DeleteSensor operation)</comment> -->
             </column>
         </property>
         <property name="descriptionFile" type="org.hibernate.type.StringType">
-            <column name="descriptionFile">
-                <comment>Field for full (XML) encoded procedure description or link to a procedure description file.
-                    Optional</comment>
+            <column name="description_file">
+                <!-- <comment>Field for full (XML) encoded procedure description or link to a procedure description file.
+                    Optional</comment> -->
             </column>
         </property>
         <property name="reference" type="org.hibernate.type.NumericBooleanType">
-            <column name="referenceFlag" default="0" check="referenceFlag in (1,0)">
-                <comment>Flag to indicate that this procedure is a reference procedure of another procedure. Not used by
-                    the SOS but by the Sensor Web REST-API</comment>
+            <column name="reference_flag" default="0" check="reference_flag in (1,0)">
+                <!-- <comment>Flag to indicate that this procedure is a reference procedure of another procedure. Not used by
+                    the SOS but by the Sensor Web REST-API</comment> -->
             </column>
         </property>
-        <many-to-one name="typeOf" class="ProcedureEntity" not-null="false" foreign-key="typeOfFk">
-            <column name="typeOf" not-null="false">
-                <comment>Relation/foreign key to procedure table. Optional, contains procedureId if this procedure is
-                    typeOf another procedure</comment>
+        <many-to-one name="typeOf" class="ProcedureEntity" not-null="false" foreign-key="type_of_fk">
+            <column name="type_of" not-null="false">
+                <!-- <comment>Relation/foreign key to procedure table. Optional, contains procedureId if this procedure is
+                    typeOf another procedure</comment> -->
             </column>
         </many-to-one>
         <property name="type" type="org.hibernate.type.NumericBooleanType">
-            <column name="isType" default="0" check="isType in (1,0)">
-                <comment>Flag to indicate that this procedure is a type description, has no observations.</comment>
+            <column name="is_type" default="0" check="is_type in (1,0)">
+                <!-- <comment>Flag to indicate that this procedure is a type description, has no observations.</comment> -->
             </column>
         </property>
         <property name="aggregation" type="org.hibernate.type.NumericBooleanType">
-            <column name="isAggregation" default="1" check="isAggregation in (1,0)">
-                <comment>Flag to indicate that this procedure is an aggregation (e.g. System, PhysicalSystem).</comment>
+            <column name="is_aggregation" default="1" check="is_aggregation in (1,0)">
+                <!-- <comment>Flag to indicate that this procedure is an aggregation (e.g. System, PhysicalSystem).</comment> -->
             </column>
         </property>
         <property name="mobile" type="org.hibernate.type.NumericBooleanType">
             <column name="mobile" not-null="false" default="0" check="mobile in (1,0)">
-                <comment>Flag to indicate that this procedure is stationary (false) or mobile (true). Optional</comment>
+                <!-- <comment>Flag to indicate that this procedure is stationary (false) or mobile (true). Optional</comment> -->
             </column>
         </property>
         <property name="insitu" type="org.hibernate.type.NumericBooleanType">
             <column name="insitu" not-null="false" default="1" check="insitu in (1,0)">
-                <comment>Flag to indicate that this procedure is insitu (true) or remote (false). Optional</comment>
+                <!-- <comment>Flag to indicate that this procedure is insitu (true) or remote (false). Optional</comment> -->
             </column>
         </property>
-        <set name="parents" table="procedurerelation" inverse="false" fetch="select">
-            <key column="child" not-null="true" foreign-key="procparentschildfk" />
-            <many-to-many class="ProcedureEntity" column="parent" foreign-key="procparentparentfk" />
+        <set name="parents" table="procedure_relation" inverse="false" fetch="select">
+            <key column="child" not-null="true" foreign-key="procedure_child_fk" />
+            <many-to-many class="ProcedureEntity" column="parent" foreign-key="procedure_parent_fk" />
         </set>
-        <set name="children" table="procedurerelation" inverse="false" fetch="select">
-            <key column="parent" not-null="true" foreign-key="procchildrenparentfk" />
-            <many-to-many class="ProcedureEntity" column="child" foreign-key="procchildrenchildfk" />
+        <set name="children" table="procedure_relation" inverse="false" fetch="select">
+            <key column="parent" not-null="true" foreign-key="procedure_parent_fk" />
+            <many-to-many class="ProcedureEntity" column="child" foreign-key="procedure_child_fk" />
         </set>
-        <many-to-one name="procedureDescriptionFormat" class="ProcedureDescriptionFormatEntity" foreign-key="procProcDescFormatFk">
-            <column name="procedureDescriptionFormat" not-null="true">
-                <comment>Relation/foreign key to the procedureDescriptionFormat table. Describes the format of the
-                    procedure description.</comment>
+        <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="procedure_format_fk">
+            <column name="format" not-null="true">
+                <!-- <comment>Relation/foreign key to the procedureDescriptionFormat table. Describes the format of the
+                    procedure description.</comment> -->
             </column>
         </many-to-one>
-        <set name="validProcedureTimes" table="validproceduretime" inverse="true">
-            <key foreign-key="procvalidproctimeprocfk">
+        <set name="procedureHistory" table="procedure_history" inverse="true">
+            <key foreign-key="procedure_history_fk">
                 <column name="procedure" not-null="true" />
             </key>
-            <one-to-many class="ValidProcedureTimeEntity" />
+            <one-to-many class="ProcedureHistoryEntity" />
         </set>
         <set name="translations" table="procedure_i18n" inverse="true" fetch="select">
-            <key column="procedure" foreign-key="proctransprocfk" />
+            <key column="procedure" not-null="true" foreign-key="procedure_translation_fk" />
             <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nProcedureEntity"
-                foreign-key="proctransi18nfk" />
+                foreign-key="translation_procedure_fk" />
         </set>
     </class>
 
@@ -121,13 +118,13 @@
         <property name="name" type="string" />
         <property name="description" type="string" />
         <property name="shortName" type="string">
-            <column name="shortname">
-                <comment>Locale/language specific shortname of the procedure</comment>
+            <column name="short_name">
+                <!-- <comment>Locale/language specific shortname of the procedure</comment> -->
             </column>
         </property>
         <property name="longName" type="string">
-            <column name="longname">
-                <comment>Locale/language specific longname of the procedure</comment>
+            <column name="long_name">
+                <!-- <comment>Locale/language specific longname of the procedure</comment> -->
             </column>
         </property>
     </class>

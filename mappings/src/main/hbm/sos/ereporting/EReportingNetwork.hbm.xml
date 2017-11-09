@@ -4,8 +4,8 @@
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingNetworkEntity" table="network">
         <comment>Table to store the AQD e-Reporting network information. Mapping file: mapping/ereporting/EReportingNetwork.hbm.xml</comment>
-        <id name="networkId" type="long">
-            <column name="networkId">
+        <id name="id" type="long">
+            <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -13,11 +13,11 @@
             </generator>
         </id>
        <property name="domainId" type="string">
-            <column name="domainId" not-null="true" unique-key="networkIdentifierUK">
+            <column name="domain_id" not-null="true" unique-key="network_uk">
                 <comment>The identifier of the Network, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="networkCodespaceEntityIdFk">
+        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="network_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -27,8 +27,8 @@
                 <comment>The name of the network, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="networkCodespaceEntityNameFk">
-            <column name="codespaceName">
+        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="network_codespace_name_fk">
+            <column name="codespace_name">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>

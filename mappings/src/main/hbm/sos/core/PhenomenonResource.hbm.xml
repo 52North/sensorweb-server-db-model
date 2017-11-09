@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-    <class name="PhenomenonEntity" table="observableproperty">
+    <class name="PhenomenonEntity" table="phenomenon">
         <comment>Table to store the ObservedProperty/Phenomenon information. Mapping file:
             mapping/core/ObservableProperty.hbm.xml</comment>
         <id name="id" type="long">
@@ -9,38 +9,30 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">observableProperty_seq</param>
+                <param name="sequence_name">phenomenon_seq</param>
             </generator>
         </id>
 
-        <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="phenomenonServiceFk"> -->
-        <!-- <column name="service" not-null="true" /> -->
-        <!-- </many-to-one> -->
-
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="phenCodespaceEntityIdentifierFk">
+        <property name="domainId" type="string">
+            <column name="domain_id" not-null="true" unique-key="phenomenon_id_fk">
+                <comment>The identifier of the observableProperty, gml:identifier. Used as parameter for queries. Unique</comment>
+            </column>
+        </property>
+		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="phenomenon_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
-
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="phenCodespaceEntityNameFk">
-            <column name="codespaceName">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
-            </column>
-        </many-to-one>
-
-        <property name="domainId" type="string">
-            <column name="domainId" not-null="true" unique-key="phenIdentifierUK">
-                <comment>The identifier of the observableProperty, gml:identifier. Used as parameter for queries. Unique</comment>
-            </column>
-        </property>
-
         <property name="name" type="string">
             <column name="name">
                 <comment>The name of the observableProperty, gml:name. Optional</comment>
             </column>
         </property>
-
+		<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="phenomenon_codespace_name_fk">
+            <column name="codespace_name">
+                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
+            </column>
+        </many-to-one>
         <property name="description" type="string">
             <column name="description">
                 <comment>Description of the observableProperty, gml:description. Optional</comment>
@@ -48,20 +40,20 @@
         </property>
 
         <property name="hiddenChild" type="org.hibernate.type.NumericBooleanType">
-            <column name="hiddenChild" not-null="true" default="0" check="hiddenChild in (1,0)" />
+            <column name="hidden_child" not-null="true" default="0" check="hidden_child in (1,0)" />
         </property>
 
-        <set name="children" table="compositephenomenon" inverse="false">
+        <set name="children" table="composite_phenomenon" inverse="false">
             <comment>Relation table to store observableProperty hierarchies, aka compositePhenomenon. E.g. define a
                 parent in a query and all childs are also contained in the response. Mapping file:
                 mapping/transactional/TObservableProperty.hbm.xml</comment>
-            <key>
+            <key foreign-key="phenomenon_parent_fk">
                 <column name="parent" not-null="true">
                     <comment>Foreign Key (FK) to the related parent observableProperty. Contains
                         "observableProperty".observablePropertyid</comment>
                 </column>
             </key>
-            <many-to-many class="PhenomenonEntity" foreign-key="phenChildFk">
+            <many-to-many class="PhenomenonEntity" foreign-key="phenomenon_child_fk">
                 <column name="child" not-null="true">
                     <comment>Foreign Key (FK) to the related child observableProperty. Contains
                         "observableProperty".observablePropertyid</comment>
@@ -69,19 +61,19 @@
             </many-to-many>
         </set>
 
-        <set name="parents" table="compositephenomenon" inverse="false">
-            <key>
+        <set name="parents" table="composite_phenomenon" inverse="false">
+            <key foreign-key="phenomenon_child_fk">
                 <column name="child" not-null="true" />
             </key>
-            <many-to-many class="PhenomenonEntity" foreign-key="phenParentFk">
+            <many-to-many class="PhenomenonEntity" foreign-key="phenomenon_parent_fk">
                 <column name="parent" not-null="true" />
             </many-to-many>
         </set>
 
         <set name="translations" table="phenomenon_i18n" inverse="true" fetch="select">
-            <key column="phenomenon" foreign-key="phentransphenfk" />
+            <key column="phenomenon" not-null="true" foreign-key="phenomenon_tranlsation_fk" />
             <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity"
-                foreign-key="phentransi18nfk" />
+                foreign-key="tranlsation_phenomenon_fk" />
         </set>
     </class>
 

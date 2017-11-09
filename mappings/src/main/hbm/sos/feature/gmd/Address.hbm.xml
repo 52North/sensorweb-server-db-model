@@ -13,7 +13,7 @@
                 <param name="sequence_name">address_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,20 +21,20 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
-        <property name="gmdid" column="gmdid" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
+        <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
-        <set name="deliveryPoint" table="addressdeliveryPoint">
-          <key column="address" not-null="true" foreign-key="adddelpoiFk"/>
-          <element column="deliveryPoint" type="string" not-null="true" />
+        <set name="deliveryPoint" table="address_delivery_point">
+          <key column="address" not-null="true" foreign-key="address_delivery_point_fk"/>
+          <element column="delivery_point" type="string" not-null="true" />
         </set>
         <property name="city" column="city" type="string" />
-        <property name="administrativeArea" column="administrativeArea" type="string" />
-        <property name="postalCode" column="postalCode" type="string" />
+        <property name="administrativeArea" column="administrative_area" type="string" />
+        <property name="postalCode" column="postal_code" type="string" />
         <property name="country" column="country" type="string" />
-        <set name="electronicMailAddress" table="addressemail">
-          <key column="address" not-null="true" foreign-key="addemailFk"/>
-          <element column="electronicMailAddress" type="string" not-null="true" />
+        <set name="electronicMailAddress" table="address_mail">
+          <key column="address" not-null="true" foreign-key="address_mail_fk"/>
+          <element column="electronic_mail_address" type="string" not-null="true" />
         </set>
     </class>
 </hibernate-mapping>

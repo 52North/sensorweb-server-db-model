@@ -3,17 +3,17 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
-           table="domainofvalidity">
+           table="domain_of_validity">
         <id name="id"
             type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">domOfValidity_seq</param>
+                <param name="sequence_name">domain_of_validity_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,13 +21,13 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="domainId" type="string" >
-            <column name="domainId" unique-key="dovIdentifierUK">
+            <column name="domain_id" unique-key="domain_of_validity_uk">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="codCodespaceEntityIdentifierFk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="dov_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -37,8 +37,8 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="codCodespaceEntityNameFk">
-            <column name="codespaceName">
+        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="dov_codespace_name_fk">
+            <column name="codespace_name">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -48,8 +48,8 @@
             </column>
         </property>
         <many-to-one name="exExtent"
-                     column="exExtent"
+                     column="ex_extent"
                      class="org.n52.series.db.beans.feature.gmd.ExExtentEntity"
-                     foreign-key="dovexeFk" />
+                     foreign-key="dov_ex_extent_fk" />
     </class>
 </hibernate-mapping>

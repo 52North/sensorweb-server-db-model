@@ -3,17 +3,17 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.feature.gmd">
     <class name="ResponsiblePartyEntity"
-           table="responsibleparty">
+           table="responsible_party">
         <id name="id"
             type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">responsibleParty_seq</param>
+                <param name="sequence_name">responsible_party_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,19 +21,19 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
-        <property name="gmdid" column="gmdid" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
+        <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
-        <property name="individualName" column="individualName" type="string" />
-        <property name="organizationName" column="organizationName" type="string" />
-        <property name="positionName" column="positionName" type="string" />
+        <property name="individualName" column="individual_name" type="string" />
+        <property name="organizationName" column="organization_name" type="string" />
+        <property name="positionName" column="position_name" type="string" />
         <many-to-one name="contactInfo"
-                     column="contactInfo"
+                     column="contact_info"
                      class="ContactEntity"
-                     foreign-key="rpcontactFk" />
+                     foreign-key="contact_info_fk" />
         <many-to-one name="ciRole"
-                     column="ciRole"
+                     column="ci_role"
                      class="RoleEntity"
-                     foreign-key="rproleFk" />
+                     foreign-key="ci_role_fk" />
     </class>
 </hibernate-mapping>
