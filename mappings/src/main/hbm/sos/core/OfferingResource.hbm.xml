@@ -42,6 +42,11 @@
             </column>
         </property>
 
+		<property name="hidden" type="numeric_boolean">
+            <column name="hidden" not-null="true" default="0" check="hidden in (1,0)">
+            </column>
+        </property>
+
         <property name="phenomenonTimeStart" type="timestamp">
             <column name="phenomenon_time_start" length="29" not-null="false">
                 <comment>Time stamp when the offering was started or phenomenon was observed</comment>
