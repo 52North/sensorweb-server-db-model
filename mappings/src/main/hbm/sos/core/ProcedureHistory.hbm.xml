@@ -20,16 +20,16 @@
             </column>
         </many-to-one>
         <property name="startTime" type="timestamp">
-            <column index="validProcedureTimeStartTimeIdx" name="start_time" length="29" not-null="true">
+            <column index="start_time_idx" name="start_time" length="29" not-null="true">
                 <comment>Timestamp since this procedure description is valid</comment>
             </column>
         </property>
         <property name="endTime" type="timestamp">
-            <column index="validProcedureTimeEndTimeIdx" name="end_time" length="29" not-null="false" default="NULL">
+            <column index="end_time_idx" name="end_time" length="29" not-null="false" default="NULL">
                 <comment>Timestamp until this procedure description is invalid</comment>
             </column>
         </property>
-        <property name="xml" type="org.hibernate.type.StringType">
+        <property name="xml" type="text">
             <column name="xml" not-null="true">
                 <comment>Procedure description as XML string</comment>
             </column>

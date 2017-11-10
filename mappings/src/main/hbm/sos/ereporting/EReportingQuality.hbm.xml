@@ -27,12 +27,12 @@
                    <comment>primaryObservation flag, see http://dd.eionet.europa.eu/vocabulary/aq/primaryObservation/view</comment>
                </column>
         </property>
-        <property name="timeCoverageFlag" type="org.hibernate.type.NumericBooleanType">
+        <property name="timeCoverageFlag" type="numeric_boolean">
             <column name="time_coverage_flag" check="time_coverage_flag in (1,0)">
                    <comment>indicator for time coverage </comment>
                </column>
         </property>
-        <property name="dataCaptureFlag" type="org.hibernate.type.NumericBooleanType">
+        <property name="dataCaptureFlag" type="numeric_boolean">
             <column name="data_capture_flag" check="data_capture_flag in (1,0)">
                    <comment>Data capture value, used for multi day aggregations</comment>
                </column>

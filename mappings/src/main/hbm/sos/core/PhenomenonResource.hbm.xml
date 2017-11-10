@@ -39,7 +39,7 @@
             </column>
         </property>
 
-        <property name="hiddenChild" type="org.hibernate.type.NumericBooleanType">
+        <property name="hiddenChild" type="numeric_boolean">
             <column name="hidden_child" not-null="true" default="0" check="hidden_child in (1,0)" />
         </property>
 

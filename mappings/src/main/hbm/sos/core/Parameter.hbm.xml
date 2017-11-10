@@ -17,7 +17,7 @@
             </column>
         </property>
 		<subclass discriminator-value="boolean" extends="Parameter" name="ParameterBoolean">
-			<property column="value_boolean" name="value" type="org.hibernate.type.NumericBooleanType" />
+			<property column="value_boolean" name="value" type="numeric_boolean" />
 		</subclass>
 		<subclass discriminator-value="category" extends="Parameter" name="ParameterCategory">
 			<property column="value_category" name="value" type="string" />
@@ -34,40 +34,7 @@
 			<property column="value_text" name="value" type="string" />
 		</subclass>
 		<subclass discriminator-value="xml" extends="Parameter" name="ParameterXml">
-			<property column="value_xml" name="value" type="string" />
+			<property column="value_xml" name="value" type="text" />
 		</subclass>
-		<!--
-        <joined-subclass extends="Parameter" name="ParameterBoolean" table="booleanparametervalue">
-            <key column="parameter" foreign-key="boolparamvaluefk"/>
-            <property column="value" name="value" type="org.hibernate.type.NumericBooleanType" />
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterCategory" table="categoryparametervalue">
-            <key column="parameter" foreign-key="categoryparamvaluefk"/>
-            <property column="value" name="value" type="string"/>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="numericparamunitfk"/>
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterCount" table="countparametervalue">
-            <key column="parameter" foreign-key="countparamvaluefk"/>
-            <property column="value" name="value" type="integer"/>
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterQuantity" table="numericparametervalue">
-            <key column="parameter" foreign-key="numericparamvaluefk"/>
-            <property column="value" name="value" type="double"/>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="numericparamunitfk"/>
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterText" table="textparametervalue">
-            <key column="parameter"  foreign-key="textparamvaluefk"/>
-            <property column="value" name="value" type="string"/>
-        </joined-subclass>
-
-         <joined-subclass extends="Parameter" name="ParameterXml" table="xmlparametervalue">
-            <key column="parameter" foreign-key="bxmlparamvaluefk"/>
-            <property column="value" name="value" type="string"/>
-        </joined-subclass>
-         -->
     </class>
 </hibernate-mapping>

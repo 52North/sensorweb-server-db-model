@@ -36,18 +36,18 @@
                 <!-- <comment>Description of the procedure, gml:description. Optional</comment> -->
             </column>
         </property>
-        <property name="deleted" type="org.hibernate.type.NumericBooleanType">
+        <property name="deleted" type="numeric_boolean">
             <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is deleted or not (OGC SWES 2.0 - DeleteSensor operation)</comment> -->
             </column>
         </property>
-        <property name="descriptionFile" type="org.hibernate.type.StringType">
+        <property name="descriptionFile" type="text">
             <column name="description_file">
                 <!-- <comment>Field for full (XML) encoded procedure description or link to a procedure description file.
                     Optional</comment> -->
             </column>
         </property>
-        <property name="reference" type="org.hibernate.type.NumericBooleanType">
+        <property name="reference" type="numeric_boolean">
             <column name="reference_flag" default="0" check="reference_flag in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is a reference procedure of another procedure. Not used by
                     the SOS but by the Sensor Web REST-API</comment> -->
@@ -59,22 +59,22 @@
                     typeOf another procedure</comment> -->
             </column>
         </many-to-one>
-        <property name="type" type="org.hibernate.type.NumericBooleanType">
+        <property name="type" type="numeric_boolean">
             <column name="is_type" default="0" check="is_type in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is a type description, has no observations.</comment> -->
             </column>
         </property>
-        <property name="aggregation" type="org.hibernate.type.NumericBooleanType">
+        <property name="aggregation" type="numeric_boolean">
             <column name="is_aggregation" default="1" check="is_aggregation in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is an aggregation (e.g. System, PhysicalSystem).</comment> -->
             </column>
         </property>
-        <property name="mobile" type="org.hibernate.type.NumericBooleanType">
+        <property name="mobile" type="numeric_boolean">
             <column name="mobile" not-null="false" default="0" check="mobile in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is stationary (false) or mobile (true). Optional</comment> -->
             </column>
         </property>
-        <property name="insitu" type="org.hibernate.type.NumericBooleanType">
+        <property name="insitu" type="numeric_boolean">
             <column name="insitu" not-null="false" default="1" check="insitu in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is insitu (true) or remote (false). Optional</comment> -->
             </column>

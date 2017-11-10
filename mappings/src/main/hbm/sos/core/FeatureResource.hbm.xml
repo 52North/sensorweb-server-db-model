@@ -45,14 +45,14 @@
             </column>
         </property>
 
-        <property name="xml" type="org.hibernate.type.StringType">
+        <property name="xml" type="text">
             <column name="xml">
                 <comment>XML description of the feature, used when transactional profile is supported . Optional</comment>
             </column>
         </property>
 
         <property name="url" type="string">
-            <column name="url" unique-key="feature_url">
+            <column name="url" unique-key="feature_url_uk">
                 <comment>Reference URL to the feature if it is stored in another service, e.g. WFS. Optional but unique</comment>
             </column>
         </property>

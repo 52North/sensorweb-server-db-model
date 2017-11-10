@@ -39,14 +39,14 @@
             </column>
         </property>
 
-        <property name="structure" type="org.hibernate.type.StringType">
+        <property name="structure" type="text">
             <column name="structure" not-null="true">
                 <comment>The resultStructure as XML string. Describes the types and order of the values in a
                     GetResultResponse/InsertResultRequest</comment>
             </column>
         </property>
 
-        <property name="encoding" type="org.hibernate.type.StringType">
+        <property name="encoding" type="text">
             <column name="encoding" not-null="true">
                 <comment>The resultEncoding as XML string. Describes the encoding of the values in a
                     GetResultResponse/InsertResultRequest</comment>
