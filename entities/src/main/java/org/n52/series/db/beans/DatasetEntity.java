@@ -79,6 +79,8 @@ public class DatasetEntity extends DescribableEntity {
 
     private ObservationTypeEntity observationType;
 
+    private int decimals;
+
     public DatasetEntity() {
         this((String) null);
     }
@@ -312,6 +314,14 @@ public class DatasetEntity extends DescribableEntity {
 
     public boolean isSetObservationtype() {
         return getObservationType() != null && getObservationType().isSetType();
+    }
+
+    public int getDecimals() {
+        return decimals;
+    }
+
+    public void setDecimals(int decimals) {
+        this.decimals = decimals;
     }
 
     @Override

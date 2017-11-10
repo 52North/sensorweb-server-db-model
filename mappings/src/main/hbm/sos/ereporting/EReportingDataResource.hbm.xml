@@ -163,7 +163,7 @@
         </property>
 
        <subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" discriminator-value="quantity">
-            <property column="value_quantity" name="value" type="double" />
+            <property column="value_quantity" name="value" type="double" precision="29" />
         </subclass>
     </class>
 </hibernate-mapping>

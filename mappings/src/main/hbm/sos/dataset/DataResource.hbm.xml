@@ -127,7 +127,7 @@
           </property>
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
-            <property column="value_quantity" name="value" type="double" />
+            <property column="value_quantity" name="value" type="double" precision="29"/>
         </subclass>
 
         <subclass extends="DataEntity" name="TextDataEntity" discriminator-value="text">

@@ -12,13 +12,15 @@
         </id>
         <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
-        <many-to-one class="ProcedureEntity" column="procedure" name="procedure" not-null="true" unique-key="datasetIdentity"
-           foreign-key="dataset_procedure_fk" />
-        <many-to-one class="PhenomenonEntity" column="phenomenon" name="phenomenon" not-null="true" unique-key="datasetIdentity"
-           foreign-key="dataset_phenomenon_fk" />
-        <many-to-one class="CategoryEntity" column="category" name="category" not-null="true" foreign-key="dataset_category_fk"
-            unique-key="datasetIdentity" />
-        <many-to-one class="FeatureEntity" column="feature" name="feature" not-null="false" unique-key="datasetIdentity"
+        <many-to-one class="ProcedureEntity" column="`procedure`" name="procedure" not-null="true" unique-key="dataset_identity"
+        	foreign-key="dataset_procedure_fk" />
+        <many-to-one class="PhenomenonEntity" column="phenomenon" name="phenomenon" not-null="true" unique-key="dataset_identity"
+        	foreign-key="dataset_phenomenon_fk" />
+        <many-to-one class="org.n52.series.db.beans.OfferingEntity" column="offering" name="offering" not-null="true" unique-key="dataset_identity"
+           foreign-key="dataset_offering_fk" />
+        <many-to-one class="CategoryEntity" column="category" name="category" not-null="false" unique-key="dataset_identity"
+        	foreign-key="dataset_category_fk"  />
+        <many-to-one class="FeatureEntity" column="feature" name="feature" not-null="false" unique-key="dataset_identity"
             foreign-key="dataset_feature_fk" />
 
         <many-to-one name="observationType" class="ObservationTypeEntity" not-null="false" foreign-key="dataset_observation_type_fk">
@@ -30,8 +32,8 @@
         <property column="first_time_stamp" name="firstValueAt" type="timestamp" />
         <property column="last_time_stamp" name="lastValueAt" type="timestamp" />
 
-        <property column="first_value" name="firstValue" type="timestamp" />
-        <property column="last_value" name="lastValue" type="timestamp" />
+        <property column="first_value" name="firstValue" type="double" precision="29" />
+        <property column="last_value" name="lastValue" type="double" precision="29" />
 
         <many-to-one class="DataEntity" column="first_observation" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
         <many-to-one class="DataEntity" column="last_observation" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
@@ -55,13 +57,15 @@
             </column>
         </property>
 
+        <property column="decimals" name="decimals" not-null="false" type="integer" />
+
         <property name="domainId" type="string">
-            <column name="domain_id" not-null="false" unique-key="datasetIdentifierUK">
+            <column name="domain_id" not-null="false" unique-key="dataset_id_uk">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>
             </column>
         </property>
 
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="datasetCodespaceEntityIdentifierFk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="dataset_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:identifier codespace. Optional</comment>
@@ -70,7 +74,7 @@
             <column name="name">
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
-        </property><many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="datasetCodespaceEntityNameFk">
+        </property><many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="dataset_codespace_name_fk">
             <column name="codespace_mame">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:name codespace. Optional</comment>
@@ -83,7 +87,7 @@
             </column>
         </property>
 
-        <set inverse="false" name="parameters" table="datasetparameter" cascade="delete-orphan">
+        <set inverse="false" name="parameters" table="dataset_parameter" cascade="delete-orphan">
             <key column="dataset" not-null="true" foreign-key="dataset_parameter_fk" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
                 foreign-key="parameter_dataset_fk" />

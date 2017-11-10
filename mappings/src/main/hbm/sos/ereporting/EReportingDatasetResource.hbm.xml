@@ -13,19 +13,27 @@
         </id>
         <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
-        <many-to-one class="org.n52.series.db.beans.ProcedureEntity" column="procedure" not-null="true" name="procedure" unique-key="dataset_identity"
+        <many-to-one class="org.n52.series.db.beans.ProcedureEntity" column="`procedure`" name="procedure" not-null="true" unique-key="dataset_identity"
            foreign-key="dataset_procedure_fk" />
-        <many-to-one class="org.n52.series.db.beans.PhenomenonEntity" column="phenomenon" not-null="true" name="phenomenon" unique-key="dataset_identity"
+        <many-to-one class="org.n52.series.db.beans.PhenomenonEntity" column="phenomenon" name="phenomenon" not-null="true" unique-key="dataset_identity"
            foreign-key="dataset_phenomenon_fk" />
+        <many-to-one class="org.n52.series.db.beans.OfferingEntity" column="offering" name="offering" not-null="true" unique-key="dataset_identity"
+           foreign-key="dataset_offering_fk" />
         <many-to-one class="org.n52.series.db.beans.FeatureEntity" column="feature" name="feature" not-null="false" unique-key="dataset_identity"
             foreign-key="dataset_feature_fk" />
-        <many-to-one class="org.n52.series.db.beans.CategoryEntity" column="category" not-null="true" name="category" foreign-key="dataset_category_fk"
-            unique-key="dataset_identity" />
-        <many-to-one class="EReportingSamplingPointEntity" column="sampling_point" not-null="true" name="samplingPoint" foreign-key="dataset_sampling_point_fk"
-            unique-key="dataset_identity"/>
+        <many-to-one class="org.n52.series.db.beans.CategoryEntity" column="category" name="category" not-null="false" unique-key="dataset_identity"
+        	foreign-key="dataset_category_fk" />
+        <many-to-one class="EReportingSamplingPointEntity" column="sampling_point" name="samplingPoint" not-null="false" unique-key="dataset_identity"
+        	foreign-key="dataset_sampling_point_fk" />
 
         <property column="firsttimestamp" name="firstValueAt" type="timestamp" />
         <property column="lasttimestamp" name="lastValueAt" type="timestamp" />
+
+        <property column="first_value" name="firstValue" type="double" precision="29" />
+        <property column="last_value" name="lastValue" type="double" precision="29" />
+
+        <many-to-one class="EReportingDataEntity" column="first_observation" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
+        <many-to-one class="EReportingDataEntity" column="last_observation" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
 
         <property name="deleted" type="org.hibernate.type.NumericBooleanType">
             <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
@@ -45,6 +53,8 @@
             <column name="hidden_child" not-null="true" default="0" check="hidden_child in (1,0)">
             </column>
         </property>
+
+        <property column="decimals" name="decimals" not-null="false" type="integer" />
 
         <property name="domainId" type="string">
             <column name="domain_id" not-null="false" unique-key="datasetIdentifierUK">
