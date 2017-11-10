@@ -18,7 +18,13 @@
                 <comment>Foreign Key (FK) to the related feature. Contains "feature".id</comment>
             </column>
         </many-to-one>
-        <set name="relatedFeatureRoles" table="related_feature_roles" inverse="false">
+        <many-to-one name="role" class="RelatedFeatureRoleEntity" foreign-key="related_feature_role_fk">
+            <column name="role" not-null="true">
+                <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains
+                    "related_feature_role".id</comment>
+            </column>
+        </many-to-one>
+        <!-- <set name="relatedFeatureRole" table="related_feature_role" inverse="false">
             <comment>Relation table to store relatedFeatures and their associated relatedFeatureRoles. Mapping file:
                 mapping/transactionl/RelatedFeature.hbm.xml</comment>
             <key foreign-key="related_feature_role_fk">
@@ -32,7 +38,7 @@
                         "related_feature_role".id</comment>
                 </column>
             </many-to-many>
-        </set>
+        </set>-->
         <set name="offerings" table="offering_related_feature" inverse="true">
             <comment>Relation table to store relatedFeatures and their associated offerings. Mapping file:
                 mapping/transactionl/RelatedFeature.hbm.xml</comment>

@@ -430,11 +430,11 @@ public interface HibernateRelations {
     }
 
     interface HasRelatedFeatureRoles<T> {
-        String RELATED_FEATURE_ROLES = "relatedFeatureRoles";
+        String RELATED_FEATURE_ROLE = "relatedFeatureRole";
 
-        Set<RelatedFeatureRoleEntity> getRelatedFeatureRoles();
+        RelatedFeatureRoleEntity getRole();
 
-        T setRelatedFeatureRoles(Set<RelatedFeatureRoleEntity> relatedFeatureRoles);
+        T setRole(RelatedFeatureRoleEntity role);
     }
 
     interface HasRelatedFeatures<T> {
