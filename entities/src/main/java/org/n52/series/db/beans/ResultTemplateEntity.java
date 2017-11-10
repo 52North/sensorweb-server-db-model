@@ -30,29 +30,29 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_OFFERING = "offering";
 
-    public static final String PROPERTY_OBSERVABLE_PROPERTY = "observableProperty";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
 
     public static final String PROPERTY_DOMAIN_ID = "domainId";
 
-    public static final String PROPERTY_FEATURE_OF_INTEREST = "featureOfInterest";
+    public static final String PROPERTY_FEATURE = "feature";
 
     private static final long serialVersionUID = -8847952458819368733L;
 
-    private PhenomenonEntity observableProperty;
+    private PhenomenonEntity phenomenon;
 
     private OfferingEntity offering;
 
     private ProcedureEntity procedure;
 
-    private AbstractFeatureEntity featureOfInterest;
+    private AbstractFeatureEntity feature;
 
     private String identifier;
 
     private String domainId;
 
-    private String resultStructure;
+    private String structure;
 
-    private String resultEncoding;
+    private String encoding;
 
     public ResultTemplateEntity() {
     }
@@ -66,17 +66,17 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @return the observableProperty
+     * @return the phenomenon
      */
-    public PhenomenonEntity getObservableProperty() {
-        return observableProperty;
+    public PhenomenonEntity getPhenomenon() {
+        return phenomenon;
     }
 
     /**
-     * @param observableProperty the observableProperty to set
+     * @param phenomenon the phenomenon to set
      */
-    public void setObservableProperty(PhenomenonEntity observableProperty) {
-        this.observableProperty = observableProperty;
+    public void setPhenomenon(PhenomenonEntity phenomenon) {
+        this.phenomenon = phenomenon;
     }
 
     /**
@@ -110,15 +110,15 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     /**
      * @return the featureOfInterest
      */
-    public AbstractFeatureEntity getFeatureOfInterest() {
-        return featureOfInterest;
+    public AbstractFeatureEntity getFeature() {
+        return feature;
     }
 
     /**
      * @param featureOfInterest the featureOfInterest to set
      */
-    public void setFeatureOfInterest(AbstractFeatureEntity featureOfInterest) {
-        this.featureOfInterest = featureOfInterest;
+    public void setFeature(AbstractFeatureEntity featureOfInterest) {
+        this.feature = featureOfInterest;
     }
 
     public String getIdentifier() {
@@ -134,33 +134,23 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     @Override
-    public String getResultStructure() {
-        return resultStructure;
+    public String getStructure() {
+        return structure;
     }
 
     @Override
-    public boolean isSetResultStructure() {
-        return getResultStructure() != null && !getResultStructure().isEmpty();
+    public void setStructure(String resultStructure) {
+        this.structure = resultStructure;
     }
 
     @Override
-    public void setResultStructure(String resultStructure) {
-        this.resultStructure = resultStructure;
+    public String getEncoding() {
+        return this.encoding;
     }
 
     @Override
-    public String getResultEncoding() {
-        return this.resultEncoding;
-    }
-
-    @Override
-    public boolean isSetResultEncoding() {
-        return getResultEncoding() != null && !getResultEncoding().isEmpty();
-    }
-
-    @Override
-    public void setResultEncoding(String resultEncoding) {
-        this.resultEncoding = resultEncoding;
+    public void setEncoding(String resultEncoding) {
+        this.encoding = resultEncoding;
     }
 
 }

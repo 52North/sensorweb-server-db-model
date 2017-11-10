@@ -64,22 +64,6 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasObservationConstellation {
-        String OBSERVATION_CONSTELLATION = "observationConstellation";
-
-        ObservationConstellationEntity getObservationConstellation();
-
-        void setObservationConstellation(ObservationConstellationEntity observationConstellation);
-    }
-
-    interface HasObservationConstellations {
-        String OBSERVATION_CONSTELLATIONS = "observationConstellations";
-
-        Set<ObservationConstellationEntity> getObservationConstellations();
-
-        void setObservationConstellations(Set<ObservationConstellationEntity> observationConstellations);
-    }
-
     interface HasDescription<T> {
         String DESCRIPTION = "description";
 
@@ -188,19 +172,24 @@ public interface HibernateRelations {
             HasProcedure<T>, HasFeature<T>, HasOffering<T> {
     }
 
-    interface HasGeometry {
+    interface HasGeometry<T> {
         String GEOMETRY = "geom";
 
-        Geometry getGeom();
+        GeometryEntity getGeometryEntity();
 
-        void setGeom(Geometry geom);
+        T setGeometry(Geometry geometry);
 
-        /**
-         * Is geometry set
-         *
-         * @return <code>true</code>, if geometry is set
-         */
-        boolean isSetGeometry();
+        T setGeometryEntity(GeometryEntity geometryEntity);
+
+        default Geometry getGeometry() {
+            return getGeometryEntity() != null
+                    ? getGeometryEntity().getGeometry()
+                    : null;
+        }
+
+        default boolean isSetGeometry() {
+            return getGeometryEntity() != null;
+        }
     }
 
     interface HasHiddenChildFlag<T> {
@@ -419,17 +408,17 @@ public interface HibernateRelations {
     interface HasProcedureDescriptionFormat<T> {
         String PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
 
-        ProcedureDescriptionFormatEntity getProcedureDescriptionFormat();
+        ProcedureDescriptionFormatEntity getFormat();
 
-        T setProcedureDescriptionFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat);
+        T setFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat);
     }
 
     interface HasRelatedFeatureRoles<T> {
-        String RELATED_FEATURE_ROLES = "relatedFeatureRoles";
+        String RELATED_FEATURE_ROLE = "relatedFeatureRole";
 
-        Set<RelatedFeatureRoleEntity> getRelatedFeatureRoles();
+        RelatedFeatureRoleEntity getRole();
 
-        T setRelatedFeatureRoles(Set<RelatedFeatureRoleEntity> relatedFeatureRoles);
+        T setRole(RelatedFeatureRoleEntity role);
     }
 
     interface HasRelatedFeatures<T> {
@@ -447,21 +436,25 @@ public interface HibernateRelations {
     interface HasResultEncoding {
         String RESULT_ENCODING = "resultEncoding";
 
-        String getResultEncoding();
+        String getEncoding();
 
-        void setResultEncoding(String resultEncoding);
+        void setEncoding(String resultEncoding);
 
-        boolean isSetResultEncoding();
+        default boolean isSetEncoding() {
+            return getEncoding() != null && !getEncoding().isEmpty();
+        }
     }
 
     interface HasResultStructure {
         String RESULT_STRUCTURE = "resultStructure";
 
-        String getResultStructure();
+        String getStructure();
 
-        void setResultStructure(String resultStructure);
+        void setStructure(String resultStructure);
 
-        boolean isSetResultStructure();
+        default boolean isSetStructure() {
+            return getStructure() != null && !getStructure().isEmpty();
+        }
     }
 
     interface HasResultTime {
@@ -576,7 +569,13 @@ public interface HibernateRelations {
         // Object getOffering();
         T setOfferings(Object offerings);
 
-        boolean isSetOfferings();
+        default boolean isSetOfferings() {
+            return hasOfferings();
+        }
+
+        default boolean hasOfferings() {
+            return getOfferings() != null && !getOfferings().isEmpty();
+        }
 
     }
 
@@ -587,18 +586,22 @@ public interface HibernateRelations {
 
         void setParameters(Object parameters);
 
-        boolean hasParameters();
+        default boolean hasParameters() {
+            return getParameters() != null && !getParameters().isEmpty();
+        }
 
     }
 
     interface HasRelatedObservations {
-        String PARAMETERS = "relatedObservations";
+        String RELATED_OBSERVATIONS = "related_observations";
 
         Set<RelatedDataEntity> getRelatedObservations();
 
         void setRelatedObservations(Set<RelatedDataEntity> relatedObservations);
 
-        boolean hasRelatedObservations();
+        default boolean hasRelatedObservations() {
+            return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
+        }
 
     }
 
@@ -699,18 +702,22 @@ public interface HibernateRelations {
         boolean isSpatial();
     }
 
-    interface HasValidProcedureTimes {
-        String VALID_PROCEDURE_TIMES = "validProcedureTimes";
+    interface HasProcedureHistory {
+        String VALID_PROCEDURE_TIMES = "procedure_history";
 
-        Set<ValidProcedureTimeEntity> getValidProcedureTimes();
+        Set<ProcedureHistoryEntity> getProcedureHistory();
 
-        void setValidProcedureTimes(Set<ValidProcedureTimeEntity> validProcedureTimes);
+        void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory);
+
+        default boolean hasProcedureHistory() {
+            return getProcedureHistory() != null && !getProcedureHistory().isEmpty();
+        }
     }
 
-    interface HasParentChilds<T> {
+    interface HasParentChildren<T> {
         String PARENTS = "parents";
 
-        String CHILDS = "childs";
+        String CHILDREN = "children";
 
         Set<T> getParents();
 
@@ -718,19 +725,23 @@ public interface HibernateRelations {
 
         void addParent(T parent);
 
-        boolean hasParents();
+        default boolean hasParents() {
+            return getParents() != null && !getParents().isEmpty();
+        }
 
-        Set<T> getChilds();
+        Set<T> getChildren();
 
-        void setChilds(Set<T> childs);
+        void setChildren(Set<T> children);
 
         void addChild(T child);
 
-        boolean hasChilds();
+        default boolean hasChildren() {
+            return getChildren() != null && !getChildren().isEmpty();
+        }
     }
 
     interface HasObservationId {
-        String OBS_ID = "observationId";
+        String OBS_ID = "id";
 
         /**
          * Get the observation id
@@ -760,26 +771,28 @@ public interface HibernateRelations {
 
     interface HasSamplingGeometry {
 
-        String SAMPLING_GEOMETRY = "samplingGeometry";
+        String SAMPLING_GEOMETRY = "sampling_geometry";
 
         Geometry getSamplingGeometry();
 
         void setSamplingGeometry(Geometry samplingGeometry);
 
-        boolean hasSamplingGeometry();
+        default boolean hasSamplingGeometry() {
+            return getSamplingGeometry() != null && !getSamplingGeometry().isEmpty();
+        }
 
     }
 
-    interface HasDescriptionXml<T> {
+    interface HasXml<T> {
 
-        String DESCRIPTION_XML = "descriptionXml";
+        String XML = "xml";
 
-        String getDescriptionXml();
+        String getXml();
 
-        T setDescriptionXml(String descriptionXml);
+        T setXml(String xml);
 
-        default boolean isSetDescriptionXml() {
-            return getDescriptionXml() != null && !getDescriptionXml().isEmpty();
+        default boolean isSetXml() {
+            return getXml() != null && !getXml().isEmpty();
         }
     }
 
@@ -807,6 +820,9 @@ public interface HibernateRelations {
 
         String getDatasetType();
 
-        boolean isSetDatasetType();
+        default boolean isSetDatasetType() {
+            return getDatasetType() != null && !getDatasetType().isEmpty();
+        }
+
     }
 }

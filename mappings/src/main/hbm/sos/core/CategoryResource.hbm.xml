@@ -5,38 +5,42 @@
         <id name="id" type="long">
             <column name="id" />
             <generator class="native">
-                <param name="sequence">category_seq</param>
+                <param name="sequence_name">category_seq</param>
             </generator>
         </id>
-        <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="featureServiceFk"> -->
-        <!-- <column name="service" not-null="true"/> -->
-        <!-- </many-to-one> -->
-        <property column="domainId" name="domainId" type="string" />
+        <property column="domain_id" name="domainId" type="string" not-null="true" />
         <property name="name" type="string">
             <column name="name">
-                <comment>The name of the featureOfInterest, gml:name. Optional</comment>
+                <comment>The name of the category</comment>
             </column>
         </property>
         <property name="description" type="string">
             <column name="description">
-                <comment>Description of the featureOfInterest, gml:description. Optional</comment>
+                <comment>Description of the category</comment>
             </column>
         </property>
-        <set name="translations" table="i18category" inverse="true" fetch="select">
-            <key column="category" foreign-key="cattranscatfk" />
+        <!--
+        <one-to-one name="translations" column="category" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"></many-to-one>
+         <set name="translations" table="category_i18" inverse="true" fetch="select">
+            <key column="category" not-null="true" foreign-key="category_translation_fk"/>
             <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"
-                foreign-key="cattransi18nfk" />
+                foreign-key="translation_category_fk" />
+        </set>
+         -->
+        <set name="translations" table="category_i18" inverse="true" fetch="select">
+            <key column="category" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nCategoryEntity" />
         </set>
     </class>
 
-    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="i18ncategory">
+    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="category_i18">
         <id name="id" type="long">
             <column name="id" />
             <generator class="native">
-                <param name="sequence">i18ncategory_seq</param>
+                <param name="sequence_name">category_i18n_seq</param>
             </generator>
         </id>
-
+		<many-to-one name="entity" column="category" not-null="true" class="CategoryEntity" foreign-key="translation_category_fk"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

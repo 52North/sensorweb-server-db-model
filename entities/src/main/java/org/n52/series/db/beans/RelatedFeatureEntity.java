@@ -36,7 +36,7 @@ public class RelatedFeatureEntity extends IdEntity
 
     private AbstractFeatureEntity<RelatedFeatureEntity> feature;
 
-    private Set<RelatedFeatureRoleEntity> relatedFeatureRoles = new HashSet<RelatedFeatureRoleEntity>(0);
+    private RelatedFeatureRoleEntity role;
 
     private Set<OfferingEntity> offerings = new HashSet<OfferingEntity>(0);
 
@@ -55,13 +55,13 @@ public class RelatedFeatureEntity extends IdEntity
     }
 
     @Override
-    public Set<RelatedFeatureRoleEntity> getRelatedFeatureRoles() {
-        return this.relatedFeatureRoles;
+    public RelatedFeatureRoleEntity getRole() {
+        return this.role;
     }
 
     @Override
-    public RelatedFeatureEntity setRelatedFeatureRoles(Set<RelatedFeatureRoleEntity> relatedFeatureRoles) {
-        this.relatedFeatureRoles = relatedFeatureRoles;
+    public RelatedFeatureEntity setRole(RelatedFeatureRoleEntity role) {
+        this.role = role;
         return this;
     }
 

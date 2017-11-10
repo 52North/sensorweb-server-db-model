@@ -1,0 +1,38 @@
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.series.db.beans">
+    <class name="ProcedureHistoryEntity" table="procedure_history">
+        <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile.
+            Mapping file: mapping/ProcedureHistory.hbm.xml</comment>
+        <id name="id" type="long">
+            <column name="id">
+                <comment>Table primary key</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">procedure_history_seq</param>
+            </generator>
+        </id>
+
+        <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="proc_hist_format_fk">
+            <column name="format" not-null="true">
+                <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains
+                    "procedureDescriptionFormat".id</comment>
+            </column>
+        </many-to-one>
+        <property name="startTime" type="timestamp">
+            <column index="start_time_idx" name="start_time" length="29" not-null="true">
+                <comment>Timestamp since this procedure description is valid</comment>
+            </column>
+        </property>
+        <property name="endTime" type="timestamp">
+            <column index="end_time_idx" name="end_time" length="29" not-null="false" default="NULL">
+                <comment>Timestamp until this procedure description is invalid</comment>
+            </column>
+        </property>
+        <property name="xml" type="text">
+            <column name="xml" not-null="true">
+                <comment>Procedure description as XML string</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

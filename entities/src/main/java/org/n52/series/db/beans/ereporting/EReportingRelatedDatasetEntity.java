@@ -15,28 +15,12 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.ereporting;
 
-import java.util.Collection;
-import java.util.Set;
+import org.n52.series.db.beans.AbstractRelationEntity;
 
-public class ComplexDataEntity extends DataEntity<Set<DataEntity< ? >>> {
+public class EReportingRelatedDatasetEntity extends AbstractRelationEntity<EReportingDatasetEntity> {
 
-    private static final long serialVersionUID = 2206385928964743369L;
+    private static final long serialVersionUID = 280165490758286290L;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public Set<DataEntity< ? >> getValue() {
-        return super.getValue();
-    }
-
-    @Override
-    public void setValue(Set<DataEntity< ? >> value) {
-        super.setValue(value);
-    }
 }

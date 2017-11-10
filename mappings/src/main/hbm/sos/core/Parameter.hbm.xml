@@ -7,46 +7,34 @@
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
-                <param name="sequence">parameter_seq</param>
+                <param name="sequence_name">parameter_seq</param>
             </generator>
         </id>
-
+		<discriminator column="type" type="string"/>
         <property name="name" type="string">
-            <column name="name" not-null="true" index="paramNameIdx">
+            <column name="name" not-null="true" index="param_name_idx">
                 <comment>Parameter name</comment>
             </column>
         </property>
-
-        <joined-subclass extends="Parameter" name="ParameterBoolean" table="booleanparametervalue">
-            <key column="parameter" foreign-key="boolparamvaluefk"/>
-            <property column="value" name="value" type="org.hibernate.type.TrueFalseType" />
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterCategory" table="categoryparametervalue">
-            <key column="parameter" foreign-key="categoryparamvaluefk"/>
-            <property column="value" name="value" type="string"/>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="categoryparamunitfk"/>
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterCount" table="countparametervalue">
-            <key column="parameter" foreign-key="countparamvaluefk"/>
-            <property column="value" name="value" type="integer"/>
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterQuantity" table="numericparametervalue">
-            <key column="parameter" foreign-key="numericparamvaluefk"/>
-            <property column="value" name="value" type="double"/>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="numericparamunitfk"/>
-        </joined-subclass>
-
-        <joined-subclass extends="Parameter" name="ParameterText" table="textparametervalue">
-            <key column="parameter"  foreign-key="textparamvaluefk"/>
-            <property column="value" name="value" type="string"/>
-        </joined-subclass>
-
-         <joined-subclass extends="Parameter" name="ParameterXml" table="xmlparametervalue">
-            <key column="parameter" foreign-key="bxmlparamvaluefk"/>
-            <property column="value" name="value" type="string"/>
-        </joined-subclass>
+		<subclass discriminator-value="boolean" extends="Parameter" name="ParameterBoolean">
+			<property column="value_boolean" name="value" type="numeric_boolean" />
+		</subclass>
+		<subclass discriminator-value="category" extends="Parameter" name="ParameterCategory">
+			<property column="value_category" name="value" type="string" />
+			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
+		</subclass>
+		<subclass discriminator-value="count" extends="Parameter" name="ParameterCount">
+			<property column="value_count" name="value" type="integer" />
+		</subclass>
+		<subclass discriminator-value="quantity" extends="Parameter" name="ParameterQuantity">
+			<property column="value_quantity" name="value" type="double" />
+			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
+		</subclass>
+		<subclass discriminator-value="text" extends="Parameter" name="ParameterText">
+			<property column="value_text" name="value" type="string" />
+		</subclass>
+		<subclass discriminator-value="xml" extends="Parameter" name="ParameterXml">
+			<property column="value_xml" name="value" type="text" />
+		</subclass>
     </class>
 </hibernate-mapping>

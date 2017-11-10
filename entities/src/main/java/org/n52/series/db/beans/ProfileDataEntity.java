@@ -36,6 +36,16 @@ public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
         return false;
     }
 
+    @Override
+    public Set<DataEntity< ? >> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity< ? >> value) {
+        super.setValue(value);
+    }
+
     public Double getFromLevel() {
         return fromLevel;
     }

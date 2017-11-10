@@ -188,20 +188,20 @@ public interface HiberanteEReportingRelations
         /**
          * @return the station
          */
-        EReportingStationEntity getEReportingStationEntity();
+        EReportingStationEntity getStation();
 
         /**
          * @param station
          *            the station to set
          * @return this
          */
-        HasStation setEReportingStationEntity(EReportingStationEntity station);
+        HasStation setStation(EReportingStationEntity station);
 
         /**
          * @return <code>true</code>, if station is not null
          */
-        default boolean isSetEReportingStationEntity() {
-            return getEReportingStationEntity() != null;
+        default boolean isSetStation() {
+            return getStation() != null;
         }
     }
 
@@ -214,20 +214,20 @@ public interface HiberanteEReportingRelations
         /**
          * @return the network
          */
-        EReportingNetworkEntity getEReportingNetworkEntity();
+        EReportingNetworkEntity getNetwork();
 
         /**
          * @param network
          *            the network to set
          * @return this
          */
-        HasNetwork setEReportingNetworkEntity(EReportingNetworkEntity network);
+        HasNetwork setNetwork(EReportingNetworkEntity network);
 
         /**
          * @return <code>true</code>, if network is not null
          */
-        default boolean isSetEReportingNetworkEntity() {
-            return getEReportingNetworkEntity() != null;
+        default boolean isSetNetwork() {
+            return getNetwork() != null;
         }
     }
 }

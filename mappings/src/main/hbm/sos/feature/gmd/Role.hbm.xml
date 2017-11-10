@@ -10,10 +10,10 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">role_seq</param>
+                <param name="sequence_name">role_seq</param>
             </generator>
         </id>
-        <property name="codeList" column="codeList" not-null="true" type="string" />
-        <property name="codeListValue" column="codeListValue" not-null="true" type="string" />
+        <property name="codeList" column="code_list" not-null="true" type="string" />
+        <property name="codeListValue" column="code_list_value" not-null="true" type="string" />
     </class>
 </hibernate-mapping>

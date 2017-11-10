@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="org.n52.series.db.beans.ereporting">
+    <class name="EReportingRelatedDataEntity" table="related_observation">
+        <comment>The related observation of an observation.</comment>
+        <id name="id" type="long">
+            <column name="id">
+                <comment>Table primary key</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">related_observation_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="item" class="EReportingDataEntity" not-null="true" foreign-key="rel_obs_observation_fk">
+            <column name="observation" not-null="false">
+                <comment>Foreign Key (FK) to the observation. Contains "observation".id</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="relatedItem" class="EReportingDataEntity" not-null="true" foreign-key="rel_obs_related_fk">
+            <column name="related_observation">
+                <comment>Relation/foreign key to the associated observation table. Contains "observation".id</comment>
+            </column>
+        </many-to-one>
+        <property name="role" type="string">
+            <column name="role">
+                <comment>The role of the relation</comment>
+            </column>
+        </property>
+        <property name="relatedUrl" type="string" not-null="false">
+            <column name="url">
+                <comment>An url to a related observation</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

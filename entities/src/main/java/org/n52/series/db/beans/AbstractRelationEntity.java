@@ -17,13 +17,47 @@
 
 package org.n52.series.db.beans;
 
-public abstract class AbstractRelationEntity extends IdEntity {
+public abstract class AbstractRelationEntity<T> extends IdEntity {
 
     private static final long serialVersionUID = -2573767006446257428L;
+
+    private T item;
+
+    private T relatedItem;
 
     private String role;
 
     private String relatedUrl;
+
+    /**
+     * @return the item
+     */
+    public T getItem() {
+        return item;
+    }
+
+    /**
+     * @param item
+     *            the item to set
+     */
+    public void setItem(T item) {
+        this.item = item;
+    }
+
+    /**
+     * @return the relatedItem
+     */
+    public T getRelatedItem() {
+        return relatedItem;
+    }
+
+    /**
+     * @param relatedItem
+     *            the relatedItem to set
+     */
+    public void setRelatedItem(T relatedItem) {
+        this.relatedItem = relatedItem;
+    }
 
     /**
      * @return the role

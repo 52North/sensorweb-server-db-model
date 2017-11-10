@@ -17,11 +17,14 @@
 
 package org.n52.series.db.beans.i18n;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
-public class I18nEntity extends IdEntity {
+public class I18nEntity<T extends DescribableEntity> extends IdEntity {
 
     private static final long serialVersionUID = 693520332508628558L;
+
+    private T entity;
 
     private String locale;
 
@@ -32,6 +35,14 @@ public class I18nEntity extends IdEntity {
     private String longName;
 
     private String description;
+
+    public T getEntity() {
+        return entity;
+    }
+
+    public void setEntity(T entity) {
+        this.entity = entity;
+    }
 
     public String getLocale() {
         return locale;

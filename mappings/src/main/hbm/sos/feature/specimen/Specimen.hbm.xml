@@ -2,24 +2,24 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
-    <subclass name="org.n52.series.db.beans.feature.Specimen"
+    <subclass name="org.n52.series.db.beans.feature.SpecimenEntity"
     				 extends="AbstractFeatureEntity"
                      discriminator-value="SpecimenEntity">
         <join table="specimen">
-            <key foreign-key="specimenFeatureFk">
+            <key foreign-key="specimen_feature_fk">
                 <column name="fearure" >
-                    <comment>Foreign Key (FK) to the related featureOfInterest from the featureOfInterest table. Contains "featureOfInterest".featureOfInterestId</comment>
+                    <comment>Foreign Key (FK) to the related feature from the feature table. Contains "feature".id</comment>
                 </column>
             </key>
 
             <property name="materialClass" type="string">
-                <column name="materialClass" not-null="true">
+                <column name="material_class" not-null="true">
                     <comment>Material class</comment>
                 </column>
             </property>
             <property name="samplingTimeStart"
                       type="timestamp">
-                <column name="samplingTimeStart"
+                <column name="sampling_time_start"
                         length="29"
                         not-null="true">
                     <comment>Time stamp when the specimen was started</comment>
@@ -27,14 +27,14 @@
             </property>
             <property name="samplingTimeEnd"
                       type="timestamp">
-                <column name="samplingTimeEnd"
+                <column name="sampling_time_end"
                         length="29"
                         not-null="true">
                     <comment>Time stamp when the specimen was stopped</comment>
                 </column>
             </property>
             <property name="samplingMethod" type="string">
-                <column name="samplingMethod">
+                <column name="sampling_method">
                 	<comment>Sampling method as referenced link</comment>
                 </column>
             </property>
@@ -45,19 +45,19 @@
             </property>
             <many-to-one name="sizeUnit"
                          class="UnitEntity"
-                         foreign-key="observationUnitFk">
-                <column name="sizeUnit"
+                         foreign-key="specimen_unit_fk">
+                <column name="size_unit"
                         not-null="false">
                     <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
                 </column>
             </many-to-one>
             <property name="currentLocation" type="string">
-                <column name="currentLocation" >
+                <column name="current_location" >
                     <comment>Sampling method as referenced link</comment>
                 </column>
             </property>
             <property name="specimenType" type="string">
-                <column name="specimenType">
+                <column name="specimen_type">
                     <comment>Specimen type</comment>
                 </column>
             </property>

@@ -3,17 +3,17 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="org.n52.series.db.beans.feature.gml.VerticalCSEntity"
-           table="verticalcs">
+           table="vertical_cs">
         <id name="id"
             type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">verticalCS_seq</param>
+                <param name="sequence_name">vertical_cs_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,13 +21,13 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="domainId" type="string" >
-            <column name="domainId" unique-key="vcsIdentifierUK">
+            <column name="domain_id" unique-key="vertical_cs_uk">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="vcsCodespaceEntityIdentifierFk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="vertical_cs_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -37,8 +37,8 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="vcsCodespaceEntityNameFk">
-            <column name="codespaceName">
+        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="vertical_cs_name_fk">
+            <column name="codespace_name">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -48,13 +48,13 @@
             </column>
         </property>
         <property name="remarks" column="remarks" type="string" />
-        <set name="coordinateSystemAxis" table="verticalcscoodsysaxis">
-          <key column="verticalCS"
+        <set name="coordinateSystemAxis" table="vertical_cs_axis">
+          <key column="vertical_cs"
                not-null="true"
-               foreign-key="vcscsaidfk"/>
-          <many-to-many column="coordinateSystemAxis"
+               foreign-key="vertical_cs_axis_fk"/>
+          <many-to-many column="coordinate_system_axis"
                         class="org.n52.series.db.beans.feature.gml.CoordinateSystemAxisEntity"
-                        foreign-key="vcscsafk"/>
+                        foreign-key="axis_vertical_cs_fk"/>
         </set>
         <property name="aggregation" column="aggregation" type="string" />
     </class>

@@ -17,7 +17,11 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.GeometryEntity;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * Entity for AQD e-Reporting Station
@@ -25,13 +29,15 @@ import org.n52.series.db.beans.DescribableEntity;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class EReportingStationEntity extends DescribableEntity {
+public class EReportingStationEntity extends DescribableEntity implements HasGeometry<EReportingStationEntity> {
 
     public static final String ID = "station";
 
     private static final long serialVersionUID = 743675189477493870L;
 
     private Long station;
+
+    private GeometryEntity geometryEntity;
 
     /**
      * @return the station
@@ -50,4 +56,19 @@ public class EReportingStationEntity extends DescribableEntity {
         return this;
     }
 
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
+    }
+
+    public EReportingStationEntity setGeometry(Geometry geometry) {
+        this.geometryEntity = new GeometryEntity();
+        this.geometryEntity.setGeometry(geometry);
+        this.geometryEntity.setSrid(geometry.getSRID());
+        return this;
+    }
+
+    public EReportingStationEntity setGeometryEntity(GeometryEntity geometryEntity) {
+        this.geometryEntity = geometryEntity;
+        return this;
+    }
 }

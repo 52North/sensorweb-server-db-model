@@ -10,10 +10,10 @@
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">telephone_seq</param>
+                <param name="sequence_name">telephone_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,15 +21,15 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
-        <property name="gmdid" column="gmdid" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
+        <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
-        <set name="voice" table="phonevoice">
-          <key column="phone" not-null="true" foreign-key="phonevoicefk"/>
+        <set name="voice" table="phone_voice">
+          <key column="phone" not-null="true" foreign-key="phone_voice_fk"/>
           <element column="voice" type="string" not-null="true" />
         </set>
-        <set name="facsimile" table="phonefacsimile">
-          <key column="phone" not-null="true" foreign-key="phonefacsimilefk"/>
+        <set name="facsimile" table="phone_facsimile">
+          <key column="phone" not-null="true" foreign-key="phone_facsimile_fk"/>
           <element column="facsimile" type="string" not-null="true" />
         </set>
     </class>

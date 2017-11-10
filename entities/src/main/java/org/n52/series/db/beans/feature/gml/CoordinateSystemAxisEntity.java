@@ -36,9 +36,9 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     private String axisAbbrev;
     private String axisDirection;
     private String rangeMeaning;
-    private CodespaceEntity codespaceEntityAxisAbbrev;
-    private CodespaceEntity codespaceEntityAxisDirection;
-    private CodespaceEntity codespaceEntityRangeMeaning;
+    private CodespaceEntity codespaceAxisAbbrev;
+    private CodespaceEntity codespaceAxisDirection;
+    private CodespaceEntity codespaceRangeMeaning;
     private Double minimumValue;
     private Double maximumValue;
     private UnitEntity uom;
@@ -77,22 +77,22 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     }
 
     /**
-     * @return the codespaceEntityAxisAbbrev
+     * @return the codespaceAxisAbbrev
      */
-    public CodespaceEntity getCodespaceEntityAxisAbbrev() {
-        return codespaceEntityAxisAbbrev;
+    public CodespaceEntity getCodespaceAxisAbbrev() {
+        return codespaceAxisAbbrev;
     }
 
     /**
-     * @param codespaceEntityAxisAbbrev
-     *        the codespaceEntityAxisAbbrev to set
+     * @param codespaceAxisAbbrev
+     *        the codespaceAxisAbbrev to set
      */
-    public void setCodespaceEntityAxisAbbrev(CodespaceEntity codespaceEntityAxisAbbrev) {
-        this.codespaceEntityAxisAbbrev = codespaceEntityAxisAbbrev;
+    public void setCodespaceAxisAbbrev(CodespaceEntity codespaceAxisAbbrev) {
+        this.codespaceAxisAbbrev = codespaceAxisAbbrev;
     }
 
-    public boolean isSetCodespaceEntityAxisAbbrev() {
-        return getCodespaceEntityAxisAbbrev() != null && getCodespaceEntityAxisAbbrev().isSetCodespaceEntity();
+    public boolean isSetCodespaceAxisAbbrev() {
+        return getCodespaceAxisAbbrev() != null && getCodespaceAxisAbbrev().isSetCodespaceEntity();
     }
 
     /**
@@ -111,22 +111,22 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     }
 
     /**
-     * @return the codespaceEntityAxisDirection
+     * @return the codespaceAxisDirection
      */
-    public CodespaceEntity getCodespaceEntityAxisDirection() {
-        return codespaceEntityAxisDirection;
+    public CodespaceEntity getCodespaceAxisDirection() {
+        return codespaceAxisDirection;
     }
 
     /**
-     * @param codespaceEntityAxisDirection
-     *        the codespaceEntityAxisDirection to set
+     * @param codespaceAxisDirection
+     *        the codespaceAxisDirection to set
      */
-    public void setCodespaceEntityAxisDirection(CodespaceEntity codespaceEntityAxisDirection) {
-        this.codespaceEntityAxisDirection = codespaceEntityAxisDirection;
+    public void setCodespaceAxisDirection(CodespaceEntity codespaceAxisDirection) {
+        this.codespaceAxisDirection = codespaceAxisDirection;
     }
 
-    public boolean isSetCodespaceEntityAxisDirection() {
-        return getCodespaceEntityAxisDirection() != null && getCodespaceEntityAxisDirection().isSetCodespaceEntity();
+    public boolean isSetCodespaceAxisDirection() {
+        return getCodespaceAxisDirection() != null && getCodespaceAxisDirection().isSetCodespaceEntity();
     }
 
     /**
@@ -189,20 +189,20 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     /**
      * @return the rangeMeaningCodespaceEntity
      */
-    public CodespaceEntity getCodespaceEntityRangeMeaning() {
-        return codespaceEntityRangeMeaning;
+    public CodespaceEntity getCodespaceRangeMeaning() {
+        return codespaceRangeMeaning;
     }
 
     /**
-     * @param codespaceEntityRangeMeaning
-     *        the codespaceEntityRangeMeaning to set
+     * @param codespaceRangeMeaning
+     *        the codespaceRangeMeaning to set
      */
-    public void setCodespaceEntityRangeMeaning(CodespaceEntity codespaceEntityRangeMeaning) {
-        this.codespaceEntityRangeMeaning = codespaceEntityRangeMeaning;
+    public void setCodespaceRangeMeaning(CodespaceEntity codespaceRangeMeaning) {
+        this.codespaceRangeMeaning = codespaceRangeMeaning;
     }
 
-    public boolean isSetCodespaceEntityRangeMeaning() {
-        return getCodespaceEntityRangeMeaning() != null && getCodespaceEntityRangeMeaning().isSetCodespaceEntity();
+    public boolean isSetCodespaceRangeMeaning() {
+        return getCodespaceRangeMeaning() != null && getCodespaceRangeMeaning().isSetCodespaceEntity();
     }
 
     /**

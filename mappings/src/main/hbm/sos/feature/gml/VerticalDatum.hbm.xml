@@ -3,17 +3,17 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="org.n52.series.db.beans.feature.gml.VerticalDatumEntity"
-           table="verticaldatum">
+           table="vertical_datum">
         <id name="id"
             type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence">verticalDatum_seq</param>
+                <param name="sequence_name">vertical_datum_seq</param>
             </generator>
         </id>
-        <property name="nilReason" column="nilReason" type="string" />
+        <property name="nilReason" column="nil_reason" type="string" />
         <property name="href" column="href" type="string" />
         <property name="type" column="type" type="string" />
         <property name="role" column="role" type="string" />
@@ -21,13 +21,13 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="remoteSchema" column="remoteSchema" type="string" />
+        <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="domainId" type="string" >
-            <column name="domainId" unique-key="vdIdentifierUK">
+            <column name="domain_id" unique-key="vertical_datum_uk">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="vdCodespaceEntityIdentifierFk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="vertical_datum_codespace_fk">
             <column name="codespace">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -37,8 +37,8 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="vdCodespaceEntityNameFk">
-            <column name="codespaceName">
+        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="vd_codespace_name_fk">
+            <column name="codespace_name">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -50,23 +50,27 @@
         <property name="remarks" column="remarks" type="string" />
         <many-to-one name="domainOfValidity"
                      class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
-                     foreign-key="vddovFk">
-            <column index="vddovIdx"
-                    name="domainOfValidity"
+                     foreign-key="vd_domain_of_validity_fk">
+            <column index="vd_domain_of_validity_idx"
+                    name="domain_of_validity"
                     not-null="false">
             </column>
         </many-to-one>
-        <set name="scope" table="verticaldatumscope">
-          <key column="verticalDatum" not-null="true" foreign-key="vdscopefk"/>
+
+        <set name="scope" table="vertical_datum_scope">
+          <key column="verticalDatum" not-null="true" foreign-key="vd_scope_fk"/>
           <element column="scope" type="string" not-null="true" />
         </set>
-        <property name="anchorDefinition" column="anchorDefinition" type="string" />
-        <many-to-one name="codespaceAnchorDef" column="codespaceAnchorDef"
+
+        <property name="anchorDefinition" column="anchor_definition" type="string" />
+
+        <many-to-one name="codespaceAnchorDefinition" column="codespace_anchor_def"
                      class="CodespaceEntity"
-                     foreign-key="vdCodespaceEntityADefFk" />
+                     foreign-key="vd_codespace_anchor_def_fk" />
+
         <property name="realizationEpoch"
                   type="timestamp">
-            <column name="realizationEpoch"
+            <column name="realization_epoch"
                     not-null="false"
                     default="NULL"
                     length="29" >

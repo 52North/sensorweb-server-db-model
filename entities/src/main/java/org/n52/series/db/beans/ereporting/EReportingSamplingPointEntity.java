@@ -31,32 +31,13 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasStatio
 public class EReportingSamplingPointEntity extends DescribableEntity implements HasAssessmentType,
         HasStation, HasNetwork {
 
-    public static final String ID = "samplingPointId";
-
     private static final long serialVersionUID = 506067361074437086L;
-
-    private Long samplingPointId;
 
     private EReportingAssessmentTypeEntity assessmentType;
 
-    private EReportingStationEntity eReportingStationEntity;
+    private EReportingStationEntity station;
 
-    private EReportingNetworkEntity eReportingNetworkEntity;
-
-    /**
-     * @return the samplingPointId
-     */
-    public Long getSamplingPointId() {
-        return samplingPointId;
-    }
-
-    /**
-     * @param samplingPointId
-     *        the samplingPointId to set
-     */
-    public void setSamplingPointId(Long samplingPointId) {
-        this.samplingPointId = samplingPointId;
-    }
+    private EReportingNetworkEntity network;
 
     @Override
     public EReportingAssessmentTypeEntity getAssessmentType() {
@@ -75,35 +56,35 @@ public class EReportingSamplingPointEntity extends DescribableEntity implements 
     }
 
     @Override
-    public EReportingNetworkEntity getEReportingNetworkEntity() {
-        return eReportingNetworkEntity;
+    public EReportingNetworkEntity getNetwork() {
+        return network;
     }
 
     @Override
-    public HasNetwork setEReportingNetworkEntity(EReportingNetworkEntity network) {
-        this.eReportingNetworkEntity = network;
+    public EReportingSamplingPointEntity setNetwork(EReportingNetworkEntity network) {
+        this.network = network;
         return this;
     }
 
     @Override
-    public boolean isSetEReportingNetworkEntity() {
-        return getEReportingNetworkEntity() != null;
+    public boolean isSetNetwork() {
+        return getNetwork() != null;
     }
 
     @Override
-    public EReportingStationEntity getEReportingStationEntity() {
-        return eReportingStationEntity;
+    public EReportingStationEntity getStation() {
+        return station;
     }
 
     @Override
-    public HasStation setEReportingStationEntity(EReportingStationEntity station) {
-        this.eReportingStationEntity = station;
+    public EReportingSamplingPointEntity setStation(EReportingStationEntity station) {
+        this.station = station;
         return this;
     }
 
     @Override
-    public boolean isSetEReportingStationEntity() {
-        return getEReportingStationEntity() != null;
+    public boolean isSetStation() {
+        return getStation() != null;
     }
 
 }

@@ -17,21 +17,36 @@
 
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
+import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
+import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
+import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
+import org.n52.series.db.beans.HibernateRelations.HasObservationType;
+import org.n52.series.db.beans.HibernateRelations.HasOffering;
+import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity extends DescribableEntity {
+public class DatasetEntity extends DescribableEntity
+        implements Serializable,
+        HasProcedure<DatasetEntity>,
+        HasObservableProperty<DatasetEntity>,
+        HasOffering<DatasetEntity>,
+        HasObservationType<DatasetEntity>,
+        HasHiddenChildFlag<DatasetEntity>,
+        HasDeletedFlag<DatasetEntity>,
+        HasDisabledFlag<DatasetEntity> {
 
     public static final String DEFAULT_VALUE_TYPE = "quantity";
 
     public static final String ENTITY_ALIAS = "dataset";
 
-    public static final String PROPERTY_OBSERVATION_CONSTELLATION = "observationConstellation";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
@@ -43,7 +58,11 @@ public class DatasetEntity extends DescribableEntity {
 
     private static final long serialVersionUID = -7491530543976690237L;
 
-    private ObservationConstellationEntity observationConstellation;
+    private PhenomenonEntity phenomenon;
+
+    private ProcedureEntity procedure;
+
+    private OfferingEntity offering;
 
     private AbstractFeatureEntity feature;
 
@@ -55,6 +74,8 @@ public class DatasetEntity extends DescribableEntity {
 
     private boolean deleted;
 
+    private boolean disabled;
+
     private String valueType;
 
     private Set<Date> resultTimes;
@@ -63,11 +84,23 @@ public class DatasetEntity extends DescribableEntity {
 
     private Date lastValueAt;
 
+    private DataEntity firstObservation;
+
+    private DataEntity lastObservation;
+
+    private double firstValue;
+
+    private double lastValue;
+
     private UnitEntity unit;
 
     private long observationCount = -1;
 
     private boolean hiddenChild;
+
+    private ObservationTypeEntity observationType;
+
+    private int decimals;
 
     public DatasetEntity() {
         this((String) null);
@@ -85,43 +118,50 @@ public class DatasetEntity extends DescribableEntity {
         this.category = category;
     }
 
-    public ObservationConstellationEntity getObservationConstellation() {
-        return observationConstellation;
-    }
-
-    public void setObservationConstellation(ObservationConstellationEntity observationConstellation) {
-        this.observationConstellation = observationConstellation;
-    }
-
     public PhenomenonEntity getPhenomenon() {
-        return getObservationConstellation().getObservableProperty();
+        return phenomenon;
     }
 
-    public void setPhenomenon(PhenomenonEntity phenomenon) {
-        existsOrCreateObservationConstellation().setObservableProperty(phenomenon);
+    public DatasetEntity setPhenomenon(PhenomenonEntity phenomenon) {
+        this.phenomenon = phenomenon;
+        return this;
     }
 
-    private ObservationConstellationEntity existsOrCreateObservationConstellation() {
-        if (getObservationConstellation() == null) {
-            setObservationConstellation(new ObservationConstellationEntity());
-        }
-        return getObservationConstellation();
+    @Override
+    public PhenomenonEntity getObservableProperty() {
+        return getPhenomenon();
     }
 
+    @Override
+    public DatasetEntity setObservableProperty(PhenomenonEntity observableProperty) {
+        return setPhenomenon(phenomenon);
+    }
+
+    @Override
     public ProcedureEntity getProcedure() {
-        return getObservationConstellation().getProcedure();
+        return procedure;
     }
 
-    public void setProcedure(ProcedureEntity procedure) {
-        existsOrCreateObservationConstellation().setProcedure(procedure);
+    @Override
+    public DatasetEntity setProcedure(ProcedureEntity procedure) {
+        this.procedure = procedure;
+        return this;
     }
 
+    @Override
     public OfferingEntity getOffering() {
-        return getObservationConstellation().getOffering();
+        return offering;
     }
 
-    public void setOffering(OfferingEntity offering) {
-        existsOrCreateObservationConstellation().setOffering(offering);
+    @Override
+    public DatasetEntity setOffering(OfferingEntity offering) {
+        this.offering = offering;
+        return this;
+    }
+
+    @Override
+    public boolean isSetOffering() {
+        return getOffering() != null;
     }
 
     public AbstractFeatureEntity getFeature() {
@@ -130,6 +170,10 @@ public class DatasetEntity extends DescribableEntity {
 
     public void setFeature(AbstractFeatureEntity feature) {
         this.feature = feature;
+    }
+
+    public boolean isSetFeature() {
+        return getFeature() != null;
     }
 
     public PlatformEntity getPlatform() {
@@ -148,12 +192,39 @@ public class DatasetEntity extends DescribableEntity {
         this.published = published;
     }
 
-    public Boolean isDeleted() {
+    public boolean isDeleted() {
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
+    public DatasetEntity setDeleted(boolean deleted) {
         this.deleted = deleted;
+        return this;
+    }
+
+    @Override
+    public boolean getDeleted() {
+        return deleted;
+    }
+
+    @Override
+    public DatasetEntity setDisabled(boolean disabled) {
+        this.disabled = disabled;
+        return this;
+    }
+
+    @Override
+    public boolean getDisabled() {
+        return disabled;
+    }
+
+    @Override
+    public boolean isDisabled() {
+        return disabled;
+    }
+
+    @Override
+    public boolean isSetObservationType() {
+        return getObservationType() != null && getObservationType().isSetType();
     }
 
     public Date getFirstValueAt() {
@@ -178,6 +249,38 @@ public class DatasetEntity extends DescribableEntity {
 
     public boolean isSetLastValueAt() {
         return getLastValueAt() != null;
+    }
+
+    public DataEntity getFirstObservation() {
+        return firstObservation;
+    }
+
+    public void setFirstObservation(DataEntity firstObservation) {
+        this.firstObservation = firstObservation;
+    }
+
+    public DataEntity getLastObservation() {
+        return lastObservation;
+    }
+
+    public void setLastObservation(DataEntity lastObservation) {
+        this.lastObservation = lastObservation;
+    }
+
+    public double getFirstValue() {
+        return firstValue;
+    }
+
+    public void setFirstValue(double firstValue) {
+        this.firstValue = firstValue;
+    }
+
+    public double getLastValue() {
+        return lastValue;
+    }
+
+    public void setLastValue(double lastValue) {
+        this.lastValue = lastValue;
     }
 
     public String getValueType() {
@@ -252,15 +355,35 @@ public class DatasetEntity extends DescribableEntity {
         return hiddenChild;
     }
 
-    public void setHiddenChild(boolean hiddenChild) {
+    public DatasetEntity setHiddenChild(boolean hiddenChild) {
         this.hiddenChild = hiddenChild;
+        return this;
+    }
+
+    public ObservationTypeEntity getObservationType() {
+        return observationType;
+
+    }
+
+    public DatasetEntity setObservationType(ObservationTypeEntity observationType) {
+        this.observationType = observationType;
+        return this;
+    }
+
+    public boolean isSetObservationtype() {
+        return getObservationType() != null && getObservationType().isSetType();
+    }
+
+    public int getDecimals() {
+        return decimals;
+    }
+
+    public void setDecimals(int decimals) {
+        this.decimals = decimals;
     }
 
     @Override
     public String getLabelFrom(String locale) {
-        ProcedureEntity procedure = observationConstellation.getProcedure();
-        PhenomenonEntity phenomenon = observationConstellation.getObservableProperty();
-        OfferingEntity offering = observationConstellation.getOffering();
         StringBuilder sb = new StringBuilder();
         sb.append(phenomenon.getLabelFrom(locale))
           .append(" ");
@@ -280,7 +403,7 @@ public class DatasetEntity extends DescribableEntity {
                  .append(" id: ")
                  .append(getId())
                  .append(" , category: ")
-                 .append(category)
+                 .append(getCategory())
                  .append(" , phenomenon: ")
                  .append(getPhenomenon())
                  .append(" , procedure: ")
@@ -288,7 +411,7 @@ public class DatasetEntity extends DescribableEntity {
                  .append(" , offering: ")
                  .append(getOffering())
                  .append(" , feature: ")
-                 .append(feature)
+                 .append(getFeature())
                  .append(" , service: ")
                  .append(getService())
                  .append(" ]")
