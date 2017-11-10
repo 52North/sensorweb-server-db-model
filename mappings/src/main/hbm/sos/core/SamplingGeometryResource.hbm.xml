@@ -6,13 +6,13 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-        <property name="timestamp" column="phenomenon_time_end" type="timestamp"/>
+        <property name="timestamp" column="phenomenon_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
 
-        <component class="GeometryEntity" name="geometryEntity">
+        <component class="GeometryEntity" name="geometryEntity" insert="false" update="false">
             <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" />
         </component>
 
-        <many-to-one column="dataset" name="dataset" class="DatasetEntity" foreign-key="sampling_geom_dataset_fk" />
+        <many-to-one column="dataset" name="dataset" class="DatasetEntity" not-null="true" foreign-key="sampling_geom_dataset_fk" insert="false" update="false"/>
     </class>
 </hibernate-mapping>

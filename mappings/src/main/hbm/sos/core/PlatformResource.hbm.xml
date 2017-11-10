@@ -10,7 +10,7 @@
         <!-- <column name="service" not-null="true"/> -->
         <!-- </many-to-one> -->
         <property column="domain_id" insert="false" name="domainId" type="string" update="false" />
-        <property column="name" name="name" type="string" />
+        <property column="name" insert="false" name="name" type="string" update="false" />
         <property column="mobile" insert="false" name="mobile" type="numeric_boolean" update="false" />
         <property column="insitu" insert="false" name="insitu" type="numeric_boolean" update="false" />
    		<set name="translations" table="procedure_i18n" inverse="true" fetch="select">
@@ -22,9 +22,7 @@
     <class name="org.n52.series.db.beans.i18n.I18nPlatformEntity" table="procedure_i18n">
         <id name="id" type="long">
             <column name="id" />
-            <generator class="native">
-                <param name="sequence_name">procedure_i18n_seq</param>
-            </generator>
+            <generator class="assigned" />
         </id>
 		<many-to-one name="entity" column="`procedure`" not-null="true" class="PlatformEntity" foreign-key="translation_procedure_fk"/>
         <property name="locale" type="string" insert="false" update="false" />

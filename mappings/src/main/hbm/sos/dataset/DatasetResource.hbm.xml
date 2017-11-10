@@ -40,14 +40,20 @@
 
         <property name="deleted" type="numeric_boolean">
             <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
-                <comment>Flag to indicate that this series is deleted or not. Set if the related procedure is deleted
+                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
                     via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+            </column>
+        </property>
+
+        <property name="disabled" type="numeric_boolean">
+            <column name="disabled" not-null="true" default="0" check="disabled in (1,0)">
+                <comment>Flag to indicate that this dataset is disabled for SOS transactional insertion or not.</comment>
             </column>
         </property>
 
         <property name="published" type="numeric_boolean">
             <column name="published" not-null="true" default="1" check="published in (1,0)">
-                <comment>Flag to indicate that this series is published or not. A not published series is not contained
+                <comment>Flag to indicate that this dataset is published or not. A not published dataset is not contained
                     in GetObservation and GetDataAvailability responses</comment>
             </column>
         </property>

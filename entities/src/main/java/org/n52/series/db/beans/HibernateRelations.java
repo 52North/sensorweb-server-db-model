@@ -64,22 +64,6 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasObservationConstellation {
-        String OBSERVATION_CONSTELLATION = "observationConstellation";
-
-        ObservationConstellationEntity getObservationConstellation();
-
-        void setObservationConstellation(ObservationConstellationEntity observationConstellation);
-    }
-
-    interface HasObservationConstellations {
-        String OBSERVATION_CONSTELLATIONS = "observationConstellations";
-
-        Set<ObservationConstellationEntity> getObservationConstellations();
-
-        void setObservationConstellations(Set<ObservationConstellationEntity> observationConstellations);
-    }
-
     interface HasDescription<T> {
         String DESCRIPTION = "description";
 

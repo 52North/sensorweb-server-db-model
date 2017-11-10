@@ -8,7 +8,7 @@
                 <param name="sequence_name">category_seq</param>
             </generator>
         </id>
-        <property column="domain_id" name="domainId" type="string" />
+        <property column="domain_id" name="domainId" type="string" not-null="true" />
         <property name="name" type="string">
             <column name="name">
                 <comment>The name of the category</comment>

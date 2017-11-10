@@ -192,7 +192,7 @@
 					</column>
 				</many-to-many>
 			</set>
-        	<join table="profile_value">
+        	<join table="value_profile">
 	            <key foreign-key="profile_value_fk">
 	                <column name="observation">
 	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
