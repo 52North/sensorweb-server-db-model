@@ -61,7 +61,7 @@ public class EReportingSamplingPointEntity extends DescribableEntity implements 
     }
 
     @Override
-    public HasNetwork setNetwork(EReportingNetworkEntity network) {
+    public EReportingSamplingPointEntity setNetwork(EReportingNetworkEntity network) {
         this.network = network;
         return this;
     }
@@ -77,7 +77,7 @@ public class EReportingSamplingPointEntity extends DescribableEntity implements 
     }
 
     @Override
-    public HasStation setStation(EReportingStationEntity station) {
+    public EReportingSamplingPointEntity setStation(EReportingStationEntity station) {
         this.station = station;
         return this;
     }

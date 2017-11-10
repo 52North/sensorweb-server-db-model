@@ -23,7 +23,6 @@ import java.util.Set;
 
 import org.n52.series.db.beans.parameter.Parameter;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.vividsolutions.jts.geom.Geometry;
 
 /**

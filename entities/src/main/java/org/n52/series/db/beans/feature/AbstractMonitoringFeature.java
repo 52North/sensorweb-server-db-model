@@ -73,7 +73,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
         if (!isSetContent()) {
             setContent(new MonitoringPointContent());
         }
-        getContent().addAllRelatedParties(relatedParty);
+        getContent().addAllRelatedParty(relatedParty);
         return this;
     }
 

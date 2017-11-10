@@ -39,8 +39,7 @@ public class ValuedParameterVisitor
         "rawtypes"
     })
     @Override
-    public NamedValue visit(ParameterQuantity p)
-            throws OwsExceptionReport {
+    public NamedValue visit(ParameterQuantity p) throws OwsExceptionReport {
         NamedValue<Double> namedValue = new NamedValue<>();
         addName(namedValue, p);
         namedValue.setValue(new QuantityValue(p.getValue()));
@@ -53,8 +52,7 @@ public class ValuedParameterVisitor
         "rawtypes"
     })
     @Override
-    public NamedValue visit(ParameterBoolean p)
-            throws OwsExceptionReport {
+    public NamedValue visit(ParameterBoolean p) throws OwsExceptionReport {
         NamedValue<Boolean> namedValue = new NamedValue<>();
         addName(namedValue, p);
         namedValue.setValue(new BooleanValue(p.getValue()));
@@ -66,8 +64,7 @@ public class ValuedParameterVisitor
         "rawtypes"
     })
     @Override
-    public NamedValue visit(ParameterCategory p)
-            throws OwsExceptionReport {
+    public NamedValue visit(ParameterCategory p) throws OwsExceptionReport {
         NamedValue<String> namedValue = new NamedValue<>();
         addName(namedValue, p);
         namedValue.setValue(new CategoryValue(p.getValue()));
@@ -80,8 +77,7 @@ public class ValuedParameterVisitor
         "rawtypes"
     })
     @Override
-    public NamedValue visit(ParameterCount p)
-            throws OwsExceptionReport {
+    public NamedValue visit(ParameterCount p) throws OwsExceptionReport {
         NamedValue<Integer> namedValue = new NamedValue<>();
         addName(namedValue, p);
         namedValue.setValue(new CountValue(p.getValue()));
@@ -93,8 +89,7 @@ public class ValuedParameterVisitor
         "rawtypes"
     })
     @Override
-    public NamedValue visit(ParameterText p)
-            throws OwsExceptionReport {
+    public NamedValue visit(ParameterText p) throws OwsExceptionReport {
         NamedValue<String> namedValue = new NamedValue<>();
         addName(namedValue, p);
         namedValue.setValue(new TextValue(p.getValue()));
@@ -106,8 +101,7 @@ public class ValuedParameterVisitor
         "rawtypes"
     })
     @Override
-    public NamedValue visit(ParameterXml p)
-            throws OwsExceptionReport {
+    public NamedValue visit(ParameterXml p) throws OwsExceptionReport {
         // NamedValue<XmlObject> namedValue = new NamedValue<>();
         // addName(namedValue, p);
         // namedValue.setValue(new XmlValue(p.getValueAsXml()));

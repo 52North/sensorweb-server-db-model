@@ -23,13 +23,13 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimar
 
 public class EReportingQualityEntity extends IdEntity implements HasPrimaryObservation, EReportingQualityData {
 
-    private static final long serialVersionUID = 1891418800348199576L;
-
     public static final String YEAR = "year";
 
-    public static final String SERIES = "series";
+    public static final String DATASET = "dataset";
 
     public static final String PRIMARY_OBSERVATION = "primaryObservation";
+
+    private static final long serialVersionUID = 1891418800348199576L;
 
     private long dataset;
 

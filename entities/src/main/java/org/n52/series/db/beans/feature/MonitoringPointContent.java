@@ -27,31 +27,31 @@ import org.n52.shetland.util.CollectionHelper;
 public class MonitoringPointContent {
 
     /* 0..* */
-    private Collection<ResponsiblePartyEntity> relatedParties = new ArrayList<>();
+    private Collection<ResponsiblePartyEntity> relatedParty = new ArrayList<>();
 
     /* 0..* */
     private Collection<VerticalDatumEntity> verticalDatum = new ArrayList<>();
 
     public Collection<ResponsiblePartyEntity> getRelatedParty() {
-        return relatedParties;
+        return relatedParty;
     }
 
     public void setRelatedParty(Collection<ResponsiblePartyEntity> relatedParties) {
-        this.relatedParties.clear();
+        this.relatedParty.clear();
         if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(relatedParties)) {
-            this.relatedParties.addAll(relatedParties);
+            this.relatedParty.addAll(relatedParties);
         }
     }
 
-    public void addAllRelatedParties(Collection<ResponsiblePartyEntity> relatedPartiesToAdd) {
-        if (relatedPartiesToAdd != null) {
-            this.relatedParties.addAll(relatedPartiesToAdd);
+    public void addAllRelatedParty(Collection<ResponsiblePartyEntity> rp) {
+        if (rp != null) {
+            this.relatedParty.addAll(rp);
         }
     }
 
-    public void addRelatedParty(ResponsiblePartyEntity relatedParty) {
-        if (relatedParty != null) {
-            this.relatedParties.add(relatedParty);
+    public void addRelatedParty(ResponsiblePartyEntity rp) {
+        if (rp != null) {
+            this.relatedParty.add(rp);
         }
     }
 
@@ -70,15 +70,15 @@ public class MonitoringPointContent {
         }
     }
 
-    public void addAllVerticalDatum(Collection<VerticalDatumEntity> verticalDatum) {
-        if (verticalDatum != null) {
-            this.verticalDatum.addAll(verticalDatum);
+    public void addAllVerticalDatum(Collection<VerticalDatumEntity> vd) {
+        if (vd != null) {
+            this.verticalDatum.addAll(vd);
         }
     }
 
-    public void addVerticalDatum(VerticalDatumEntity verticalDatum) {
-        if (verticalDatum != null) {
-            this.verticalDatum.add(verticalDatum);
+    public void addVerticalDatum(VerticalDatumEntity vd) {
+        if (vd != null) {
+            this.verticalDatum.add(vd);
         }
     }
 

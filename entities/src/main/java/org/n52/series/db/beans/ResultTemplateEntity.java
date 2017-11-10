@@ -50,9 +50,9 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     private String domainId;
 
-    private String resultStructure;
+    private String structure;
 
-    private String resultEncoding;
+    private String encoding;
 
     public ResultTemplateEntity() {
     }
@@ -135,22 +135,22 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     @Override
     public String getStructure() {
-        return resultStructure;
+        return structure;
     }
 
     @Override
     public void setStructure(String resultStructure) {
-        this.resultStructure = resultStructure;
+        this.structure = resultStructure;
     }
 
     @Override
     public String getEncoding() {
-        return this.resultEncoding;
+        return this.encoding;
     }
 
     @Override
     public void setEncoding(String resultEncoding) {
-        this.resultEncoding = resultEncoding;
+        this.encoding = resultEncoding;
     }
 
 }
