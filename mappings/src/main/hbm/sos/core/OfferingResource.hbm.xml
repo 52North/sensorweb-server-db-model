@@ -151,9 +151,8 @@
         </set>
 
         <set name="translations" table="offering_i18n" inverse="true" fetch="select">
-            <key column="offering" not-null="true" foreign-key="offering_translation_fk" />
-            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nOfferingEntity"
-                foreign-key="translation_offering_fk" />
+            <key column="offering" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nOfferingEntity" />
         </set>
     </class>
 
@@ -164,7 +163,7 @@
                 <param name="sequence_name">offering_i18n_seq</param>
             </generator>
         </id>
-
+		<many-to-one name="entity" column="offering" not-null="true" class="OfferingEntity" foreign-key="translation_offering_fk"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

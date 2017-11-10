@@ -13,5 +13,32 @@
         <property column="name" name="name" type="string" />
         <property column="mobile" insert="false" name="mobile" type="org.hibernate.type.NumericBooleanType" update="false" />
         <property column="insitu" insert="false" name="insitu" type="org.hibernate.type.NumericBooleanType" update="false" />
+   		<set name="translations" table="procedure_i18n" inverse="true" fetch="select">
+            <key column="`procedure`" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />
+        </set>
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nPlatformEntity" table="procedure_i18n">
+        <id name="id" type="long">
+            <column name="id" />
+            <generator class="native">
+                <param name="sequence_name">procedure_i18n_seq</param>
+            </generator>
+        </id>
+		<many-to-one name="entity" column="`procedure`" not-null="true" class="PlatformEntity" foreign-key="translation_procedure_fk"/>
+        <property name="locale" type="string" insert="false" update="false" />
+        <property name="name" type="string" insert="false" update="false" />
+        <property name="description" type="string" insert="false" update="false"  />
+        <property name="shortName" type="string" insert="false" update="false">
+            <column name="short_name">
+                <!-- <comment>Locale/language specific shortname of the procedure</comment> -->
+            </column>
+        </property>
+        <property name="longName" type="string" insert="false" update="false">
+            <column name="long_name">
+                <!-- <comment>Locale/language specific longname of the procedure</comment> -->
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

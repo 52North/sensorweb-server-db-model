@@ -17,7 +17,9 @@
 
 package org.n52.series.db.beans.i18n;
 
-public class I18nPhenomenonEntity extends I18nEntity {
+import org.n52.series.db.beans.PhenomenonEntity;
+
+public class I18nPhenomenonEntity extends I18nEntity<PhenomenonEntity> {
 
     private static final long serialVersionUID = 8139714432806062380L;
 

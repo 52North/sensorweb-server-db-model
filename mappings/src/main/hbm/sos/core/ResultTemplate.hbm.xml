@@ -24,7 +24,7 @@
             </column>
         </many-to-one>
         <many-to-one name="procedure" class="ProcedureEntity" foreign-key="result_template_procedure_fk">
-            <column index="rt_procedure_idx" name="procedure" not-null="false">
+            <column index="rt_procedure_idx" name="`procedure`" not-null="false">
                 <comment>Foreign Key (FK) to the related procedure. Contains "procedure".id</comment>
             </column>
         </many-to-one>

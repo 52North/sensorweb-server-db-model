@@ -12,11 +12,7 @@
                 <param name="sequence_name">procedure_history_seq</param>
             </generator>
         </id>
-        <many-to-one name="procedure" class="ProcedureEntity" foreign-key="proc_history_proc_fk">
-            <column name="procedure" not-null="true">
-                <comment>Foreign Key (FK) to the related procedure. Contains "procedure".id</comment>
-            </column>
-        </many-to-one>
+
         <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="proc_hist_format_fk">
             <column name="format" not-null="true">
                 <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains

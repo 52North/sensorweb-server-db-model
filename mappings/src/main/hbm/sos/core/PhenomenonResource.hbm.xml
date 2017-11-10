@@ -71,9 +71,8 @@
         </set>
 
         <set name="translations" table="phenomenon_i18n" inverse="true" fetch="select">
-            <key column="phenomenon" not-null="true" foreign-key="phenomenon_tranlsation_fk" />
-            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity"
-                foreign-key="tranlsation_phenomenon_fk" />
+         	<key column="phenomenon" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" />
         </set>
     </class>
 
@@ -84,7 +83,7 @@
                 <param name="sequence_name">phenomenon_i18n_seq</param>
             </generator>
         </id>
-
+		<many-to-one name="entity" column="phenomenon" not-null="true" class="PhenomenonEntity" foreign-key="tranlsation_phenomenon_fk"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

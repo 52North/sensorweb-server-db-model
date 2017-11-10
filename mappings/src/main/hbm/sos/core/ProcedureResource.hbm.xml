@@ -95,14 +95,13 @@
         </many-to-one>
         <set name="procedureHistory" table="procedure_history" inverse="true">
             <key foreign-key="procedure_history_fk">
-                <column name="procedure" not-null="true" />
+                <column name="`procedure`" not-null="true" />
             </key>
             <one-to-many class="ProcedureHistoryEntity" />
         </set>
         <set name="translations" table="procedure_i18n" inverse="true" fetch="select">
-            <key column="procedure" not-null="true" foreign-key="procedure_translation_fk" />
-            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nProcedureEntity"
-                foreign-key="translation_procedure_fk" />
+            <key column="`procedure`" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nProcedureEntity" />
         </set>
     </class>
 
@@ -113,7 +112,7 @@
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
-
+		<many-to-one name="entity" column="`procedure`" not-null="true" class="ProcedureEntity" foreign-key="translation_procedure_fk"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />
