@@ -59,7 +59,9 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     private Date resultTimeEnd;
 
     private Set<RelatedFeatureEntity> relatedFeatures;
+
     private Date validTimeStart;
+
     private Date validTimeEnd;
 
     public boolean isHidden() {

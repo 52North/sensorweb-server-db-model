@@ -4,7 +4,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="RelatedFeatureRoleEntity" table="related_feature_role">
         <comment>Table to store related feature role information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
-            2.0). Mapping file: mapping/transactionl/RelatedFeatureRole.hbm.xml</comment>
+            2.0). Mapping file: sos/core/RelatedFeatureRole.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>

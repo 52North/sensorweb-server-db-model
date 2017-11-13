@@ -4,7 +4,7 @@
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingSamplingPointEntity"
            table="sampling_point">
-        <comment>Table to store the AQD e-Reporting Sampling Point information. Mapping file: mapping/ereporting/EReportingSamplingPoint.hbm.xml</comment>
+        <comment>Table to store the AQD e-Reporting Sampling Point information. Mapping file: sos/ereporting/EReportingSamplingPoint.hbm.xml</comment>
         <id name="id"
             type="long">
             <column name="id">

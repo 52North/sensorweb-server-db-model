@@ -3,7 +3,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ObservationTypeEntity" table="observation_type">
-        <comment>Table to store the observationTypes. Mapping file: mapping/core/ObservationType.hbm.xml</comment>
+        <comment>Table to store the observationTypes. Mapping file: sos/core/ObservationType.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>

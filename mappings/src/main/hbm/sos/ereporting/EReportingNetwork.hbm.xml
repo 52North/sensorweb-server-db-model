@@ -3,7 +3,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingNetworkEntity" table="network">
-        <comment>Table to store the AQD e-Reporting network information. Mapping file: mapping/ereporting/EReportingNetwork.hbm.xml</comment>
+        <comment>Table to store the AQD e-Reporting network information. Mapping file: sos/ereporting/EReportingNetwork.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>

@@ -4,7 +4,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="RelatedFeatureEntity" table="related_feature">
         <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
-            2.0). Mapping file: mapping/transactionl/RelatedFeature.hbm.xml</comment>
+            2.0). Mapping file: sos/core/RelatedFeature.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
@@ -24,24 +24,8 @@
                     "related_feature_role".id</comment>
             </column>
         </many-to-one>
-        <!-- <set name="relatedFeatureRole" table="related_feature_role" inverse="false">
-            <comment>Relation table to store relatedFeatures and their associated relatedFeatureRoles. Mapping file:
-                mapping/transactionl/RelatedFeature.hbm.xml</comment>
-            <key foreign-key="related_feature_role_fk">
-                <column name="related_feature" not-null="true">
-                    <comment>Foreign Key (FK) to the related relatedFeature. Contains "related_feature".id</comment>
-                </column>
-            </key>
-            <many-to-many class="RelatedFeatureRoleEntity" foreign-key="role_related_feature_fk">
-                <column name="role" not-null="true">
-                    <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains
-                        "related_feature_role".id</comment>
-                </column>
-            </many-to-many>
-        </set>-->
         <set name="offerings" table="offering_related_feature" inverse="true">
-            <comment>Relation table to store relatedFeatures and their associated offerings. Mapping file:
-                mapping/transactionl/RelatedFeature.hbm.xml</comment>
+            <comment>Relation table to store relatedFeatures and their associated offerings.</comment>
             <key foreign-key="offering_related_feature_fk">
                 <column name="related_feature" not-null="true">
                     <comment>Foreign Key (FK) to the related relatedFeature. Contains "related_eature".id</comment>

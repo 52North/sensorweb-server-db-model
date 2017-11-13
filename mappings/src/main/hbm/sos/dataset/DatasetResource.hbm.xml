@@ -10,7 +10,7 @@
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
-        <discriminator column="value_type" force="true" type="string" not-null="true"/>
+        <discriminator column="value_type" force="true" type="string" not-null="false"/>
 
         <many-to-one class="ProcedureEntity" column="`procedure`" name="procedure" not-null="true" unique-key="dataset_identity"
         	foreign-key="dataset_procedure_fk" />

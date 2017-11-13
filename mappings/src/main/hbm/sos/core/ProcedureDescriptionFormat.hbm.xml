@@ -3,7 +3,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ProcedureDescriptionFormatEntity" table="procedure_description_format">
-        <comment>Table to store the ProcedureDescriptionFormat information of procedures. Mapping file: mapping/core/ProcedureDescriptionFormat.hbm.xml</comment>
+        <comment>Table to store the ProcedureDescriptionFormat information of procedures. Mapping file: sos/core/ProcedureDescriptionFormat.hbm.xml</comment>
         <id name="id" type="long" >
             <column name="id" >
                 <comment>Table primary key, used for relations</comment>

@@ -3,7 +3,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="OfferingEntity" table="offering">
         <comment>Table to store the offering information. Mapping file:
-            mapping/core/OfferingResource.hbm.xml</comment>
+            sos/core/OfferingResource.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
@@ -91,7 +91,7 @@
         <set name="children" table="offering_relation" inverse="false" fetch="select">
             <comment>Relation table to store offering hierarchies. E.g. define a
                 parent in a query and all childs are also contained in the response.
-                Mapping file: mapping/core/Offering.hbm.xml</comment>
+                Mapping file: sos/core/Offering.hbm.xml</comment>
             <key column="parent" not-null="true" foreign-key="offering_parent_fk" />
             <many-to-many class="OfferingEntity" column="child" foreign-key="offering_child_fk" />
         </set>
@@ -103,8 +103,7 @@
 
         <set name="observationTypes" table="offering_observation_type" inverse="false" fetch="select">
             <comment>Table to store relations between offering and allowed
-                observationTypes, defined in InsertSensor request. Mapping file:
-                mapping/transactional/TOffering.hbm.xml</comment>
+                observationTypes, defined in InsertSensor request</comment>
             <key foreign-key="offering_observation_type_fk">
                 <column name="offering" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains
@@ -121,8 +120,7 @@
 
         <set name="relatedFeatures" table="offering_related_feature" inverse="false">
             <comment>Table to store relations between offering and associated
-                relatedFeatures. Mapping file:
-                mapping/transactional/Offering.hbm.xml</comment>
+                relatedFeatures</comment>
             <key foreign-key="offering_related_feature_fk">
                 <column name="offering" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains
@@ -139,8 +137,7 @@
 
         <set name="featureTypes" table="offering_feature_type" inverse="false">
             <comment>Table to store relations between offering and allowed
-                featureOfInterestTypes, defined in InsertSensor request. Mapping
-                file: mapping/transactional/TOffering.hbm.xml</comment>
+                featureOfInterestTypes, defined in InsertSensor request.</comment>
             <key foreign-key="offering_feature_type_fk">
                 <column name="offering" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains

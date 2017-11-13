@@ -4,7 +4,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="FeatureTypeEntity" table="feature_type">
         <comment>Table to store the FeatureOfInterestType information. Mapping file:
-            mapping/core/FeatureType.hbm.xml</comment>
+            sos/core/FeatureType.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>

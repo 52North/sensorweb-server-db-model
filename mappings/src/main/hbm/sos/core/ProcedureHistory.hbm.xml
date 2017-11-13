@@ -3,7 +3,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ProcedureHistoryEntity" table="procedure_history">
         <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile.
-            Mapping file: mapping/ProcedureHistory.hbm.xml</comment>
+            Mapping file: msos/core/ProcedureHistory.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key</comment>

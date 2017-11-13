@@ -5,7 +5,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="CodespaceEntity" table="codespace">
         <comment>Table to store the gml:identifier and gml:name codespace information. Mapping file:
-            mapping/core/Codespace.hbm.xml</comment>
+            sos/core/Codespace.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>

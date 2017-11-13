@@ -3,7 +3,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="PhenomenonEntity" table="phenomenon">
         <comment>Table to store the ObservedProperty/Phenomenon information. Mapping file:
-            mapping/core/ObservableProperty.hbm.xml</comment>
+            sos/core/ObservableProperty.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key, used for relations</comment>
@@ -45,8 +45,7 @@
 
         <set name="children" table="composite_phenomenon" inverse="false">
             <comment>Relation table to store observableProperty hierarchies, aka compositePhenomenon. E.g. define a
-                parent in a query and all childs are also contained in the response. Mapping file:
-                mapping/transactional/TObservableProperty.hbm.xml</comment>
+                parent in a query and all childs are also contained in the response.</comment>
             <key foreign-key="phenomenon_parent_fk">
                 <column name="parent" not-null="true">
                     <comment>Foreign Key (FK) to the related parent observableProperty. Contains

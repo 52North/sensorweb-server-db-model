@@ -3,7 +3,7 @@
     "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping package="org.n52.series.db.beans.ereporting">
     <class name="EReportingRelatedDatasetEntity" table="related_dataset">
-        <comment>The series relation should be used if the series table represents a dataset.</comment>
+        <comment>The dataset relation should be used if the dataset table represents a dataset.</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key</comment>
@@ -14,12 +14,12 @@
         </id>
         <property name="item" type="long">
             <column name="dataset" not-null="true" index="rel_dataset_dataset_idx">
-                <comment>Foreign Key (FK) to the series. Contains "dataset".id</comment>
+                <comment>Foreign Key (FK) to the dataset. Contains "dataset".id</comment>
             </column>
         </property>
         <many-to-one name="relatedItem" class="EReportingDatasetEntity" foreign-key="rel_dataset_rel_dataset_fk">
             <column name="related_dataset"  not-null="true">
-                <comment>Relation/foreign key to the associated series table. Contains "dataset".id</comment>
+                <comment>Relation/foreign key to the associated dataset table. Contains "dataset".id</comment>
             </column>
         </many-to-one>
         <property name="role" type="string">

@@ -4,7 +4,7 @@
 <hibernate-mapping package="org.n52.series.db.beans">
     <class name="ResultTemplateEntity" table="result_template">
         <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file:
-            mapping/core/ResultTemplate.hbm.xml</comment>
+            sos/core/ResultTemplate.hbm.xml</comment>
         <id name="id" type="long">
             <column name="id">
                 <comment>Table primary key</comment>
