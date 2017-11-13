@@ -29,10 +29,6 @@ public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingSweDataArrayDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingSweDataArrayDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingSweDataArrayDatasetEntity> getReferenceValues() {
         return referenceValues;

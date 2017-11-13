@@ -29,10 +29,6 @@ public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingProfileDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingProfileDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingProfileDatasetEntity> getReferenceValues() {
         return referenceValues;

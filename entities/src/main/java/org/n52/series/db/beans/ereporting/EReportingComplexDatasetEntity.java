@@ -29,10 +29,6 @@ public class EReportingComplexDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingComplexDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingComplexDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingComplexDatasetEntity> getReferenceValues() {
         return referenceValues;

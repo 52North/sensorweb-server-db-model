@@ -10,7 +10,7 @@
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
-        <discriminator column="value_type" force="true" type="string" not-null="false"/>
+        <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
         <many-to-one class="ProcedureEntity" column="`procedure`" name="procedure" not-null="true" unique-key="dataset_identity"
         	foreign-key="dataset_procedure_fk" />
@@ -99,6 +99,7 @@
                 foreign-key="parameter_dataset_fk" />
         </set>
 
+		<subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
             <many-to-one class="UnitEntity" column="unit" name="unit" foreign-key="dataset_unit_fk" />

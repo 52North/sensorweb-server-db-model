@@ -17,23 +17,8 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
+public class NotDefinedEReportingDatasetEntity extends EReportingDatasetEntity {
 
-public class EReportingGeometryDatasetEntity extends EReportingDatasetEntity {
-
-    private static final long serialVersionUID = -6212212763954201384L;
-
-    private static final String DATASET_TYPE = "geometry";
-
-    private Set<EReportingGeometryDatasetEntity> referenceValues = new HashSet<>();
-
-    public Set<EReportingGeometryDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    public void setReferenceValues(Set<EReportingGeometryDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-    }
+    private static final long serialVersionUID = 5193466561723855114L;
 
 }

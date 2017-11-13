@@ -29,10 +29,6 @@ public class EReportingCountDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingCountDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingCountDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingCountDatasetEntity> getReferenceValues() {
         return referenceValues;

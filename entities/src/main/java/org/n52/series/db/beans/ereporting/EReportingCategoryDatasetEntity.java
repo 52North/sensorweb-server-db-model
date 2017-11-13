@@ -31,10 +31,6 @@ public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingCategoryDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingCategoryDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingCategoryDatasetEntity> getReferenceValues() {
         return referenceValues;

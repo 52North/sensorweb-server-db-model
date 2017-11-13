@@ -26,10 +26,6 @@ public class EReportingDatasetEntity extends DatasetEntity {
 
     private EReportingSamplingPointEntity samplingPoint;
 
-    public EReportingDatasetEntity(String datasetType) {
-        super(datasetType);
-    }
-
     public EReportingSamplingPointEntity getSamplingPoint() {
         return samplingPoint;
     }

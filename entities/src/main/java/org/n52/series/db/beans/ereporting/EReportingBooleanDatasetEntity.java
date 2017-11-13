@@ -31,10 +31,6 @@ public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingBooleanDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingBooleanDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingBooleanDatasetEntity> getReferenceValues() {
         return referenceValues;

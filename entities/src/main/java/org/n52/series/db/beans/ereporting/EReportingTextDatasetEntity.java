@@ -29,10 +29,6 @@ public class EReportingTextDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingTextDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingTextDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingTextDatasetEntity> getReferenceValues() {
         return referenceValues;

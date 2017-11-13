@@ -31,10 +31,6 @@ public class EReportingBlobDatasetEntity extends EReportingDatasetEntity
 
     private Set<EReportingBlobDatasetEntity> referenceValues = new HashSet<>();
 
-    public EReportingBlobDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public Set<EReportingBlobDatasetEntity> getReferenceValues() {
         return referenceValues;
