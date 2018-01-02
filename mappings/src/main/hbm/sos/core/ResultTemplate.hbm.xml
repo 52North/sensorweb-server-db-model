@@ -33,8 +33,8 @@
                 <comment>Foreign Key (FK) to the related featureOfInterest. Contains "feature".id</comment>
             </column>
         </many-to-one>
-        <property name="domainId" type="string">
-            <column index="rt_id_idx" name="domain_id" not-null="true">
+        <property name="domain" type="string">
+            <column index="rt_id_idx" name="domain" not-null="true">
                 <comment>The resultTemplate identifier, required for InsertResult requests.</comment>
             </column>
         </property>

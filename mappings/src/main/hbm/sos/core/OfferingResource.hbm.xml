@@ -12,8 +12,8 @@
                 <param name="sequence_name">offering_seq</param>
             </generator>
         </id>
-        <property name="domainId" type="string">
-            <column name="domain_id" not-null="true" unique-key="offering_id_uk">
+        <property name="domain" type="string">
+            <column name="domain" not-null="true" unique-key="offering_id_uk">
                 <comment>The identifier of the offering, gml:identifier. Used as
                     parameter for queries. Unique</comment>
             </column>

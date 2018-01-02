@@ -28,7 +28,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         Serializable {
 
     public static final String PROPERTY_NAME = NAME;
-    public static final String PROPERTY_DOMAIN_ID = "domainId";
+    public static final String PROPERTY_DOMAIN_ID = "domain";
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
     public static final String PROPERTY_SERVICE = "service";
     public static final String PROPERTY_CODESPACE = CODESPACE;
@@ -39,7 +39,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     /**
      * Identification of the entity without special chars.
      */
-    private String domainId;
+    private String domain;
 
     private CodespaceEntity codespace;
 
@@ -62,13 +62,13 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     private Set<Parameter< ? >> parameters;
 
     @Override
-    public String getDomainId() {
-        return domainId;
+    public String getDomain() {
+        return domain;
     }
 
     @Override
-    public DescribableEntity setDomainId(String domainId) {
-        this.domainId = domainId;
+    public DescribableEntity setDomain(String domain) {
+        this.domain = domain;
         return this;
     }
 
@@ -148,8 +148,9 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return service;
     }
 
-    public void setService(ServiceEntity service) {
+    public DescribableEntity setService(ServiceEntity service) {
         this.service = service;
+        return this;
     }
 
     public String getNameI18n(String locale) {
@@ -177,8 +178,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
             return getNameI18n(locale);
         } else if (isNameAvailable()) {
             return getName();
-        } else if (isDomainIdAvailable()) {
-            return getDomainId();
+        } else if (isDomainAvailable()) {
+            return getDomain();
         } else {
             // absolute fallback
             return Long.toString(getId());
@@ -189,8 +190,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return getName() != null && !getName().isEmpty();
     }
 
-    private boolean isDomainIdAvailable() {
-        return getDomainId() != null && !getDomainId().isEmpty();
+    private boolean isDomainAvailable() {
+        return getDomain() != null && !getDomain().isEmpty();
     }
 
     private boolean isi18nNameAvailable(String locale) {
@@ -208,4 +209,16 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return locale.split("_")[0];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" Domain id: ")
+                 .append(getDomain())
+                 .append(", service: ")
+                 .append(getService())
+                 .append(" ]")
+                 .toString();
+    }
 }

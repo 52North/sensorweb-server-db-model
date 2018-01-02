@@ -126,7 +126,7 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     public boolean isSetSizeUnit() {
-        return getSizeUnit() != null && getSizeUnit().isSetDomainId();
+        return getSizeUnit() != null && getSizeUnit().isSetDomain();
     }
 
     /**

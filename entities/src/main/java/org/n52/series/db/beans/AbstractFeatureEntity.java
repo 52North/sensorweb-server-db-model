@@ -97,17 +97,4 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return getUrl() != null && !getUrl().isEmpty();
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
-    }
-
 }

@@ -56,8 +56,8 @@
 
         <property column="decimals" name="decimals" not-null="false" type="integer" />
 
-        <property name="domainId" type="string">
-            <column name="domain_id" not-null="false" unique-key="datasetIdentifierUK">
+        <property name="domain" type="string">
+            <column name="domain" not-null="false" unique-key="datasetIdentifierUK">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>
             </column>
         </property>

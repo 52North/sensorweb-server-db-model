@@ -31,16 +31,4 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
         this.hiddenChild = hiddenChild;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
-    }
 }

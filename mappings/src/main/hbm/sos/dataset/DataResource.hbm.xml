@@ -29,8 +29,8 @@
             </column>
         </property>
 
-        <property name="domainId" type="string">
-            <column name="domain_id">
+        <property name="domain" type="string">
+            <column name="domain">
                 <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but
                     unique</comment>
             </column>

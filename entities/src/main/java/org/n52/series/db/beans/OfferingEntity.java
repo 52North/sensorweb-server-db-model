@@ -260,15 +260,4 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         return this;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(" ]")
-                 .toString();
-    }
-
 }

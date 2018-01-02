@@ -13,8 +13,8 @@
             </generator>
         </id>
 
-        <property name="domainId" type="string">
-            <column name="domain_id" not-null="true" unique-key="phenomenon_id_fk">
+        <property name="domain" type="string">
+            <column name="domain" not-null="true" unique-key="phenomenon_id_fk">
                 <comment>The identifier of the observableProperty, gml:identifier. Used as parameter for queries. Unique</comment>
             </column>
         </property>

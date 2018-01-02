@@ -43,10 +43,10 @@ public class UnitEntity extends DescribableEntity {
 
     // TODO SOS compatible
     public String getUnit() {
-        return getDomainId();
+        return getDomain();
     }
 
     public void setUnit(String unit) {
-        setDomainId(unit);
+        setDomain(unit);
     }
 }

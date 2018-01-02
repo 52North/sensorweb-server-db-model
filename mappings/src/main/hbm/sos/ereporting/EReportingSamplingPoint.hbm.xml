@@ -14,9 +14,9 @@
                 <param name="sequence_name">sampling_point_seq</param>
             </generator>
         </id>
-        <property name="domainId"
+        <property name="domain"
                  type="string">
-            <column name="domain_id"
+            <column name="domain"
                     not-null="true"
                     unique-key="sampling_point_uk">
                 <comment>The identifier of the samplingPoint, gml:identifier. Used as parameter for queries. Optional but unique</comment>

@@ -14,24 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 public class CategoryEntity extends DescribableEntity {
 
     private static final long serialVersionUID = -5508957540970020954L;
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
-    }
 
 }

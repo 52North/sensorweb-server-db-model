@@ -12,8 +12,8 @@
                 <param name="sequence_name">network_seq</param>
             </generator>
         </id>
-       <property name="domainId" type="string">
-            <column name="domain_id" not-null="true" unique-key="network_uk">
+       <property name="domain" type="string">
+            <column name="domain" not-null="true" unique-key="network_uk">
                 <comment>The identifier of the Network, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

@@ -22,8 +22,8 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="domainId" type="string" >
-            <column name="domain_id" unique-key="domain_of_validity_uk">
+        <property name="domain" type="string" >
+            <column name="domain" unique-key="domain_of_validity_uk">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

@@ -11,8 +11,8 @@
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
-        <property name="domainId" type="string">
-            <column name="domain_id" not-null="true" unique-key="procedure_id_uk">
+        <property name="domain" type="string">
+            <column name="domain" not-null="true" unique-key="procedure_id_uk">
                 <!-- <comment>The identifier of the procedure, gml:identifier. Used as parameter for queries. Unique</comment> -->
             </column>
         </property>

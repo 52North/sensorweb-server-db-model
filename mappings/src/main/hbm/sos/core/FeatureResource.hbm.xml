@@ -19,8 +19,8 @@
             </column>
         </many-to-one>
 
-        <property name="domainId" type="string">
-            <column name="domain_id" unique-key="feature_id_uk">
+        <property name="domain" type="string">
+            <column name="domain" unique-key="feature_id_uk">
                 <comment>The identifier of the feature, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

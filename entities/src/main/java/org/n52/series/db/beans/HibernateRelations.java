@@ -37,20 +37,20 @@ public interface HibernateRelations {
     String SRID = "srid";
 
     interface HasIdentifier<T> {
-        String getDomainId();
+        String getDomain();
 
-        T setDomainId(String domainId);
+        T setDomain(String domain);
 
-        default boolean isSetDomainId() {
-            return getDomainId() != null && !getDomainId().isEmpty();
+        default boolean isSetDomain() {
+            return getDomain() != null && !getDomain().isEmpty();
         }
 
         default String getIdentifier() {
-            return getDomainId();
+            return getDomain();
         }
 
         default T setIdentifier(String identifier) {
-            return setDomainId(identifier);
+            return setDomain(identifier);
         }
 
         /**
@@ -59,7 +59,7 @@ public interface HibernateRelations {
          * @return <code>true</code>, if identifier is set
          */
         default boolean isSetIdentifier() {
-            return isSetDomainId();
+            return isSetDomain();
         }
     }
 
