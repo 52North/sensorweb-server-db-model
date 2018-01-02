@@ -14,19 +14,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
-import java.util.Collection;
-
-public class SweDataArrayDataEntity extends DataEntity<String> {
+public class SweDataArrayDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -1618516259763515255L;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+    private String structure;
+
+    private String encoding;
+
+    /**
+     * @return the structure
+     */
+    public String getStructure() {
+        return structure;
     }
+
+    /**
+     * @param structure the structure to set
+     */
+    public void setStructure(String structure) {
+        this.structure = structure;
+    }
+
+    /**
+     * @return the encoding
+     */
+    public String getEncoding() {
+        return encoding;
+    }
+
+    /**
+     * @param encoding the encoding to set
+     */
+    public void setEncoding(String encoding) {
+        this.encoding = encoding;
+    }
+
 }

@@ -14,10 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
-public class ComplexDataEntity extends CompositeDataEntity {
+import java.util.Collection;
+import java.util.Set;
 
-    private static final long serialVersionUID = 2206385928964743369L;
+public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity< ? >>> {
+
+    private static final long serialVersionUID = -2942122854792122664L;
+
+    @Override
+    public boolean isNoDataValue(Collection<String> noDataValues) {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    @Override
+    public Set<DataEntity< ? >> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity< ? >> value) {
+        super.setValue(value);
+    }
 
 }
