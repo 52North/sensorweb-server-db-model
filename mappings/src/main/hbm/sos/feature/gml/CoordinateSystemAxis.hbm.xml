@@ -52,8 +52,8 @@
         <many-to-one name="codespaceAxisAbbrev" column="codespace_axis_abbrev" class="CodespaceEntity" foreign-key="codespace_axis_abbrev_fk" />
         <property name="axisDirection" column="axis_direction" type="string" />
         <many-to-one name="codespaceAxisDirection" column="codespace_axis_direction" class="CodespaceEntity" foreign-key="codespace_axis_direction_fk" />
-        <property name="minimumValue" column="minimum_value" type="double" length="29" />
-        <property name="maximumValue" column="maximum_value" type="double" length="29"  />
+        <property name="minimumValue" column="minimum_value" type="big_decimal" length="29" />
+        <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"  />
         <property name="rangeMeaning" column="range_meaning" type="string" />
         <many-to-one name="codespaceRangeMeaning" column="codespace_range_meaning" class="CodespaceEntity" foreign-key="codespace_range_meaning_fk" />
         <many-to-one name="uom"

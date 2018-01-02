@@ -90,7 +90,7 @@
         </property>
 
         <component  name="geometryEntity" class="org.n52.series.db.beans.GeometryEntity">
-            <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
+            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
         </component>
 
@@ -111,7 +111,7 @@
         </set>
 
         <property name="valueIdentifier" type="string">
-               <column name="value_domain_id">
+               <column name="value_domain">
                    <comment>SweText observation identifier</comment>
                </column>
           </property>
@@ -151,19 +151,19 @@
                 <comment>AQD e-Reporting data capture quality flag</comment>
             </column>
         </property>
-        <property name="dataCapture" type="double">
+        <property name="dataCapture" type="big_decimal">
             <column name="dataCapture" not-null="false">
                 <comment>AQD e-Reporting data capture value, required for multiday observations</comment>
             </column>
         </property>
-        <property name="uncertaintyEstimation" type="double">
+        <property name="uncertaintyEstimation" type="big_decimal">
             <column name="uncertainty_estimation" not-null="false">
                 <comment>AQD e-Reporting uncertainty estimation quality value</comment>
             </column>
         </property>
 
        <subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" discriminator-value="quantity">
-            <property column="value_quantity" name="value" type="double" precision="29" />
+            <property column="value_quantity" name="value" type="big_decimal" precision="29" />
         </subclass>
     </class>
 </hibernate-mapping>

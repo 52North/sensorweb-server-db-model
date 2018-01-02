@@ -29,8 +29,8 @@
         <property column="firsttimestamp" name="firstValueAt" type="timestamp" />
         <property column="lasttimestamp" name="lastValueAt" type="timestamp" />
 
-        <property column="first_value" name="firstValue" type="double" precision="29" />
-        <property column="last_value" name="lastValue" type="double" precision="29" />
+        <property column="first_value" name="firstValue" type="big_decimal" precision="29" />
+        <property column="last_value" name="lastValue" type="big_decimal" precision="29" />
 
         <many-to-one class="EReportingDataEntity" column="first_observation" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
         <many-to-one class="EReportingDataEntity" column="last_observation" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
@@ -90,7 +90,7 @@
                 foreign-key="parameter_dataset_fk" />
         </set>
 
-		<subclass name="NotDefinedEReportingDatasetEntity" discriminator-value=""not_defined" />
+		<subclass name="NotDefinedEReportingDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
             <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="dataset_unit_fk" />

@@ -37,7 +37,7 @@
                    <comment>Data capture value, used for multi day aggregations</comment>
                </column>
         </property>
-        <property name="uncertaintyEstimation" type="double">
+        <property name="uncertaintyEstimation" type="big_decimal">
             <column name="uncertainty_estimation" not-null="false">
                    <comment>value for uncertainty estimation</comment>
                </column>
