@@ -70,12 +70,12 @@
             </column>
         </property>
         <property name="mobile" type="numeric_boolean">
-            <column name="mobile" not-null="false" default="0" check="mobile in (1,0)">
+            <column name="is_mobile" not-null="false" default="0" check="mobile in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is stationary (false) or mobile (true). Optional</comment> -->
             </column>
         </property>
         <property name="insitu" type="numeric_boolean">
-            <column name="insitu" not-null="false" default="1" check="insitu in (1,0)">
+            <column name="is_insitu" not-null="false" default="1" check="insitu in (1,0)">
                 <!-- <comment>Flag to indicate that this procedure is insitu (true) or remote (false). Optional</comment> -->
             </column>
         </property>

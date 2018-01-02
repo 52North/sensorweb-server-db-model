@@ -40,7 +40,7 @@
         </property>
 
         <property name="hiddenChild" type="numeric_boolean">
-            <column name="hidden_child" not-null="true" default="0" check="hidden_child in (1,0)" />
+            <column name="is_hidden_child" not-null="true" default="0" check="hidden_child in (1,0)" />
         </property>
 
         <set name="children" table="composite_phenomenon" inverse="false">

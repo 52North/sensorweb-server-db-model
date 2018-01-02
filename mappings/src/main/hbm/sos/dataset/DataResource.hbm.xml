@@ -59,7 +59,7 @@
         </property>
 
         <property name="deleted" type="numeric_boolean">
-            <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
+            <column name="is_deleted" not-null="true" default="0" check="deleted in (1,0)">
                 <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
                     via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
@@ -78,19 +78,19 @@
         </property>
 
         <property name="child" type="numeric_boolean">
-            <column name="child" not-null="true" default="0"  check="child in (1,0)">
+            <column name="is_child" not-null="true" default="0"  check="child in (1,0)">
                 <comment>Flag to indicate that this observation is a child observation for complex observation</comment>
             </column>
         </property>
 
         <property name="parent" type="numeric_boolean">
-            <column name="parent" not-null="true" default="0"  check="parent in (1,0)">
+            <column name="is_parent" not-null="true" default="0"  check="parent in (1,0)">
                 <comment>Flag to indicate that this observation is a parent observation for complex observation</comment>
             </column>
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
-            <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
+            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
         </component>
 
