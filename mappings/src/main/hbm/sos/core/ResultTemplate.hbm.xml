@@ -15,22 +15,22 @@
             </generator>
         </id>
         <many-to-one name="offering" class="OfferingEntity" foreign-key="result_template_offering_fk">
-            <column index="rt_offering_idx" name="offering" not-null="true">
+            <column index="rt_offering_idx" name="offering_id" not-null="true">
                 <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
             </column>
         </many-to-one>
         <many-to-one name="phenomenon" class="PhenomenonEntity" foreign-key="result_template_phenomenon_fk">
-            <column index="rt_phenomenon_idx" name="phenomenon" not-null="true">
+            <column index="rt_phenomenon_idx" name="phenomenon_id" not-null="true">
                 <comment>Foreign Key (FK) to the related observableProperty. Contains "phenomenon".Id</comment>
             </column>
         </many-to-one>
         <many-to-one name="procedure" class="ProcedureEntity" foreign-key="result_template_procedure_fk">
-            <column index="rt_procedure_idx" name="`procedure`" not-null="false">
+            <column index="rt_procedure_idx" name="procedure_id" not-null="false">
                 <comment>Foreign Key (FK) to the related procedure. Contains "procedure".id</comment>
             </column>
         </many-to-one>
         <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="result_template_feature_fk">
-            <column name="feature" not-null="false">
+            <column name="feature_id" not-null="false">
                 <comment>Foreign Key (FK) to the related featureOfInterest. Contains "feature".id</comment>
             </column>
         </many-to-one>

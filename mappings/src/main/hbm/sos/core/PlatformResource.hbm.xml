@@ -16,7 +16,7 @@
         <property column="is_mobile" insert="false" name="mobile" type="numeric_boolean" update="false" />
         <property column="is_insitu" insert="false" name="insitu" type="numeric_boolean" update="false" />
    		<set name="translations" table="procedure_i18n" inverse="true" fetch="select">
-            <key column="`procedure`" not-null="true" />
+            <key column="procedure_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />
         </set>
     </class>
@@ -26,7 +26,7 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-		<many-to-one name="entity" column="`procedure`" not-null="true" class="PlatformEntity" foreign-key="translation_procedure_fk"/>
+		<many-to-one name="entity" column="procedure_id" not-null="true" class="PlatformEntity" foreign-key="translation_procedure_fk"/>
         <property name="locale" type="string" insert="false" update="false" />
         <property name="name" type="string" insert="false" update="false" />
         <property name="description" type="string" insert="false" update="false"  />

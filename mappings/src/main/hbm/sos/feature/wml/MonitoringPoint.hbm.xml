@@ -17,19 +17,19 @@
             <component name="content" class="org.n52.series.db.beans.feature.MonitoringPointContent">
                 <set name="relatedParty" table="wml_mp_related_party">
                     <key foreign-key="wml_mp_related_party_fk">
-                        <column name="feature" not-null="true" />
+                        <column name="feature_id" not-null="true" />
                     </key>
                     <many-to-many class="org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity"
                         foreign-key="wml_related_party_mp_fk">
-                        <column name="responsible_party" not-null="true" />
+                        <column name="responsible_party_id" not-null="true" />
                     </many-to-many>
                 </set>
                 <set name="verticalDatum" table="wml_mp_vertical_datum">
                     <key foreign-key="wml_mp_vertical_datum_fk">
-                        <column name="feature"/>
+                        <column name="feature_id"/>
                     </key>
                     <many-to-many class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity" foreign-key="wml_vertical_datum__mpfk">
-                        <column name="vertical_datum" not-null="true" />
+                        <column name="vertical_datum_id" not-null="true" />
                     </many-to-many>
                 </set>
             </component>

@@ -19,7 +19,7 @@
             </column>
         </property>
         <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="station_codespace_fk">
-            <column name="codespace">
+            <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -29,7 +29,7 @@
             </column>
         </property>
         <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="station_codespace_name_fk">
-            <column name="codespace_name">
+            <column name="codespace_name_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>

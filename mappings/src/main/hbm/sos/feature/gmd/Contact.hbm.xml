@@ -26,15 +26,15 @@
         <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <many-to-one name="phone"
-                     column="phone"
+                     column="phone_id"
                      class="TelephoneEntity"
                      foreign-key="contact_phone_fk" />
         <many-to-one name="address"
-                     column="address"
+                     column="address_id"
                      class="AddressEntity"
                      foreign-key="contact_address_fk" />
         <many-to-one name="onlineResource"
-                     column="online_resource"
+                     column="online_resource_id"
                      class="OnlineResourceEntity"
                      foreign-key="contact_online_resource_fk" />
         <property name="hoursOfService" column="hours_of_service" type="string" />

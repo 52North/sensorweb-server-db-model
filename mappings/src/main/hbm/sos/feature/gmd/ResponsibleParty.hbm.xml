@@ -29,11 +29,11 @@
         <property name="organizationName" column="organization_name" type="string" />
         <property name="positionName" column="position_name" type="string" />
         <many-to-one name="contactInfo"
-                     column="contact_info"
+                     column="contact_info_id"
                      class="ContactEntity"
                      foreign-key="contact_info_fk" />
         <many-to-one name="ciRole"
-                     column="ci_role"
+                     column="ci_role_id"
                      class="RoleEntity"
                      foreign-key="ci_role_fk" />
     </class>

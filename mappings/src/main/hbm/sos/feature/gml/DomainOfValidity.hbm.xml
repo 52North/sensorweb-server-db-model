@@ -29,7 +29,7 @@
             </column>
         </property>
         <many-to-one name="codespace" class="CodespaceEntity" foreign-key="dov_codespace_fk">
-            <column name="codespace">
+            <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -39,7 +39,7 @@
             </column>
         </property>
         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="dov_codespace_name_fk">
-            <column name="codespace_name">
+            <column name="codespace_name_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -49,7 +49,7 @@
             </column>
         </property>
         <many-to-one name="exExtent"
-                     column="ex_extent"
+                     column="ex_extent_id"
                      class="org.n52.series.db.beans.feature.gmd.ExExtentEntity"
                      foreign-key="dov_ex_extent_fk" />
     </class>

@@ -14,12 +14,12 @@
             </generator>
         </id>
         <many-to-one name="item" class="EReportingDataEntity" not-null="true" foreign-key="rel_obs_observation_fk">
-            <column name="observation" not-null="false">
+            <column name="observation_id" not-null="false">
                 <comment>Foreign Key (FK) to the observation. Contains "observation".id</comment>
             </column>
         </many-to-one>
         <many-to-one name="relatedItem" class="EReportingDataEntity" not-null="true" foreign-key="rel_obs_related_fk">
-            <column name="related_observation">
+            <column name="related_observation_id">
                 <comment>Relation/foreign key to the associated observation table. Contains "observation".id</comment>
             </column>
         </many-to-one>

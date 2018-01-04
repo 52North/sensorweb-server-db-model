@@ -29,7 +29,7 @@
             </column>
         </property>
         <many-to-one name="codespace" class="CodespaceEntity" foreign-key="vertical_datum_codespace_fk">
-            <column name="codespace">
+            <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -39,7 +39,7 @@
             </column>
         </property>
         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="vd_codespace_name_fk">
-            <column name="codespace_name">
+            <column name="codespace_name_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -53,7 +53,7 @@
                      class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
                      foreign-key="vd_domain_of_validity_fk">
             <column index="vd_domain_of_validity_idx"
-                    name="domain_of_validity"
+                    name="domain_of_validity_id"
                     not-null="false">
             </column>
         </many-to-one>
@@ -65,7 +65,7 @@
 
         <property name="anchorDefinition" column="anchor_definition" type="string" />
 
-        <many-to-one name="codespaceAnchorDefinition" column="codespace_anchor_def"
+        <many-to-one name="codespaceAnchorDefinition" column="codespace_anchor_def_id"
                      class="CodespaceEntity"
                      foreign-key="vd_codespace_anchor_def_fk" />
 

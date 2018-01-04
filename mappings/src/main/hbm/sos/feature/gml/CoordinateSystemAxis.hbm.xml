@@ -29,7 +29,7 @@
             </column>
         </property>
         <many-to-one name="codespace" class="CodespaceEntity" foreign-key="csa_codespace_fk">
-            <column name="codespace">
+            <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -39,7 +39,7 @@
             </column>
         </property>
         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="csa_codespace_name_fk">
-            <column name="codespace_name">
+            <column name="codespace_name_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -50,15 +50,15 @@
         </property>
         <property name="remarks" column="remarks" type="string" />
         <property name="axisAbbrev" column="axis_abbrev"  type="string" />
-        <many-to-one name="codespaceAxisAbbrev" column="codespace_axis_abbrev" class="CodespaceEntity" foreign-key="codespace_axis_abbrev_fk" />
+        <many-to-one name="codespaceAxisAbbrev" column="codespace_axis_abbrev_id" class="CodespaceEntity" foreign-key="codespace_axis_abbrev_fk" />
         <property name="axisDirection" column="axis_direction" type="string" />
         <many-to-one name="codespaceAxisDirection" column="codespace_axis_direction" class="CodespaceEntity" foreign-key="codespace_axis_direction_fk" />
         <property name="minimumValue" column="minimum_value" type="big_decimal" length="29" />
         <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"  />
         <property name="rangeMeaning" column="range_meaning" type="string" />
-        <many-to-one name="codespaceRangeMeaning" column="codespace_range_meaning" class="CodespaceEntity" foreign-key="codespace_range_meaning_fk" />
+        <many-to-one name="codespaceRangeMeaning" column="codespace_range_meaning_id" class="CodespaceEntity" foreign-key="codespace_range_meaning_fk" />
         <many-to-one name="uom"
-                     column="unit"
+                     column="unit_id"
                      class="UnitEntity"
                      not-null="true"
                      foreign-key="coordinate_system_axis_unit_fk" />

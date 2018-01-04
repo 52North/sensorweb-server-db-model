@@ -21,7 +21,7 @@
             </column>
         </property>
 		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="offering_codespace_fk">
-            <column name="codespace">
+            <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:name codespace. Optional</comment>
             </column>
@@ -33,7 +33,7 @@
             </column>
         </property>
 		<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="offering_codespace_name_fk">
-            <column name="codespace_name">
+            <column name="codespace_name_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:identifier codespace. Optional</comment>
             </column>
@@ -45,7 +45,7 @@
         </property>
 
 		<property name="hidden" type="numeric_boolean">
-            <column name="hidden" not-null="true" default="0" check="hidden in (1,0)">
+            <column name="is_hidden" not-null="true" default="0" check="is_hidden in (1,0)">
             </column>
         </property>
 
@@ -74,13 +74,13 @@
         </property>
 
         <property name="validTimeStart" type="timestamp">
-            <column name="validt_ime_start" length="29" not-null="false">
+            <column name="valid_time_start" length="29" not-null="false">
                 <comment>Time stamp until when the offering is valid or results are valid</comment>
             </column>
         </property>
 
         <property name="validTimeEnd" type="timestamp">
-            <column name="validt_ime_end" length="29" not-null="false">
+            <column name="valid_time_end" length="29" not-null="false">
                 <comment>Time stamp until when the offering is valid or results are valid</comment>
             </column>
         </property>
@@ -94,26 +94,26 @@
             <comment>Relation table to store offering hierarchies. E.g. define a
                 parent in a query and all childs are also contained in the response.
                 Mapping file: sos/core/Offering.hbm.xml</comment>
-            <key column="parent" not-null="true" foreign-key="offering_parent_fk" />
-            <many-to-many class="OfferingEntity" column="child" foreign-key="offering_child_fk" />
+            <key column="parent_offering_id" not-null="true" foreign-key="offering_parent_fk" />
+            <many-to-many class="OfferingEntity" column="child_offering_id" foreign-key="offering_child_fk" />
         </set>
 
         <set name="parents" table="offering_relation" inverse="false" fetch="select">
-            <key column="child" not-null="true" foreign-key="offering_child_fk" />
-            <many-to-many class="OfferingEntity" column="parent" foreign-key="offering_parent_fk" />
+            <key column="child_offering_id" not-null="true" foreign-key="offering_child_fk" />
+            <many-to-many class="OfferingEntity" column="parent_offering_id" foreign-key="offering_parent_fk" />
         </set>
 
         <set name="observationTypes" table="offering_observation_type" inverse="false" fetch="select">
             <comment>Table to store relations between offering and allowed
                 observationTypes, defined in InsertSensor request</comment>
             <key foreign-key="offering_observation_type_fk">
-                <column name="offering" not-null="true">
+                <column name="offering_id" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains
                         "offering".id</comment>
                 </column>
             </key>
             <many-to-many class="ObservationTypeEntity" foreign-key="observation_type_offering_fk">
-                <column name="observation_type" not-null="true">
+                <column name="observation_type_id" not-null="true">
                     <comment>Foreign Key (FK) to the related observationType. Contains
                         "observationType".observationTypeId</comment>
                 </column>
@@ -124,13 +124,13 @@
             <comment>Table to store relations between offering and associated
                 relatedFeatures</comment>
             <key foreign-key="offering_related_feature_fk">
-                <column name="offering" not-null="true">
+                <column name="offering_id" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains
                         "offering".id</comment>
                 </column>
             </key>
             <many-to-many class="RelatedFeatureEntity" foreign-key="related_feature_offering_fk">
-                <column name="related_feature" not-null="true">
+                <column name="related_feature_id" not-null="true">
                     <comment>Foreign Key (FK) to the related reladedFeature. Contains
                         "reladed_feature".relatedFeatureId</comment>
                 </column>
@@ -141,13 +141,13 @@
             <comment>Table to store relations between offering and allowed
                 featureOfInterestTypes, defined in InsertSensor request.</comment>
             <key foreign-key="offering_feature_type_fk">
-                <column name="offering" not-null="true">
+                <column name="offering_id" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains
                         "offering".id</comment>
                 </column>
             </key>
             <many-to-many class="FeatureTypeEntity" foreign-key="feature_type_offering_fk">
-                <column name="feature_type" not-null="true">
+                <column name="feature_type_id" not-null="true">
                     <comment>Foreign Key (FK) to the related id.
                         Contains "feature_type".id</comment>
                 </column>
@@ -155,7 +155,7 @@
         </set>
 
         <set name="translations" table="offering_i18n" inverse="true" fetch="select">
-            <key column="offering" not-null="true" />
+            <key column="offering_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nOfferingEntity" />
         </set>
     </class>
@@ -167,7 +167,7 @@
                 <param name="sequence_name">offering_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="offering" not-null="true" class="OfferingEntity" foreign-key="translation_offering_fk"/>
+		<many-to-one name="entity" column="offering_id" not-null="true" class="OfferingEntity" foreign-key="translation_offering_fk"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

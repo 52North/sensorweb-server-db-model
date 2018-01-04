@@ -18,8 +18,8 @@
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
         <set name="verticalExtent" table="ex_extent_vertical_ext">
-          <key column="ex_extent" not-null="true" foreign-key="ex_extent_fk"/>
-          <many-to-many column="vertical_extent"
+          <key column="ex_extent_id" not-null="true" foreign-key="ex_extent_fk"/>
+          <many-to-many column="vertical_extent_id"
                         class="ExVerticalExtentEntity" foreign-key="vertical_extent_fk"/>
         </set>
     </class>

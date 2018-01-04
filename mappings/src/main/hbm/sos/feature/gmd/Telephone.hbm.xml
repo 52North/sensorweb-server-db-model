@@ -26,11 +26,11 @@
         <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <set name="voice" table="phone_voice">
-          <key column="phone" not-null="true" foreign-key="phone_voice_fk"/>
+          <key column="phone_id" not-null="true" foreign-key="phone_voice_fk"/>
           <element column="voice" type="string" not-null="true" />
         </set>
         <set name="facsimile" table="phone_facsimile">
-          <key column="phone" not-null="true" foreign-key="phone_facsimile_fk"/>
+          <key column="phone_id" not-null="true" foreign-key="phone_facsimile_fk"/>
           <element column="facsimile" type="string" not-null="true" />
         </set>
     </class>
