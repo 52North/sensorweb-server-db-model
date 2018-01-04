@@ -20,11 +20,11 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class GeometryDatasetEntity extends DatasetEntity {
+import org.n52.series.db.beans.dataset.GeometryDataset;
+
+public class GeometryDatasetEntity extends DatasetEntity implements GeometryDataset<GeometryDatasetEntity> {
 
     private static final long serialVersionUID = -5257221102121501687L;
-
-    private static final String DATASET_TYPE = "geometry";
 
     private Set<GeometryDatasetEntity> referenceValues = new HashSet<>();
 
@@ -36,8 +36,9 @@ public class GeometryDatasetEntity extends DatasetEntity {
         return referenceValues;
     }
 
-    public void setReferenceValues(Set<GeometryDatasetEntity> referenceValues) {
+    public GeometryDatasetEntity setReferenceValues(Set<GeometryDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
+        return this;
     }
 
 }

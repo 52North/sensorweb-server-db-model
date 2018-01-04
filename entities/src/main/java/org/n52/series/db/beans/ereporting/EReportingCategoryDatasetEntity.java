@@ -27,8 +27,6 @@ public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity
 
     private static final long serialVersionUID = -6644598309866325949L;
 
-    private static final String DATASET_TYPE = "category";
-
     private Set<EReportingCategoryDatasetEntity> referenceValues = new HashSet<>();
 
     @Override

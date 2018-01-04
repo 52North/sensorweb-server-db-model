@@ -18,7 +18,6 @@
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.HibernateRelations;
-import org.n52.shetland.aqd.AqdConstants;
 
 public interface HiberanteEReportingRelations
         extends
@@ -79,7 +78,7 @@ public interface HiberanteEReportingRelations
 
     interface HasPrimaryObservation {
 
-        String DEFAULT_PRIMARY_OBSERVATION = AqdConstants.VAR;
+        String DEFAULT_PRIMARY_OBSERVATION = "var";
 
         String PRIMARY_OBSERVATION = "primaryObservation";
 

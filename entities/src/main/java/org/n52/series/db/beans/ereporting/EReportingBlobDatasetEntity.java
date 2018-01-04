@@ -27,8 +27,6 @@ public class EReportingBlobDatasetEntity extends EReportingDatasetEntity
 
     private static final long serialVersionUID = 365032550010162204L;
 
-    private static final String DATASET_TYPE = "blob";
-
     private Set<EReportingBlobDatasetEntity> referenceValues = new HashSet<>();
 
     @Override

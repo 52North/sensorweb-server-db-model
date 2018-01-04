@@ -35,21 +35,21 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
 
     private boolean reference;
 
-    private boolean mobile;
+    private boolean mobile = false;
 
-    private boolean insitu;
+    private boolean insitu = true;
 
     private ProcedureDescriptionFormatEntity format;
 
-    private boolean deleted;
+    private boolean deleted = false;
 
     private String descriptionFile;
 
     private ProcedureEntity typeOf;
 
-    private boolean type;
+    private boolean type = false;
 
-    private boolean aggregation;
+    private boolean aggregation = false;
 
     private Set<ProcedureHistoryEntity> procedureHistory;
 

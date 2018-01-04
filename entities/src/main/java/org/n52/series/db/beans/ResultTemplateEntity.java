@@ -48,7 +48,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     private String identifier;
 
-    private String domainId;
+    private String domain;
 
     private String structure;
 
@@ -57,12 +57,12 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     public ResultTemplateEntity() {
     }
 
-    public String getDomainId() {
-        return domainId;
+    public String getDomain() {
+        return domain;
     }
 
-    public void setDomainId(String domainId) {
-        this.domainId = domainId;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     /**

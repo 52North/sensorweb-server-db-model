@@ -27,8 +27,6 @@ public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity
 
     private static final long serialVersionUID = 5026545130550522586L;
 
-    private static final String DATASET_TYPE = "boolean";
-
     private Set<EReportingBooleanDatasetEntity> referenceValues = new HashSet<>();
 
     @Override

@@ -56,7 +56,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     /**
      * Identification of the entity without special chars.
      */
-    private String domainId;
+    private String domain;
 
     private CodespaceEntity codespace;
 
@@ -116,12 +116,12 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
         this.id = id;
     }
 
-    public String getDomainId() {
-        return domainId;
+    public String getDomain() {
+        return domain;
     }
 
-    public void setDomainId(String domainId) {
-        this.domainId = domainId;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     public CodespaceEntity getCodespace() {

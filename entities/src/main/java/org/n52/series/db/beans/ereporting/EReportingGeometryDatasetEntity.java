@@ -24,8 +24,6 @@ public class EReportingGeometryDatasetEntity extends EReportingDatasetEntity {
 
     private static final long serialVersionUID = -6212212763954201384L;
 
-    private static final String DATASET_TYPE = "geometry";
-
     private Set<EReportingGeometryDatasetEntity> referenceValues = new HashSet<>();
 
     public Set<EReportingGeometryDatasetEntity> getReferenceValues() {

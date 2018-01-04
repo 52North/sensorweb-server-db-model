@@ -20,7 +20,9 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CountDatasetEntity extends DatasetEntity {
+import org.n52.series.db.beans.dataset.CountDataset;
+
+public class CountDatasetEntity extends DatasetEntity implements CountDataset<CountDatasetEntity> {
 
     private static final long serialVersionUID = -3770736881206526817L;
 
@@ -36,8 +38,9 @@ public class CountDatasetEntity extends DatasetEntity {
         return referenceValues;
     }
 
-    public void setReferenceValues(Set<CountDatasetEntity> referenceValues) {
+    public CountDatasetEntity setReferenceValues(Set<CountDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
+        return this;
     }
 
 }

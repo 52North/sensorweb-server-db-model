@@ -33,7 +33,7 @@ public class PlatformEntity extends DescribableEntity {
 
     private boolean insitu = true;
 
-    private boolean mobile;
+    private boolean mobile = false;
 
     private Geometry geometry;
 
