@@ -37,8 +37,8 @@
         <property column="first_value" name="firstValue" type="big_decimal" precision="29" />
         <property column="last_value" name="lastValue" type="big_decimal" precision="29" />
 
-        <many-to-one class="DataEntity" column="first_observation" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
-        <many-to-one class="DataEntity" column="last_observation" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
+        <many-to-one class="DataEntity" column="first_observation_id" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
+        <many-to-one class="DataEntity" column="last_observation_id" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
 
         <property name="deleted" type="numeric_boolean">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
