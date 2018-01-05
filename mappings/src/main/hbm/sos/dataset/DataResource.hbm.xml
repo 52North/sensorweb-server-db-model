@@ -14,13 +14,13 @@
         <many-to-one column="dataset_id" name="dataset" class="DatasetEntity" foreign-key="dataset_fk" not-null="true"/>
 
         <property name="phenomenonTimeStart" type="timestamp">
-            <column index="phenomenon_time_start_idx" name="phenomenon_time_start" length="29" not-null="true">
+            <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="phenomenonTimeEnd" type="timestamp">
-            <column index="phenhenomenon_time_end_idx" name="phenomenon_time_end" length="29" not-null="true">
+            <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>

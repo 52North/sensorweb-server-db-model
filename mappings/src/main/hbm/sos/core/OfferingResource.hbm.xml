@@ -50,13 +50,13 @@
         </property>
 
         <property name="phenomenonTimeStart" type="timestamp">
-            <column name="phenomenon_time_start" length="29" not-null="false">
+            <column name="sampling_time_start" length="29" not-null="false">
                 <comment>Time stamp when the offering was started or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="phenomenonTimeEnd" type="timestamp">
-            <column name="phenomenon_time_end" length="29" not-null="false">
+            <column name="sampling_time_end" length="29" not-null="false">
                 <comment>Time stamp when the offering was stopped or phenomenon was observed</comment>
             </column>
         </property>
