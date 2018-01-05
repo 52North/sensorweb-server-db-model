@@ -35,6 +35,7 @@ This project includes:
   JUnit under Eclipse Public License 1.0
   Logback Classic Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
   Logback Core Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
+  org.locationtech.jts:jts-core under Eclipse Publish License, Version 1.0 or Eclipse Distribution License - v 1.0
   Postgis JDBC Driver under GNU Lesser General Public License
   PostgreSQL JDBC Driver under BSD License
   PostgreSQL JDBC Driver - JDBC 4.2 under BSD-2-Clause
