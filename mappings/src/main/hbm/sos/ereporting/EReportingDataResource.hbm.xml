@@ -11,7 +11,7 @@
             </generator>
         </id>
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
-        <many-to-one column="dataset" name="dataset" class="EReportingDatasetEntity" foreign-key="dataset_fk" not-null="true"/>
+        <many-to-one column="dataset" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true"/>
 
         <property name="phenomenonTimeStart" type="timestamp">
             <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
@@ -37,7 +37,7 @@
                     unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="data_codespace_fk">
+        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_data_codespace">
             <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -49,7 +49,7 @@
             </column>
         </property>
 
-        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="data_codespace_name_fk">
+        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_data_codespace_name">
             <column name="codespace_name_id">
                 <comment>The name of the observation, gml:name. Optional</comment>
             </column>
@@ -100,13 +100,13 @@
 
         <!-- Or add only to specific subclasses -->
         <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
-            <key column="observation_id" not-null="true" foreign-key="observation_parameter_fk" />
+            <key column="observation_id" not-null="true" foreign-key="fk_observation_parameter" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id"
-                foreign-key="parameter_observation_fk" />
+                foreign-key="fk_parameter_observation" />
         </set>
 
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
-            <key foreign-key="related_observation_fk">
+            <key foreign-key="fk_related_observation">
                 <column name="observation_id" not-null="true" index="related_observation_idx" />
             </key>
             <one-to-many class="EReportingRelatedDataEntity" />

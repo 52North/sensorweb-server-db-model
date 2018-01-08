@@ -23,14 +23,14 @@
 		</subclass>
 		<subclass discriminator-value="category" extends="Parameter" name="ParameterCategory">
 			<property column="value_category" name="value" type="string" />
-			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
+			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="fk_param_unit"/>
 		</subclass>
 		<subclass discriminator-value="count" extends="Parameter" name="ParameterCount">
 			<property column="value_count" name="value" type="integer" />
 		</subclass>
 		<subclass discriminator-value="quantity" extends="Parameter" name="ParameterQuantity">
 			<property column="value_quantity" name="value" type="big_decimal" />
-			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="param_unit_fk"/>
+			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" not-null="false" foreign-key="fk_param_unit"/>
 		</subclass>
 		<subclass discriminator-value="text" extends="Parameter" name="ParameterText">
 			<property column="value_text" name="value" type="string" />

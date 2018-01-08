@@ -41,7 +41,7 @@
                 <param name="sequence_name">unit_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="unit" not-null="true" class="UnitEntity" foreign-key="tranlsation_unit_fk"/>
+		<many-to-one name="entity" column="unit" not-null="true" class="UnitEntity" foreign-key="fk_tranlsation_unit"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
     </class>

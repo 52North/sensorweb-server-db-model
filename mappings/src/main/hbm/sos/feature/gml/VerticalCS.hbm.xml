@@ -28,7 +28,7 @@
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="vertical_cs_codespace_fk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_codespace">
             <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -38,7 +38,7 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="vertical_cs_name_fk">
+        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_vertical_cs_name">
             <column name="codespace_name_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
@@ -52,10 +52,10 @@
         <set name="coordinateSystemAxis" table="vertical_cs_axis">
           <key column="vertical_cs_id"
                not-null="true"
-               foreign-key="vertical_cs_axis_fk"/>
+               foreign-key="fk_vertical_cs_axis"/>
           <many-to-many column="coordinate_system_axis_id"
                         class="org.n52.series.db.beans.feature.gml.CoordinateSystemAxisEntity"
-                        foreign-key="axis_vertical_cs_fk"/>
+                        foreign-key="fk_axis_vertical_cs"/>
         </set>
         <property name="aggregation" column="aggregation" type="string" />
     </class>

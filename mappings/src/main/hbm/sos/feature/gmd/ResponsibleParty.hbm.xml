@@ -31,10 +31,10 @@
         <many-to-one name="contactInfo"
                      column="contact_info_id"
                      class="ContactEntity"
-                     foreign-key="contact_info_fk" />
+                     foreign-key="fk_contact_info" />
         <many-to-one name="ciRole"
                      column="ci_role_id"
                      class="RoleEntity"
-                     foreign-key="ci_role_fk" />
+                     foreign-key="fk_ci_role" />
     </class>
 </hibernate-mapping>

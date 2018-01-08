@@ -18,9 +18,9 @@
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
         <set name="verticalExtent" table="ex_extent_vertical_ext">
-          <key column="ex_extent_id" not-null="true" foreign-key="ex_extent_fk"/>
+          <key column="ex_extent_id" not-null="true" foreign-key="fk_ex_extent"/>
           <many-to-many column="vertical_extent_id"
-                        class="ExVerticalExtentEntity" foreign-key="vertical_extent_fk"/>
+                        class="ExVerticalExtentEntity" foreign-key="fk_vertical_extent"/>
         </set>
     </class>
 </hibernate-mapping>

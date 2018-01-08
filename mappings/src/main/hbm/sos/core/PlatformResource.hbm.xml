@@ -26,7 +26,7 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
-		<many-to-one name="entity" column="procedure_id" not-null="true" class="PlatformEntity" foreign-key="translation_procedure_fk"/>
+		<many-to-one name="entity" column="procedure_id" not-null="true" class="PlatformEntity" foreign-key="fk_translation_procedure"/>
         <property name="locale" type="string" insert="false" update="false" />
         <property name="name" type="string" insert="false" update="false" />
         <property name="description" type="string" insert="false" update="false"  />

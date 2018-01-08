@@ -29,7 +29,7 @@
         <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"/>
         <many-to-one name="verticalCRS"
                      class="org.n52.series.db.beans.feature.gml.VerticalCRSEntity"
-                     foreign-key="vertical_crs_fk">
+                     foreign-key="fk_vertical_crs">
             <column index="vertical_crs_idx"
                     name="vertical_crs_id"
                     not-null="false">

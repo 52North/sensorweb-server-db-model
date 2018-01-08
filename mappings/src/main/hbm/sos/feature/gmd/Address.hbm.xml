@@ -26,7 +26,7 @@
         <property name="gmdid" column="gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <set name="deliveryPoint" table="address_delivery_point">
-          <key column="address_id" not-null="true" foreign-key="address_delivery_point_fk"/>
+          <key column="address_id" not-null="true" foreign-key="fk_address_delivery_point"/>
           <element column="delivery_point_id" type="string" not-null="true" />
         </set>
         <property name="city" column="city" type="string" />
@@ -34,7 +34,7 @@
         <property name="postalCode" column="postal_code" type="string" />
         <property name="country" column="country" type="string" />
         <set name="electronicMailAddress" table="address_mail">
-          <key column="address_id" not-null="true" foreign-key="address_mail_fk"/>
+          <key column="address_id" not-null="true" foreign-key="fk_address_mail"/>
           <element column="electronic_mail_address_id" type="string" not-null="true" />
         </set>
     </class>

@@ -13,12 +13,12 @@
                 <param name="sequence_name">related_observation_seq</param>
             </generator>
         </id>
-        <many-to-one name="item" class="EReportingDataEntity" not-null="true" foreign-key="rel_obs_observation_fk">
+        <many-to-one name="item" class="EReportingDataEntity" not-null="true" foreign-key="fk_rel_obs_observation">
             <column name="observation_id" not-null="false">
                 <comment>Foreign Key (FK) to the observation. Contains "observation".id</comment>
             </column>
         </many-to-one>
-        <many-to-one name="relatedItem" class="EReportingDataEntity" not-null="true" foreign-key="rel_obs_related_fk">
+        <many-to-one name="relatedItem" class="EReportingDataEntity" not-null="true" foreign-key="fk_rel_obs_related">
             <column name="related_observation_id">
                 <comment>Relation/foreign key to the associated observation table. Contains "observation".id</comment>
             </column>

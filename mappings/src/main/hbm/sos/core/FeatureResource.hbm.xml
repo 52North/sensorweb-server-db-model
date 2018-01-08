@@ -15,7 +15,7 @@
 
         <discriminator column="discriminator" type="string" not-null="false"/>
 
-        <many-to-one name="featureType" class="FeatureTypeEntity" foreign-key="feature_type_fk">
+        <many-to-one name="featureType" class="FeatureTypeEntity" foreign-key="fk_feature_type">
             <column name="type_id" not-null="true">
                 <comment>Relation/foreign key to the featureType table. Describes the type of the feature. Contains "featureType".featureTypeId</comment>
             </column>
@@ -26,7 +26,7 @@
                 <comment>The identifier of the feature, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="feature_codespace_fk">
+		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_feature_codespace">
             <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
@@ -36,7 +36,7 @@
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
         </property>
-	<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="feature_codespace_name_fk">
+	<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_feature_codespace_name">
             <column name="codespace_name_id">
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
@@ -68,18 +68,18 @@
         </component>
 
         <set name="children" table="feature_relation" inverse="false" fetch="select">
-            <key column="parent_feature_id" not-null="true" foreign-key="feature_parent_fk" />
-            <many-to-many class="AbstractFeatureEntity" column="child_feature_id" foreign-key="feature_child_fk"/>
+            <key column="parent_feature_id" not-null="true" foreign-key="fk_feature_parent" />
+            <many-to-many class="AbstractFeatureEntity" column="child_feature_id" foreign-key="fk_feature_child"/>
         </set>
 
         <set name="parents" table="feature_relation" inverse="false" fetch="select">
-            <key column="child_feature_id" not-null="true" foreign-key="feature_child_fk"/>
-            <many-to-many class="AbstractFeatureEntity" column="parent_feature_id" foreign-key="feature_parent_fk"/>
+            <key column="child_feature_id" not-null="true" foreign-key="fk_feature_child"/>
+            <many-to-many class="AbstractFeatureEntity" column="parent_feature_id" foreign-key="fk_feature_parent"/>
         </set>
 
         <set name="parameters" table="feature_parameter" cascade="delete-orphan" inverse="false">
-            <key column="feature_id" not-null="true" foreign-key="feature_parameter_fk"/>
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id" foreign-key="parameter_feature_fk"/>
+            <key column="feature_id" not-null="true" foreign-key="fk_feature_parameter"/>
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id" foreign-key="fk_parameter_feature"/>
         </set>
 
 		<set name="translations" table="feature_i18n" inverse="true" fetch="select">
@@ -101,7 +101,7 @@
                 <param name="sequence_name">feature_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="feature_id" not-null="true" class="FeatureEntity" foreign-key="translation_feature_fk"/>
+		<many-to-one name="entity" column="feature_id" not-null="true" class="FeatureEntity" foreign-key="fk_translation_feature"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

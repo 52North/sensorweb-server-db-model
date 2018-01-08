@@ -18,7 +18,7 @@
                 <!-- <comment>The identifier of the procedure, gml:identifier. Used as parameter for queries. Unique</comment> -->
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="procedure_codespace_fk">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_procedure_codespace">
             <column name="codespace_id">
                 <!-- <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment> -->
             </column>
@@ -28,7 +28,7 @@
                 <!-- <comment>The name of the procedure, gml:name. Optional</comment> -->
             </column>
         </property>
-         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="procedure_codespace_name_fk">
+         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_procedure_codespace_name">
             <column name="codespace_name_id">
                 <!-- <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment> -->
             </column>
@@ -55,7 +55,7 @@
                     the SOS but by the Sensor Web REST-API</comment> -->
             </column>
         </property>
-        <many-to-one name="typeOf" class="ProcedureEntity" not-null="false" foreign-key="type_of_fk">
+        <many-to-one name="typeOf" class="ProcedureEntity" not-null="false" foreign-key="fk_type_of">
             <column name="type_of_procedure_id" not-null="false">
                 <!-- <comment>Relation/foreign key to procedure table. Optional, contains procedureId if this procedure is
                     typeOf another procedure</comment> -->
@@ -82,21 +82,21 @@
             </column>
         </property>
         <set name="parents" table="procedure_relation" inverse="false" fetch="select">
-            <key column="child_procedure_id" not-null="true" foreign-key="procedure_child_fk" />
-            <many-to-many class="ProcedureEntity" column="parent_procedure_id" foreign-key="procedure_parent_fk" />
+            <key column="child_procedure_id" not-null="true" foreign-key="fk_procedure_child" />
+            <many-to-many class="ProcedureEntity" column="parent_procedure_id" foreign-key="fk_procedure_parent" />
         </set>
         <set name="children" table="procedure_relation" inverse="false" fetch="select">
-            <key column="parent_procedure_id" not-null="true" foreign-key="procedure_parent_fk" />
-            <many-to-many class="ProcedureEntity" column="child_procedure_id" foreign-key="procedure_child_fk" />
+            <key column="parent_procedure_id" not-null="true" foreign-key="fk_procedure_parent" />
+            <many-to-many class="ProcedureEntity" column="child_procedure_id" foreign-key="fk_procedure_child" />
         </set>
-        <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="procedure_format_fk">
+        <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="fk_procedure_format">
             <column name="format_id" not-null="true">
                 <!-- <comment>Relation/foreign key to the procedureDescriptionFormat table. Describes the format of the
                     procedure description.</comment> -->
             </column>
         </many-to-one>
         <set name="procedureHistory" table="procedure_history" inverse="true">
-            <key foreign-key="procedure_history_fk">
+            <key foreign-key="fk_procedure_history">
                 <column name="procedure_id" not-null="true" />
             </key>
             <one-to-many class="ProcedureHistoryEntity" />
@@ -114,7 +114,7 @@
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="procedure_id" not-null="true" class="ProcedureEntity" foreign-key="translation_procedure_fk"/>
+		<many-to-one name="entity" column="procedure_id" not-null="true" class="ProcedureEntity" foreign-key="fk_translation_procedure"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

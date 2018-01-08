@@ -28,9 +28,9 @@
         <!--
         <one-to-one name="translations" column="category" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"></many-to-one>
          <set name="translations" table="category_i18" inverse="true" fetch="select">
-            <key column="category" not-null="true" foreign-key="category_translation_fk"/>
+            <key column="category" not-null="true" foreign-key="fk_category_translation"/>
             <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"
-                foreign-key="translation_category_fk" />
+                foreign-key="fk_translation_category" />
         </set>
          -->
         <set name="translations" table="category_i18" inverse="true" fetch="select">
@@ -46,7 +46,7 @@
                 <param name="sequence_name">category_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="category_id" not-null="true" class="CategoryEntity" foreign-key="translation_category_fk"/>
+		<many-to-one name="entity" column="category_id" not-null="true" class="CategoryEntity" foreign-key="fk_translation_category"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />
