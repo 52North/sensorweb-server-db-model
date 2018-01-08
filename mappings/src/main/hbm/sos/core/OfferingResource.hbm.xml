@@ -15,7 +15,7 @@
             </generator>
         </id>
         <property name="domain" type="string" index="idx_offering_domain">
-            <column name="domain" not-null="true" unique-key="offering_id_uk">
+            <column name="domain" not-null="true" unique-key="un_offering_domain">
                 <comment>The identifier of the offering, gml:identifier. Used as
                     parameter for queries. Unique</comment>
             </column>

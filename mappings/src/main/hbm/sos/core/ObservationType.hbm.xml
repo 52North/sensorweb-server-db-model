@@ -14,7 +14,7 @@
             </generator>
         </id>
         <property name="type" type="string">
-            <column name="type" not-null="true" unique-key="observation_type_uk">
+            <column name="type" not-null="true" unique-key="un_observation_type">
                 <comment>The observationType value, e.g.
                     http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement (OGC OM 2.0 specification) for
                     OM_Measurement</comment>

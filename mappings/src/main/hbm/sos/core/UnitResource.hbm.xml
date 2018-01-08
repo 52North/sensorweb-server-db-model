@@ -14,7 +14,7 @@
             </generator>
         </id>
         <property name="domain" type="string">
-            <column name="symbol" not-null="true" unique-key="unit_uk">
+            <column name="symbol" not-null="true" unique-key="un_unit_symbol">
                 <comment>The unit of measure of observations. See http://unitsofmeasure.org/ucum.html</comment>
             </column>
         </property>

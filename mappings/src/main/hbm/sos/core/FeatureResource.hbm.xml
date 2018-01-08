@@ -22,7 +22,7 @@
         </many-to-one>
 
         <property name="domain" type="string" index="idx_feature_domain">
-            <column name="domain" unique-key="feature_id_uk">
+            <column name="domain" unique-key="un_feature_domain">
                 <comment>The identifier of the feature, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
@@ -54,7 +54,7 @@
         </property>
 
         <property name="url" type="string">
-            <column name="url" unique-key="feature_url_uk">
+            <column name="url" unique-key="un_feature_url">
                 <comment>Reference URL to the feature if it is stored in another service, e.g. WFS. Optional but unique</comment>
             </column>
         </property>

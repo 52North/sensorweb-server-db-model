@@ -14,7 +14,7 @@
             </generator>
         </id>
        <property name="domain" type="string">
-            <column name="domain" not-null="true" unique-key="station_uk">
+            <column name="domain" not-null="true" unique-key="un_station_domain">
                 <comment>The identifier of the station, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

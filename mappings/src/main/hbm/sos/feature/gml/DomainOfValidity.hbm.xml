@@ -24,7 +24,7 @@
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="domain" type="string" >
-            <column name="domain" unique-key="domain_of_validity_uk">
+            <column name="domain" unique-key="un_domain_of_validity_domain">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

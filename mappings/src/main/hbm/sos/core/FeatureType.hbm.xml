@@ -15,7 +15,7 @@
             </generator>
         </id>
         <property name="type" type="string">
-            <column name="type" not-null="true" unique-key="feature_type_uk">
+            <column name="type" not-null="true" unique-key="un_feature_type">
                 <comment>The featureOfInterestType value, e.g.
                     http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint (OGC OM 2.0
                     specification) for point features</comment>

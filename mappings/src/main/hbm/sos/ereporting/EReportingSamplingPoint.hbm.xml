@@ -19,7 +19,7 @@
                  type="string">
             <column name="domain"
                     not-null="true"
-                    unique-key="sampling_point_uk">
+                    unique-key="un_sampling_point_domain">
                 <comment>The identifier of the samplingPoint, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

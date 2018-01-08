@@ -11,7 +11,7 @@
                 <param name="sequence_name">service_seq</param>
             </generator>
         </id>
-        <property column="name" name="name" type="string" not-null="true" unique-key="service_uk" />
+        <property column="name" name="name" type="string" not-null="true" unique-key="un_service_name" />
         <property column="description" name="description" type="string" />
         <property column="url" name="url" type="string" />
         <property column="type" name="type" type="string" />

@@ -24,7 +24,7 @@
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="domain" type="string" >
-            <column name="domain" unique-key="coordinate_system_axis_uk">
+            <column name="domain" unique-key="un_coordinate_system_axis">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

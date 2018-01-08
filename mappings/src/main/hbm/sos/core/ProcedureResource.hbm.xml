@@ -14,7 +14,7 @@
             </generator>
         </id>
         <property name="domain" type="string" index="idx_procedure_domain">
-            <column name="domain" not-null="true" unique-key="procedure_id_uk">
+            <column name="domain" not-null="true" unique-key="un_procedure_domain">
                 <!-- <comment>The identifier of the procedure, gml:identifier. Used as parameter for queries. Unique</comment> -->
             </column>
         </property>
