@@ -67,7 +67,7 @@
 
         <property column="decimals" name="decimals" not-null="false" type="integer" />
 
-        <property name="domain" type="string">
+        <property name="domain" type="string" index="idx_dataset_domain">
             <column name="domain" not-null="false" unique-key="dataset_id_uk">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>
             </column>

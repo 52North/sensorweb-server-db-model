@@ -15,7 +15,7 @@
             </generator>
         </id>
 
-        <property name="domain" type="string">
+        <property name="domain" type="string" index="idx_phenomenon_domain">
             <column name="domain" not-null="true" unique-key="phenomenon_id_fk">
                 <comment>The identifier of the observableProperty, gml:identifier. Used as parameter for queries. Unique</comment>
             </column>

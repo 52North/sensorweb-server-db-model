@@ -10,7 +10,11 @@
                 <param name="sequence_name">category_seq</param>
             </generator>
         </id>
-        <property column="domain" name="domain" type="string" not-null="true" />
+        <property name="domain" type="string" index="idx_category_domain">
+            <column name="domain" not-null="true">
+                <comment>The domain of the category</comment>
+            </column>
+        </property>
         <property name="name" type="string">
             <column name="name">
                 <comment>The name of the category</comment>
