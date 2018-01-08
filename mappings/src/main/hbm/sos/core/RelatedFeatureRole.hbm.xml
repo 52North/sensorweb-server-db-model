@@ -15,7 +15,7 @@
             </generator>
         </id>
         <property name="relatedFeatureRole" type="string">
-            <column name="role" not-null="true" unique-key="un_related_feature_role">
+            <column name="definition" not-null="true" unique-key="un_related_feature_role_definition">
                 <comment>The related feature role definition. See OGC SWES 2.0 specification</comment>
             </column>
         </property>

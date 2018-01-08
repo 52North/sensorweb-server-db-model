@@ -14,8 +14,8 @@
             </generator>
         </id>
         <property name="format" type="string">
-            <column name="format" not-null="true" unique-key="un_procedure_desc_format">
-                <comment>The procedureDescriptionFormat value, e.g. http://www.opengis.net/sensorML/1.0.1 for procedures descriptions as specified in OGC SensorML 1.0.1</comment>
+            <column name="definition" not-null="true" unique-key="un_procedure_desc_format_definition">
+                <comment>The procedureDescriptionFormat definition, e.g. http://www.opengis.net/sensorML/1.0.1 for procedures descriptions as specified in OGC SensorML 1.0.1</comment>
             </column>
         </property>
     </class>
