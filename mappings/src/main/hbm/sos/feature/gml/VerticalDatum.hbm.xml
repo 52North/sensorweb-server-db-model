@@ -52,7 +52,7 @@
         <many-to-one name="domainOfValidity"
                      class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
                      foreign-key="fk_vd_domain_of_validity">
-            <column index="vd_domain_of_validity_idx"
+            <column index="idx_vd_domain_of_validity"
                     name="domain_of_validity_id"
                     not-null="false">
             </column>

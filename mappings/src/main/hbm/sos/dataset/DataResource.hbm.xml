@@ -14,19 +14,19 @@
         <many-to-one column="dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true"/>
 
         <property name="phenomenonTimeStart" type="timestamp">
-            <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
+            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="phenomenonTimeEnd" type="timestamp">
-            <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
+            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="resultTime" type="timestamp">
-            <column index="result_time_idx" name="result_time" length="29" not-null="true">
+            <column index="idx_result_time" name="result_time" length="29" not-null="true">
                 <comment>Time stamp when the observation was published or result was published/available</comment>
             </column>
         </property>
@@ -107,7 +107,7 @@
 
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
-                <column name="observation_id" not-null="true" index="related_observation_idx" />
+                <column name="observation_id" not-null="true" index="idx_related_observation" />
             </key>
             <one-to-many class="RelatedDataEntity" />
         </set>

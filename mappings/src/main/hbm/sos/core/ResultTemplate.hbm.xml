@@ -15,17 +15,17 @@
             </generator>
         </id>
         <many-to-one name="offering" class="OfferingEntity" foreign-key="fk_result_template_offering">
-            <column index="rt_offering_idx" name="offering_id" not-null="true">
+            <column index="idx_rt_offering" name="offering_id" not-null="true">
                 <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
             </column>
         </many-to-one>
         <many-to-one name="phenomenon" class="PhenomenonEntity" foreign-key="fk_result_template_phenomenon">
-            <column index="rt_phenomenon_idx" name="phenomenon_id" not-null="true">
+            <column index="idx_rt_phenomenon" name="phenomenon_id" not-null="true">
                 <comment>Foreign Key (FK) to the related observableProperty. Contains "phenomenon".Id</comment>
             </column>
         </many-to-one>
         <many-to-one name="procedure" class="ProcedureEntity" foreign-key="fk_result_template_procedure">
-            <column index="rt_procedure_idx" name="procedure_id" not-null="false">
+            <column index="idx_rt_procedure" name="procedure_id" not-null="false">
                 <comment>Foreign Key (FK) to the related procedure. Contains "procedure".id</comment>
             </column>
         </many-to-one>
@@ -35,7 +35,7 @@
             </column>
         </many-to-one>
         <property name="domain" type="string">
-            <column index="rt_id_idx" name="domain" not-null="true">
+            <column index="idx_rt_id" name="domain" not-null="true">
                 <comment>The resultTemplate identifier, required for InsertResult requests.</comment>
             </column>
         </property>

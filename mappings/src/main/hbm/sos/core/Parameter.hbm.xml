@@ -14,7 +14,7 @@
         </id>
 		<discriminator column="type" type="string"/>
         <property name="name" type="string">
-            <column name="name" not-null="true" index="param_name_idx">
+            <column name="name" not-null="true" index="idx_param_name">
                 <comment>Parameter name</comment>
             </column>
         </property>
