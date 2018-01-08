@@ -72,9 +72,9 @@ public class DatasetEntity extends DescribableEntity
 
     private boolean published = true;
 
-    private boolean deleted = false;
+    private boolean deleted;
 
-    private boolean disabled = false;
+    private boolean disabled;
 
     private String valueType;
 
@@ -96,7 +96,7 @@ public class DatasetEntity extends DescribableEntity
 
     private long observationCount = -1;
 
-    private boolean hiddenChild = false;
+    private boolean hiddenChild;
 
     private ObservationTypeEntity observationType;
 
