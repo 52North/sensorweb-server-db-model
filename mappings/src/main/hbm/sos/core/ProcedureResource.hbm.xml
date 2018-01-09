@@ -13,13 +13,13 @@
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
-        <property name="domain" type="string" index="idx_procedure_domain">
-            <column name="domain" not-null="true" unique-key="un_procedure_domain">
+        <property name="identifier" type="string" index="idx_procedure_identifier">
+            <column name="identifier" not-null="true" unique-key="un_procedure_identifier">
                 <!-- <comment>The identifier of the procedure, gml:identifier. Used as parameter for queries. Unique</comment> -->
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_procedure_codespace">
-            <column name="fk_codespace_id">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_procedure_identifier_codespace">
+            <column name="fk_identifier_codespace_id">
                 <!-- <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment> -->
             </column>
         </many-to-one>
@@ -28,8 +28,8 @@
                 <!-- <comment>The name of the procedure, gml:name. Optional</comment> -->
             </column>
         </property>
-         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_procedure_codespace_name">
-            <column name="fk_codespace_name_id">
+         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_procedure_name_codespace">
+            <column name="fk_name_codespace_id">
                 <!-- <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment> -->
             </column>
         </many-to-one>
@@ -84,7 +84,7 @@
             <key column="fk_parent_procedure_id" not-null="true" foreign-key="fk_procedure_parent" />
             <many-to-many class="ProcedureEntity" column="fk_child_procedure_id" foreign-key="fk_procedure_child" />
         </set>
-        <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="fk_procedure_format">
+        <many-to-one name="format" class="FormatEntity" foreign-key="fk_procedure_format">
             <column name="fk_format_id" not-null="true">
                 <!-- <comment>Relation/foreign key to the procedureDescriptionFormat table. Describes the format of the
                     procedure description.</comment> -->

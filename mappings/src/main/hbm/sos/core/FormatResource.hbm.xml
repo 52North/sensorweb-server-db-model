@@ -3,22 +3,26 @@
 	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="FeatureTypeEntity" table="feature_type">
+    <class name="FormatEntity" table="format">
         <comment>Table to store the FeatureOfInterestType information. Mapping file:
             sos/core/FeatureType.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="format_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">feature_type_seq</param>
+                <param name="sequence_name">format_seq</param>
             </generator>
         </id>
-        <property name="type" type="string">
-            <column name="definition" not-null="true" unique-key="un_feature_type_definition">
-                <comment>The featureOfInterestType definition, e.g.
+        <property name="format" type="string">
+            <column name="definition" not-null="true" unique-key="un_format_definition">
+                <comment>The format definitions, e.g.
                     http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint (OGC OM 2.0
-                    specification) for point features</comment>
+                    specification) for point features,
+                    http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement (OGC OM 2.0 specification) for
+                    OM_Measurement,
+                    http://www.opengis.net/sensorML/1.0.1 for procedures descriptions as specified in OGC SensorML 1.0.1
+                    </comment>
             </column>
         </property>
     </class>

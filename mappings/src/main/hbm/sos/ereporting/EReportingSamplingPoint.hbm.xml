@@ -8,25 +8,25 @@
         <comment>Table to store the AQD e-Reporting Sampling Point information. Mapping file: sos/ereporting/EReportingSamplingPoint.hbm.xml</comment>
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="sampling_point_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
                 <param name="sequence_name">sampling_point_seq</param>
             </generator>
         </id>
-        <property name="domain"
+        <property name="identifier"
                  type="string">
-            <column name="domain"
+            <column name="identifier"
                     not-null="true"
-                    unique-key="un_sampling_point_domain">
+                    unique-key="un_sampling_point_identifier">
                 <comment>The identifier of the samplingPoint, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace"
+        <many-to-one name="identifierCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="fk_sampling_point_codespace">
-            <column name="fk_codespace_id">
+                     foreign-key="fk_sp_identifier_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -36,10 +36,10 @@
                 <comment>The name of the samplingPoint, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName"
+        <many-to-one name="nameCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="fk_sp_codespace_name">
-            <column name="fk_codespace_name_id">
+                     foreign-key="fk_sp_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>

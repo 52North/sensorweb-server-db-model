@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DatasetEntity" table="dataset">
         <id name="id" type="long">
-            <column name="id">
+            <column name="dataset_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -25,8 +25,8 @@
         <many-to-one class="FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
             foreign-key="fk_dataset_feature" />
 
-        <many-to-one name="observationType" class="ObservationTypeEntity" not-null="false" foreign-key="fk_dataset_observation_type">
-            <column name="fk_observation_type">
+        <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
+            <column name="fk_format_id">
                 <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
             </column>
         </many-to-one>
@@ -67,14 +67,14 @@
 
         <property column="decimals" name="decimals" not-null="false" type="integer" />
 
-        <property name="domain" type="string" index="idx_dataset_domain">
-            <column name="domain" not-null="false" unique-key="un_dataset_domain">
+        <property name="identifier" type="string" index="idx_dataset_identifier">
+            <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>
             </column>
         </property>
 
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_dataset_codespace">
-            <column name="fk_codespace_id">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:identifier codespace. Optional</comment>
             </column>
@@ -84,8 +84,8 @@
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_dataset_codespace_name">
-            <column name="fk_codespace_name_id">
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:name codespace. Optional</comment>
             </column>
@@ -116,7 +116,7 @@
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
         </subclass>
         <subclass discriminator-value="geometry" name="GeometryDatasetEntity"/>
-        <subclass discriminator-value="swedataarray" name="SweDataArrayDatasetEntity"/>
+        <subclass discriminator-value="dataarray" name="DataArrayDatasetEntity"/>
         <subclass discriminator-value="complex" name="ComplexDatasetEntity"/>
         <subclass discriminator-value="quantity-profile" name="ProfileDatasetEntity">
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />

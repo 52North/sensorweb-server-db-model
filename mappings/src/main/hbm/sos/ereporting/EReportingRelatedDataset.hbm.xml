@@ -6,7 +6,7 @@
     <class name="EReportingRelatedDatasetEntity" table="related_dataset">
         <comment>The dataset relation should be used if the dataset table represents a dataset.</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="related_dataset_id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">

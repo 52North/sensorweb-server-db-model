@@ -7,7 +7,7 @@
         <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
             2.0). Mapping file: sos/core/RelatedFeature.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="related_feature_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

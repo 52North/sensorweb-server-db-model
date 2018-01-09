@@ -38,20 +38,23 @@ public interface HibernateRelations {
     String SRID = "srid";
 
     interface HasIdentifier<T> {
-        String getDomain();
+        
+        String IDENTIFIER = "identifier";
+        
+        String getIdentifier();
 
-        T setDomain(String domain);
+        T setIdentifier(String identifier);
 
-        default boolean isSetDomain() {
-            return getDomain() != null && !getDomain().isEmpty();
+        default boolean isSetIdentifier() {
+            return getIdentifier() != null && !getIdentifier().isEmpty();
         }
 
-        default String getIdentifier() {
-            return getDomain();
+        default String getDomain() {
+            return getIdentifier();
         }
 
-        default T setIdentifier(String identifier) {
-            return setDomain(identifier);
+        default T setDomain(String domain) {
+            return setIdentifier(domain);
         }
 
         /**
@@ -59,9 +62,24 @@ public interface HibernateRelations {
          *
          * @return <code>true</code>, if identifier is set
          */
-        default boolean isSetIdentifier() {
-            return isSetDomain();
+        default boolean isSetDomain() {
+            return isSetIdentifier();
         }
+    }
+
+    interface HasDomainId {
+        String IDENTIFIER = "identifier";
+    
+        String getIdentifier();
+    
+        void setIdentifier(String identifier);
+    
+        /**
+         * Is identifier set
+         *
+         * @return <code>true</code>, if identifier is set
+         */
+        boolean isSetIdentifier();
     }
 
     interface HasDescription<T> {
@@ -81,27 +99,27 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasCodespace<T> {
-        String CODESPACE = "codespace";
+    interface HasIdentifierCodespace<T> {
+        String IDENTIFIER_CODESPACE = "identifierCodespace";
 
-        CodespaceEntity getCodespace();
+        CodespaceEntity getIdentifierCodespace();
 
-        T setCodespace(CodespaceEntity codespace);
+        T setIdentifierCodespace(CodespaceEntity codespace);
 
-        default boolean isSetCodespace() {
-            return getCodespace() != null && !getCodespace().isSetCodespaceEntity();
+        default boolean isSetIdentifierCodespace() {
+            return getIdentifierCodespace() != null && !getIdentifierCodespace().isSetName();
         }
     }
 
-    interface HasCodespaceName<T> {
-        String CODESPACE_NAME = "codespaceName";
+    interface HasNameCodespace<T> {
+        String NAME_CODESPACE = "nameCodespace";
 
-        CodespaceEntity getCodespaceName();
+        CodespaceEntity getNameCodespace();
 
-        T setCodespaceName(CodespaceEntity codespaceName);
+        T setNameCodespace(CodespaceEntity codespaceName);
 
-        default boolean isSetCodespaceName() {
-            return getCodespaceName() != null && !getCodespaceName().isSetCodespaceEntity();
+        default boolean isSetNameCodespace() {
+            return getNameCodespace() != null && !getNameCodespace().isSetName();
         }
     }
 
@@ -136,17 +154,17 @@ public interface HibernateRelations {
     interface HasFeatureType {
         String FEATURE_OF_INTEREST_TYPE = "featureOfInterestType";
 
-        FeatureTypeEntity getFeatureType();
+        FormatEntity getFeatureType();
 
-        void setFeatureType(FeatureTypeEntity featureOfInterestType);
+        void setFeatureType(FormatEntity featureOfInterestType);
     }
 
     interface HasFeatureTypes<T> {
         String FEATURE__TYPES = "featureTypes";
 
-        Set<FeatureTypeEntity> getFeatureTypes();
+        Set<FormatEntity> getFeatureTypes();
 
-        T setFeatureTypes(Set<FeatureTypeEntity> featureOfInterestTypes);
+        T setFeatureTypes(Set<FormatEntity> featureOfInterestTypes);
 
         default boolean HasFeaturTypes() {
             return getFeatureTypes() != null && !getFeatureTypes().isEmpty();
@@ -214,21 +232,6 @@ public interface HibernateRelations {
         void setParent(boolean parent);
 
         boolean isParent();
-    }
-
-    interface HasDomainId {
-        String IDENTIFIER = "identifier";
-
-        String getIdentifier();
-
-        void setIdentifier(String identifier);
-
-        /**
-         * Is identifier set
-         *
-         * @return <code>true</code>, if identifier is set
-         */
-        boolean isSetIdentifier();
     }
 
     interface HasName<T> {

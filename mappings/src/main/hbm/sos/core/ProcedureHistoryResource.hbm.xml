@@ -7,7 +7,7 @@
         <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile.
             Mapping file: msos/core/ProcedureHistory.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="procedure_history_id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
@@ -15,7 +15,7 @@
             </generator>
         </id>
 
-        <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="fk_procedure_description_format_id">
+        <many-to-one name="format" class="FormatEntity" foreign-key="fk_procedure_description_format_id">
             <column name="fk_procedure_description_format_id" not-null="true">
                 <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains
                     "procedureDescriptionFormat".id</comment>

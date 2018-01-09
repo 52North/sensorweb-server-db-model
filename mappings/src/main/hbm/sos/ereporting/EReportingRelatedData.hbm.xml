@@ -6,7 +6,7 @@
     <class name="EReportingRelatedDataEntity" table="related_observation">
         <comment>The related observation of an observation.</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="related_observation_id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">

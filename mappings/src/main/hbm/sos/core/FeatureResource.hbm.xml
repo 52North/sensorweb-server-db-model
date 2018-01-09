@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="AbstractFeatureEntity" abstract="true" table="feature">
         <id name="id" type="long">
-            <column name="id">
+            <column name="feature_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -15,19 +15,19 @@
 
         <discriminator column="discriminator" type="string" not-null="false"/>
 
-        <many-to-one name="featureType" class="FeatureTypeEntity" foreign-key="fk_feature_type">
-            <column name="fk_feature_type_id" not-null="true">
+        <many-to-one name="featureType" class="FormatEntity" foreign-key="fk_feature_format">
+            <column name="fk_format_id" not-null="true">
                 <comment>Relation/foreign key to the featureType table. Describes the type of the feature. Contains "featureType".featureTypeId</comment>
             </column>
         </many-to-one>
 
-        <property name="domain" type="string" index="idx_feature_domain">
-            <column name="domain" unique-key="un_feature_domain">
+        <property name="identifier" type="string" index="idx_feature_identifier">
+            <column name="identifier" unique-key="un_feature_identifier">
                 <comment>The identifier of the feature, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_feature_codespace">
-            <column name="fk_codespace_id">
+		<many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_feature_identifier_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -36,8 +36,8 @@
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
         </property>
-	<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_feature_codespace_name">
-            <column name="fk_codespace_name_id">
+	<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
         </many-to-one>

@@ -6,7 +6,7 @@
     <class name="EReportingQualityEntity" table="ereporting_quality">
         <comment>Table to store the AQD e-Reporting quality information for yearly reporting. Mapping file: sos/ereporting/EReportingQuality.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="ereporting_quality_id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">

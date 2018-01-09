@@ -11,7 +11,7 @@
         <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="platformServiceFk"> -->
         <!-- <column name="service" not-null="true"/> -->
         <!-- </many-to-one> -->
-        <property column="domain" insert="false" name="domain" type="string" update="false" />
+        <property column="identifier" insert="false" name="identifier" type="string" update="false" />
         <property column="name" insert="false" name="name" type="string" update="false" />
         <property column="is_mobile" insert="false" name="mobile" type="numeric_boolean" update="false" />
         <property column="is_insitu" insert="false" name="insitu" type="numeric_boolean" update="false" />

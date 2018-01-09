@@ -27,7 +27,7 @@ import java.util.Set;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serializable {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
 
     public static final String PROPERTY_ID = "id";
 
@@ -52,25 +52,6 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
     private static final long serialVersionUID = 273612846605300612L;
 
     private Long id;
-
-    /**
-     * Identification of the entity without special chars.
-     */
-    private String domain;
-
-    private CodespaceEntity codespace;
-
-    /**
-     * Default name of the entity.
-     */
-    private String name;
-
-    private CodespaceEntity codespaceName;
-
-    /**
-     * Default description of the entity.
-     */
-    private String description;
 
     private Date phenomenonTimeStart;
 
@@ -114,46 +95,6 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getDomain() {
-        return domain;
-    }
-
-    public void setDomain(String domain) {
-        this.domain = domain;
-    }
-
-    public CodespaceEntity getCodespace() {
-        return codespace;
-    }
-
-    public void setCodespace(CodespaceEntity codespace) {
-        this.codespace = codespace;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CodespaceEntity getCodespaceName() {
-        return codespaceName;
-    }
-
-    public void setCodespaceName(CodespaceEntity codespaceName) {
-        this.codespaceName = codespaceName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     /**

@@ -92,7 +92,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     }
 
     public boolean isSetCodespaceAxisAbbrev() {
-        return getCodespaceAxisAbbrev() != null && getCodespaceAxisAbbrev().isSetCodespaceEntity();
+        return getCodespaceAxisAbbrev() != null && getCodespaceAxisAbbrev().isSetName();
     }
 
     /**
@@ -126,7 +126,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     }
 
     public boolean isSetCodespaceAxisDirection() {
-        return getCodespaceAxisDirection() != null && getCodespaceAxisDirection().isSetCodespaceEntity();
+        return getCodespaceAxisDirection() != null && getCodespaceAxisDirection().isSetName();
     }
 
     /**
@@ -202,7 +202,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     }
 
     public boolean isSetCodespaceRangeMeaning() {
-        return getCodespaceRangeMeaning() != null && getCodespaceRangeMeaning().isSetCodespaceEntity();
+        return getCodespaceRangeMeaning() != null && getCodespaceRangeMeaning().isSetName();
     }
 
     /**

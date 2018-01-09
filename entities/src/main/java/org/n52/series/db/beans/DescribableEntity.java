@@ -28,19 +28,23 @@ import org.n52.series.db.beans.parameter.Parameter;
 public class DescribableEntity extends IdEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
         Serializable {
 
+    public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
+    public static final String PROPERTY_IDENTIFIER_CODESPACE = IDENTIFIER_CODESPACE;
     public static final String PROPERTY_NAME = NAME;
-    public static final String PROPERTY_DOMAIN_ID = "domain";
+    public static final String PROPERTY_NAME_CODESPACE = NAME_CODESPACE;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
     public static final String PROPERTY_SERVICE = "service";
-    public static final String PROPERTY_CODESPACE = CODESPACE;
-    public static final String PROPERTY_CODESPACE_NAME = CODESPACE_NAME;
+    
+    public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
+    public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
+    public static final String PROPERTY_CODESPACE_NAME = PROPERTY_NAME_CODESPACE;
 
     private static final long serialVersionUID = -4448231483118864847L;
 
     /**
      * Identification of the entity without special chars.
      */
-    private String domain;
+    private String identifier;
 
     private CodespaceEntity codespace;
 
@@ -63,23 +67,23 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     private Set<Parameter< ? >> parameters;
 
     @Override
-    public String getDomain() {
-        return domain;
+    public String getIdentifier() {
+        return identifier;
     }
 
     @Override
-    public DescribableEntity setDomain(String domain) {
-        this.domain = domain;
+    public DescribableEntity setIdentifier(String domain) {
+        this.identifier = domain;
         return this;
     }
 
     @Override
-    public CodespaceEntity getCodespace() {
+    public CodespaceEntity getIdentifierCodespace() {
         return this.codespace;
     }
 
     @Override
-    public DescribableEntity setCodespace(CodespaceEntity codespace) {
+    public DescribableEntity setIdentifierCodespace(CodespaceEntity codespace) {
         this.codespace = codespace;
         return this;
     }
@@ -96,12 +100,12 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public CodespaceEntity getCodespaceName() {
+    public CodespaceEntity getNameCodespace() {
         return codespaceName;
     }
 
     @Override
-    public DescribableEntity setCodespaceName(CodespaceEntity codespaceName) {
+    public DescribableEntity setNameCodespace(CodespaceEntity codespaceName) {
         this.codespaceName = codespaceName;
         return this;
     }

@@ -23,13 +23,13 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="domain" type="string" >
-            <column name="domain" unique-key="un_vertical_cs_domain">
+        <property name="identifier" type="string" >
+            <column name="identifier" unique-key="un_vertical_cs_identifier">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_codespace">
-            <column name="fk_codespace_id">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -38,8 +38,8 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_vertical_cs_name">
-            <column name="fk_codespace_name_id">
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_name">
+            <column name="fk_name_codespace_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>

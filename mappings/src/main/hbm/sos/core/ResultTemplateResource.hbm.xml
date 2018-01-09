@@ -7,7 +7,7 @@
         <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file:
             sos/core/ResultTemplate.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="result_template_id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
@@ -34,8 +34,8 @@
                 <comment>Foreign Key (FK) to the related featureOfInterest. Contains "feature".id</comment>
             </column>
         </many-to-one>
-        <property name="domain" type="string">
-            <column name="domain" not-null="true" index="idx_result_template_domain">
+        <property name="identifier" type="string">
+            <column name="identifier" not-null="true" index="idx_result_template_identifier">
                 <comment>The resultTemplate identifier, required for InsertResult requests.</comment>
             </column>
         </property>

@@ -7,14 +7,14 @@
         <comment>Table to store the gml:identifier and gml:name codespace information. Mapping file:
             sos/core/Codespace.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="codespace_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
                 <param name="sequence_name">codespace_seq</param>
             </generator>
         </id>
-        <property name="codespace" type="string">
+        <property name="name" type="string">
             <column name="name" not-null="true" unique-key="un_codespace_codespace">
                 <comment>The codespace name</comment>
             </column>
