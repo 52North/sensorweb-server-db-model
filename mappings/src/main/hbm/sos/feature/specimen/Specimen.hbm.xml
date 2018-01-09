@@ -8,7 +8,7 @@
                      discriminator-value="SpecimenEntity">
         <join table="specimen">
             <key foreign-key="fk_specimen_feature">
-                <column name="fearure_id" >
+                <column name="fk_fearure_id" >
                     <comment>Foreign Key (FK) to the related feature from the feature table. Contains "feature".id</comment>
                 </column>
             </key>
@@ -47,7 +47,7 @@
             <many-to-one name="sizeUnit"
                          class="UnitEntity"
                          foreign-key="fk_specimen_unit">
-                <column name="size_unit_id"
+                <column name="fk_size_unit_id"
                         not-null="false">
                     <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
                 </column>

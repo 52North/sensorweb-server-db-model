@@ -14,12 +14,12 @@
             </generator>
         </id>
         <property name="item" type="long">
-            <column name="dataset_id" not-null="true" index="idx_rel_dataset_dataset">
+            <column name="fk_dataset_id" not-null="true" index="idx_rel_dataset_dataset">
                 <comment>Foreign Key (FK) to the dataset. Contains "dataset".id</comment>
             </column>
         </property>
         <many-to-one name="relatedItem" class="EReportingDatasetEntity" foreign-key="fk_rel_dataset_rel_dataset">
-            <column name="related_dataset_id"  not-null="true">
+            <column name="fk_related_dataset_id"  not-null="true">
                 <comment>Relation/foreign key to the associated dataset table. Contains "dataset".id</comment>
             </column>
         </many-to-one>

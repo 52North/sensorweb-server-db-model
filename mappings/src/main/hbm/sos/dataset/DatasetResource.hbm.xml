@@ -14,19 +14,19 @@
         </id>
         <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
-        <many-to-one class="ProcedureEntity" column="procedure_id" name="procedure" not-null="true" unique-key="dataset_identity"
+        <many-to-one class="ProcedureEntity" column="fk_procedure_id" name="procedure" not-null="true" unique-key="un_dataset_identity"
         	foreign-key="fk_dataset_procedure" />
-        <many-to-one class="PhenomenonEntity" column="phenomenon_id" name="phenomenon" not-null="true" unique-key="dataset_identity"
+        <many-to-one class="PhenomenonEntity" column="fk_phenomenon_id" name="phenomenon" not-null="true" unique-key="un_dataset_identity"
         	foreign-key="fk_dataset_phenomenon" />
-        <many-to-one class="OfferingEntity" column="offering_id" name="offering" not-null="true" unique-key="dataset_identity"
+        <many-to-one class="OfferingEntity" column="fk_offering_id" name="offering" not-null="true" unique-key="un_dataset_identity"
            foreign-key="fk_dataset_offering" />
-        <many-to-one class="CategoryEntity" column="category_id" name="category" not-null="false" unique-key="dataset_identity"
-        	foreign-key="fk_dataset_category"  />
-        <many-to-one class="FeatureEntity" column="feature_id" name="feature" not-null="false" unique-key="dataset_identity"
+        <many-to-one class="CategoryEntity" column="fk_category_id" name="category" not-null="false" unique-key="un_dataset_identity"
+        	foreign-key="fk_dataset_category" />
+        <many-to-one class="FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
             foreign-key="fk_dataset_feature" />
 
         <many-to-one name="observationType" class="ObservationTypeEntity" not-null="false" foreign-key="fk_dataset_observation_type">
-            <column name="observation_type">
+            <column name="fk_observation_type">
                 <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
             </column>
         </many-to-one>
@@ -37,8 +37,8 @@
         <property column="first_value" name="firstValue" type="big_decimal" precision="29" />
         <property column="last_value" name="lastValue" type="big_decimal" precision="29" />
 
-        <many-to-one class="DataEntity" column="first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
-        <many-to-one class="DataEntity" column="last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        <many-to-one class="DataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+        <many-to-one class="DataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
 
         <property name="deleted" type="numeric_boolean">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
@@ -74,17 +74,18 @@
         </property>
 
         <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_dataset_codespace">
-            <column name="codespace_id">
+            <column name="fk_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:identifier codespace. Optional</comment>
             </column>
-        </many-to-one><property name="name" type="string">
+        </many-to-one>
+		<property name="name" type="string">
             <column name="name">
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
         </property>
         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_dataset_codespace_name">
-            <column name="codespace_mame_id">
+            <column name="fk_codespace_name_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:name codespace. Optional</comment>
             </column>
@@ -97,28 +98,28 @@
         </property>
 
         <set inverse="false" name="parameters" table="dataset_parameter" cascade="delete-orphan">
-            <key column="dataset_id" not-null="true" foreign-key="fk_dataset_parameter" />
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id"
+            <key column="fk_dataset_id" not-null="true" foreign-key="fk_dataset_parameter" />
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_dataset" />
         </set>
 
 		<subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
-            <many-to-one class="UnitEntity" column="unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
         </subclass>
         <subclass discriminator-value="text" name="TextDatasetEntity"/>
         <subclass discriminator-value="count" name="CountDatasetEntity"/>
         <subclass discriminator-value="blob" name="BlobDatasetEntity"/>
         <subclass discriminator-value="boolean" name="BooleanDatasetEntity" />
         <subclass discriminator-value="category" name="CategoryDatasetEntity">
-            <many-to-one class="UnitEntity" column="unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
         </subclass>
         <subclass discriminator-value="geometry" name="GeometryDatasetEntity"/>
         <subclass discriminator-value="swedataarray" name="SweDataArrayDatasetEntity"/>
         <subclass discriminator-value="complex" name="ComplexDatasetEntity"/>
         <subclass discriminator-value="quantity-profile" name="ProfileDatasetEntity">
-            <many-to-one class="UnitEntity" column="unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
     </class>

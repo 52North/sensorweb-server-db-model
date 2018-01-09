@@ -15,8 +15,8 @@
             </generator>
         </id>
         <property name="codespace" type="string">
-            <column name="codespace" not-null="true" unique-key="un_codespace_codespace">
-                <comment>The codespace value</comment>
+            <column name="name" not-null="true" unique-key="un_codespace_codespace">
+                <comment>The codespace name</comment>
             </column>
         </property>
     </class>

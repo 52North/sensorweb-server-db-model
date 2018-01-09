@@ -15,12 +15,12 @@
             </generator>
         </id>
         <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="fk_related_feature">
-            <column name="feature_id" not-null="true">
+            <column name="fk_feature_id" not-null="true">
                 <comment>Foreign Key (FK) to the related feature. Contains "feature".id</comment>
             </column>
         </many-to-one>
         <many-to-one name="role" class="RelatedFeatureRoleEntity" foreign-key="fk_related_feature_role">
-            <column name="role_id" not-null="true">
+            <column name="fk_role_id" not-null="true">
                 <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains
                     "related_feature_role".id</comment>
             </column>
@@ -28,12 +28,12 @@
         <set name="offerings" table="offering_related_feature" inverse="true">
             <comment>Relation table to store relatedFeatures and their associated offerings.</comment>
             <key foreign-key="fk_offering_related_feature">
-                <column name="related_feature_id" not-null="true">
+                <column name="fk_related_feature_id" not-null="true">
                     <comment>Foreign Key (FK) to the related relatedFeature. Contains "related_eature".id</comment>
                 </column>
             </key>
             <many-to-many class="OfferingEntity" foreign-key="fk_related_feature_offering">
-                <column name="offering_id" not-null="true">
+                <column name="fk_offering_id" not-null="true">
                     <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
                 </column>
             </many-to-many>

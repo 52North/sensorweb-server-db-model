@@ -17,7 +17,7 @@
 
 package org.n52.series.db.beans;
 
-public class SweDataArrayDataEntity extends CompositeDataEntity {
+public class DataArrayDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -1618516259763515255L;
 

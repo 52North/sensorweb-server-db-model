@@ -8,7 +8,7 @@
                      discriminator-value="WmlMonitoringPointEntity">
         <join table="wml_monitoring_point">
             <key foreign-key="fk_wml_monitoring_point">
-                <column name="feature_id">
+                <column name="fk_feature_id">
                     <comment>Foreign Key (FK) to the related featureOfInterest
                         from the feature table. Contains
                         "feature".id</comment>
@@ -17,19 +17,19 @@
             <component name="content" class="org.n52.series.db.beans.feature.MonitoringPointContent">
                 <set name="relatedParty" table="wml_mp_related_party">
                     <key foreign-key="fk_wml_mp_related_party">
-                        <column name="feature_id" not-null="true" />
+                        <column name="fk_feature_id" not-null="true" />
                     </key>
                     <many-to-many class="org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity"
                         foreign-key="fk_wml_related_party_mp">
-                        <column name="responsible_party_id" not-null="true" />
+                        <column name="fk_responsible_party_id" not-null="true" />
                     </many-to-many>
                 </set>
                 <set name="verticalDatum" table="wml_mp_vertical_datum">
                     <key foreign-key="fk_wml_mp_vertical_datum">
-                        <column name="feature_id"/>
+                        <column name="fk_feature_id"/>
                     </key>
                     <many-to-many class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity" foreign-key="wml_vertical_datum__mpfk">
-                        <column name="vertical_datum_id" not-null="true" />
+                        <column name="fk_vertical_datum_id" not-null="true" />
                     </many-to-many>
                 </set>
             </component>

@@ -23,17 +23,17 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="fk_gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="individualName" column="individual_name" type="string" />
         <property name="organizationName" column="organization_name" type="string" />
         <property name="positionName" column="position_name" type="string" />
         <many-to-one name="contactInfo"
-                     column="contact_info_id"
+                     column="fk_contact_info_id"
                      class="ContactEntity"
                      foreign-key="fk_contact_info" />
         <many-to-one name="ciRole"
-                     column="ci_role_id"
+                     column="fk_ci_role_id"
                      class="RoleEntity"
                      foreign-key="fk_ci_role" />
     </class>

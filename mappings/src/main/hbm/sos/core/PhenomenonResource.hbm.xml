@@ -21,7 +21,7 @@
             </column>
         </property>
 		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_phenomenon_codespace">
-            <column name="codespace_id">
+            <column name="fk_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -31,7 +31,7 @@
             </column>
         </property>
 		<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_phenomenon_codespace_name">
-            <column name="codespace_name_id">
+            <column name="fk_codespace_name_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -49,13 +49,13 @@
             <comment>Relation table to store observableProperty hierarchies, aka compositePhenomenon. E.g. define a
                 parent in a query and all childs are also contained in the response.</comment>
             <key foreign-key="fk_phenomenon_parent">
-                <column name="parent_phenomenon_id" not-null="true">
+                <column name="fk_parent_phenomenon_id" not-null="true">
                     <comment>Foreign Key (FK) to the related parent observableProperty. Contains
                         "observableProperty".observablePropertyid</comment>
                 </column>
             </key>
             <many-to-many class="PhenomenonEntity" foreign-key="fk_phenomenon_child">
-                <column name="child_phenomenon_id" not-null="true">
+                <column name="fk_child_phenomenon_id" not-null="true">
                     <comment>Foreign Key (FK) to the related child observableProperty. Contains
                         "observableProperty".observablePropertyid</comment>
                 </column>
@@ -64,15 +64,15 @@
 
         <set name="parents" table="composite_phenomenon" inverse="false">
             <key foreign-key="fk_phenomenon_child">
-                <column name="child_phenomenon_id" not-null="true" />
+                <column name="fk_child_phenomenon_id" not-null="true" />
             </key>
             <many-to-many class="PhenomenonEntity" foreign-key="fk_phenomenon_parent">
-                <column name="parent_phenomenon_id" not-null="true" />
+                <column name="fk_parent_phenomenon_id" not-null="true" />
             </many-to-many>
         </set>
 
         <set name="translations" table="phenomenon_i18n" inverse="true" fetch="select">
-         	<key column="phenomenon_id" not-null="true" />
+         	<key column="fk_phenomenon_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" />
         </set>
     </class>
@@ -84,7 +84,7 @@
                 <param name="sequence_name">phenomenon_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="phenomenon_id" not-null="true" class="PhenomenonEntity" foreign-key="fk_tranlsation_phenomenon"/>
+		<many-to-one name="entity" column="fk_phenomenon_id" not-null="true" class="PhenomenonEntity" foreign-key="fk_phenomenon"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

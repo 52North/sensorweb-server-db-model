@@ -16,7 +16,7 @@
         </id>
 
         <many-to-one name="format" class="ProcedureDescriptionFormatEntity" foreign-key="fk_procedure_description_format_id">
-            <column name="procedure_description_format_id" not-null="true">
+            <column name="fk_procedure_description_format_id" not-null="true">
                 <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains
                     "procedureDescriptionFormat".id</comment>
             </column>

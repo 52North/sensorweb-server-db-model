@@ -31,7 +31,7 @@
         <many-to-one name="codespace"
                      class="CodespaceEntity"
                      foreign-key="fk_vertical_crs_codespace">
-            <column name="codespace_id">
+            <column name="fk_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -41,7 +41,7 @@
             </column>
         </property>
         <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_verti_crs_codespace_name">
-            <column name="codespace_name_id">
+            <column name="fk_codespace_name_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -53,16 +53,16 @@
         <property name="remarks" column="remarks" type="string" />
         <set name="domainOfValidity"
              table="vertical_crs_domain_of_valid">
-          <key column="vertical_crs_id"
+          <key column="fk_vertical_crs_id"
                not-null="true"
                foreign-key="fk_vcrs_vertical_crs"/>
-          <many-to-many column="domain_of_validity_id"
+          <many-to-many column="fk_domain_of_validity_id"
                         class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
                         foreign-key="fk_vcrs_domain_of_validity"/>
         </set>
         <set name="scope"
              table="vertical_crs_scope">
-          <key column="vertical_crs_id"
+          <key column="fk_vertical_crs_id"
                not-null="true"
                foreign-key="fk_vertical_crs_scope"/>
           <element column="scope"
@@ -70,11 +70,11 @@
                    not-null="true" />
         </set>
         <many-to-one name="verticalCS"
-                     column="vertical_cs_id"
+                     column="fk_vertical_cs_id"
                      class="org.n52.series.db.beans.feature.gml.VerticalCSEntity"
                      foreign-key="fk_vcrs_vertical_cs"/>
         <many-to-one name="verticalDatum"
-                     column="vertical_datum_id"
+                     column="fk_vertical_datum_id"
                      class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity"
                      foreign-key="fk_vcrs_vertical_datum"/>
     </class>

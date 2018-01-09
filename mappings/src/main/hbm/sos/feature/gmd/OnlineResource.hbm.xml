@@ -22,7 +22,7 @@
         <property name="title" column="title" type="string" />
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="fk_gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="linkage" column="linkage" type="string" />
         <property name="protocol" column="protocol" type="string" />

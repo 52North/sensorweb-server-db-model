@@ -23,18 +23,18 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="fk_gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <many-to-one name="phone"
-                     column="phone_id"
+                     column="fk_phone_id"
                      class="TelephoneEntity"
                      foreign-key="fk_contact_phone" />
         <many-to-one name="address"
-                     column="address_id"
+                     column="fk_address_id"
                      class="AddressEntity"
                      foreign-key="fk_contact_address" />
         <many-to-one name="onlineResource"
-                     column="online_resource_id"
+                     column="fk_online_resource_id"
                      class="OnlineResourceEntity"
                      foreign-key="fk_contact_online_resource" />
         <property name="hoursOfService" column="hours_of_service" type="string" />

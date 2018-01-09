@@ -14,17 +14,17 @@
             </generator>
         </id>
         <property name="dataset" type="long">
-               <column name="dataset" not-null="true" unique-key="ereporting_quality_id">
+               <column name="dataset" not-null="true" unique-key="un_ereporting_quality_id">
                    <comment>Relation/foreign key to the associated dataset table. Contains "dataset".id</comment>
                </column>
         </property>
         <property name="year" type="int">
-               <column name="year" not-null="true" unique-key="ereporting_quality_id">
+               <column name="year" not-null="true" unique-key="un_ereporting_quality_id">
                    <comment>referenced year</comment>
                </column>
         </property>
         <property name="primaryObservation" type="string">
-            <column name="primary_observation" not-null="true" unique-key="ereporting_quality_id">
+            <column name="primary_observation" not-null="true" unique-key="un_ereporting_quality_id">
                    <comment>primaryObservation flag, see http://dd.eionet.europa.eu/vocabulary/aq/primaryObservation/view</comment>
                </column>
         </property>

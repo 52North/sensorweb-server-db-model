@@ -23,7 +23,7 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="fk_gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="minimumValue" column="minimum_value" type="big_decimal" length="29"/>
         <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"/>
@@ -31,7 +31,7 @@
                      class="org.n52.series.db.beans.feature.gml.VerticalCRSEntity"
                      foreign-key="fk_vertical_crs">
             <column index="idx_vertical_crs"
-                    name="vertical_crs_id"
+                    name="fk_vertical_crs_id"
                     not-null="false">
             </column>
         </many-to-one>

@@ -14,12 +14,12 @@
                 <param name="sequence_name">ex_extent_seq</param>
             </generator>
         </id>
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="fk_gmd_id" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
         <set name="verticalExtent" table="ex_extent_vertical_ext">
-          <key column="ex_extent_id" not-null="true" foreign-key="fk_ex_extent"/>
-          <many-to-many column="vertical_extent_id"
+          <key column="fk_ex_extent_id" not-null="true" foreign-key="fk_ex_extent"/>
+          <many-to-many column="fk_vertical_extent_id"
                         class="ExVerticalExtentEntity" foreign-key="fk_vertical_extent"/>
         </set>
     </class>

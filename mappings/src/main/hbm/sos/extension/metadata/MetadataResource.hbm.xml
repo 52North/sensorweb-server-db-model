@@ -18,7 +18,7 @@
 
         <property name="name" column="name" type="string" />
         <property name="lastUpdate" column="last_update" type="timestamp" />
-        <property name="dataset_id" column="dataset" type="long" />
+        <property name="fk_dataset_id" column="dataset" type="long" />
       	<property name="domain" type="string">
             <column name="domain" not-null="true">
                 <comment>The metadata value domain.</comment>
