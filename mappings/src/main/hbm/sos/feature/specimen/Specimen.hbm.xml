@@ -8,7 +8,7 @@
                      discriminator-value="SpecimenEntity">
         <join table="specimen">
             <key foreign-key="fk_specimen_feature">
-                <column name="fk_fearure_id" >
+                <column name="fk_feature_id" >
                     <comment>Foreign Key (FK) to the related feature from the feature table. Contains "feature".id</comment>
                 </column>
             </key>

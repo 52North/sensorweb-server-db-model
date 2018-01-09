@@ -7,7 +7,7 @@
            table="address">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="address_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

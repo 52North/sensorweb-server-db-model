@@ -7,7 +7,7 @@
            table="telephone">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="telephone_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

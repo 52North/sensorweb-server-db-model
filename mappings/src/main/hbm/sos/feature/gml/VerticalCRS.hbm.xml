@@ -7,7 +7,7 @@
            table="vertical_crs">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="vertical_crs_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -51,14 +51,14 @@
             </column>
         </property>
         <property name="remarks" column="remarks" type="string" />
-        <set name="identifierOfValidity"
+        <set name="domainOfValidity"
              table="vertical_crs_identifier_of_valid">
           <key column="fk_vertical_crs_id"
                not-null="true"
                foreign-key="fk_vcrs_vertical_crs"/>
-          <many-to-many column="fk_identifier_of_validity_id"
-                        class="org.n52.series.db.beans.feature.gml.identifierOfValidityEntity"
-                        foreign-key="fk_vcrs_identifier_of_validity"/>
+          <many-to-many column="fk_domain_of_validity_id"
+                        class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
+                        foreign-key="fk_vcrs_domain_of_validity"/>
         </set>
         <set name="scope"
              table="vertical_crs_scope">

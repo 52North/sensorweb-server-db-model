@@ -7,7 +7,7 @@
            table="coordinate_system_axis">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="coordinate_system_axis_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

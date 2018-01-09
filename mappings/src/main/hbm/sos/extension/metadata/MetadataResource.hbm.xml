@@ -18,10 +18,10 @@
 
         <property name="name" column="name" type="string" />
         <property name="lastUpdate" column="last_update" type="timestamp" />
-        <property name="fk_dataset_id" column="dataset" type="long" />
-      	<property name="identifier" type="string">
-            <column name="identifier" not-null="true">
-                <comment>The metadata value identifier.</comment>
+        <property name="dataset" column="fk_dataset_id" type="long" />
+      	<property name="domain" type="string">
+            <column name="domain" not-null="true">
+                <comment>The metadata value domain.</comment>
             </column>
         </property>
         <subclass name="MetadataStringEntity" discriminator-value="string">

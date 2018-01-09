@@ -3,15 +3,15 @@
 	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="org.n52.series.db.beans.feature.gml.identifierOfValidityEntity"
-           table="identifier_of_validity">
+    <class name="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
+           table="domain_of_validity">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="domain_of_validity_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">identifier_of_validity_seq</param>
+                <param name="sequence_name">domain_of_validity_seq</param>
             </generator>
         </id>
         <property name="nilReason" column="nil_reason" type="string" />
@@ -24,7 +24,7 @@
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="identifier" type="string" >
-            <column name="identifier" unique-key="un_identifier_of_validity_identifier">
+            <column name="identifier" unique-key="un_domain_of_validity_identifier">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>

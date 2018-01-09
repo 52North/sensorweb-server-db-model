@@ -7,7 +7,7 @@
            table="online_resource">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="online_resource_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

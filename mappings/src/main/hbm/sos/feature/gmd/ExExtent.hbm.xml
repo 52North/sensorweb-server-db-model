@@ -7,7 +7,7 @@
            table="ex_extent">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="ex_extent_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

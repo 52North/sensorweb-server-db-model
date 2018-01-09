@@ -7,7 +7,7 @@
            table="role">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="role_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">

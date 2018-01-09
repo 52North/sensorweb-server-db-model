@@ -7,7 +7,7 @@
            table="vertical_datum">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="vertical_datum_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -49,17 +49,17 @@
             </column>
         </property>
         <property name="remarks" column="remarks" type="string" />
-        <many-to-one name="identifierOfValidity"
-                     class="org.n52.series.db.beans.feature.gml.identifierOfValidityEntity"
-                     foreign-key="fk_vd_identifier_of_validity">
-            <column index="idx_vd_identifier_of_validity"
-                    name="fk_identifier_of_validity_id"
+        <many-to-one name="domainOfValidity"
+                     class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
+                     foreign-key="fk_vd_domain_of_validity">
+            <column index="idx_vd_domain_of_validity"
+                    name="fk_domain_of_validity_id"
                     not-null="false">
             </column>
         </many-to-one>
 
         <set name="scope" table="vertical_datum_scope">
-          <key column="verticalDatum" not-null="true" foreign-key="fk_vd_scope"/>
+          <key column="fk_vertical_datum_id" not-null="true" foreign-key="fk_vd_scope"/>
           <element column="scope" type="string" not-null="true" />
         </set>
 

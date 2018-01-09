@@ -7,7 +7,7 @@
            table="vertical_exextent">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="_vertical_exextentid">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
