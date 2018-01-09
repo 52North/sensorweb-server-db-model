@@ -14,7 +14,7 @@
                 <param name="sequence_name">ex_extent_seq</param>
             </generator>
         </id>
-        <property name="gmdid" column="fk_gmd_id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
         <set name="verticalExtent" table="ex_extent_vertical_ext">
