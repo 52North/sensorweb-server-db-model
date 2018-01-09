@@ -11,7 +11,7 @@
             </generator>
         </id>
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
-        <many-to-one column="dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true"/>
 
         <property name="phenomenonTimeStart" type="timestamp">
             <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
@@ -101,7 +101,7 @@
         <!-- Or add only to specific subclasses -->
         <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_parameter" />
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id"
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_observation" />
         </set>
 
@@ -114,17 +114,17 @@
 
         <property name="valueIdentifier" type="string">
                <column name="value_identifier">
-                   <comment>SweText observation identifier</comment>
+                   <comment>SWE observation identifier, e.g. SweText</comment>
                </column>
           </property>
           <property name="valueName" type="string">
               <column name="value_name">
-                  <comment>SweText observation name</comment>
+                  <comment>SWE observation name, e.g. SweText</comment>
               </column>
           </property>
           <property name="valueDescription" type="string">
               <column name="value_description">
-                  <comment>SweText observation description</comment>
+                  <comment>SWE observation description, e.g. SweText</comment>
               </column>
           </property>
 
@@ -259,7 +259,7 @@
 	                </column>
 	            </property>
 	            <many-to-one name="levelUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-	                <column name="level_unit_id" not-null="false">
+	                <column name="fk_level_unit_id" not-null="false">
 	                    <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
 	                </column>
 	            </many-to-one>

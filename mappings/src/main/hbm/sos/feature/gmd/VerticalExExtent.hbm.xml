@@ -7,7 +7,7 @@
            table="vertical_exextent">
         <id name="id"
             type="long">
-            <column name="_vertical_exextentid">
+            <column name="vertical_exextent_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -23,7 +23,7 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="fk_gmd_id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="minimumValue" column="minimum_value" type="big_decimal" length="29"/>
         <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"/>

@@ -52,7 +52,7 @@
         </property>
         <property name="remarks" column="remarks" type="string" />
         <set name="domainOfValidity"
-             table="vertical_crs_identifier_of_valid">
+             table="vertical_crs_domain_of_valid">
           <key column="fk_vertical_crs_id"
                not-null="true"
                foreign-key="fk_vcrs_vertical_crs"/>

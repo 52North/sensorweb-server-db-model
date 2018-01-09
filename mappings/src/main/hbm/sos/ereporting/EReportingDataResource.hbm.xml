@@ -11,7 +11,7 @@
             </generator>
         </id>
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
-        <many-to-one column="dataset" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true"/>
 
         <property name="phenomenonTimeStart" type="timestamp">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">

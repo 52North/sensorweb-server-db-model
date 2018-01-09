@@ -23,7 +23,7 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="fk_gmd_id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <set name="voice" table="phone_voice">
           <key column="fk_phone_id" not-null="true" foreign-key="fk_phone_voice"/>
