@@ -17,24 +17,24 @@
 
 package org.n52.series.db.beans;
 
-public abstract class TypeEntity<T> extends IdEntity {
+public class FormatEntity extends IdEntity {
 
-    public static final String TYPE = "type";
+    public static final String FORMAT = "format";
 
     private static final long serialVersionUID = -8428858401445365107L;
 
-    private String type;
+    private String format;
 
-    public String getType() {
-        return this.type;
+    public String getFormat() {
+        return this.format;
     }
 
-    public TypeEntity<T> setType(String type) {
-        this.type = type;
+    public FormatEntity setFormat(String format) {
+        this.format = format;
         return this;
     }
 
-    public boolean isSetType() {
-        return getType() != null && !getType().isEmpty();
+    public boolean isSetFormat() {
+        return getFormat() != null && !getFormat().isEmpty();
     }
 }

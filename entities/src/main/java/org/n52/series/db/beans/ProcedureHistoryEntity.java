@@ -38,7 +38,7 @@ public class ProcedureHistoryEntity extends IdEntity implements Serializable,
 
     private static final long serialVersionUID = -3658568714438752174L;
 
-    private ProcedureDescriptionFormatEntity format;
+    private FormatEntity format;
 
     private ProcedureEntity procedure;
 
@@ -60,12 +60,12 @@ public class ProcedureHistoryEntity extends IdEntity implements Serializable,
     }
 
     @Override
-    public ProcedureDescriptionFormatEntity getFormat() {
+    public FormatEntity getFormat() {
         return this.format;
     }
 
     @Override
-    public ProcedureHistoryEntity setFormat(ProcedureDescriptionFormatEntity format) {
+    public ProcedureHistoryEntity setFormat(FormatEntity format) {
         this.format = format;
         return this;
     }

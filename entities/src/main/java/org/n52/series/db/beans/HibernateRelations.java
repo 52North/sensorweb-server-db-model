@@ -268,9 +268,9 @@ public interface HibernateRelations {
     interface HasObservationType<T> {
         String OBSERVATION_TYPE = "observationType";
 
-        ObservationTypeEntity getObservationType();
+        FormatEntity getObservationType();
 
-        T setObservationType(ObservationTypeEntity observationType);
+        T setObservationType(FormatEntity observationType);
 
         boolean isSetObservationType();
     }
@@ -278,9 +278,9 @@ public interface HibernateRelations {
     interface HasObservationTypes<T> {
         String OBSERVATION_TYPES = "observationTypes";
 
-        Set<ObservationTypeEntity> getObservationTypes();
+        Set<FormatEntity> getObservationTypes();
 
-        T setObservationTypes(Set<ObservationTypeEntity> observationTypes);
+        T setObservationTypes(Set<FormatEntity> observationTypes);
 
         default boolean hasObservationTypes() {
             return getObservationTypes() != null && !getObservationTypes().isEmpty();
@@ -408,9 +408,9 @@ public interface HibernateRelations {
     interface HasProcedureDescriptionFormat<T> {
         String PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
 
-        ProcedureDescriptionFormatEntity getFormat();
+        FormatEntity getFormat();
 
-        T setFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat);
+        T setFormat(FormatEntity procedureDescriptionFormat);
     }
 
     interface HasRelatedFeatureRoles<T> {

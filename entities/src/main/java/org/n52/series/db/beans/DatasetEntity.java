@@ -98,7 +98,7 @@ public class DatasetEntity extends DescribableEntity
 
     private boolean hiddenChild;
 
-    private ObservationTypeEntity observationType;
+    private FormatEntity observationType;
 
     private int decimals;
 
@@ -224,7 +224,7 @@ public class DatasetEntity extends DescribableEntity
 
     @Override
     public boolean isSetObservationType() {
-        return getObservationType() != null && getObservationType().isSetType();
+        return getObservationType() != null && getObservationType().isSetFormat();
     }
 
     public Date getFirstValueAt() {
@@ -360,18 +360,18 @@ public class DatasetEntity extends DescribableEntity
         return this;
     }
 
-    public ObservationTypeEntity getObservationType() {
+    public FormatEntity getObservationType() {
         return observationType;
 
     }
 
-    public DatasetEntity setObservationType(ObservationTypeEntity observationType) {
+    public DatasetEntity setObservationType(FormatEntity observationType) {
         this.observationType = observationType;
         return this;
     }
 
     public boolean isSetObservationtype() {
-        return getObservationType() != null && getObservationType().isSetType();
+        return getObservationType() != null && getObservationType().isSetFormat();
     }
 
     public int getDecimals() {

@@ -33,7 +33,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private static final long serialVersionUID = 6712642995944229067L;
 
     private GeometryEntity geometryEntity;
-    private FeatureTypeEntity featureType;
+    private FormatEntity featureType;
     private String url;
     private String xml;
 
@@ -64,11 +64,11 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return this;
     }
 
-    public FeatureTypeEntity getFeatureType() {
+    public FormatEntity getFeatureType() {
         return featureType;
     }
 
-    public AbstractFeatureEntity<E> setFeatureType(FeatureTypeEntity featureType) {
+    public AbstractFeatureEntity<E> setFeatureType(FormatEntity featureType) {
         this.featureType = featureType;
         return this;
     }
