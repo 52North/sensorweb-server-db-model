@@ -23,7 +23,7 @@
 
     <class name="org.n52.series.db.beans.i18n.I18nPlatformEntity" table="procedure_i18n">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="procedure_i18n_id" />
             <generator class="assigned" />
         </id>
 		<many-to-one name="entity" column="fk_procedure_id" not-null="true" class="PlatformEntity" foreign-key="fk_procedure"/>

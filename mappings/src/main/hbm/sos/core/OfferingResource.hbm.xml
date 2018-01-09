@@ -162,7 +162,7 @@
 
     <class name="org.n52.series.db.beans.i18n.I18nOfferingEntity" table="offering_i18n">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="offering_i18n_id" />
             <generator class="native">
                 <param name="sequence_name">offering_i18n_seq</param>
             </generator>

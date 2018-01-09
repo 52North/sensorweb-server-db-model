@@ -161,7 +161,7 @@
         <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
 			<join table="value_blob">
 	            <key foreign-key="fk_blob_value">
-	                <column name="observation_id">
+	                <column name="fk_observation_id">
 	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
 	                        "observation".id</comment>
 	                </column>
