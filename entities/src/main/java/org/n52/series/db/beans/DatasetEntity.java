@@ -192,10 +192,12 @@ public class DatasetEntity extends DescribableEntity
         this.published = published;
     }
 
+    @Override
     public boolean isDeleted() {
         return deleted;
     }
 
+    @Override
     public DatasetEntity setDeleted(boolean deleted) {
         this.deleted = deleted;
         return this;
@@ -351,20 +353,24 @@ public class DatasetEntity extends DescribableEntity
         return observationCount;
     }
 
+    @Override
     public boolean isHiddenChild() {
         return hiddenChild;
     }
 
+    @Override
     public DatasetEntity setHiddenChild(boolean hiddenChild) {
         this.hiddenChild = hiddenChild;
         return this;
     }
 
+    @Override
     public FormatEntity getObservationType() {
         return observationType;
 
     }
 
+    @Override
     public DatasetEntity setObservationType(FormatEntity observationType) {
         this.observationType = observationType;
         return this;
