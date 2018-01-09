@@ -151,7 +151,7 @@
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
         	<component class="GeometryEntity" name="geometryEntity">
                 <!--
-                <property column="value_lat" name="lat" type="big_decimal" /> 
+                <property column="value_lat" name="lat" type="big_decimal" />
                 <property column="value_lon" name="lon" type="big_decimal" />
                 -->
                 <property column="value_geometry" name="geometry" type="jts_geometry" />

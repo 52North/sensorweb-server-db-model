@@ -17,9 +17,6 @@
 
 package org.n52.series.db.beans.parameter;
 
-import org.n52.shetland.ogc.om.NamedValue;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
-
 public class ParameterText extends Parameter<String> {
 
     private static final long serialVersionUID = 3300965770609382377L;
@@ -27,16 +24,6 @@ public class ParameterText extends Parameter<String> {
     @Override
     public String getValueAsString() {
         return getValue();
-    }
-
-    @Override
-    public void accept(VoidParameterVisitor visitor) throws OwsExceptionReport {
-        visitor.visit(this);
-    }
-
-    @Override
-    public NamedValue<String> accept(ParameterVisitor<String> visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
     }
 
 }

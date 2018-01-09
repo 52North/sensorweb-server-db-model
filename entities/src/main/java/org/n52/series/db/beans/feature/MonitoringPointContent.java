@@ -22,7 +22,6 @@ import java.util.Collection;
 
 import org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity;
 import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
-import org.n52.shetland.util.CollectionHelper;
 
 public class MonitoringPointContent {
 
@@ -38,7 +37,7 @@ public class MonitoringPointContent {
 
     public void setRelatedParty(Collection<ResponsiblePartyEntity> relatedParties) {
         this.relatedParty.clear();
-        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(relatedParties)) {
+        if (relatedParties != null && !relatedParties.isEmpty()) {
             this.relatedParty.addAll(relatedParties);
         }
     }
@@ -56,7 +55,7 @@ public class MonitoringPointContent {
     }
 
     public boolean hasRelatedParties() {
-        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getRelatedParty());
+        return getRelatedParty() != null && !getRelatedParty().isEmpty();
     }
 
     public Collection<VerticalDatumEntity> getVerticalDatum() {
@@ -65,7 +64,7 @@ public class MonitoringPointContent {
 
     public void setVerticalDatum(Collection<VerticalDatumEntity> verticalDatum) {
         this.verticalDatum.clear();
-        if (!CollectionHelper.nullEmptyOrContainsOnlyNulls(verticalDatum)) {
+        if (verticalDatum != null && !verticalDatum.isEmpty()) {
             this.verticalDatum.addAll(verticalDatum);
         }
     }
@@ -83,6 +82,6 @@ public class MonitoringPointContent {
     }
 
     public boolean hasVerticalDatum() {
-        return !CollectionHelper.nullEmptyOrContainsOnlyNulls(getVerticalDatum());
+        return getVerticalDatum() != null && !getVerticalDatum().isEmpty();
     }
 }

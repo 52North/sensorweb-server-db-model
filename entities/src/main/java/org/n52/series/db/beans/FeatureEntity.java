@@ -17,24 +17,8 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.feature.FeatureVisitor;
-import org.n52.series.db.beans.feature.GeometryVisitor;
-import org.n52.shetland.ogc.gml.AbstractFeature;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
-
-import com.vividsolutions.jts.geom.Geometry;
-
 public class FeatureEntity extends AbstractFeatureEntity<FeatureEntity> {
 
     private static final long serialVersionUID = 3926633318714623558L;
 
-    @Override
-    public AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
-    }
-
-    @Override
-    public Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
-    }
 }
