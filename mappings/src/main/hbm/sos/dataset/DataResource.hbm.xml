@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hibernate-mapping package="org.n52.series.db.beans" xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DataEntity" table="observation">
@@ -9,24 +10,23 @@
                 <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
-        <discriminator column="value_type" force="true" type="string" not-null="true" />
-        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset"
-            not-null="true" />
+		<discriminator column="value_type" force="true" type="string" not-null="true"/>
+        <many-to-one column="dataset_id" name="dataset" class="DatasetEntity" foreign-key="dataset_fk" not-null="true"/>
 
         <property name="phenomenonTimeStart" type="timestamp">
-            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
+            <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="phenomenonTimeEnd" type="timestamp">
-            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
+            <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="resultTime" type="timestamp">
-            <column index="idx_result_time" name="result_time" length="29" not-null="true">
+            <column index="result_time_idx" name="result_time" length="29" not-null="true">
                 <comment>Time stamp when the observation was published or result was published/available</comment>
             </column>
         </property>
@@ -37,8 +37,8 @@
                     unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="fk_data_codespace">
-            <column name="fk_codespace_id">
+        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="data_codespace_fk">
+            <column name="codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -49,8 +49,8 @@
             </column>
         </property>
 
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="fk_data_codespace_name">
-            <column name="fk_codespace_name_id">
+        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="data_codespace_name_fk">
+            <column name="codespace_name_id">
                 <comment>The name of the observation, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -80,57 +80,56 @@
         </property>
 
         <property name="child" type="numeric_boolean">
-            <column name="is_child" not-null="true" default="0" check="is_child in (1,0)">
+            <column name="is_child" not-null="true" default="0"  check="is_child in (1,0)">
                 <comment>Flag to indicate that this observation is a child observation for complex observation</comment>
             </column>
         </property>
 
         <property name="parent" type="numeric_boolean">
-            <column name="is_parent" not-null="true" default="0" check="is_parent in (1,0)">
+            <column name="is_parent" not-null="true" default="0"  check="is_parent in (1,0)">
                 <comment>Flag to indicate that this observation is a parent observation for complex observation</comment>
             </column>
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
-            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" 
-                /> -->
-            <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false" />
+            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
+            <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
         </component>
 
 
 
         <!-- Or add only to specific subclasses -->
         <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
-            <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_parameter" />
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
-                foreign-key="fk_parameter_observation" />
+            <key column="observation_id" not-null="true" foreign-key="observation_parameter_fk" />
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id"
+                foreign-key="parameter_observation_fk" />
         </set>
 
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
-            <key foreign-key="fk_related_observation">
-                <column name="fk_observation_id" not-null="true" index="idx_related_observation" />
+            <key foreign-key="related_observation_fk">
+                <column name="observation_id" not-null="true" index="related_observation_idx" />
             </key>
             <one-to-many class="RelatedDataEntity" />
         </set>
 
         <property name="valueIdentifier" type="string">
-            <column name="value_domain">
-                <comment>SweText observation identifier</comment>
-            </column>
-        </property>
-        <property name="valueName" type="string">
-            <column name="value_name">
-                <comment>SweText observation name</comment>
-            </column>
-        </property>
-        <property name="valueDescription" type="string">
-            <column name="value_description">
-                <comment>SweText observation description</comment>
-            </column>
-        </property>
+               <column name="value_domain">
+                   <comment>SweText observation identifier</comment>
+               </column>
+          </property>
+          <property name="valueName" type="string">
+              <column name="value_name">
+                  <comment>SweText observation name</comment>
+              </column>
+          </property>
+          <property name="valueDescription" type="string">
+              <column name="value_description">
+                  <comment>SweText observation description</comment>
+              </column>
+          </property>
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
-            <property column="value_quantity" name="value" type="big_decimal" precision="29" />
+            <property column="value_quantity" name="value" type="big_decimal" precision="29"/>
         </subclass>
 
         <subclass extends="DataEntity" name="TextDataEntity" discriminator-value="text">
@@ -142,125 +141,128 @@
         </subclass>
 
         <subclass name="BooleanDataEntity" extends="DataEntity" discriminator-value="boolean">
-            <property column="value_boolean" name="value" type="numeric_boolean" />
+        	<property column="value_boolean" name="value" type="numeric_boolean" />
         </subclass>
 
         <subclass name="CategoryDataEntity" extends="DataEntity" discriminator-value="category">
-            <property column="value_category" name="value" type="string" />
+        	<property column="value_category" name="value" type="string" />
         </subclass>
 
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
-            <component class="GeometryEntity" name="geometryEntity">
-                <!-- <property column="value_lat" name="lat" type="big_decimal" /> <property column="value_lon" name="lon" 
-                    type="big_decimal" /> -->
+        	<component class="GeometryEntity" name="geometryEntity">
+                <!--
+                <property column="value_lat" name="lat" type="big_decimal" />
+                <property column="value_lon" name="lon" type="big_decimal" />
+                -->
                 <property column="value_geometry" name="geometry" type="jts_geometry" />
             </component>
         </subclass>
 
         <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
-            <join table="value_blob">
-                <key foreign-key="fk_blob_value">
-                    <column name="fk_observation_id">
-                        <comment>Foreign Key (FK) to the related observation from the observation table. Contains
+			<join table="value_blob">
+	            <key foreign-key="blob_value_fk">
+	                <column name="observation_id">
+	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
 	                        "observation".id</comment>
-                    </column>
-                </key>
-                <property name="value" type="blob">
-                    <column name="value">
-                        <comment>Blob observation value</comment>
-                    </column>
-                </property>
+	                </column>
+	            </key>
+	           <property name="value"
+                       type="blob">
+                 <column name="value">
+                     <comment>Blob observation value</comment>
+                 </column>
+				</property>
             </join>
         </subclass>
 
-        <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
-            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+        <subclass name="SweDataArrayDataEntity" extends="DataEntity" discriminator-value="swedataarray">
+        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Relation table for complex parent/child observations</comment>
-                <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
+                <key foreign-key="composite_observation_fk">
+                    <column name="observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
                     </column>
                 </key>
-                <many-to-many class="DataEntity" foreign-key="composite_observation_child">
-                    <column name="fk_child_observation_id" not-null="true">
+                <many-to-many class="DataEntity" foreign-key="composite_observation_child_fk">
+                    <column name="child_observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related child complex observation. Contains "observation".data</comment>
                     </column>
                 </many-to-many>
             </set>
-            <join table="value_data_array">
-                <key foreign-key="fk_data_array_value">
-                    <column name="fk_observation_id">
-                        <comment>Foreign Key (FK) to the related observation from the observation table. Contains
+            <join table="value_swe_data_array">
+	            <key foreign-key="swe_data_array_value_fk">
+	                <column name="observation_id">
+	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
 	                        "observation".id</comment>
-                    </column>
-                </key>
-                <property name="structure" type="text">
-                    <column name="structure" not-null="true">
-                        <comment>The data array structure as XML string</comment>
-                    </column>
-                </property>
+	                </column>
+	            </key>
+	           <property name="structure" type="text">
+		            <column name="structure" not-null="true">
+		                <comment>The data array structure as XML string</comment>
+		            </column>
+		        </property>
 
-                <property name="encoding" type="text">
-                    <column name="encoding" not-null="true">
-                        <comment>The data array encoding as XML string</comment>
-                    </column>
-                </property>
+		        <property name="encoding" type="text">
+		            <column name="encoding" not-null="true">
+		                <comment>The data array encoding as XML string</comment>
+		            </column>
+		        </property>
             </join>
         </subclass>
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
-            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Relation table for complex parent/child observations</comment>
-                <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
+                <key foreign-key="composite_observation_fk">
+                    <column name="observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
                     </column>
                 </key>
-                <many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
-                    <column name="fk_child_observation_id" not-null="true">
+                <many-to-many class="DataEntity" foreign-key="composite_observation_child_fk">
+                    <column name="child_observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related child complex observation. Contains "observation".data</comment>
                     </column>
                 </many-to-many>
             </set>
         </subclass>
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
-                <comment>Relation table for complex parent/child observations</comment>
-                <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
-                        <comment>Foreign Key (FK) to the related parent complex observation.
-                        Contains "observation".data</comment>
-                    </column>
-                </key>
-                <many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
-                    <column name="fk_child_observation_id" not-null="true">
-                        <comment>Foreign Key (FK) to the related child complex observation.
-                        Contains "observation".data</comment>
-                    </column>
-                </many-to-many>
-            </set>
-            <join table="value_profile">
-                <key foreign-key="fk_profile_value">
-                    <column name="fk_observation_id">
-                        <comment>Foreign Key (FK) to the related observation from the observation table. Contains
+        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+				<comment>Relation table for complex parent/child observations</comment>
+				<key foreign-key="composite_observation_fk">
+					<column name="observation_id" not-null="true">
+						<comment>Foreign Key (FK) to the related parent complex observation.
+							Contains "observation".data</comment>
+					</column>
+				</key>
+				<many-to-many class="DataEntity" foreign-key="composite_observation_child_fk">
+					<column name="child_observation_id" not-null="true">
+						<comment>Foreign Key (FK) to the related child complex observation.
+							Contains "observation".data</comment>
+					</column>
+				</many-to-many>
+			</set>
+        	<join table="value_profile">
+	            <key foreign-key="profile_value_fk">
+	                <column name="observation_id">
+	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
 	                        "observation".id</comment>
-                    </column>
-                </key>
-                <property name="fromLevel" type="big_decimal">
-                    <column name="from_level" not-null="false">
-                        <comment>Value of fromLevel</comment>
-                    </column>
-                </property>
-                <property name="toLevel" type="big_decimal">
-                    <column name="to_level" not-null="false">
-                        <comment>Value of toLevel</comment>
-                    </column>
-                </property>
-                <many-to-one name="levelUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-                    <column name="fk_level_unit_id" not-null="false">
-                        <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
-                    </column>
-                </many-to-one>
+	                </column>
+	            </key>
+	            <property name="fromLevel" type="big_decimal">
+	                <column name="from_level" not-null="false">
+	                    <comment>Value of fromLevel</comment>
+	                </column>
+	            </property>
+	            <property name="toLevel" type="big_decimal">
+	                <column name="to_level" not-null="false">
+	                    <comment>Value of toLevel</comment>
+	                </column>
+	            </property>
+	            <many-to-one name="levelUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="profile_unit_fk">
+	                <column name="level_unit_id" not-null="false">
+	                    <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
+	                </column>
+	            </many-to-one>
             </join>
         </subclass>
 

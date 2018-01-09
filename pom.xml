@@ -54,7 +54,6 @@
         <slf4j.version>1.7.25</slf4j.version>
         <hamcrest.version>1.3</hamcrest.version>
         <series.api.version>2.0.0-rc.2-SNAPSHOT</series.api.version>
-        <shetland.version>1.1.0-SNAPSHOT</shetland.version>
 
         <java.compiler.source>1.8</java.compiler.source>
         <java.compiler.target>1.8</java.compiler.target>
@@ -84,19 +83,6 @@
                 <version>${project.version}</version>
             </dependency>
 
-            <dependency>
-                <groupId>org.n52.shetland</groupId>
-                <artifactId>shetland</artifactId>
-                <version>${shetland.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <!-- uses older xml-apis than other fop dependencies -->
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>

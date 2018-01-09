@@ -20,8 +20,6 @@ package org.n52.series.db.beans.parameter;
 import java.util.Map;
 
 import org.n52.series.db.beans.UnitEntity;
-import org.n52.shetland.ogc.om.NamedValue;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 public class ParameterCategory extends Parameter<String> {
 
@@ -48,16 +46,6 @@ public class ParameterCategory extends Parameter<String> {
 
     public boolean isSetUnit() {
         return getUnit() != null;
-    }
-
-    @Override
-    public void accept(VoidParameterVisitor visitor) throws OwsExceptionReport {
-        visitor.visit(this);
-    }
-
-    @Override
-    public NamedValue<String> accept(ParameterVisitor<String> visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
     }
 
     @Override
