@@ -15,8 +15,8 @@
             </generator>
         </id>
 
-        <many-to-one name="format" class="FormatEntity" foreign-key="fk_procedure_description_format_id">
-            <column name="fk_procedure_description_format_id" not-null="true">
+        <many-to-one name="format" class="FormatEntity" foreign-key="fk_pdf_id">
+            <column name="fk_format_id" not-null="true">
                 <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains
                     "procedureDescriptionFormat".id</comment>
             </column>

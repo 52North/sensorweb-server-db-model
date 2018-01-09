@@ -101,7 +101,7 @@
         <!-- Or add only to specific subclasses -->
         <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_parameter" />
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter_id"
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_observation" />
         </set>
 
@@ -114,17 +114,17 @@
 
         <property name="valueIdentifier" type="string">
                <column name="value_identifier">
-                   <comment>SweText observation identifier</comment>
+                   <comment>SWE observation identifier, e.g. SweText</comment>
                </column>
           </property>
           <property name="valueName" type="string">
               <column name="value_name">
-                  <comment>SweText observation name</comment>
+                  <comment>SWE observation name, e.g. SweText</comment>
               </column>
           </property>
           <property name="valueDescription" type="string">
               <column name="value_description">
-                  <comment>SweText observation description</comment>
+                  <comment>SWE observation description, e.g. SweText</comment>
               </column>
           </property>
 
@@ -161,7 +161,7 @@
         <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
 			<join table="value_blob">
 	            <key foreign-key="fk_blob_value">
-	                <column name="observation_id">
+	                <column name="fk_observation_id">
 	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
 	                        "observation".id</comment>
 	                </column>
@@ -259,7 +259,7 @@
 	                </column>
 	            </property>
 	            <many-to-one name="levelUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-	                <column name="level_unit_id" not-null="false">
+	                <column name="fk_level_unit_id" not-null="false">
 	                    <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
 	                </column>
 	            </many-to-one>

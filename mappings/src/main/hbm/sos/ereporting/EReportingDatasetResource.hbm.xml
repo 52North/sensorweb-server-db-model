@@ -96,7 +96,7 @@
 		<subclass name="NotDefinedEReportingDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
         </subclass>
     </class>
 </hibernate-mapping>

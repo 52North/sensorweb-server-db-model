@@ -8,7 +8,7 @@
             <column name="observation_id" />
             <generator class="assigned" />
         </id>
-        <property name="timestamp" column="phenomenon_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
+        <property name="timestamp" column="sampling_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
 
         <component class="GeometryEntity" name="geometryEntity" insert="false" update="false">
             <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->

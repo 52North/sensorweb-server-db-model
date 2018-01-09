@@ -6,7 +6,7 @@
     <class name="ProcedureEntity" table="`procedure`">
         <!-- <comment>Table to store the procedure/sensor. Mapping file: sos/core/Procedure.hbm.xml</comment> -->
         <id name="id" type="long">
-            <column name="id">
+            <column name="procedure_id">
                 <!-- <comment>Table primary key, used for relations</comment> -->
             </column>
             <generator class="native">
@@ -104,7 +104,7 @@
 
     <class name="org.n52.series.db.beans.i18n.I18nProcedureEntity" table="procedure_i18n">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="procedure_i18n_id" />
             <generator class="native">
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
