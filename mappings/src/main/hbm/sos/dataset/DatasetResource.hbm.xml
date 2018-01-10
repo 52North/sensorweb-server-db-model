@@ -79,13 +79,13 @@
                     gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
-        
+
 		<property name="name" type="string">
             <column name="name">
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
         </property>
-        
+
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
             <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
@@ -104,7 +104,7 @@
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_dataset" />
         </set>
-        
+
 		<subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
