@@ -29,7 +29,7 @@
             </column>
         </property>
   		<set name="translations" table="unit_i18n" inverse="true" fetch="select">
-         	<key column="unit" not-null="true" />
+         	<key column="fk_unit_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nUnitEntity" />
         </set>
     </class>

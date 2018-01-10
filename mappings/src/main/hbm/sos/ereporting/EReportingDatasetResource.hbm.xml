@@ -97,6 +97,10 @@
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
             <many-to-one class="org.n52.series.db.beans.UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <set name="referenceValues" table="dataset_reference" inverse="true" cascade="delete-orphan" >
+                <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
+                <many-to-many class="EReportingDatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
+            </set>
         </subclass>
     </class>
 </hibernate-mapping>
