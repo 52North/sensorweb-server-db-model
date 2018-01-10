@@ -27,6 +27,7 @@ This project includes:
   PostgreSQL JDBC Driver - JDBC 4.2 under BSD-2-Clause
   Series Database Model - Entities under The Apache Software License, Version 2.0
   Series Database Model - Generator under The Apache Software License, Version 2.0
+  Series Database Model - Hibernate Types under The Apache Software License, Version 2.0
   Series Database Model - Mappings under The Apache Software License, Version 2.0
   Series Database Model - Parent under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
