@@ -79,13 +79,13 @@
                     gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
-        
+
 		<property name="name" type="string">
             <column name="name">
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
         </property>
-        
+
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
             <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
@@ -104,14 +104,14 @@
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_dataset" />
         </set>
-        
+
 		<subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="QuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
-            <set name="referenceValues" table="dataset_reference" inverse="true" cascade="delete-orphan">
-                <key column="fk_dataset_id_from" unique="true" not-null="true" foreign-key="fk_dataset_reference_from"/>
-                <many-to-many class="DatasetEntity" column="fk_dataset_id_to" unique="true" foreign-key="fk_dataset_reference_to"/>
+            <set name="referenceValues" table="dataset_reference" inverse="false" cascade="delete-orphan">
+                <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
+                <many-to-many class="DatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
             </set>
         </subclass>
         <subclass discriminator-value="text" name="TextDatasetEntity"/>

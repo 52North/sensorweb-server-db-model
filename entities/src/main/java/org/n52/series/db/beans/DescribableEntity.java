@@ -34,7 +34,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     public static final String PROPERTY_NAME_CODESPACE = NAME_CODESPACE;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
     public static final String PROPERTY_SERVICE = "service";
-    
+
     public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
     public static final String PROPERTY_CODESPACE_NAME = PROPERTY_NAME_CODESPACE;
@@ -46,14 +46,14 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
      */
     private String identifier;
 
-    private CodespaceEntity codespace;
+    private CodespaceEntity identifierCodespace;
 
     /**
      * Default name of the entity.
      */
     private String name;
 
-    private CodespaceEntity codespaceName;
+    private CodespaceEntity nameCodespace;
 
     /**
      * Default description of the entity.
@@ -62,7 +62,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
 
     private ServiceEntity service;
 
-    private Set<I18nEntity> translations;
+    private Set<I18nEntity< ? extends DescribableEntity>> translations;
 
     private Set<Parameter< ? >> parameters;
 
@@ -72,19 +72,19 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public DescribableEntity setIdentifier(String domain) {
-        this.identifier = domain;
+    public DescribableEntity setIdentifier(String identifier) {
+        this.identifier = identifier;
         return this;
     }
 
     @Override
     public CodespaceEntity getIdentifierCodespace() {
-        return this.codespace;
+        return this.identifierCodespace;
     }
 
     @Override
-    public DescribableEntity setIdentifierCodespace(CodespaceEntity codespace) {
-        this.codespace = codespace;
+    public DescribableEntity setIdentifierCodespace(CodespaceEntity identifierCodespace) {
+        this.identifierCodespace = identifierCodespace;
         return this;
     }
 
@@ -101,12 +101,12 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
 
     @Override
     public CodespaceEntity getNameCodespace() {
-        return codespaceName;
+        return nameCodespace;
     }
 
     @Override
-    public DescribableEntity setNameCodespace(CodespaceEntity codespaceName) {
-        this.codespaceName = codespaceName;
+    public DescribableEntity setNameCodespace(CodespaceEntity nameCodespace) {
+        this.nameCodespace = nameCodespace;
         return this;
     }
 
@@ -121,11 +121,11 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return this;
     }
 
-    public Set<I18nEntity> getTranslations() {
+    public Set<I18nEntity< ? extends DescribableEntity>> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(Set<I18nEntity> translations) {
+    public void setTranslations(Set<I18nEntity< ? extends DescribableEntity>> translations) {
         this.translations = translations;
     }
 
@@ -164,7 +164,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         }
         String candidate = name;
         String countryCode = getCountryCode(locale);
-        for (I18nEntity translation : translations) {
+        for (I18nEntity< ? extends DescribableEntity> translation : translations) {
             String translatedLocale = translation.getLocale();
             if (translatedLocale.equals(locale)) {
                 // locale matches exactly
