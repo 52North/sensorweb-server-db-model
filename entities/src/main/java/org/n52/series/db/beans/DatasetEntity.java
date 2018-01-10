@@ -47,6 +47,8 @@ public class DatasetEntity extends DescribableEntity
 
     public static final String ENTITY_ALIAS = "dataset";
 
+    public static final String PROPERTY_OFFERING = "offering";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
