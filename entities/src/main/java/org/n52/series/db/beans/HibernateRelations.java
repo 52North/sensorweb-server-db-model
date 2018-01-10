@@ -38,9 +38,9 @@ public interface HibernateRelations {
     String SRID = "srid";
 
     interface HasIdentifier<T> {
-        
+
         String IDENTIFIER = "identifier";
-        
+
         String getIdentifier();
 
         T setIdentifier(String identifier);
@@ -68,12 +68,12 @@ public interface HibernateRelations {
     }
 
     interface HasDomainId {
-        String IDENTIFIER = "identifier";
-    
+        String IDENTIFIER = HasIdentifier.IDENTIFIER;
+
         String getIdentifier();
-    
+
         void setIdentifier(String identifier);
-    
+
         /**
          * Is identifier set
          *
