@@ -36,14 +36,15 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.dialect.PostgreSQL95Dialect;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.spatial.dialect.oracle.OracleSpatial10gDialect;
+import org.hibernate.spatial.dialect.oracle.OracleSpatialSDO10gDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
+import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
 
@@ -85,10 +86,9 @@ public class SQLScriptGenerator {
         switch (selection) {
         case POSTGIS:
             return new PostgisPG95Dialect();
-//            return new PostgreSQL95Dialect();
         case ORACLE:
             // try {
-//             return new OracleSpatial10gDialect();
+            //   return new OracleSpatial10gDialect();
             // } catch (ExceptionInInitializerError eiie) {
             // printToScreen("The Oracle JDBC driver is missing!");
             // printToScreen("To execute the SQL script generator for Oracle you have to uncomment the
@@ -345,6 +345,7 @@ public class SQLScriptGenerator {
             }
             configuration.addProperties(p);
             sqlScriptGenerator.setDirectoriesForModelSelection(concept, configuration, null);
+            configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
             configuration.buildSessionFactory();
             StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();

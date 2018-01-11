@@ -60,7 +60,7 @@
             </column>
         </property>
 
-        <property name="deleted" type="numeric_boolean">
+        <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
                 <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
                     via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
@@ -79,13 +79,13 @@
             </column>
         </property>
 
-        <property name="child" type="numeric_boolean">
+        <property name="child" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_child" not-null="true" default="0"  check="is_child in (1,0)">
                 <comment>Flag to indicate that this observation is a child observation for complex observation</comment>
             </column>
         </property>
 
-        <property name="parent" type="numeric_boolean">
+        <property name="parent" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_parent" not-null="true" default="0"  check="is_parent in (1,0)">
                 <comment>Flag to indicate that this observation is a parent observation for complex observation</comment>
             </column>
@@ -143,12 +143,12 @@
                 <comment>AQD e-Reporting primaryObservation type, see http://dd.eionet.europa.eu/vocabulary/aq/primaryObservation/view</comment>
             </column>
         </property>
-        <property name="timeCoverageFlag" type="numeric_boolean">
+        <property name="timeCoverageFlag" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="time_coverage_flag" check="time_coverage_flag in (1,0)">
                 <comment>AQD e-Reporting time coverage quality flag</comment>
             </column>
         </property>
-        <property name="dataCaptureFlag" type="numeric_boolean">
+        <property name="dataCaptureFlag" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="data_capture_flag" check="data_capture_flag in (1,0)">
                 <comment>AQD e-Reporting data capture quality flag</comment>
             </column>

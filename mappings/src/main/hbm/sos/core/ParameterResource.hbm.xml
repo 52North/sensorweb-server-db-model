@@ -19,7 +19,7 @@
             </column>
         </property>
 		<subclass discriminator-value="boolean" extends="Parameter" name="ParameterBoolean">
-			<property column="value_boolean" name="value" type="numeric_boolean" />
+			<property column="value_boolean" name="value" type="org.n52.hibernate.type.SmallBooleanType" />
 		</subclass>
 		<subclass discriminator-value="category" extends="Parameter" name="ParameterCategory">
 			<property column="value_category" name="value" type="string" />
