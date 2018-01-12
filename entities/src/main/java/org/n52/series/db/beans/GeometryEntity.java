@@ -26,6 +26,10 @@ import com.vividsolutions.jts.geom.GeometryFactory;
 public class GeometryEntity implements Serializable {
 
     public static final String PROPERTY_GEOMETRY = "geometry";
+    public static final String PROPERTY_LAT = "lat";
+    public static final String PROPERTY_LON = "lon";
+    public static final String PROPERTY_ALT = "alt";
+    public static final String PROPERTY_SRID = "srid";
 
     private static final long serialVersionUID = -1411829809704409439L;
 

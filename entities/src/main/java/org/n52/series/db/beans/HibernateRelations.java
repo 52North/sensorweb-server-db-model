@@ -21,6 +21,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
+
 import org.n52.series.db.beans.parameter.Parameter;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -676,31 +678,35 @@ public interface HibernateRelations {
 
         String ALTITUDE = "altitude";
 
-        Object getLongitude();
+        Object getLon();
 
-        HasCoordinate setLongitude(Object longitude);
+        HasCoordinate setLon(Object longitude);
 
-        Object getLatitude();
+        Object getLat();
 
-        HasCoordinate setLatitude(Object latitude);
+        HasCoordinate setLat(Object latitude);
 
         /**
          * Are longitude and latitude set
          *
          * @return <code>true</code>, if longitude and latitude are set
          */
-        boolean isSetLongLat();
+        default boolean isSetLongLat() {
+            return getLon() != null && getLat() != null;
+        }
 
-        Object getAltitude();
+        Object getAlt();
 
-        HasCoordinate setAltitude(Object altitude);
+        HasCoordinate setAlt(Object altitude);
 
         /**
          * Is altitude set
          *
          * @return <code>true</code>, if altitude is set
          */
-        boolean isSetAltitude();
+        default boolean isSetAlt() {
+            return getAlt() != null;
+        }
 
         boolean isSpatial();
     }

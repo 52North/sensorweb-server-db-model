@@ -32,7 +32,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_PHENOMENON = "phenomenon";
 
-    public static final String PROPERTY_DOMAIN_ID = "domainId";
+    public static final String PROPERTY_IDENTIFIER = "identifier";
 
     public static final String PROPERTY_FEATURE = "feature";
 

@@ -35,9 +35,13 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_RESULT_TIME = "result_time";
 
-    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenon_time_start";
+    public static final String PROPERTY_PHENOMENON_TIME_START = "sampling_time_start";
 
-    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenon_time_end";
+    public static final String PROPERTY_PHENOMENON_TIME_END = "sampling_time_end";
+
+    public static final String PROPERTY_VALID_TIME_START = "valid_time_start";
+
+    public static final String PROPERTY_VALID_TIME_END = "valid_time_end";
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
 
@@ -48,6 +52,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     public static final String PROPERTY_DOMAIN_ID = "domain_id";
 
     public static final String PROPERTY_CHILDREN = "children";
+
+    public static final String PROPERTY_VALUE = "value";
+
+    public static final String PROPERTY_PARAMETERS = "parameters";
 
     private static final long serialVersionUID = 273612846605300612L;
 
@@ -133,6 +141,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public void setValue(T value) {
         this.value = value;
+    }
+
+    public boolean hasValue() {
+        return getValue() != null;
     }
 
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
@@ -237,6 +249,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.relatedObservations = relatedObservations;
     }
 
+    public boolean hasRelatedObservations() {
+        return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
+    }
+
     public String getValueIdentifier() {
         return valueIdentifier;
     }
@@ -245,7 +261,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.valueIdentifier = valueIdentifier;
     }
 
-    public boolean has() {
+    public boolean hasValueIdentifier() {
         return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
     }
 
@@ -257,7 +273,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.valueName = valueName;
     }
 
-    public boolean hasgetValueName() {
+    public boolean hasValueName() {
         return getValueName() != null && !getValueName().isEmpty();
     }
 

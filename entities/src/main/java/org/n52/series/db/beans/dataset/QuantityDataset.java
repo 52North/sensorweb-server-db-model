@@ -21,7 +21,7 @@ import org.n52.series.db.beans.DatasetEntity;
 
 public interface QuantityDataset<T extends DatasetEntity> extends Dataset<T> {
 
-    String DATASET_TYPE = "measurement";
+    String DATASET_TYPE = "quantity";
 
     int getNumberOfDecimals();
 

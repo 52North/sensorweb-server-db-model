@@ -51,4 +51,16 @@ public class ProfileDataEntity extends CompositeDataEntity {
         this.levelUnit = levelUnit;
     }
 
+    public boolean hasLevelUnit() {
+        return getLevelUnit() != null && getLevelUnit().isSetIdentifier();
+    }
+
+    public boolean hasFromLevel() {
+        return getFromLevel() != null;
+    }
+
+    public boolean hasToLevel() {
+        return getToLevel() != null;
+    }
+
 }

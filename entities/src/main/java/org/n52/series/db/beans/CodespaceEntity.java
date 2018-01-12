@@ -28,6 +28,8 @@ public class CodespaceEntity extends IdEntity implements Serializable {
 
     public static final String PROPERTY_CODESPACE = HasIdentifierCodespace.IDENTIFIER_CODESPACE;
 
+    public static final String PROPERTY_NAME = "name";
+
     private static final long serialVersionUID = 8795086004488469603L;
 
     private String name;

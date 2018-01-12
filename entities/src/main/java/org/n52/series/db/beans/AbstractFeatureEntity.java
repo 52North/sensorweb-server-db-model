@@ -29,9 +29,9 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     public static final String PROPERTY_GEOMETRY_ENTITY_GEOMETRY = PROPERTY_GEOMETRY_ENTITY + ".geometry";
     public static final String PROPERTY_GEOMETRY_ENTITY_LAT = PROPERTY_GEOMETRY_ENTITY + ".lat";
     public static final String PROPERTY_GEOMETRY_ENTITY_LON = PROPERTY_GEOMETRY_ENTITY + ".lon";
-
+    public static final String PROPERTY_FEATURE_TYPE = "featureType";
+    
     private static final long serialVersionUID = 6712642995944229067L;
-
     private GeometryEntity geometryEntity;
     private FormatEntity featureType;
     private String url;

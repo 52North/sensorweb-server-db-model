@@ -21,6 +21,7 @@ import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -48,13 +49,18 @@ public class DatasetEntity extends DescribableEntity
     public static final String ENTITY_ALIAS = "dataset";
 
     public static final String PROPERTY_CATEGORY = "category";
+    public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_FEATURE = "feature";
+    public static final String PROPERTY_PROCEDURE = "procedure";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
     public static final String HIDDEN_CHILD = "hiddenChild";
+
+    public static final String PROPERTY_UNIT = "unit";
 
     private static final long serialVersionUID = -7491530543976690237L;
 
@@ -88,9 +94,9 @@ public class DatasetEntity extends DescribableEntity
 
     private DataEntity lastObservation;
 
-    private double firstValue;
+    private Double firstValue;
 
-    private double lastValue;
+    private Double lastValue;
 
     private UnitEntity unit;
 
@@ -101,6 +107,8 @@ public class DatasetEntity extends DescribableEntity
     private FormatEntity observationType;
 
     private int decimals;
+
+    private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
 
     public DatasetEntity() {
         this((String) null);
@@ -273,7 +281,7 @@ public class DatasetEntity extends DescribableEntity
         return firstValue;
     }
 
-    public void setFirstValue(double firstValue) {
+    public void setFirstValue(Double firstValue) {
         this.firstValue = firstValue;
     }
 
@@ -281,7 +289,7 @@ public class DatasetEntity extends DescribableEntity
         return lastValue;
     }
 
-    public void setLastValue(double lastValue) {
+    public void setLastValue(Double lastValue) {
         this.lastValue = lastValue;
     }
 
@@ -386,6 +394,18 @@ public class DatasetEntity extends DescribableEntity
 
     public void setDecimals(int decimals) {
         this.decimals = decimals;
+    }
+
+    public Set<RelatedDatasetEntity> getRelatedDatasets() {
+        return relatedDatasets;
+    }
+
+    public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDatasets) {
+        this.relatedDatasets = relatedDatasets;
+    }
+
+    public boolean hasRelatedDatasets() {
+        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
     }
 
     @Override
