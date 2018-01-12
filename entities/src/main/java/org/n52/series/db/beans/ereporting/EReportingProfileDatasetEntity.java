@@ -17,27 +17,117 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.dataset.ProfileDataset;
+import org.n52.series.db.beans.ProfileDataEntity;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingValues;
 
-public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
-        implements ProfileDataset<EReportingProfileDatasetEntity> {
+public class EReportingProfileDatasetEntity extends ProfileDataEntity implements EReportingValues {
 
     private static final long serialVersionUID = -7514394037111286838L;
+    private Integer validation = EReportingValues.DEFAULT_VALIDATION;
+
+    private Integer verification = EReportingValues.DEFAULT_VERIFICATION;
+
+    private String primaryObservation = EReportingValues.DEFAULT_PRIMARY_OBSERVATION;
+
+    private Boolean timeCoverageFlag;
+
+    private Boolean dataCaptureFlag;
+
+    private Double dataCapture;
+
+    private Double uncertaintyEstimation;
+
+    @Override
+    public Integer getVerification() {
+        return verification;
+    }
+
+    @Override
+    public void setVerification(Integer verification) {
+        this.verification = verification;
+    }
+
+    @Override
+    public Integer getValidation() {
+        return validation;
+    }
+
+    @Override
+    public void setValidation(Integer validation) {
+        this.validation = validation;
+    }
+
+    @Override
+    public String getPrimaryObservation() {
+        return primaryObservation;
+    }
+
+    @Override
+    public void setPrimaryObservation(String primaryObservation) {
+        this.primaryObservation = primaryObservation;
+    }
+
+    @Override
+    public Boolean getDataCaptureFlag() {
+        return this.dataCaptureFlag;
+    }
+
+    @Override
+    public void setDataCaptureFlag(Boolean dataCaptureFlag) {
+        this.dataCaptureFlag = dataCaptureFlag;
+    }
+
+    @Override
+    public Double getDataCapture() {
+        return this.dataCapture;
+    }
+
+    @Override
+    public void setDataCapture(Double dataCapture) {
+        this.dataCapture = dataCapture;
+    }
+
+    @Override
+    public Boolean getTimeCoverageFlag() {
+        return this.timeCoverageFlag;
+    }
+
+    @Override
+    public void setTimeCoverageFlag(Boolean timeCoverageFlag) {
+        this.timeCoverageFlag = timeCoverageFlag;
+    }
+
+    @Override
+    public Double getUncertaintyEstimation() {
+        return this.uncertaintyEstimation;
+    }
+
+    @Override
+    public void setUncertaintyEstimation(Double uncertaintyEstimation) {
+        this.uncertaintyEstimation = uncertaintyEstimation;
+    }
+    
+    @Override
+    public boolean isNoDataValue(Collection<String> noDataValues) {
+        return getValue() == null;
+    }
+
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue()
+                ? getValue().toString()
+                : "";
+    }
 
     private Set<EReportingProfileDatasetEntity> referenceValues = new HashSet<>();
-
-    @Override
-    public Set<EReportingProfileDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public EReportingProfileDatasetEntity setReferenceValues(Set<EReportingProfileDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
 
 }

@@ -17,18 +17,27 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.dataset.DataArrayDataset;
 
-public class EReportingSweDataArrayDataEntity extends DataEntity<String> {
+public class EReportingDataArrayDatasetEntity extends EReportingDatasetEntity
+        implements DataArrayDataset<EReportingDataArrayDatasetEntity> {
 
-    private static final long serialVersionUID = -357644664672153647L;
+    private static final long serialVersionUID = 8734427623675385749L;
+
+    private Set<EReportingDataArrayDatasetEntity> referenceValues = new HashSet<>();
 
     @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+    public Set<EReportingDataArrayDatasetEntity> getReferenceValues() {
+        return referenceValues;
     }
+
+    @Override
+    public EReportingDataArrayDatasetEntity setReferenceValues(Set<EReportingDataArrayDatasetEntity> refValues) {
+        this.referenceValues = refValues;
+        return this;
+    }
+
 }

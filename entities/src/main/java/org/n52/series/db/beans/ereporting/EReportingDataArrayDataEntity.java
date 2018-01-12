@@ -18,13 +18,15 @@
 package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
+import java.util.Set;
 
-import org.n52.series.db.beans.BooleanDataEntity;
+import org.n52.series.db.beans.DataArrayDataEntity;
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingValues;
 
-public class EReportingBooleanDataEntity extends BooleanDataEntity implements EReportingValues {
+public class EReportingDataArrayDataEntity extends DataArrayDataEntity implements EReportingValues {
 
-    private static final long serialVersionUID = 4231187253999943944L;
+    private static final long serialVersionUID = -357644664672153647L;
 
     private Integer validation = EReportingValues.DEFAULT_VALIDATION;
 
@@ -112,9 +114,7 @@ public class EReportingBooleanDataEntity extends BooleanDataEntity implements ER
     
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        Boolean value = getValue();
-        return value == null
-                || noDataValues.contains(value.toString());
+        return getValue() == null;
     }
 
     @Override
@@ -128,5 +128,4 @@ public class EReportingBooleanDataEntity extends BooleanDataEntity implements ER
                 ? getValue().toString()
                 : "";
     }
-
 }

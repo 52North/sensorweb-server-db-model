@@ -17,9 +17,9 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.GeometryEntity;
+import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -30,8 +30,6 @@ import com.vividsolutions.jts.geom.Geometry;
  * @since 1.0.0
  */
 public class EReportingStationEntity extends DescribableEntity implements HasGeometry<EReportingStationEntity> {
-
-    public static final String ID = "station";
 
     private static final long serialVersionUID = 743675189477493870L;
 
