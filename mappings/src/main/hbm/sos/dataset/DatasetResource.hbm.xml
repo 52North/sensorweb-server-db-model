@@ -115,6 +115,7 @@
             </set>
         </subclass>
         <subclass discriminator-value="text" name="TextDatasetEntity"/>
+        <subclass discriminator-value="referenced" name="ReferencedDatasetEntity"/>
         <subclass discriminator-value="count" name="CountDatasetEntity"/>
         <subclass discriminator-value="blob" name="BlobDatasetEntity"/>
         <subclass discriminator-value="boolean" name="BooleanDatasetEntity" />
