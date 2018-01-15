@@ -101,15 +101,15 @@ COPY offering (offering_id, identifier, fk_identifier_codespace_id, name, fk_nam
 
 
 COPY procedure (procedure_id, fk_format_id, identifier, fk_identifier_codespace_id, name, fk_name_codespace_id, description, is_deleted, description_file, is_reference, fk_type_of_procedure_id, is_aggregation, is_mobile, is_insitu) FROM stdin;
-1	3	http://www.52north.org/test/procedure/1	\N	con terra	\N	\N	0	\N	0	\N	0	0	0
-2	3	http://www.52north.org/test/procedure/2	\N	ESRI	\N	\N	0	\N	0	\N	0	0	0
-3	3	http://www.52north.org/test/procedure/3	\N	Kisters	\N	\N	0	\N	0	\N	0	0	0
-4	3	http://www.52north.org/test/procedure/4	\N	IfGI	\N	\N	0	\N	0	\N	0	0	0
-5	3	http://www.52north.org/test/procedure/5	\N	TU-Dresden	\N	\N	1	\N	0	\N	0	0	0
-6	3	http://www.52north.org/test/procedure/6	\N	Hochschule Bochum	\N	\N	0	\N	0	\N	0	0	0
-7	3	http://www.52north.org/test/procedure/7	\N	ITC	\N	\N	0	\N	0	\N	0	0	0
-8	3	http://www.52north.org/test/procedure/8	\N	DLZ-IT	\N	\N	0	\N	0	\N	0	1	0
-9	3	http://www.52north.org/test/procedure/developer	\N	http://www.52north.org/test/procedure/developer	\N	\N	0	\N	0	\N	0	0	0
+1	3	http://www.52north.org/test/procedure/1	\N	con terra	\N	\N	0	\N	0	\N	0	0	1
+2	3	http://www.52north.org/test/procedure/2	\N	ESRI	\N	\N	0	\N	0	\N	0	0	1
+3	3	http://www.52north.org/test/procedure/3	\N	Kisters	\N	\N	0	\N	0	\N	0	0	1
+4	3	http://www.52north.org/test/procedure/4	\N	IfGI	\N	\N	0	\N	0	\N	0	0	1
+5	3	http://www.52north.org/test/procedure/5	\N	TU-Dresden	\N	\N	1	\N	0	\N	0	0	1
+6	3	http://www.52north.org/test/procedure/6	\N	Hochschule Bochum	\N	\N	0	\N	0	\N	0	0	1
+7	3	http://www.52north.org/test/procedure/7	\N	ITC	\N	\N	0	\N	0	\N	0	0	1
+8	3	http://www.52north.org/test/procedure/8	\N	DLZ-IT	\N	\N	0	\N	0	\N	0	1	1
+9	3	http://www.52north.org/test/procedure/developer	\N	http://www.52north.org/test/procedure/developer	\N	\N	0	\N	0	\N	0	0	1
 \.
 
 
