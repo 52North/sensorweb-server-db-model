@@ -135,7 +135,7 @@
         <subclass extends="DataEntity" name="TextDataEntity" discriminator-value="text">
             <property column="value_text" name="value" type="string" />
         </subclass>
-        
+
         <subclass extends="DataEntity" name="ReferencedDataEntity" discriminator-value="referenced">
             <property column="value_referenced" name="value" type="string" />
         </subclass>

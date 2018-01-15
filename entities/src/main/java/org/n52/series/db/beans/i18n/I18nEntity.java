@@ -21,7 +21,7 @@ import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
 public class I18nEntity<T extends DescribableEntity> extends IdEntity {
-    
+
     public static final String PROPERTY_LOCALE = "locale";
 
     private static final long serialVersionUID = 693520332508628558L;
@@ -85,19 +85,19 @@ public class I18nEntity<T extends DescribableEntity> extends IdEntity {
     public void setDescription(String description) {
         this.description = description;
     }
-    
+
     public boolean hasName() {
         return getName() != null && !getName().isEmpty();
     }
-    
+
     public boolean hasDescription() {
         return getDescription() != null && !getDescription().isEmpty();
     }
-    
+
     public boolean hasLongName() {
         return getLongName() != null && !getLongName().isEmpty();
     }
-    
+
     public boolean hasShortName() {
         return getShortName() != null && !getShortName().isEmpty();
     }
