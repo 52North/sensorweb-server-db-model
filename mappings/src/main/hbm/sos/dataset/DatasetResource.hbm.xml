@@ -31,8 +31,8 @@
             </column>
         </many-to-one>
 
-        <property column="first_time_stamp" name="firstValueAt" type="timestamp" />
-        <property column="last_time_stamp" name="lastValueAt" type="timestamp" />
+        <property column="first_time" name="firstValueAt" type="timestamp" />
+        <property column="last_time" name="lastValueAt" type="timestamp" />
 
         <property column="first_value" name="firstValue" type="big_decimal" precision="29" />
         <property column="last_value" name="lastValue" type="big_decimal" precision="29" />

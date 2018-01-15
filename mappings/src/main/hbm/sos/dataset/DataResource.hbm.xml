@@ -179,7 +179,7 @@
         	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Relation table for complex parent/child observations</comment>
                 <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
+                    <column name="fk_parent_observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
                     </column>
                 </key>
@@ -214,7 +214,7 @@
         	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Relation table for complex parent/child observations</comment>
                 <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
+                    <column name="fk_parent_observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
                     </column>
                 </key>
@@ -229,7 +229,7 @@
         	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
 				<comment>Relation table for complex parent/child observations</comment>
 				<key foreign-key="fk_composite_observation">
-					<column name="fk_observation_id" not-null="true">
+					<column name="fk_parent_observation_id" not-null="true">
 						<comment>Foreign Key (FK) to the related parent complex observation.
 							Contains "observation".data</comment>
 					</column>
