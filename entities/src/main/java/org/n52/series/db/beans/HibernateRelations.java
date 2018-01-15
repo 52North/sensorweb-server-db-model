@@ -21,8 +21,6 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
-import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter.DEFAULT;
-
 import org.n52.series.db.beans.parameter.Parameter;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -39,13 +37,19 @@ public interface HibernateRelations {
 
     String SRID = "srid";
 
-    interface HasIdentifier<T> {
+    interface HasId {
+        Long getId();
+
+        void setId(Long id);
+    }
+
+    interface HasIdentifier {
 
         String IDENTIFIER = "identifier";
 
         String getIdentifier();
 
-        T setIdentifier(String identifier);
+        void setIdentifier(String identifier);
 
         default boolean isSetIdentifier() {
             return getIdentifier() != null && !getIdentifier().isEmpty();
@@ -55,8 +59,8 @@ public interface HibernateRelations {
             return getIdentifier();
         }
 
-        default T setDomain(String domain) {
-            return setIdentifier(domain);
+        default void setDomain(String domain) {
+            setIdentifier(domain);
         }
 
         /**
@@ -84,12 +88,12 @@ public interface HibernateRelations {
         boolean isSetIdentifier();
     }
 
-    interface HasDescription<T> {
+    interface HasDescription {
         String DESCRIPTION = "description";
 
         String getDescription();
 
-        T setDescription(String description);
+        void setDescription(String description);
 
         /**
          * Is description set
@@ -101,24 +105,24 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasIdentifierCodespace<T> {
+    interface HasIdentifierCodespace {
         String IDENTIFIER_CODESPACE = "identifierCodespace";
 
         CodespaceEntity getIdentifierCodespace();
 
-        T setIdentifierCodespace(CodespaceEntity codespace);
+        void setIdentifierCodespace(CodespaceEntity codespace);
 
         default boolean isSetIdentifierCodespace() {
             return getIdentifierCodespace() != null && !getIdentifierCodespace().isSetName();
         }
     }
 
-    interface HasNameCodespace<T> {
+    interface HasNameCodespace {
         String NAME_CODESPACE = "nameCodespace";
 
         CodespaceEntity getNameCodespace();
 
-        T setNameCodespace(CodespaceEntity codespaceName);
+        void setNameCodespace(CodespaceEntity codespaceName);
 
         default boolean isSetNameCodespace() {
             return getNameCodespace() != null && !getNameCodespace().isSetName();
@@ -236,12 +240,12 @@ public interface HibernateRelations {
         boolean isParent();
     }
 
-    interface HasName<T> {
+    interface HasName {
         String NAME = "name";
 
         String getName();
 
-        T setName(String name);
+        void setName(String name);
 
         default boolean isSetName() {
             return getName() != null && !getName().isEmpty();
@@ -302,7 +306,7 @@ public interface HibernateRelations {
         boolean isSetOffering();
     }
 
-    interface HasPhenomenonTime<T> {
+    interface HasPhenomenonTime {
 
         String PHENOMENON_TIME_START = "phenomenonTimeStart";
 
@@ -320,10 +324,8 @@ public interface HibernateRelations {
          *
          * @param phenomenonTimeStart
          *            Start phenomenon time to set
-         *
-         * @return this
          */
-        T setPhenomenonTimeStart(Date phenomenonTimeStart);
+        void setPhenomenonTimeStart(Date phenomenonTimeStart);
 
         default boolean hasPhenomenonTimeStart() {
             return getPhenomenonTimeStart() != null;
@@ -341,10 +343,8 @@ public interface HibernateRelations {
          *
          * @param phenomenonTimeEnd
          *            End phenomenon time to set
-         *
-         * @return this
          */
-        T setPhenomenonTimeEnd(Date phenomenonTimeEnd);
+        void setPhenomenonTimeEnd(Date phenomenonTimeEnd);
 
         default boolean hasPhenomenonTimeEnd() {
             return getPhenomenonTimeEnd() != null;
@@ -515,6 +515,8 @@ public interface HibernateRelations {
          *
          * @param validTimeStart
          *            Start valid time to set
+         *
+         * @return this
          */
         T setValidTimeStart(Date validTimeStart);
 
@@ -530,6 +532,8 @@ public interface HibernateRelations {
          *
          * @param validTimeEnd
          *            End valid time to set
+         *
+         * @return this
          */
         T setValidTimeEnd(Date validTimeEnd);
 
@@ -831,6 +835,18 @@ public interface HibernateRelations {
 
         default boolean isSetDatasetType() {
             return getDatasetType() != null && !getDatasetType().isEmpty();
+        }
+
+    }
+
+    interface HasDataset {
+
+        void setDataset(DatasetEntity dataset);
+
+        DatasetEntity getDataset();
+
+        default boolean isSetDataset() {
+            return getDataset() != null;
         }
 
     }

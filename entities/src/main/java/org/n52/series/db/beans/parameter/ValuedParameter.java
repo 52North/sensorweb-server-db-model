@@ -22,6 +22,6 @@ import java.io.Serializable;
 import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasValue;
 
-public interface ValuedParameter<T, S> extends HasValue<T>, HasName<S>, Serializable {
+public interface ValuedParameter<T, S> extends HasValue<T>, HasName, Serializable {
 
 }

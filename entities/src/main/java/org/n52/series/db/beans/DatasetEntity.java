@@ -400,8 +400,11 @@ public class DatasetEntity extends DescribableEntity
         return relatedDatasets;
     }
 
-    public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDatasets) {
-        this.relatedDatasets = relatedDatasets;
+    public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
+        this.relatedDatasets.clear();
+        if (relatedDataset != null) {
+            this.relatedDatasets.addAll(relatedDataset);
+        }
     }
 
     public boolean hasRelatedDatasets() {

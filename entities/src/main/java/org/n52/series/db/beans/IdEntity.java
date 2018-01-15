@@ -19,7 +19,9 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-public abstract class IdEntity implements Serializable {
+import org.n52.series.db.beans.HibernateRelations.HasId;
+
+public abstract class IdEntity implements Serializable, HasId {
 
     public static final String PROPERTY_ID = "id";
 
@@ -30,10 +32,12 @@ public abstract class IdEntity implements Serializable {
      */
     private Long id;
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

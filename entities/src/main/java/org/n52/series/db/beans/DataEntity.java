@@ -24,10 +24,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, Data<T> {
 
     public static final String PROPERTY_ID = "id";
 
@@ -58,8 +60,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     public static final String PROPERTY_PARAMETERS = "parameters";
 
     private static final long serialVersionUID = 273612846605300612L;
-
-    private Long id;
 
     private Date phenomenonTimeStart;
 
@@ -95,14 +95,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     protected DataEntity() {
 
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
@@ -301,9 +293,9 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null)
+        result = prime * result + ((getId() == null)
                 ? 0
-                : id.hashCode());
+                : getId().hashCode());
         return result;
     }
 
@@ -319,11 +311,11 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
             return false;
         }
         DataEntity< ? > other = (DataEntity< ? >) obj;
-        if (id == null) {
-            if (other.id != null) {
+        if (getId() == null) {
+            if (other.getId() != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!getId().equals(other.getId())) {
             return false;
         }
         return true;
@@ -335,7 +327,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" id: ")
-                 .append(id)
+                 .append(getId())
                  .append(" ]")
                  .toString();
     }

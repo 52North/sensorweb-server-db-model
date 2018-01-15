@@ -19,114 +19,28 @@ package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.BooleanDataEntity;
-import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingValues;
+import org.n52.series.db.beans.data.Data.BooleanData;
 
-public class EReportingBooleanDataEntity extends BooleanDataEntity implements EReportingValues {
+public class EReportingBooleanDataEntity extends EReportingDataEntity<Boolean> implements BooleanData {
 
     private static final long serialVersionUID = 4231187253999943944L;
 
-    private Integer validation = EReportingValues.DEFAULT_VALIDATION;
-
-    private Integer verification = EReportingValues.DEFAULT_VERIFICATION;
-
-    private String primaryObservation = EReportingValues.DEFAULT_PRIMARY_OBSERVATION;
-
-    private Boolean timeCoverageFlag;
-
-    private Boolean dataCaptureFlag;
-
-    private Double dataCapture;
-
-    private Double uncertaintyEstimation;
-
-    @Override
-    public Integer getVerification() {
-        return verification;
-    }
-
-    @Override
-    public void setVerification(Integer verification) {
-        this.verification = verification;
-    }
-
-    @Override
-    public Integer getValidation() {
-        return validation;
-    }
-
-    @Override
-    public void setValidation(Integer validation) {
-        this.validation = validation;
-    }
-
-    @Override
-    public String getPrimaryObservation() {
-        return primaryObservation;
-    }
-
-    @Override
-    public void setPrimaryObservation(String primaryObservation) {
-        this.primaryObservation = primaryObservation;
-    }
-
-    @Override
-    public Boolean getDataCaptureFlag() {
-        return this.dataCaptureFlag;
-    }
-
-    @Override
-    public void setDataCaptureFlag(Boolean dataCaptureFlag) {
-        this.dataCaptureFlag = dataCaptureFlag;
-    }
-
-    @Override
-    public Double getDataCapture() {
-        return this.dataCapture;
-    }
-
-    @Override
-    public void setDataCapture(Double dataCapture) {
-        this.dataCapture = dataCapture;
-    }
-
-    @Override
-    public Boolean getTimeCoverageFlag() {
-        return this.timeCoverageFlag;
-    }
-
-    @Override
-    public void setTimeCoverageFlag(Boolean timeCoverageFlag) {
-        this.timeCoverageFlag = timeCoverageFlag;
-    }
-
-    @Override
-    public Double getUncertaintyEstimation() {
-        return this.uncertaintyEstimation;
-    }
-
-    @Override
-    public void setUncertaintyEstimation(Double uncertaintyEstimation) {
-        this.uncertaintyEstimation = uncertaintyEstimation;
-    }
-    
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        Boolean value = getValue();
-        return value == null
-                || noDataValues.contains(value.toString());
-    }
-
     @Override
     public boolean isSetValue() {
-        return getValue() != null;
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean isNoDataValue(Collection<String> noDataValues) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

@@ -17,7 +17,9 @@
 
 package org.n52.series.db.beans;
 
-public class ProfileDataEntity extends CompositeDataEntity {
+import org.n52.series.db.beans.data.Data.ProfileData;
+
+public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
 
     private static final long serialVersionUID = -7431276500677067329L;
 

@@ -18,13 +18,16 @@
 package org.n52.series.db.beans;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 import java.util.List;
+
+import org.n52.series.db.beans.data.Data.QuantityData;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class QuantityDataEntity extends DataEntity<Double> {
+public class QuantityDataEntity extends DataEntity<Double> implements QuantityData {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
 

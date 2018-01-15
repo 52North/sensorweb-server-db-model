@@ -19,7 +19,9 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-public class TextDataEntity extends DataEntity<String> {
+import org.n52.series.db.beans.data.Data.TextData;
+
+public class TextDataEntity extends DataEntity<String> implements TextData {
 
     private static final long serialVersionUID = 4925354534934095827L;
 

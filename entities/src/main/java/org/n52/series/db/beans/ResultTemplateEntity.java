@@ -153,4 +153,12 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
         this.encoding = resultEncoding;
     }
 
+    public boolean isSetProcedure() {
+        return getProcedure() != null;
+    }
+
+    public boolean isSetFeature() {
+        return getFeature() != null;
+    }
+
 }

@@ -32,7 +32,7 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
-        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity>,
+        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime, HasResultTimes<OfferingEntity>,
         HasValidTime<OfferingEntity> {
 
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
@@ -150,9 +150,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      *        the phenomenonTimeStart to set
      */
     @Override
-    public OfferingEntity setPhenomenonTimeStart(Date phenomenonTimeStart) {
+    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
         this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
-        return this;
     }
 
     /**
@@ -168,9 +167,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      *        the phenomenonTimeEnd to set
      */
     @Override
-    public OfferingEntity setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
         this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
-        return this;
     }
 
     /**
