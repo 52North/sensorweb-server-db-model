@@ -28,7 +28,7 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
 
     private Set<QuantityDatasetEntity> referenceValues = new HashSet<>();
 
-    private int numberOfDecimals;
+    private Integer numberOfDecimals;
 
     public QuantityDatasetEntity() {
         super(DATASET_TYPE);
@@ -46,12 +46,14 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
     }
 
     @Override
-    public int getNumberOfDecimals() {
-        return numberOfDecimals;
+    public Integer getNumberOfDecimals() {
+        return numberOfDecimals != null
+                ? numberOfDecimals
+                : 0;
     }
 
     @Override
-    public QuantityDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
+    public QuantityDatasetEntity setNumberOfDecimals(Integer numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
         return this;
     }

@@ -90,9 +90,9 @@ public class DatasetEntity extends DescribableEntity
 
     private DataEntity lastObservation;
 
-    private double firstValue;
+    private Double firstQuantityValue;
 
-    private double lastValue;
+    private Double lastQuantityValue;
 
     private UnitEntity unit;
 
@@ -101,8 +101,6 @@ public class DatasetEntity extends DescribableEntity
     private boolean hiddenChild;
 
     private FormatEntity observationType;
-
-    private int decimals;
 
     public DatasetEntity() {
         this((String) null);
@@ -271,20 +269,20 @@ public class DatasetEntity extends DescribableEntity
         this.lastObservation = lastObservation;
     }
 
-    public double getFirstValue() {
-        return firstValue;
+    public Double getFirstQuantityValue() {
+        return firstQuantityValue;
     }
 
-    public void setFirstValue(double firstValue) {
-        this.firstValue = firstValue;
+    public void setFirstQuantityValue(Double firstValue) {
+        this.firstQuantityValue = firstValue;
     }
 
-    public double getLastValue() {
-        return lastValue;
+    public Double getLastQuantityValue() {
+        return lastQuantityValue;
     }
 
-    public void setLastValue(double lastValue) {
-        this.lastValue = lastValue;
+    public void setLastQuantityValue(Double lastValue) {
+        this.lastQuantityValue = lastValue;
     }
 
     public String getValueType() {
@@ -380,14 +378,6 @@ public class DatasetEntity extends DescribableEntity
 
     public boolean isSetObservationtype() {
         return getObservationType() != null && getObservationType().isSetFormat();
-    }
-
-    public int getDecimals() {
-        return decimals;
-    }
-
-    public void setDecimals(int decimals) {
-        this.decimals = decimals;
     }
 
     @Override

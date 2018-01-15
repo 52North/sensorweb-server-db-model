@@ -51,12 +51,12 @@ public class EReportingQuantityDatasetEntity extends DatasetEntity
     }
 
     @Override
-    public int getNumberOfDecimals() {
+    public Integer getNumberOfDecimals() {
         return numberOfDecimals;
     }
 
     @Override
-    public EReportingQuantityDatasetEntity setNumberOfDecimals(int numberOfDecimals) {
+    public EReportingQuantityDatasetEntity setNumberOfDecimals(Integer numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
         return this;
     }

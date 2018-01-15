@@ -34,7 +34,7 @@ public class DataEntityTest {
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
         dataEntity.setPhenomenonTimeStart(timestamp);
-        Timestamp timestart = (Timestamp) dataEntity.getPhenomenonTimeStart();
+        Timestamp timestart = (Timestamp) dataEntity.getSamplingTimeStart();
         MatcherAssert.assertThat(timestart.getNanos(), is(timestamp.getNanos()));
     }
 
@@ -44,7 +44,7 @@ public class DataEntityTest {
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
         dataEntity.setPhenomenonTimeEnd(timestamp);
-        Timestamp timeend = (Timestamp) dataEntity.getPhenomenonTimeEnd();
+        Timestamp timeend = (Timestamp) dataEntity.getSamplingTimeEnd();
         MatcherAssert.assertThat(timeend.getNanos(), is(timestamp.getNanos()));
     }
 

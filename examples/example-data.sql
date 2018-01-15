@@ -125,19 +125,19 @@ COPY unit (unit_id, symbol, name, link) FROM stdin;
 
 
 
-COPY dataset (dataset_id, fk_feature_id, fk_category_id, fk_phenomenon_id, fk_procedure_id, fk_format_id, fk_offering_id, is_deleted, is_published, is_hidden_child, first_time, last_time, fk_unit_id, identifier, fk_identifier_codespace_id, name, fk_name_codespace_id, description, value_type) FROM stdin;
-1	2	1	1	1	4	1	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	1	\N	\N	\N	\N	\N	quantity-profile
-2	3	2	2	2	5	2	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	count
-3	4	3	3	3	6	3	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	boolean
-4	5	4	4	4	7	4	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	category
-5	6	5	5	5	8	5	1	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	text
-6	7	6	6	6	4	6	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	3	\N	\N	\N	\N	\N	quantity
-7	8	7	7	7	4	7	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	4	\N	\N	\N	\N	\N	quantity
-8	9	8	8	8	4	8	0	1	0	2012-11-19 13:00:00	2012-11-19 13:49:59	5	\N	\N	\N	\N	\N	quantity
-9	10	9	9	9	8	9	0	1	0	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
-10	11	9	9	9	8	9	0	0	0	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
-11	12	9	9	9	8	9	0	1	0	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text
-12	13	9	9	9	8	9	0	1	0	2012-12-31 23:00:00	2012-12-31 23:00:00	\N	\N	\N	\N	\N	\N	text
+COPY dataset (dataset_id, fk_feature_id, fk_category_id, fk_phenomenon_id, fk_procedure_id, fk_format_id, fk_offering_id, is_deleted, is_published, is_hidden_child, first_time, last_time, fk_unit_id, identifier, fk_identifier_codespace_id, name, fk_name_codespace_id, description, value_type, decimals) FROM stdin;
+1	2	1	1	1	4	1	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	1	\N	\N	\N	\N	\N	quantity-profile	3
+2	3	2	2	2	5	2	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	count	\N
+3	4	3	3	3	6	3	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	boolean	\N
+4	5	4	4	4	7	4	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	category	\N
+5	6	5	5	5	8	5	1	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	\N	\N	\N	\N	\N	\N	text	\N
+6	7	6	6	6	4	6	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	3	\N	\N	\N	\N	\N	quantity	3
+7	8	7	7	7	4	7	0	1	0	2012-11-19 13:00:00	2012-11-19 13:09:00	4	\N	\N	\N	\N	\N	quantity	3
+8	9	8	8	8	4	8	0	1	0	2012-11-19 13:00:00	2012-11-19 13:49:59	5	\N	\N	\N	\N	\N	quantity	3
+9	10	9	9	9	8	9	0	1	0	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text	\N
+10	11	9	9	9	8	9	0	0	0	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text	\N
+11	12	9	9	9	8	9	0	1	0	2008-10-29 00:00:00	2008-10-29 00:00:00	\N	\N	\N	\N	\N	\N	text	\N
+12	13	9	9	9	8	9	0	1	0	2012-12-31 23:00:00	2012-12-31 23:00:00	\N	\N	\N	\N	\N	\N	text	\N
 \.
 
 
