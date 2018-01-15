@@ -110,7 +110,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      * @param samplingTimeStart
      *        the samplingTimeStart
      */
-    public void setPhenomenonTimeStart(Date samplingTimeStart) {
+    public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
@@ -125,7 +125,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      * @param samplingTimeEnd
      *        the samplingTimeEnd
      */
-    public void setPhenomenonTimeEnd(Date samplingTimeEnd) {
+    public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
