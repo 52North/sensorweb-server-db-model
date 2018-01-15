@@ -19,11 +19,11 @@ package org.n52.series.db.beans;
 
 import static org.junit.Assert.assertTrue;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.Test;
-import org.n52.series.db.beans.QuantityDataEntity;
 
 public class QuantityDataEntityTest {
 
@@ -34,7 +34,7 @@ public class QuantityDataEntityTest {
             "-9999.9"
         });
         QuantityDataEntity entity = new QuantityDataEntity();
-        entity.setValue(9999d);
+        entity.setValue(new BigDecimal(9999d));
         assertTrue(entity.isNoDataValue(noDataValues));
     }
 }

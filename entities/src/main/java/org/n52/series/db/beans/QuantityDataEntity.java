@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -24,42 +26,43 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class QuantityDataEntity extends DataEntity<Double> {
+public class QuantityDataEntity extends DataEntity<BigDecimal> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
 
     private static final long serialVersionUID = 7619426522406105659L;
 
-    private static final Double DOUBLE_THRESHOLD = 0.01;
+    private static final BigDecimal DOUBLE_THRESHOLD = new BigDecimal(0.0001d);
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        Double value = getValue();
+        BigDecimal value = getValue();
         return value == null
-                || Double.isNaN(value)
                 || containsValue(noDataValues, value);
     }
 
-    private boolean containsValue(Collection<String> collection, double key) {
+    private boolean containsValue(Collection<String> collection, BigDecimal key) {
         if (collection == null) {
             return false;
         }
-        for (Double noDataValue : convertToDoubles(collection)) {
-            if (Math.abs(noDataValue / key - 1) < DOUBLE_THRESHOLD) {
+        for (BigDecimal noDataValue : convertToDoubles(collection)) {
+            if (noDataValue.divide(key, RoundingMode.HALF_UP)
+                           .subtract(BigDecimal.ONE)
+                           .compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }
         return false;
     }
 
-    private Collection<Double> convertToDoubles(Collection<String> collection) {
-        List<Double> validatedValues = new ArrayList<>();
+    private Collection<BigDecimal> convertToDoubles(Collection<String> collection) {
+        List<BigDecimal> validatedValues = new ArrayList<>();
         for (String value : collection) {
             String trimmed = value.trim();
             try {
-                validatedValues.add(Double.parseDouble(trimmed));
+                validatedValues.add(new BigDecimal(trimmed));
             } catch (NumberFormatException e) {
-                LOGGER.trace("Ignoring NO_DATA value {} (not a double).", trimmed);
+                LOGGER.trace("Ignoring NO_DATA value {} (not a big decimal value).", trimmed);
             }
         }
         return validatedValues;
