@@ -31,6 +31,8 @@
             </column>
         </many-to-one>
 
+        <property column="value_type" insert="false" name="valueType" type="string" update="false" />
+        
         <property column="first_time" name="firstValueAt" type="timestamp" />
         <property column="last_time" name="lastValueAt" type="timestamp" />
 
