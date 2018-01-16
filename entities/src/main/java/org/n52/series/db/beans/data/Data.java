@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.data;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Set;
@@ -171,8 +172,9 @@ public interface Data<T>
 
     interface QuantityData
             extends
-            Data<Double> {
+            Data<BigDecimal> {
         String DATASET_TYPE = "quantity";
+        BigDecimal DOUBLE_THRESHOLD = new BigDecimal(0.0001d);
     }
 
     interface ReferencedData

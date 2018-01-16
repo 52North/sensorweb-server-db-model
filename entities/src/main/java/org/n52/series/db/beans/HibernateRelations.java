@@ -308,16 +308,36 @@ public interface HibernateRelations {
 
     interface HasPhenomenonTime {
 
-        String PHENOMENON_TIME_START = "phenomenonTimeStart";
+        /**
+         * @return the samplingTimeStart
+         */
+        Date getSamplingTimeStart();
 
-        String PHENOMENON_TIME_END = "phenomenonTimeEnd";
+        /**
+         * @param samplingTimeStart
+         *        the samplingTimeStart
+         */
+        void setSamplingTimeStart(Date samplingTimeStart);
+
+        /**
+         * @return the samplingTimeEnd
+         */
+        Date getSamplingTimeEnd();
+
+        /**
+         * @param samplingTimeEnd
+         *        the samplingTimeEnd
+         */
+        void setSamplingTimeEnd(Date samplingTimeEnd);
 
         /**
          * Get the start phenomenon time
          *
          * @return Start phenomenon time
          */
-        Date getPhenomenonTimeStart();
+        default Date getPhenomenonTimeStart() {
+            return getSamplingTimeStart();
+        }
 
         /**
          * Set the start phenomenon time
@@ -325,7 +345,9 @@ public interface HibernateRelations {
          * @param phenomenonTimeStart
          *            Start phenomenon time to set
          */
-        void setPhenomenonTimeStart(Date phenomenonTimeStart);
+        default void setPhenomenonTimeStart(Date phenomenonTimeStart) {
+            setSamplingTimeStart(phenomenonTimeStart);
+        }
 
         default boolean hasPhenomenonTimeStart() {
             return getPhenomenonTimeStart() != null;
@@ -336,7 +358,9 @@ public interface HibernateRelations {
          *
          * @return End phenomenon time
          */
-        Date getPhenomenonTimeEnd();
+        default Date getPhenomenonTimeEnd() {
+            return getSamplingTimeEnd();
+        }
 
         /**
          * Set the end phenomenon time
@@ -344,7 +368,9 @@ public interface HibernateRelations {
          * @param phenomenonTimeEnd
          *            End phenomenon time to set
          */
-        void setPhenomenonTimeEnd(Date phenomenonTimeEnd);
+        default void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+            setSamplingTimeEnd(phenomenonTimeEnd);
+        }
 
         default boolean hasPhenomenonTimeEnd() {
             return getPhenomenonTimeEnd() != null;

@@ -17,10 +17,9 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.data.Data.ProfileData;
 import java.math.BigDecimal;
 
-public class ProfileDataEntity extends CompositeDataEntity {
+import org.n52.series.db.beans.data.Data.ProfileData;
 
 public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
 

@@ -137,38 +137,24 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         return this;
     }
 
-    /**
-     * @return the phenomenonTimeStart
-     */
     @Override
-    public Date getPhenomenonTimeStart() {
+    public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
-    /**
-     * @param phenomenonTimeStart
-     *        the phenomenonTimeStart to set
-     */
     @Override
-    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
+    public void setSamplingTimeStart(Date time) {
+        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(time);
     }
 
-    /**
-     * @return the phenomenonTimeEnd
-     */
     @Override
-    public Date getPhenomenonTimeEnd() {
+    public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
-    /**
-     * @param phenomenonTimeEnd
-     *        the phenomenonTimeEnd to set
-     */
     @Override
-    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
+    public void setSamplingTimeEnd(Date time) {
+        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(time);
     }
 
     /**

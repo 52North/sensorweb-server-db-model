@@ -18,6 +18,7 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
@@ -51,10 +52,8 @@ public class DatasetEntity extends DescribableEntity
     public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
-    public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_PROCEDURE = "procedure";
-    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
@@ -96,9 +95,9 @@ public class DatasetEntity extends DescribableEntity
 
     private DataEntity lastObservation;
 
-    private Double firstQuantityValue;
+    private BigDecimal firstQuantityValue;
 
-    private Double lastQuantityValue;
+    private BigDecimal lastQuantityValue;
 
     private UnitEntity unit;
 
@@ -277,19 +276,19 @@ public class DatasetEntity extends DescribableEntity
         this.lastObservation = lastObservation;
     }
 
-    public Double getFirstQuantityValue() {
+    public BigDecimal getFirstQuantityValue() {
         return firstQuantityValue;
     }
 
-    public void setFirstQuantityValue(Double firstValue) {
+    public void setFirstQuantityValue(BigDecimal firstValue) {
         this.firstQuantityValue = firstValue;
     }
 
-    public Double getLastQuantityValue() {
+    public BigDecimal getLastQuantityValue() {
         return lastQuantityValue;
     }
 
-    public void setLastQuantityValue(Double lastValue) {
+    public void setLastQuantityValue(BigDecimal lastValue) {
         this.lastQuantityValue = lastValue;
     }
 

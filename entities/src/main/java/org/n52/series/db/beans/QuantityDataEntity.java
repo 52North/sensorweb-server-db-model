@@ -34,8 +34,6 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> implements Quanti
 
     private static final long serialVersionUID = 7619426522406105659L;
 
-    private static final BigDecimal DOUBLE_THRESHOLD = new BigDecimal(0.0001d);
-
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         BigDecimal value = getValue();
@@ -48,7 +46,9 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> implements Quanti
             return false;
         }
         for (BigDecimal noDataValue : convertToDoubles(collection)) {
-            if (noDataValue.subtract(key).abs().compareTo(DOUBLE_THRESHOLD) < 0 ) {
+            if (noDataValue.subtract(key)
+                           .abs()
+                           .compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }
