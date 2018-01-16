@@ -143,8 +143,8 @@ COPY dataset (dataset_id, fk_feature_id, fk_category_id, fk_phenomenon_id, fk_pr
 
 
 COPY observation (observation_id, fk_dataset_id, sampling_time_start, sampling_time_end, result_time, identifier, fk_identifier_codespace_id, name, fk_name_codespace_id, description, is_deleted, is_child, is_parent, valid_time_start, valid_time_end, sampling_geometry, value_count, value_boolean, value_category, value_quantity, value_text, value_type) FROM stdin;
-1	1	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/profile-observation/1	1	\N	1	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	quantity-profile
-10	1	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	http://www.52north.org/test/profile-observation/10	1	\N	1	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	quantity-profile
+1	1	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	http://www.52north.org/test/profile-observation/1	1	\N	1	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	profile
+10	1	2012-11-19 13:09:00	2012-11-19 13:09:00	2012-11-19 13:09:00	http://www.52north.org/test/profile-observation/10	1	\N	1	\N	0	0	1	\N	\N	\N	\N	\N	\N	\N	\N	profile
 11	2	2012-11-19 13:00:00	2012-11-19 13:00:00	2012-11-19 13:00:00	\N	1	\N	1	\N	0	0	0	\N	\N	\N	0	\N	\N	\N	\N	count
 12	2	2012-11-19 13:01:00	2012-11-19 13:01:00	2012-11-19 13:01:00	\N	1	\N	1	\N	0	0	0	\N	\N	\N	1	\N	\N	\N	\N	count
 13	2	2012-11-19 13:02:00	2012-11-19 13:02:00	2012-11-19 13:02:00	\N	1	\N	1	\N	0	0	0	\N	\N	\N	2	\N	\N	\N	\N	count
