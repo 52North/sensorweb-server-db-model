@@ -49,9 +49,8 @@ public class GeometryEntity implements Serializable {
         return geometry != null && !geometry.isEmpty();
     }
 
-    public GeometryEntity setGeometry(Geometry geometry) {
+    public void setGeometry(Geometry geometry) {
         this.geometry = geometry;
-        return this;
     }
 
     /**

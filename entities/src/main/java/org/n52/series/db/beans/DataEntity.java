@@ -35,11 +35,11 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_DATASET = "dataset";
 
-    public static final String PROPERTY_RESULT_TIME = "result_time";
+    public static final String PROPERTY_RESULT_TIME = "resultTime";
 
-    public static final String PROPERTY_PHENOMENON_TIME_START = "sampling_time_start";
+    public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
 
-    public static final String PROPERTY_PHENOMENON_TIME_END = "sampling_time_end";
+    public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
 
     public static final String PROPERTY_VALID_TIME_START = "valid_time_start";
 
@@ -51,7 +51,7 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_PARENT = "parent";
 
-    public static final String PROPERTY_DOMAIN_ID = "domain_id";
+    public static final String PROPERTY_IDENTIFIER = "identifier";
 
     public static final String PROPERTY_CHILDREN = "children";
 
@@ -61,9 +61,9 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private static final long serialVersionUID = 273612846605300612L;
 
-    private Date phenomenonTimeStart;
+    private Date samplingTimeStart;
 
-    private Date phenomenonTimeEnd;
+    private Date samplingTimeEnd;
 
     private T value;
 
@@ -98,33 +98,33 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     /**
-     * @return the phenomenonTimeStart
+     * @return the samplingTimeStart
      */
-    public Date getPhenomenonTimeStart() {
-        return Utils.createUnmutableTimestamp(phenomenonTimeStart);
+    public Date getSamplingTimeStart() {
+        return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
-     * @param phenomenonTimeStart
-     *        the phenomenonTimeStart
+     * @param samplingTimeStart
+     *        the samplingTimeStart
      */
-    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
+    public void setSamplingTimeStart(Date samplingTimeStart) {
+        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
-     * @return the phenomenonTimeEnd
+     * @return the samplingTimeEnd
      */
-    public Date getPhenomenonTimeEnd() {
-        return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
+    public Date getSamplingTimeEnd() {
+        return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
-     * @param phenomenonTimeEnd
-     *        the phenomenonTimeEnd
+     * @param samplingTimeEnd
+     *        the samplingTimeEnd
      */
-    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
+    public void setSamplingTimeEnd(Date samplingTimeEnd) {
+        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     public T getValue() {
@@ -213,14 +213,17 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.child = child;
     }
 
+    @Override
     public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
+    @Override
     public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 
+    @Override
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }
@@ -283,8 +286,8 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     @Override
     public int compareTo(DataEntity<T> o) {
-        return Comparator.comparing(DataEntity<T>::getPhenomenonTimeEnd)
-                         .thenComparing(DataEntity<T>::getPhenomenonTimeStart)
+        return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
+                         .thenComparing(DataEntity<T>::getSamplingTimeStart)
                          .thenComparing(DataEntity<T>::getId)
                          .compare(this, o);
     }

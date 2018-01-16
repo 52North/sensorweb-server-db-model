@@ -13,13 +13,13 @@
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
         <many-to-one column="fk_dataset_id" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true"/>
 
-        <property name="phenomenonTimeStart" type="timestamp">
+        <property name="samplingTimeStart" type="timestamp">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
-        <property name="phenomenonTimeEnd" type="timestamp">
+        <property name="samplingTimeEnd" type="timestamp">
             <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>

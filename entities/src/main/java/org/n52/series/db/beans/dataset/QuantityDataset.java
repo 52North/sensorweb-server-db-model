@@ -23,7 +23,7 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset<T> {
 
     String DATASET_TYPE = "quantity";
 
-    int getNumberOfDecimals();
+    Integer getNumberOfDecimals();
 
-    T setNumberOfDecimals(int numberOfDecimals);
+    T setNumberOfDecimals(Integer numberOfDecimals);
 }

@@ -13,13 +13,13 @@
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
         <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true"/>
 
-        <property name="phenomenonTimeStart" type="timestamp">
+        <property name="samplingTimeStart" type="timestamp">
             <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
-        <property name="phenomenonTimeEnd" type="timestamp">
+        <property name="samplingTimeEnd" type="timestamp">
             <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
@@ -183,7 +183,7 @@
         	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Relation table for complex parent/child observations</comment>
                 <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
+                    <column name="fk_parent_observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
                     </column>
                 </key>
@@ -218,7 +218,7 @@
         	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Relation table for complex parent/child observations</comment>
                 <key foreign-key="fk_composite_observation">
-                    <column name="fk_observation_id" not-null="true">
+                    <column name="fk_parent_observation_id" not-null="true">
                         <comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
                     </column>
                 </key>
@@ -233,7 +233,7 @@
         	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
 				<comment>Relation table for complex parent/child observations</comment>
 				<key foreign-key="fk_composite_observation">
-					<column name="fk_observation_id" not-null="true">
+					<column name="fk_parent_observation_id" not-null="true">
 						<comment>Foreign Key (FK) to the related parent complex observation.
 							Contains "observation".data</comment>
 					</column>

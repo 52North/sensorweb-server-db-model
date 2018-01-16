@@ -18,6 +18,7 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 import org.n52.series.db.beans.HibernateRelations.HasId;
 
@@ -44,34 +45,16 @@ public abstract class IdEntity implements Serializable, HasId {
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null)
-                ? 0
-                : id.hashCode());
-        return result;
+        return Objects.hash(id);
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
+        if (obj == null || !(obj instanceof IdEntity)) {
             return false;
         }
         IdEntity other = (IdEntity) obj;
-        if (id == null) {
-            if (other.id != null) {
-                return false;
-            }
-        } else if (!id.equals(other.id)) {
-            return false;
-        }
-        return true;
+        return Objects.equals(id, other.id);
     }
 
 }

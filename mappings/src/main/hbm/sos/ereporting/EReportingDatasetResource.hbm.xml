@@ -55,8 +55,6 @@
             </column>
         </property>
 
-        <property column="decimals" name="decimals" not-null="false" type="integer" />
-
         <property name="identifier" type="string">
             <column name="identifier" not-null="false" unique-key="datasetIdentifierUK">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>

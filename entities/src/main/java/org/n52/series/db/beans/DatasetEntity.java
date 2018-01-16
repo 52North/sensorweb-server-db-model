@@ -48,6 +48,8 @@ public class DatasetEntity extends DescribableEntity
 
     public static final String ENTITY_ALIAS = "dataset";
 
+    public static final String PROPERTY_OFFERING = "offering";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_FEATURE = "feature";
@@ -94,9 +96,9 @@ public class DatasetEntity extends DescribableEntity
 
     private DataEntity lastObservation;
 
-    private Double firstValue;
+    private Double firstQuantityValue;
 
-    private Double lastValue;
+    private Double lastQuantityValue;
 
     private UnitEntity unit;
 
@@ -105,8 +107,6 @@ public class DatasetEntity extends DescribableEntity
     private boolean hiddenChild;
 
     private FormatEntity observationType;
-
-    private int decimals;
 
     private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
 
@@ -277,20 +277,20 @@ public class DatasetEntity extends DescribableEntity
         this.lastObservation = lastObservation;
     }
 
-    public double getFirstValue() {
-        return firstValue;
+    public Double getFirstQuantityValue() {
+        return firstQuantityValue;
     }
 
-    public void setFirstValue(Double firstValue) {
-        this.firstValue = firstValue;
+    public void setFirstQuantityValue(Double firstValue) {
+        this.firstQuantityValue = firstValue;
     }
 
-    public double getLastValue() {
-        return lastValue;
+    public Double getLastQuantityValue() {
+        return lastQuantityValue;
     }
 
-    public void setLastValue(Double lastValue) {
-        this.lastValue = lastValue;
+    public void setLastQuantityValue(Double lastValue) {
+        this.lastQuantityValue = lastValue;
     }
 
     public String getValueType() {
@@ -386,14 +386,6 @@ public class DatasetEntity extends DescribableEntity
 
     public boolean isSetObservationtype() {
         return getObservationType() != null && getObservationType().isSetFormat();
-    }
-
-    public int getDecimals() {
-        return decimals;
-    }
-
-    public void setDecimals(int decimals) {
-        this.decimals = decimals;
     }
 
     public Set<RelatedDatasetEntity> getRelatedDatasets() {

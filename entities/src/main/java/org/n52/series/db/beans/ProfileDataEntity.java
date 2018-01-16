@@ -18,30 +18,33 @@
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.data.Data.ProfileData;
+import java.math.BigDecimal;
+
+public class ProfileDataEntity extends CompositeDataEntity {
 
 public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
 
     private static final long serialVersionUID = -7431276500677067329L;
 
-    private Double fromLevel;
+    private BigDecimal fromLevel;
 
-    private Double toLevel;
+    private BigDecimal toLevel;
 
     private UnitEntity levelUnit;
 
-    public Double getFromLevel() {
+    public BigDecimal getFromLevel() {
         return fromLevel;
     }
 
-    public void setFromLevel(Double fromLevel) {
+    public void setFromLevel(BigDecimal fromLevel) {
         this.fromLevel = fromLevel;
     }
 
-    public Double getToLevel() {
+    public BigDecimal getToLevel() {
         return toLevel;
     }
 
-    public void setToLevel(Double toLevel) {
+    public void setToLevel(BigDecimal toLevel) {
         this.toLevel = toLevel;
     }
 
