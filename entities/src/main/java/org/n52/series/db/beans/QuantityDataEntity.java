@@ -45,7 +45,9 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> {
             return false;
         }
         for (BigDecimal noDataValue : convertToDoubles(collection)) {
-            if (noDataValue.subtract(key).abs().compareTo(DOUBLE_THRESHOLD) < 0 ) {
+            if (noDataValue.subtract(key)
+                           .abs()
+                           .compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }
