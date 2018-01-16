@@ -18,7 +18,6 @@
 package org.n52.series.db.beans;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -46,9 +45,7 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> {
             return false;
         }
         for (BigDecimal noDataValue : convertToDoubles(collection)) {
-            if (noDataValue.divide(key, RoundingMode.HALF_UP)
-                           .subtract(BigDecimal.ONE)
-                           .compareTo(DOUBLE_THRESHOLD) < 0) {
+            if (noDataValue.subtract(key).abs().compareTo(DOUBLE_THRESHOLD) < 0 ) {
                 return true;
             }
         }
