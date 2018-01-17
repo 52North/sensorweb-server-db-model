@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -26,8 +26,6 @@ public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity
         implements BooleanDataset<EReportingBooleanDatasetEntity> {
 
     private static final long serialVersionUID = 5026545130550522586L;
-
-    private static final String DATASET_TYPE = "boolean";
 
     private Set<EReportingBooleanDatasetEntity> referenceValues = new HashSet<>();
 

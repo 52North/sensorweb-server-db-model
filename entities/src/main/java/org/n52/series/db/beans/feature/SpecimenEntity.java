@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,10 +22,6 @@ import java.util.Date;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.common.Utils;
-import org.n52.shetland.ogc.gml.AbstractFeature;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 public class SpecimenEntity extends FeatureEntity {
 
@@ -127,7 +123,7 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     public boolean isSetSizeUnit() {
-        return getSizeUnit() != null && getSizeUnit().isSetDomainId();
+        return getSizeUnit() != null && getSizeUnit().isSetDomain();
     }
 
     /**
@@ -164,16 +160,6 @@ public class SpecimenEntity extends FeatureEntity {
 
     public boolean isSetSpecimenType() {
         return getSpecimenType() != null && !getSpecimenType().isEmpty();
-    }
-
-    @Override
-    public AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
-    }
-
-    @Override
-    public Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport {
-        return visitor.visit(this);
     }
 
 }

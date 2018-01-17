@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,18 +20,5 @@ package org.n52.series.db.beans;
 public class CategoryEntity extends DescribableEntity {
 
     private static final long serialVersionUID = -5508957540970020954L;
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
-    }
 
 }

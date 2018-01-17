@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,9 +46,9 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     private GeometryEntity geometryEntity;
 
-    private Set<ObservationTypeEntity> observationTypes;
+    private Set<FormatEntity> observationTypes;
 
-    private Set<FeatureTypeEntity> featureTypes;
+    private Set<FormatEntity> featureTypes;
 
     private Date phenomenonTimeStart;
 
@@ -105,7 +105,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @return the observationTypes
      */
     @Override
-    public Set<ObservationTypeEntity> getObservationTypes() {
+    public Set<FormatEntity> getObservationTypes() {
         return observationTypes;
     }
 
@@ -114,7 +114,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      *        the observationTypes to set
      */
     @Override
-    public OfferingEntity setObservationTypes(Set<ObservationTypeEntity> observationTypes) {
+    public OfferingEntity setObservationTypes(Set<FormatEntity> observationTypes) {
         this.observationTypes = observationTypes;
         return this;
     }
@@ -123,7 +123,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      * @return the featureTypes
      */
     @Override
-    public Set<FeatureTypeEntity> getFeatureTypes() {
+    public Set<FormatEntity> getFeatureTypes() {
         return featureTypes;
     }
 
@@ -132,7 +132,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
      *        the featureTypes to set
      */
     @Override
-    public OfferingEntity setFeatureTypes(Set<FeatureTypeEntity> featureTypes) {
+    public OfferingEntity setFeatureTypes(Set<FormatEntity> featureTypes) {
         this.featureTypes = featureTypes;
         return this;
     }
@@ -259,17 +259,6 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     public OfferingEntity setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
         this.relatedFeatures = relatedFeatures;
         return this;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(" ]")
-                 .toString();
     }
 
 }

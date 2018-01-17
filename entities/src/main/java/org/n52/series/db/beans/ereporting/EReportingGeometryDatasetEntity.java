@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,8 +23,6 @@ import java.util.Set;
 public class EReportingGeometryDatasetEntity extends EReportingDatasetEntity {
 
     private static final long serialVersionUID = -6212212763954201384L;
-
-    private static final String DATASET_TYPE = "geometry";
 
     private Set<EReportingGeometryDatasetEntity> referenceValues = new HashSet<>();
 

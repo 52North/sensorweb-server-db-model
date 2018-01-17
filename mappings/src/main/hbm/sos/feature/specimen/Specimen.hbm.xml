@@ -1,13 +1,14 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <subclass name="org.n52.series.db.beans.feature.SpecimenEntity"
     				 extends="AbstractFeatureEntity"
                      discriminator-value="SpecimenEntity">
         <join table="specimen">
-            <key foreign-key="specimen_feature_fk">
-                <column name="fearure" >
+            <key foreign-key="fk_specimen_feature">
+                <column name="fk_feature_id" >
                     <comment>Foreign Key (FK) to the related feature from the feature table. Contains "feature".id</comment>
                 </column>
             </key>
@@ -38,15 +39,15 @@
                 	<comment>Sampling method as referenced link</comment>
                 </column>
             </property>
-            <property name="size" type="double">
+            <property name="size" type="big_decimal">
                 <column name="size">
                     <comment>Sampling method as referenced link</comment>
                 </column>
             </property>
             <many-to-one name="sizeUnit"
                          class="UnitEntity"
-                         foreign-key="specimen_unit_fk">
-                <column name="size_unit"
+                         foreign-key="fk_specimen_unit">
+                <column name="fk_size_unit_id"
                         not-null="false">
                     <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
                 </column>

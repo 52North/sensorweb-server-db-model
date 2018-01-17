@@ -1,11 +1,12 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="RelatedDatasetEntity" table="related_dataset">
         <comment>The dataset relation should be used if the series table represents a dataset.</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="related_dataset_id">
                 <comment>Table primary key</comment>
             </column>
             <generator class="native">
@@ -13,12 +14,12 @@
             </generator>
         </id>
         <property name="item" type="long">
-            <column name="dataset" not-null="true" index="rel_dataset_dataset_idx">
+            <column name="fk_dataset_id" not-null="true" index="idx_rel_dataset_dataset">
                 <comment>Foreign Key (FK) to the dataset. Contains "dataset".id</comment>
             </column>
         </property>
-        <many-to-one name="relatedItem" class="DatasetEntity" foreign-key="rel_dataset_rel_dataset_fk">
-            <column name="related_dataset" not-null="true">
+        <many-to-one name="relatedItem" class="DatasetEntity" foreign-key="fk_rel_dataset_rel_dataset">
+            <column name="fk_related_dataset_id" not-null="true">
                 <comment>Relation/foreign key to the associated dataset table. Contains "dataset".id</comment>
             </column>
         </many-to-one>

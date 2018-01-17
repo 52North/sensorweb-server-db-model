@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,10 +19,6 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasXml;
-import org.n52.series.db.beans.feature.FeatureVisitor;
-import org.n52.series.db.beans.feature.GeometryVisitor;
-import org.n52.shetland.ogc.gml.AbstractFeature;
-import org.n52.shetland.ogc.ows.exception.OwsExceptionReport;
 
 import com.vividsolutions.jts.geom.Geometry;
 
@@ -37,13 +33,9 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private static final long serialVersionUID = 6712642995944229067L;
 
     private GeometryEntity geometryEntity;
-    private FeatureTypeEntity featureType;
+    private FormatEntity featureType;
     private String url;
     private String xml;
-
-    public abstract AbstractFeature accept(FeatureVisitor< ? > visitor) throws OwsExceptionReport;
-
-    public abstract Geometry accept(GeometryVisitor visitor) throws OwsExceptionReport;
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -72,11 +64,11 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return this;
     }
 
-    public FeatureTypeEntity getFeatureType() {
+    public FormatEntity getFeatureType() {
         return featureType;
     }
 
-    public AbstractFeatureEntity<E> setFeatureType(FeatureTypeEntity featureType) {
+    public AbstractFeatureEntity<E> setFeatureType(FormatEntity featureType) {
         this.featureType = featureType;
         return this;
     }
@@ -96,19 +88,6 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
 
     public boolean isSetUrl() {
         return getUrl() != null && !getUrl().isEmpty();
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
     }
 
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -27,17 +27,17 @@ import java.util.Set;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serializable {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
 
     public static final String PROPERTY_ID = "id";
 
     public static final String PROPERTY_DATASET = "dataset";
 
-    public static final String PROPERTY_RESULT_TIME = "result_time";
+    public static final String PROPERTY_RESULT_TIME = "resultTime";
 
-    public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenon_time_start";
+    public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
 
-    public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenon_time_end";
+    public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
 
@@ -45,7 +45,7 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     public static final String PROPERTY_PARENT = "parent";
 
-    public static final String PROPERTY_DOMAIN_ID = "domain_id";
+    public static final String PROPERTY_IDENTIFIER = "identifier";
 
     public static final String PROPERTY_CHILDREN = "children";
 
@@ -53,28 +53,9 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     private Long id;
 
-    /**
-     * Identification of the entity without special chars.
-     */
-    private String domainId;
+    private Date samplingTimeStart;
 
-    private CodespaceEntity codespace;
-
-    /**
-     * Default name of the entity.
-     */
-    private String name;
-
-    private CodespaceEntity codespaceName;
-
-    /**
-     * Default description of the entity.
-     */
-    private String description;
-
-    private Date phenomenonTimeStart;
-
-    private Date phenomenonTimeEnd;
+    private Date samplingTimeEnd;
 
     private T value;
 
@@ -108,82 +89,44 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getDomainId() {
-        return domainId;
-    }
-
-    public void setDomainId(String domainId) {
-        this.domainId = domainId;
-    }
-
-    public CodespaceEntity getCodespace() {
-        return codespace;
-    }
-
-    public void setCodespace(CodespaceEntity codespace) {
-        this.codespace = codespace;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public CodespaceEntity getCodespaceName() {
-        return codespaceName;
-    }
-
-    public void setCodespaceName(CodespaceEntity codespaceName) {
-        this.codespaceName = codespaceName;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
+    /**
+     * @return the samplingTimeStart
+     */
+    public Date getSamplingTimeStart() {
+        return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
-     * @return the phenomenonTimeStart
+     * @param samplingTimeStart
+     *        the samplingTimeStart
      */
-    public Date getPhenomenonTimeStart() {
-        return Utils.createUnmutableTimestamp(phenomenonTimeStart);
+    public void setSamplingTimeStart(Date samplingTimeStart) {
+        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
-     * @param phenomenonTimeStart
-     *        the phenomenonTimeStart
+     * @return the samplingTimeEnd
      */
-    public void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
+    public Date getSamplingTimeEnd() {
+        return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
-     * @return the phenomenonTimeEnd
+     * @param samplingTimeEnd
+     *        the samplingTimeEnd
      */
-    public Date getPhenomenonTimeEnd() {
-        return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
-    }
-
-    /**
-     * @param phenomenonTimeEnd
-     *        the phenomenonTimeEnd
-     */
-    public void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
+    public void setSamplingTimeEnd(Date samplingTimeEnd) {
+        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     public T getValue() {
@@ -268,14 +211,17 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
         this.child = child;
     }
 
+    @Override
     public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
+    @Override
     public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 
+    @Override
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }
@@ -334,8 +280,8 @@ public abstract class DataEntity<T> implements Comparable<DataEntity<T>>, Serial
 
     @Override
     public int compareTo(DataEntity<T> o) {
-        return Comparator.comparing(DataEntity<T>::getPhenomenonTimeEnd)
-                         .thenComparing(DataEntity<T>::getPhenomenonTimeStart)
+        return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
+                         .thenComparing(DataEntity<T>::getSamplingTimeStart)
                          .thenComparing(DataEntity<T>::getId)
                          .compare(this, o);
     }

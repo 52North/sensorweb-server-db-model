@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -28,28 +28,32 @@ import org.n52.series.db.beans.parameter.Parameter;
 public class DescribableEntity extends IdEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
         Serializable {
 
+    public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
+    public static final String PROPERTY_IDENTIFIER_CODESPACE = IDENTIFIER_CODESPACE;
     public static final String PROPERTY_NAME = NAME;
-    public static final String PROPERTY_DOMAIN_ID = "domainId";
+    public static final String PROPERTY_NAME_CODESPACE = NAME_CODESPACE;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
     public static final String PROPERTY_SERVICE = "service";
-    public static final String PROPERTY_CODESPACE = CODESPACE;
-    public static final String PROPERTY_CODESPACE_NAME = CODESPACE_NAME;
+
+    public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
+    public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
+    public static final String PROPERTY_CODESPACE_NAME = PROPERTY_NAME_CODESPACE;
 
     private static final long serialVersionUID = -4448231483118864847L;
 
     /**
      * Identification of the entity without special chars.
      */
-    private String domainId;
+    private String identifier;
 
-    private CodespaceEntity codespace;
+    private CodespaceEntity identifierCodespace;
 
     /**
      * Default name of the entity.
      */
     private String name;
 
-    private CodespaceEntity codespaceName;
+    private CodespaceEntity nameCodespace;
 
     /**
      * Default description of the entity.
@@ -58,29 +62,29 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
 
     private ServiceEntity service;
 
-    private Set<I18nEntity> translations;
+    private Set<I18nEntity< ? extends DescribableEntity>> translations;
 
     private Set<Parameter< ? >> parameters;
 
     @Override
-    public String getDomainId() {
-        return domainId;
+    public String getIdentifier() {
+        return identifier;
     }
 
     @Override
-    public DescribableEntity setDomainId(String domainId) {
-        this.domainId = domainId;
+    public DescribableEntity setIdentifier(String identifier) {
+        this.identifier = identifier;
         return this;
     }
 
     @Override
-    public CodespaceEntity getCodespace() {
-        return this.codespace;
+    public CodespaceEntity getIdentifierCodespace() {
+        return this.identifierCodespace;
     }
 
     @Override
-    public DescribableEntity setCodespace(CodespaceEntity codespace) {
-        this.codespace = codespace;
+    public DescribableEntity setIdentifierCodespace(CodespaceEntity identifierCodespace) {
+        this.identifierCodespace = identifierCodespace;
         return this;
     }
 
@@ -96,13 +100,13 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public CodespaceEntity getCodespaceName() {
-        return codespaceName;
+    public CodespaceEntity getNameCodespace() {
+        return nameCodespace;
     }
 
     @Override
-    public DescribableEntity setCodespaceName(CodespaceEntity codespaceName) {
-        this.codespaceName = codespaceName;
+    public DescribableEntity setNameCodespace(CodespaceEntity nameCodespace) {
+        this.nameCodespace = nameCodespace;
         return this;
     }
 
@@ -117,11 +121,11 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return this;
     }
 
-    public Set<I18nEntity> getTranslations() {
+    public Set<I18nEntity< ? extends DescribableEntity>> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(Set<I18nEntity> translations) {
+    public void setTranslations(Set<I18nEntity< ? extends DescribableEntity>> translations) {
         this.translations = translations;
     }
 
@@ -149,8 +153,9 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return service;
     }
 
-    public void setService(ServiceEntity service) {
+    public DescribableEntity setService(ServiceEntity service) {
         this.service = service;
+        return this;
     }
 
     public String getNameI18n(String locale) {
@@ -159,7 +164,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         }
         String candidate = name;
         String countryCode = getCountryCode(locale);
-        for (I18nEntity translation : translations) {
+        for (I18nEntity< ? extends DescribableEntity> translation : translations) {
             String translatedLocale = translation.getLocale();
             if (translatedLocale.equals(locale)) {
                 // locale matches exactly
@@ -178,8 +183,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
             return getNameI18n(locale);
         } else if (isNameAvailable()) {
             return getName();
-        } else if (isDomainIdAvailable()) {
-            return getDomainId();
+        } else if (isDomainAvailable()) {
+            return getDomain();
         } else {
             // absolute fallback
             return Long.toString(getId());
@@ -190,8 +195,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return getName() != null && !getName().isEmpty();
     }
 
-    private boolean isDomainIdAvailable() {
-        return getDomainId() != null && !getDomainId().isEmpty();
+    private boolean isDomainAvailable() {
+        return getDomain() != null && !getDomain().isEmpty();
     }
 
     private boolean isi18nNameAvailable(String locale) {
@@ -209,4 +214,16 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         return locale.split("_")[0];
     }
 
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        return sb.append(getClass().getSimpleName())
+                 .append(" [")
+                 .append(" Domain id: ")
+                 .append(getDomain())
+                 .append(", service: ")
+                 .append(getService())
+                 .append(" ]")
+                 .toString();
+    }
 }

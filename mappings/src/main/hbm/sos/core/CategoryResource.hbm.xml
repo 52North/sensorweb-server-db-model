@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans">
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="CategoryEntity" table="category">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="category_id" />
             <generator class="native">
                 <param name="sequence_name">category_seq</param>
             </generator>
         </id>
-        <property column="domain_id" name="domainId" type="string" not-null="true" />
+        <property name="identifier" type="string" index="idx_category_identifier">
+            <column name="identifier" not-null="true">
+                <comment>The identifier of the category</comment>
+            </column>
+        </property>
         <property name="name" type="string">
             <column name="name">
                 <comment>The name of the category</comment>
@@ -22,25 +28,25 @@
         <!--
         <one-to-one name="translations" column="category" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"></many-to-one>
          <set name="translations" table="category_i18" inverse="true" fetch="select">
-            <key column="category" not-null="true" foreign-key="category_translation_fk"/>
+            <key column="category" not-null="true" foreign-key="fk_category_translation"/>
             <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"
-                foreign-key="translation_category_fk" />
+                foreign-key="fk_translation_category" />
         </set>
          -->
         <set name="translations" table="category_i18" inverse="true" fetch="select">
-            <key column="category" not-null="true" />
+            <key column="fk_category_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nCategoryEntity" />
         </set>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="category_i18">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="category_i18n_id" />
             <generator class="native">
                 <param name="sequence_name">category_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="category" not-null="true" class="CategoryEntity" foreign-key="translation_category_fk"/>
+		<many-to-one name="entity" column="fk_category_id" not-null="true" class="CategoryEntity" foreign-key="fk_category"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

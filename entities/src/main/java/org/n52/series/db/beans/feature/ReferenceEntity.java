@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,11 +16,6 @@
  */
 
 package org.n52.series.db.beans.feature;
-
-import java.net.URI;
-import java.net.URISyntaxException;
-
-import org.n52.shetland.w3c.xlink.Reference;
 
 /**
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
@@ -192,34 +187,4 @@ public abstract class ReferenceEntity extends NilReasonEntity {
         return getRemoteSchema() != null && !getRemoteSchema().isEmpty();
     }
 
-    public Reference createReferenceValues() {
-        Reference reference = new Reference();
-        if (isSetHref()) {
-            try {
-                reference.setHref(new URI(getHref()));
-            } catch (URISyntaxException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-        }
-        if (isSetType()) {
-            reference.setType(getType());
-        }
-        if (isSetRole()) {
-            reference.setRole(getRole());
-        }
-        if (isSetArcrole()) {
-            reference.setArcrole(getArcrole());
-        }
-        if (isSetShow()) {
-            reference.setShow(getShow());
-        }
-        if (isSetActuate()) {
-            reference.setActuate(getActuate());
-        }
-        if (isSetRemoteSchema()) {
-            reference.setRemoteSchema(getRemoteSchema());
-        }
-        return reference;
-    }
 }

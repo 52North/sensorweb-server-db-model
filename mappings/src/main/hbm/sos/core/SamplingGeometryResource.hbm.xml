@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans">
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="SamplingGeometryEntity" table="observation">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="observation_id" />
             <generator class="assigned" />
         </id>
-        <property name="timestamp" column="phenomenon_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
+        <property name="timestamp" column="sampling_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
 
         <component class="GeometryEntity" name="geometryEntity" insert="false" update="false">
-            <!-- <property column="lat" name="lat" type="double" /> <property column="lon" name="lon" type="double" /> -->
+            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" />
         </component>
 
-        <many-to-one column="dataset" name="dataset" class="DatasetEntity" not-null="true" foreign-key="sampling_geom_dataset_fk" insert="false" update="false"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" not-null="true" foreign-key="fk_sampling_geom_dataset" insert="false" update="false"/>
     </class>
 </hibernate-mapping>

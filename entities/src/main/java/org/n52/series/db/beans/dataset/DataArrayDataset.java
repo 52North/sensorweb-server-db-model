@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -15,26 +15,12 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.dataset;
 
-public abstract class TypeEntity<T> extends IdEntity {
+import org.n52.series.db.beans.DatasetEntity;
 
-    public static final String TYPE = "type";
+public interface DataArrayDataset<T extends DatasetEntity> extends Dataset<T> {
 
-    private static final long serialVersionUID = -8428858401445365107L;
+    String DATASET_TYPE = "dataarray";
 
-    private String type;
-
-    public String getType() {
-        return this.type;
-    }
-
-    public TypeEntity<T> setType(String type) {
-        this.type = type;
-        return this;
-    }
-
-    public boolean isSetType() {
-        return getType() != null && !getType().isEmpty();
-    }
 }

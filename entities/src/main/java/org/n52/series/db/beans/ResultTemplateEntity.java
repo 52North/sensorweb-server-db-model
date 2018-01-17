@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,7 +48,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     private String identifier;
 
-    private String domainId;
+    private String domain;
 
     private String structure;
 
@@ -57,12 +57,12 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     public ResultTemplateEntity() {
     }
 
-    public String getDomainId() {
-        return domainId;
+    public String getDomain() {
+        return domain;
     }
 
-    public void setDomainId(String domainId) {
-        this.domainId = domainId;
+    public void setDomain(String domain) {
+        this.domain = domain;
     }
 
     /**

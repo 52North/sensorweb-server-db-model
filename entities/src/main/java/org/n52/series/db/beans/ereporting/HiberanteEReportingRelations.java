@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,7 +18,6 @@
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.HibernateRelations;
-import org.n52.shetland.aqd.AqdConstants;
 
 public interface HiberanteEReportingRelations
         extends
@@ -79,7 +78,7 @@ public interface HiberanteEReportingRelations
 
     interface HasPrimaryObservation {
 
-        String DEFAULT_PRIMARY_OBSERVATION = AqdConstants.VAR;
+        String DEFAULT_PRIMARY_OBSERVATION = "var";
 
         String PRIMARY_OBSERVATION = "primaryObservation";
 

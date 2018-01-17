@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans">
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="AbstractFeatureEntity" abstract="true" table="feature">
         <id name="id" type="long">
-            <column name="id">
+            <column name="feature_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -13,19 +15,19 @@
 
         <discriminator column="discriminator" type="string" not-null="false"/>
 
-        <many-to-one name="featureType" class="FeatureTypeEntity" foreign-key="feature_type_fk">
-            <column name="type" not-null="true">
+        <many-to-one name="featureType" class="FormatEntity" foreign-key="fk_feature_format">
+            <column name="fk_format_id" not-null="true">
                 <comment>Relation/foreign key to the featureType table. Describes the type of the feature. Contains "featureType".featureTypeId</comment>
             </column>
         </many-to-one>
 
-        <property name="domainId" type="string">
-            <column name="domain_id" unique-key="feature_id_uk">
+        <property name="identifier" type="string" index="idx_feature_identifier">
+            <column name="identifier" unique-key="un_feature_identifier">
                 <comment>The identifier of the feature, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-		<many-to-one name="codespace" class="CodespaceEntity" foreign-key="feature_codespace_fk">
-            <column name="codespace">
+		<many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_feature_identifier_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -34,8 +36,8 @@
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
         </property>
-	<many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="feature_codespace_name_fk">
-            <column name="codespaceName">
+	<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -52,36 +54,36 @@
         </property>
 
         <property name="url" type="string">
-            <column name="url" unique-key="feature_url_uk">
+            <column name="url" unique-key="un_feature_url">
                 <comment>Reference URL to the feature if it is stored in another service, e.g. WFS. Optional but unique</comment>
             </column>
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
             <!--
-            <property column="lat" name="lat" type="double" />
-            <property column="lon" name="lon" type="double" />
+            <property column="lat" name="lat" type="big_decimal" />
+            <property column="lon" name="lon" type="big_decimal" />
              -->
             <property column="geom" name="geometry" type="jts_geometry"/>
         </component>
 
         <set name="children" table="feature_relation" inverse="false" fetch="select">
-            <key column="parent" not-null="true" foreign-key="feature_parent_fk" />
-            <many-to-many class="AbstractFeatureEntity" column="child" foreign-key="feature_child_fk"/>
+            <key column="fk_parent_feature_id" not-null="true" foreign-key="fk_feature_parent" />
+            <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
         </set>
 
         <set name="parents" table="feature_relation" inverse="false" fetch="select">
-            <key column="child" not-null="true" foreign-key="feature_child_fk"/>
-            <many-to-many class="AbstractFeatureEntity" column="parent" foreign-key="feature_parent_fk"/>
+            <key column="fk_child_feature_id" not-null="true" foreign-key="fk_feature_child"/>
+            <many-to-many class="AbstractFeatureEntity" column="fk_parent_feature_id" foreign-key="fk_feature_parent"/>
         </set>
 
         <set name="parameters" table="feature_parameter" cascade="delete-orphan" inverse="false">
-            <key column="feature" not-null="true" foreign-key="feature_parameter_fk"/>
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter" foreign-key="parameter_feature_fk"/>
+            <key column="fk_feature_id" not-null="true" foreign-key="fk_feature_parameter"/>
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id" foreign-key="fk_parameter_feature"/>
         </set>
 
 		<set name="translations" table="feature_i18n" inverse="true" fetch="select">
-            <key column="feature" not-null="true" />
+            <key column="fk_feature_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nFeatureEntity" />
         </set>
 
@@ -94,12 +96,12 @@
 
     <class name="org.n52.series.db.beans.i18n.I18nFeatureEntity" table="feature_i18n">
         <id name="id" type="long">
-            <column name="id" />
+            <column name="feature_i18n_id" />
             <generator class="native">
                 <param name="sequence_name">feature_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="feature" not-null="true" class="FeatureEntity" foreign-key="translation_feature_fk"/>
+		<many-to-one name="entity" column="fk_feature_id" not-null="true" class="FeatureEntity" foreign-key="fk_feature"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

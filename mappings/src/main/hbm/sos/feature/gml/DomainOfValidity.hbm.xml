@@ -1,12 +1,13 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
            table="domain_of_validity">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="domain_of_validity_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -22,13 +23,13 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="domainId" type="string" >
-            <column name="domain_id" unique-key="domain_of_validity_uk">
+        <property name="identifier" type="string" >
+            <column name="identifier" unique-key="un_domain_of_validity_identifier">
                 <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="CodespaceEntity" foreign-key="dov_codespace_fk">
-            <column name="codespace">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dov_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -37,8 +38,8 @@
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="CodespaceEntity" foreign-key="dov_codespace_name_fk">
-            <column name="codespace_name">
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dov_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>The name of the object, gml:name. Optional</comment>
             </column>
         </many-to-one>
@@ -48,8 +49,8 @@
             </column>
         </property>
         <many-to-one name="exExtent"
-                     column="ex_extent"
+                     column="fk_ex_extent_id"
                      class="org.n52.series.db.beans.feature.gmd.ExExtentEntity"
-                     foreign-key="dov_ex_extent_fk" />
+                     foreign-key="fk_dov_ex_extent" />
     </class>
 </hibernate-mapping>

@@ -1,25 +1,26 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans.feature.gmd">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.feature.gmd"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ExExtentEntity"
            table="ex_extent">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="ex_extent_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
                 <param name="sequence_name">ex_extent_seq</param>
             </generator>
         </id>
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <property name="description" column="description" type="string" />
         <set name="verticalExtent" table="ex_extent_vertical_ext">
-          <key column="ex_extent" not-null="true" foreign-key="ex_extent_fk"/>
-          <many-to-many column="vertical_extent"
-                        class="ExVerticalExtentEntity" foreign-key="vertical_extent_fk"/>
+          <key column="fk_ex_extent_id" not-null="true" foreign-key="fk_ex_extent"/>
+          <many-to-many column="fk_vertical_extent_id"
+                        class="ExVerticalExtentEntity" foreign-key="fk_vertical_extent"/>
         </set>
     </class>
 </hibernate-mapping>

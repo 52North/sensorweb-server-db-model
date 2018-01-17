@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,48 +17,31 @@
 
 package org.n52.series.db.beans;
 
-import java.util.Collection;
-import java.util.Set;
+import java.math.BigDecimal;
 
-public class ProfileDataEntity extends DataEntity<Set<DataEntity< ? >>> {
+public class ProfileDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -7431276500677067329L;
 
-    private Double fromLevel;
+    private BigDecimal fromLevel;
 
-    private Double toLevel;
+    private BigDecimal toLevel;
 
     private UnitEntity levelUnit;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public Set<DataEntity< ? >> getValue() {
-        return super.getValue();
-    }
-
-    @Override
-    public void setValue(Set<DataEntity< ? >> value) {
-        super.setValue(value);
-    }
-
-    public Double getFromLevel() {
+    public BigDecimal getFromLevel() {
         return fromLevel;
     }
 
-    public void setFromLevel(Double fromLevel) {
+    public void setFromLevel(BigDecimal fromLevel) {
         this.fromLevel = fromLevel;
     }
 
-    public Double getToLevel() {
+    public BigDecimal getToLevel() {
         return toLevel;
     }
 
-    public void setToLevel(Double toLevel) {
+    public void setToLevel(BigDecimal toLevel) {
         this.toLevel = toLevel;
     }
 

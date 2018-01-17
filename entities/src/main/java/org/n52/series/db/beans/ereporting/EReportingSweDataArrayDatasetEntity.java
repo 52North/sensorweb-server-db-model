@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,10 +20,10 @@ package org.n52.series.db.beans.ereporting;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.dataset.SweDataArrayDataset;
+import org.n52.series.db.beans.dataset.DataArrayDataset;
 
 public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
-        implements SweDataArrayDataset<EReportingSweDataArrayDatasetEntity> {
+        implements DataArrayDataset<EReportingSweDataArrayDatasetEntity> {
 
     private static final long serialVersionUID = 8734427623675385749L;
 

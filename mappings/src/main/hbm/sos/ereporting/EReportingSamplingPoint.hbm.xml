@@ -1,31 +1,32 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans.ereporting">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.ereporting"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="EReportingSamplingPointEntity"
            table="sampling_point">
         <comment>Table to store the AQD e-Reporting Sampling Point information. Mapping file: sos/ereporting/EReportingSamplingPoint.hbm.xml</comment>
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="sampling_point_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
                 <param name="sequence_name">sampling_point_seq</param>
             </generator>
         </id>
-        <property name="domainId"
+        <property name="identifier"
                  type="string">
-            <column name="domain_id"
+            <column name="identifier"
                     not-null="true"
-                    unique-key="sampling_point_uk">
+                    unique-key="un_sampling_point_identifier">
                 <comment>The identifier of the samplingPoint, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace"
+        <many-to-one name="identifierCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="sampling_point_codespace_fk">
-            <column name="codespace">
+                     foreign-key="fk_sp_identifier_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -35,10 +36,10 @@
                 <comment>The name of the samplingPoint, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName"
+        <many-to-one name="nameCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="sp_codespace_name_fk">
-            <column name="codespace_name">
+                     foreign-key="fk_sp_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -50,18 +51,18 @@
         </property>
         <many-to-one name="assessmentType"
                      class="EReportingAssessmentTypeEntity"
-                     foreign-key="sp_assessment_type_fk">
-            <column name="assessment_type">
+                     foreign-key="fk_sp_assessment_type">
+            <column name="fk_assessment_type_id">
                 <comment>Relation/foreign key to the assessment_type table. Describes the type of the assessmentType. Contains "assessment_type".assessment_type</comment>
             </column>
         </many-to-one>
-        <many-to-one name="station" class="EReportingStationEntity" foreign-key="sp_station_fk">
-            <column name="station">
+        <many-to-one name="station" class="EReportingStationEntity" foreign-key="fk_sp_station">
+            <column name="fk_station_id">
                 <comment>Relation/foreign key to the station table. Describes the type of the station. Contains "station".id</comment>
             </column>
         </many-to-one>
-        <many-to-one name="network" class="EReportingNetworkEntity" foreign-key="sp_network_fk">
-            <column name="network">
+        <many-to-one name="network" class="EReportingNetworkEntity" foreign-key="fk_sp_network">
+            <column name="fk_network_id">
                 <comment>Relation/foreign key to the network table. Describes the type of the network. Contains "network".id</comment>
             </column>
         </many-to-one>

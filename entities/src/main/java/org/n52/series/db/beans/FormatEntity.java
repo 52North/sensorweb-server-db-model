@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,32 +17,24 @@
 
 package org.n52.series.db.beans;
 
-import java.io.Serializable;
+public class FormatEntity extends IdEntity {
 
-import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
+    public static final String FORMAT = "format";
 
-/**
- * @since 1.0.0
- */
-public class ProcedureDescriptionFormatEntity extends IdEntity implements Serializable {
-
-    public static final String PROCEDURE_DESCRIPTION_FORMAT =
-            HasProcedureDescriptionFormat.PROCEDURE_DESCRIPTION_FORMAT;
-
-    private static final long serialVersionUID = 5252037145878336688L;
+    private static final long serialVersionUID = -8428858401445365107L;
 
     private String format;
-
-    public ProcedureDescriptionFormatEntity() {
-    }
 
     public String getFormat() {
         return this.format;
     }
 
-    public ProcedureDescriptionFormatEntity setFormat(String procedureDescriptionFormat) {
-        this.format = procedureDescriptionFormat;
+    public FormatEntity setFormat(String format) {
+        this.format = format;
         return this;
     }
 
+    public boolean isSetFormat() {
+        return getFormat() != null && !getFormat().isEmpty();
+    }
 }

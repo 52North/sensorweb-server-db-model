@@ -1,10 +1,11 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans.ereporting">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.ereporting"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
 	<class name="EReportingDatasetEntity" table="dataset">
         <id name="id" type="long">
-            <column name="id">
+            <column name="dataset_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -13,66 +14,66 @@
         </id>
         <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
-        <many-to-one class="org.n52.series.db.beans.ProcedureEntity" column="`procedure`" name="procedure" not-null="true" unique-key="dataset_identity"
-           foreign-key="dataset_procedure_fk" />
-        <many-to-one class="org.n52.series.db.beans.PhenomenonEntity" column="phenomenon" name="phenomenon" not-null="true" unique-key="dataset_identity"
-           foreign-key="dataset_phenomenon_fk" />
-        <many-to-one class="org.n52.series.db.beans.OfferingEntity" column="offering" name="offering" not-null="true" unique-key="dataset_identity"
-           foreign-key="dataset_offering_fk" />
-        <many-to-one class="org.n52.series.db.beans.FeatureEntity" column="feature" name="feature" not-null="false" unique-key="dataset_identity"
-            foreign-key="dataset_feature_fk" />
-        <many-to-one class="org.n52.series.db.beans.CategoryEntity" column="category" name="category" not-null="false" unique-key="dataset_identity"
-        	foreign-key="dataset_category_fk" />
-        <many-to-one class="EReportingSamplingPointEntity" column="sampling_point" name="samplingPoint" not-null="false" unique-key="dataset_identity"
-        	foreign-key="dataset_sampling_point_fk" />
+        <many-to-one class="org.n52.series.db.beans.ProcedureEntity" column="fk_procedure_id" name="procedure" not-null="true" unique-key="un_dataset_identity"
+           foreign-key="fk_dataset_procedure" />
+        <many-to-one class="org.n52.series.db.beans.PhenomenonEntity" column="fk_phenomenon_id" name="phenomenon" not-null="true" unique-key="un_dataset_identity"
+           foreign-key="fk_dataset_phenomenon" />
+        <many-to-one class="org.n52.series.db.beans.OfferingEntity" column="fk_offering_id" name="offering" not-null="true" unique-key="un_dataset_identity"
+           foreign-key="fk_dataset_offering" />
+        <many-to-one class="org.n52.series.db.beans.FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
+            foreign-key="fk_dataset_feature" />
+        <many-to-one class="org.n52.series.db.beans.CategoryEntity" column="fk_category_id" name="category" not-null="false" unique-key="un_dataset_identity"
+        	foreign-key="fk_dataset_category" />
+        <many-to-one class="EReportingSamplingPointEntity" column="fk_sampling_point_id" name="samplingPoint" not-null="false" unique-key="un_dataset_identity"
+        	foreign-key="fk_dataset_sampling_point" />
 
         <property column="firsttimestamp" name="firstValueAt" type="timestamp" />
         <property column="lasttimestamp" name="lastValueAt" type="timestamp" />
 
-        <property column="first_value" name="firstValue" type="double" precision="29" />
-        <property column="last_value" name="lastValue" type="double" precision="29" />
+        <property column="first_value" name="firstValue" type="big_decimal" precision="29" />
+        <property column="last_value" name="lastValue" type="big_decimal" precision="29" />
 
-        <many-to-one class="EReportingDataEntity" column="first_observation" name="firstObservation" fetch="select" foreign-key="dataset_first_obs_fk"/>
-        <many-to-one class="EReportingDataEntity" column="last_observation" name="lastObservation" fetch="select" foreign-key="dataset_last_obs_fk"/>
+        <many-to-one class="EReportingDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+        <many-to-one class="EReportingDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
 
-        <property name="deleted" type="numeric_boolean">
-            <column name="deleted" not-null="true" default="0" check="deleted in (1,0)">
+        <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
+            <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
                 <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
                     via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
 
-        <property name="published" type="numeric_boolean">
-            <column name="published" not-null="true" default="1" check="published in (1,0)">
+        <property name="published" type="org.n52.hibernate.type.SmallBooleanType">
+            <column name="is_published" not-null="true" default="1" check="is_published in (1,0)">
                 <comment>Flag to indicate that this dataset is published or not. A not published series is not contained
                     in GetObservation and GetDataAvailability responses</comment>
             </column>
         </property>
 
-        <property name="hiddenChild" type="numeric_boolean">
-            <column name="hidden_child" not-null="true" default="0" check="hidden_child in (1,0)">
+        <property name="hiddenChild" type="org.n52.hibernate.type.SmallBooleanType">
+            <column name="is_hidden_child" not-null="true" default="0" check="is_hidden_child in (1,0)">
             </column>
         </property>
 
-        <property column="decimals" name="decimals" not-null="false" type="integer" />
-
-        <property name="domainId" type="string">
-            <column name="domain_id" not-null="false" unique-key="datasetIdentifierUK">
+        <property name="identifier" type="string">
+            <column name="identifier" not-null="false" unique-key="datasetIdentifierUK">
                 <comment>The identifier of the dataset, gml:identifier. Unique</comment>
             </column>
         </property>
 
-        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="datasetCodespaceEntityIdentifierFk">
-            <column name="codespace">
+        <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_dataset_codespace_identifier">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:identifier codespace. Optional</comment>
             </column>
-        </many-to-one><property name="name" type="string">
+        </many-to-one>
+		<property name="name" type="string">
             <column name="name">
                 <comment>The name of the dataset, gml:name. Optional</comment>
             </column>
-        </property><many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="datasetCodespaceEntityNameFk">
-            <column name="codespace_mame">
+        </property>
+		<many-to-one name="nameCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_dataset_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the
                     gml:name codespace. Optional</comment>
             </column>
@@ -85,15 +86,19 @@
         </property>
 
         <set inverse="false" name="parameters" table="dataset_parameter" cascade="delete-orphan">
-            <key column="dataset" not-null="true" foreign-key="dataset_parameter_fk" />
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="parameter"
-                foreign-key="parameter_dataset_fk" />
+            <key column="fk_dataset_id" not-null="true" foreign-key="fk_dataset_parameter" />
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
+                foreign-key="fk_parameter_dataset" />
         </set>
 
-		<subclass name="NotDefinedEReportingDatasetEntity" discriminator-value=""not_defined" />
+		<subclass name="NotDefinedEReportingDatasetEntity" discriminator-value="not_defined" />
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="unit" name="unit" foreign-key="dataset_unit_fk" />
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <set name="referenceValues" table="dataset_reference" inverse="true" cascade="delete-orphan" >
+                <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
+                <many-to-many class="EReportingDatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
+            </set>
         </subclass>
     </class>
 </hibernate-mapping>

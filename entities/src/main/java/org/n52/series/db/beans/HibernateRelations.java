@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -38,20 +38,23 @@ public interface HibernateRelations {
     String SRID = "srid";
 
     interface HasIdentifier<T> {
-        String getDomainId();
 
-        T setDomainId(String domainId);
+        String IDENTIFIER = "identifier";
 
-        default boolean isSetDomainId() {
-            return getDomainId() != null && !getDomainId().isEmpty();
+        String getIdentifier();
+
+        T setIdentifier(String identifier);
+
+        default boolean isSetIdentifier() {
+            return getIdentifier() != null && !getIdentifier().isEmpty();
         }
 
-        default String getIdentifier() {
-            return getDomainId();
+        default String getDomain() {
+            return getIdentifier();
         }
 
-        default T setIdentifier(String identifier) {
-            return setDomainId(identifier);
+        default T setDomain(String domain) {
+            return setIdentifier(domain);
         }
 
         /**
@@ -59,9 +62,24 @@ public interface HibernateRelations {
          *
          * @return <code>true</code>, if identifier is set
          */
-        default boolean isSetIdentifier() {
-            return isSetDomainId();
+        default boolean isSetDomain() {
+            return isSetIdentifier();
         }
+    }
+
+    interface HasDomainId {
+        String IDENTIFIER = HasIdentifier.IDENTIFIER;
+
+        String getIdentifier();
+
+        void setIdentifier(String identifier);
+
+        /**
+         * Is identifier set
+         *
+         * @return <code>true</code>, if identifier is set
+         */
+        boolean isSetIdentifier();
     }
 
     interface HasDescription<T> {
@@ -81,27 +99,27 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasCodespace<T> {
-        String CODESPACE = "codespace";
+    interface HasIdentifierCodespace<T> {
+        String IDENTIFIER_CODESPACE = "identifierCodespace";
 
-        CodespaceEntity getCodespace();
+        CodespaceEntity getIdentifierCodespace();
 
-        T setCodespace(CodespaceEntity codespace);
+        T setIdentifierCodespace(CodespaceEntity codespace);
 
-        default boolean isSetCodespace() {
-            return getCodespace() != null && !getCodespace().isSetCodespaceEntity();
+        default boolean isSetIdentifierCodespace() {
+            return getIdentifierCodespace() != null && !getIdentifierCodespace().isSetName();
         }
     }
 
-    interface HasCodespaceName<T> {
-        String CODESPACE_NAME = "codespaceName";
+    interface HasNameCodespace<T> {
+        String NAME_CODESPACE = "nameCodespace";
 
-        CodespaceEntity getCodespaceName();
+        CodespaceEntity getNameCodespace();
 
-        T setCodespaceName(CodespaceEntity codespaceName);
+        T setNameCodespace(CodespaceEntity codespaceName);
 
-        default boolean isSetCodespaceName() {
-            return getCodespaceName() != null && !getCodespaceName().isSetCodespaceEntity();
+        default boolean isSetNameCodespace() {
+            return getNameCodespace() != null && !getNameCodespace().isSetName();
         }
     }
 
@@ -136,17 +154,17 @@ public interface HibernateRelations {
     interface HasFeatureType {
         String FEATURE_OF_INTEREST_TYPE = "featureOfInterestType";
 
-        FeatureTypeEntity getFeatureType();
+        FormatEntity getFeatureType();
 
-        void setFeatureType(FeatureTypeEntity featureOfInterestType);
+        void setFeatureType(FormatEntity featureOfInterestType);
     }
 
     interface HasFeatureTypes<T> {
         String FEATURE__TYPES = "featureTypes";
 
-        Set<FeatureTypeEntity> getFeatureTypes();
+        Set<FormatEntity> getFeatureTypes();
 
-        T setFeatureTypes(Set<FeatureTypeEntity> featureOfInterestTypes);
+        T setFeatureTypes(Set<FormatEntity> featureOfInterestTypes);
 
         default boolean HasFeaturTypes() {
             return getFeatureTypes() != null && !getFeatureTypes().isEmpty();
@@ -216,21 +234,6 @@ public interface HibernateRelations {
         boolean isParent();
     }
 
-    interface HasDomainId {
-        String IDENTIFIER = "identifier";
-
-        String getIdentifier();
-
-        void setIdentifier(String identifier);
-
-        /**
-         * Is identifier set
-         *
-         * @return <code>true</code>, if identifier is set
-         */
-        boolean isSetIdentifier();
-    }
-
     interface HasName<T> {
         String NAME = "name";
 
@@ -268,9 +271,9 @@ public interface HibernateRelations {
     interface HasObservationType<T> {
         String OBSERVATION_TYPE = "observationType";
 
-        ObservationTypeEntity getObservationType();
+        FormatEntity getObservationType();
 
-        T setObservationType(ObservationTypeEntity observationType);
+        T setObservationType(FormatEntity observationType);
 
         boolean isSetObservationType();
     }
@@ -278,9 +281,9 @@ public interface HibernateRelations {
     interface HasObservationTypes<T> {
         String OBSERVATION_TYPES = "observationTypes";
 
-        Set<ObservationTypeEntity> getObservationTypes();
+        Set<FormatEntity> getObservationTypes();
 
-        T setObservationTypes(Set<ObservationTypeEntity> observationTypes);
+        T setObservationTypes(Set<FormatEntity> observationTypes);
 
         default boolean hasObservationTypes() {
             return getObservationTypes() != null && !getObservationTypes().isEmpty();
@@ -408,9 +411,9 @@ public interface HibernateRelations {
     interface HasProcedureDescriptionFormat<T> {
         String PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
 
-        ProcedureDescriptionFormatEntity getFormat();
+        FormatEntity getFormat();
 
-        T setFormat(ProcedureDescriptionFormatEntity procedureDescriptionFormat);
+        T setFormat(FormatEntity procedureDescriptionFormat);
     }
 
     interface HasRelatedFeatureRoles<T> {

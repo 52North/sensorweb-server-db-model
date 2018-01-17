@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,20 +17,20 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.HibernateRelations.HasCodespace;
-import org.n52.series.db.beans.HibernateRelations.HasCodespaceName;
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasIdentifier;
+import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
 import org.n52.series.db.beans.HibernateRelations.HasName;
+import org.n52.series.db.beans.HibernateRelations.HasNameCodespace;
 
 /**
  * @author Christian Autermann
  */
 public interface IdentifierNameDescriptionEntity<T>
         extends HasIdentifier<T>,
-        HasCodespace<T>,
+        HasIdentifierCodespace<T>,
         HasName<T>,
-        HasCodespaceName<T>,
+        HasNameCodespace<T>,
         HasDescription<T> {
 
 }

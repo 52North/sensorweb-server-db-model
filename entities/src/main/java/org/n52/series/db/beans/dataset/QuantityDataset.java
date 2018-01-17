@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -23,7 +23,7 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset<T> {
 
     String DATASET_TYPE = "measurement";
 
-    int getNumberOfDecimals();
+    Integer getNumberOfDecimals();
 
-    T setNumberOfDecimals(int numberOfDecimals);
+    T setNumberOfDecimals(Integer numberOfDecimals);
 }

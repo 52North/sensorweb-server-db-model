@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,7 +20,9 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-public class CountDatasetEntity extends DatasetEntity {
+import org.n52.series.db.beans.dataset.CountDataset;
+
+public class CountDatasetEntity extends DatasetEntity implements CountDataset<CountDatasetEntity> {
 
     private static final long serialVersionUID = -3770736881206526817L;
 
@@ -36,8 +38,9 @@ public class CountDatasetEntity extends DatasetEntity {
         return referenceValues;
     }
 
-    public void setReferenceValues(Set<CountDatasetEntity> referenceValues) {
+    public CountDatasetEntity setReferenceValues(Set<CountDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
+        return this;
     }
 
 }

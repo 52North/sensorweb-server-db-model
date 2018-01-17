@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -19,29 +19,29 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-import org.n52.series.db.beans.HibernateRelations.HasCodespace;
+import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
 
 /**
  * @since 1.0.0
  */
 public class CodespaceEntity extends IdEntity implements Serializable {
 
-    public static final String PROPERTY_CODESPACE = HasCodespace.CODESPACE;
+    public static final String PROPERTY_CODESPACE = HasIdentifierCodespace.IDENTIFIER_CODESPACE;
 
     private static final long serialVersionUID = 8795086004488469603L;
 
-    private String codespace;
+    private String name;
 
-    public String getCodespace() {
-        return this.codespace;
+    public String getName() {
+        return this.name;
     }
 
-    public CodespaceEntity setCodespace(String codespace) {
-        this.codespace = codespace;
+    public CodespaceEntity setName(String name) {
+        this.name = name;
         return this;
     }
 
-    public boolean isSetCodespaceEntity() {
-        return getCodespace() != null && !getCodespace().isEmpty();
+    public boolean isSetName() {
+        return getName() != null && !getName().isEmpty();
     }
 }

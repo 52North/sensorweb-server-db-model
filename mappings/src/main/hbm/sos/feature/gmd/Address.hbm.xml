@@ -1,12 +1,13 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans.feature.gmd">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.feature.gmd"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="AddressEntity"
            table="address">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="address_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -22,19 +23,19 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
         <set name="deliveryPoint" table="address_delivery_point">
-          <key column="address" not-null="true" foreign-key="address_delivery_point_fk"/>
-          <element column="delivery_point" type="string" not-null="true" />
+          <key column="fk_address_id" not-null="true" foreign-key="fk_address_delivery_point"/>
+          <element column="fk_delivery_point_id" type="string" not-null="true" />
         </set>
         <property name="city" column="city" type="string" />
         <property name="administrativeArea" column="administrative_area" type="string" />
         <property name="postalCode" column="postal_code" type="string" />
         <property name="country" column="country" type="string" />
         <set name="electronicMailAddress" table="address_mail">
-          <key column="address" not-null="true" foreign-key="address_mail_fk"/>
-          <element column="electronic_mail_address" type="string" not-null="true" />
+          <key column="fk_address_id" not-null="true" foreign-key="fk_address_mail"/>
+          <element column="fk_electronic_mail_address_id" type="string" not-null="true" />
         </set>
     </class>
 </hibernate-mapping>

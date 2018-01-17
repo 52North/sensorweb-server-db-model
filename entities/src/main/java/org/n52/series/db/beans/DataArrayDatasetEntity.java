@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -20,25 +20,25 @@ package org.n52.series.db.beans;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.dataset.SweDataArrayDataset;
+import org.n52.series.db.beans.dataset.DataArrayDataset;
 
-public class SweDataArrayDatasetEntity extends DatasetEntity implements SweDataArrayDataset<SweDataArrayDatasetEntity> {
+public class DataArrayDatasetEntity extends DatasetEntity implements DataArrayDataset<DataArrayDatasetEntity> {
 
     private static final long serialVersionUID = 2202529106185723855L;
 
-    private Set<SweDataArrayDatasetEntity> referenceValues = new HashSet<>();
+    private Set<DataArrayDatasetEntity> referenceValues = new HashSet<>();
 
-    public SweDataArrayDatasetEntity() {
+    public DataArrayDatasetEntity() {
         super(DATASET_TYPE);
     }
 
     @Override
-    public Set<SweDataArrayDatasetEntity> getReferenceValues() {
+    public Set<DataArrayDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
     @Override
-    public SweDataArrayDatasetEntity setReferenceValues(Set<SweDataArrayDatasetEntity> referenceValues) {
+    public DataArrayDatasetEntity setReferenceValues(Set<DataArrayDatasetEntity> referenceValues) {
         this.referenceValues = referenceValues;
         return this;
     }

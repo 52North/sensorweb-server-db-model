@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -37,9 +37,9 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
 
     private boolean mobile;
 
-    private boolean insitu;
+    private boolean insitu = true;
 
-    private ProcedureDescriptionFormatEntity format;
+    private FormatEntity format;
 
     private boolean deleted;
 
@@ -77,11 +77,11 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.insitu = insitu;
     }
 
-    public ProcedureDescriptionFormatEntity getFormat() {
+    public FormatEntity getFormat() {
         return this.format;
     }
 
-    public ProcedureEntity setFormat(ProcedureDescriptionFormatEntity format) {
+    public ProcedureEntity setFormat(FormatEntity format) {
         this.format = format;
         return this;
     }
@@ -138,16 +138,4 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.procedureHistory = procedureHistory;
     }
 
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomainId())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
-    }
 }

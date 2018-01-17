@@ -1,12 +1,13 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans.feature.gmd">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.feature.gmd"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ExVerticalExtentEntity"
            table="vertical_exextent">
         <id name="id"
             type="long">
-            <column name="id">
+            <column name="vertical_exextent_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
@@ -22,15 +23,15 @@
         <property name="show" column="show" type="string" />
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
-        <property name="gmdid" column="gmd_id" type="string" />
+        <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
-        <property name="minimumValue" column="minimum_value" type="double" length="29"/>
-        <property name="maximumValue" column="maximum_value" type="double" length="29"/>
+        <property name="minimumValue" column="minimum_value" type="big_decimal" length="29"/>
+        <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"/>
         <many-to-one name="verticalCRS"
                      class="org.n52.series.db.beans.feature.gml.VerticalCRSEntity"
-                     foreign-key="vertical_crs_fk">
-            <column index="vertical_crs_idx"
-                    name="vertical_crs"
+                     foreign-key="fk_vertical_crs">
+            <column index="idx_vertical_crs"
+                    name="fk_vertical_crs_id"
                     not-null="false">
             </column>
         </many-to-one>

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -25,8 +25,6 @@ import org.n52.series.db.beans.dataset.CategoryDataset;
 public class CategoryDatasetEntity extends DatasetEntity implements CategoryDataset<CategoryDatasetEntity> {
 
     private static final long serialVersionUID = -3225007112833816443L;
-
-    private static final String DATASET_TYPE = "category";
 
     private Set<CategoryDatasetEntity> referenceValues = new HashSet<>();
 

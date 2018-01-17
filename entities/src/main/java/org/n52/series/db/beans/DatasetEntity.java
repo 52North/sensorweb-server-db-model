@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -47,6 +47,8 @@ public class DatasetEntity extends DescribableEntity
 
     public static final String ENTITY_ALIAS = "dataset";
 
+    public static final String PROPERTY_OFFERING = "offering";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
@@ -88,9 +90,9 @@ public class DatasetEntity extends DescribableEntity
 
     private DataEntity lastObservation;
 
-    private double firstValue;
+    private Double firstQuantityValue;
 
-    private double lastValue;
+    private Double lastQuantityValue;
 
     private UnitEntity unit;
 
@@ -98,9 +100,7 @@ public class DatasetEntity extends DescribableEntity
 
     private boolean hiddenChild;
 
-    private ObservationTypeEntity observationType;
-
-    private int decimals;
+    private FormatEntity observationType;
 
     public DatasetEntity() {
         this((String) null);
@@ -192,10 +192,12 @@ public class DatasetEntity extends DescribableEntity
         this.published = published;
     }
 
+    @Override
     public boolean isDeleted() {
         return deleted;
     }
 
+    @Override
     public DatasetEntity setDeleted(boolean deleted) {
         this.deleted = deleted;
         return this;
@@ -224,7 +226,7 @@ public class DatasetEntity extends DescribableEntity
 
     @Override
     public boolean isSetObservationType() {
-        return getObservationType() != null && getObservationType().isSetType();
+        return getObservationType() != null && getObservationType().isSetFormat();
     }
 
     public Date getFirstValueAt() {
@@ -267,20 +269,20 @@ public class DatasetEntity extends DescribableEntity
         this.lastObservation = lastObservation;
     }
 
-    public double getFirstValue() {
-        return firstValue;
+    public Double getFirstQuantityValue() {
+        return firstQuantityValue;
     }
 
-    public void setFirstValue(double firstValue) {
-        this.firstValue = firstValue;
+    public void setFirstQuantityValue(Double firstValue) {
+        this.firstQuantityValue = firstValue;
     }
 
-    public double getLastValue() {
-        return lastValue;
+    public Double getLastQuantityValue() {
+        return lastQuantityValue;
     }
 
-    public void setLastValue(double lastValue) {
-        this.lastValue = lastValue;
+    public void setLastQuantityValue(Double lastValue) {
+        this.lastQuantityValue = lastValue;
     }
 
     public String getValueType() {
@@ -351,35 +353,31 @@ public class DatasetEntity extends DescribableEntity
         return observationCount;
     }
 
+    @Override
     public boolean isHiddenChild() {
         return hiddenChild;
     }
 
+    @Override
     public DatasetEntity setHiddenChild(boolean hiddenChild) {
         this.hiddenChild = hiddenChild;
         return this;
     }
 
-    public ObservationTypeEntity getObservationType() {
+    @Override
+    public FormatEntity getObservationType() {
         return observationType;
 
     }
 
-    public DatasetEntity setObservationType(ObservationTypeEntity observationType) {
+    @Override
+    public DatasetEntity setObservationType(FormatEntity observationType) {
         this.observationType = observationType;
         return this;
     }
 
     public boolean isSetObservationtype() {
-        return getObservationType() != null && getObservationType().isSetType();
-    }
-
-    public int getDecimals() {
-        return decimals;
-    }
-
-    public void setDecimals(int decimals) {
-        this.decimals = decimals;
+        return getObservationType() != null && getObservationType().isSetFormat();
     }
 
     @Override

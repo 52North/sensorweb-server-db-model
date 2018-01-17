@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2017 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,15 +18,26 @@
 package org.n52.series.db.beans;
 
 import java.util.Collection;
+import java.util.Set;
 
-public class SweDataArrayDataEntity extends DataEntity<String> {
+public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity< ? >>> {
 
-    private static final long serialVersionUID = -1618516259763515255L;
+    private static final long serialVersionUID = -2942122854792122664L;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+        // TODO Auto-generated method stub
+        return false;
     }
+
+    @Override
+    public Set<DataEntity< ? >> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity< ? >> value) {
+        super.setValue(value);
+    }
+
 }

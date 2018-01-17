@@ -1,24 +1,25 @@
-<?xml version="1.0"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
-    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<hibernate-mapping package="org.n52.series.db.beans.ereporting">
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.ereporting"
+	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="EReportingStationEntity" table="station">
         <comment>Table to store the AQD e-Reporting Station information. Mapping file: sos/ereporting/EReportingStation.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="id">
+            <column name="station_id">
                 <comment>Table primary key, used for relations</comment>
             </column>
             <generator class="native">
                 <param name="sequence_name">station_seq</param>
             </generator>
         </id>
-       <property name="domainId" type="string">
-            <column name="domain_id" not-null="true" unique-key="station_uk">
+       <property name="identifier" type="string">
+            <column name="identifier" not-null="true" unique-key="un_station_identifier">
                 <comment>The identifier of the station, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
-        <many-to-one name="codespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="station_codespace_fk">
-            <column name="codespace">
+        <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_station_codespace">
+            <column name="fk_identifier_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -27,8 +28,8 @@
                 <comment>The name of the station, gml:name. Optional</comment>
             </column>
         </property>
-        <many-to-one name="codespaceName" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="station_codespace_name_fk">
-            <column name="codespace_name">
+        <many-to-one name="nameCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_station_name_codespace">
+            <column name="fk_name_codespace_id">
                 <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>
@@ -39,8 +40,8 @@
         </property>
         <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
            <!--
-            <property column="lat" name="lat" type="double" />
-            <property column="lon" name="lon" type="double" />
+            <property column="lat" name="lat" type="big_decimal" />
+            <property column="lon" name="lon" type="big_decimal" />
              -->
             <property column="geom" name="geometry" type="jts_geometry"/>
         </component>
