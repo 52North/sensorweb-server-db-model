@@ -27,14 +27,6 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
-import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
-import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
-import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
-import org.n52.series.db.beans.HibernateRelations.HasObservationType;
-import org.n52.series.db.beans.HibernateRelations.HasOffering;
-import org.n52.series.db.beans.HibernateRelations.HasProcedure;
-import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 

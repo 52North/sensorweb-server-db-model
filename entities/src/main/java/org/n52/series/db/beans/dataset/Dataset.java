@@ -27,13 +27,6 @@ import org.n52.series.db.beans.CodespaceEntity;
 import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FormatEntity;
-import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
-import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
-import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
-import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
-import org.n52.series.db.beans.HibernateRelations.HasObservationType;
-import org.n52.series.db.beans.HibernateRelations.HasOffering;
-import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.OfferingEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.PlatformEntity;
@@ -42,15 +35,7 @@ import org.n52.series.db.beans.RelatedDatasetEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public interface Dataset
-        extends
-        HasProcedure<DatasetEntity>,
-        HasObservableProperty<DatasetEntity>,
-        HasOffering<DatasetEntity>,
-        HasObservationType<DatasetEntity>,
-        HasHiddenChildFlag<DatasetEntity>,
-        HasDeletedFlag<DatasetEntity>,
-        HasDisabledFlag<DatasetEntity> {
+public interface Dataset {
 
     CategoryEntity getCategory();
 
