@@ -17,30 +17,10 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.ReferencedDataset;
 
-public class ReferencedDatasetEntity extends DatasetEntity implements ReferencedDataset<ReferencedDatasetEntity> {
+public class ReferencedDatasetEntity extends DatasetEntity implements ReferencedDataset {
 
     private static final long serialVersionUID = 9155135337309735800L;
-
-    private Set<ReferencedDatasetEntity> referenceValues = new HashSet<>();
-
-    public ReferencedDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
-    @Override
-    public Set<ReferencedDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public ReferencedDatasetEntity setReferenceValues(Set<ReferencedDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
 
 }

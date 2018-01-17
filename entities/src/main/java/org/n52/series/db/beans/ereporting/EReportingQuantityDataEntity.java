@@ -23,7 +23,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.n52.series.db.beans.data.Data.QuantityData;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

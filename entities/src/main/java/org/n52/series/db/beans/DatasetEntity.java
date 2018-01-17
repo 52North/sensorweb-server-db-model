@@ -22,6 +22,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -33,17 +34,13 @@ import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
 import org.n52.series.db.beans.HibernateRelations.HasObservationType;
 import org.n52.series.db.beans.HibernateRelations.HasOffering;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
+import org.n52.series.db.beans.data.Data;
+import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 
 public class DatasetEntity extends DescribableEntity
         implements Serializable,
-        HasProcedure<DatasetEntity>,
-        HasObservableProperty<DatasetEntity>,
-        HasOffering<DatasetEntity>,
-        HasObservationType<DatasetEntity>,
-        HasHiddenChildFlag<DatasetEntity>,
-        HasDeletedFlag<DatasetEntity>,
-        HasDisabledFlag<DatasetEntity> {
+        Dataset {
 
     public static final String DEFAULT_VALUE_TYPE = "quantity";
 
@@ -108,6 +105,8 @@ public class DatasetEntity extends DescribableEntity
     private FormatEntity observationType;
 
     private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
+
+    private Set<DatasetEntity> referenceValues = new HashSet<>();
 
     public DatasetEntity() {
         this((String) null);
@@ -436,6 +435,49 @@ public class DatasetEntity extends DescribableEntity
                  .append(getService())
                  .append(" ]")
                  .toString();
+    }
+
+    public Set<DatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
+
+    public DatasetEntity setReferenceValues(Set<DatasetEntity> referenceValues) {
+        this.referenceValues = referenceValues;
+        return this;
+    }
+
+    @Override
+    public void add(Dataset dataset) {
+        setId(dataset.getId());
+        setIdentifier(dataset.getIdentifier());
+        setIdentifierCodespace(dataset.getIdentifierCodespace());
+        setName(dataset.getName());
+        setNameCodespace(dataset.getNameCodespace());
+        setDescription(dataset.getDescription());
+        setParameters(dataset.getParameters());
+        setCategory(dataset.getCategory());
+        setDeleted(dataset.isDeleted());
+        setDeleted(dataset.isDeleted());
+        setDisabled(dataset.isDisabled());
+        setFeature(dataset.getFeature());
+        setFirstObservation(dataset.getFirstObservation());
+        setFirstQuantityValue(dataset.getFirstQuantityValue());
+        setFirstValueAt(dataset.getFirstValueAt());
+        setHiddenChild(dataset.isHiddenChild());
+        setLastObservation(dataset.getLastObservation());
+        setLastQuantityValue(dataset.getLastQuantityValue());
+        setLastValueAt(dataset.getLastValueAt());
+        setObservationCount(dataset.getObservationCount());
+        setObservationType(dataset.getObservationType());
+        setOffering(dataset.getOffering());
+        setPhenomenon(dataset.getPhenomenon());
+        setPlatform(dataset.getPlatform());
+        setProcedure(dataset.getProcedure());
+        setPublished(dataset.isPublished());
+        setReferenceValues(dataset.getReferenceValues());
+        setRelatedObservations(dataset.getRelatedDatasets());
+        setResultTimes(dataset.getResultTimes());
+        setUnit(dataset.getUnit());
     }
 
 }

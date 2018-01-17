@@ -17,9 +17,7 @@
 
 package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.DatasetEntity;
-
-public interface BooleanDataset<T extends DatasetEntity> extends Dataset<T> {
+public interface BooleanDataset extends Dataset {
 
     String DATASET_TYPE = "boolean";
 

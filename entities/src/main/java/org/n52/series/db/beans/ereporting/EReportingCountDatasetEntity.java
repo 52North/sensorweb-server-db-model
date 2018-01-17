@@ -17,27 +17,11 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.CountDataset;
 
 public class EReportingCountDatasetEntity extends EReportingDatasetEntity
-        implements CountDataset<EReportingCountDatasetEntity> {
+        implements CountDataset {
 
     private static final long serialVersionUID = 1131133156959629606L;
-
-    private Set<EReportingCountDatasetEntity> referenceValues = new HashSet<>();
-
-    @Override
-    public Set<EReportingCountDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public EReportingCountDatasetEntity setReferenceValues(Set<EReportingCountDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
 
 }

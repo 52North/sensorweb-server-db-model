@@ -18,7 +18,6 @@
 package org.n52.series.db.beans;
 
 import java.util.ArrayList;
-
 import java.util.Collection;
 import java.util.List;
 

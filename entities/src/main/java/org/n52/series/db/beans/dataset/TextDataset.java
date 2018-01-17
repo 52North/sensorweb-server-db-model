@@ -17,9 +17,7 @@
 
 package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.DatasetEntity;
-
-public interface TextDataset<T extends DatasetEntity> extends Dataset<T> {
+public interface TextDataset extends Dataset {
 
     String DATASET_TYPE = "text";
 

@@ -17,32 +17,16 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.QuantityDataset;
 
-public class QuantityDatasetEntity extends DatasetEntity implements QuantityDataset<QuantityDatasetEntity> {
+public class QuantityDatasetEntity extends DatasetEntity implements QuantityDataset {
 
     private static final long serialVersionUID = 4788481449399555710L;
-
-    private Set<QuantityDatasetEntity> referenceValues = new HashSet<>();
 
     private Integer numberOfDecimals;
 
     public QuantityDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    @Override
-    public Set<QuantityDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public QuantityDatasetEntity setReferenceValues(Set<QuantityDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
     }
 
     @Override

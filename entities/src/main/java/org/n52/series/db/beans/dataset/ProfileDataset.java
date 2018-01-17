@@ -17,9 +17,7 @@
 
 package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.DatasetEntity;
-
-public interface ProfileDataset<T extends DatasetEntity> extends Dataset<T> {
+public interface ProfileDataset extends Dataset {
 
     String DATASET_TYPE = "profile";
 

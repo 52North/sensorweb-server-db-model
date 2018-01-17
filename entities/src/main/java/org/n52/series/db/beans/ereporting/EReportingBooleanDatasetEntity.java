@@ -17,27 +17,11 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.BooleanDataset;
 
 public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity
-        implements BooleanDataset<EReportingBooleanDatasetEntity> {
+        implements BooleanDataset {
 
     private static final long serialVersionUID = 5026545130550522586L;
-
-    private Set<EReportingBooleanDatasetEntity> referenceValues = new HashSet<>();
-
-    @Override
-    public Set<EReportingBooleanDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public EReportingBooleanDatasetEntity setReferenceValues(Set<EReportingBooleanDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
 
 }

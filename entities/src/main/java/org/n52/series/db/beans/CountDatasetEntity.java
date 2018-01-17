@@ -17,30 +17,16 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.CountDataset;
 
-public class CountDatasetEntity extends DatasetEntity implements CountDataset<CountDatasetEntity> {
+public class CountDatasetEntity extends DatasetEntity implements CountDataset {
 
     private static final long serialVersionUID = -3770736881206526817L;
 
     private static final String DATASET_TYPE = "count";
 
-    private Set<CountDatasetEntity> referenceValues = new HashSet<>();
-
     public CountDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    public Set<CountDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    public CountDatasetEntity setReferenceValues(Set<CountDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
     }
 
 }

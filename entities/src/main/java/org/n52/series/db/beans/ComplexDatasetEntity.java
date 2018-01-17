@@ -17,30 +17,14 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
-public class ComplexDatasetEntity extends DatasetEntity implements ComplexDataset<ComplexDatasetEntity> {
+public class ComplexDatasetEntity extends DatasetEntity implements ComplexDataset {
 
     private static final long serialVersionUID = -3164247954562059026L;
 
-    private Set<ComplexDatasetEntity> referenceValues = new HashSet<>();
-
     public ComplexDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    @Override
-    public Set<ComplexDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public ComplexDatasetEntity setReferenceValues(Set<ComplexDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
     }
 
 }
