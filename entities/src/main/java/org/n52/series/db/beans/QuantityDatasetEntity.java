@@ -17,8 +17,9 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 import org.n52.series.db.beans.dataset.QuantityDataset;
 
@@ -26,7 +27,7 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
 
     private static final long serialVersionUID = 4788481449399555710L;
 
-    private Set<QuantityDatasetEntity> referenceValues = new HashSet<>();
+    private List<QuantityDatasetEntity> referenceValues = new ArrayList<>();
 
     private Integer numberOfDecimals;
 
@@ -35,13 +36,12 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
     }
 
     @Override
-    public Set<QuantityDatasetEntity> getReferenceValues() {
+    public List<QuantityDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
-    @Override
-    public QuantityDatasetEntity setReferenceValues(Set<QuantityDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
+    public QuantityDatasetEntity setReferenceValues(Collection<QuantityDatasetEntity> referenceValues) {
+        this.referenceValues = new ArrayList<>(referenceValues);
         return this;
     }
 

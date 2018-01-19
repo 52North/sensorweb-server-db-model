@@ -17,27 +17,11 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
 public class EReportingComplexDatasetEntity extends EReportingDatasetEntity
         implements ComplexDataset<EReportingComplexDatasetEntity> {
 
     private static final long serialVersionUID = -7514394037111286838L;
-
-    private Set<EReportingComplexDatasetEntity> referenceValues = new HashSet<>();
-
-    @Override
-    public Set<EReportingComplexDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public EReportingComplexDatasetEntity setReferenceValues(Set<EReportingComplexDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
 
 }

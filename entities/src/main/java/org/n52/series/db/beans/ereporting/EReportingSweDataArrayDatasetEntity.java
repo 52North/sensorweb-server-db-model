@@ -17,27 +17,11 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.DataArrayDataset;
 
 public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
         implements DataArrayDataset<EReportingSweDataArrayDatasetEntity> {
 
     private static final long serialVersionUID = 8734427623675385749L;
-
-    private Set<EReportingSweDataArrayDatasetEntity> referenceValues = new HashSet<>();
-
-    @Override
-    public Set<EReportingSweDataArrayDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public EReportingSweDataArrayDatasetEntity setReferenceValues(Set<EReportingSweDataArrayDatasetEntity> refValues) {
-        this.referenceValues = refValues;
-        return this;
-    }
 
 }

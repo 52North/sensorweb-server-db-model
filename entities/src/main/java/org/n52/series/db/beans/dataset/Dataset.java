@@ -17,15 +17,16 @@
 
 package org.n52.series.db.beans.dataset;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.n52.series.db.beans.DatasetEntity;
 
 public interface Dataset<T extends DatasetEntity> {
 
-    Set<T> getReferenceValues();
-
-    T setReferenceValues(Set<T> referenceValues);
+    default List<T> getReferenceValues() {
+        return new ArrayList<>();
+    }
 
     default boolean hasReferenceValues() {
         return getReferenceValues() != null && !getReferenceValues().isEmpty();

@@ -17,8 +17,8 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.dataset.QuantityDataset;
@@ -29,7 +29,7 @@ public class EReportingQuantityDatasetEntity extends DatasetEntity
 
     private static final long serialVersionUID = -8934345303908852017L;
 
-    private Set<EReportingQuantityDatasetEntity> referenceValues = new HashSet<>();
+    private List<EReportingQuantityDatasetEntity> referenceValues = new ArrayList<>();
 
     private int numberOfDecimals;
 
@@ -40,12 +40,11 @@ public class EReportingQuantityDatasetEntity extends DatasetEntity
     }
 
     @Override
-    public Set<EReportingQuantityDatasetEntity> getReferenceValues() {
+    public List<EReportingQuantityDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
-    @Override
-    public EReportingQuantityDatasetEntity setReferenceValues(Set<EReportingQuantityDatasetEntity> refValues) {
+    public EReportingQuantityDatasetEntity setReferenceValues(List<EReportingQuantityDatasetEntity> refValues) {
         this.referenceValues = refValues;
         return this;
     }

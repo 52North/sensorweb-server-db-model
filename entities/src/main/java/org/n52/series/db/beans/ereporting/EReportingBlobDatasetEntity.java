@@ -17,27 +17,11 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.BlobDataset;
 
 public class EReportingBlobDatasetEntity extends EReportingDatasetEntity
         implements BlobDataset<EReportingBlobDatasetEntity> {
 
     private static final long serialVersionUID = 365032550010162204L;
-
-    private Set<EReportingBlobDatasetEntity> referenceValues = new HashSet<>();
-
-    @Override
-    public Set<EReportingBlobDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public EReportingBlobDatasetEntity setReferenceValues(Set<EReportingBlobDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
 
 }

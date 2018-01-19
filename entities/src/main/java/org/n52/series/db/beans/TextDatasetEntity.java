@@ -17,30 +17,14 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.TextDataset;
 
 public class TextDatasetEntity extends DatasetEntity implements TextDataset<TextDatasetEntity> {
 
     private static final long serialVersionUID = 9155135337309735800L;
 
-    private Set<TextDatasetEntity> referenceValues = new HashSet<>();
-
     public TextDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    @Override
-    public Set<TextDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public TextDatasetEntity setReferenceValues(Set<TextDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
     }
 
 }

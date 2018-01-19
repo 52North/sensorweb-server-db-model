@@ -17,30 +17,14 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.BlobDataset;
 
 public class BlobDatasetEntity extends DatasetEntity implements BlobDataset<BlobDatasetEntity> {
 
     private static final long serialVersionUID = 7695968619628841933L;
 
-    private Set<BlobDatasetEntity> referenceValues = new HashSet<>();
-
     public BlobDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    @Override
-    public Set<BlobDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public BlobDatasetEntity setReferenceValues(Set<BlobDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
     }
 
 }
