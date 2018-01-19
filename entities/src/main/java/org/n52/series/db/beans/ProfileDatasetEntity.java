@@ -21,9 +21,9 @@ public class ProfileDatasetEntity extends DatasetEntity {
 
     private static final long serialVersionUID = 8000392773970672194L;
 
-    private static final String DATASET_TYPE = "profile";
-
     private String verticalParameterName;
+    private String verticalFromParameterName;
+    private String verticalToParameterName;
 
     public String getVerticalParameterName() {
         return verticalParameterName;
@@ -31,5 +31,21 @@ public class ProfileDatasetEntity extends DatasetEntity {
 
     public void setVerticalParameterName(String verticalParameterName) {
         this.verticalParameterName = verticalParameterName;
+    }
+
+    public String getVerticalFromParameterName() {
+        return verticalFromParameterName;
+    }
+
+    public void setVerticalFromParameterName(String verticalFromParameterName) {
+        this.verticalFromParameterName = verticalFromParameterName;
+    }
+
+    public String getVerticalToParameterName() {
+        return verticalToParameterName;
+    }
+
+    public void setVerticalToParameterName(String verticalToParameterName) {
+        this.verticalToParameterName = verticalToParameterName;
     }
 }
