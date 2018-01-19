@@ -37,6 +37,12 @@ public interface HibernateRelations {
 
     String SRID = "srid";
 
+    String GEOMETRY_ENTITY = "geometryEntity";
+
+    String P = "parents";
+
+    String C = "children";
+
     interface HasId {
         Long getId();
 
@@ -158,7 +164,7 @@ public interface HibernateRelations {
     }
 
     interface HasFeatureType {
-        String FEATURE_OF_INTEREST_TYPE = "featureOfInterestType";
+        String FEATURE_OF_INTEREST_TYPE = "featureType";
 
         FormatEntity getFeatureType();
 
@@ -179,7 +185,7 @@ public interface HibernateRelations {
     }
 
     interface HasFeatureGetter {
-        String FEATURE_OF_INTEREST = "featureOfInterest";
+        String FEATURE_OF_INTEREST = "feature";
 
         AbstractFeatureEntity< ? > getFeature();
     }
@@ -197,7 +203,7 @@ public interface HibernateRelations {
     }
 
     interface HasGeometry<T> {
-        String GEOMETRY = "geom";
+        String GEOMETRY = GEOMETRY_ENTITY;
 
         GeometryEntity getGeometryEntity();
 
@@ -225,7 +231,7 @@ public interface HibernateRelations {
     }
 
     interface HasChildFlag {
-        String CHILD = "child";
+        String CHILD = C;
 
         void setChild(boolean child);
 
@@ -233,7 +239,7 @@ public interface HibernateRelations {
     }
 
     interface HasParentFlag {
-        String PARENT = "parent";
+        String PARENT = P;
 
         void setParent(boolean parent);
 
@@ -437,7 +443,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureGetter {
-        String PROCEDURE = "procedure";
+        String PROCEDURE = "";
 
         ProcedureEntity getProcedure();
     }
@@ -448,7 +454,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureDescriptionFormat<T> {
-        String PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
+        String PROCEDURE_DESCRIPTION_FORMAT = "format";
 
         FormatEntity getFormat();
 
@@ -476,7 +482,7 @@ public interface HibernateRelations {
     }
 
     interface HasResultEncoding {
-        String RESULT_ENCODING = "resultEncoding";
+        String RESULT_ENCODING = "encoding";
 
         String getEncoding();
 
@@ -488,7 +494,7 @@ public interface HibernateRelations {
     }
 
     interface HasResultStructure {
-        String RESULT_STRUCTURE = "resultStructure";
+        String RESULT_STRUCTURE = "structure";
 
         String getStructure();
 
@@ -753,7 +759,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureHistory {
-        String VALID_PROCEDURE_TIMES = "procedure_history";
+        String VALID_PROCEDURE_TIMES = "procedureGistory";
 
         Set<ProcedureHistoryEntity> getProcedureHistory();
 
@@ -765,9 +771,9 @@ public interface HibernateRelations {
     }
 
     interface HasParentChildren<T> {
-        String PARENTS = "parents";
+        String PARENTS = P;
 
-        String CHILDREN = "children";
+        String CHILDREN = C;
 
         Set<T> getParents();
 
@@ -821,7 +827,7 @@ public interface HibernateRelations {
 
     interface HasSamplingGeometry {
 
-        String SAMPLING_GEOMETRY = "sampling_geometry";
+        String SAMPLING_GEOMETRY = GEOMETRY_ENTITY;
 
         Geometry getSamplingGeometry();
 

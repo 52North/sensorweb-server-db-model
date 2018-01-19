@@ -24,6 +24,8 @@ public class I18nEntity<T extends DescribableEntity> extends IdEntity {
 
     public static final String PROPERTY_LOCALE = "locale";
 
+    public static final String PROPERTY_ENTITY = "entity";
+
     private static final long serialVersionUID = 693520332508628558L;
 
     private T entity;
