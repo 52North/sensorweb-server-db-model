@@ -53,7 +53,7 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
 
-    public static final String PROPERTY_CHILDREN = "children";
+    public static final String PROPERTY_CHILD = "child";
 
     public static final String PROPERTY_VALUE = "value";
 
