@@ -30,6 +30,7 @@ import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.beans.IdentifierNameDescriptionEntity;
 import org.n52.series.db.beans.RelatedDataEntity;
+import org.n52.series.db.beans.UnitEntity;
 
 public interface Data<T>
         extends
@@ -37,6 +38,8 @@ public interface Data<T>
         IdentifierNameDescriptionEntity,
         HasPhenomenonTime,
         HasDataset {
+
+    BigDecimal NOT_SET_VERTICAL = new BigDecimal("-99999.00");
 
     T getValue();
 
@@ -122,6 +125,22 @@ public interface Data<T>
         return getValueDescription() != null && !getValueDescription().isEmpty();
     }
 
+    BigDecimal getVerticalFrom();
+
+    void setVerticalFrom(BigDecimal fromLeve);
+
+    BigDecimal getVerticalTo();
+
+    void setVerticalTo(BigDecimal to);
+
+    default boolean hasVerticalFrom() {
+        return getVerticalFrom() != null && !getVerticalFrom().equals(NOT_SET_VERTICAL);
+    }
+
+    default boolean hasVerticalTo() {
+        return getVerticalTo() != null && !getVerticalFrom().equals(NOT_SET_VERTICAL);
+    }
+
     interface BlobData
             extends
             Data<Object> {
@@ -168,6 +187,30 @@ public interface Data<T>
             extends
             Data<Set<DataEntity< ? >>> {
         String DATASET_TYPE = "profile";
+
+        String getVerticalFromName();
+
+        void setVerticalFromName(String fromName);
+
+        String getVerticalToName();
+
+        void setVerticalToName(String toName);
+
+        UnitEntity getVerticalUnit();
+
+        void setVerticalUnit(UnitEntity levelEntity);
+
+        default boolean hasVerticalUnit() {
+            return getVerticalUnit() != null && getVerticalUnit().isSetIdentifier();
+        }
+
+        default boolean hasVerticalFromName() {
+            return getVerticalFromName() != null && !getVerticalFromName().isEmpty();
+        }
+
+        default boolean hasVerticalToName() {
+            return getVerticalToName() != null && !getVerticalToName().isEmpty();
+        }
     }
 
     interface QuantityData

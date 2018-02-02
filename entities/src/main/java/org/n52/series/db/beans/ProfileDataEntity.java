@@ -17,54 +17,40 @@
 
 package org.n52.series.db.beans;
 
-import java.math.BigDecimal;
-
 import org.n52.series.db.beans.data.Data.ProfileData;
 
 public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
 
     private static final long serialVersionUID = -7431276500677067329L;
 
-    private BigDecimal fromLevel;
+    private String verticalfromName;
 
-    private BigDecimal toLevel;
+    private String verticaltoName;
 
-    private UnitEntity levelUnit;
+    private UnitEntity verticalUnit;
 
-    public BigDecimal getFromLevel() {
-        return fromLevel;
+    public String getVerticalFromName() {
+        return verticalfromName;
     }
 
-    public void setFromLevel(BigDecimal fromLevel) {
-        this.fromLevel = fromLevel;
+    public void setVerticalFromName(String name) {
+        this.verticalfromName = name;
     }
 
-    public BigDecimal getToLevel() {
-        return toLevel;
+    public String getVerticalToName() {
+        return verticaltoName;
     }
 
-    public void setToLevel(BigDecimal toLevel) {
-        this.toLevel = toLevel;
+    public void setVerticalToName(String name) {
+        this.verticaltoName = name;
     }
 
-    public UnitEntity getLevelUnit() {
-        return levelUnit;
+    public UnitEntity getVerticalUnit() {
+        return verticalUnit;
     }
 
-    public void setLevelUnit(UnitEntity levelUnit) {
-        this.levelUnit = levelUnit;
-    }
-
-    public boolean hasLevelUnit() {
-        return getLevelUnit() != null && getLevelUnit().isSetIdentifier();
-    }
-
-    public boolean hasFromLevel() {
-        return getFromLevel() != null;
-    }
-
-    public boolean hasToLevel() {
-        return getToLevel() != null;
+    public void setVerticalUnit(UnitEntity verticalUnit) {
+        this.verticalUnit = verticalUnit;
     }
 
 }

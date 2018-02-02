@@ -18,6 +18,7 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
@@ -92,6 +93,10 @@ public abstract class DataEntity<T> extends DescribableEntity
     private String valueName;
 
     private String valueDescription;
+
+    private BigDecimal verticalFrom = NOT_SET_VERTICAL;
+
+    private BigDecimal verticalTo = NOT_SET_VERTICAL;
 
     protected DataEntity() {
 
@@ -282,6 +287,22 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public boolean hasValueDescription() {
         return getValueDescription() != null && !getValueDescription().isEmpty();
+    }
+
+    public BigDecimal getVerticalFrom() {
+        return verticalFrom;
+    }
+
+    public void setVerticalFrom(BigDecimal verticalFrom) {
+        this.verticalFrom = verticalFrom;
+    }
+
+    public BigDecimal getVerticalTo() {
+        return verticalTo;
+    }
+
+    public void setVerticalTo(BigDecimal verticalTo) {
+        this.verticalTo = verticalTo;
     }
 
     @Override
