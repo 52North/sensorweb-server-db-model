@@ -11,27 +11,27 @@
             </generator>
         </id>
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
-        <many-to-one column="fk_dataset_id" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true" unique-key="un_data_identity"/>
 
-        <property name="samplingTimeStart" type="timestamp">
+        <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
-        <property name="samplingTimeEnd" type="timestamp">
+        <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
             <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>
 
-        <property name="resultTime" type="timestamp">
+        <property name="resultTime" type="timestamp" unique-key="un_data_identity">
             <column index="idx_result_time" name="resultTime" length="29" not-null="true">
                 <comment>Time stamp when the observation was published or result was published/available</comment>
             </column>
         </property>
 
-        <property name="identifier" type="string">
+        <property name="identifier" type="string" unique-key="un_data_identifier">
             <column name="identifier">
                 <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but
                     unique</comment>
@@ -62,8 +62,7 @@
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
-                    via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
 

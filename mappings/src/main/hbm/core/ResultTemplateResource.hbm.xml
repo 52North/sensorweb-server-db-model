@@ -4,8 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ResultTemplateEntity" table="result_template">
-        <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file:
-            sos/core/ResultTemplate.hbm.xml</comment>
+        <comment>Table to store resultTemplates (OGC SOS 2.0 result handling profile). Mapping file: sos/core/ResultTemplate.hbm.xml</comment>
         <id name="id" type="long">
             <column name="result_template_id">
                 <comment>Table primary key</comment>
@@ -42,15 +41,13 @@
 
         <property name="structure" type="text">
             <column name="structure" not-null="true">
-                <comment>The resultStructure as XML string. Describes the types and order of the values in a
-                    GetResultResponse/InsertResultRequest</comment>
+                <comment>The resultStructure as XML string. Describes the types and order of the values in a GetResultResponse/InsertResultRequest</comment>
             </column>
         </property>
 
         <property name="encoding" type="text">
             <column name="encoding" not-null="true">
-                <comment>The resultEncoding as XML string. Describes the encoding of the values in a
-                    GetResultResponse/InsertResultRequest</comment>
+                <comment>The resultEncoding as XML string. Describes the encoding of the values in a GetResultResponse/InsertResultRequest</comment>
             </column>
         </property>
     </class>

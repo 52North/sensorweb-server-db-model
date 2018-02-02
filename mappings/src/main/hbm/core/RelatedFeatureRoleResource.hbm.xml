@@ -4,8 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="RelatedFeatureRoleEntity" table="related_feature_role">
-        <comment>Table to store related feature role information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
-            2.0). Mapping file: sos/core/RelatedFeatureRole.hbm.xml</comment>
+        <comment>Table to store related feature role information used in the OGC SOS 2.0 Capabilities (See also OGC SWES 2.0). Mapping file: sos/core/RelatedFeatureRole.hbm.xml</comment>
         <id name="id" type="long">
             <column name="related_feature_role_id">
                 <comment>Table primary key, used for relations</comment>

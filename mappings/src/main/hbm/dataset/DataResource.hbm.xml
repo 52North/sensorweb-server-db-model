@@ -11,30 +11,29 @@
             </generator>
         </id>
 		<discriminator column="value_type" force="true" type="string" not-null="true"/>
-        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true" unique-key="un_data_identity"/>
 
-        <property name="samplingTimeStart" type="timestamp">
+        <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
             <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
-        <property name="samplingTimeEnd" type="timestamp">
+        <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
             <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>
 
-        <property name="resultTime" type="timestamp">
+        <property name="resultTime" type="timestamp" unique-key="un_data_identity">
             <column index="result_time_idx" name="result_time" length="29" not-null="true">
                 <comment>Time stamp when the observation was published or result was published/available</comment>
             </column>
         </property>
 
-        <property name="identifier" type="string">
+        <property name="identifier" type="string" unique-key="un_data_identifier">
             <column name="identifier">
-                <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but
-                    unique</comment>
+                <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codespace">
@@ -62,8 +61,7 @@
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
-                    via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
 
@@ -99,7 +97,7 @@
 
 
         <!-- Or add only to specific subclasses -->
-        <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
+        <set inverse="true" name="parameters" table="observation_parameter" cascade="all" fetch="join">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_parameter" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_observation" />
@@ -177,8 +175,6 @@
 			<join table="value_blob">
 	            <key foreign-key="fk_blob_value">
 	                <column name="fk_observation_id">
-	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
-	                        "observation".id</comment>
 	                </column>
 	            </key>
 	           <property name="value"
@@ -207,8 +203,7 @@
             <join table="value_data_array">
 	            <key foreign-key="fk_data_array_value">
 	                <column name="fk_observation_id">
-	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
-	                        "observation".id</comment>
+	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".id</comment>
 	                </column>
 	            </key>
 	           <property name="structure" type="text">
