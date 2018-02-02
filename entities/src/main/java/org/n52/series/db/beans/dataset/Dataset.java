@@ -151,10 +151,6 @@ public interface Dataset {
 
     boolean hasRelatedDatasets();
 
-    Set<DatasetEntity> getReferenceValues();
-
-    DatasetEntity setReferenceValues(Set<DatasetEntity> referenceValues);
-
     Long getId();
 
     void setId(Long id);

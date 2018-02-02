@@ -17,16 +17,32 @@
 
 package org.n52.series.db.beans;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.n52.series.db.beans.dataset.QuantityDataset;
 
-public class QuantityDatasetEntity extends DatasetEntity implements QuantityDataset {
+public class QuantityDatasetEntity extends DatasetEntity implements QuantityDataset<QuantityDatasetEntity> {
 
     private static final long serialVersionUID = 4788481449399555710L;
+
+    private List<QuantityDatasetEntity> referenceValues = new ArrayList<>();
 
     private Integer numberOfDecimals;
 
     public QuantityDatasetEntity() {
         super(DATASET_TYPE);
+    }
+
+    @Override
+    public List<QuantityDatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
+
+    public QuantityDatasetEntity setReferenceValues(Collection<QuantityDatasetEntity> referenceValues) {
+        this.referenceValues = new ArrayList<>(referenceValues);
+        return this;
     }
 
     @Override

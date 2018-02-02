@@ -17,14 +17,31 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import org.n52.series.db.beans.dataset.QuantityDataset;
 
 public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
-        implements QuantityDataset {
+        implements QuantityDataset<EReportingQuantityDatasetEntity> {
 
     private static final long serialVersionUID = -8934345303908852017L;
 
+    private List<EReportingQuantityDatasetEntity> referenceValues = new ArrayList<>();
+
     private int numberOfDecimals;
+
+    @Override
+    public List<EReportingQuantityDatasetEntity> getReferenceValues() {
+        return referenceValues;
+    }
+
+    public EReportingQuantityDatasetEntity setReferenceValues(
+                                                              Collection<EReportingQuantityDatasetEntity> refValues) {
+        this.referenceValues = new ArrayList<>(referenceValues);
+        return this;
+    }
 
     @Override
     public Integer getNumberOfDecimals() {

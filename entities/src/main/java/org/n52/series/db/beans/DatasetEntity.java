@@ -37,10 +37,10 @@ public class DatasetEntity extends DescribableEntity
     public static final String ENTITY_ALIAS = "dataset";
 
     public static final String PROPERTY_OFFERING = "offering";
+    public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";
-    public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
@@ -427,15 +427,6 @@ public class DatasetEntity extends DescribableEntity
                  .toString();
     }
 
-    public Set<DatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    public DatasetEntity setReferenceValues(Set<DatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
-    }
-
     @Override
     public void copy(Dataset dataset) {
         setIdentifier(dataset.getIdentifier());
@@ -467,11 +458,6 @@ public class DatasetEntity extends DescribableEntity
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
         setPublished(dataset.isPublished());
-        if (dataset.getReferenceValues() != null) {
-            setReferenceValues(dataset.getReferenceValues()
-                                      .stream()
-                                      .collect(Collectors.toSet()));
-        }
         if (dataset.getRelatedDatasets() != null) {
             setRelatedObservations(dataset.getRelatedDatasets()
                                           .stream()
