@@ -183,7 +183,7 @@ public interface Dataset {
 
     void setParameters(Set<Parameter< ? >> parameters);
 
-    void add(Dataset series);
+    void copy(Dataset series);
 
     default String getDefaultDatastType() {
         return DEFAULT_VALUE_TYPE;

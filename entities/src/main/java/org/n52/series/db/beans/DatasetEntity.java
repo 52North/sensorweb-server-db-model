@@ -437,14 +437,17 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public void add(Dataset dataset) {
-        setId(dataset.getId());
+    public void copy(Dataset dataset) {
         setIdentifier(dataset.getIdentifier());
         setIdentifierCodespace(dataset.getIdentifierCodespace());
         setName(dataset.getName());
         setNameCodespace(dataset.getNameCodespace());
         setDescription(dataset.getDescription());
-        setParameters(dataset.getParameters());
+        if (dataset.getParameters() != null) {
+            setParameters(dataset.getParameters()
+                                 .stream()
+                                 .collect(Collectors.toSet()));
+        }
         setCategory(dataset.getCategory());
         setDeleted(dataset.isDeleted());
         setDeleted(dataset.isDeleted());
@@ -464,9 +467,21 @@ public class DatasetEntity extends DescribableEntity
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
         setPublished(dataset.isPublished());
-        setReferenceValues(dataset.getReferenceValues());
-        setRelatedObservations(dataset.getRelatedDatasets());
-        setResultTimes(dataset.getResultTimes());
+        if (dataset.getReferenceValues() != null) {
+            setReferenceValues(dataset.getReferenceValues()
+                                      .stream()
+                                      .collect(Collectors.toSet()));
+        }
+        if (dataset.getRelatedDatasets() != null) {
+            setRelatedObservations(dataset.getRelatedDatasets()
+                                          .stream()
+                                          .collect(Collectors.toSet()));
+        }
+        if (dataset.getResultTimes() != null) {
+            setResultTimes(dataset.getResultTimes()
+                                  .stream()
+                                  .collect(Collectors.toSet()));
+        }
         setUnit(dataset.getUnit());
     }
 

@@ -36,10 +36,10 @@ public class EReportingDatasetEntity extends DatasetEntity {
     }
 
     @Override
-    public void add(Dataset dataset) {
+    public void copy(Dataset dataset) {
         if (dataset instanceof EReportingDatasetEntity) {
             setSamplingPoint(((EReportingDatasetEntity) dataset).getSamplingPoint());
         }
-        super.add(dataset);
+        super.copy(dataset);
     }
 }
