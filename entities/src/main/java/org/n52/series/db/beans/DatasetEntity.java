@@ -34,8 +34,6 @@ public class DatasetEntity extends DescribableEntity
         implements Serializable,
         Dataset {
 
-    public static final String DEFAULT_VALUE_TYPE = "quantity";
-
     public static final String ENTITY_ALIAS = "dataset";
 
     public static final String PROPERTY_OFFERING = "offering";
@@ -132,7 +130,7 @@ public class DatasetEntity extends DescribableEntity
 
     @Override
     public DatasetEntity setObservableProperty(PhenomenonEntity observableProperty) {
-        return setPhenomenon(phenomenon);
+        return setPhenomenon(observableProperty);
     }
 
     @Override
@@ -286,7 +284,7 @@ public class DatasetEntity extends DescribableEntity
     public String getValueType() {
         return valueType == null || valueType.isEmpty()
                 // backward compatible
-                ? DEFAULT_VALUE_TYPE
+                ? getDefaultDatastType()
                 : valueType;
     }
 
