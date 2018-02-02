@@ -128,6 +128,17 @@
               </column>
           </property>
 
+          <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="29">
+              <column name="vertical_from" not-null="true" default="-99999.00">
+                  <comment>Value of height/depth from</comment>
+              </column>
+          </property>
+          <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="29">
+              <column name="vertical_to" not-null="true" default="-99999.00">
+                  <comment>Value of height/depth to</comment>
+              </column>
+          </property>
+
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
             <property column="value_quantity" name="value" type="big_decimal" precision="29"/>
         </subclass>
@@ -234,36 +245,33 @@
 				<comment>Relation table for complex parent/child observations</comment>
 				<key foreign-key="fk_composite_observation">
 					<column name="fk_parent_observation_id" not-null="true">
-						<comment>Foreign Key (FK) to the related parent complex observation.
-							Contains "observation".data</comment>
+						<comment>Foreign Key (FK) to the related parent complex observation. Contains "observation".data</comment>
 					</column>
 				</key>
 				<many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
 					<column name="fk_child_observation_id" not-null="true">
-						<comment>Foreign Key (FK) to the related child complex observation.
-							Contains "observation".data</comment>
+						<comment>Foreign Key (FK) to the related child complex observation. Contains "observation".data</comment>
 					</column>
 				</many-to-many>
 			</set>
         	<join table="value_profile">
 	            <key foreign-key="fk_profile_value">
 	                <column name="fk_observation_id">
-	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains
-	                        "observation".id</comment>
+	                    <comment>Foreign Key (FK) to the related observation from the observation table. Contains "observation".id</comment>
 	                </column>
 	            </key>
-	            <property name="fromLevel" type="big_decimal">
-	                <column name="from_level" not-null="false">
-	                    <comment>Value of fromLevel</comment>
+	            <property name="verticalFromName" type="string">
+	                <column name="vertical_from_name" not-null="false">
+	                    <comment>Name of height/depth value from</comment>
 	                </column>
 	            </property>
-	            <property name="toLevel" type="big_decimal">
-	                <column name="to_level" not-null="false">
-	                    <comment>Value of toLevel</comment>
+	            <property name="verticalToName" type="string">
+	                <column name="vertical_to_name" not-null="false">
+	                    <comment>Name of height/depth value to</comment>
 	                </column>
 	            </property>
-	            <many-to-one name="levelUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-	                <column name="fk_level_unit_id" not-null="false">
+	            <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
+	                <column name="fk_vertical_unit_id" not-null="true">
 	                    <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
 	                </column>
 	            </many-to-one>

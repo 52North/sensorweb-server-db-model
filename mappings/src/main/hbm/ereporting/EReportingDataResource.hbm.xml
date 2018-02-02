@@ -128,6 +128,17 @@
               </column>
           </property>
 
+          <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="29">
+              <column name="vertical_from" not-null="true" default="-99999.00">
+                  <comment>Value of height/depth from</comment>
+              </column>
+          </property>
+          <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="29">
+              <column name="vertical_to" not-null="true" default="-99999.00">
+                  <comment>Value of height/depth to</comment>
+              </column>
+          </property>
+
     	<property name="validation" type="int">
             <column name="validation" not-null="true" default="-1">
                 <comment>AQD e-Reporting validation flag, see http://dd.eionet.europa.eu/vocabulary/aq/observationvalidity/view</comment>
