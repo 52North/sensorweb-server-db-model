@@ -49,6 +49,8 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_CHILDREN = "children";
 
+    public static final String PROPERTY_VALUE = "value";
+
     private static final long serialVersionUID = 273612846605300612L;
 
     private Long id;

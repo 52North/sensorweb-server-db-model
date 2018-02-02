@@ -17,30 +17,14 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.n52.series.db.beans.dataset.BooleanDataset;
 
 public class BooleanDatasetEntity extends DatasetEntity implements BooleanDataset<BooleanDatasetEntity> {
 
     private static final long serialVersionUID = -4006760517778156199L;
 
-    private Set<BooleanDatasetEntity> referenceValues = new HashSet<>();
-
     public BooleanDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    @Override
-    public Set<BooleanDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    @Override
-    public BooleanDatasetEntity setReferenceValues(Set<BooleanDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
-        return this;
     }
 
 }

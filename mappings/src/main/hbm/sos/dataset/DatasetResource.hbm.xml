@@ -3,7 +3,7 @@
 	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DatasetEntity" table="dataset">
+    <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile')">
         <id name="id" type="long">
             <column name="dataset_id">
                 <comment>Table primary key, used for relations</comment>
@@ -24,6 +24,7 @@
         	foreign-key="fk_dataset_category" />
         <many-to-one class="FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
             foreign-key="fk_dataset_feature" />
+        <many-to-one class="PlatformEntity" column="fk_procedure_id" name="platform" insert="false" update="false" unique-key="un_dataset_identity" />
 
         <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
             <column name="fk_format_id">
@@ -109,10 +110,12 @@
         <subclass name="QuantityDatasetEntity" discriminator-value="quantity" >
             <property name="numberOfDecimals" column="decimals" type="int" />
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
-            <set name="referenceValues" table="dataset_reference" inverse="false" cascade="delete-orphan">
+            <!-- REPLACE SET WITH "LIST" -->
+            <list name="referenceValues" table="dataset_reference" inverse="false" cascade="delete-orphan">
                 <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
+                <list-index column="sort_order" />
                 <many-to-many class="DatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
-            </set>
+            </list>
         </subclass>
         <subclass discriminator-value="text" name="TextDatasetEntity"/>
         <subclass discriminator-value="count" name="CountDatasetEntity"/>
@@ -124,7 +127,7 @@
         <subclass discriminator-value="geometry" name="GeometryDatasetEntity"/>
         <subclass discriminator-value="dataarray" name="DataArrayDatasetEntity"/>
         <subclass discriminator-value="complex" name="ComplexDatasetEntity"/>
-        <subclass discriminator-value="quantity-profile" name="ProfileDatasetEntity">
+        <subclass discriminator-value="quantity-profile" name="QuantityProfileDatasetEntity">
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
