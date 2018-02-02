@@ -21,4 +21,8 @@ public interface CategoryDataset extends Dataset {
 
     String DATASET_TYPE = "category";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

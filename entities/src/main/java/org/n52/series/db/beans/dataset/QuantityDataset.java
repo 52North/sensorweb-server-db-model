@@ -26,4 +26,9 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
     Integer getNumberOfDecimals();
 
     T setNumberOfDecimals(Integer numberOfDecimals);
+
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

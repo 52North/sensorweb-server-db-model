@@ -21,11 +21,15 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.data.Data.ProfileData;
 
 public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements ProfileData {
 
     private static final long serialVersionUID = -3450153841771781000L;
+    private String verticalfromName;
+    private String verticaltoName;
+    private UnitEntity verticalUnit;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
@@ -42,6 +46,30 @@ public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEn
         return isSetValue()
                 ? getValue().toString()
                 : "";
+    }
+
+    public String getVerticalFromName() {
+        return verticalfromName;
+    }
+
+    public void setVerticalFromName(String name) {
+        this.verticalfromName = name;
+    }
+
+    public String getVerticalToName() {
+        return verticaltoName;
+    }
+
+    public void setVerticalToName(String name) {
+        this.verticaltoName = name;
+    }
+
+    public UnitEntity getVerticalUnit() {
+        return verticalUnit;
+    }
+
+    public void setVerticalUnit(UnitEntity unit) {
+        this.verticalUnit = unit;
     }
 
 }

@@ -21,4 +21,8 @@ public interface CountDataset extends Dataset {
 
     String DATASET_TYPE = "count";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

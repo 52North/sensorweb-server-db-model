@@ -17,8 +17,15 @@
 
 package org.n52.series.db.beans.ereporting;
 
-public class NotDefinedEReportingDatasetEntity extends EReportingDatasetEntity {
+import org.n52.series.db.beans.dataset.NotDefinedDataset;
+
+public class NotDefinedEReportingDatasetEntity extends EReportingDatasetEntity implements NotDefinedDataset {
 
     private static final long serialVersionUID = 5193466561723855114L;
+
+    @Override
+    public Boolean isPublished() {
+        return false;
+    }
 
 }

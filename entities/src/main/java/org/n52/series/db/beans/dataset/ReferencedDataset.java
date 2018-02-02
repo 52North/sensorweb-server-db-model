@@ -19,6 +19,11 @@ package org.n52.series.db.beans.dataset;
 
 public interface ReferencedDataset extends Dataset {
 
-    String DATASET_TYPE = "text";
+    String DATASET_TYPE = "referenced";
+
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 
 }

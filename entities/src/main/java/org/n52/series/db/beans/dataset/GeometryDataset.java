@@ -21,4 +21,8 @@ public interface GeometryDataset extends Dataset {
 
     String DATASET_TYPE = "geometry";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

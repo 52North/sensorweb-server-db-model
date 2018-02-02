@@ -21,4 +21,8 @@ public interface DataArrayDataset extends Dataset {
 
     String DATASET_TYPE = "dataarray";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

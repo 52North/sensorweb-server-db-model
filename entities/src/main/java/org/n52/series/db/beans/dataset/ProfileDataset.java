@@ -21,4 +21,8 @@ public interface ProfileDataset extends Dataset {
 
     String DATASET_TYPE = "profile";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

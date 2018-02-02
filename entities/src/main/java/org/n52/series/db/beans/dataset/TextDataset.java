@@ -21,4 +21,8 @@ public interface TextDataset extends Dataset {
 
     String DATASET_TYPE = "text";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

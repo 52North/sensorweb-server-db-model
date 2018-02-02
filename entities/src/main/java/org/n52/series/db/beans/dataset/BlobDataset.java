@@ -21,4 +21,8 @@ public interface BlobDataset extends Dataset {
 
     String DATASET_TYPE = "blob";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }
