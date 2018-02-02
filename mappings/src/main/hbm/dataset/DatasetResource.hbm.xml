@@ -128,5 +128,12 @@
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
+        <subclass discriminator-value="category-profile" name="CategoryProfileDatasetEntity">
+            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <property name="verticalParameterName" formula="'depth'" type="string" />
+        </subclass>
+        <subclass discriminator-value="text-profile" name="TextProfileDatasetEntity">
+            <property name="verticalParameterName" formula="'depth'" type="string" />
+        </subclass>
     </class>
 </hibernate-mapping>
