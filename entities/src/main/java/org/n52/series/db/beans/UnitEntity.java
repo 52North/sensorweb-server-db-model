@@ -19,7 +19,8 @@ package org.n52.series.db.beans;
 
 public class UnitEntity extends DescribableEntity {
 
-    public static final String PROPERTY_UNIT = "unit";
+    public static final String PROPERTY_UNIT = PROPERTY_IDENTIFIER;
+    public static final String PROPERTY_SYMBOL = PROPERTY_IDENTIFIER;
     private static final long serialVersionUID = -7512483445911729980L;
 
     private String link;
@@ -44,10 +45,18 @@ public class UnitEntity extends DescribableEntity {
 
     // TODO SOS compatible
     public String getUnit() {
-        return getDomain();
+        return getIdentifier();
     }
 
     public void setUnit(String unit) {
-        setDomain(unit);
+        setIdentifier(unit);
+    }
+
+    public String getSymbol() {
+        return getIdentifier();
+    }
+
+    public void setSymbol(String symbol) {
+        setIdentifier(symbol);
     }
 }
