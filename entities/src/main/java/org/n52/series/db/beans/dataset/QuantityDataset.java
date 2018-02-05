@@ -39,7 +39,7 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
     }
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }

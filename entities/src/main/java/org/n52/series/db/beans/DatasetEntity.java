@@ -284,7 +284,7 @@ public class DatasetEntity extends DescribableEntity
     public String getValueType() {
         return valueType == null || valueType.isEmpty()
                 // backward compatible
-                ? getDefaultDatastType()
+                ? getDefaultDatasetType()
                 : valueType;
     }
 

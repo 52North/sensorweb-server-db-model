@@ -27,7 +27,7 @@ public interface NotDefinedDataset extends Dataset {
     }
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }

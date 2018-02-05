@@ -22,7 +22,7 @@ public interface ReferencedDataset extends Dataset {
     String DATASET_TYPE = "referenced";
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 

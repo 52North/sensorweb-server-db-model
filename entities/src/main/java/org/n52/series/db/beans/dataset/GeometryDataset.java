@@ -22,7 +22,7 @@ public interface GeometryDataset extends Dataset {
     String DATASET_TYPE = "geometry";
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }

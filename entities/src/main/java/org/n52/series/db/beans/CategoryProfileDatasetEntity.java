@@ -24,7 +24,7 @@ public class CategoryProfileDatasetEntity extends ProfileDatasetEntity {
     private static final long serialVersionUID = -2450158334551569733L;
 
     @Override
-    public String getDefaultDatastType() {
-        return CategoryDataset.DATASET_TYPE + "-" + super.getDefaultDatastType();
+    public String getDefaultDatasetType() {
+        return CategoryDataset.DATASET_TYPE + "-" + super.getDefaultDatasetType();
     }
 }

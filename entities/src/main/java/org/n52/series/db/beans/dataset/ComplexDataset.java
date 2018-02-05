@@ -22,7 +22,7 @@ public interface ComplexDataset extends Dataset {
     String DATASET_TYPE = "complex";
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }

@@ -24,7 +24,7 @@ public class TextProfileDatasetEntity extends ProfileDatasetEntity {
     private static final long serialVersionUID = 5885583199127023243L;
 
     @Override
-    public String getDefaultDatastType() {
-        return TextDataset.DATASET_TYPE + "-" + super.getDefaultDatastType();
+    public String getDefaultDatasetType() {
+        return TextDataset.DATASET_TYPE + "-" + super.getDefaultDatasetType();
     }
 }
