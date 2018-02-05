@@ -181,7 +181,7 @@ public interface Dataset {
 
     void copy(Dataset series);
 
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DEFAULT_VALUE_TYPE;
     }
 

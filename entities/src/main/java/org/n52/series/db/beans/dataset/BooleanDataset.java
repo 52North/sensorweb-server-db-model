@@ -22,7 +22,7 @@ public interface BooleanDataset extends Dataset {
     String DATASET_TYPE = "boolean";
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }

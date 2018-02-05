@@ -22,7 +22,7 @@ public interface CountDataset extends Dataset {
     String DATASET_TYPE = "count";
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }

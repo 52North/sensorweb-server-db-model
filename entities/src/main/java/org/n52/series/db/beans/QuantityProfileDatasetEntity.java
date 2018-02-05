@@ -24,7 +24,7 @@ public class QuantityProfileDatasetEntity extends ProfileDatasetEntity {
     private static final long serialVersionUID = 3167124107955153850L;
 
     @Override
-    public String getDefaultDatastType() {
-        return QuantityDataset.DATASET_TYPE + "-" + super.getDefaultDatastType();
+    public String getDefaultDatasetType() {
+        return QuantityDataset.DATASET_TYPE + "-" + super.getDefaultDatasetType();
     }
 }

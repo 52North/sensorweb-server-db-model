@@ -22,7 +22,7 @@ public interface TextDataset extends Dataset {
     String DATASET_TYPE = "text";
 
     @Override
-    default String getDefaultDatastType() {
+    default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
 }
