@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.dataset.CountDataset;
 
-public class CountDatasetEntity extends DatasetEntity implements CountDataset<CountDatasetEntity> {
+public class CountDatasetEntity extends DatasetEntity implements CountDataset {
 
     private static final long serialVersionUID = -3770736881206526817L;
 

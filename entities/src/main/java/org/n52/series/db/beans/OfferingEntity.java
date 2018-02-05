@@ -32,7 +32,7 @@ import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
-        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>, HasResultTimes<OfferingEntity>,
+        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime, HasResultTimes<OfferingEntity>,
         HasValidTime<OfferingEntity> {
 
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
@@ -137,40 +137,24 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         return this;
     }
 
-    /**
-     * @return the phenomenonTimeStart
-     */
     @Override
-    public Date getPhenomenonTimeStart() {
+    public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(phenomenonTimeStart);
     }
 
-    /**
-     * @param phenomenonTimeStart
-     *        the phenomenonTimeStart to set
-     */
     @Override
-    public OfferingEntity setPhenomenonTimeStart(Date phenomenonTimeStart) {
-        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(phenomenonTimeStart);
-        return this;
+    public void setSamplingTimeStart(Date time) {
+        this.phenomenonTimeStart = Utils.createUnmutableTimestamp(time);
     }
 
-    /**
-     * @return the phenomenonTimeEnd
-     */
     @Override
-    public Date getPhenomenonTimeEnd() {
+    public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(phenomenonTimeEnd);
     }
 
-    /**
-     * @param phenomenonTimeEnd
-     *        the phenomenonTimeEnd to set
-     */
     @Override
-    public OfferingEntity setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(phenomenonTimeEnd);
-        return this;
+    public void setSamplingTimeEnd(Date time) {
+        this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(time);
     }
 
     /**

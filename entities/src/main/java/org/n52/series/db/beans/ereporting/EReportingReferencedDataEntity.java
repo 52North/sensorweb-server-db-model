@@ -19,9 +19,9 @@ package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.TextData;
+import org.n52.series.db.beans.data.Data.ReferencedData;
 
-public class EReportingTextDataEntity extends EReportingDataEntity<String> implements TextData {
+public class EReportingReferencedDataEntity extends EReportingDataEntity<String> implements ReferencedData {
 
     private static final long serialVersionUID = 5825937593528537740L;
 

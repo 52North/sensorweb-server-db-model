@@ -17,49 +17,50 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import org.n52.series.db.beans.data.Data.QuantityData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class EReportingQuantityDataEntity extends EReportingDataEntity<Double> {
+public class EReportingQuantityDataEntity extends EReportingDataEntity<BigDecimal> implements QuantityData {
 
     private static final long serialVersionUID = 5870100531719269673L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(EReportingQuantityDataEntity.class);
 
-    private static final Double DOUBLE_THRESHOLD = 0.01;
-
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        Double value = getValue();
+        BigDecimal value = getValue();
         return value == null
-                || Double.isNaN(value)
                 || containsValue(noDataValues, value);
     }
 
-    private boolean containsValue(Collection<String> collection, double key) {
+    private boolean containsValue(Collection<String> collection, BigDecimal key) {
         if (collection == null) {
             return false;
         }
-        for (Double noDataValue : convertToDoubles(collection)) {
-            if (Math.abs(noDataValue / key - 1) < DOUBLE_THRESHOLD) {
+        for (BigDecimal noDataValue : convertToDoubles(collection)) {
+            if (noDataValue.subtract(key)
+                           .abs()
+                           .compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }
         return false;
     }
 
-    private Collection<Double> convertToDoubles(Collection<String> collection) {
-        List<Double> validatedValues = new ArrayList<>();
+    private Collection<BigDecimal> convertToDoubles(Collection<String> collection) {
+        List<BigDecimal> validatedValues = new ArrayList<>();
         for (String value : collection) {
             String trimmed = value.trim();
             try {
-                validatedValues.add(Double.parseDouble(trimmed));
+                validatedValues.add(new BigDecimal(trimmed));
             } catch (NumberFormatException e) {
-                LOGGER.trace("Ignoring NO_DATA value {} (not a double).", trimmed);
+                LOGGER.trace("Ignoring NO_DATA value {} (not a big decimal value).", trimmed);
             }
         }
         return validatedValues;
@@ -76,4 +77,5 @@ public class EReportingQuantityDataEntity extends EReportingDataEntity<Double> {
                 ? getValue().toString()
                 : "";
     }
+
 }

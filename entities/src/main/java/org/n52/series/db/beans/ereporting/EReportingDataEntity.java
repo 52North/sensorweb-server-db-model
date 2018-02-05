@@ -18,17 +18,17 @@
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.DataEntity;
-import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingValues;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingData;
 
-public abstract class EReportingDataEntity<T> extends DataEntity<T> implements EReportingValues {
+public abstract class EReportingDataEntity<T> extends DataEntity<T> implements EReportingData<T> {
 
     private static final long serialVersionUID = 6718001163355558735L;
 
-    private Integer validation = EReportingValues.DEFAULT_VALIDATION;
+    private Integer validation = EReportingData.DEFAULT_VALIDATION;
 
-    private Integer verification = EReportingValues.DEFAULT_VERIFICATION;
+    private Integer verification = EReportingData.DEFAULT_VERIFICATION;
 
-    private String primaryObservation = EReportingValues.DEFAULT_PRIMARY_OBSERVATION;
+    private String primaryObservation = EReportingData.DEFAULT_PRIMARY_OBSERVATION;
 
     private Boolean timeCoverageFlag;
 

@@ -17,11 +17,12 @@
 
 package org.n52.series.db.beans.parameter;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import org.n52.series.db.beans.UnitEntity;
 
-public class ParameterQuantity extends Parameter<Double> {
+public class ParameterQuantity extends Parameter<BigDecimal> {
 
     private static final long serialVersionUID = 7528516075676290716L;
 
@@ -50,7 +51,7 @@ public class ParameterQuantity extends Parameter<Double> {
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return getValue().toPlainString();
     }
 
 }

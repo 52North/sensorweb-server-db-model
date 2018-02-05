@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
-public class ComplexDatasetEntity extends DatasetEntity implements ComplexDataset<ComplexDatasetEntity> {
+public class ComplexDatasetEntity extends DatasetEntity implements ComplexDataset {
 
     private static final long serialVersionUID = -3164247954562059026L;
 

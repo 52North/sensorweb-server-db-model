@@ -43,9 +43,8 @@ public abstract class Parameter<T> extends IdEntity implements ValuedParameter<T
     }
 
     @Override
-    public Parameter<T> setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     @Override

@@ -17,13 +17,29 @@
 
 package org.n52.series.db.beans.dataset;
 
+import java.util.Collection;
+import java.util.List;
+
 import org.n52.series.db.beans.DatasetEntity;
 
-public interface QuantityDataset<T extends DatasetEntity> extends Dataset<T> {
+public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
 
-    String DATASET_TYPE = "measurement";
+    String DATASET_TYPE = "quantity";
 
     Integer getNumberOfDecimals();
 
     T setNumberOfDecimals(Integer numberOfDecimals);
+
+    T setReferenceValues(Collection<T> referencValues);
+
+    List<T> getReferenceValues();
+
+    default boolean hasReferenceValues() {
+        return getReferenceValues() != null && !getReferenceValues().isEmpty();
+    }
+
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

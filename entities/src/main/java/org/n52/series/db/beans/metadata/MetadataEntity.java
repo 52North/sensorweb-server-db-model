@@ -24,6 +24,8 @@ import org.n52.series.db.beans.IdEntity;
 
 public abstract class MetadataEntity<T> extends IdEntity {
 
+    public static final String PROPERTY_DOMAIN = "domain";
+
     static final String PROPERTY_NAME = "name";
 
     static final String PROPERTY_SERIES_ID = "dataset";
@@ -93,5 +95,4 @@ public abstract class MetadataEntity<T> extends IdEntity {
     public void setDomain(String domain) {
         this.domain = domain;
     }
-
 }

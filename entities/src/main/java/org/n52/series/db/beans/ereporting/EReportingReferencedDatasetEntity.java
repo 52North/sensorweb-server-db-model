@@ -15,14 +15,12 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.dataset;
+package org.n52.series.db.beans.ereporting;
 
-public interface GeometryDataset extends Dataset {
+import org.n52.series.db.beans.dataset.ReferencedDataset;
 
-    String DATASET_TYPE = "geometry";
+public class EReportingReferencedDatasetEntity extends EReportingDatasetEntity implements ReferencedDataset {
 
-    @Override
-    default String getDefaultDatastType() {
-        return DATASET_TYPE;
-    }
+    private static final long serialVersionUID = 5825937593528537740L;
+
 }

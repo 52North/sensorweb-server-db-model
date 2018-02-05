@@ -4,8 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="RelatedFeatureEntity" table="related_feature">
-        <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES
-            2.0). Mapping file: sos/core/RelatedFeature.hbm.xml</comment>
+        <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES 2.0). Mapping file: sos/core/RelatedFeature.hbm.xml</comment>
         <id name="id" type="long">
             <column name="related_feature_id">
                 <comment>Table primary key, used for relations</comment>
@@ -21,8 +20,7 @@
         </many-to-one>
         <many-to-one name="role" class="RelatedFeatureRoleEntity" foreign-key="fk_related_feature_role">
             <column name="fk_role_id" not-null="true">
-                <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains
-                    "related_feature_role".id</comment>
+                <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains  "related_feature_role".id</comment>
             </column>
         </many-to-one>
         <set name="offerings" table="offering_related_feature" inverse="true">

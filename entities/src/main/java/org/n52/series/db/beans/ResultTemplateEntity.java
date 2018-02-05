@@ -32,7 +32,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_PHENOMENON = "phenomenon";
 
-    public static final String PROPERTY_DOMAIN_ID = "domainId";
+    public static final String PROPERTY_IDENTIFIER = "identifier";
 
     public static final String PROPERTY_FEATURE = "feature";
 
@@ -151,6 +151,14 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     @Override
     public void setEncoding(String resultEncoding) {
         this.encoding = resultEncoding;
+    }
+
+    public boolean isSetProcedure() {
+        return getProcedure() != null;
+    }
+
+    public boolean isSetFeature() {
+        return getFeature() != null;
     }
 
 }

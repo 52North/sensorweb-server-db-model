@@ -19,7 +19,9 @@ package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
 
-public class EReportingBlobDataEntity extends EReportingDataEntity<Object> {
+import org.n52.series.db.beans.data.Data.BlobData;
+
+public class EReportingBlobDataEntity extends EReportingDataEntity<Object> implements BlobData {
 
     private static final long serialVersionUID = 3206636011448518060L;
 

@@ -19,7 +19,9 @@ package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
 
-public class EReportingCategoryDataEntity extends EReportingDataEntity<String> {
+import org.n52.series.db.beans.data.Data.CategoryData;
+
+public class EReportingCategoryDataEntity extends EReportingDataEntity<String> implements CategoryData {
 
     private static final long serialVersionUID = -5900304161795877220L;
 

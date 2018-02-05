@@ -18,16 +18,19 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, Data<T> {
 
     public static final String PROPERTY_ID = "id";
 
@@ -39,6 +42,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
 
+    public static final String PROPERTY_VALID_TIME_START = "valid_time_start";
+
+    public static final String PROPERTY_VALID_TIME_END = "valid_time_end";
+
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
 
     public static final String PROPERTY_DELETED = "deleted";
@@ -47,13 +54,13 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
 
-    public static final String PROPERTY_CHILDREN = "children";
+    public static final String PROPERTY_CHILD = "child";
 
     public static final String PROPERTY_VALUE = "value";
 
-    private static final long serialVersionUID = 273612846605300612L;
+    public static final String PROPERTY_PARAMETERS = "parameters";
 
-    private Long id;
+    private static final long serialVersionUID = 273612846605300612L;
 
     private Date samplingTimeStart;
 
@@ -87,18 +94,12 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     private String valueDescription;
 
+    private BigDecimal verticalFrom = NOT_SET_VERTICAL;
+
+    private BigDecimal verticalTo = NOT_SET_VERTICAL;
+
     protected DataEntity() {
 
-    }
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
     }
 
     /**
@@ -137,6 +138,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public void setValue(T value) {
         this.value = value;
+    }
+
+    public boolean hasValue() {
+        return getValue() != null;
     }
 
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
@@ -244,6 +249,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.relatedObservations = relatedObservations;
     }
 
+    public boolean hasRelatedObservations() {
+        return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
+    }
+
     public String getValueIdentifier() {
         return valueIdentifier;
     }
@@ -252,7 +261,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.valueIdentifier = valueIdentifier;
     }
 
-    public boolean has() {
+    public boolean hasValueIdentifier() {
         return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
     }
 
@@ -264,7 +273,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.valueName = valueName;
     }
 
-    public boolean hasgetValueName() {
+    public boolean hasValueName() {
         return getValueName() != null && !getValueName().isEmpty();
     }
 
@@ -280,6 +289,22 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return getValueDescription() != null && !getValueDescription().isEmpty();
     }
 
+    public BigDecimal getVerticalFrom() {
+        return verticalFrom;
+    }
+
+    public void setVerticalFrom(BigDecimal verticalFrom) {
+        this.verticalFrom = verticalFrom;
+    }
+
+    public BigDecimal getVerticalTo() {
+        return verticalTo;
+    }
+
+    public void setVerticalTo(BigDecimal verticalTo) {
+        this.verticalTo = verticalTo;
+    }
+
     @Override
     public int compareTo(DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
@@ -292,9 +317,9 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((id == null)
+        result = prime * result + ((getId() == null)
                 ? 0
-                : id.hashCode());
+                : getId().hashCode());
         return result;
     }
 
@@ -310,11 +335,11 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
             return false;
         }
         DataEntity< ? > other = (DataEntity< ? >) obj;
-        if (id == null) {
-            if (other.id != null) {
+        if (getId() == null) {
+            if (other.getId() != null) {
                 return false;
             }
-        } else if (!id.equals(other.id)) {
+        } else if (!getId().equals(other.getId())) {
             return false;
         }
         return true;
@@ -326,7 +351,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" id: ")
-                 .append(id)
+                 .append(getId())
                  .append(" ]")
                  .toString();
     }

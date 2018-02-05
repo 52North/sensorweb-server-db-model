@@ -17,27 +17,14 @@
 
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
-import java.util.Set;
-
 public class RecordDatasetEntity extends DatasetEntity {
 
     private static final long serialVersionUID = 2357248511291918028L;
 
     private static final String DATASET_TYPE = "record";
 
-    private Set<RecordDatasetEntity> referenceValues = new HashSet<>();
-
     public RecordDatasetEntity() {
         super(DATASET_TYPE);
-    }
-
-    public Set<RecordDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    public void setReferenceValues(Set<RecordDatasetEntity> referenceValues) {
-        this.referenceValues = referenceValues;
     }
 
 }
