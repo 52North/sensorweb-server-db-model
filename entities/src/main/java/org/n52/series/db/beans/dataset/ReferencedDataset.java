@@ -15,13 +15,15 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.ereporting;
+package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.dataset.DataArrayDataset;
+public interface ReferencedDataset extends Dataset {
 
-public class EReportingSweDataArrayDatasetEntity extends EReportingDatasetEntity
-        implements DataArrayDataset<EReportingSweDataArrayDatasetEntity> {
+    String DATASET_TYPE = "referenced";
 
-    private static final long serialVersionUID = 8734427623675385749L;
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 
 }

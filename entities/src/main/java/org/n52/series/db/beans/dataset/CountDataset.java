@@ -17,10 +17,12 @@
 
 package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.DatasetEntity;
-
-public interface CountDataset<T extends DatasetEntity> extends Dataset<T> {
+public interface CountDataset extends Dataset {
 
     String DATASET_TYPE = "count";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

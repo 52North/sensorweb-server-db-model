@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.dataset.DataArrayDataset;
 
-public class DataArrayDatasetEntity extends DatasetEntity implements DataArrayDataset<DataArrayDatasetEntity> {
+public class DataArrayDatasetEntity extends DatasetEntity implements DataArrayDataset {
 
     private static final long serialVersionUID = 2202529106185723855L;
 

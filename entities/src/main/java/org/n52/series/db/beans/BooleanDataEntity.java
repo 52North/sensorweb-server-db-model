@@ -19,7 +19,9 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-public class BooleanDataEntity extends DataEntity<Boolean> {
+import org.n52.series.db.beans.data.Data.BooleanData;
+
+public class BooleanDataEntity extends DataEntity<Boolean> implements BooleanData {
 
     private static final long serialVersionUID = -8729150886271878177L;
 

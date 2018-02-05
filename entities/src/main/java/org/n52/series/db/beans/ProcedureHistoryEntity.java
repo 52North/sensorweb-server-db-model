@@ -20,9 +20,9 @@ package org.n52.series.db.beans;
 import java.io.Serializable;
 import java.util.Date;
 
-import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
+import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.common.Utils;
 
 /**

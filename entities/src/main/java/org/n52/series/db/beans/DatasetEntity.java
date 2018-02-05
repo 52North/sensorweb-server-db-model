@@ -18,32 +18,21 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.n52.series.db.beans.HibernateRelations.HasDeletedFlag;
-import org.n52.series.db.beans.HibernateRelations.HasDisabledFlag;
-import org.n52.series.db.beans.HibernateRelations.HasHiddenChildFlag;
-import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
-import org.n52.series.db.beans.HibernateRelations.HasObservationType;
-import org.n52.series.db.beans.HibernateRelations.HasOffering;
-import org.n52.series.db.beans.HibernateRelations.HasProcedure;
+import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 
 public class DatasetEntity extends DescribableEntity
         implements Serializable,
-        HasProcedure<DatasetEntity>,
-        HasObservableProperty<DatasetEntity>,
-        HasOffering<DatasetEntity>,
-        HasObservationType<DatasetEntity>,
-        HasHiddenChildFlag<DatasetEntity>,
-        HasDeletedFlag<DatasetEntity>,
-        HasDisabledFlag<DatasetEntity> {
-
-    public static final String DEFAULT_VALUE_TYPE = "quantity";
+        Dataset {
 
     public static final String ENTITY_ALIAS = "dataset";
 
@@ -58,6 +47,8 @@ public class DatasetEntity extends DescribableEntity
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
     public static final String HIDDEN_CHILD = "hiddenChild";
+
+    public static final String PROPERTY_UNIT = "unit";
 
     private static final long serialVersionUID = -7491530543976690237L;
 
@@ -91,9 +82,9 @@ public class DatasetEntity extends DescribableEntity
 
     private DataEntity lastObservation;
 
-    private Double firstQuantityValue;
+    private BigDecimal firstQuantityValue;
 
-    private Double lastQuantityValue;
+    private BigDecimal lastQuantityValue;
 
     private UnitEntity unit;
 
@@ -102,6 +93,10 @@ public class DatasetEntity extends DescribableEntity
     private boolean hiddenChild;
 
     private FormatEntity observationType;
+
+    private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
+
+    private Set<DatasetEntity> referenceValues = new HashSet<>();
 
     public DatasetEntity() {
         this((String) null);
@@ -135,7 +130,7 @@ public class DatasetEntity extends DescribableEntity
 
     @Override
     public DatasetEntity setObservableProperty(PhenomenonEntity observableProperty) {
-        return setPhenomenon(phenomenon);
+        return setPhenomenon(observableProperty);
     }
 
     @Override
@@ -270,26 +265,26 @@ public class DatasetEntity extends DescribableEntity
         this.lastObservation = lastObservation;
     }
 
-    public Double getFirstQuantityValue() {
+    public BigDecimal getFirstQuantityValue() {
         return firstQuantityValue;
     }
 
-    public void setFirstQuantityValue(Double firstValue) {
+    public void setFirstQuantityValue(BigDecimal firstValue) {
         this.firstQuantityValue = firstValue;
     }
 
-    public Double getLastQuantityValue() {
+    public BigDecimal getLastQuantityValue() {
         return lastQuantityValue;
     }
 
-    public void setLastQuantityValue(Double lastValue) {
+    public void setLastQuantityValue(BigDecimal lastValue) {
         this.lastQuantityValue = lastValue;
     }
 
     public String getValueType() {
         return valueType == null || valueType.isEmpty()
                 // backward compatible
-                ? DEFAULT_VALUE_TYPE
+                ? getDefaultDatastType()
                 : valueType;
     }
 
@@ -381,6 +376,21 @@ public class DatasetEntity extends DescribableEntity
         return getObservationType() != null && getObservationType().isSetFormat();
     }
 
+    public Set<RelatedDatasetEntity> getRelatedDatasets() {
+        return relatedDatasets;
+    }
+
+    public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
+        this.relatedDatasets.clear();
+        if (relatedDataset != null) {
+            this.relatedDatasets.addAll(relatedDataset);
+        }
+    }
+
+    public boolean hasRelatedDatasets() {
+        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
+    }
+
     @Override
     public String getLabelFrom(String locale) {
         StringBuilder sb = new StringBuilder();
@@ -415,6 +425,50 @@ public class DatasetEntity extends DescribableEntity
                  .append(getService())
                  .append(" ]")
                  .toString();
+    }
+
+    @Override
+    public void copy(Dataset dataset) {
+        setIdentifier(dataset.getIdentifier());
+        setIdentifierCodespace(dataset.getIdentifierCodespace());
+        setName(dataset.getName());
+        setNameCodespace(dataset.getNameCodespace());
+        setDescription(dataset.getDescription());
+        if (dataset.getParameters() != null) {
+            setParameters(dataset.getParameters()
+                                 .stream()
+                                 .collect(Collectors.toSet()));
+        }
+        setCategory(dataset.getCategory());
+        setDeleted(dataset.isDeleted());
+        setDeleted(dataset.isDeleted());
+        setDisabled(dataset.isDisabled());
+        setFeature(dataset.getFeature());
+        setFirstObservation(dataset.getFirstObservation());
+        setFirstQuantityValue(dataset.getFirstQuantityValue());
+        setFirstValueAt(dataset.getFirstValueAt());
+        setHiddenChild(dataset.isHiddenChild());
+        setLastObservation(dataset.getLastObservation());
+        setLastQuantityValue(dataset.getLastQuantityValue());
+        setLastValueAt(dataset.getLastValueAt());
+        setObservationCount(dataset.getObservationCount());
+        setObservationType(dataset.getObservationType());
+        setOffering(dataset.getOffering());
+        setPhenomenon(dataset.getPhenomenon());
+        setPlatform(dataset.getPlatform());
+        setProcedure(dataset.getProcedure());
+        setPublished(dataset.isPublished());
+        if (dataset.getRelatedDatasets() != null) {
+            setRelatedObservations(dataset.getRelatedDatasets()
+                                          .stream()
+                                          .collect(Collectors.toSet()));
+        }
+        if (dataset.getResultTimes() != null) {
+            setResultTimes(dataset.getResultTimes()
+                                  .stream()
+                                  .collect(Collectors.toSet()));
+        }
+        setUnit(dataset.getUnit());
     }
 
 }

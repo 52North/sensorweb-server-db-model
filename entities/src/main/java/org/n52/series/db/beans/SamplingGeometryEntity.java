@@ -30,7 +30,7 @@ public class SamplingGeometryEntity extends IdEntity {
 
     private GeometryEntity geometryEntity;
 
-    private Dataset< ? > dataset;
+    private Dataset dataset;
 
     public Date getTimestamp() {
         return Utils.createUnmutableTimestamp(timestamp);
@@ -48,11 +48,11 @@ public class SamplingGeometryEntity extends IdEntity {
         this.geometryEntity = geometryEntity;
     }
 
-    public Dataset< ? > getDataset() {
+    public Dataset getDataset() {
         return dataset;
     }
 
-    public void setDataset(Dataset< ? > dataset) {
+    public void setDataset(Dataset dataset) {
         this.dataset = dataset;
     }
 }

@@ -17,10 +17,12 @@
 
 package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.DatasetEntity;
-
-public interface ComplexDataset<T extends DatasetEntity> extends Dataset<T> {
+public interface ComplexDataset extends Dataset {
 
     String DATASET_TYPE = "complex";
 
+    @Override
+    default String getDefaultDatastType() {
+        return DATASET_TYPE;
+    }
 }

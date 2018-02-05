@@ -19,27 +19,28 @@ package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
 
-public class EReportingBooleanDataEntity extends EReportingDataEntity<Boolean> {
+import org.n52.series.db.beans.data.Data.BooleanData;
+
+public class EReportingBooleanDataEntity extends EReportingDataEntity<Boolean> implements BooleanData {
 
     private static final long serialVersionUID = 4231187253999943944L;
 
     @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        Boolean value = getValue();
-        return value == null
-                || noDataValues.contains(value.toString());
-    }
-
-    @Override
     public boolean isSetValue() {
-        return getValue() != null;
+        // TODO Auto-generated method stub
+        return false;
     }
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean isNoDataValue(Collection<String> noDataValues) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

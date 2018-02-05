@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.dataset.BlobDataset;
 
-public class BlobDatasetEntity extends DatasetEntity implements BlobDataset<BlobDatasetEntity> {
+public class BlobDatasetEntity extends DatasetEntity implements BlobDataset {
 
     private static final long serialVersionUID = 7695968619628841933L;
 

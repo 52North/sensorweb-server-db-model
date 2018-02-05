@@ -18,17 +18,29 @@
 package org.n52.series.db.beans.ereporting;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.data.Data.DataArrayData;
 
-public class EReportingSweDataArrayDataEntity extends DataEntity<String> {
+public class EReportingDataArrayDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements DataArrayData {
 
     private static final long serialVersionUID = -357644664672153647L;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+        return getValue() == null;
+    }
+
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue()
+                ? getValue().toString()
+                : "";
     }
 }

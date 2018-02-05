@@ -18,14 +18,13 @@
 package org.n52.series.db.beans.ereporting;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.dataset.QuantityDataset;
-import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasEReportingSamplingPoint;
 
-public class EReportingQuantityDatasetEntity extends DatasetEntity
-        implements QuantityDataset<EReportingQuantityDatasetEntity>, HasEReportingSamplingPoint {
+public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
+        implements QuantityDataset<EReportingQuantityDatasetEntity> {
 
     private static final long serialVersionUID = -8934345303908852017L;
 
@@ -33,19 +32,14 @@ public class EReportingQuantityDatasetEntity extends DatasetEntity
 
     private int numberOfDecimals;
 
-    private EReportingSamplingPointEntity samplingPoint;
-
-    public EReportingQuantityDatasetEntity() {
-        super(DATASET_TYPE);
-    }
-
     @Override
     public List<EReportingQuantityDatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
-    public EReportingQuantityDatasetEntity setReferenceValues(List<EReportingQuantityDatasetEntity> refValues) {
-        this.referenceValues = refValues;
+    public EReportingQuantityDatasetEntity setReferenceValues(
+                                                              Collection<EReportingQuantityDatasetEntity> refValues) {
+        this.referenceValues = new ArrayList<>(referenceValues);
         return this;
     }
 
@@ -58,16 +52,6 @@ public class EReportingQuantityDatasetEntity extends DatasetEntity
     public EReportingQuantityDatasetEntity setNumberOfDecimals(Integer numberOfDecimals) {
         this.numberOfDecimals = numberOfDecimals;
         return this;
-    }
-
-    @Override
-    public EReportingSamplingPointEntity getSamplingPoint() {
-        return samplingPoint;
-    }
-
-    @Override
-    public void setSamplingPoint(EReportingSamplingPointEntity samplingPoint) {
-        this.samplingPoint = samplingPoint;
     }
 
 }

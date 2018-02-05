@@ -45,8 +45,7 @@
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted
-                    via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted  via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
 
@@ -58,8 +57,7 @@
 
         <property name="published" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_published" not-null="true" default="1" check="is_published in (1,0)">
-                <comment>Flag to indicate that this dataset is published or not. A not published dataset is not contained
-                    in GetObservation and GetDataAvailability responses</comment>
+                <comment>Flag to indicate that this dataset is published or not. A not published dataset is not contained in GetObservation and GetDataAvailability responses</comment>
             </column>
         </property>
 
@@ -76,8 +74,7 @@
 
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_codespace">
             <column name="fk_identifier_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the
-                    gml:identifier codespace. Optional</comment>
+                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
             </column>
         </many-to-one>
 
@@ -89,8 +86,7 @@
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
             <column name="fk_name_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the
-                    gml:name codespace. Optional</comment>
+                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
             </column>
         </many-to-one>
 
@@ -118,6 +114,7 @@
             </list>
         </subclass>
         <subclass discriminator-value="text" name="TextDatasetEntity"/>
+        <subclass discriminator-value="referenced" name="ReferencedDatasetEntity"/>
         <subclass discriminator-value="count" name="CountDatasetEntity"/>
         <subclass discriminator-value="blob" name="BlobDatasetEntity"/>
         <subclass discriminator-value="boolean" name="BooleanDatasetEntity" />
@@ -129,6 +126,13 @@
         <subclass discriminator-value="complex" name="ComplexDatasetEntity"/>
         <subclass discriminator-value="quantity-profile" name="QuantityProfileDatasetEntity">
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <property name="verticalParameterName" formula="'depth'" type="string" />
+        </subclass>
+        <subclass discriminator-value="category-profile" name="CategoryProfileDatasetEntity">
+            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <property name="verticalParameterName" formula="'depth'" type="string" />
+        </subclass>
+        <subclass discriminator-value="text-profile" name="TextProfileDatasetEntity">
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
     </class>

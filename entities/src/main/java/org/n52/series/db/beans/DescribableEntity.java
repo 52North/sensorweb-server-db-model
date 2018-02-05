@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity extends IdEntity implements IdentifierNameDescriptionEntity<DescribableEntity>,
+public class DescribableEntity extends IdEntity implements IdentifierNameDescriptionEntity,
         Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
@@ -72,9 +72,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public DescribableEntity setIdentifier(String identifier) {
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
-        return this;
     }
 
     @Override
@@ -83,9 +82,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public DescribableEntity setIdentifierCodespace(CodespaceEntity identifierCodespace) {
+    public void setIdentifierCodespace(CodespaceEntity identifierCodespace) {
         this.identifierCodespace = identifierCodespace;
-        return this;
     }
 
     @Override
@@ -94,9 +92,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public DescribableEntity setName(String name) {
+    public void setName(String name) {
         this.name = name;
-        return this;
     }
 
     @Override
@@ -105,9 +102,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public DescribableEntity setNameCodespace(CodespaceEntity nameCodespace) {
+    public void setNameCodespace(CodespaceEntity nameCodespace) {
         this.nameCodespace = nameCodespace;
-        return this;
     }
 
     @Override
@@ -116,9 +112,8 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
     }
 
     @Override
-    public DescribableEntity setDescription(String description) {
+    public void setDescription(String description) {
         this.description = description;
-        return this;
     }
 
     public Set<I18nEntity< ? extends DescribableEntity>> getTranslations() {

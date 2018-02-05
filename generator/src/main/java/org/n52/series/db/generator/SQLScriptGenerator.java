@@ -111,14 +111,14 @@ public class SQLScriptGenerator {
     private void setDirectoriesForModelSelection(Concept concept, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
-//        files.add(getDirectory("/hbm/sos/core/Codespace.hbm.xml"));
-//        files.add(getDirectory("/hbm/sos/core/ProcedureDescriptionFormat.hbm.xml"));
-//        files.add(getDirectory("/hbm/sos/core/ProcedureResource.hbm.xml"));
-//        files.add(getDirectory("/hbm/sos/core/ProcedureHistory.hbm.xml"));
-         files.add(getDirectory("/hbm/sos/core"));
-         files.add(getDirectory("/hbm/sos/dataset"));
-//         files.add(getDirectory("/hbm/sos/feature"));
-//         files.add(getDirectory("/hbm/sos/extension"));
+//        files.add(getDirectory("/hbm/core/Codespace.hbm.xml"));
+//        files.add(getDirectory("/hbm/core/ProcedureDescriptionFormat.hbm.xml"));
+//        files.add(getDirectory("/hbm/core/ProcedureResource.hbm.xml"));
+//        files.add(getDirectory("/hbm/core/ProcedureHistory.hbm.xml"));
+         files.add(getDirectory("/hbm/core"));
+         files.add(getDirectory("/hbm/dataset"));
+//         files.add(getDirectory("/hbm/feature"));
+//         files.add(getDirectory("/hbm/extension"));
         for (File file : files) {
             if (configuration != null) {
 //                configuration.addFile(file);

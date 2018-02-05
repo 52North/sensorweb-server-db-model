@@ -37,13 +37,25 @@ public interface HibernateRelations {
 
     String SRID = "srid";
 
-    interface HasIdentifier<T> {
+    String GEOMETRY_ENTITY = "geometryEntity";
+
+    String P = "parents";
+
+    String C = "children";
+
+    interface HasId {
+        Long getId();
+
+        void setId(Long id);
+    }
+
+    interface HasIdentifier {
 
         String IDENTIFIER = "identifier";
 
         String getIdentifier();
 
-        T setIdentifier(String identifier);
+        void setIdentifier(String identifier);
 
         default boolean isSetIdentifier() {
             return getIdentifier() != null && !getIdentifier().isEmpty();
@@ -53,8 +65,8 @@ public interface HibernateRelations {
             return getIdentifier();
         }
 
-        default T setDomain(String domain) {
-            return setIdentifier(domain);
+        default void setDomain(String domain) {
+            setIdentifier(domain);
         }
 
         /**
@@ -82,12 +94,12 @@ public interface HibernateRelations {
         boolean isSetIdentifier();
     }
 
-    interface HasDescription<T> {
+    interface HasDescription {
         String DESCRIPTION = "description";
 
         String getDescription();
 
-        T setDescription(String description);
+        void setDescription(String description);
 
         /**
          * Is description set
@@ -99,24 +111,24 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasIdentifierCodespace<T> {
+    interface HasIdentifierCodespace {
         String IDENTIFIER_CODESPACE = "identifierCodespace";
 
         CodespaceEntity getIdentifierCodespace();
 
-        T setIdentifierCodespace(CodespaceEntity codespace);
+        void setIdentifierCodespace(CodespaceEntity codespace);
 
         default boolean isSetIdentifierCodespace() {
             return getIdentifierCodespace() != null && !getIdentifierCodespace().isSetName();
         }
     }
 
-    interface HasNameCodespace<T> {
+    interface HasNameCodespace {
         String NAME_CODESPACE = "nameCodespace";
 
         CodespaceEntity getNameCodespace();
 
-        T setNameCodespace(CodespaceEntity codespaceName);
+        void setNameCodespace(CodespaceEntity codespaceName);
 
         default boolean isSetNameCodespace() {
             return getNameCodespace() != null && !getNameCodespace().isSetName();
@@ -152,7 +164,7 @@ public interface HibernateRelations {
     }
 
     interface HasFeatureType {
-        String FEATURE_OF_INTEREST_TYPE = "featureOfInterestType";
+        String FEATURE_OF_INTEREST_TYPE = "featureType";
 
         FormatEntity getFeatureType();
 
@@ -173,7 +185,7 @@ public interface HibernateRelations {
     }
 
     interface HasFeatureGetter {
-        String FEATURE_OF_INTEREST = "featureOfInterest";
+        String FEATURE_OF_INTEREST = "feature";
 
         AbstractFeatureEntity< ? > getFeature();
     }
@@ -191,7 +203,7 @@ public interface HibernateRelations {
     }
 
     interface HasGeometry<T> {
-        String GEOMETRY = "geom";
+        String GEOMETRY = GEOMETRY_ENTITY;
 
         GeometryEntity getGeometryEntity();
 
@@ -219,7 +231,7 @@ public interface HibernateRelations {
     }
 
     interface HasChildFlag {
-        String CHILD = "child";
+        String CHILD = C;
 
         void setChild(boolean child);
 
@@ -227,19 +239,19 @@ public interface HibernateRelations {
     }
 
     interface HasParentFlag {
-        String PARENT = "parent";
+        String PARENT = P;
 
         void setParent(boolean parent);
 
         boolean isParent();
     }
 
-    interface HasName<T> {
+    interface HasName {
         String NAME = "name";
 
         String getName();
 
-        T setName(String name);
+        void setName(String name);
 
         default boolean isSetName() {
             return getName() != null && !getName().isEmpty();
@@ -300,39 +312,69 @@ public interface HibernateRelations {
         boolean isSetOffering();
     }
 
-    interface HasPhenomenonTime<T> {
+    interface HasPhenomenonTime {
 
-        String PHENOMENON_TIME_START = "phenomenonTimeStart";
+        /**
+         * @return the samplingTimeStart
+         */
+        Date getSamplingTimeStart();
 
-        String PHENOMENON_TIME_END = "phenomenonTimeEnd";
+        /**
+         * @param samplingTimeStart
+         *        the samplingTimeStart
+         */
+        void setSamplingTimeStart(Date samplingTimeStart);
+
+        /**
+         * @return the samplingTimeEnd
+         */
+        Date getSamplingTimeEnd();
+
+        /**
+         * @param samplingTimeEnd
+         *        the samplingTimeEnd
+         */
+        void setSamplingTimeEnd(Date samplingTimeEnd);
 
         /**
          * Get the start phenomenon time
          *
          * @return Start phenomenon time
+         *
+         * @deprecated use {@link HasPhenomenonTime#getSamplingTimeStart()}
          */
-        Date getPhenomenonTimeStart();
+        @Deprecated
+        default Date getPhenomenonTimeStart() {
+            return getSamplingTimeStart();
+        }
 
         /**
          * Set the start phenomenon time
          *
          * @param phenomenonTimeStart
          *            Start phenomenon time to set
-         *
-         * @return this
+         * @deprecated use {@link HasPhenomenonTime#setSamplingTimeStart(Date)}
          */
-        T setPhenomenonTimeStart(Date phenomenonTimeStart);
+        @Deprecated
+        default void setPhenomenonTimeStart(Date phenomenonTimeStart) {
+            setSamplingTimeStart(phenomenonTimeStart);
+        }
 
         default boolean hasPhenomenonTimeStart() {
-            return getPhenomenonTimeStart() != null;
+            return getSamplingTimeStart() != null;
         }
 
         /**
          * Get the end phenomenon time
          *
          * @return End phenomenon time
+         *
+         * @deprecated use {@link HasPhenomenonTime#getSamplingTimeEnd()}
          */
-        Date getPhenomenonTimeEnd();
+        @Deprecated
+        default Date getPhenomenonTimeEnd() {
+            return getSamplingTimeEnd();
+        }
 
         /**
          * Set the end phenomenon time
@@ -340,12 +382,15 @@ public interface HibernateRelations {
          * @param phenomenonTimeEnd
          *            End phenomenon time to set
          *
-         * @return this
+         * @deprecated use {@link HasPhenomenonTime#setSamplingTimeEnd(Date)}
          */
-        T setPhenomenonTimeEnd(Date phenomenonTimeEnd);
+        @Deprecated
+        default void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+            setSamplingTimeEnd(phenomenonTimeEnd);
+        }
 
         default boolean hasPhenomenonTimeEnd() {
-            return getPhenomenonTimeEnd() != null;
+            return getSamplingTimeEnd() != null;
         }
     }
 
@@ -398,7 +443,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureGetter {
-        String PROCEDURE = "procedure";
+        String PROCEDURE = "";
 
         ProcedureEntity getProcedure();
     }
@@ -409,7 +454,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureDescriptionFormat<T> {
-        String PROCEDURE_DESCRIPTION_FORMAT = "procedureDescriptionFormat";
+        String PROCEDURE_DESCRIPTION_FORMAT = "format";
 
         FormatEntity getFormat();
 
@@ -437,7 +482,7 @@ public interface HibernateRelations {
     }
 
     interface HasResultEncoding {
-        String RESULT_ENCODING = "resultEncoding";
+        String RESULT_ENCODING = "encoding";
 
         String getEncoding();
 
@@ -449,7 +494,7 @@ public interface HibernateRelations {
     }
 
     interface HasResultStructure {
-        String RESULT_STRUCTURE = "resultStructure";
+        String RESULT_STRUCTURE = "structure";
 
         String getStructure();
 
@@ -513,6 +558,8 @@ public interface HibernateRelations {
          *
          * @param validTimeStart
          *            Start valid time to set
+         *
+         * @return this
          */
         T setValidTimeStart(Date validTimeStart);
 
@@ -528,6 +575,8 @@ public interface HibernateRelations {
          *
          * @param validTimeEnd
          *            End valid time to set
+         *
+         * @return this
          */
         T setValidTimeEnd(Date validTimeEnd);
 
@@ -676,37 +725,41 @@ public interface HibernateRelations {
 
         String ALTITUDE = "altitude";
 
-        Object getLongitude();
+        Object getLon();
 
-        HasCoordinate setLongitude(Object longitude);
+        HasCoordinate setLon(Object longitude);
 
-        Object getLatitude();
+        Object getLat();
 
-        HasCoordinate setLatitude(Object latitude);
+        HasCoordinate setLat(Object latitude);
 
         /**
          * Are longitude and latitude set
          *
          * @return <code>true</code>, if longitude and latitude are set
          */
-        boolean isSetLongLat();
+        default boolean isSetLongLat() {
+            return getLon() != null && getLat() != null;
+        }
 
-        Object getAltitude();
+        Object getAlt();
 
-        HasCoordinate setAltitude(Object altitude);
+        HasCoordinate setAlt(Object altitude);
 
         /**
          * Is altitude set
          *
          * @return <code>true</code>, if altitude is set
          */
-        boolean isSetAltitude();
+        default boolean isSetAlt() {
+            return getAlt() != null;
+        }
 
         boolean isSpatial();
     }
 
     interface HasProcedureHistory {
-        String VALID_PROCEDURE_TIMES = "procedure_history";
+        String VALID_PROCEDURE_TIMES = "procedureGistory";
 
         Set<ProcedureHistoryEntity> getProcedureHistory();
 
@@ -718,9 +771,9 @@ public interface HibernateRelations {
     }
 
     interface HasParentChildren<T> {
-        String PARENTS = "parents";
+        String PARENTS = P;
 
-        String CHILDREN = "children";
+        String CHILDREN = C;
 
         Set<T> getParents();
 
@@ -774,7 +827,7 @@ public interface HibernateRelations {
 
     interface HasSamplingGeometry {
 
-        String SAMPLING_GEOMETRY = "sampling_geometry";
+        String SAMPLING_GEOMETRY = GEOMETRY_ENTITY;
 
         Geometry getSamplingGeometry();
 
@@ -825,6 +878,18 @@ public interface HibernateRelations {
 
         default boolean isSetDatasetType() {
             return getDatasetType() != null && !getDatasetType().isEmpty();
+        }
+
+    }
+
+    interface HasDataset {
+
+        void setDataset(DatasetEntity dataset);
+
+        DatasetEntity getDataset();
+
+        default boolean isSetDataset() {
+            return getDataset() != null;
         }
 
     }

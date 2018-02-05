@@ -17,9 +17,14 @@
 
 package org.n52.series.db.beans.dataset;
 
-public interface GeometryDataset extends Dataset {
+public interface NotDefinedDataset extends Dataset {
 
-    String DATASET_TYPE = "geometry";
+    String DATASET_TYPE = "not_defined";
+
+    @Override
+    default Boolean isPublished() {
+        return false;
+    }
 
     @Override
     default String getDefaultDatastType() {

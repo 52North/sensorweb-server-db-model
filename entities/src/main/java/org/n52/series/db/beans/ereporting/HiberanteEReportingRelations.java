@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.data.Data;
 
 public interface HiberanteEReportingRelations
         extends
@@ -148,8 +149,9 @@ public interface HiberanteEReportingRelations
 
     }
 
-    interface EReportingValues
+    interface EReportingData<T>
             extends
+            Data<T>,
             HasValidation,
             HasVerification,
             HasPrimaryObservation,

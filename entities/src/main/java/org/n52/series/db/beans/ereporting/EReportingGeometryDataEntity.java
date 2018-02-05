@@ -20,8 +20,9 @@ package org.n52.series.db.beans.ereporting;
 import java.util.Collection;
 
 import org.n52.series.db.beans.GeometryEntity;
+import org.n52.series.db.beans.data.Data.GeometryData;
 
-public class EReportingGeometryDataEntity extends EReportingDataEntity<GeometryEntity> {
+public class EReportingGeometryDataEntity extends EReportingDataEntity<GeometryEntity> implements GeometryData {
 
     private static final long serialVersionUID = -3578232304258898505L;
 

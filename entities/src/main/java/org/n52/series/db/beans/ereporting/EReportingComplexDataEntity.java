@@ -21,15 +21,27 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.data.Data.ComplexData;
 
-public class EReportingComplexDataEntity extends DataEntity<Set<DataEntity< ? >>> {
+public class EReportingComplexDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements ComplexData {
 
     private static final long serialVersionUID = -3450153841771781000L;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        // TODO Auto-generated method stub
-        return false;
+        return getValue() == null;
+    }
+
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue()
+                ? getValue().toString()
+                : "";
     }
 
 }

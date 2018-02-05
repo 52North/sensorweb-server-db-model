@@ -36,7 +36,7 @@
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>
         </property>
-	<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
+		<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
             <column name="fk_name_codespace_id">
                 <comment>The name of the feature, gml:name. Optional</comment>
             </column>

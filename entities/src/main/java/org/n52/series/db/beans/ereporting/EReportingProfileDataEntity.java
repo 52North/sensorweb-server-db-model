@@ -15,19 +15,38 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.ereporting;
 
+import java.util.Collection;
+import java.util.Set;
+
+import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.data.Data.ProfileData;
 
-public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
+public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements ProfileData {
 
-    private static final long serialVersionUID = -7431276500677067329L;
-
+    private static final long serialVersionUID = -3450153841771781000L;
     private String verticalfromName;
-
     private String verticaltoName;
-
     private UnitEntity verticalUnit;
+
+    @Override
+    public boolean isNoDataValue(Collection<String> noDataValues) {
+        return getValue() == null;
+    }
+
+    @Override
+    public boolean isSetValue() {
+        return getValue() != null;
+    }
+
+    @Override
+    public String getValueAsString() {
+        return isSetValue()
+                ? getValue().toString()
+                : "";
+    }
 
     public String getVerticalFromName() {
         return verticalfromName;
@@ -49,8 +68,8 @@ public class ProfileDataEntity extends CompositeDataEntity implements ProfileDat
         return verticalUnit;
     }
 
-    public void setVerticalUnit(UnitEntity verticalUnit) {
-        this.verticalUnit = verticalUnit;
+    public void setVerticalUnit(UnitEntity unit) {
+        this.verticalUnit = unit;
     }
 
 }

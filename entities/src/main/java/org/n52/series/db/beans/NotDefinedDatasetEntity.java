@@ -17,8 +17,15 @@
 
 package org.n52.series.db.beans;
 
-public class NotDefinedDatasetEntity extends DatasetEntity {
+import org.n52.series.db.beans.dataset.NotDefinedDataset;
+
+public class NotDefinedDatasetEntity extends DatasetEntity implements NotDefinedDataset {
 
     private static final long serialVersionUID = 3447190730799856292L;
+
+    @Override
+    public Boolean isPublished() {
+        return false;
+    }
 
 }
