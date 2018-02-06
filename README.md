@@ -22,6 +22,7 @@ However, make sure to do pull requests for features, hotfixes, etc. by making us
 
 ## Contact
 Henning Bredel (h.bredel@52north.org)
+
 Carsten Hollmann (c.hollmann@52north.org)
 
 ## Credits
