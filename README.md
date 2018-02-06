@@ -1,7 +1,5 @@
 # Hibernate files for 52°North Sensor Web Suite database model
 
-<img style="width: 60%; height: 60%" alt="series-rest-api architecture overview" src="https://52north.github.io/series-rest-api/version_3.x/assets/images/big-picture.png">
-
 ## Description
 
 **Provide Hibernate files for 52°North Sensor Web Suite database model.**
@@ -28,6 +26,7 @@ most common workflows.
 
 ## Contact
 Henning Bredel (h.bredel@52north.org)
+Carsten Hollmann (c.hollmann@52north.org)
 
 ## Credits
 
