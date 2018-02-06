@@ -40,9 +40,6 @@
         <property column="first_value" name="firstQuantityValue" type="big_decimal" precision="29" />
         <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="29" />
 
-        <many-to-one class="DataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
-        <many-to-one class="DataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
-
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
                 <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted  via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
@@ -102,37 +99,70 @@
                 foreign-key="fk_parameter_dataset" />
         </set>
 
-		<subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
+        <subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
         <subclass name="QuantityDatasetEntity" discriminator-value="quantity" >
             <property name="numberOfDecimals" column="decimals" type="int" />
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
-            <!-- REPLACE SET WITH "LIST" -->
+            <many-to-one class="QuantityDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="QuantityDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
             <list name="referenceValues" table="dataset_reference" inverse="false" cascade="delete-orphan">
                 <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
                 <list-index column="sort_order" />
                 <many-to-many class="DatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
             </list>
         </subclass>
-        <subclass discriminator-value="text" name="TextDatasetEntity"/>
-        <subclass discriminator-value="referenced" name="ReferencedDatasetEntity"/>
-        <subclass discriminator-value="count" name="CountDatasetEntity"/>
-        <subclass discriminator-value="blob" name="BlobDatasetEntity"/>
-        <subclass discriminator-value="boolean" name="BooleanDatasetEntity" />
+        <subclass discriminator-value="text" name="TextDatasetEntity">
+            <many-to-one class="TextDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="TextDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
+        <subclass discriminator-value="referenced" name="ReferencedDatasetEntity">
+            <many-to-one class="ReferencedDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="ReferencedDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
+        <subclass discriminator-value="count" name="CountDatasetEntity">
+            <many-to-one class="CountDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="CountDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
+        <subclass discriminator-value="blob" name="BlobDatasetEntity">
+            <many-to-one class="BlobDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="BlobDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
+        <subclass discriminator-value="boolean" name="BooleanDatasetEntity">
+            <many-to-one class="BooleanDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="BooleanDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
         <subclass discriminator-value="category" name="CategoryDatasetEntity">
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="CategoryDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="CategoryDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
         </subclass>
-        <subclass discriminator-value="geometry" name="GeometryDatasetEntity"/>
-        <subclass discriminator-value="dataarray" name="DataArrayDatasetEntity"/>
-        <subclass discriminator-value="complex" name="ComplexDatasetEntity"/>
+        <subclass discriminator-value="geometry" name="GeometryDatasetEntity">
+            <many-to-one class="GeometryDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="GeometryDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
+        <subclass discriminator-value="dataarray" name="DataArrayDatasetEntity">
+            <many-to-one class="DataArrayDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="DataArrayDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
+        <subclass discriminator-value="complex" name="ComplexDatasetEntity">
+            <many-to-one class="ComplexDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="ComplexDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        </subclass>
         <subclass discriminator-value="quantity-profile" name="QuantityProfileDatasetEntity">
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="ProfileDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="ProfileDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
         <subclass discriminator-value="category-profile" name="CategoryProfileDatasetEntity">
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <many-to-one class="ProfileDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="ProfileDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
         <subclass discriminator-value="text-profile" name="TextProfileDatasetEntity">
+            <many-to-one class="ProfileDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="ProfileDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
     </class>
