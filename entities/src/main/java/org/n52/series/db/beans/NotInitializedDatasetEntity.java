@@ -17,9 +17,9 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.dataset.NotDefinedDataset;
+import org.n52.series.db.beans.dataset.NotInitializedDataset;
 
-public class NotDefinedDatasetEntity extends DatasetEntity implements NotDefinedDataset {
+public class NotInitializedDatasetEntity extends DatasetEntity implements NotInitializedDataset {
 
     private static final long serialVersionUID = 3447190730799856292L;
 

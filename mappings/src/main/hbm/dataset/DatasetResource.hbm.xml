@@ -3,7 +3,7 @@
 	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile')">
+    <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'not_initialized')">
         <id name="id" type="long">
             <column name="dataset_id">
                 <comment>Table primary key, used for relations</comment>
@@ -99,7 +99,7 @@
                 foreign-key="fk_parameter_dataset" />
         </set>
 
-        <subclass name="NotDefinedDatasetEntity" discriminator-value="not_defined" />
+        <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized" />
         <subclass name="QuantityDatasetEntity" discriminator-value="quantity" >
             <property name="numberOfDecimals" column="decimals" type="int" />
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
