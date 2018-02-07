@@ -15,17 +15,19 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.ereporting;
+package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.dataset.NotDefinedDataset;
+public interface NotInitializedDataset extends Dataset {
 
-public class NotDefinedEReportingDatasetEntity extends EReportingDatasetEntity implements NotDefinedDataset {
-
-    private static final long serialVersionUID = 5193466561723855114L;
+    String DATASET_TYPE = "not_initialized";
 
     @Override
-    public Boolean isPublished() {
+    default Boolean isPublished() {
         return false;
     }
 
+    @Override
+    default String getDefaultDatasetType() {
+        return DATASET_TYPE;
+    }
 }
