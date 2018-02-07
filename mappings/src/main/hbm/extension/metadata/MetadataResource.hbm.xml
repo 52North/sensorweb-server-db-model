@@ -36,7 +36,7 @@
             <property name="value" column="value_boolean" type="org.hibernate.type.BooleanType" />
         </subclass>
 
-        <subclass name="MetadataDoubleEntity" discriminator-value="double">
+        <subclass name="MetadataQuantityEntity" discriminator-value="quantity">
             <property name="value" column="value_double" type="big_decimal" precision="29"/>
         </subclass>
 
