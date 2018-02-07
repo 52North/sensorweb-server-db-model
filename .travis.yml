@@ -5,6 +5,8 @@ script: mvn -fae -U -B clean license:check notice:check install -P check
 after_success: 
 - chmod +x .travis/deploy-docs.sh && .travis/deploy-docs.sh
 - curl -Ls https://git.io/deploy-maven-snapshot | bash
+# start dependend builds
+- curl -Ls https://git.io/trigger-build | bash -s -- 52North/dao-series-api "version/v3.x" 
 env:
   global:
     - SNAPSHOT_BRANCH=develop
