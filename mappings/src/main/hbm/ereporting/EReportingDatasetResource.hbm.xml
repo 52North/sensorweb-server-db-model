@@ -87,7 +87,10 @@
                 foreign-key="fk_parameter_dataset" />
         </set>
 
-		<subclass name="NotDefinedEReportingDatasetEntity" discriminator-value="not_defined" />
+		<subclass name="EReportingNotInitializedDatasetEntity" discriminator-value="not_initialized">
+			<property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
+        	<property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
+		</subclass>
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />
             <many-to-one class="org.n52.series.db.beans.UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />

@@ -99,7 +99,10 @@
                 foreign-key="fk_parameter_dataset" />
         </set>
 
-        <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized" />
+        <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized">
+        	<property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
+        	<property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
+        </subclass>
         <subclass name="QuantityDatasetEntity" discriminator-value="quantity" >
             <property name="numberOfDecimals" column="decimals" type="int" />
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
