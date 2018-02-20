@@ -108,7 +108,7 @@
             <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
             <many-to-one class="QuantityDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
             <many-to-one class="QuantityDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
-            <list name="referenceValues" table="dataset_reference" inverse="false" cascade="delete-orphan">
+            <list name="referenceValues" table="dataset_reference" inverse="false">
                 <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
                 <list-index column="sort_order" />
                 <many-to-many class="DatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
