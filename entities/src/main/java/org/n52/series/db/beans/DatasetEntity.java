@@ -22,7 +22,6 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -95,8 +94,6 @@ public class DatasetEntity extends DescribableEntity
     private FormatEntity observationType;
 
     private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
-
-    private Set<DatasetEntity> referenceValues = new HashSet<>();
 
     public DatasetEntity() {
         this((String) null);

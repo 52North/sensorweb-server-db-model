@@ -23,9 +23,4 @@ public class NotInitializedDatasetEntity extends DatasetEntity implements NotIni
 
     private static final long serialVersionUID = 3447190730799856292L;
 
-    @Override
-    public Boolean isPublished() {
-        return false;
-    }
-
 }
