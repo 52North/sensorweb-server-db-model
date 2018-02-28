@@ -42,7 +42,7 @@
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted  via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
+                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
             </column>
         </property>
 

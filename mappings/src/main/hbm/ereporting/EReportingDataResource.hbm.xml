@@ -14,27 +14,26 @@
         <many-to-one column="fk_dataset_id" name="dataset" class="EReportingDatasetEntity" foreign-key="fk_dataset" not-null="true" unique-key="un_data_identity"/>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
-            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
+            <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
                 <comment>Time stamp when the observation was started or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
-            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
+            <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
                 <comment>Time stamp when the observation was stopped or phenomenon was observed</comment>
             </column>
         </property>
 
         <property name="resultTime" type="timestamp" unique-key="un_data_identity">
-            <column index="idx_result_time" name="resultTime" length="29" not-null="true">
+            <column index="result_time_idx" name="result_time" length="29" not-null="true">
                 <comment>Time stamp when the observation was published or result was published/available</comment>
             </column>
         </property>
 
         <property name="identifier" type="string" unique-key="un_data_identifier">
             <column name="identifier">
-                <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but
-                    unique</comment>
+                <comment>The identifier of the observation, gml:identifier. Used as parameter for queries. Optional but unique</comment>
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_data_identifier_codespace">
@@ -98,7 +97,7 @@
 
 
         <!-- Or add only to specific subclasses -->
-        <set inverse="false" name="parameters" table="observation_parameter" cascade="delete-orphan" fetch="join">
+        <set inverse="true" name="parameters" table="observation_parameter" cascade="all" fetch="join">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_parameter" />
             <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
                 foreign-key="fk_parameter_observation" />
@@ -106,24 +105,24 @@
 
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
-                <column name="fk_observation_id" not-null="true" index="idx_related_observation" />
+                <column name="fk_observation_id" not-null="true" index="related_observation_idx" />
             </key>
             <one-to-many class="EReportingRelatedDataEntity" />
         </set>
 
         <property name="valueIdentifier" type="string">
                <column name="value_identifier">
-                   <comment>SweText observation identifier</comment>
+                   <comment>SWE observation identifier, e.g. SweText</comment>
                </column>
           </property>
           <property name="valueName" type="string">
               <column name="value_name">
-                  <comment>SweText observation name</comment>
+                  <comment>SWE observation name, e.g. SweText</comment>
               </column>
           </property>
           <property name="valueDescription" type="string">
               <column name="value_description">
-                  <comment>SweText observation description</comment>
+                  <comment>SWE observation description, e.g. SweText</comment>
               </column>
           </property>
 
