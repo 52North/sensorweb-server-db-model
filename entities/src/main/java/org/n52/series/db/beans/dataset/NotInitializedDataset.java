@@ -22,12 +22,27 @@ public interface NotInitializedDataset extends Dataset {
     String DATASET_TYPE = "not_initialized";
 
     @Override
-    default Boolean isPublished() {
-        return false;
-    }
-
-    @Override
     default String getDefaultDatasetType() {
         return DATASET_TYPE;
+    }
+
+    default Long getFirstObservationId() {
+        return getFirstObservation() != null
+                ? getFirstObservation().getId()
+                : null;
+    }
+
+    default void setFirstObservationId(Long firstObservationId) {
+        // only required for Hibernate
+    }
+
+    default Long getLastObservationId() {
+        return getLastObservation() != null
+                ? getLastObservation().getId()
+                : null;
+    }
+
+    default void setLastObservationId(Long lastObservationId) {
+        // only required for Hibernate
     }
 }

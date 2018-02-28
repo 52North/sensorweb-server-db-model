@@ -443,7 +443,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureGetter {
-        String PROCEDURE = "";
+        String PROCEDURE = "procedure";
 
         ProcedureEntity getProcedure();
     }
