@@ -111,21 +111,14 @@ public class SQLScriptGenerator {
     private void setDirectoriesForModelSelection(Concept concept, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
-//        files.add(getDirectory("/hbm/core/Codespace.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureDescriptionFormat.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureResource.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureHistory.hbm.xml"));
          files.add(getDirectory("/hbm/core"));
-         files.add(getDirectory("/hbm/dataset"));
 //         files.add(getDirectory("/hbm/feature"));
 //         files.add(getDirectory("/hbm/extension"));
         for (File file : files) {
             if (configuration != null) {
-//                configuration.addFile(file);
                 configuration.addDirectory(file);
             }
             if (metadataSources != null) {
-//                metadataSources.addFile(file);
                 metadataSources.addDirectory(file);
             }
         }
@@ -147,14 +140,20 @@ public class SQLScriptGenerator {
             throws Exception {
         switch (concept) {
         case DEFAULT:
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory("/hbm/dataset"));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory("/hbm/dataset"));
+            }
             break;
         case E_REPORTING:
 
             if (configuration != null) {
-                configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
+                configuration.addDirectory(getDirectory("/hbm/ereporting"));
             }
             if (metadataSources != null) {
-                metadataSources.addDirectory(getDirectory("/hbm/sos/ereporting"));
+                metadataSources.addDirectory(getDirectory("/hbm/ereporting"));
             }
 
             break;
