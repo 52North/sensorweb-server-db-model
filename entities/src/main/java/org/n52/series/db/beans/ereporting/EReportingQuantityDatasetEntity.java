@@ -30,7 +30,7 @@ public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
 
     private List<EReportingQuantityDatasetEntity> referenceValues = new ArrayList<>();
 
-    private int numberOfDecimals;
+    private Integer numberOfDecimals;
 
     @Override
     public List<EReportingQuantityDatasetEntity> getReferenceValues() {
