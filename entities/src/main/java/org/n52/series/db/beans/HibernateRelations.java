@@ -360,7 +360,12 @@ public interface HibernateRelations {
             setSamplingTimeStart(phenomenonTimeStart);
         }
 
+        @Deprecated
         default boolean hasPhenomenonTimeStart() {
+            return hasSamplingTimeStart();
+        }
+
+        default boolean hasSamplingTimeStart() {
             return getSamplingTimeStart() != null;
         }
 
@@ -389,7 +394,12 @@ public interface HibernateRelations {
             setSamplingTimeEnd(phenomenonTimeEnd);
         }
 
+        @Deprecated
         default boolean hasPhenomenonTimeEnd() {
+            return hasSamplingTimeEnd();
+        }
+
+        default boolean hasSamplingTimeEnd() {
             return getSamplingTimeEnd() != null;
         }
     }
