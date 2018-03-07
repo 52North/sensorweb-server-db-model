@@ -32,6 +32,7 @@ import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.RelatedDatasetEntity;
+//import org.n52.series.db.beans.ServiceEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
@@ -180,6 +181,10 @@ public interface Dataset {
     void setParameters(Set<Parameter< ? >> parameters);
 
     void copy(Dataset series);
+
+    //    ServiceEntity getService();
+    //
+    //    void setService(ServiceEntity service);
 
     default String getDefaultDatasetType() {
         return DEFAULT_VALUE_TYPE;
