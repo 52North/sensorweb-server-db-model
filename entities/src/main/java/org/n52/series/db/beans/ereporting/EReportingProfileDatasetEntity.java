@@ -24,4 +24,32 @@ public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
 
     private static final long serialVersionUID = -7514394037111286838L;
 
+    private String verticalParameterName;
+    private String verticalFromParameterName;
+    private String verticalToParameterName;
+
+    public String getVerticalParameterName() {
+        return verticalParameterName;
+    }
+
+    public void setVerticalParameterName(String verticalParameterName) {
+        this.verticalParameterName = verticalParameterName;
+    }
+
+    public String getVerticalFromParameterName() {
+        return verticalFromParameterName;
+    }
+
+    public void setVerticalFromParameterName(String verticalFromParameterName) {
+        this.verticalFromParameterName = verticalFromParameterName;
+    }
+
+    public String getVerticalToParameterName() {
+        return verticalToParameterName;
+    }
+
+    public void setVerticalToParameterName(String verticalToParameterName) {
+        this.verticalToParameterName = verticalToParameterName;
+    }
+
 }
