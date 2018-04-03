@@ -41,7 +41,10 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
     }
 
     public QuantityDatasetEntity setReferenceValues(Collection<QuantityDatasetEntity> referenceValues) {
-        this.referenceValues = new ArrayList<>(referenceValues);
+        this.referenceValues.clear();
+        if (referenceValues != null) {
+            this.referenceValues.addAll(referenceValues);
+        }
         return this;
     }
 
