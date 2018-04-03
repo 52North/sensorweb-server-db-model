@@ -19,13 +19,8 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.NotInitializedDataset;
 
-public class NotInitializedEReportingDatasetEntity extends EReportingDatasetEntity implements NotInitializedDataset {
+public class EReportingNotInitializedDatasetEntity extends EReportingDatasetEntity implements NotInitializedDataset {
 
     private static final long serialVersionUID = 5193466561723855114L;
-
-    @Override
-    public Boolean isPublished() {
-        return false;
-    }
 
 }
