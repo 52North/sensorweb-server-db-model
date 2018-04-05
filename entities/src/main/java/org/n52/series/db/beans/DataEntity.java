@@ -70,7 +70,7 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private GeometryEntity geometryEntity;
 
-    private Boolean deleted;
+    private Boolean deleted = false;
 
     private Date validTimeStart;
 

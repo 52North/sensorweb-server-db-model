@@ -26,6 +26,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 
@@ -77,9 +78,9 @@ public class DatasetEntity extends DescribableEntity
 
     private Date lastValueAt;
 
-    private DataEntity firstObservation;
+    private Data firstObservation;
 
-    private DataEntity lastObservation;
+    private Data lastObservation;
 
     private BigDecimal firstQuantityValue;
 
@@ -246,19 +247,19 @@ public class DatasetEntity extends DescribableEntity
         return getLastValueAt() != null;
     }
 
-    public DataEntity getFirstObservation() {
+    public Data getFirstObservation() {
         return firstObservation;
     }
 
-    public void setFirstObservation(DataEntity firstObservation) {
+    public void setFirstObservation(Data firstObservation) {
         this.firstObservation = firstObservation;
     }
 
-    public DataEntity getLastObservation() {
+    public Data getLastObservation() {
         return lastObservation;
     }
 
-    public void setLastObservation(DataEntity lastObservation) {
+    public void setLastObservation(Data lastObservation) {
         this.lastObservation = lastObservation;
     }
 

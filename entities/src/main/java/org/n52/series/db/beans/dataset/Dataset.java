@@ -24,19 +24,19 @@ import java.util.Set;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.CategoryEntity;
 import org.n52.series.db.beans.CodespaceEntity;
-import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.Describable;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.OfferingEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.RelatedDatasetEntity;
-//import org.n52.series.db.beans.ServiceEntity;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public interface Dataset {
+public interface Dataset extends Describable {
 
     String DEFAULT_VALUE_TYPE = "quantity";
 
@@ -102,13 +102,13 @@ public interface Dataset {
 
     boolean isSetLastValueAt();
 
-    DataEntity getFirstObservation();
+    Data getFirstObservation();
 
-    void setFirstObservation(DataEntity observation);
+    void setFirstObservation(Data observation);
 
-    DataEntity getLastObservation();
+    Data getLastObservation();
 
-    void setLastObservation(DataEntity observation);
+    void setLastObservation(Data observation);
 
     BigDecimal getFirstQuantityValue();
 
@@ -181,10 +181,6 @@ public interface Dataset {
     void setParameters(Set<Parameter< ? >> parameters);
 
     void copy(Dataset series);
-
-    //    ServiceEntity getService();
-    //
-    //    void setService(ServiceEntity service);
 
     default String getDefaultDatasetType() {
         return DEFAULT_VALUE_TYPE;

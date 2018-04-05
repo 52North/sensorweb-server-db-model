@@ -17,14 +17,9 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.dataset.QuantityDataset;
+import org.n52.series.db.beans.dataset.QuantityProfileDataset;
 
-public class QuantityProfileDatasetEntity extends ProfileDatasetEntity {
+public class QuantityProfileDatasetEntity extends ProfileDatasetEntity implements QuantityProfileDataset {
 
     private static final long serialVersionUID = 3167124107955153850L;
-
-    @Override
-    public String getDefaultDatasetType() {
-        return QuantityDataset.DATASET_TYPE + "-" + super.getDefaultDatasetType();
-    }
 }
