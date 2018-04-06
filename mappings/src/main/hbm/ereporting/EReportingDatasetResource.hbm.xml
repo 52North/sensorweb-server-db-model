@@ -39,8 +39,8 @@
         <property column="first_time" name="firstValueAt" type="timestamp" />
         <property column="last_time" name="lastValueAt" type="timestamp" />
 
-        <property column="first_value" name="firstQuantityValue" type="big_decimal" precision="29" />
-        <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="29" />
+        <property column="first_value" name="firstQuantityValue" type="big_decimal" precision="20" scale="10" />
+        <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="20" scale="10" />
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">

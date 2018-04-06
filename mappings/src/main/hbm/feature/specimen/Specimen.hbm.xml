@@ -39,8 +39,8 @@
                 	<comment>Sampling method as referenced link</comment>
                 </column>
             </property>
-            <property name="size" type="big_decimal">
-                <column name="size">
+            <property name="size" type="big_decimal" precision="20" scale="10">
+                <column name="size" precision="20" scale="10">
                     <comment>Sampling method as referenced link</comment>
                 </column>
             </property>

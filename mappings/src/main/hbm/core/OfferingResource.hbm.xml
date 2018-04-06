@@ -81,7 +81,7 @@
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
-            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
+            <!-- <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" /> <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" /> -->
             <property column="geom" name="geometry" type="jts_geometry" />
         </component>
 

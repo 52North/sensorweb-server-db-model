@@ -11,7 +11,7 @@
         <property name="timestamp" column="sampling_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
 
         <component class="GeometryEntity" name="geometryEntity" insert="false" update="false">
-            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
+            <!-- <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" /> <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" /> -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" />
         </component>
 

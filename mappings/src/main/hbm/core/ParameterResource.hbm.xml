@@ -29,7 +29,7 @@
 			<property column="value_count" name="value" type="integer" />
 		</subclass>
 		<subclass discriminator-value="quantity" extends="Parameter" name="ParameterQuantity">
-			<property column="value_quantity" name="value" type="big_decimal" />
+			<property column="value_quantity" name="value" type="big_decimal" precision="20" scale="10" />
 			<many-to-one class="org.n52.series.db.beans.UnitEntity" column="fk_unit_id" name="unit" not-null="false" foreign-key="fk_param_unit"/>
 		</subclass>
 		<subclass discriminator-value="text" extends="Parameter" name="ParameterText">

@@ -20,7 +20,7 @@
         <property name="lastUpdate" column="last_update" type="timestamp" />
         <property name="dataset" column="fk_dataset_id" type="long" />
       	<property name="domain" type="string">
-            <column name="domain" not-null="true">
+            <column name="domain" not-null="false">
                 <comment>The metadata value domain.</comment>
             </column>
         </property>
@@ -37,7 +37,7 @@
         </subclass>
 
         <subclass name="MetadataQuantityEntity" discriminator-value="quantity">
-            <property name="value" column="value_double" type="big_decimal" precision="29"/>
+            <property name="value" column="value_double" type="big_decimal" precision="20" scale="10"/>
         </subclass>
 
         <subclass name="MetadataIntegerEntity" discriminator-value="integer">
