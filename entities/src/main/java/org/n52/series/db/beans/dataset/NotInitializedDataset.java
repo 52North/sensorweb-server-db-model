@@ -26,6 +26,16 @@ public interface NotInitializedDataset extends Dataset {
         return DATASET_TYPE;
     }
 
+    default Long getUnitId() {
+        return getUnit() != null
+                ? getUnit().getId()
+                : null;
+    }
+
+    default void setUnitId(Long unitId) {
+        // only required for Hibernate
+    }
+
     default Long getFirstObservationId() {
         return getFirstObservation() != null
                 ? getFirstObservation().getId()
