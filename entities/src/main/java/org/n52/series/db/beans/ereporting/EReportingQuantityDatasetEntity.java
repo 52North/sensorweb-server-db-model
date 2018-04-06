@@ -39,7 +39,10 @@ public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
 
     public EReportingQuantityDatasetEntity setReferenceValues(
                                                               Collection<EReportingQuantityDatasetEntity> refValues) {
-        this.referenceValues = new ArrayList<>(referenceValues);
+        this.referenceValues.clear();
+        if (refValues != null) {
+            this.referenceValues.addAll(refValues);
+        }
         return this;
     }
 
