@@ -40,7 +40,7 @@ public interface Data<T>
         HasPhenomenonTime,
         HasDataset {
 
-    BigDecimal NOT_SET_VERTICAL = new BigDecimal("-99999.00");
+    BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
 
     T getValue();
 
@@ -218,7 +218,7 @@ public interface Data<T>
             extends
             Data<BigDecimal> {
         String DATASET_TYPE = "quantity";
-        BigDecimal DOUBLE_THRESHOLD = new BigDecimal(0.0001d);
+        BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     }
 
     interface ReferencedData

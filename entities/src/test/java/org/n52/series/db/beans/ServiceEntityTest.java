@@ -59,10 +59,10 @@ public class ServiceEntityTest {
     public void shouldHandleDoubleValues() {
         serviceInfo.setNoDataValues("4.3,9,foo");
         QuantityDataEntity entity = new QuantityDataEntity();
-        entity.setValue(new BigDecimal(9d));
+        entity.setValue(BigDecimal.valueOf(9d));
         MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
 
-        entity.setValue(new BigDecimal(4.30));
+        entity.setValue(BigDecimal.valueOf(4.30));
         MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
     }
 }
