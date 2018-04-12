@@ -5,9 +5,7 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'text-profile', 'category-profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced', 'not_initialized')">
         <id name="id" type="long">
-            <column name="dataset_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="dataset_id"/>
             <generator class="native">
                 <param name="sequence_name">dataset_seq</param>
             </generator>
@@ -27,9 +25,7 @@
         <many-to-one class="PlatformEntity" column="fk_procedure_id" name="platform" insert="false" update="false" unique-key="un_dataset_identity" />
 
         <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
-            <column name="fk_format_id">
-                <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
-            </column>
+            <column name="fk_format_id"/>
         </many-to-one>
 
         <property column="value_type" insert="false" name="valueType" type="string" update="false" />
@@ -41,56 +37,40 @@
         <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="29" />
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <comment>Flag to indicate that this dataset is deleted or not. Set if the related procedure is deleted  via DeleteSensor operation (OGC SWES 2.0 - DeleteSensor operation)</comment>
-            </column>
+            <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)"/>
         </property>
 
         <property name="disabled" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)">
-                <comment>Flag to indicate that this dataset is disabled for SOS transactional insertion or not.</comment>
-            </column>
+            <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)"/>
         </property>
 
         <property name="published" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_published" not-null="true" default="1" check="is_published in (1,0)">
-                <comment>Flag to indicate that this dataset is published or not. A not published dataset is not contained in GetObservation and GetDataAvailability responses</comment>
-            </column>
+            <column name="is_published" not-null="true" default="1" check="is_published in (1,0)"/>
         </property>
 
-        <property name="hiddenChild" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_hidden_child" not-null="true" default="0" check="is_hidden_child in (1,0)">
+        <property name="hidden" type="org.n52.hibernate.type.SmallBooleanType">
+            <column name="is_hidden" not-null="true" default="0" check="is_hidden in (1,0)">
             </column>
         </property>
 
         <property name="identifier" type="string" index="idx_dataset_identifier">
-            <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
-                <comment>The identifier of the dataset, gml:identifier. Unique</comment>
-            </column>
+            <column name="identifier" not-null="false" unique-key="un_dataset_identifier"/>
         </property>
 
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_codespace">
-            <column name="fk_identifier_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
-            </column>
+            <column name="fk_identifier_codespace_id"/>
         </many-to-one>
 
 		<property name="name" type="string">
-            <column name="name">
-                <comment>The name of the dataset, gml:name. Optional</comment>
-            </column>
+            <column name="name"/>
         </property>
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
-            <column name="fk_name_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
-            </column>
+            <column name="fk_name_codespace_id"/>
         </many-to-one>
 
         <property name="description" type="string">
-            <column name="description">
-                <comment>Description of the dataset, gml:description. Optional</comment>
-            </column>
+            <column name="description"/>
         </property>
 
         <set inverse="false" name="parameters" table="dataset_parameter" cascade="delete-orphan">

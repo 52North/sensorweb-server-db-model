@@ -4,36 +4,25 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="RelatedFeatureEntity" table="related_feature">
-        <comment>Table to store related feature information used in the OGC SOS 2.0 Capabilities (See also OGC SWES 2.0). Mapping file: sos/core/RelatedFeature.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="related_feature_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="related_feature_id"/>
             <generator class="native">
                 <param name="sequence_name">related_feature_seq</param>
             </generator>
         </id>
         <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="fk_related_feature">
-            <column name="fk_feature_id" not-null="true">
-                <comment>Foreign Key (FK) to the related feature. Contains "feature".id</comment>
-            </column>
+            <column name="fk_feature_id" not-null="true"/>
         </many-to-one>
-        <many-to-one name="role" class="RelatedFeatureRoleEntity" foreign-key="fk_related_feature_role">
-            <column name="fk_role_id" not-null="true">
-                <comment>Foreign Key (FK) to the related relatedFeatureRole. Contains  "related_feature_role".id</comment>
+       <property name="role" type="string">
+            <column name="role" not-null="true">
             </column>
-        </many-to-one>
+        </property>
         <set name="offerings" table="offering_related_feature" inverse="true">
-            <comment>Relation table to store relatedFeatures and their associated offerings.</comment>
             <key foreign-key="fk_offering_related_feature">
-                <column name="fk_related_feature_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related relatedFeature. Contains "related_eature".id</comment>
-                </column>
+                <column name="fk_related_feature_id" not-null="true"/>
             </key>
             <many-to-many class="OfferingEntity" foreign-key="fk_related_feature_offering">
-                <column name="fk_offering_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
-                </column>
+                <column name="fk_offering_id" not-null="true"/>
             </many-to-many>
         </set>
     </class>

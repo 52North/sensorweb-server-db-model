@@ -4,45 +4,12 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="MetadataEntity" table="dataset_metadata">
-        <id name="id" type="long">
-            <column name="dataset_metadata_id">
-            	<comment>Table primary key, used for relations</comment>
-            </column>
-            <generator class="native">
-                <param name="sequence_name">metadata_seq</param>
-            </generator>
-        </id>
-
-        <discriminator column="type" type="string" />
-        <property name="type" column="type" type="string"  insert="false" update="false"/>
-
-        <property name="name" column="name" type="string" />
+    	<composite-id>
+    		<key-property name="dataset_id" column="fk_dataset_id" type="long"/>
+    		<key-many-to-one name="parameter"  class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
+                foreign-key="fk_parameter_metadtata" />
+    	</composite-id>
         <property name="lastUpdate" column="last_update" type="timestamp" />
-        <property name="dataset" column="fk_dataset_id" type="long" />
-      	<property name="domain" type="string">
-            <column name="domain" not-null="true">
-                <comment>The metadata value domain.</comment>
-            </column>
-        </property>
-        <subclass name="MetadataStringEntity" discriminator-value="string">
-            <property name="value" column="value_string" type="string" />
-        </subclass>
-
-        <subclass name="MetadataJsonEntity" discriminator-value="json">
-            <property name="value" column="value_json" type="string" />
-        </subclass>
-
-        <subclass name="MetadataBooleanEntity" discriminator-value="boolean">
-            <property name="value" column="value_boolean" type="org.hibernate.type.BooleanType" />
-        </subclass>
-
-        <subclass name="MetadataQuantityEntity" discriminator-value="quantity">
-            <property name="value" column="value_double" type="big_decimal" precision="29"/>
-        </subclass>
-
-        <subclass name="MetadataIntegerEntity" discriminator-value="integer">
-            <property name="value" column="value_integer" type="integer" />
-        </subclass>
-
+      	<property name="domain" column="domain" type="string" />
     </class>
 </hibernate-mapping>
