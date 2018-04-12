@@ -19,17 +19,6 @@ package org.n52.series.db.beans;
 
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
 
-    public static final String PROPERTY_HIDDEN_CHILD = "hiddenChild";
     private static final long serialVersionUID = 2302654989683191424L;
-
-    private boolean hiddenChild;
-
-    public boolean isHiddenChild() {
-        return hiddenChild;
-    }
-
-    public void setHiddenChild(boolean hiddenChild) {
-        this.hiddenChild = hiddenChild;
-    }
 
 }
