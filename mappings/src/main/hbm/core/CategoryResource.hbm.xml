@@ -11,28 +11,14 @@
             </generator>
         </id>
         <property name="identifier" type="string" index="idx_category_identifier">
-            <column name="identifier" not-null="true">
-                <comment>The identifier of the category</comment>
-            </column>
+            <column name="identifier" not-null="true" />
         </property>
         <property name="name" type="string">
-            <column name="name">
-                <comment>The name of the category</comment>
-            </column>
+            <column name="name" />
         </property>
         <property name="description" type="string">
-            <column name="description">
-                <comment>Description of the category</comment>
-            </column>
+            <column name="description" />
         </property>
-        <!--
-        <one-to-one name="translations" column="category" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"></many-to-one>
-         <set name="translations" table="category_i18" inverse="true" fetch="select">
-            <key column="category" not-null="true" foreign-key="fk_category_translation"/>
-            <many-to-many unique="true" column="id" class="org.n52.series.db.beans.i18n.I18nCategoryEntity"
-                foreign-key="fk_translation_category" />
-        </set>
-         -->
         <set name="translations" table="category_i18" inverse="true" fetch="select">
             <key column="fk_category_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nCategoryEntity" />

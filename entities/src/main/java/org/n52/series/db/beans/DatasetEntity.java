@@ -46,7 +46,7 @@ public class DatasetEntity extends DescribableEntity
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
-    public static final String HIDDEN_CHILD = "hiddenChild";
+    public static final String HIDDEN_CHILD = "hidden";
 
     public static final String PROPERTY_UNIT = "unit";
 
@@ -90,7 +90,7 @@ public class DatasetEntity extends DescribableEntity
 
     private long observationCount = -1;
 
-    private boolean hiddenChild;
+    private boolean hidden;
 
     private FormatEntity observationType;
 
@@ -348,13 +348,13 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public boolean isHiddenChild() {
-        return hiddenChild;
+    public boolean isHidden() {
+        return hidden;
     }
 
     @Override
-    public DatasetEntity setHiddenChild(boolean hiddenChild) {
-        this.hiddenChild = hiddenChild;
+    public DatasetEntity setHidden(boolean hidden) {
+        this.hidden = hidden;
         return this;
     }
 
@@ -445,7 +445,7 @@ public class DatasetEntity extends DescribableEntity
         setFirstObservation(dataset.getFirstObservation());
         setFirstQuantityValue(dataset.getFirstQuantityValue());
         setFirstValueAt(dataset.getFirstValueAt());
-        setHiddenChild(dataset.isHiddenChild());
+        setHidden(dataset.isHidden());
         setLastObservation(dataset.getLastObservation());
         setLastQuantityValue(dataset.getLastQuantityValue());
         setLastValueAt(dataset.getLastValueAt());

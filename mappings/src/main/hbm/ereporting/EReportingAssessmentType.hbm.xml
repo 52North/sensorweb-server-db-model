@@ -5,19 +5,14 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="EReportingAssessmentTypeEntity"
            table="assessment_type">
-        <comment>Table to store the AQD e-Reporting assessmentType information. Mapping file: sos/ereporting/EReportingAssessmentType.hbm.xml</comment>
         <id name="assessmentType"
             type="string">
-            <column name="assessment_type">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="assessment_type"/>
             <generator class="assigned" />
         </id>
         <property name="uri"
                   type="string">
-            <column name="uri">
-                <comment>AQD e-Reporting assessmentType URI, e.g. "http://dd.eionet.europa.eu/vocabulary/aq/assessmenttype/fixed"</comment>
-            </column>
+            <column name="uri"/>
         </property>
     </class>
 </hibernate-mapping>

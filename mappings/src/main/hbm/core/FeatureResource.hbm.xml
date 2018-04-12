@@ -5,9 +5,7 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="AbstractFeatureEntity" abstract="true" table="feature">
         <id name="id" type="long">
-            <column name="feature_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="feature_id" />
             <generator class="native">
                 <param name="sequence_name">feature_seq</param>
             </generator>
@@ -16,47 +14,31 @@
         <discriminator column="discriminator" type="string" not-null="false"/>
 
         <many-to-one name="featureType" class="FormatEntity" foreign-key="fk_feature_format">
-            <column name="fk_format_id" not-null="true">
-                <comment>Relation/foreign key to the featureType table. Describes the type of the feature. Contains "featureType".featureTypeId</comment>
-            </column>
+            <column name="fk_format_id" not-null="true"/>
         </many-to-one>
 
         <property name="identifier" type="string" index="idx_feature_identifier">
-            <column name="identifier" unique-key="un_feature_identifier">
-                <comment>The identifier of the feature, gml:identifier. Used as parameter for queries. Optional but unique</comment>
-            </column>
+            <column name="identifier" unique-key="un_feature_identifier"/>
         </property>
 		<many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_feature_identifier_codespace">
-            <column name="fk_identifier_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
-            </column>
+            <column name="fk_identifier_codespace_id"/>
         </many-to-one>
         <property name="name" type="string">
-            <column name="name">
-                <comment>The name of the feature, gml:name. Optional</comment>
-            </column>
+            <column name="name"/>
         </property>
 		<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
-            <column name="fk_name_codespace_id">
-                <comment>The name of the feature, gml:name. Optional</comment>
-            </column>
+            <column name="fk_name_codespace_id"/>
         </many-to-one>
         <property name="description" type="string">
-            <column name="description">
-                <comment>Description of the feature, gml:description. Optional</comment>
-            </column>
+            <column name="description"/>
         </property>
 
         <property name="xml" type="text">
-            <column name="xml">
-                <comment>XML description of the feature, used when transactional profile is supported . Optional</comment>
-            </column>
+            <column name="xml"/>
         </property>
 
         <property name="url" type="string">
-            <column name="url" unique-key="un_feature_url">
-                <comment>Reference URL to the feature if it is stored in another service, e.g. WFS. Optional but unique</comment>
-            </column>
+            <column name="url" unique-key="un_feature_url"/>
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
@@ -67,12 +49,12 @@
             <property column="geom" name="geometry" type="jts_geometry"/>
         </component>
 
-        <set name="children" table="feature_relation" inverse="false" fetch="select">
+        <set name="children" table="feature_hierarchy" inverse="false" fetch="select">
             <key column="fk_parent_feature_id" not-null="true" foreign-key="fk_feature_parent" />
             <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
         </set>
 
-        <set name="parents" table="feature_relation" inverse="false" fetch="select">
+        <set name="parents" table="feature_hierarchy" inverse="false" fetch="select">
             <key column="fk_child_feature_id" not-null="true" foreign-key="fk_feature_child"/>
             <many-to-many class="AbstractFeatureEntity" column="fk_parent_feature_id" foreign-key="fk_feature_parent"/>
         </set>

@@ -471,14 +471,6 @@ public interface HibernateRelations {
         T setFormat(FormatEntity procedureDescriptionFormat);
     }
 
-    interface HasRelatedFeatureRoles<T> {
-        String RELATED_FEATURE_ROLE = "relatedFeatureRole";
-
-        RelatedFeatureRoleEntity getRole();
-
-        T setRole(RelatedFeatureRoleEntity role);
-    }
-
     interface HasRelatedFeatures<T> {
         String RELATED_FEATURES = "relatedFeatures";
 

@@ -23,20 +23,19 @@ import java.util.Set;
 
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasOfferings;
-import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatureRoles;
 
 /**
  * @since 1.0.0
  */
 public class RelatedFeatureEntity extends IdEntity
-        implements Serializable, HasFeature<RelatedFeatureEntity>, HasRelatedFeatureRoles<RelatedFeatureEntity>,
+        implements Serializable, HasFeature<RelatedFeatureEntity>,
         HasOfferings<RelatedFeatureEntity> {
 
     private static final long serialVersionUID = -8143897383050691280L;
 
     private AbstractFeatureEntity<RelatedFeatureEntity> feature;
 
-    private RelatedFeatureRoleEntity role;
+    private String role;
 
     private Set<OfferingEntity> offerings = new HashSet<OfferingEntity>(0);
 
@@ -54,13 +53,11 @@ public class RelatedFeatureEntity extends IdEntity
         return this;
     }
 
-    @Override
-    public RelatedFeatureRoleEntity getRole() {
+    public String getRole() {
         return this.role;
     }
 
-    @Override
-    public RelatedFeatureEntity setRole(RelatedFeatureRoleEntity role) {
+    public RelatedFeatureEntity setRole(String role) {
         this.role = role;
         return this;
     }

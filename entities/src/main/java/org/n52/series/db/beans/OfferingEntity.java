@@ -42,8 +42,6 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     private static final long serialVersionUID = 5862607025737865794L;
 
-    private boolean hidden;
-
     private GeometryEntity geometryEntity;
 
     private Set<FormatEntity> observationTypes;
@@ -63,18 +61,6 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     private Date validTimeStart;
 
     private Date validTimeEnd;
-
-    public boolean isHidden() {
-        return hidden;
-    }
-
-    public boolean getHidden() {
-        return hidden;
-    }
-
-    public void setHidden(boolean hidden) {
-        this.hidden = hidden;
-    }
 
     public Geometry getGeometry() {
         return geometryEntity != null

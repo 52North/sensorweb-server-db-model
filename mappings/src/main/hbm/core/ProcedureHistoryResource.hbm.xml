@@ -4,39 +4,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ProcedureHistoryEntity" table="procedure_history">
-        <comment>Table to store procedure descriptions which were inserted or updated via the transactional Profile. Mapping file: msos/core/ProcedureHistory.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="procedure_history_id">
-                <comment>Table primary key</comment>
-            </column>
+            <column name="procedure_history_id"/>
             <generator class="native">
                 <param name="sequence_name">procedure_history_seq</param>
             </generator>
         </id>
 		<many-to-one name="procedure" class="ProcedureEntity" foreign-key="fk_ph_procedure_id">
-            <column name="fk_procedure_id" not-null="true">
-                <comment>Foreign Key (FK) to the related procedure. Contains "procedure".id</comment>
-            </column>
+            <column name="fk_procedure_id" not-null="true"/>
         </many-to-one>
         <many-to-one name="format" class="FormatEntity" foreign-key="fk_pdf_id" >
-            <column name="fk_format_id" not-null="true">
-                <comment>Foreign Key (FK) to the related procedureDescriptionFormat. Contains "procedureDescriptionFormat".id</comment>
-            </column>
+            <column name="fk_format_id" not-null="true"/>
         </many-to-one>
         <property name="startTime" type="timestamp">
-            <column index="idx_start_time" name="valid_from" length="29" not-null="true">
-                <comment>Timestamp since this procedure description is valid</comment>
-            </column>
+            <column index="idx_start_time" name="valid_from" length="29" not-null="true"/>
         </property>
         <property name="endTime" type="timestamp">
-            <column index="idx_end_time" name="valid_to" length="29" not-null="false" default="NULL">
-                <comment>Timestamp until this procedure description is invalid</comment>
-            </column>
+            <column index="idx_end_time" name="valid_to" length="29" not-null="false" default="NULL"/>
         </property>
         <property name="xml" type="text">
-            <column name="xml" not-null="true">
-                <comment>Procedure description as XML string</comment>
-            </column>
+            <column name="xml" not-null="true"/>
         </property>
     </class>
 </hibernate-mapping>

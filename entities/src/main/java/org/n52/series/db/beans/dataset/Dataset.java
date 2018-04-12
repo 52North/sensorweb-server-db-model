@@ -136,9 +136,9 @@ public interface Dataset extends Describable {
 
     long getObservationCount();
 
-    boolean isHiddenChild();
+    boolean isHidden();
 
-    DatasetEntity setHiddenChild(boolean hiddenChild);
+    DatasetEntity setHidden(boolean hidden);
 
     FormatEntity getObservationType();
 
