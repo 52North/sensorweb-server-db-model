@@ -55,56 +55,40 @@
             <property column="geom" name="geometry" type="jts_geometry" />
         </component>
 
-        <set name="children" table="offering_relation" inverse="false" fetch="select">
-            <comment>Relation table to store offering hierarchies. E.g. define a parent in a query and all childs are also contained in the response.  Mapping file: sos/core/Offering.hbm.xml</comment>
+        <set name="children" table="offering_hierarchy" inverse="false" fetch="select">
             <key column="fk_parent_offering_id" not-null="true" foreign-key="fk_offering_parent" />
             <many-to-many class="OfferingEntity" column="fk_child_offering_id" foreign-key="fk_offering_child" />
         </set>
 
-        <set name="parents" table="offering_relation" inverse="false" fetch="select">
+        <set name="parents" table="offering_hierarchy" inverse="false" fetch="select">
             <key column="fk_child_offering_id" not-null="true" foreign-key="fk_offering_child" />
             <many-to-many class="OfferingEntity" column="fk_parent_offering_id" foreign-key="fk_offering_parent" />
         </set>
 
         <set name="observationTypes" table="offering_observation_type" inverse="false" fetch="select">
-            <comment>Table to store relations between offering and allowed observationTypes, defined in InsertSensor request</comment>
             <key foreign-key="fk_offering_observation_type">
-                <column name="fk_offering_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
-                </column>
+                <column name="fk_offering_id" not-null="true"/>
             </key>
             <many-to-many class="FormatEntity" foreign-key="fk_observation_type_offering">
-                <column name="fk_format_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related observationType. Contains "observationType".observationTypeId</comment>
-                </column>
+                <column name="fk_format_id" not-null="true"/>
             </many-to-many>
         </set>
 
         <set name="relatedFeatures" table="offering_related_feature" inverse="false">
-            <comment>Table to store relations between offering and associated relatedFeatures</comment>
             <key foreign-key="fk_offering_related_feature">
-                <column name="fk_offering_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
-                </column>
+                <column name="fk_offering_id" not-null="true"/>
             </key>
             <many-to-many class="RelatedFeatureEntity" foreign-key="fk_related_feature_offering">
-                <column name="fk_related_feature_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related reladedFeature. Contains "reladed_feature".relatedFeatureId</comment>
-                </column>
+                <column name="fk_related_feature_id" not-null="true"/>
             </many-to-many>
         </set>
 
         <set name="featureTypes" table="offering_feature_type" inverse="false">
-            <comment>Table to store relations between offering and allowed featureOfInterestTypes, defined in InsertSensor request.</comment>
             <key foreign-key="fk_offering_feature_type">
-                <column name="fk_offering_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related offering. Contains "offering".id</comment>
-                </column>
+                <column name="fk_offering_id" not-null="true"/>
             </key>
             <many-to-many class="FormatEntity" foreign-key="fk_feature_type_offering">
-                <column name="fk_format_id" not-null="true">
-                    <comment>Foreign Key (FK) to the related id. Contains "feature_type".id</comment>
-                </column>
+                <column name="fk_format_id" not-null="true"/>
             </many-to-many>
         </set>
 

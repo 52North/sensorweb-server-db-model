@@ -49,12 +49,12 @@
             <property column="geom" name="geometry" type="jts_geometry"/>
         </component>
 
-        <set name="children" table="feature_relation" inverse="false" fetch="select">
+        <set name="children" table="feature_hierarchy" inverse="false" fetch="select">
             <key column="fk_parent_feature_id" not-null="true" foreign-key="fk_feature_parent" />
             <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
         </set>
 
-        <set name="parents" table="feature_relation" inverse="false" fetch="select">
+        <set name="parents" table="feature_hierarchy" inverse="false" fetch="select">
             <key column="fk_child_feature_id" not-null="true" foreign-key="fk_feature_child"/>
             <many-to-many class="AbstractFeatureEntity" column="fk_parent_feature_id" foreign-key="fk_feature_parent"/>
         </set>
