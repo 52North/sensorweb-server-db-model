@@ -5,6 +5,7 @@ Licensed under GNU General Public License, Version 2.0
 This project includes: 
   AntLR Parser Generator under BSD License
   ClassMate under The Apache Software License, Version 2.0
+  com.vividsolutions:jts-core under GNU Lesser General Public License, Version 2.1
   Core Hibernate O/RM functionality under GNU Lesser General Public License
   dom4j under DOM4J license, http://dom4j.sourceforge.net/dom4j-1.6.1/license.html (BSD style)
   geolatte-geom under LGPL 3.0
