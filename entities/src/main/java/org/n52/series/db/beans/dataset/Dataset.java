@@ -24,7 +24,6 @@ import java.util.Set;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.CategoryEntity;
 import org.n52.series.db.beans.CodespaceEntity;
-import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.OfferingEntity;
@@ -33,6 +32,7 @@ import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.RelatedDatasetEntity;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
 
 public interface Dataset {
@@ -101,13 +101,13 @@ public interface Dataset {
 
     boolean isSetLastValueAt();
 
-    DataEntity getFirstObservation();
+    Data getFirstObservation();
 
-    void setFirstObservation(DataEntity observation);
+    void setFirstObservation(Data observation);
 
-    DataEntity getLastObservation();
+    Data getLastObservation();
 
-    void setLastObservation(DataEntity observation);
+    void setLastObservation(Data observation);
 
     BigDecimal getFirstQuantityValue();
 
@@ -135,9 +135,9 @@ public interface Dataset {
 
     long getObservationCount();
 
-    boolean isHiddenChild();
+    boolean isHidden();
 
-    DatasetEntity setHiddenChild(boolean hiddenChild);
+    DatasetEntity setHidden(boolean hidden);
 
     FormatEntity getObservationType();
 
