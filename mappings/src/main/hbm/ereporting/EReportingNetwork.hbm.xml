@@ -4,39 +4,26 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="EReportingNetworkEntity" table="network">
-        <comment>Table to store the AQD e-Reporting network information. Mapping file: sos/ereporting/EReportingNetwork.hbm.xml</comment>
         <id name="id" type="long">
-            <column name="network_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="network_id"/>
             <generator class="native">
                 <param name="sequence_name">network_seq</param>
             </generator>
         </id>
        <property name="identifier" type="string">
-            <column name="identifier" not-null="true" unique-key="un_network_identifier">
-                <comment>The identifier of the Network, gml:identifier. Used as parameter for queries. Optional but unique</comment>
-            </column>
+            <column name="identifier" not-null="true" unique-key="un_network_identifier"/>
         </property>
         <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_network_codespace">
-            <column name="fk_identifier_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
-            </column>
+            <column name="fk_identifier_codespace_id"/>
         </many-to-one>
         <property name="name" type="string">
-            <column name="name">
-                <comment>The name of the network, gml:name. Optional</comment>
-            </column>
+            <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_network_name_codespace">
-            <column name="fk_name_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:name codespace. Optional</comment>
-            </column>
+            <column name="fk_name_codespace_id"/>
         </many-to-one>
         <property name="description" type="string">
-            <column name="description">
-                <comment>Description of the network, gml:description. Optional</comment>
-            </column>
+            <column name="description"/>
         </property>
     </class>
 </hibernate-mapping>
