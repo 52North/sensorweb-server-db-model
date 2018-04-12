@@ -20,25 +20,15 @@ package org.n52.series.db.beans.metadata;
 import java.sql.Timestamp;
 import java.util.Date;
 
-import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.parameter.Parameter;
 
-public abstract class MetadataEntity<T> extends IdEntity {
+public class MetadataEntity {
 
     public static final String PROPERTY_DOMAIN = "domain";
 
-    static final String PROPERTY_NAME = "name";
-
-    static final String PROPERTY_SERIES_ID = "dataset";
-
-    private static final long serialVersionUID = -8312685947116728741L;
-
     private Long dataset;
 
-    private String name;
-
-    private String type;
-
-    private T value;
+    private Parameter< ? > parameter;
 
     private Date lastUpdate;
 
@@ -52,28 +42,12 @@ public abstract class MetadataEntity<T> extends IdEntity {
         this.dataset = dataset;
     }
 
-    public String getName() {
-        return name;
+    public Parameter< ? > getParameter() {
+        return parameter;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public T getValue() {
-        return value;
-    }
-
-    public void setValue(T value) {
-        this.value = value;
+    public void setParameter(Parameter< ? > parameter) {
+        this.parameter = parameter;
     }
 
     public Date getLastUpdate() {
