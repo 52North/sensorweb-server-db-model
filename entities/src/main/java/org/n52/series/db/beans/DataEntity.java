@@ -70,7 +70,7 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private GeometryEntity geometryEntity;
 
-    private Boolean deleted;
+    private boolean deleted;
 
     private Date validTimeStart;
 
@@ -162,7 +162,7 @@ public abstract class DataEntity<T> extends DescribableEntity
         return deleted;
     }
 
-    public void setDeleted(Boolean deleted) {
+    public void setDeleted(boolean deleted) {
         this.deleted = deleted;
     }
 
