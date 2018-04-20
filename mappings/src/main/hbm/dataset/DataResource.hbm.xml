@@ -64,7 +64,10 @@
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
-            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
+            <!--
+            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
+            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
+             -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
         </component>
 
@@ -92,15 +95,15 @@
               <column name="value_description"/>
           </property>
 
-          <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="29">
-              <column name="vertical_from" not-null="true" default="-99999.00"/>
+          <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
+              <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10"/>
           </property>
-          <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="29">
-              <column name="vertical_to" not-null="true" default="-99999.00"/>
+          <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
+              <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10"/>
           </property>
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
-            <property column="value_quantity" name="value" type="big_decimal" precision="29"/>
+            <property column="value_quantity" name="value" type="big_decimal" precision="20" scale="10"/>
         </subclass>
 
         <subclass extends="DataEntity" name="TextDataEntity" discriminator-value="text">
@@ -126,8 +129,8 @@
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
         	<component class="GeometryEntity" name="geometryEntity">
                 <!--
-                <property column="value_lat" name="lat" type="big_decimal" />
-                <property column="value_lon" name="lon" type="big_decimal" />
+                <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
+                <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
                 <property column="value_geometry" name="geometry" type="jts_geometry" />
             </component>

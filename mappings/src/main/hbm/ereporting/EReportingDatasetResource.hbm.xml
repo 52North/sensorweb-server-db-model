@@ -28,8 +28,8 @@
         <property column="firsttimestamp" name="firstValueAt" type="timestamp" />
         <property column="lasttimestamp" name="lastValueAt" type="timestamp" />
 
-        <property column="first_value" name="firstValue" type="big_decimal" precision="29" />
-        <property column="last_value" name="lastValue" type="big_decimal" precision="29" />
+        <property column="first_value" name="firstValue" type="big_decimal" precision="20" scale="10" />
+        <property column="last_value" name="lastValue" type="big_decimal" precision="20" scale="10" />
 
         <many-to-one class="EReportingDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
         <many-to-one class="EReportingDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>

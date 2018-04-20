@@ -34,7 +34,7 @@ public class QuantityDataEntityTest {
             "-9999.9"
         });
         QuantityDataEntity entity = new QuantityDataEntity();
-        entity.setValue(new BigDecimal(9999d));
+        entity.setValue(BigDecimal.valueOf(9999d));
         assertTrue(entity.isNoDataValue(noDataValues));
     }
 }

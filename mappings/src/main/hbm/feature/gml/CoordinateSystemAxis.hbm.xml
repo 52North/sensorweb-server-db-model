@@ -53,8 +53,8 @@
         <many-to-one name="codespaceAxisAbbrev" column="fk_codespace_axis_abbrev_id" class="CodespaceEntity" foreign-key="fk_codespace_axis_abbrev" />
         <property name="axisDirection" column="axis_direction" type="string" />
         <many-to-one name="codespaceAxisDirection" column="codespace_axis_direction" class="CodespaceEntity" foreign-key="fk_codespace_axis_direction" />
-        <property name="minimumValue" column="minimum_value" type="big_decimal" length="29" />
-        <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"  />
+        <property name="minimumValue" column="minimum_value" type="big_decimal" precision="20" scale="10" />
+        <property name="maximumValue" column="maximum_value" type="big_decimal" precision="20" scale="10"  />
         <property name="rangeMeaning" column="range_meaning" type="string" />
         <many-to-one name="codespaceRangeMeaning" column="fk_codespace_range_meaning_id" class="CodespaceEntity" foreign-key="fk_codespace_range_meaning" />
         <many-to-one name="uom"

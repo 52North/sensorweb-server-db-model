@@ -25,8 +25,8 @@
         <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="gmdid" column="gmdid" type="string" />
         <property name="uuid" column="uuid" type="string" />
-        <property name="minimumValue" column="minimum_value" type="big_decimal" length="29"/>
-        <property name="maximumValue" column="maximum_value" type="big_decimal" length="29"/>
+        <property name="minimumValue" column="minimum_value" type="big_decimal" precision="20" scale="10"/>
+        <property name="maximumValue" column="maximum_value" type="big_decimal" precision="20" scale="10"/>
         <many-to-one name="verticalCRS"
                      class="org.n52.series.db.beans.feature.gml.VerticalCRSEntity"
                      foreign-key="fk_vertical_crs">
