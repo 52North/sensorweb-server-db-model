@@ -50,9 +50,7 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
 
     @Override
     public Integer getNumberOfDecimals() {
-        return numberOfDecimals != null
-                ? numberOfDecimals
-                : 0;
+        return numberOfDecimals;
     }
 
     @Override

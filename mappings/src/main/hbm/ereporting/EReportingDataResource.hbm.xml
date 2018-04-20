@@ -64,7 +64,10 @@
         </property>
 
         <component  name="geometryEntity" class="org.n52.series.db.beans.GeometryEntity">
-            <!-- <property column="lat" name="lat" type="big_decimal" /> <property column="lon" name="lon" type="big_decimal" /> -->
+            <!--
+            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10"/>
+            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10"/>
+             -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
         </component>
 
@@ -92,11 +95,11 @@
               <column name="value_description"/>
           </property>
 
-          <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="29">
-              <column name="vertical_from" not-null="true" default="-99999.00"/>
+          <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
+              <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10"/>
           </property>
-          <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="29">
-              <column name="vertical_to" not-null="true" default="-99999.00"/>
+          <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
+              <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10"/>
           </property>
 
     	<property name="validation" type="int">
@@ -124,19 +127,19 @@
                 <comment>AQD e-Reporting data capture quality flag</comment>
             </column>
         </property>
-        <property name="dataCapture" type="big_decimal">
-            <column name="dataCapture" not-null="false">
+        <property name="dataCapture" type="big_decimal" precision="20" scale="10">
+            <column name="dataCapture" not-null="false" precision="20" scale="10">
                 <comment>AQD e-Reporting data capture value, required for multiday observations</comment>
             </column>
         </property>
-        <property name="uncertaintyEstimation" type="big_decimal">
-            <column name="uncertainty_estimation" not-null="false">
+        <property name="uncertaintyEstimation" type="big_decimal" precision="20" scale="10">
+            <column name="uncertainty_estimation" not-null="false" precision="20" scale="10">
                 <comment>AQD e-Reporting uncertainty estimation quality value</comment>
             </column>
         </property>
 
        <subclass extends="EReportingDataEntity" name="EReportingQuantityDataEntity" discriminator-value="quantity">
-            <property column="value_quantity" name="value" type="big_decimal" precision="29" />
+            <property column="value_quantity" name="value" type="big_decimal" precision="20" scale="10" />
         </subclass>
     </class>
 </hibernate-mapping>
