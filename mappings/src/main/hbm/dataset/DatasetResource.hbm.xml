@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'text-profile', 'category-profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced', 'not_initialized')">
@@ -13,13 +13,13 @@
         <discriminator column="value_type" force="true" type="string" not-null="true"/>
 
         <many-to-one class="ProcedureEntity" column="fk_procedure_id" name="procedure" not-null="true" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_procedure" />
+            foreign-key="fk_dataset_procedure" />
         <many-to-one class="PhenomenonEntity" column="fk_phenomenon_id" name="phenomenon" not-null="true" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_phenomenon" />
+            foreign-key="fk_dataset_phenomenon" />
         <many-to-one class="OfferingEntity" column="fk_offering_id" name="offering" not-null="true" unique-key="un_dataset_identity"
            foreign-key="fk_dataset_offering" />
         <many-to-one class="CategoryEntity" column="fk_category_id" name="category" not-null="false" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_category" />
+            foreign-key="fk_dataset_category" />
         <many-to-one class="FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
             foreign-key="fk_dataset_feature" />
         <many-to-one class="PlatformEntity" column="fk_procedure_id" name="platform" insert="false" update="false" unique-key="un_dataset_identity" />
@@ -61,7 +61,7 @@
             <column name="fk_identifier_codespace_id"/>
         </many-to-one>
 
-		<property name="name" type="string">
+        <property name="name" type="string">
             <column name="name"/>
         </property>
 
@@ -80,9 +80,9 @@
         </set>
 
         <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized">
-        	<property name="unitId" column="fk_unit_id" type="long" lazy="true" />
-        	<property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
-        	<property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
+            <property name="unitId" column="fk_unit_id" type="long" lazy="true" />
+            <property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
+            <property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
         </subclass>
         <subclass name="QuantityDatasetEntity" discriminator-value="quantity" >
             <property name="numberOfDecimals" column="decimals" type="int" />

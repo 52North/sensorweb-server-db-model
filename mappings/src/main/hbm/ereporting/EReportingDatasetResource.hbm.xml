@@ -26,7 +26,7 @@
         <many-to-one class="EReportingSamplingPointEntity" column="fk_sampling_point_id" name="samplingPoint" not-null="false" unique-key="un_dataset_identity"
             foreign-key="fk_dataset_sampling_point" />
 
-		<many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
+        <many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
             <column name="fk_format_id">
                 <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
             </column>
@@ -67,7 +67,7 @@
             <column name="fk_identifier_codespace_id"/>
         </many-to-one>
 
-		<property name="name" type="string">
+        <property name="name" type="string">
             <column name="name"/>
         </property>
 
@@ -86,7 +86,7 @@
         </set>
 
         <subclass name="EReportingNotInitializedDatasetEntity" discriminator-value="not_initialized">
-        	<property name="unitId" column="fk_unit_id" type="long" lazy="true" />
+            <property name="unitId" column="fk_unit_id" type="long" lazy="true" />
             <property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
             <property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
         </subclass>

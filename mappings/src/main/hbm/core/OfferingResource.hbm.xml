@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="OfferingEntity" table="offering">
@@ -13,13 +13,13 @@
         <property name="identifier" type="string" index="idx_offering_identifier">
             <column name="identifier" not-null="true" unique-key="un_offering_identifier"/>
         </property>
-		<many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_offering_identifier_codespace">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_offering_identifier_codespace">
             <column name="fk_identifier_codespace_id"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
-		<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_offering_name_codespace">
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_offering_name_codespace">
             <column name="fk_name_codespace_id"/>
         </many-to-one>
         <property name="description" type="string">
@@ -108,7 +108,7 @@
                 <param name="sequence_name">offering_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="fk_offering_id" not-null="true" class="OfferingEntity" foreign-key="fk_offering"/>
+        <many-to-one name="entity" column="fk_offering_id" not-null="true" class="OfferingEntity" foreign-key="fk_offering"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

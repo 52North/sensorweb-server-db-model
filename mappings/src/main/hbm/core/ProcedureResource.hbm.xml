@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ProcedureEntity" table="`procedure`">
@@ -76,7 +76,7 @@
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" column="fk_procedure_id" not-null="true" class="ProcedureEntity" foreign-key="fk_i18n_procedure"/>
+        <many-to-one name="entity" column="fk_procedure_id" not-null="true" class="ProcedureEntity" foreign-key="fk_i18n_procedure"/>
         <property name="locale" type="string" />
         <property name="name" type="string" />
         <property name="description" type="string" />

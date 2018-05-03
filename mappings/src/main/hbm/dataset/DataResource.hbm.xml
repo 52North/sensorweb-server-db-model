@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
@@ -10,7 +10,7 @@
                 <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
-		<discriminator column="value_type" force="true" type="string" not-null="true"/>
+        <discriminator column="value_type" force="true" type="string" not-null="true"/>
         <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true" unique-key="un_data_identity"/>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
@@ -119,15 +119,15 @@
         </subclass>
 
         <subclass name="BooleanDataEntity" extends="DataEntity" discriminator-value="boolean">
-        	<property column="value_boolean" name="value" type="org.n52.hibernate.type.SmallBooleanType" />
+            <property column="value_boolean" name="value" type="org.n52.hibernate.type.SmallBooleanType" />
         </subclass>
 
         <subclass name="CategoryDataEntity" extends="DataEntity" discriminator-value="category">
-        	<property column="value_category" name="value" type="string" />
+            <property column="value_category" name="value" type="string" />
         </subclass>
 
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
-        	<component class="GeometryEntity" name="geometryEntity">
+            <component class="GeometryEntity" name="geometryEntity">
                 <!--
                 <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
                 <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
@@ -137,22 +137,22 @@
         </subclass>
 
         <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
-			<join table="value_blob">
-	            <key foreign-key="fk_blob_value">
-	                <column name="fk_observation_id">
-	                </column>
-	            </key>
-	           <property name="value"
+            <join table="value_blob">
+                <key foreign-key="fk_blob_value">
+                    <column name="fk_observation_id">
+                    </column>
+                </key>
+               <property name="value"
                        type="blob">
                  <column name="value">
                      <comment>Blob observation value</comment>
                  </column>
-				</property>
+                </property>
             </join>
         </subclass>
 
         <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
-        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <key foreign-key="fk_composite_observation">
                     <column name="fk_parent_observation_id" not-null="true"/>
                 </key>
@@ -161,21 +161,21 @@
                 </many-to-many>
             </set>
             <join table="value_data_array">
-	            <key foreign-key="fk_data_array_value">
-	                <column name="fk_observation_id"/>
-	            </key>
-	           <property name="structure" type="text">
-		            <column name="structure" not-null="true"/>
-		        </property>
+                <key foreign-key="fk_data_array_value">
+                    <column name="fk_observation_id"/>
+                </key>
+               <property name="structure" type="text">
+                    <column name="structure" not-null="true"/>
+                </property>
 
-		        <property name="encoding" type="text">
-		            <column name="encoding" not-null="true"/>
-		        </property>
+                <property name="encoding" type="text">
+                    <column name="encoding" not-null="true"/>
+                </property>
             </join>
         </subclass>
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
-        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <key foreign-key="fk_composite_observation">
                     <column name="fk_parent_observation_id" not-null="true"/>
                 </key>
@@ -185,27 +185,27 @@
             </set>
         </subclass>
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
-				<key foreign-key="fk_composite_observation">
-					<column name="fk_parent_observation_id" not-null="true"/>
-				</key>
-				<many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
-					<column name="fk_child_observation_id" not-null="true"/>
-				</many-to-many>
-			</set>
-        	<join table="value_profile">
-	            <key foreign-key="fk_profile_value">
-	                <column name="fk_observation_id"/>
-	            </key>
-	            <property name="verticalFromName" type="string">
-	                <column name="vertical_from_name" not-null="false"/>
-	            </property>
-	            <property name="verticalToName" type="string">
-	                <column name="vertical_to_name" not-null="false"/>
-	            </property>
-	            <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-	                <column name="fk_vertical_unit_id" not-null="true"/>
-	            </many-to-one>
+            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+                <key foreign-key="fk_composite_observation">
+                    <column name="fk_parent_observation_id" not-null="true"/>
+                </key>
+                <many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
+                    <column name="fk_child_observation_id" not-null="true"/>
+                </many-to-many>
+            </set>
+            <join table="value_profile">
+                <key foreign-key="fk_profile_value">
+                    <column name="fk_observation_id"/>
+                </key>
+                <property name="verticalFromName" type="string">
+                    <column name="vertical_from_name" not-null="false"/>
+                </property>
+                <property name="verticalToName" type="string">
+                    <column name="vertical_to_name" not-null="false"/>
+                </property>
+                <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
+                    <column name="fk_vertical_unit_id" not-null="true"/>
+                </many-to-one>
             </join>
         </subclass>
 
