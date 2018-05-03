@@ -58,7 +58,7 @@ public interface Data<T>
 
     boolean getDeleted();
 
-    void setDeleted(Boolean deleted);
+    void setDeleted(boolean deleted);
 
     Date getValidTimeStart();
 

@@ -64,7 +64,10 @@
         </property>
 
         <component  name="geometryEntity" class="org.n52.series.db.beans.GeometryEntity">
-            <!-- <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" /> <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" /> -->
+            <!--
+            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10"/>
+            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10"/>
+             -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" not-null="false"/>
         </component>
 
@@ -93,10 +96,10 @@
           </property>
 
           <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
-              <column name="vertical_from" not-null="true" default="-99999.00"  precision="20" scale="10"/>
+              <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10"/>
           </property>
           <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
-              <column name="vertical_to" not-null="true" default="-99999.00"  precision="20" scale="10"/>
+              <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10"/>
           </property>
 
     	<property name="validation" type="int">

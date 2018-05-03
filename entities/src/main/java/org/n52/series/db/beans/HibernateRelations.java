@@ -336,6 +336,14 @@ public interface HibernateRelations {
          */
         void setSamplingTimeEnd(Date samplingTimeEnd);
 
+        default boolean hasSamplingTimeStart() {
+            return getSamplingTimeStart() != null;
+        }
+
+        default boolean hasSamplingTimeEnd() {
+            return getSamplingTimeStart() != null;
+        }
+
         /**
          * Get the start phenomenon time
          *
@@ -363,10 +371,6 @@ public interface HibernateRelations {
         @Deprecated
         default boolean hasPhenomenonTimeStart() {
             return hasSamplingTimeStart();
-        }
-
-        default boolean hasSamplingTimeStart() {
-            return getSamplingTimeStart() != null;
         }
 
         /**
@@ -397,10 +401,6 @@ public interface HibernateRelations {
         @Deprecated
         default boolean hasPhenomenonTimeEnd() {
             return hasSamplingTimeEnd();
-        }
-
-        default boolean hasSamplingTimeEnd() {
-            return getSamplingTimeEnd() != null;
         }
     }
 
