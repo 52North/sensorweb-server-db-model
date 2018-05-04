@@ -39,9 +39,9 @@ import org.n52.series.db.beans.UnitEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class DataStreamEntity extends IdEntity implements Serializable, HasName,
-        HasDescription, HasObservationType<DataStreamEntity>, HasPhenomenonTime,
-        HasResultTime, HasUnit, HasProcedure<DataStreamEntity>, HasGeometry {
+public class DatastreamEntity extends IdEntity implements Serializable, HasName,
+        HasDescription, HasObservationType<DatastreamEntity>, HasPhenomenonTime,
+        HasResultTime, HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
 
     private static final long serialVersionUID = -9067390076853876658L;
 
@@ -56,17 +56,18 @@ public class DataStreamEntity extends IdEntity implements Serializable, HasName,
 
     private String name;
     private String description;
-    private FormatEntity observationType;
-    private UnitEntity unitEntity;
     private GeometryEntity geometryEntity;
     private Date samplingTimeStart;
     private Date samplingTimeEnd;
-    private Date resultTime;
+    private Date resultTimeStart;
+    private Date resultTimeEnd;
 
-    private ThingEntity thingEntity;
-    private ProcedureEntity procedureEntity;
-    private PhenomenonEntity phenomenonEntiy;
-    private Set<DatasetEntity> dataSetEntities;
+    private FormatEntity observationType;
+    private UnitEntity unitOfMeasurement;
+    private ThingEntity thing;
+    private ProcedureEntity procedure;
+    private PhenomenonEntity phenomenon;
+    private Set<DatasetEntity> datasets;
 
     @Override
     public String getName() {
@@ -108,37 +109,43 @@ public class DataStreamEntity extends IdEntity implements Serializable, HasName,
         this.samplingTimeEnd = samplingTimeEnd;
     }
 
-    @Override
-    public Date getResultTime() {
-        return resultTime;
+    public Date getResultTimeStart() {
+        return resultTimeStart;
     }
 
-    @Override
-    public void setResultTime(Date resultTime) {
-        this.resultTime = resultTime;
+    public void setResultTimeStart(Date resultTimeStart) {
+        this.resultTimeStart = resultTimeStart;
+    }
+
+    public Date getResultTimeEnd() {
+        return resultTimeEnd;
+    }
+
+    public void setResultTimeEnd(Date resultTimeEnd) {
+        this.resultTimeEnd = resultTimeEnd;
     }
 
     @Override
     public UnitEntity getUnit() {
-        return unitEntity;
+        return unitOfMeasurement;
     }
 
     @Override
     public void setUnit(UnitEntity unit) {
-        this.unitEntity = unit;
+        this.unitOfMeasurement = unit;
     }
 
     @Override
     public boolean isSetUnit() {
-        return unitEntity != null;
+        return unitOfMeasurement != null;
     }
 
-    public Set<DatasetEntity> getDataSetEntities() {
-        return dataSetEntities;
+    public Set<DatasetEntity> getDatasets() {
+        return datasets;
     }
 
-    public void setDataSetEntities(Set<DatasetEntity> dataSetEntities) {
-        this.dataSetEntities = dataSetEntities;
+    public void setDatasets(Set<DatasetEntity> datasets) {
+        this.datasets = datasets;
     }
 
     @Override
@@ -147,7 +154,7 @@ public class DataStreamEntity extends IdEntity implements Serializable, HasName,
     }
 
     @Override
-    public DataStreamEntity setObservationType(FormatEntity observationType) {
+    public DatastreamEntity setObservationType(FormatEntity observationType) {
         this.observationType = observationType;
         return this;
     }
@@ -157,47 +164,47 @@ public class DataStreamEntity extends IdEntity implements Serializable, HasName,
         return this.observationType != null;
     }
 
-    public ThingEntity getThingEntity() {
-        return thingEntity;
+    public ThingEntity getThing() {
+        return thing;
     }
 
-    public void setThingEntity(ThingEntity thingEntity) {
-        this.thingEntity = thingEntity;
+    public void setThing(ThingEntity thing) {
+        this.thing = thing;
     }
 
     @Override
-    public DataStreamEntity setProcedure(ProcedureEntity procedure) {
-        this.procedureEntity = procedure;
+    public DatastreamEntity setProcedure(ProcedureEntity procedure) {
+        this.procedure = procedure;
         return this;
     }
 
     @Override
     public ProcedureEntity getProcedure() {
-        return procedureEntity;
+        return procedure;
     }
 
-    public UnitEntity getUnitEntity() {
-        return unitEntity;
+    public UnitEntity getUnitOfMeasurement() {
+        return unitOfMeasurement;
     }
 
-    public void setUnitEntity(UnitEntity unitEntity) {
-        this.unitEntity = unitEntity;
+    public void setUnitOfMeasurement(UnitEntity unitOfMeasurement) {
+        this.unitOfMeasurement = unitOfMeasurement;
     }
 
     public ProcedureEntity getProcedureEntity() {
-        return procedureEntity;
+        return procedure;
     }
 
-    public void setProcedureEntity(ProcedureEntity procedureEntity) {
-        this.procedureEntity = procedureEntity;
+    public void setProcedureEntity(ProcedureEntity procedure) {
+        this.procedure = procedure;
     }
 
-    public PhenomenonEntity getPhenomenonEntiy() {
-        return phenomenonEntiy;
+    public PhenomenonEntity getPhenomenon() {
+        return phenomenon;
     }
 
-    public void setPhenomenonEntiy(PhenomenonEntity phenomenonEntiy) {
-        this.phenomenonEntiy = phenomenonEntiy;
+    public void setPhenomenon(PhenomenonEntity phenomenon) {
+        this.phenomenon = phenomenon;
     }
 
     @Override
@@ -206,7 +213,7 @@ public class DataStreamEntity extends IdEntity implements Serializable, HasName,
     }
 
     @Override
-    public DataStreamEntity setGeometry(Geometry geometry) {
+    public DatastreamEntity setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
         this.geometryEntity.setSrid(geometry.getSRID());
@@ -214,9 +221,19 @@ public class DataStreamEntity extends IdEntity implements Serializable, HasName,
     }
 
     @Override
-    public DataStreamEntity setGeometryEntity(GeometryEntity geometryEntity) {
+    public DatastreamEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
+    }
+
+    @Override
+    public Date getResultTime() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void setResultTime(Date resultTime) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

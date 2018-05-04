@@ -38,8 +38,8 @@ public class ThingEntity extends IdEntity implements Serializable, HasName, HasD
     private String name;
     private String description;
     private String properties;
-    private LocationEntity location;
-    private Set<HistoricalLocation> historicalLocation;
+    private LocationEntity locationEntity;
+    private Set<HistoricalLocation> historicalLocationEntities;
 
     @Override
     public String getName() {
@@ -69,20 +69,20 @@ public class ThingEntity extends IdEntity implements Serializable, HasName, HasD
         return properties;
     }
 
-    public LocationEntity getLocation() {
-        return location;
+    public LocationEntity getLocationEntity() {
+        return locationEntity;
     }
 
-    public void setLocation(LocationEntity location) {
-        this.location = location;
+    public void setLocationEntity(LocationEntity locationEntity) {
+        this.locationEntity = locationEntity;
     }
 
-    public Set<HistoricalLocation> getHistoricalLocation() {
-        return historicalLocation;
+    public Set<HistoricalLocation> getHistoricalLocationEntities() {
+        return historicalLocationEntities;
     }
 
-    public void setHistoricalLocation(Set<HistoricalLocation> historicalLocation) {
-        this.historicalLocation = historicalLocation;
+    public void setHistoricalLocationEntities(Set<HistoricalLocation> historicalLocationEntities) {
+        this.historicalLocationEntities = historicalLocationEntities;
     }
 
 }

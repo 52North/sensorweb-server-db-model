@@ -32,6 +32,7 @@ public class LocationEncodingEntity extends IdEntity implements Serializable{
 
     private String encodingType;
     private String location;
+    private LocationEntity locationEntity; 
 
     public String getEncodingType() {
         return encodingType;
@@ -49,5 +50,12 @@ public class LocationEncodingEntity extends IdEntity implements Serializable{
         this.location = location;
     }
 
+    public LocationEntity getLocationEntity() {
+        return locationEntity;
+    }
+
+    public void setLocationEntity(LocationEntity locationEntity) {
+        this.locationEntity = locationEntity;
+    }
 
 }
