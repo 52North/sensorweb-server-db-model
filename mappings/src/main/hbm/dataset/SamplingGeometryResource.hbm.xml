@@ -18,6 +18,6 @@
             <property column="sampling_geometry" name="geometry" type="jts_geometry" />
         </component>
 
-        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" not-null="true" foreign-key="fk_sampling_geom_dataset" insert="false" update="false"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" not-null="true" insert="false" update="false"/>
     </class>
 </hibernate-mapping>

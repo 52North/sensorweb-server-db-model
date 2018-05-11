@@ -11,10 +11,13 @@
         <property name="timestamp" column="sampling_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
 
         <component class="GeometryEntity" name="geometryEntity" insert="false" update="false">
-            <!-- <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" /> <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" /> -->
+            <!--
+            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10"/>
+            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10"/>
+             -->
             <property column="sampling_geometry" name="geometry" type="jts_geometry" />
         </component>
 
-        <many-to-one column="fk_dataset_id" name="dataset" class="org.n52.series.db.beans.ereporting.EReportingDatasetEntity" not-null="true" foreign-key="fk_sampling_geom_dataset" insert="false" update="false"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="org.n52.series.db.beans.ereporting.EReportingDatasetEntity" not-null="true" insert="false" update="false"/>
     </class>
 </hibernate-mapping>
