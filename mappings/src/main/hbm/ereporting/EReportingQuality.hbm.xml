@@ -17,24 +17,16 @@
                <column name="year" not-null="true" unique-key="un_ereporting_quality_id"/>
         </property>
         <property name="primaryObservation" type="string">
-            <column name="primary_observation" not-null="true" unique-key="un_ereporting_quality_id">
-                   <comment>primaryObservation flag, see http://dd.eionet.europa.eu/vocabulary/aq/primaryObservation/view</comment>
-               </column>
+            <column name="primary_observation" not-null="true" unique-key="un_ereporting_quality_id"/>
         </property>
         <property name="timeCoverageFlag" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="time_coverage_flag" check="time_coverage_flag in (1,0)">
-                   <comment>indicator for time coverage </comment>
-               </column>
+            <column name="time_coverage_flag" check="time_coverage_flag in (1,0)"/>
         </property>
         <property name="dataCaptureFlag" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="data_capture_flag" check="data_capture_flag in (1,0)">
-                   <comment>Data capture value, used for multi day aggregations</comment>
-               </column>
+            <column name="data_capture_flag" check="data_capture_flag in (1,0)"/>
         </property>
         <property name="uncertaintyEstimation" type="big_decimal" precision="20" scale="10">
-            <column name="uncertainty_estimation" not-null="false" precision="20" scale="10">
-                   <comment>value for uncertainty estimation</comment>
-               </column>
+            <column name="uncertainty_estimation" not-null="false" precision="20" scale="10"/>
         </property>
     </class>
 </hibernate-mapping>

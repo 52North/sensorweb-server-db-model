@@ -27,9 +27,7 @@
             foreign-key="fk_dataset_sampling_point" />
 
         <many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
-            <column name="fk_format_id">
-                <comment>Foreign Key (FK) to the related observation type. Contains "observationtype".observationtypeid</comment>
-            </column>
+            <column name="fk_format_id" />
         </many-to-one>
 
         <property column="value_type" insert="false" name="valueType" type="string" update="false" />
@@ -45,9 +43,7 @@
         </property>
 
         <property name="disabled" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)">
-                <comment>Flag to indicate that this dataset is disabled for SOS transactional insertion or not.</comment>
-            </column>
+            <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)"/>
         </property>
 
         <property name="published" type="org.n52.hibernate.type.SmallBooleanType">

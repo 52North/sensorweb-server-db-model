@@ -144,9 +144,7 @@
                 </key>
                <property name="value"
                        type="blob">
-                 <column name="value">
-                     <comment>Blob observation value</comment>
-                 </column>
+                 <column name="value"/>
                 </property>
             </join>
         </subclass>
