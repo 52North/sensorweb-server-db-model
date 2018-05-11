@@ -14,15 +14,15 @@
         <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" foreign-key="fk_dataset" not-null="true" unique-key="un_data_identity"/>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
-            <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true"/>
+            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true"/>
         </property>
 
         <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
-            <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true"/>
+            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true"/>
         </property>
 
         <property name="resultTime" type="timestamp" unique-key="un_data_identity">
-            <column index="result_time_idx" name="result_time" length="29" not-null="true"/>
+            <column index="idx_result_time" name="result_time" length="29" not-null="true"/>
         </property>
 
         <property name="identifier" type="string" unique-key="un_data_identifier">
@@ -80,7 +80,7 @@
 
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
-                <column name="fk_observation_id" not-null="true" index="related_observation_idx" />
+                <column name="fk_observation_id" not-null="true" index="idx_related_observation" />
             </key>
             <one-to-many class="RelatedDataEntity" />
         </set>
