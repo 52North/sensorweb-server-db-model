@@ -8,11 +8,7 @@
                      discriminator-value="WmlMonitoringPointEntity">
         <join table="wml_monitoring_point">
             <key foreign-key="fk_wml_monitoring_point">
-                <column name="fk_feature_id">
-                    <comment>Foreign Key (FK) to the related featureOfInterest
-                        from the feature table. Contains
-                        "feature".id</comment>
-                </column>
+                <column name="fk_feature_id"/>
             </key>
             <component name="content" class="org.n52.series.db.beans.feature.MonitoringPointContent">
                 <set name="relatedParty" table="wml_mp_related_party">

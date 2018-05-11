@@ -7,9 +7,7 @@
            table="address">
         <id name="id"
             type="long">
-            <column name="address_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="address_id"/>
             <generator class="native">
                 <param name="sequence_name">address_seq</param>
             </generator>

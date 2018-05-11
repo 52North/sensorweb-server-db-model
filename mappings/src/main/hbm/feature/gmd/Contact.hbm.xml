@@ -7,9 +7,7 @@
            table="contact">
         <id name="id"
             type="long">
-            <column name="contact_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="contact_id"/>
             <generator class="native">
                 <param name="sequence_name">contact_seq</param>
             </generator>
