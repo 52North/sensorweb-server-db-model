@@ -81,14 +81,10 @@
         <property name="name" type="string" />
         <property name="description" type="string" />
         <property name="shortName" type="string">
-            <column name="short_name">
-                <!-- <comment>Locale/language specific shortname of the procedure</comment> -->
-            </column>
+            <column name="short_name"/>
         </property>
         <property name="longName" type="string">
-            <column name="long_name">
-                <!-- <comment>Locale/language specific longname of the procedure</comment> -->
-            </column>
+            <column name="long_name"/>
         </property>
     </class>
 </hibernate-mapping>
