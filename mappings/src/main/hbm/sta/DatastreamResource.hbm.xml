@@ -16,48 +16,47 @@
         <property name="description" type="string">
             <column name="description" not-null="true"/>
         </property>
-    </many-to-one>
-    <component class="GeometryEntity" name="geometryEntity">
-        <property name="geometry">
-            <column name="observedArea" type="jts_geometry" not-null="false"/>
+        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
+            <property name="geometry" type="jts_geometry">
+                <column name="observedArea" not-null="false"/>
+            </property>
+        </component>
+        <property name="resultTimeStart" type="timestamp">
+            <column name="resultTimeStart" length="29" not-null="false" default="NULL"/>
         </property>
-    </component>
-    <property name="resultTimeStart" type="timestamp">
-        <column name="resultTimeStart" length="29" not-null="false" default="NULL"/>
-    </property>
-    <property name="resultTimeEnd" type="timestamp">
-        <column name="resultTimeEnd" length="29" not-null="false" default="NULL"/>
-    </property>
-    <property name="samplingTimeStart" type="timestamp">
-        <column name="phenomenonTimeStart" length="29" not-null="false" default="NULL"/>
-    </property>
-    <property name="samplingTimeEnd" type="timestamp">
-        <column name="phenomenonTimeEnd" length="29" not-null="false" default="NULL"/>
-    </property>
-    <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_datastream_observation_type">
-        <column name="fk_format_id" not-null="true"/>
-    </many-to-one>
-    <many-to-one name="unitOfMeasurement" class="FormatEntity" not-null="false" foreign-key="fk_datastream_unit">
-        <column name="fk_unit_id" not-null="true"/>
-    </many-to-one>
-    <many-to-one name="thing" class="ThingEntity" not-null="true" foreign-key="fk_datastream_thing">
-        <column name="fk_thing_id" not-null="true"/>
-    </many-to-one>
-    <many-to-one name="procedure" class="ProcedureEntity" not-null="true" foreign-key="fk_datastream_procedure">
-        <column name="fk_procedure_id" not-null="true"/>
-    </many-to-one>
-    <many-to-one name="phenomenen" class="PheonemenonEntity" not-null="true" foreign-key="fk_datastream_phenomenon">
-        <column name="fk_phenomenon_id" not-null="true"/>
-    </many-to-one>
-        
-    <set name="datasets" table="datastream_dataset" inverse="false">
-        <key foreign-key="fk_datastream_dataset">
-            <column name="fk_datastream_id" not-null="true"/>
-        </key>
-        <many-to-many class="DatasetEntity" foreign-key="fk_dataset_datastream">
-            <column name="fk_dataset_id" not-null="true"/>
-        </many-to-many>
-    </set>
+        <property name="resultTimeEnd" type="timestamp">
+            <column name="resultTimeEnd" length="29" not-null="false" default="NULL"/>
+        </property>
+        <property name="samplingTimeStart" type="timestamp">
+            <column name="phenomenonTimeStart" length="29" not-null="false" default="NULL"/>
+        </property>
+        <property name="samplingTimeEnd" type="timestamp">
+            <column name="phenomenonTimeEnd" length="29" not-null="false" default="NULL"/>
+        </property>
+        <many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="false" foreign-key="fk_datastream_observation_type">
+            <column name="fk_format_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="unitOfMeasurement" class="org.n52.series.db.beans.UnitEntity" not-null="false" foreign-key="fk_datastream_unit">
+            <column name="fk_unit_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="thing" class="org.n52.series.db.beans.sta.ThingEntity" not-null="true" foreign-key="fk_datastream_thing">
+            <column name="fk_thing_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="procedure" class="org.n52.series.db.beans.ProcedureEntity" not-null="true" foreign-key="fk_datastream_procedure">
+            <column name="fk_procedure_id" not-null="true"/>
+        </many-to-one>
+        <many-to-one name="observableProperty" class="org.n52.series.db.beans.PhenomenonEntity" not-null="true" foreign-key="fk_datastream_phenomenon">
+            <column name="fk_phenomenon_id" not-null="true"/>
+        </many-to-one>
+
+        <set name="datasets" table="datastream_dataset" inverse="false">
+            <key foreign-key="fk_datastream_dataset">
+                <column name="fk_datastream_id" not-null="true"/>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_datastream">
+                <column name="fk_dataset_id" not-null="true"/>
+            </many-to-many>
+        </set>
     </class>
 
 </hibernate-mapping>

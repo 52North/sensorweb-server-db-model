@@ -16,9 +16,9 @@
         <property name="description" type="string">
             <column name="description" not-null="true"/>
         </property>
-        <component class="GeometryEntity" name="geometryEntity">
-            <property name="geometry">
-                <column name="geom" type="jts_geometry" not-null="false"/>
+        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
+            <property name="geometry" type="jts_geometry">
+                <column name="geom" not-null="false"/>
             </property>
         </component>
         <set name="locationEncodings" table="location_encoding" inverse="true">
