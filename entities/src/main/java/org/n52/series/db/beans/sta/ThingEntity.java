@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
@@ -25,7 +26,7 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class ThingEntity extends IdEntity implements Serializable, HasName, HasDescription{
+public class ThingEntity extends IdEntity implements Serializable, HasName, HasDescription {
 
     private static final long serialVersionUID = -6769297522935770467L;
 
@@ -39,7 +40,7 @@ public class ThingEntity extends IdEntity implements Serializable, HasName, HasD
     private String description;
     private String properties;
     private LocationEntity locationEntity;
-    private Set<HistoricalLocation> historicalLocationEntities;
+    private Set<HistoricalLocationEntity> historicalLocationEntities;
 
     @Override
     public String getName() {
@@ -61,11 +62,11 @@ public class ThingEntity extends IdEntity implements Serializable, HasName, HasD
         this.description = description;
     }
 
-    public void setProperties(String properties){
+    public void setProperties(String properties) {
         this.properties = properties;
     }
 
-    public String getProperties(){
+    public String getProperties() {
         return properties;
     }
 
@@ -77,11 +78,11 @@ public class ThingEntity extends IdEntity implements Serializable, HasName, HasD
         this.locationEntity = locationEntity;
     }
 
-    public Set<HistoricalLocation> getHistoricalLocationEntities() {
+    public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {
         return historicalLocationEntities;
     }
 
-    public void setHistoricalLocationEntities(Set<HistoricalLocation> historicalLocationEntities) {
+    public void setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
         this.historicalLocationEntities = historicalLocationEntities;
     }
 

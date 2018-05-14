@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
@@ -23,7 +24,7 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class HistoricalLocation extends IdEntity implements Serializable{
+public class HistoricalLocationEntity extends IdEntity implements Serializable {
 
     private static final long serialVersionUID = 5564686026419270062L;
 

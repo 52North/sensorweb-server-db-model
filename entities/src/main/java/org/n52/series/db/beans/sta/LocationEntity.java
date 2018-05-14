@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -28,7 +29,8 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends IdEntity implements Serializable, HasName, HasDescription, HasGeometry<LocationEntity> {
+public class LocationEntity extends IdEntity
+        implements Serializable, HasName, HasDescription, HasGeometry<LocationEntity> {
 
     private static final long serialVersionUID = -8201429072560300649L;
 

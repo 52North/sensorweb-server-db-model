@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -25,10 +26,10 @@ import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasName;
+import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
 import org.n52.series.db.beans.HibernateRelations.HasObservationType;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
-import org.n52.series.db.beans.HibernateRelations.HasResultTime;
 import org.n52.series.db.beans.HibernateRelations.HasUnit;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
@@ -40,8 +41,8 @@ import org.n52.series.db.beans.UnitEntity;
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
 public class DatastreamEntity extends IdEntity implements Serializable, HasName,
-        HasDescription, HasObservationType<DatastreamEntity>, HasPhenomenonTime,
-        HasResultTime, HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
+        HasDescription, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>, HasPhenomenonTime,
+        HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
 
     private static final long serialVersionUID = -9067390076853876658L;
 
@@ -52,7 +53,11 @@ public class DatastreamEntity extends IdEntity implements Serializable, HasName,
     public static final String PROPERTY_OBSERVED_AREA = "observedArea";
     public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
     public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
-    public static final String PROPERTY_RESULT_TIME = "resultTime";
+    public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
+    public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
+    public static final String PROPERTY_THING = "thing";
+    public static final String PROPERTY_PROCEDURE = "procedure";
+    public static final String PROPERTY_PHENOMENON = "phenomenon";
 
     private String name;
     private String description;
@@ -66,7 +71,8 @@ public class DatastreamEntity extends IdEntity implements Serializable, HasName,
     private UnitEntity unitOfMeasurement;
     private ThingEntity thing;
     private ProcedureEntity procedure;
-    private PhenomenonEntity phenomenon;
+    private PhenomenonEntity observableProperty;
+
     private Set<DatasetEntity> datasets;
 
     @Override
@@ -199,14 +205,6 @@ public class DatastreamEntity extends IdEntity implements Serializable, HasName,
         this.procedure = procedure;
     }
 
-    public PhenomenonEntity getPhenomenon() {
-        return phenomenon;
-    }
-
-    public void setPhenomenon(PhenomenonEntity phenomenon) {
-        this.phenomenon = phenomenon;
-    }
-
     @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -227,13 +225,14 @@ public class DatastreamEntity extends IdEntity implements Serializable, HasName,
     }
 
     @Override
-    public Date getResultTime() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public DatastreamEntity setObservableProperty(PhenomenonEntity observableProperty) {
+        this.observableProperty = observableProperty;
+        return this;
     }
 
     @Override
-    public void setResultTime(Date resultTime) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public PhenomenonEntity getObservableProperty() {
+        return observableProperty;
     }
 
 }
