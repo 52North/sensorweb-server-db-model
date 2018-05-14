@@ -117,6 +117,7 @@ public class SQLScriptGenerator {
 //        files.add(getDirectory("/hbm/core/ProcedureHistory.hbm.xml"));
          files.add(getDirectory("/hbm/core"));
          files.add(getDirectory("/hbm/dataset"));
+         files.add(getDirectory("/hbm/sta"));
 //         files.add(getDirectory("/hbm/feature"));
 //         files.add(getDirectory("/hbm/extension"));
         for (File file : files) {
