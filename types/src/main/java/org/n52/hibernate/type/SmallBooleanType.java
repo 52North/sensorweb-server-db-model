@@ -30,7 +30,9 @@ public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Bool
         implements PrimitiveType<Boolean>, DiscriminatorType<Boolean> {
 
     public static final SmallBooleanType INSTANCE = new SmallBooleanType();
+
     private static final long serialVersionUID = 5426388285620763702L;
+
     private String name = "small_boolean";
 
     public SmallBooleanType() {
@@ -43,8 +45,8 @@ public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Bool
     }
 
     @Override
-    public Class getPrimitiveClass() {
-        return boolean.class;
+    public Class< ? > getPrimitiveClass() {
+        return Boolean.class;
     }
 
     @Override
