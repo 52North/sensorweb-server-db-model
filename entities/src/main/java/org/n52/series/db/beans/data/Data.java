@@ -57,7 +57,7 @@ public interface Data<T>
 
     boolean getDeleted();
 
-    void setDeleted(Boolean deleted);
+    void setDeleted(boolean deleted);
 
     Date getValidTimeStart();
 
@@ -217,7 +217,7 @@ public interface Data<T>
             extends
             Data<BigDecimal> {
         String DATASET_TYPE = "quantity";
-        BigDecimal DOUBLE_THRESHOLD = new BigDecimal(0.0001d);
+        BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     }
 
     interface ReferencedData

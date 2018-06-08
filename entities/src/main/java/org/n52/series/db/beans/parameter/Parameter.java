@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans.parameter;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,6 +29,10 @@ public abstract class Parameter<T> extends IdEntity implements ValuedParameter<T
     private static final long serialVersionUID = -1489503368673412638L;
 
     private String name;
+
+    private Date lastUpdate;
+
+    private String domain;
 
     private T value;
 
@@ -50,6 +56,34 @@ public abstract class Parameter<T> extends IdEntity implements ValuedParameter<T
     @Override
     public boolean isSetName() {
         return getName() != null && !getName().isEmpty();
+    }
+
+    public Date getLastUpdate() {
+        return lastUpdate != null
+                ? new Timestamp(lastUpdate.getTime())
+                : null;
+    }
+
+    public void setLastUpdate(Date lastUpdate) {
+        this.lastUpdate = lastUpdate != null
+                ? new Timestamp(lastUpdate.getTime())
+                : null;
+    }
+
+    public boolean isSetLastUpdate() {
+        return getLastUpdate() != null;
+    }
+
+    public String getDomain() {
+        return domain;
+    }
+
+    public void setDomain(String domain) {
+        this.domain = domain;
+    }
+
+    public boolean isSetDomain() {
+        return getDomain() != null && !getDomain().isEmpty();
     }
 
     @Override

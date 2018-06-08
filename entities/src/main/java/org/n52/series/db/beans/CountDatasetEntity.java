@@ -23,8 +23,6 @@ public class CountDatasetEntity extends DatasetEntity implements CountDataset {
 
     private static final long serialVersionUID = -3770736881206526817L;
 
-    private static final String DATASET_TYPE = "count";
-
     public CountDatasetEntity() {
         super(DATASET_TYPE);
     }

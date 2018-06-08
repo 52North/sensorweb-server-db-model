@@ -177,6 +177,10 @@ public interface Dataset {
 
     Set<Parameter< ? >> getParameters();
 
+    default boolean hasParameters() {
+        return getParameters() != null;
+    }
+
     void setParameters(Set<Parameter< ? >> parameters);
 
     void copy(Dataset series);

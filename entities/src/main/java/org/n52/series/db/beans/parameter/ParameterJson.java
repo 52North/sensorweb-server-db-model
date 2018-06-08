@@ -15,26 +15,15 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.parameter;
 
-import static org.junit.Assert.assertTrue;
+public class ParameterJson extends Parameter<String> {
 
-import java.math.BigDecimal;
-import java.util.Arrays;
-import java.util.Collection;
+    private static final long serialVersionUID = 3300965770609382377L;
 
-import org.junit.Test;
-
-public class QuantityDataEntityTest {
-
-    @Test
-    public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] {
-            "9999",
-            "-9999.9"
-        });
-        QuantityDataEntity entity = new QuantityDataEntity();
-        entity.setValue(BigDecimal.valueOf(9999d));
-        assertTrue(entity.isNoDataValue(noDataValues));
+    @Override
+    public String getValueAsString() {
+        return getValue();
     }
+
 }
