@@ -17,10 +17,9 @@
 
 package org.n52.series.db.beans;
 
+import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasXml;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         implements HasXml<AbstractFeatureEntity<E>>, HasGeometry<AbstractFeatureEntity<E>> {

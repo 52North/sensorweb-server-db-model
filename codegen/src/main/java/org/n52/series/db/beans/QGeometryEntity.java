@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
 
 /**
@@ -19,8 +20,8 @@ public class QGeometryEntity extends BeanPath<GeometryEntity> {
 
     public static final QGeometryEntity geometryEntity = new QGeometryEntity("geometryEntity");
 
-    public final ComparablePath<com.vividsolutions.jts.geom.Geometry> geometry =
-            createComparable("geometry", com.vividsolutions.jts.geom.Geometry.class);
+    public final ComparablePath<org.locationtech.jts.geom.Geometry> geometry =
+            createComparable("geometry", org.locationtech.jts.geom.Geometry.class);
 
     public QGeometryEntity(String variable) {
         super(GeometryEntity.class, forVariable(variable));

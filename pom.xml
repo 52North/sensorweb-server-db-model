@@ -52,6 +52,7 @@
 
         <geotools.version>19.1</geotools.version>
         <hibernate-spatial.version>5.2.12-52N.1</hibernate-spatial.version>
+        <jts.version>1.15.0</jts.version>
         <querydsl.version>4.1.4</querydsl.version>
         <spring-boot.version>2.0.2.RELEASE</spring-boot.version>
 
@@ -229,9 +230,9 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>com.vividsolutions</groupId>
+                <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.14.0</version>
+                <version>${jts.version}</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->

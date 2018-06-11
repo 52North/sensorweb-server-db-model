@@ -38,7 +38,7 @@
             <artifactId>spring-orm</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vividsolutions</groupId>
+            <groupId>org.locationtech.jts</groupId>
             <artifactId>jts-core</artifactId>
         </dependency>
         <dependency>
