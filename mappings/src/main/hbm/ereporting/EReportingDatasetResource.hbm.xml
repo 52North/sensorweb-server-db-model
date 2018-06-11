@@ -25,14 +25,11 @@
         <many-to-one class="EReportingSamplingPointEntity" column="fk_sampling_point_id" name="samplingPoint" not-null="false" unique-key="un_dataset_identity"
         	foreign-key="fk_dataset_sampling_point" />
 
-        <property column="firsttimestamp" name="firstValueAt" type="timestamp" />
-        <property column="lasttimestamp" name="lastValueAt" type="timestamp" />
+        <property column="first_time" name="firstValueAt" type="timestamp" precision="20" scale="10" />
+        <property column="last_time" name="lastValueAt" type="timestamp" precision="20" scale="10" />
 
-        <property column="first_value" name="firstValue" type="big_decimal" precision="20" scale="10" />
-        <property column="last_value" name="lastValue" type="big_decimal" precision="20" scale="10" />
-
-        <many-to-one class="EReportingDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
-        <many-to-one class="EReportingDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+        <property column="first_value" name="firstQuantityValue" type="big_decimal" precision="20" scale="10" />
+        <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="20" scale="10" />
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)"/>
@@ -72,9 +69,9 @@
         </set>
 
 		<subclass name="EReportingNotInitializedDatasetEntity" discriminator-value="not_initialized">
-        	<property name="unitId" column="fk_unit_id" type="long" lazy="true" />
-			<property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
-        	<property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
+        	<property name="unit" column="fk_unit_id" type="long" lazy="true" />
+            <many-to-one class="EReportingDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="EReportingDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
 		</subclass>
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
             <property formula="3" name="numberOfDecimals" type="int" />

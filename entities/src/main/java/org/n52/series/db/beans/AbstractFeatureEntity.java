@@ -37,10 +37,12 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private String url;
     private String xml;
 
+    @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
 
+    @Override
     public AbstractFeatureEntity<E> setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
@@ -48,6 +50,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return this;
     }
 
+    @Override
     public AbstractFeatureEntity<E> setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
