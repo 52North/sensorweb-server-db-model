@@ -127,17 +127,4 @@
         </dependency>
     </dependencies>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-maven-plugin</artifactId>
-                <version>${querydsl.version}</version>
-                <configuration>
-
-                    <spatial>true</spatial>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
