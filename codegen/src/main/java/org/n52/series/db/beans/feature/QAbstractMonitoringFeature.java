@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -10,6 +9,7 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
+
 /**
  * QAbstractMonitoringFeature is a Querydsl query type for AbstractMonitoringFeature
  */
@@ -20,13 +20,12 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QAbstractMonitoringFeature abstractMonitoringFeature =
-            new QAbstractMonitoringFeature("abstractMonitoringFeature");
+    public static final QAbstractMonitoringFeature abstractMonitoringFeature = new QAbstractMonitoringFeature("abstractMonitoringFeature");
 
     public final org.n52.series.db.beans.QFeatureEntity _super;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity< ? >, org.n52.series.db.beans.QAbstractFeatureEntity> children;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> children;
 
     //inherited
     public final StringPath description;
@@ -53,10 +52,10 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
     public final org.n52.series.db.beans.QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity< ? >, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;
@@ -71,7 +70,7 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
         this(AbstractMonitoringFeature.class, forVariable(variable), INITS);
     }
 
-    public QAbstractMonitoringFeature(Path< ? extends AbstractMonitoringFeature> path) {
+    public QAbstractMonitoringFeature(Path<? extends AbstractMonitoringFeature> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -83,9 +82,7 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
         this(AbstractMonitoringFeature.class, metadata, inits);
     }
 
-    public QAbstractMonitoringFeature(Class< ? extends AbstractMonitoringFeature> type,
-                                      PathMetadata metadata,
-                                      PathInits inits) {
+    public QAbstractMonitoringFeature(Class<? extends AbstractMonitoringFeature> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new org.n52.series.db.beans.QFeatureEntity(type, metadata, inits);
         this.children = _super.children;
@@ -105,3 +102,4 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QRelatedDatasetEntity is a Querydsl query type for RelatedDatasetEntity
@@ -29,7 +29,7 @@ public class QRelatedDatasetEntity extends EntityPathBase<RelatedDatasetEntity> 
         super(RelatedDatasetEntity.class, forVariable(variable));
     }
 
-    public QRelatedDatasetEntity(Path< ? extends RelatedDatasetEntity> path) {
+    public QRelatedDatasetEntity(Path<? extends RelatedDatasetEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -38,3 +38,4 @@ public class QRelatedDatasetEntity extends EntityPathBase<RelatedDatasetEntity> 
     }
 
 }
+

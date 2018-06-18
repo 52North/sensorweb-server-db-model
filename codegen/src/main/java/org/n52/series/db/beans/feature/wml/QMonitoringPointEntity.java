@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature.wml;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -10,6 +9,7 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
+
 /**
  * QMonitoringPointEntity is a Querydsl query type for MonitoringPointEntity
  */
@@ -20,13 +20,12 @@ public class QMonitoringPointEntity extends EntityPathBase<MonitoringPointEntity
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QMonitoringPointEntity monitoringPointEntity =
-            new QMonitoringPointEntity("monitoringPointEntity");
+    public static final QMonitoringPointEntity monitoringPointEntity = new QMonitoringPointEntity("monitoringPointEntity");
 
     public final org.n52.series.db.beans.feature.QAbstractMonitoringFeature _super;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity< ? >, org.n52.series.db.beans.QAbstractFeatureEntity> children;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> children;
 
     public final org.n52.series.db.beans.feature.QMonitoringPointContent content;
 
@@ -55,10 +54,10 @@ public class QMonitoringPointEntity extends EntityPathBase<MonitoringPointEntity
     public final org.n52.series.db.beans.QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity< ? >, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;
@@ -73,7 +72,7 @@ public class QMonitoringPointEntity extends EntityPathBase<MonitoringPointEntity
         this(MonitoringPointEntity.class, forVariable(variable), INITS);
     }
 
-    public QMonitoringPointEntity(Path< ? extends MonitoringPointEntity> path) {
+    public QMonitoringPointEntity(Path<? extends MonitoringPointEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -85,15 +84,11 @@ public class QMonitoringPointEntity extends EntityPathBase<MonitoringPointEntity
         this(MonitoringPointEntity.class, metadata, inits);
     }
 
-    public QMonitoringPointEntity(Class< ? extends MonitoringPointEntity> type,
-                                  PathMetadata metadata,
-                                  PathInits inits) {
+    public QMonitoringPointEntity(Class<? extends MonitoringPointEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new org.n52.series.db.beans.feature.QAbstractMonitoringFeature(type, metadata, inits);
         this.children = _super.children;
-        this.content = inits.isInitialized("content")
-                ? new org.n52.series.db.beans.feature.QMonitoringPointContent(forProperty("content"))
-                : null;
+        this.content = inits.isInitialized("content") ? new org.n52.series.db.beans.feature.QMonitoringPointContent(forProperty("content")) : null;
         this.description = _super.description;
         this.featureType = _super.featureType;
         this.geometryEntity = _super.geometryEntity;
@@ -110,3 +105,4 @@ public class QMonitoringPointEntity extends EntityPathBase<MonitoringPointEntity
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QComplexDatasetEntity is a Querydsl query type for ComplexDatasetEntity
@@ -40,8 +40,7 @@ public class QComplexDatasetEntity extends EntityPathBase<ComplexDatasetEntity> 
     // inherited
     public final QAbstractFeatureEntity feature;
 
-    public final SimplePath<org.n52.series.db.beans.data.Data> firstObservation =
-            createSimple("firstObservation", org.n52.series.db.beans.data.Data.class);
+    public final SimplePath<org.n52.series.db.beans.data.Data> firstObservation = createSimple("firstObservation", org.n52.series.db.beans.data.Data.class);
 
     //inherited
     public final NumberPath<java.math.BigDecimal> firstQuantityValue;
@@ -61,8 +60,7 @@ public class QComplexDatasetEntity extends EntityPathBase<ComplexDatasetEntity> 
     // inherited
     public final QCodespaceEntity identifierCodespace;
 
-    public final SimplePath<org.n52.series.db.beans.data.Data> lastObservation =
-            createSimple("lastObservation", org.n52.series.db.beans.data.Data.class);
+    public final SimplePath<org.n52.series.db.beans.data.Data> lastObservation = createSimple("lastObservation", org.n52.series.db.beans.data.Data.class);
 
     //inherited
     public final NumberPath<java.math.BigDecimal> lastQuantityValue;
@@ -83,7 +81,7 @@ public class QComplexDatasetEntity extends EntityPathBase<ComplexDatasetEntity> 
     public final QOfferingEntity offering;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     // inherited
     public final QPhenomenonEntity phenomenon;
@@ -104,7 +102,7 @@ public class QComplexDatasetEntity extends EntityPathBase<ComplexDatasetEntity> 
         this(ComplexDatasetEntity.class, forVariable(variable), INITS);
     }
 
-    public QComplexDatasetEntity(Path< ? extends ComplexDatasetEntity> path) {
+    public QComplexDatasetEntity(Path<? extends ComplexDatasetEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -116,7 +114,7 @@ public class QComplexDatasetEntity extends EntityPathBase<ComplexDatasetEntity> 
         this(ComplexDatasetEntity.class, metadata, inits);
     }
 
-    public QComplexDatasetEntity(Class< ? extends ComplexDatasetEntity> type, PathMetadata metadata, PathInits inits) {
+    public QComplexDatasetEntity(Class<? extends ComplexDatasetEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDatasetEntity(type, metadata, inits);
         this.category = _super.category;
@@ -145,3 +143,4 @@ public class QComplexDatasetEntity extends EntityPathBase<ComplexDatasetEntity> 
     }
 
 }
+

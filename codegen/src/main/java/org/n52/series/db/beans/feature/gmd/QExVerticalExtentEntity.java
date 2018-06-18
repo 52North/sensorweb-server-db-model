@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -10,6 +9,7 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
+
 /**
  * QExVerticalExtentEntity is a Querydsl query type for ExVerticalExtentEntity
  */
@@ -20,8 +20,7 @@ public class QExVerticalExtentEntity extends EntityPathBase<ExVerticalExtentEnti
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QExVerticalExtentEntity exVerticalExtentEntity =
-            new QExVerticalExtentEntity("exVerticalExtentEntity");
+    public static final QExVerticalExtentEntity exVerticalExtentEntity = new QExVerticalExtentEntity("exVerticalExtentEntity");
 
     public final QAbstractCiEntity _super = new QAbstractCiEntity(this);
 
@@ -59,7 +58,7 @@ public class QExVerticalExtentEntity extends EntityPathBase<ExVerticalExtentEnti
         this(ExVerticalExtentEntity.class, forVariable(variable), INITS);
     }
 
-    public QExVerticalExtentEntity(Path< ? extends ExVerticalExtentEntity> path) {
+    public QExVerticalExtentEntity(Path<? extends ExVerticalExtentEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -71,14 +70,10 @@ public class QExVerticalExtentEntity extends EntityPathBase<ExVerticalExtentEnti
         this(ExVerticalExtentEntity.class, metadata, inits);
     }
 
-    public QExVerticalExtentEntity(Class< ? extends ExVerticalExtentEntity> type,
-                                   PathMetadata metadata,
-                                   PathInits inits) {
+    public QExVerticalExtentEntity(Class<? extends ExVerticalExtentEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.verticalCRS = inits.isInitialized("verticalCRS")
-                ? new org.n52.series.db.beans.feature.gml.QVerticalCRSEntity(forProperty("verticalCRS"),
-                                                                             inits.get("verticalCRS"))
-                : null;
+        this.verticalCRS = inits.isInitialized("verticalCRS") ? new org.n52.series.db.beans.feature.gml.QVerticalCRSEntity(forProperty("verticalCRS"), inits.get("verticalCRS")) : null;
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QGeometryDataEntity is a Querydsl query type for GeometryDataEntity
@@ -54,7 +54,7 @@ public class QGeometryDataEntity extends EntityPathBase<GeometryDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -96,7 +96,7 @@ public class QGeometryDataEntity extends EntityPathBase<GeometryDataEntity> {
         this(GeometryDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QGeometryDataEntity(Path< ? extends GeometryDataEntity> path) {
+    public QGeometryDataEntity(Path<? extends GeometryDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -108,16 +108,14 @@ public class QGeometryDataEntity extends EntityPathBase<GeometryDataEntity> {
         this(GeometryDataEntity.class, metadata, inits);
     }
 
-    public QGeometryDataEntity(Class< ? extends GeometryDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QGeometryDataEntity(Class<? extends GeometryDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDataEntity(type, metadata, inits);
         this.child = _super.child;
         this.dataset = _super.dataset;
         this.deleted = _super.deleted;
         this.description = _super.description;
-        this.geometryEntity = inits.isInitialized("geometryEntity")
-                ? new QGeometryEntity(forProperty("geometryEntity"))
-                : null;
+        this.geometryEntity = inits.isInitialized("geometryEntity") ? new QGeometryEntity(forProperty("geometryEntity")) : null;
         this.id = _super.id;
         this.identifier = _super.identifier;
         this.identifierCodespace = _super.identifierCodespace;
@@ -139,3 +137,4 @@ public class QGeometryDataEntity extends EntityPathBase<GeometryDataEntity> {
     }
 
 }
+

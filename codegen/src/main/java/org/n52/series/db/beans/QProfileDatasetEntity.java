@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QProfileDatasetEntity is a Querydsl query type for ProfileDatasetEntity
@@ -77,7 +77,7 @@ public class QProfileDatasetEntity extends EntityPathBase<ProfileDatasetEntity> 
     public final QOfferingEntity offering;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     // inherited
     public final QPhenomenonEntity phenomenon;
@@ -98,7 +98,7 @@ public class QProfileDatasetEntity extends EntityPathBase<ProfileDatasetEntity> 
         this(ProfileDatasetEntity.class, forVariable(variable), INITS);
     }
 
-    public QProfileDatasetEntity(Path< ? extends ProfileDatasetEntity> path) {
+    public QProfileDatasetEntity(Path<? extends ProfileDatasetEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -110,7 +110,7 @@ public class QProfileDatasetEntity extends EntityPathBase<ProfileDatasetEntity> 
         this(ProfileDatasetEntity.class, metadata, inits);
     }
 
-    public QProfileDatasetEntity(Class< ? extends ProfileDatasetEntity> type, PathMetadata metadata, PathInits inits) {
+    public QProfileDatasetEntity(Class<? extends ProfileDatasetEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDatasetEntity(type, metadata, inits);
         this.category = _super.category;
@@ -139,3 +139,4 @@ public class QProfileDatasetEntity extends EntityPathBase<ProfileDatasetEntity> 
     }
 
 }
+

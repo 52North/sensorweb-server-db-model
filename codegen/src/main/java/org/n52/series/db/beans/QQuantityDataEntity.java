@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QQuantityDataEntity is a Querydsl query type for QuantityDataEntity
@@ -55,7 +55,7 @@ public class QQuantityDataEntity extends EntityPathBase<QuantityDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -99,7 +99,7 @@ public class QQuantityDataEntity extends EntityPathBase<QuantityDataEntity> {
         this(QuantityDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QQuantityDataEntity(Path< ? extends QuantityDataEntity> path) {
+    public QQuantityDataEntity(Path<? extends QuantityDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -111,7 +111,7 @@ public class QQuantityDataEntity extends EntityPathBase<QuantityDataEntity> {
         this(QuantityDataEntity.class, metadata, inits);
     }
 
-    public QQuantityDataEntity(Class< ? extends QuantityDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QQuantityDataEntity(Class<? extends QuantityDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -140,3 +140,4 @@ public class QQuantityDataEntity extends EntityPathBase<QuantityDataEntity> {
     }
 
 }
+

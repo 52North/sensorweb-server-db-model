@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QDescribableEntity is a Querydsl query type for DescribableEntity
@@ -25,7 +25,7 @@ public class QDescribableEntity extends EntityPathBase<DescribableEntity> {
         super(DescribableEntity.class, forVariable(variable));
     }
 
-    public QDescribableEntity(Path< ? extends DescribableEntity> path) {
+    public QDescribableEntity(Path<? extends DescribableEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -34,3 +34,4 @@ public class QDescribableEntity extends EntityPathBase<DescribableEntity> {
     }
 
 }
+

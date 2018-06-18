@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QProfileDataEntity is a Querydsl query type for ProfileDataEntity
@@ -55,7 +55,7 @@ public class QProfileDataEntity extends EntityPathBase<ProfileDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -78,11 +78,7 @@ public class QProfileDataEntity extends EntityPathBase<ProfileDataEntity> {
     //inherited
     public final DateTimePath<java.util.Date> validTimeStart;
 
-    public final SetPath<DataEntity< ? >, QDataEntity> value =
-            this.<DataEntity< ? >, QDataEntity> createSet("value",
-                                                          DataEntity.class,
-                                                          QDataEntity.class,
-                                                          PathInits.DIRECT2);
+    public final SetPath<DataEntity<?>, QDataEntity> value = this.<DataEntity<?>, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
 
     //inherited
     public final StringPath valueDescription;
@@ -109,7 +105,7 @@ public class QProfileDataEntity extends EntityPathBase<ProfileDataEntity> {
         this(ProfileDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QProfileDataEntity(Path< ? extends ProfileDataEntity> path) {
+    public QProfileDataEntity(Path<? extends ProfileDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -121,7 +117,7 @@ public class QProfileDataEntity extends EntityPathBase<ProfileDataEntity> {
         this(ProfileDataEntity.class, metadata, inits);
     }
 
-    public QProfileDataEntity(Class< ? extends ProfileDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QProfileDataEntity(Class<? extends ProfileDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QCompositeDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -147,9 +143,8 @@ public class QProfileDataEntity extends EntityPathBase<ProfileDataEntity> {
         this.valueName = _super.valueName;
         this.verticalFrom = _super.verticalFrom;
         this.verticalTo = _super.verticalTo;
-        this.verticalUnit = inits.isInitialized("verticalUnit")
-                ? new QUnitEntity(forProperty("verticalUnit"))
-                : null;
+        this.verticalUnit = inits.isInitialized("verticalUnit") ? new QUnitEntity(forProperty("verticalUnit")) : null;
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -10,6 +9,7 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
+
 /**
  * QEReportingDatasetEntity is a Querydsl query type for EReportingDatasetEntity
  */
@@ -20,8 +20,7 @@ public class QEReportingDatasetEntity extends EntityPathBase<EReportingDatasetEn
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QEReportingDatasetEntity eReportingDatasetEntity =
-            new QEReportingDatasetEntity("eReportingDatasetEntity");
+    public static final QEReportingDatasetEntity eReportingDatasetEntity = new QEReportingDatasetEntity("eReportingDatasetEntity");
 
     public final org.n52.series.db.beans.QDatasetEntity _super;
 
@@ -35,11 +34,9 @@ public class QEReportingDatasetEntity extends EntityPathBase<EReportingDatasetEn
     public final BooleanPath disabled;
 
     // custom
-    public final org.n52.series.db.beans.QAbstractFeatureEntity feature =
-            new org.n52.series.db.beans.QAbstractFeatureEntity(forProperty("feature"));
+    public final org.n52.series.db.beans.QAbstractFeatureEntity feature = new org.n52.series.db.beans.QAbstractFeatureEntity(forProperty("feature"));
 
-    public final NumberPath<java.math.BigDecimal> firstQuantityValue =
-            createNumber("firstQuantityValue", java.math.BigDecimal.class);
+    public final NumberPath<java.math.BigDecimal> firstQuantityValue = createNumber("firstQuantityValue", java.math.BigDecimal.class);
 
     public final DateTimePath<java.util.Date> firstValueAt = createDateTime("firstValueAt", java.util.Date.class);
 
@@ -51,8 +48,7 @@ public class QEReportingDatasetEntity extends EntityPathBase<EReportingDatasetEn
 
     public final org.n52.series.db.beans.QCodespaceEntity identifierCodespace;
 
-    public final NumberPath<java.math.BigDecimal> lastQuantityValue =
-            createNumber("lastQuantityValue", java.math.BigDecimal.class);
+    public final NumberPath<java.math.BigDecimal> lastQuantityValue = createNumber("lastQuantityValue", java.math.BigDecimal.class);
 
     public final DateTimePath<java.util.Date> lastValueAt = createDateTime("lastValueAt", java.util.Date.class);
 
@@ -65,11 +61,7 @@ public class QEReportingDatasetEntity extends EntityPathBase<EReportingDatasetEn
 
     public final org.n52.series.db.beans.QOfferingEntity offering;
 
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters =
-            this.<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> createSet("parameters",
-                                                                                                                            org.n52.series.db.beans.parameter.Parameter.class,
-                                                                                                                            org.n52.series.db.beans.parameter.QParameter.class,
-                                                                                                                            PathInits.DIRECT2);
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters = this.<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter>createSet("parameters", org.n52.series.db.beans.parameter.Parameter.class, org.n52.series.db.beans.parameter.QParameter.class, PathInits.DIRECT2);
 
     public final org.n52.series.db.beans.QPhenomenonEntity phenomenon;
 
@@ -89,7 +81,7 @@ public class QEReportingDatasetEntity extends EntityPathBase<EReportingDatasetEn
         this(EReportingDatasetEntity.class, forVariable(variable), INITS);
     }
 
-    public QEReportingDatasetEntity(Path< ? extends EReportingDatasetEntity> path) {
+    public QEReportingDatasetEntity(Path<? extends EReportingDatasetEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -101,36 +93,21 @@ public class QEReportingDatasetEntity extends EntityPathBase<EReportingDatasetEn
         this(EReportingDatasetEntity.class, metadata, inits);
     }
 
-    public QEReportingDatasetEntity(Class< ? extends EReportingDatasetEntity> type,
-                                    PathMetadata metadata,
-                                    PathInits inits) {
+    public QEReportingDatasetEntity(Class<? extends EReportingDatasetEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new org.n52.series.db.beans.QDatasetEntity(type, metadata, inits);
-        this.category = inits.isInitialized("category")
-                ? new org.n52.series.db.beans.QCategoryEntity(forProperty("category"))
-                : null;
+        this.category = inits.isInitialized("category") ? new org.n52.series.db.beans.QCategoryEntity(forProperty("category")) : null;
         this.disabled = _super.disabled;
-        this.identifierCodespace = inits.isInitialized("identifierCodespace")
-                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
-                : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace")
-                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
-                : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
         this.observationType = _super.observationType;
-        this.offering = inits.isInitialized("offering")
-                ? new org.n52.series.db.beans.QOfferingEntity(forProperty("offering"), inits.get("offering"))
-                : null;
-        this.phenomenon = inits.isInitialized("phenomenon")
-                ? new org.n52.series.db.beans.QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon"))
-                : null;
+        this.offering = inits.isInitialized("offering") ? new org.n52.series.db.beans.QOfferingEntity(forProperty("offering"), inits.get("offering")) : null;
+        this.phenomenon = inits.isInitialized("phenomenon") ? new org.n52.series.db.beans.QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon")) : null;
         this.platform = _super.platform;
-        this.procedure = inits.isInitialized("procedure")
-                ? new org.n52.series.db.beans.QProcedureEntity(forProperty("procedure"), inits.get("procedure"))
-                : null;
-        this.samplingPoint = inits.isInitialized("samplingPoint")
-                ? new QEReportingSamplingPointEntity(forProperty("samplingPoint"), inits.get("samplingPoint"))
-                : null;
+        this.procedure = inits.isInitialized("procedure") ? new org.n52.series.db.beans.QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
+        this.samplingPoint = inits.isInitialized("samplingPoint") ? new QEReportingSamplingPointEntity(forProperty("samplingPoint"), inits.get("samplingPoint")) : null;
         this.valueType = _super.valueType;
     }
 
 }
+

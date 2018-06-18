@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QSpecimenEntity is a Querydsl query type for SpecimenEntity
@@ -25,7 +25,7 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
     public final org.n52.series.db.beans.QFeatureEntity _super;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity< ? >, org.n52.series.db.beans.QAbstractFeatureEntity> children;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> children;
 
     public final StringPath currentLocation = createString("currentLocation");
 
@@ -56,17 +56,16 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
     public final org.n52.series.db.beans.QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity< ? >, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
 
     public final StringPath samplingMethod = createString("samplingMethod");
 
     public final DateTimePath<java.util.Date> samplingTimeEnd = createDateTime("samplingTimeEnd", java.util.Date.class);
 
-    public final DateTimePath<java.util.Date> samplingTimeStart =
-            createDateTime("samplingTimeStart", java.util.Date.class);
+    public final DateTimePath<java.util.Date> samplingTimeStart = createDateTime("samplingTimeStart", java.util.Date.class);
 
     public final NumberPath<Double> size = createNumber("size", Double.class);
 
@@ -87,7 +86,7 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
         this(SpecimenEntity.class, forVariable(variable), INITS);
     }
 
-    public QSpecimenEntity(Path< ? extends SpecimenEntity> path) {
+    public QSpecimenEntity(Path<? extends SpecimenEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -99,7 +98,7 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
         this(SpecimenEntity.class, metadata, inits);
     }
 
-    public QSpecimenEntity(Class< ? extends SpecimenEntity> type, PathMetadata metadata, PathInits inits) {
+    public QSpecimenEntity(Class<? extends SpecimenEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new org.n52.series.db.beans.QFeatureEntity(type, metadata, inits);
         this.children = _super.children;
@@ -113,12 +112,11 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
         this.nameCodespace = _super.nameCodespace;
         this.parameters = _super.parameters;
         this.parents = _super.parents;
-        this.sizeUnit = inits.isInitialized("sizeUnit")
-                ? new org.n52.series.db.beans.QUnitEntity(forProperty("sizeUnit"))
-                : null;
+        this.sizeUnit = inits.isInitialized("sizeUnit") ? new org.n52.series.db.beans.QUnitEntity(forProperty("sizeUnit")) : null;
         this.translations = _super.translations;
         this.url = _super.url;
         this.xml = _super.xml;
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
+
 /**
  * QEReportingRelatedDataEntity is a Querydsl query type for EReportingRelatedDataEntity
  */
@@ -17,11 +17,9 @@ public class QEReportingRelatedDataEntity extends EntityPathBase<EReportingRelat
 
     private static final long serialVersionUID = 61938651L;
 
-    public static final QEReportingRelatedDataEntity eReportingRelatedDataEntity =
-            new QEReportingRelatedDataEntity("eReportingRelatedDataEntity");
+    public static final QEReportingRelatedDataEntity eReportingRelatedDataEntity = new QEReportingRelatedDataEntity("eReportingRelatedDataEntity");
 
-    public final org.n52.series.db.beans.QAbstractRelationEntity _super =
-            new org.n52.series.db.beans.QAbstractRelationEntity(this);
+    public final org.n52.series.db.beans.QAbstractRelationEntity _super = new org.n52.series.db.beans.QAbstractRelationEntity(this);
 
     public final StringPath relatedUrl = createString("relatedUrl");
 
@@ -31,7 +29,7 @@ public class QEReportingRelatedDataEntity extends EntityPathBase<EReportingRelat
         super(EReportingRelatedDataEntity.class, forVariable(variable));
     }
 
-    public QEReportingRelatedDataEntity(Path< ? extends EReportingRelatedDataEntity> path) {
+    public QEReportingRelatedDataEntity(Path<? extends EReportingRelatedDataEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -40,3 +38,4 @@ public class QEReportingRelatedDataEntity extends EntityPathBase<EReportingRelat
     }
 
 }
+

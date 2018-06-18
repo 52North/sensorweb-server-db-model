@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QReferenceEntity is a Querydsl query type for ReferenceEntity
@@ -25,7 +25,7 @@ public class QReferenceEntity extends EntityPathBase<ReferenceEntity> {
         super(ReferenceEntity.class, forVariable(variable));
     }
 
-    public QReferenceEntity(Path< ? extends ReferenceEntity> path) {
+    public QReferenceEntity(Path<? extends ReferenceEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -34,3 +34,4 @@ public class QReferenceEntity extends EntityPathBase<ReferenceEntity> {
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.parameter;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QParameterJson is a Querydsl query type for ParameterJson
@@ -39,7 +39,7 @@ public class QParameterJson extends EntityPathBase<ParameterJson> {
         super(ParameterJson.class, forVariable(variable));
     }
 
-    public QParameterJson(Path< ? extends ParameterJson> path) {
+    public QParameterJson(Path<? extends ParameterJson> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -48,3 +48,4 @@ public class QParameterJson extends EntityPathBase<ParameterJson> {
     }
 
 }
+

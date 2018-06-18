@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QServiceEntity is a Querydsl query type for ServiceEntity
@@ -37,7 +37,7 @@ public class QServiceEntity extends EntityPathBase<ServiceEntity> {
         super(ServiceEntity.class, forVariable(variable));
     }
 
-    public QServiceEntity(Path< ? extends ServiceEntity> path) {
+    public QServiceEntity(Path<? extends ServiceEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -46,3 +46,4 @@ public class QServiceEntity extends EntityPathBase<ServiceEntity> {
     }
 
 }
+
