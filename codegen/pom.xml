@@ -38,10 +38,6 @@
             <artifactId>spring-orm</artifactId>
         </dependency>
         <dependency>
-            <groupId>com.vividsolutions</groupId>
-            <artifactId>jts-core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
@@ -89,7 +85,15 @@
                     <groupId>org.geolatte</groupId>
                     <artifactId>geolatte-geom</artifactId>
                 </exclusion>
+                <exclusion>
+                    <groupId>com.vividsolutions</groupId>
+                    <artifactId>jts</artifactId>
+                </exclusion>
             </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.vividsolutions</groupId>
+            <artifactId>jts-core</artifactId>
         </dependency>
         <dependency>
             <groupId>org.geolatte</groupId>
