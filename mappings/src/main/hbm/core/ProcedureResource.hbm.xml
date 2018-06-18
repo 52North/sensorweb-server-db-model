@@ -6,7 +6,10 @@
     <class name="ProcedureEntity" table="`procedure`">
         <id name="id" type="long">
             <column name="procedure_id"/>
-            <generator class="native">
+            <!-- use new style generator make inserting new procedure entities possible -->
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator">
+                <param name="optimizer">none</param>
+                <param name="increment_size">1</param>
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
