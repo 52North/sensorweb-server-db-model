@@ -38,7 +38,7 @@
             <artifactId>spring-orm</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.locationtech.jts</groupId>
+            <groupId>com.vividsolutions</groupId>
             <artifactId>jts-core</artifactId>
         </dependency>
         <dependency>
@@ -74,12 +74,6 @@
             </exclusions>
         </dependency>
         <dependency>
-            <groupId>org.geolatte</groupId>
-            <artifactId>geolatte-geom</artifactId>
-            <version>1.3.0</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql-codegen</artifactId>
         </dependency>
@@ -90,7 +84,19 @@
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-sql-spatial</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.geolatte</groupId>
+                    <artifactId>geolatte-geom</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
+        <dependency>
+            <groupId>org.geolatte</groupId>
+            <artifactId>geolatte-geom</artifactId>
+            <version>1.3.0</version>
+        </dependency>
+
         <!-- dependencies used for actual code generation -->
 
         <dependency>
