@@ -23,7 +23,7 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEncodingEntity extends IdEntity implements Serializable {
+public class LocationEncodingEntity extends AbstractStaEntity implements Serializable {
 
     private static final long serialVersionUID = 656748116995263897L;
 

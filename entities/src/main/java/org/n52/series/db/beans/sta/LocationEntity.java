@@ -29,7 +29,7 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends IdEntity
+public class LocationEntity extends AbstractStaEntity
         implements Serializable, HasName, HasDescription, HasGeometry<LocationEntity> {
 
     private static final long serialVersionUID = -8201429072560300649L;

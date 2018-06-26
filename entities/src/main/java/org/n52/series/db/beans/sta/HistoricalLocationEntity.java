@@ -24,7 +24,7 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class HistoricalLocationEntity extends IdEntity implements Serializable {
+public class HistoricalLocationEntity extends AbstractStaEntity implements Serializable {
 
     private static final long serialVersionUID = 5564686026419270062L;
 
