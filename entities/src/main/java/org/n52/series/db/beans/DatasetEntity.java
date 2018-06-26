@@ -30,7 +30,7 @@ import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity extends DescribableEntity
+public abstract class DatasetEntity extends DescribableEntity
         implements Serializable,
         Dataset {
 
