@@ -19,13 +19,13 @@
         <property name="description" type="string">
             <column name="description" />
         </property>
-        <set name="translations" table="category_i18" inverse="true" fetch="select">
+        <set name="translations" table="category_i18n" inverse="true" fetch="select">
             <key column="fk_category_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nCategoryEntity" />
         </set>
     </class>
 
-    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="category_i18">
+    <class name="org.n52.series.db.beans.i18n.I18nCategoryEntity" table="category_i18n">
         <id name="id" type="long">
             <column name="category_i18n_id" />
             <generator class="native">

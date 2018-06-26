@@ -1,4 +1,4 @@
-﻿CREATE TABLE series_metadata 
+CREATE TABLE series_metadata 
 (
 	metadata_id bigint NOT NULL,
 	series_id bigint NOT NULL,
