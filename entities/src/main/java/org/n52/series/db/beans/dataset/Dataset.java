@@ -132,6 +132,8 @@ public interface Dataset extends Describable {
 
     boolean hasUnit();
 
+    String getUnitI18nName(String locale);
+
     void setObservationCount(long observationCount);
 
     long getObservationCount();
