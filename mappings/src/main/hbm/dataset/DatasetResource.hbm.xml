@@ -16,16 +16,15 @@
             unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure" not-null="true" />
         <many-to-one class="PhenomenonEntity" name="phenomenon" column="fk_phenomenon_id"
             unique-key="un_dataset_identity" foreign-key="fk_dataset_phenomenon" not-null="true" />
-
         <many-to-one class="OfferingEntity" name="offering" column="fk_offering_id"
             unique-key="un_dataset_identity" foreign-key="fk_dataset_offering" not-null="true" />
-
         <many-to-one class="CategoryEntity" column="fk_category_id" name="category"
-            unique-key="un_dataset_identity" foreign-key="fk_dataset_category" not-null="false" />
-        <many-to-one class="FeatureEntity" name="feature" column="fk_feature_id"
-            unique-key="un_dataset_identity" foreign-key="fk_dataset_feature" not-null="false" />
+            unique-key="un_dataset_identity" foreign-key="fk_dataset_category" not-null="true" />
         <many-to-one class="PlatformEntity" name="platform" column="fk_procedure_id"
             unique-key="un_dataset_identity" insert="false" update="false" not-null="true" />
+            
+        <many-to-one class="FeatureEntity" name="feature" column="fk_feature_id"
+            unique-key="un_dataset_identity" foreign-key="fk_dataset_feature" not-null="false" />
 
         <many-to-one name="observationType" class="FormatEntity" not-null="false"
             foreign-key="fk_dataset_observation_type">
