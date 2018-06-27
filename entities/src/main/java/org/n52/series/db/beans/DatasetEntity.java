@@ -19,7 +19,6 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashSet;
@@ -30,9 +29,7 @@ import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity extends DescribableEntity
-        implements Serializable,
-        Dataset {
+public class DatasetEntity extends DescribableEntity implements Serializable, Dataset {
 
     public static final String ENTITY_ALIAS = "dataset";
 
@@ -94,29 +91,33 @@ public class DatasetEntity extends DescribableEntity
 
     private FormatEntity observationType;
 
-    private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
+    private final Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
 
     public DatasetEntity() {
         this((String) null);
     }
 
-    public DatasetEntity(String type) {
+    public DatasetEntity(final String type) {
         this.valueType = type;
     }
 
+    @Override
     public CategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    @Override
+    public void setCategory(final CategoryEntity category) {
         this.category = category;
     }
 
+    @Override
     public PhenomenonEntity getPhenomenon() {
         return phenomenon;
     }
 
-    public DatasetEntity setPhenomenon(PhenomenonEntity phenomenon) {
+    @Override
+    public DatasetEntity setPhenomenon(final PhenomenonEntity phenomenon) {
         this.phenomenon = phenomenon;
         return this;
     }
@@ -127,7 +128,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setObservableProperty(PhenomenonEntity observableProperty) {
+    public DatasetEntity setObservableProperty(final PhenomenonEntity observableProperty) {
         return setPhenomenon(observableProperty);
     }
 
@@ -137,7 +138,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setProcedure(ProcedureEntity procedure) {
+    public DatasetEntity setProcedure(final ProcedureEntity procedure) {
         this.procedure = procedure;
         return this;
     }
@@ -148,7 +149,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setOffering(OfferingEntity offering) {
+    public DatasetEntity setOffering(final OfferingEntity offering) {
         this.offering = offering;
         return this;
     }
@@ -158,31 +159,38 @@ public class DatasetEntity extends DescribableEntity
         return getOffering() != null;
     }
 
+    @Override
     public AbstractFeatureEntity getFeature() {
         return feature;
     }
 
-    public void setFeature(AbstractFeatureEntity feature) {
+    @Override
+    public void setFeature(final AbstractFeatureEntity feature) {
         this.feature = feature;
     }
 
+    @Override
     public boolean isSetFeature() {
         return getFeature() != null;
     }
 
+    @Override
     public PlatformEntity getPlatform() {
         return platform;
     }
 
-    public void setPlatform(PlatformEntity platform) {
+    @Override
+    public void setPlatform(final PlatformEntity platform) {
         this.platform = platform;
     }
 
+    @Override
     public Boolean isPublished() {
         return published;
     }
 
-    public void setPublished(boolean published) {
+    @Override
+    public void setPublished(final boolean published) {
         this.published = published;
     }
 
@@ -192,7 +200,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setDeleted(boolean deleted) {
+    public DatasetEntity setDeleted(final boolean deleted) {
         this.deleted = deleted;
         return this;
     }
@@ -203,7 +211,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setDisabled(boolean disabled) {
+    public DatasetEntity setDisabled(final boolean disabled) {
         this.disabled = disabled;
         return this;
     }
@@ -220,73 +228,89 @@ public class DatasetEntity extends DescribableEntity
 
     @Override
     public boolean isSetObservationType() {
-        return getObservationType() != null && getObservationType().isSetFormat();
+        return (getObservationType() != null) && getObservationType().isSetFormat();
     }
 
+    @Override
     public Date getFirstValueAt() {
         return Utils.createUnmutableTimestamp(firstValueAt);
     }
 
-    public void setFirstValueAt(Date firstValueAt) {
+    @Override
+    public void setFirstValueAt(final Date firstValueAt) {
         this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
     }
 
+    @Override
     public boolean isSetFirstValueAt() {
         return getFirstValueAt() != null;
     }
 
+    @Override
     public Date getLastValueAt() {
         return Utils.createUnmutableTimestamp(lastValueAt);
     }
 
-    public void setLastValueAt(Date lastValueAt) {
+    @Override
+    public void setLastValueAt(final Date lastValueAt) {
         this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
     }
 
+    @Override
     public boolean isSetLastValueAt() {
         return getLastValueAt() != null;
     }
 
+    @Override
     public Data getFirstObservation() {
         return firstObservation;
     }
 
-    public void setFirstObservation(Data firstObservation) {
+    @Override
+    public void setFirstObservation(final Data firstObservation) {
         this.firstObservation = firstObservation;
     }
 
+    @Override
     public Data getLastObservation() {
         return lastObservation;
     }
 
-    public void setLastObservation(Data lastObservation) {
+    @Override
+    public void setLastObservation(final Data lastObservation) {
         this.lastObservation = lastObservation;
     }
 
+    @Override
     public BigDecimal getFirstQuantityValue() {
         return firstQuantityValue;
     }
 
-    public void setFirstQuantityValue(BigDecimal firstValue) {
+    @Override
+    public void setFirstQuantityValue(final BigDecimal firstValue) {
         this.firstQuantityValue = firstValue;
     }
 
+    @Override
     public BigDecimal getLastQuantityValue() {
         return lastQuantityValue;
     }
 
-    public void setLastQuantityValue(BigDecimal lastValue) {
+    @Override
+    public void setLastQuantityValue(final BigDecimal lastValue) {
         this.lastQuantityValue = lastValue;
     }
 
+    @Override
     public String getValueType() {
-        return valueType == null || valueType.isEmpty()
-                // backward compatible
-                ? getDefaultDatasetType()
-                : valueType;
+        return (valueType == null) || valueType.isEmpty()
+            // backward compatible
+            ? getDefaultDatasetType()
+            : valueType;
     }
 
-    public void setValueType(String valueType) {
+    @Override
+    public void setValueType(final String valueType) {
         this.valueType = valueType;
     }
 
@@ -294,11 +318,12 @@ public class DatasetEntity extends DescribableEntity
      * @return a list of result times
      * @since 2.0.0
      */
+    @Override
     public Set<Date> getResultTimes() {
-        Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
+        final Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
         return unmodifiableResultTimes != null
-                ? Collections.unmodifiableSet(unmodifiableResultTimes)
-                : null;
+            ? Collections.unmodifiableSet(unmodifiableResultTimes)
+            : null;
     }
 
     /**
@@ -306,43 +331,47 @@ public class DatasetEntity extends DescribableEntity
      *        a list of result times
      * @since 2.0.0
      */
-    public void setResultTimes(Set<Date> resultTimes) {
+    @Override
+    public void setResultTimes(final Set<Date> resultTimes) {
         this.resultTimes = wrapToUnmutables(resultTimes);
     }
 
-    private Set<Date> wrapToUnmutables(Set<Date> dates) {
+    private Set<Date> wrapToUnmutables(final Set<Date> dates) {
         return dates != null
-                ? dates.stream()
-                       .map(d -> d != null
-                               ? new Timestamp(d.getTime())
-                               : null)
-                       .collect(Collectors.toSet())
-                : null;
+            ? dates.stream()
+                   .map(Utils::createUnmutableTimestamp)
+                   .collect(Collectors.toSet())
+            : null;
     }
 
+    @Override
     public UnitEntity getUnit() {
         return unit;
     }
 
-    public void setUnit(UnitEntity unit) {
+    @Override
+    public void setUnit(final UnitEntity unit) {
         this.unit = unit;
     }
 
+    @Override
     public boolean hasUnit() {
         return unit != null;
     }
 
-    public String getUnitI18nName(String locale) {
+    public String getUnitI18nName(final String locale) {
         return unit != null
-                //                ? unit.getNameI18n(locale)
-                ? unit.getUnit()
-                : "";
+            // ? unit.getNameI18n(locale)
+            ? unit.getUnit()
+            : "";
     }
 
-    public void setObservationCount(long count) {
+    @Override
+    public void setObservationCount(final long count) {
         this.observationCount = count;
     }
 
+    @Override
     public long getObservationCount() {
         return observationCount;
     }
@@ -353,7 +382,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setHidden(boolean hidden) {
+    public DatasetEntity setHidden(final boolean hidden) {
         this.hidden = hidden;
         return this;
     }
@@ -365,33 +394,37 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public DatasetEntity setObservationType(FormatEntity observationType) {
+    public DatasetEntity setObservationType(final FormatEntity observationType) {
         this.observationType = observationType;
         return this;
     }
 
+    @Override
     public boolean isSetObservationtype() {
-        return getObservationType() != null && getObservationType().isSetFormat();
+        return (getObservationType() != null) && getObservationType().isSetFormat();
     }
 
+    @Override
     public Set<RelatedDatasetEntity> getRelatedDatasets() {
         return relatedDatasets;
     }
 
-    public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
+    @Override
+    public void setRelatedObservations(final Set<RelatedDatasetEntity> relatedDataset) {
         this.relatedDatasets.clear();
         if (relatedDataset != null) {
             this.relatedDatasets.addAll(relatedDataset);
         }
     }
 
+    @Override
     public boolean hasRelatedDatasets() {
-        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
+        return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
     }
 
     @Override
-    public String getLabelFrom(String locale) {
-        StringBuilder sb = new StringBuilder();
+    public String getLabelFrom(final String locale) {
+        final StringBuilder sb = new StringBuilder();
         sb.append(phenomenon.getLabelFrom(locale))
           .append(" ");
         sb.append(procedure.getLabelFrom(locale))
@@ -404,7 +437,7 @@ public class DatasetEntity extends DescribableEntity
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" id: ")
@@ -426,7 +459,7 @@ public class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public void copy(Dataset dataset) {
+    public void copy(final Dataset dataset) {
         setIdentifier(dataset.getIdentifier());
         setIdentifierCodespace(dataset.getIdentifierCodespace());
         setName(dataset.getName());
