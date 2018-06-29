@@ -22,7 +22,7 @@ public interface NotInitializedDataset extends Dataset {
     String DATASET_TYPE = "not_initialized";
 
     @Override
-    default String getDefaultDatasetType() {
+    default String getDefaultValueType() {
         return DATASET_TYPE;
     }
 

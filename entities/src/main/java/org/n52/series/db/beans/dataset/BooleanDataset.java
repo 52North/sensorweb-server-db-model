@@ -17,12 +17,12 @@
 
 package org.n52.series.db.beans.dataset;
 
+import org.n52.series.db.beans.data.Data;
+
 public interface BooleanDataset extends Dataset {
 
-    String DATASET_TYPE = "boolean";
-
     @Override
-    default String getDefaultDatasetType() {
-        return DATASET_TYPE;
+    default String getDefaultValueType() {
+        return  Data.BooleanData.VALUE_TYPE;
     }
 }

@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.BooleanDataset;
 
 public class BooleanDatasetEntity extends DatasetEntity implements BooleanDataset {
@@ -24,7 +25,7 @@ public class BooleanDatasetEntity extends DatasetEntity implements BooleanDatase
     private static final long serialVersionUID = -4006760517778156199L;
 
     public BooleanDatasetEntity() {
-        super(DATASET_TYPE);
+        super(Data.BooleanData.VALUE_TYPE);
     }
 
 }

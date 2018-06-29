@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.GeometryDataset;
 
 public class GeometryDatasetEntity extends DatasetEntity implements GeometryDataset {
@@ -24,7 +25,7 @@ public class GeometryDatasetEntity extends DatasetEntity implements GeometryData
     private static final long serialVersionUID = -5257221102121501687L;
 
     public GeometryDatasetEntity() {
-        super(DATASET_TYPE);
+        super(Data.GeometryData.VALUE_TYPE);
     }
 
 }

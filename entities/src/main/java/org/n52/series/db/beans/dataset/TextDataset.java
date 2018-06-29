@@ -17,12 +17,12 @@
 
 package org.n52.series.db.beans.dataset;
 
+import org.n52.series.db.beans.data.Data;
+
 public interface TextDataset extends Dataset {
 
-    String DATASET_TYPE = "text";
-
     @Override
-    default String getDefaultDatasetType() {
-        return DATASET_TYPE;
+    default String getDefaultValueType() {
+        return Data.TextData.VALUE_TYPE;
     }
 }

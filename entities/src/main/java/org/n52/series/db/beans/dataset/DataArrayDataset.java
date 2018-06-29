@@ -17,12 +17,12 @@
 
 package org.n52.series.db.beans.dataset;
 
+import org.n52.series.db.beans.data.Data;
+
 public interface DataArrayDataset extends Dataset {
 
-    String DATASET_TYPE = "dataarray";
-
     @Override
-    default String getDefaultDatasetType() {
-        return DATASET_TYPE;
+    default String getDefaultValueType() {
+        return Data.DataArrayData.VALUE_TYPE;
     }
 }

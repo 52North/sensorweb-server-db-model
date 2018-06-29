@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.CountDataset;
 
 public class CountDatasetEntity extends DatasetEntity implements CountDataset {
@@ -24,7 +25,7 @@ public class CountDatasetEntity extends DatasetEntity implements CountDataset {
     private static final long serialVersionUID = -3770736881206526817L;
 
     public CountDatasetEntity() {
-        super(DATASET_TYPE);
+        super(Data.CountData.VALUE_TYPE);
     }
 
 }

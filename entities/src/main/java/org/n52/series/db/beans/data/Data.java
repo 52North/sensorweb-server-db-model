@@ -27,10 +27,10 @@ import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasDataset;
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
-import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.beans.IdentifierNameDescriptionEntity;
 import org.n52.series.db.beans.RelatedDataEntity;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.parameter.Parameter;
 
 public interface Data<T>
         extends
@@ -39,7 +39,7 @@ public interface Data<T>
         HasPhenomenonTime,
         HasDataset {
 
-    BigDecimal NOT_SET_VERTICAL = new BigDecimal("-99999.00");
+    BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999);
 
     T getValue();
 
@@ -90,7 +90,7 @@ public interface Data<T>
     void setRelatedObservations(Set<RelatedDataEntity> relatedData);
 
     default boolean hasRelatedObservations() {
-        return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
+        return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
     }
 
     Set<Parameter< ? >> getParameters();
@@ -98,7 +98,7 @@ public interface Data<T>
     void setParameters(Set<Parameter< ? >> parameters);
 
     default boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
+        return (getParameters() != null) && !getParameters().isEmpty();
     }
 
     String getValueIdentifier();
@@ -106,7 +106,7 @@ public interface Data<T>
     void setValueIdentifier(String valudIdentifier);
 
     default boolean hasValueIdentifier() {
-        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
+        return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
     }
 
     String getValueName();
@@ -114,7 +114,7 @@ public interface Data<T>
     void setValueName(String valueName);
 
     default boolean hasValueName() {
-        return getValueDescription() != null && !getValueName().isEmpty();
+        return (getValueDescription() != null) && !getValueName().isEmpty();
     }
 
     String getValueDescription();
@@ -122,7 +122,7 @@ public interface Data<T>
     void setValueDescription(String valueDescription);
 
     default boolean hasValueDescription() {
-        return getValueDescription() != null && !getValueDescription().isEmpty();
+        return (getValueDescription() != null) && !getValueDescription().isEmpty();
     }
 
     BigDecimal getVerticalFrom();
@@ -134,59 +134,43 @@ public interface Data<T>
     void setVerticalTo(BigDecimal to);
 
     default boolean hasVerticalFrom() {
-        return getVerticalFrom() != null && !getVerticalFrom().equals(NOT_SET_VERTICAL);
+        return (getVerticalFrom() != null) && !getVerticalFrom().equals(NOT_SET_VERTICAL);
     }
 
     default boolean hasVerticalTo() {
-        return getVerticalTo() != null && !getVerticalFrom().equals(NOT_SET_VERTICAL);
+        return (getVerticalTo() != null) && !getVerticalFrom().equals(NOT_SET_VERTICAL);
     }
 
-    interface BlobData
-            extends
-            Data<Object> {
-        String DATASET_TYPE = "blob";
+    interface BlobData extends Data<Object> {
+        String VALUE_TYPE = "blob";
     }
 
-    interface BooleanData
-            extends
-            Data<Boolean> {
-        String DATASET_TYPE = "boolean";
+    interface BooleanData extends Data<Boolean> {
+        String VALUE_TYPE = "boolean";
     }
 
-    interface CategoryData
-            extends
-            Data<String> {
-        String DATASET_TYPE = "category";
+    interface CategoryData extends Data<String> {
+        String VALUE_TYPE = "category";
     }
 
-    interface ComplexData
-            extends
-            Data<Set<DataEntity< ? >>> {
-        String DATASET_TYPE = "complex";
+    interface ComplexData extends Data<Set<DataEntity< ? >>> {
+        String VALUE_TYPE = "complex";
     }
 
-    interface CountData
-            extends
-            Data<Integer> {
-        String DATASET_TYPE = "count";
+    interface CountData extends Data<Integer> {
+        String VALUE_TYPE = "count";
     }
 
-    interface DataArrayData
-            extends
-            Data<Set<DataEntity< ? >>> {
-        String DATASET_TYPE = "dataarray";
+    interface DataArrayData extends Data<Set<DataEntity< ? >>> {
+        String VALUE_TYPE = "dataarray";
     }
 
-    interface GeometryData
-            extends
-            Data<GeometryEntity> {
-        String DATASET_TYPE = "geoemtry";
+    interface GeometryData extends Data<GeometryEntity> {
+        String VALUE_TYPE = "geoemtry";
     }
 
-    interface ProfileData
-            extends
-            Data<Set<DataEntity< ? >>> {
-        String DATASET_TYPE = "profile";
+    interface ProfileData extends Data<Set<DataEntity< ? >>> {
+        String VALUE_TYPE = "profile";
 
         String getVerticalFromName();
 
@@ -201,35 +185,29 @@ public interface Data<T>
         void setVerticalUnit(UnitEntity levelEntity);
 
         default boolean hasVerticalUnit() {
-            return getVerticalUnit() != null && getVerticalUnit().isSetIdentifier();
+            return (getVerticalUnit() != null) && getVerticalUnit().isSetIdentifier();
         }
 
         default boolean hasVerticalFromName() {
-            return getVerticalFromName() != null && !getVerticalFromName().isEmpty();
+            return (getVerticalFromName() != null) && !getVerticalFromName().isEmpty();
         }
 
         default boolean hasVerticalToName() {
-            return getVerticalToName() != null && !getVerticalToName().isEmpty();
+            return (getVerticalToName() != null) && !getVerticalToName().isEmpty();
         }
     }
 
-    interface QuantityData
-            extends
-            Data<BigDecimal> {
-        String DATASET_TYPE = "quantity";
+    interface QuantityData extends Data<BigDecimal> {
+        String VALUE_TYPE = "quantity";
         BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     }
 
-    interface ReferencedData
-            extends
-            Data<String> {
-        String DATASET_TYPE = "referenced";
+    interface ReferencedData extends Data<String> {
+        String VALUE_TYPE = "referenced";
     }
 
-    interface TextData
-            extends
-            Data<String> {
-        String DATASET_TYPE = "text";
+    interface TextData extends Data<String> {
+        String VALUE_TYPE = "text";
     }
 
 }

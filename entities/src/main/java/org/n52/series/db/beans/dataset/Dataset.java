@@ -37,7 +37,7 @@ import org.n52.series.db.beans.parameter.Parameter;
 
 public interface Dataset {
 
-    String DEFAULT_VALUE_TYPE = "quantity";
+    String DEFAULT_VALUE_TYPE = Data.QuantityData.VALUE_TYPE;
 
     CategoryEntity getCategory();
 
@@ -185,7 +185,7 @@ public interface Dataset {
 
     void copy(Dataset series);
 
-    default String getDefaultDatasetType() {
+    default String getDefaultValueType() {
         return DEFAULT_VALUE_TYPE;
     }
 

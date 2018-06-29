@@ -21,10 +21,9 @@ import java.util.Collection;
 import java.util.List;
 
 import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.data.Data;
 
 public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
-
-    String DATASET_TYPE = "quantity";
 
     Integer getNumberOfDecimals();
 
@@ -35,11 +34,11 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
     List<T> getReferenceValues();
 
     default boolean hasReferenceValues() {
-        return getReferenceValues() != null && !getReferenceValues().isEmpty();
+        return (getReferenceValues() != null) && !getReferenceValues().isEmpty();
     }
 
     @Override
-    default String getDefaultDatasetType() {
-        return DATASET_TYPE;
+    default String getDefaultValueType() {
+        return Data.QuantityData.VALUE_TYPE;
     }
 }

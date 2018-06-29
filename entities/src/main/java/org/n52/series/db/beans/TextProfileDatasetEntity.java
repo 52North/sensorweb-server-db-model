@@ -17,14 +17,14 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.dataset.TextDataset;
+import org.n52.series.db.beans.data.Data;
 
 public class TextProfileDatasetEntity extends ProfileDatasetEntity {
 
     private static final long serialVersionUID = 5885583199127023243L;
 
     @Override
-    public String getDefaultDatasetType() {
-        return TextDataset.DATASET_TYPE + "-" + super.getDefaultDatasetType();
+    public String getDefaultValueType() {
+        return Data.TextData.VALUE_TYPE + "-" + super.getDefaultValueType();
     }
 }

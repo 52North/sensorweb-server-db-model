@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.CategoryDataset;
 
 public class CategoryDatasetEntity extends DatasetEntity implements CategoryDataset {
@@ -24,7 +25,7 @@ public class CategoryDatasetEntity extends DatasetEntity implements CategoryData
     private static final long serialVersionUID = -3225007112833816443L;
 
     public CategoryDatasetEntity() {
-        super(DATASET_TYPE);
+        super(Data.CategoryData.VALUE_TYPE);
     }
 
 }
