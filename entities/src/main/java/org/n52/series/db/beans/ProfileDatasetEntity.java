@@ -19,7 +19,7 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.dataset.ProfileDataset;
 
-public class ProfileDatasetEntity extends DatasetEntity implements ProfileDataset {
+public abstract class ProfileDatasetEntity extends DatasetEntity implements ProfileDataset {
 
     private static final long serialVersionUID = 8000392773970672194L;
 
@@ -31,7 +31,7 @@ public class ProfileDatasetEntity extends DatasetEntity implements ProfileDatase
         return verticalParameterName;
     }
 
-    public void setVerticalParameterName(String verticalParameterName) {
+    public void setVerticalParameterName(final String verticalParameterName) {
         this.verticalParameterName = verticalParameterName;
     }
 
@@ -39,7 +39,7 @@ public class ProfileDatasetEntity extends DatasetEntity implements ProfileDatase
         return verticalFromParameterName;
     }
 
-    public void setVerticalFromParameterName(String verticalFromParameterName) {
+    public void setVerticalFromParameterName(final String verticalFromParameterName) {
         this.verticalFromParameterName = verticalFromParameterName;
     }
 
@@ -47,7 +47,7 @@ public class ProfileDatasetEntity extends DatasetEntity implements ProfileDatase
         return verticalToParameterName;
     }
 
-    public void setVerticalToParameterName(String verticalToParameterName) {
+    public void setVerticalToParameterName(final String verticalToParameterName) {
         this.verticalToParameterName = verticalToParameterName;
     }
 }
