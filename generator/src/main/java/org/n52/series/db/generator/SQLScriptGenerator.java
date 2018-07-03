@@ -23,19 +23,26 @@ import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Properties;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
+import org.hibernate.mapping.Column;
+import org.hibernate.mapping.PersistentClass;
+import org.hibernate.mapping.Table;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
@@ -223,6 +230,16 @@ public class SQLScriptGenerator {
         return readSelectionFromStdIo();
     }
 
+    private int getGenerationType() throws IOException {
+        printToScreen("Which information should be created:");
+        printToScreen("0   sql script");
+        printToScreen("1   table metadata");
+        printToScreen("");
+        printToScreen("Enter your selection: ");
+
+        return readSelectionFromStdIo();
+    }
+
     private String getSchema() throws IOException {
         printToScreen("For which schema should the database model be created?");
         printToScreen("No schema is also valid!");
@@ -272,7 +289,7 @@ public class SQLScriptGenerator {
                     for (int k = 0; k < 2; k++) {
                         try {
                             // execute(sqlScriptGenerator, i, j, k, schema);
-                            execute(sqlScriptGenerator, i, -1, k, schema);
+                            execute(sqlScriptGenerator, i, -1, k, 0, schema);
                         } catch (Exception e) {
                             printToScreen("ERROR: " + e.getMessage());
                             e.printStackTrace();
@@ -288,7 +305,8 @@ public class SQLScriptGenerator {
                     int modelSelection = -1;
                     int concept = sqlScriptGenerator.getConceptSelection();
                     String schema = sqlScriptGenerator.getSchema();
-                    execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema);
+                    int generationType = sqlScriptGenerator.getGenerationType();
+                    execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, generationType, schema);
                 } catch (IOException ioe) {
                     printToScreen("ERROR: IO error trying to read your input!");
                     System.exit(1);
@@ -326,6 +344,7 @@ public class SQLScriptGenerator {
                                 int dialectSelection,
                                 int modelSelection,
                                 int conceptSelection,
+                                int generationType,
                                 String schema)
             throws Exception {
             Concept concept = Concept.values()[conceptSelection];
@@ -347,20 +366,57 @@ public class SQLScriptGenerator {
 
             configuration.buildSessionFactory();
             StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+            
             MetadataSources metadataSources = new MetadataSources(serviceRegistry);
             sqlScriptGenerator.setDirectoriesForModelSelection(concept, null, metadataSources);
             Metadata metadata = metadataSources.buildMetadata();
+            
+            if (generationType == 0) {
+              // create script
+              SchemaExport schemaExport = new SchemaExport();
+              EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
+              schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
+              schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
+              printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
+              // create drop
+              schemaExport.setOutputFile(fileNameDrop);
+              schemaExport.execute(targetTypes, SchemaExport.Action.DROP, metadata);
+              printToScreen("Finished! Check for file: " + fileNameDrop + "\n");
+            } else {
+                exportTableColumnMetadata(metadata, dia);
+            }
 
-            // create script
-            SchemaExport schemaExport = new SchemaExport();
-            EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
-            schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
-            schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
-            printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
-            // create drop
-            schemaExport.setOutputFile(fileNameDrop);
-            schemaExport.execute(targetTypes, SchemaExport.Action.DROP, metadata);
-            printToScreen("Finished! Check for file: " + fileNameDrop + "\n");
+    }
+
+    private static void exportTableColumnMetadata(Metadata metadata, Dialect dia) throws IOException {
+        SortedMap<String, String> map = new TreeMap<>();
+        for (PersistentClass entity : metadata.getEntityBindings()) {
+            Table table = entity.getTable();
+            StringBuilder builder = new StringBuilder();
+            builder.append("**").append(table.getName()).append("**").append("\n");
+            builder.append("*Description*: ").append(table.getComment()).append("\n");
+            builder.append("\n");
+            Iterator<Column> columnIterator = entity.getTable().getColumnIterator();
+            builder.append("| column | comment | sql-type | type | default | NOT-NULL |").append("\n");
+            builder.append("| --- | --- | --- | --- | --- | --- |").append("\n");
+            while (columnIterator.hasNext()) {
+                Column next = columnIterator.next();
+                builder.append("| ").append(next.getName()).append(" | ");
+                builder.append(next.getComment() != null ? next.getComment() : "-").append(" | ");
+                builder.append(next.getSqlType(dia, metadata)).append(" | ");
+                builder.append(next.getValue().getType().getName()).append(" | ");
+                builder.append(next.getDefaultValue() != null ? next.getDefaultValue() : "-").append(" | ");
+                builder.append(!next.isNullable()).append(" | ").append("\n");
+            }
+            map.put(table.getName(), builder.toString());
+        }
+        Path path = Paths.get("target/tableMetadata.md");
+        Files.deleteIfExists(path);
+        System.out.println(Files.write(path, map.values()));
+//        for (String value : map.values()) {
+//            System.out.println(value);
+//            System.out.println("");
+//        }
     }
 
 }
