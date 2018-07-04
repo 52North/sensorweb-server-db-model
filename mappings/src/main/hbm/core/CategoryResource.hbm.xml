@@ -45,12 +45,12 @@
                 <param name="sequence_name">category_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" not-null="true" class="CategoryEntity" foreign-key="fk_category">
-            <column name="fk_category_id">
+		<many-to-one name="entity" class="CategoryEntity" foreign-key="fk_category">
+            <column name="fk_category_id" not-null="true">
                 <comment>Reference to the category table this internationalization belongs to.</comment>
             </column>
         </many-to-one>
-        <property name="locale" type="string">
+        <property name="locale" not-null="true" type="string">
             <column name="locale">
                 <comment>Locale/language specification for this entry</comment>
             </column>

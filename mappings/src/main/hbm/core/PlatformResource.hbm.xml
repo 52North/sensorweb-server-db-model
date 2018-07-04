@@ -12,7 +12,7 @@
         <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="platformServiceFk"> -->
         <!-- <column name="service" not-null="true"/> -->
         <!-- </many-to-one> -->
-        <property column="identifier" insert="false" name="identifier" type="string" update="false" />
+        <property column="identifier" insert="false" name="identifier" not-null="true" type="string" update="false" />
         <property column="name" insert="false" name="name" type="string" update="false" />
         <property column="is_mobile" insert="false" name="mobile" type="org.n52.hibernate.type.SmallBooleanType" update="false" />
         <property column="is_insitu" insert="false" name="insitu" type="org.n52.hibernate.type.SmallBooleanType" update="false" />
@@ -28,7 +28,7 @@
             <generator class="assigned" />
         </id>
 		<many-to-one name="entity" column="fk_procedure_id" not-null="true" class="PlatformEntity" foreign-key="fk_procedure"/>
-        <property name="locale" type="string" insert="false" update="false" />
+        <property name="locale" type="string" not-null="true" insert="false" update="false" />
         <property name="name" type="string" insert="false" update="false" />
         <property name="description" type="string" insert="false" update="false"  />
         <property name="shortName" column="short_name" type="string" insert="false" update="false" />

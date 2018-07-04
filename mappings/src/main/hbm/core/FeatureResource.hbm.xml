@@ -14,14 +14,16 @@
             </generator>
         </id>
 
-        <discriminator column="discriminator" type="string" not-null="false">
+        <discriminator type="string" not-null="false">
             <column name="discriminator">
                 <comment>Indicator used by Hibernate to map value specific entities.</comment>
             </column>
         </discriminator>
 
         <many-to-one name="featureType" class="FormatEntity" foreign-key="fk_feature_format">
-            <column name="fk_format_id" not-null="true"/>
+            <column name="fk_format_id" not-null="true">
+                <comment>Reference to the featureType in the format table. Required by the SOS to identify the typ of the feature, e.g. http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint.</comment>
+            </column>
         </many-to-one>
 
         <property name="identifier" type="string" index="idx_feature_identifier">
@@ -51,7 +53,7 @@
         </property>
 
         <property name="xml" type="text">
-            <column name="xml"/>
+            <column name="xml">
                 <comment>The XML encoded representation of the feature.</comment>
             </column>
         </property>
@@ -77,12 +79,12 @@
 
         <set name="parents" table="feature_hierarchy" inverse="false" fetch="select">
             <comment>Storage of hierarchies between features</comment>
-            <key column="fk_child_feature_id" not-null="true" foreign-key="fk_feature_child">
+            <key not-null="true" foreign-key="fk_feature_child">
                 <column name="fk_child_feature_id">
                     <comment>Reference to the child feature in feature table.</comment>
                 </column>
             </key>
-            <many-to-many class="AbstractFeatureEntity" column="fk_parent_feature_id" foreign-key="fk_feature_parent">
+            <many-to-many class="AbstractFeatureEntity" foreign-key="fk_feature_parent">
                 <column name="fk_parent_feature_id">
                     <comment>Reference to the parent feature in feature table.</comment>
                 </column>
@@ -130,12 +132,12 @@
                 <param name="sequence_name">feature_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" not-null="true" class="FeatureEntity" foreign-key="fk_feature">
-            <column name="fk_feature_id">
+		<many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature">
+            <column name="fk_feature_id" not-null="true">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>
         </many-to-one>
-        <property name="locale" type="string">
+        <property name="locale" not-null="true" type="string">
             <column name="locale">
                 <comment>Locale/language specification for this entry</comment>
             </column>

@@ -86,7 +86,7 @@
                 </column>
             </property>
         </component>
-        
+
         <set name="parents" table="offering_hierarchy" inverse="false" fetch="select">
             <key not-null="true" foreign-key="fk_offering_child">
                 <column name="fk_child_offering_id">
@@ -132,7 +132,7 @@
                 </column>
             </many-to-many>
         </set>
-        
+
         <set name="relatedFeatures" table="offering_related_feature" inverse="false">
             <comment>Storage tfor the relation between offering and relatedFeature</comment>
             <key foreign-key="fk_offering_related_feature">
@@ -146,7 +146,7 @@
                 </column>
             </many-to-many>
         </set>
-        
+
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="offering_i18n" inverse="true" fetch="select">
             <key column="fk_offering_id" not-null="true" />
@@ -164,12 +164,12 @@
                 <param name="sequence_name">offering_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" not-null="true" class="OfferingEntity" foreign-key="fk_offering">
-            <column name="fk_offering_id">
+		<many-to-one name="entity" class="OfferingEntity" foreign-key="fk_offering">
+            <column name="fk_offering_id" not-null="true">
                 <comment>Reference to the offering table this internationalization belongs to.</comment>
             </column>
         </many-to-one>
-         <property name="locale" type="string">
+         <property name="locale" not-null="true" type="string">
             <column name="locale">
                 <comment>Locale/language specification for this entry</comment>
             </column>

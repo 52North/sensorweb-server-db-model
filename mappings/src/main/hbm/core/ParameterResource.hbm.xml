@@ -50,7 +50,7 @@
                 <column name="fk_unit_id">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
-            </property>
+            </many-to-one>
 		</subclass>
 		<subclass discriminator-value="count" extends="Parameter" name="ParameterCount">
 			<property name="value" type="integer">
@@ -69,7 +69,7 @@
                 <column name="fk_unit_id">
                     <!-- Comment is defined above for category! -->
                 </column>
-            </property>
+            </many-to-one>
 		</subclass>
 		<subclass discriminator-value="text" extends="Parameter" name="ParameterText">
 			<property name="value" type="string">

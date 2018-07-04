@@ -13,50 +13,66 @@
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
-        <discriminator column="value_type" force="true" type="string" not-null="true">
+        <discriminator force="true" type="string" not-null="true">
             <column name="value_type">
                 <comment>Indicator used by Hibernate to map value specific entities.</comment>
             </column>
         </discriminator>
 
-        <many-to-one class="ProcedureEntity" column="fk_procedure_id" name="procedure" not-null="true" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_procedure" />
-        <many-to-one class="PhenomenonEntity" column="fk_phenomenon_id" name="phenomenon" not-null="true" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_phenomenon" />
-        <many-to-one class="OfferingEntity" column="fk_offering_id" name="offering" not-null="true" unique-key="un_dataset_identity"
-           foreign-key="fk_dataset_offering" />
-        <many-to-one class="CategoryEntity" column="fk_category_id" name="category" not-null="false" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_category" />
-        <many-to-one class="FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
-            foreign-key="fk_dataset_feature" />
+        <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
+            <column name="fk_procedure_id"  not-null="true">
+                <comment>Reference to the procedure that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="PhenomenonEntity" name="phenomenon" unique-key="un_dataset_identity" foreign-key="fk_dataset_phenomenon">
+            <column name="fk_phenomenon_id"  not-null="true">
+                <comment>Reference to the phenomenon that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="OfferingEntity" name="offering" unique-key="un_dataset_identity" foreign-key="fk_dataset_offering">
+            <column name="fk_offering_id" not-null="true">
+                <comment>Reference to the offering that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="CategoryEntity" name="category" unique-key="un_dataset_identity" foreign-key="fk_dataset_category">
+            <column name="fk_category_id" not-null="false">
+                <comment>Reference to the category that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="FeatureEntity" name="feature" unique-key="un_dataset_identity" foreign-key="fk_dataset_feature">
+            <column name="fk_feature_id" not-null="false">
+                <comment>Reference to the feature that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <!-- See above for procedure! -->
         <many-to-one class="PlatformEntity" column="fk_procedure_id" name="platform" insert="false" update="false" unique-key="un_dataset_identity" />
 
         <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
             <column name="fk_format_id">
-                <comment></comment>
+                <comment>Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset.</comment>
             </column>
         </many-to-one>
 
-        <!-- See 'discriminator' above -->
+        <!-- See 'discriminator' above for comment! -->
         <property column="value_type" insert="false" name="valueType" type="string" update="false" />
 
-        <property column="first_time" name="firstValueAt" type="timestamp">
+        <property name="firstValueAt" type="timestamp">
             <column name="first_time">
                 <comment>The timestamp of the temporally first data/observation that belongs to this dataset.</comment>
             </column>
         </property>
-        <property column="last_time" name="lastValueAt" type="timestamp">
+        <property name="lastValueAt" type="timestamp">
             <column name="last_time">
                 <comment>The timestamp of the temporally last data/observation that belongs to this dataset.</comment>
             </column>
         </property>
 
-        <property column="first_value" name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
+        <property name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
             <column name="first_value">
                 <comment>The value of the temporally first data/observation that belongs to this dataset.</comment>
             </column>
         </property>
-        <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
+        <property name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
             <column name="last_value">
                 <comment>The value of the temporally last quantity data/observation that belongs to this dataset.</comment>
             </column>
@@ -117,25 +133,63 @@
         </property>
 
         <set inverse="false" name="parameters" table="dataset_parameter" cascade="delete-orphan">
-            <key column="fk_dataset_id" not-null="true" foreign-key="fk_dataset_parameter" />
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" column="fk_parameter_id"
-                foreign-key="fk_parameter_dataset" />
+            <comment>Storage of relations between dataset and related parameter</comment>
+            <key not-null="true" foreign-key="fk_dataset_parameter">
+                <column name="fk_dataset_id">
+                    <comment>The reference to the dataset in the dataset table</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" foreign-key="fk_parameter_dataset">
+                <column name="fk_parameter_id">
+                    <comment>The reference to the parameter in the dataset parameter</comment>
+                </column>
+            </many-to-many>
         </set>
 
+        <!-- Some columns occur several times and are commented only once at her first definition! -->
         <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized">
-        	<property name="unitId" column="fk_unit_id" type="long" lazy="true" />
-        	<property name="firstObservationId" column="fk_first_observation_id" type="long" lazy="true" />
-        	<property name="lastObservationId" column="fk_last_observation_id" type="long" lazy="true" />
+        	<property name="unitId" type="long" lazy="true">
+                <column name="fk_unit_id">
+                    <comment>Reference to the unit of the data/observations that belongs to this dataset.</comment>
+                </column>
+            </property>
+        	<property name="firstObservationId" type="long" lazy="true">
+                <column name="fk_first_observation_id">
+                    <comment>Reference to the temporally first data/observation in the observation table that belongs to this dataset.</comment>
+                </column>
+            </property>
+        	<property name="lastObservationId" type="long" lazy="true">
+                <column name="fk_last_observation_id">
+                    <comment>Reference to the temporally last data/observation in the observation table that belongs to this dataset.</comment>
+                </column>
+            </property>
         </subclass>
         <subclass name="QuantityDatasetEntity" discriminator-value="quantity" >
-            <property name="numberOfDecimals" column="decimals" type="int" />
-            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
+            <property name="numberOfDecimals" type="int">
+                <column name="decimals">
+                    <comment>Number of decimals that should be present in the data/observation values</comment>
+                </column>
+            </property>
+            <many-to-one class="UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit"/>
             <many-to-one class="QuantityDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
             <many-to-one class="QuantityDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
             <list name="referenceValues" table="dataset_reference" inverse="false">
-                <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
-                <list-index column="sort_order" />
-                <many-to-many class="DatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
+                <comment>Storage of referenced datasets, e.g. level zero, medium water level,etc. for water level </comment>
+                <key not-null="true" foreign-key="fk_dataset_reference_from">
+                    <column name="fk_dataset_id_from">
+                        <comment>Reference to the dataset that has referenced datasets</comment>
+                    </column>
+                </key>
+                <list-index>
+                    <column name="sort_order">
+                         <comment>Provides the sort order for the referenced datasets.</comment>
+                    </column>
+                </list-index>
+                <many-to-many class="DatasetEntity" foreign-key="fk_dataset_reference_to">
+                    <column name="fk_dataset_id_to">
+                        <comment>Reference to the dataset that is the reference</comment>
+                    </column>
+                </many-to-many>
             </list>
         </subclass>
         <subclass discriminator-value="text" name="TextDatasetEntity">

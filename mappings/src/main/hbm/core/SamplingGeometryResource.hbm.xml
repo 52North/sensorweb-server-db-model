@@ -6,7 +6,7 @@
     <!-- Comments for the columns are defined in the DataResource.hbm.xml file! -->
     <class name="SamplingGeometryEntity" table="observation">
         <id name="id" type="long">
-            <column name="observation_id" /> 
+            <column name="observation_id" />
             <generator class="assigned" />
         </id>
         <property name="timestamp" column="sampling_time_end" type="timestamp" not-null="true" insert="false" update="false"/>
@@ -20,6 +20,6 @@
         </component>
 
         <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" not-null="true" foreign-key="fk_sampling_geom_dataset" insert="false" update="false"/>
-        
+
     </class>
 </hibernate-mapping>
