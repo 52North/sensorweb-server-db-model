@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QCompositeDataEntity is a Querydsl query type for CompositeDataEntity
@@ -55,7 +55,7 @@ public class QCompositeDataEntity extends EntityPathBase<CompositeDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -97,7 +97,7 @@ public class QCompositeDataEntity extends EntityPathBase<CompositeDataEntity> {
         this(CompositeDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QCompositeDataEntity(Path< ? extends CompositeDataEntity> path) {
+    public QCompositeDataEntity(Path<? extends CompositeDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -109,7 +109,7 @@ public class QCompositeDataEntity extends EntityPathBase<CompositeDataEntity> {
         this(CompositeDataEntity.class, metadata, inits);
     }
 
-    public QCompositeDataEntity(Class< ? extends CompositeDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QCompositeDataEntity(Class<? extends CompositeDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -138,3 +138,4 @@ public class QCompositeDataEntity extends EntityPathBase<CompositeDataEntity> {
     }
 
 }
+

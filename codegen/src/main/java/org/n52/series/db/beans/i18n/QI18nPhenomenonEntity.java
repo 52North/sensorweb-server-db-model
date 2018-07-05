@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.i18n;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QI18nPhenomenonEntity is a Querydsl query type for I18nPhenomenonEntity
@@ -24,8 +24,7 @@ public class QI18nPhenomenonEntity extends EntityPathBase<I18nPhenomenonEntity> 
     public final StringPath description = createString("description");
 
     // custom
-    public final org.n52.series.db.beans.QDescribableEntity entity =
-            new org.n52.series.db.beans.QDescribableEntity(forProperty("entity"));
+    public final org.n52.series.db.beans.QDescribableEntity entity = new org.n52.series.db.beans.QDescribableEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -37,7 +36,7 @@ public class QI18nPhenomenonEntity extends EntityPathBase<I18nPhenomenonEntity> 
         super(I18nPhenomenonEntity.class, forVariable(variable));
     }
 
-    public QI18nPhenomenonEntity(Path< ? extends I18nPhenomenonEntity> path) {
+    public QI18nPhenomenonEntity(Path<? extends I18nPhenomenonEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -46,3 +45,4 @@ public class QI18nPhenomenonEntity extends EntityPathBase<I18nPhenomenonEntity> 
     }
 
 }
+

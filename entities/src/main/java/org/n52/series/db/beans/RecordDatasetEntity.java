@@ -17,14 +17,10 @@
 
 package org.n52.series.db.beans;
 
-public class RecordDatasetEntity extends DatasetEntity {
+import org.n52.series.db.beans.dataset.RecordDataset;
+
+public class RecordDatasetEntity extends DatasetEntity implements RecordDataset {
 
     private static final long serialVersionUID = 2357248511291918028L;
-
-    private static final String DATASET_TYPE = "record";
-
-    public RecordDatasetEntity() {
-        super(DATASET_TYPE);
-    }
 
 }

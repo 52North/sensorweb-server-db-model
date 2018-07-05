@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -10,6 +9,7 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
+
 /**
  * QEReportingNetworkEntity is a Querydsl query type for EReportingNetworkEntity
  */
@@ -20,11 +20,9 @@ public class QEReportingNetworkEntity extends EntityPathBase<EReportingNetworkEn
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QEReportingNetworkEntity eReportingNetworkEntity =
-            new QEReportingNetworkEntity("eReportingNetworkEntity");
+    public static final QEReportingNetworkEntity eReportingNetworkEntity = new QEReportingNetworkEntity("eReportingNetworkEntity");
 
-    public final org.n52.series.db.beans.QDescribableEntity _super =
-            new org.n52.series.db.beans.QDescribableEntity(this);
+    public final org.n52.series.db.beans.QDescribableEntity _super = new org.n52.series.db.beans.QDescribableEntity(this);
 
     public final StringPath description = createString("description");
 
@@ -42,7 +40,7 @@ public class QEReportingNetworkEntity extends EntityPathBase<EReportingNetworkEn
         this(EReportingNetworkEntity.class, forVariable(variable), INITS);
     }
 
-    public QEReportingNetworkEntity(Path< ? extends EReportingNetworkEntity> path) {
+    public QEReportingNetworkEntity(Path<? extends EReportingNetworkEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -54,16 +52,11 @@ public class QEReportingNetworkEntity extends EntityPathBase<EReportingNetworkEn
         this(EReportingNetworkEntity.class, metadata, inits);
     }
 
-    public QEReportingNetworkEntity(Class< ? extends EReportingNetworkEntity> type,
-                                    PathMetadata metadata,
-                                    PathInits inits) {
+    public QEReportingNetworkEntity(Class<? extends EReportingNetworkEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.identifierCodespace = inits.isInitialized("identifierCodespace")
-                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
-                : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace")
-                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
-                : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
     }
 
 }
+

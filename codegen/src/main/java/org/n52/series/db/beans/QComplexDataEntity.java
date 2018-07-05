@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.forVariable;
@@ -14,6 +13,7 @@ import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathInits;
 import com.querydsl.core.types.dsl.SetPath;
 import com.querydsl.core.types.dsl.StringPath;
+
 
 /**
  * QComplexDataEntity is a Querydsl query type for ComplexDataEntity
@@ -60,7 +60,7 @@ public class QComplexDataEntity extends EntityPathBase<ComplexDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -83,11 +83,7 @@ public class QComplexDataEntity extends EntityPathBase<ComplexDataEntity> {
     //inherited
     public final DateTimePath<java.util.Date> validTimeStart;
 
-    public final SetPath<DataEntity< ? >, QDataEntity> value =
-            this.<DataEntity< ? >, QDataEntity> createSet("value",
-                                                          DataEntity.class,
-                                                          QDataEntity.class,
-                                                          PathInits.DIRECT2);
+    public final SetPath<DataEntity<?>, QDataEntity> value = this.<DataEntity<?>, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
 
     //inherited
     public final StringPath valueDescription;
@@ -108,7 +104,7 @@ public class QComplexDataEntity extends EntityPathBase<ComplexDataEntity> {
         this(ComplexDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QComplexDataEntity(Path< ? extends ComplexDataEntity> path) {
+    public QComplexDataEntity(Path<? extends ComplexDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -120,7 +116,7 @@ public class QComplexDataEntity extends EntityPathBase<ComplexDataEntity> {
         this(ComplexDataEntity.class, metadata, inits);
     }
 
-    public QComplexDataEntity(Class< ? extends ComplexDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QComplexDataEntity(Class<? extends ComplexDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QCompositeDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -149,3 +145,4 @@ public class QComplexDataEntity extends EntityPathBase<ComplexDataEntity> {
     }
 
 }
+

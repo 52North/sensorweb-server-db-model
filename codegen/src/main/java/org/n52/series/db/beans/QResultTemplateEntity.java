@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QResultTemplateEntity is a Querydsl query type for ResultTemplateEntity
@@ -45,7 +45,7 @@ public class QResultTemplateEntity extends EntityPathBase<ResultTemplateEntity> 
         this(ResultTemplateEntity.class, forVariable(variable), INITS);
     }
 
-    public QResultTemplateEntity(Path< ? extends ResultTemplateEntity> path) {
+    public QResultTemplateEntity(Path<? extends ResultTemplateEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -57,17 +57,12 @@ public class QResultTemplateEntity extends EntityPathBase<ResultTemplateEntity> 
         this(ResultTemplateEntity.class, metadata, inits);
     }
 
-    public QResultTemplateEntity(Class< ? extends ResultTemplateEntity> type, PathMetadata metadata, PathInits inits) {
+    public QResultTemplateEntity(Class<? extends ResultTemplateEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.offering = inits.isInitialized("offering")
-                ? new QOfferingEntity(forProperty("offering"), inits.get("offering"))
-                : null;
-        this.phenomenon = inits.isInitialized("phenomenon")
-                ? new QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon"))
-                : null;
-        this.procedure = inits.isInitialized("procedure")
-                ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure"))
-                : null;
+        this.offering = inits.isInitialized("offering") ? new QOfferingEntity(forProperty("offering"), inits.get("offering")) : null;
+        this.phenomenon = inits.isInitialized("phenomenon") ? new QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
     }
 
 }
+

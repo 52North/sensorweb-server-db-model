@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'text-profile', 'category-profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced', 'not_initialized')">
@@ -108,13 +108,13 @@
             </column>
         </property>
 
-        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_codespace">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codespace">
             <column name="fk_identifier_codespace_id">
                 <comment>The codespace of the dataset identifier, reference to the codespace table.</comment>
             </column>
         </many-to-one>
 
-		<property name="name" type="string">
+        <property name="name" type="string">
             <column name="name">
                 <comment>The human readable name of the dataset.</comment>
             </column>

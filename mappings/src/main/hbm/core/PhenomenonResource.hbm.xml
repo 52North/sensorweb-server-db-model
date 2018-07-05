@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="PhenomenonEntity" table="phenomenon">
@@ -19,7 +19,7 @@
                 <comment>Unique identifier of the phenomenon which can be for filtering, e.g. in the SOS.</comment>
             </column>
         </property>
-		<many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_phenomenon_identifier_codespace">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_phenomenon_identifier_codespace">
             <column name="fk_identifier_codespace_id">
                 <comment>The codespace of the phenomenon identifier, reference to the codespace table.</comment>
             </column>
@@ -29,7 +29,7 @@
                 <comment>The human readable name of the phenomenon.</comment>
             </column>
         </property>
-		<many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_phenomenon_name_codespace">
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_phenomenon_name_codespace">
             <column name="fk_name_codespace_id">
                 <comment>The codespace of the phenomenon name, reference to the codespace table.</comment>
             </column>
@@ -64,7 +64,7 @@
         </set>
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="phenomenon_i18n" inverse="true" fetch="select">
-         	<key column="fk_phenomenon_id" not-null="true" />
+             <key column="fk_phenomenon_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" />
         </set>
     </class>

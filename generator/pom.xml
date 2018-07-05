@@ -37,9 +37,13 @@
             <artifactId>types</artifactId>
         </dependency>
         <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.vividsolutions</groupId>
             <artifactId>jts-core</artifactId>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -67,13 +71,13 @@
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                     <version>${version.postgres}</version>
-                    <scope>runtime</scope>
+                    <scope>provided</scope>
                 </dependency>
                 <dependency>
                     <groupId>org.postgis</groupId>
                     <artifactId>postgis-jdbc</artifactId>
                     <version>${version.postgis}</version>
-                    <scope>runtime</scope>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>
@@ -85,7 +89,7 @@
                     <groupId>com.oracle</groupId>
                     <artifactId>ojdbc6</artifactId>
                     <version>${version.ojdbc6}</version>
-                    <scope>runtime</scope>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>
@@ -97,14 +101,14 @@
                     <groupId>com.microsoft</groupId>
                     <artifactId>sqljdbc4</artifactId>
                     <version>${version.sqljdbc4}</version>
-                    <scope>runtime</scope>
+                    <scope>provided</scope>
                 </dependency>
                 
                 <dependency>
                     <groupId>mysql</groupId>
                     <artifactId>mysql-connector-java</artifactId>
                     <version>${version.mysql}</version>
-                    <scope>runtime</scope>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>
@@ -116,7 +120,7 @@
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                     <version>${version.h2}</version>
-                    <scope>runtime</scope>
+                    <scope>provided</scope>
                 </dependency>
             </dependencies>
         </profile>

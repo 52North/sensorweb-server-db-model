@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.parameter;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QParameterBoolean is a Querydsl query type for ParameterBoolean
@@ -39,7 +39,7 @@ public class QParameterBoolean extends EntityPathBase<ParameterBoolean> {
         super(ParameterBoolean.class, forVariable(variable));
     }
 
-    public QParameterBoolean(Path< ? extends ParameterBoolean> path) {
+    public QParameterBoolean(Path<? extends ParameterBoolean> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -48,3 +48,4 @@ public class QParameterBoolean extends EntityPathBase<ParameterBoolean> {
     }
 
 }
+

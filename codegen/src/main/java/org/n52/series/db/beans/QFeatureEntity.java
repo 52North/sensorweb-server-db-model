@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.forVariable;
@@ -12,6 +11,7 @@ import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathInits;
 import com.querydsl.core.types.dsl.SetPath;
 import com.querydsl.core.types.dsl.StringPath;
+
 
 /**
  * QFeatureEntity is a Querydsl query type for FeatureEntity
@@ -28,7 +28,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final QAbstractFeatureEntity _super;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity< ? >, QAbstractFeatureEntity> children;
+    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> children;
 
     //inherited
     public final StringPath description;
@@ -55,10 +55,10 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity< ? >, QAbstractFeatureEntity> parents;
+    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;
@@ -73,7 +73,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
         this(FeatureEntity.class, forVariable(variable), INITS);
     }
 
-    public QFeatureEntity(Path< ? extends FeatureEntity> path) {
+    public QFeatureEntity(Path<? extends FeatureEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -85,7 +85,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
         this(FeatureEntity.class, metadata, inits);
     }
 
-    public QFeatureEntity(Class< ? extends FeatureEntity> type, PathMetadata metadata, PathInits inits) {
+    public QFeatureEntity(Class<? extends FeatureEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QAbstractFeatureEntity(type, metadata, inits);
         this.children = _super.children;
@@ -105,3 +105,4 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     }
 
 }
+

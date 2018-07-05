@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QBlobDataEntity is a Querydsl query type for BlobDataEntity
@@ -55,7 +55,7 @@ public class QBlobDataEntity extends EntityPathBase<BlobDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -99,7 +99,7 @@ public class QBlobDataEntity extends EntityPathBase<BlobDataEntity> {
         this(BlobDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QBlobDataEntity(Path< ? extends BlobDataEntity> path) {
+    public QBlobDataEntity(Path<? extends BlobDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -111,7 +111,7 @@ public class QBlobDataEntity extends EntityPathBase<BlobDataEntity> {
         this(BlobDataEntity.class, metadata, inits);
     }
 
-    public QBlobDataEntity(Class< ? extends BlobDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QBlobDataEntity(Class<? extends BlobDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -140,3 +140,4 @@ public class QBlobDataEntity extends EntityPathBase<BlobDataEntity> {
     }
 
 }
+

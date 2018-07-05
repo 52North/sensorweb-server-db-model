@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.i18n;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QI18nPlatformEntity is a Querydsl query type for I18nPlatformEntity
@@ -24,8 +24,7 @@ public class QI18nPlatformEntity extends EntityPathBase<I18nPlatformEntity> {
     public final StringPath description = createString("description");
 
     // custom
-    public final org.n52.series.db.beans.QDescribableEntity entity =
-            new org.n52.series.db.beans.QDescribableEntity(forProperty("entity"));
+    public final org.n52.series.db.beans.QDescribableEntity entity = new org.n52.series.db.beans.QDescribableEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -41,7 +40,7 @@ public class QI18nPlatformEntity extends EntityPathBase<I18nPlatformEntity> {
         super(I18nPlatformEntity.class, forVariable(variable));
     }
 
-    public QI18nPlatformEntity(Path< ? extends I18nPlatformEntity> path) {
+    public QI18nPlatformEntity(Path<? extends I18nPlatformEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -50,3 +49,4 @@ public class QI18nPlatformEntity extends EntityPathBase<I18nPlatformEntity> {
     }
 
 }
+

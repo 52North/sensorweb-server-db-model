@@ -26,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -45,15 +44,19 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.mapping.Column;
+import org.hibernate.mapping.Join;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.Table;
+import org.hibernate.mapping.Value;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
@@ -123,21 +126,14 @@ public class SQLScriptGenerator {
     private void setDirectoriesForModelSelection(Concept concept, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
-//        files.add(getDirectory("/hbm/core/Codespace.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureDescriptionFormat.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureResource.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureHistory.hbm.xml"));
          files.add(getDirectory("/hbm/core"));
-         files.add(getDirectory("/hbm/dataset"));
 //         files.add(getDirectory("/hbm/feature"));
 //         files.add(getDirectory("/hbm/extension"));
         for (File file : files) {
             if (configuration != null) {
-//                configuration.addFile(file);
                 configuration.addDirectory(file);
             }
             if (metadataSources != null) {
-//                metadataSources.addFile(file);
                 metadataSources.addDirectory(file);
             }
         }
@@ -159,14 +155,20 @@ public class SQLScriptGenerator {
             throws Exception {
         switch (concept) {
         case DEFAULT:
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory("/hbm/dataset"));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory("/hbm/dataset"));
+            }
             break;
         case E_REPORTING:
 
             if (configuration != null) {
-                configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
+                configuration.addDirectory(getDirectory("/hbm/ereporting"));
             }
             if (metadataSources != null) {
-                metadataSources.addDirectory(getDirectory("/hbm/sos/ereporting"));
+                metadataSources.addDirectory(getDirectory("/hbm/ereporting"));
             }
 
             break;
@@ -403,59 +405,75 @@ public class SQLScriptGenerator {
     }
 
     private void exportTableColumnMetadata(Metadata metadata, Dialect dia) throws IOException {
-        SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
-//        for (PersistentClass entity : metadata.getEntityBindings()) {
-//            Table table = entity.getTable();
-//            StringBuilder builder = new StringBuilder();
-//            builder.append("**").append(table.getName()).append("**").append("\n");
-//            builder.append("*Description*: ").append(table.getComment()).append("\n");
-//            builder.append("\n");
-//            Iterator<Column> columnIterator = entity.getTable().getColumnIterator();
-//            builder.append("| column | comment | sql-type | type | default | NOT-NULL |").append("\n");
-//            builder.append("| --- | --- | --- | --- | --- | --- |").append("\n");
-//            while (columnIterator.hasNext()) {
-//                Column next = columnIterator.next();
-//                builder.append("| ").append(next.getName()).append(" | ");
-//                builder.append(next.getComment() != null ? next.getComment() : "-").append(" | ");
-//                builder.append(next.getSqlType(dia, metadata)).append(" | ");
-//                builder.append(next.getValue().getType().getName()).append(" | ");
-//                builder.append(next.getDefaultValue() != null ? next.getDefaultValue() : "-").append(" | ");
-//                builder.append(!next.isNullable()).append(" | ").append("\n");
-//            }
-//            map.put(table.getName(), builder.toString());
-//        }
-        Path path = Paths.get("target/tableMetadata.md");
+        Path path = Paths.get("target/TableMetadata.md");
         Files.deleteIfExists(path);
-        System.out.println(Files.write(path, map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList())));
-//        for (String value : map.values()) {
-//            System.out.println(value);
-//            System.out.println("");
-//        }
+        SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
+        List<String> result = new LinkedList<>();
+        result.add("# Database table/column description");
+        result.add("This page describes the tables and columns in the database.");
+        result.add("The *SQL type* column in the tables is generated for Hibernate dialect: *" + dia.getClass().getSimpleName() + "*");
+        result.add("");
+        result.add("## Tables");
+        map.keySet().forEach(k -> result.add("- [" + k + "](#" + k + ")"));
+        result.add("");
+        result.addAll(map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList()));
+        result.add("");
+        result.add("*Creation date: " +  DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
+        System.out.println("The generated file was written to: " + Files.write(path,result).toAbsolutePath());
     }
 
     private SortedMap<String, TableMetadata> extractTableMetadata(Metadata metadata, Dialect dia) {
         SortedMap<String, TableMetadata> map = new TreeMap<>();
         for (PersistentClass entity : metadata.getEntityBindings()) {
             Table table = entity.getTable();
+            TableMetadata tm = processTable(table, map, dia, metadata);
+            processJoins((Iterator<Join>) entity.getJoinClosureIterator(), map, dia, metadata);
+            // from Property
+            Iterator<Property> propertyIterator = entity.getPropertyIterator();
+            while (propertyIterator.hasNext()) {
+                Property property = (Property) propertyIterator.next();
+                if (property.getValue() instanceof org.hibernate.mapping.Collection) {
+                    processCollection((org.hibernate.mapping.Collection) property.getValue(), map, dia, metadata);
+                }
+                processColumns(property.getColumnIterator(), tm.getColumns(), dia, metadata);
+            }
+            // from Identifier
+            processColumns(entity.getIdentifier().getColumnIterator(), tm.getColumns(), dia, metadata);
+        }
+        return map;
 
+    }
+
+    private void processJoins(Iterator<Join> ji, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+        if (ji != null) {
+            while (ji.hasNext()) {
+                processTable(ji.next().getTable(), map, dia, metadata);
+            }
+        }
+    }
+
+    private void processCollection(org.hibernate.mapping.Collection collection, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+        Table table = collection.getCollectionTable();
+        if (table != null) {
             if (!map.containsKey(table.getName())) {
                 map.put(table.getName(), new TableMetadata(table.getName(), table.getComment()));
             }
             TableMetadata tm = map.get(table.getName());
             Map<String, ColumnMetadata> columns = tm.getColumns();
             // from Table
-            processColumns(entity.getTable().getColumnIterator(), columns, dia, metadata);
-            // from Property
-            Iterator<Property> propertyIterator = entity.getPropertyIterator();
-            while (propertyIterator.hasNext()) {
-                Property property = (Property) propertyIterator.next();
-                processColumns(property.getColumnIterator(), columns, dia, metadata);
-            }
-            // from Identifier
-            processColumns(entity.getIdentifier().getColumnIterator(), columns, dia, metadata);
+            processColumns(table.getColumnIterator(), columns, dia, metadata);
         }
-        return map;
+    }
 
+    private TableMetadata processTable(Table table, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+        if (!map.containsKey(table.getName())) {
+            map.put(table.getName(), new TableMetadata(table.getName(), table.getComment()));
+        }
+        TableMetadata tm = map.get(table.getName());
+        Map<String, ColumnMetadata> columns = tm.getColumns();
+        // from Table
+        processColumns(table.getColumnIterator(), columns, dia, metadata);
+        return tm;
     }
 
     private void processColumns(Iterator<?> ci, Map<String, ColumnMetadata> columns, Dialect dia, Metadata metadata) {
@@ -484,7 +502,7 @@ public class SQLScriptGenerator {
 
     }
 
-    public class TableMetadata implements Meta {
+    public static class TableMetadata implements Meta {
         private final String name;
         private final String comment;
         private Map<String, ColumnMetadata> columns = new LinkedHashMap<>();
@@ -512,25 +530,30 @@ public class SQLScriptGenerator {
 
         public String toMarkdown() {
             StringBuilder builder = new StringBuilder();
-            builder.append("**").append(getName()).append("**").append("\n");
-            builder.append("*Description*: ").append(getComment()).append("\n");
+            builder.append("### ").append(getName()).append("\n");
+            builder.append("**Description**: ").append(checkForNullOrEmpty(getComment())).append("\n");
             builder.append("\n");
-            builder.append("| column | comment | sql-type | type | default | NOT-NULL |").append("\n");
+            builder.append("| column | comment | NOT-NULL | default | SQL type | Java type |").append("\n");
             builder.append("| --- | --- | --- | --- | --- | --- |").append("\n");
             for (ColumnMetadata cm : columns.values()) {
                 builder.append("| ").append(cm.getName()).append(" | ");
-                builder.append(cm.getComment() != null ? cm.getComment() : "-").append(" | ");
+                builder.append(checkForNullOrEmpty(cm.getComment())).append(" | ");
+                builder.append(cm.getNotNull()).append(" | ");
+                builder.append(checkForNullOrEmpty(cm.getDefaultValue())).append(" | ");
                 builder.append(cm.getSqlType()).append(" | ");
-                builder.append(cm.getType()).append(" | ");
-                builder.append(cm.getDefaultValue() != null ? cm.getDefaultValue() : "-").append(" | ");
-                builder.append(cm.getNotNull()).append(" | ").append("\n");
+                builder.append(cm.getType()).append(" | ").append("\n");
             }
+            builder.append("\n[top](#Tables)\n");
             return builder.toString();
+        }
+
+        private String checkForNullOrEmpty(String value) {
+            return value != null && !value.isEmpty() ? value : "-";
         }
 
     }
 
-    public class ColumnMetadata implements Meta {
+    public static class ColumnMetadata implements Meta {
         private final String name;
         private String comment;
         private String sqlType;

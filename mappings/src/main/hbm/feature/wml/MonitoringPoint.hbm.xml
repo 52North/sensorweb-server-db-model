@@ -1,18 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <subclass name="org.n52.series.db.beans.feature.wml.MonitoringPointEntity"
-    				 extends="AbstractFeatureEntity"
+                     extends="AbstractFeatureEntity"
                      discriminator-value="WmlMonitoringPointEntity">
         <join table="wml_monitoring_point">
             <key foreign-key="fk_wml_monitoring_point">
-                <column name="fk_feature_id">
-                    <comment>Foreign Key (FK) to the related featureOfInterest
-                        from the feature table. Contains
-                        "feature".id</comment>
-                </column>
+                <column name="fk_feature_id"/>
             </key>
             <component name="content" class="org.n52.series.db.beans.feature.MonitoringPointContent">
                 <set name="relatedParty" table="wml_mp_related_party">

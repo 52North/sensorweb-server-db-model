@@ -25,6 +25,7 @@ import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.CategoryEntity;
 import org.n52.series.db.beans.CodespaceEntity;
 import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.Describable;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.OfferingEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
@@ -35,7 +36,7 @@ import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public interface Dataset {
+public interface Dataset extends Describable {
 
     String DEFAULT_VALUE_TYPE = Data.QuantityData.VALUE_TYPE;
 
@@ -130,6 +131,8 @@ public interface Dataset {
     void setUnit(UnitEntity unit);
 
     boolean hasUnit();
+
+    String getUnitI18nName(String locale);
 
     void setObservationCount(long observationCount);
 

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QRoleEntity is a Querydsl query type for RoleEntity
@@ -19,8 +19,7 @@ public class QRoleEntity extends EntityPathBase<RoleEntity> {
 
     public static final QRoleEntity roleEntity = new QRoleEntity("roleEntity");
 
-    public final org.n52.series.db.beans.feature.QNilReasonEntity _super =
-            new org.n52.series.db.beans.feature.QNilReasonEntity(this);
+    public final org.n52.series.db.beans.feature.QNilReasonEntity _super = new org.n52.series.db.beans.feature.QNilReasonEntity(this);
 
     public final StringPath codeList = createString("codeList");
 
@@ -32,7 +31,7 @@ public class QRoleEntity extends EntityPathBase<RoleEntity> {
         super(RoleEntity.class, forVariable(variable));
     }
 
-    public QRoleEntity(Path< ? extends RoleEntity> path) {
+    public QRoleEntity(Path<? extends RoleEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -41,3 +40,4 @@ public class QRoleEntity extends EntityPathBase<RoleEntity> {
     }
 
 }
+

@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+
 
 /**
  * QFormatEntity is a Querydsl query type for FormatEntity
@@ -29,7 +29,7 @@ public class QFormatEntity extends EntityPathBase<FormatEntity> {
         super(FormatEntity.class, forVariable(variable));
     }
 
-    public QFormatEntity(Path< ? extends FormatEntity> path) {
+    public QFormatEntity(Path<? extends FormatEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -38,3 +38,4 @@ public class QFormatEntity extends EntityPathBase<FormatEntity> {
     }
 
 }
+

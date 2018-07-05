@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QExExtentEntity is a Querydsl query type for ExExtentEntity
@@ -30,17 +30,13 @@ public class QExExtentEntity extends EntityPathBase<ExExtentEntity> {
 
     public final StringPath uuid = createString("uuid");
 
-    public final SetPath<ExVerticalExtentEntity, QExVerticalExtentEntity> verticalExtent =
-            this.<ExVerticalExtentEntity, QExVerticalExtentEntity> createSet("verticalExtent",
-                                                                             ExVerticalExtentEntity.class,
-                                                                             QExVerticalExtentEntity.class,
-                                                                             PathInits.DIRECT2);
+    public final SetPath<ExVerticalExtentEntity, QExVerticalExtentEntity> verticalExtent = this.<ExVerticalExtentEntity, QExVerticalExtentEntity>createSet("verticalExtent", ExVerticalExtentEntity.class, QExVerticalExtentEntity.class, PathInits.DIRECT2);
 
     public QExExtentEntity(String variable) {
         super(ExExtentEntity.class, forVariable(variable));
     }
 
-    public QExExtentEntity(Path< ? extends ExExtentEntity> path) {
+    public QExExtentEntity(Path<? extends ExExtentEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -49,3 +45,4 @@ public class QExExtentEntity extends EntityPathBase<ExExtentEntity> {
     }
 
 }
+

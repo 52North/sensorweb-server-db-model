@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ProcedureHistoryEntity" table="procedure_history">
@@ -13,7 +13,7 @@
                 <param name="sequence_name">procedure_history_seq</param>
             </generator>
         </id>
-		<many-to-one name="procedure" class="ProcedureEntity" foreign-key="fk_ph_procedure_id">
+        <many-to-one name="procedure" class="ProcedureEntity" foreign-key="fk_ph_procedure_id">
             <column name="fk_procedure_id" not-null="true">
                 <comment>Reference to the procedure this entry belongs to.</comment>
             </column>

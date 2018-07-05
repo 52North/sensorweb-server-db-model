@@ -1,4 +1,3 @@
-
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,6 +8,7 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
+
 
 /**
  * QTelephoneEntity is a Querydsl query type for TelephoneEntity
@@ -26,8 +26,7 @@ public class QTelephoneEntity extends EntityPathBase<TelephoneEntity> {
 
     public final StringPath arcrole = createString("arcrole");
 
-    public final SetPath<String, StringPath> facsimile =
-            this.<String, StringPath> createSet("facsimile", String.class, StringPath.class, PathInits.DIRECT2);
+    public final SetPath<String, StringPath> facsimile = this.<String, StringPath>createSet("facsimile", String.class, StringPath.class, PathInits.DIRECT2);
 
     public final StringPath gmdid = createString("gmdid");
 
@@ -49,14 +48,13 @@ public class QTelephoneEntity extends EntityPathBase<TelephoneEntity> {
 
     public final StringPath uuid = createString("uuid");
 
-    public final SetPath<String, StringPath> voice =
-            this.<String, StringPath> createSet("voice", String.class, StringPath.class, PathInits.DIRECT2);
+    public final SetPath<String, StringPath> voice = this.<String, StringPath>createSet("voice", String.class, StringPath.class, PathInits.DIRECT2);
 
     public QTelephoneEntity(String variable) {
         super(TelephoneEntity.class, forVariable(variable));
     }
 
-    public QTelephoneEntity(Path< ? extends TelephoneEntity> path) {
+    public QTelephoneEntity(Path<? extends TelephoneEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -65,3 +63,4 @@ public class QTelephoneEntity extends EntityPathBase<TelephoneEntity> {
     }
 
 }
+

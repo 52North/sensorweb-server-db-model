@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans.ereporting"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-	<class name="EReportingDatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'text-profile', 'category-profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced', 'not_initialized')">
+    <class name="EReportingDatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'text-profile', 'category-profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced', 'not_initialized')">
         <id name="id" type="long">
             <column name="dataset_id"/>
             <generator class="native">
@@ -18,21 +18,32 @@
            foreign-key="fk_dataset_phenomenon" />
         <many-to-one class="org.n52.series.db.beans.OfferingEntity" column="fk_offering_id" name="offering" not-null="true" unique-key="un_dataset_identity"
            foreign-key="fk_dataset_offering" />
+        <many-to-one class="org.n52.series.db.beans.CategoryEntity" column="fk_category_id" name="category" not-null="false" unique-key="un_dataset_identity"
+            foreign-key="fk_dataset_category" />
         <many-to-one class="org.n52.series.db.beans.FeatureEntity" column="fk_feature_id" name="feature" not-null="false" unique-key="un_dataset_identity"
             foreign-key="fk_dataset_feature" />
-        <many-to-one class="org.n52.series.db.beans.CategoryEntity" column="fk_category_id" name="category" not-null="false" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_category" />
+        <many-to-one class="org.n52.series.db.beans.PlatformEntity" column="fk_procedure_id" name="platform" insert="false" update="false" unique-key="un_dataset_identity" />
         <many-to-one class="EReportingSamplingPointEntity" column="fk_sampling_point_id" name="samplingPoint" not-null="false" unique-key="un_dataset_identity"
-        	foreign-key="fk_dataset_sampling_point" />
+            foreign-key="fk_dataset_sampling_point" />
 
-        <property column="first_time" name="firstValueAt" type="timestamp" precision="20" scale="10" />
-        <property column="last_time" name="lastValueAt" type="timestamp" precision="20" scale="10" />
+        <many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
+            <column name="fk_format_id" />
+        </many-to-one>
+
+        <property column="value_type" insert="false" name="valueType" type="string" update="false" />
+
+        <property column="first_time" name="firstValueAt" type="timestamp" />
+        <property column="last_time" name="lastValueAt" type="timestamp" />
 
         <property column="first_value" name="firstQuantityValue" type="big_decimal" precision="20" scale="10" />
         <property column="last_value" name="lastQuantityValue" type="big_decimal" precision="20" scale="10" />
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)"/>
+        </property>
+
+        <property name="disabled" type="org.n52.hibernate.type.SmallBooleanType">
+            <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)"/>
         </property>
 
         <property name="published" type="org.n52.hibernate.type.SmallBooleanType">
@@ -44,17 +55,19 @@
             </column>
         </property>
 
-        <property name="identifier" type="string">
-            <column name="identifier" not-null="false" unique-key="datasetIdentifierUK"/>
+        <property name="identifier" type="string" index="idx_dataset_identifier">
+            <column name="identifier" not-null="false" unique-key="un_dataset_identifier"/>
         </property>
 
-        <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_dataset_codespace_identifier">
+        <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_dataset_codespace">
             <column name="fk_identifier_codespace_id"/>
         </many-to-one>
-		<property name="name" type="string">
+
+        <property name="name" type="string">
             <column name="name"/>
         </property>
-		<many-to-one name="nameCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_dataset_name_codespace">
+
+        <many-to-one name="nameCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_dataset_name_codespace">
             <column name="fk_name_codespace_id"/>
         </many-to-one>
 
@@ -74,12 +87,15 @@
             <many-to-one class="EReportingDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
 		</subclass>
         <subclass discriminator-value="quantity" name="EReportingQuantityDatasetEntity">
-            <property formula="3" name="numberOfDecimals" type="int" />
+            <property name="numberOfDecimals" column="decimals" type="int" />
             <many-to-one class="org.n52.series.db.beans.UnitEntity" column="fk_unit_id" name="unit" foreign-key="fk_dataset_unit" />
-            <set name="referenceValues" table="dataset_reference" inverse="true" cascade="delete-orphan" >
+            <many-to-one class="EReportingQuantityDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
+            <many-to-one class="EReportingQuantityDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
+            <list name="referenceValues" table="dataset_reference" inverse="false">
                 <key column="fk_dataset_id_from" not-null="true" foreign-key="fk_dataset_reference_from"/>
+                <list-index column="sort_order" />
                 <many-to-many class="EReportingDatasetEntity" column="fk_dataset_id_to" foreign-key="fk_dataset_reference_to"/>
-            </set>
+            </list>
         </subclass>
     </class>
 </hibernate-mapping>
