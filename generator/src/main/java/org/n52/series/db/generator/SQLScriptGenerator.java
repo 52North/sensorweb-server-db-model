@@ -409,7 +409,7 @@ public class SQLScriptGenerator {
         Files.deleteIfExists(path);
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
         List<String> result = new LinkedList<>();
-        result.add("# Database model description");
+        result.add("# Database table/column description");
         result.add("This page describes the tables and columns in the database.");
         result.add("The *SQL type* column in the tables is generated for Hibernate dialect: *" + dia.getClass().getSimpleName() + "*");
         result.add("");
@@ -543,6 +543,7 @@ public class SQLScriptGenerator {
                 builder.append(cm.getSqlType()).append(" | ");
                 builder.append(cm.getType()).append(" | ").append("\n");
             }
+            builder.append("\n[top](#Tables)\n");
             return builder.toString();
         }
         
