@@ -5,10 +5,21 @@ can be applied to extend the core.
 
 ## Overview
 
+This overview shows the whole data model consisting of the [core](#core) and [additional features](#additional-features).
 
 ![overview](https://github.com/52North/series-hibernate/blob/develop/docs/images/overview.png)
 
+## Core
+
+The core data model provices all necessary tables which are required to provide data via the REST-API or the SOS interface.
+
+![core](https://github.com/52North/series-hibernate/blob/develop/docs/images/core.png)
+
+
+
 ## Additional features
+
+Additional features are modeled to extend the core data model but the core data model does not have any dependency on the additional features.
 
 ### Datatype
 
@@ -24,25 +35,37 @@ can be applied to extend the core.
 
 ### Hierarchies
 
+
+
 ![hierarchies](https://github.com/52North/series-hibernate/blob/develop/docs/images/hierarchies.png)
 
 ### Procedure history
+
+The procedure history feature is mainly required by the SOS interface to support history of procedure description which are update via the  UpdateProcedureDescription operation and can be queried via DescribeSensor operation.
 
 ![procedure-history](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-datatype.png)
 
 ### Referenced datasets
 
+This feature allows to reference datasets in another dataset. For example a water level dataset has the referenced datasets level zero and medium water level.
+
 ![reference-datasets](https://github.com/52North/series-hibernate/blob/develop/docs/images/procedure-history.png)
 
 ### Relations
+
+With the relations feature we can model relations between data/observations. For example a post-processed observation relates on a raw observation which was measured by a sensor.
 
 ![relations](https://github.com/52North/series-hibernate/blob/develop/docs/images/relations.png)
 
 ### Result templates
 
+The result template feature is mainly required by the SOS interface to support the result handling operations (Insert-/GerResultTemplate, Insert-/GetResult).
+
 ![result-template](https://github.com/52North/series-hibernate/blob/develop/docs/images/result-template.png)
 
 ### Translations
+
+With the translations feature the data model can provide internationalized values, for example the name of the feature, procedure or phenomenon.
 
 ![translations](https://github.com/52North/series-hibernate/blob/develop/docs/images/translations.png)
 
