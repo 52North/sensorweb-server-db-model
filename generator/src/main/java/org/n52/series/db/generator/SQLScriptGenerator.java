@@ -32,6 +32,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
@@ -54,6 +55,9 @@ import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
@@ -425,7 +429,10 @@ public class SQLScriptGenerator {
 //        }
         Path path = Paths.get("target/tableMetadata.md");
         Files.deleteIfExists(path);
-        System.out.println(Files.write(path, map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList())));
+        List<String> result = map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList());
+        result.add("");
+        result.add("*Creation date: " +  DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
+        System.out.println(Files.write(path,result));
 //        for (String value : map.values()) {
 //            System.out.println(value);
 //            System.out.println("");
