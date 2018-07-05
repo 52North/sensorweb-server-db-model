@@ -405,7 +405,7 @@ public class SQLScriptGenerator {
     }
 
     private void exportTableColumnMetadata(Metadata metadata, Dialect dia) throws IOException {
-        Path path = Paths.get("target/tableMetadata.md");
+        Path path = Paths.get("target/TableMetadata.md");
         Files.deleteIfExists(path);
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
         List<String> result = new LinkedList<>();

@@ -11,74 +11,31 @@ This overview shows the whole data model consisting of the [core](#core) and [ad
 
 ## Core
 
-The core data model provices all necessary tables which are required to provide data via the REST-API or the SOS interface.
+The core data model provides all necessary tables which are required to provide data via the REST-API or the SOS interface.
 
 ![core](https://github.com/52North/series-hibernate/blob/develop/docs/images/core.png)
 
+### Core tables
 
+- [category](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#category)
+- [codespace](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#codespace)
+- [dataset](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#dataset)
+- [feature](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#feature)
+- [format](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#format)
+- [observation](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#observation)
+- [offering](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#offering)
+- [parameter](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#parameter)
+- [phenomenon](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#phenomenon)
+- [procedure](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#procedure)
+- [unit](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#unit)
 
-## Additional features
+## Additional Features
 
-Additional features are modeled to extend the core data model but the core data model does not have any dependency on the additional features.
-
-### Datatype
-
-
-
-![additional-datatype](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-datatype.png)
-
-### Feature types
-
-
-
-![additional-featuretypes](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-featuretypes.png)
-
-### Metadata
-
-The metadata feature provides additional information (metadata) for datasets.
-
-![additional-metadata](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-metadata.png)
-
-### Hierarchies
-
-
-
-![hierarchies](https://github.com/52North/series-hibernate/blob/develop/docs/images/hierarchies.png)
-
-### Procedure history
-
-The procedure history feature is mainly required by the SOS interface to support history of procedure description which are update via the  UpdateProcedureDescription operation and can be queried via DescribeSensor operation.
-
-![procedure-history](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-datatype.png)
-
-### Referenced datasets
-
-This feature allows to reference datasets in another dataset. For example a water level dataset has the referenced datasets level zero and medium water level.
-
-![reference-datasets](https://github.com/52North/series-hibernate/blob/develop/docs/images/procedure-history.png)
-
-### Relations
-
-With the relations feature we can model relations between data/observations. For example a post-processed observation relates on a raw observation which was measured by a sensor.
-
-![relations](https://github.com/52North/series-hibernate/blob/develop/docs/images/relations.png)
-
-### Result templates
-
-The result template feature is mainly required by the SOS interface to support the result handling operations (Insert-/GerResultTemplate, Insert-/GetResult).
-
-![result-template](https://github.com/52North/series-hibernate/blob/develop/docs/images/result-template.png)
-
-### Translations
-
-With the translations feature the data model can provide internationalized values, for example the name of the feature, procedure or phenomenon.
-
-![translations](https://github.com/52North/series-hibernate/blob/develop/docs/images/translations.png)
-
+The additional features are defined here: [Additional Features ](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md)
 
 ## Tables and columns
 
-The tables and columns are described here: [Tables and columns description](https://github.com/52North/series-hibernate/blob/develop/docs/tableMetadata.md)
+The tables and columns are described here: [Tables and columns description](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md)
 
 ### Conventions
 
@@ -89,6 +46,8 @@ The tables and columns are described here: [Tables and columns description](http
 | foreign key column | fk_ + ( additional information +) referenced table name + _id | fk_unit_id, fk_first_observation_id |
 | index | idx_ + column name | idx_sampling_time_end |
 | unique constraint | un_ + table name + column name/postfix | un_feature_identifier, un_dataset_identity (multiple columns) |
+| not-null columns | columns marked as not null are required and should be mapped as formula | observation.vertical_from, observation.vertical_to |
+
 
 
 **Note**: Documentation is in progress. `graphml` files can
