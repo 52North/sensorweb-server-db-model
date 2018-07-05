@@ -82,7 +82,7 @@ public class Application implements CommandLineRunner {
 
     private JPADomainExporter createExporter(String prefix) {
         final Metamodel metamodel = entityManagerFactory.getMetamodel();
-//        return new JPADomainExporter(prefix, new File("target/generated-sources/java"), metamodel);
+        //        return new JPADomainExporter(prefix, new File("target/generated-sources/java"), metamodel);
         return new JPADomainExporter(prefix, new File("src/main/java"), metamodel);
     }
 

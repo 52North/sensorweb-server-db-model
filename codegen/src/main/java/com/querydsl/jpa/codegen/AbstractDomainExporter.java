@@ -1,3 +1,4 @@
+
 package com.querydsl.jpa.codegen;
 
 /*
@@ -57,21 +58,22 @@ public abstract class AbstractDomainExporter {
 
     private final File targetFolder;
 
-    private final Map<Class<?>, EntityType> allTypes = Maps.newHashMap();
+    private final Map<Class< ? >, EntityType> allTypes = Maps.newHashMap();
 
-    private final Map<Class<?>, EntityType> entityTypes = Maps.newHashMap();
+    private final Map<Class< ? >, EntityType> entityTypes = Maps.newHashMap();
 
-    private final Map<Class<?>, EntityType> embeddableTypes = Maps.newHashMap();
+    private final Map<Class< ? >, EntityType> embeddableTypes = Maps.newHashMap();
 
-    private final Map<Class<?>, EntityType> superTypes = Maps.newHashMap();
+    private final Map<Class< ? >, EntityType> superTypes = Maps.newHashMap();
 
-    private final Map<Class<?>, SerializerConfig> typeToConfig = Maps.newHashMap();
+    private final Map<Class< ? >, SerializerConfig> typeToConfig = Maps.newHashMap();
 
     private final Set<EntityType> serialized = new HashSet<EntityType>();
 
     @SuppressWarnings("unchecked")
     protected final TypeFactory typeFactory = new TypeFactory(Arrays.asList(Entity.class,
-            javax.persistence.MappedSuperclass.class, Embeddable.class));
+                                                                            javax.persistence.MappedSuperclass.class,
+                                                                            Embeddable.class));
 
     private final QueryTypeFactory queryTypeFactory;
 
@@ -92,8 +94,11 @@ public abstract class AbstractDomainExporter {
     private Function<EntityType, String> variableNameFunction;
 
     @SuppressWarnings("unchecked")
-    public AbstractDomainExporter(String namePrefix, String nameSuffix, File targetFolder,
-            SerializerConfig serializerConfig, Charset charset) {
+    public AbstractDomainExporter(String namePrefix,
+                                  String nameSuffix,
+                                  File targetFolder,
+                                  SerializerConfig serializerConfig,
+                                  Charset charset) {
         this.targetFolder = targetFolder;
         this.serializerConfig = serializerConfig;
         this.charset = charset;
@@ -125,9 +130,11 @@ public abstract class AbstractDomainExporter {
 
         // go through supertypes
         Set<Supertype> additions = Sets.newHashSet();
-        for (Map.Entry<Class<?>, EntityType> entry : allTypes.entrySet()) {
+        for (Map.Entry<Class< ? >, EntityType> entry : allTypes.entrySet()) {
             EntityType entityType = entry.getValue();
-            if (entityType.getSuperType() != null && !allTypes.containsKey(entityType.getSuperType().getType().getJavaClass())) {
+            if (entityType.getSuperType() != null && !allTypes.containsKey(entityType.getSuperType()
+                                                                                     .getType()
+                                                                                     .getJavaClass())) {
                 additions.add(entityType.getSuperType());
             }
         }
@@ -154,11 +161,13 @@ public abstract class AbstractDomainExporter {
         serialize(entityTypes, entitySerializer);
     }
 
-    private void addSupertypeFields(EntityType model, Map<Class<?>, EntityType> superTypes,
-            Set<EntityType> handled) {
+    private void addSupertypeFields(EntityType model,
+                                    Map<Class< ? >, EntityType> superTypes,
+                                    Set<EntityType> handled) {
         if (handled.add(model)) {
             for (Supertype supertype : model.getSuperTypes()) {
-                EntityType entityType = superTypes.get(supertype.getType().getJavaClass());
+                EntityType entityType = superTypes.get(supertype.getType()
+                                                                .getJavaClass());
                 if (entityType != null) {
                     addSupertypeFields(entityType, superTypes, handled);
                     supertype.setEntityType(entityType);
@@ -170,7 +179,7 @@ public abstract class AbstractDomainExporter {
 
     protected abstract void collectTypes() throws Exception;
 
-    protected EntityType createEmbeddableType(Class<?> cl) {
+    protected EntityType createEmbeddableType(Class< ? > cl) {
         return createEntityType(cl, embeddableTypes);
     }
 
@@ -178,18 +187,19 @@ public abstract class AbstractDomainExporter {
         return createEntityType(type, embeddableTypes);
     }
 
-    protected EntityType createEntityType(Class<?> cl) {
+    protected EntityType createEntityType(Class< ? > cl) {
         return createEntityType(cl, entityTypes);
     }
 
-    private EntityType createEntityType(Class<?> cl,  Map<Class<?>, EntityType> types) {
+    private EntityType createEntityType(Class< ? > cl, Map<Class< ? >, EntityType> types) {
         if (allTypes.containsKey(cl)) {
             return allTypes.get(cl);
         } else {
             EntityType type = typeFactory.getEntityType(cl);
             registerConfig(type);
             typeMappings.register(type, queryTypeFactory.create(type));
-            if (!cl.getSuperclass().equals(Object.class)) {
+            if (!cl.getSuperclass()
+                   .equals(Object.class)) {
                 type.addSupertype(new Supertype(typeFactory.get(cl.getSuperclass(), cl.getGenericSuperclass())));
             }
             types.put(cl, type);
@@ -202,15 +212,15 @@ public abstract class AbstractDomainExporter {
         return createEntityType(type, entityTypes);
     }
 
-    protected EntityType createEntityType(Type type,  Map<Class<?>, EntityType> types) {
-        Class<?> key = type.getJavaClass();
+    protected EntityType createEntityType(Type type, Map<Class< ? >, EntityType> types) {
+        Class< ? > key = type.getJavaClass();
         if (allTypes.containsKey(key)) {
             return allTypes.get(key);
         } else {
             EntityType entityType = new EntityType(type, variableNameFunction);
             registerConfig(entityType);
             typeMappings.register(entityType, queryTypeFactory.create(entityType));
-            Class<?> superClass = key.getSuperclass();
+            Class< ? > superClass = key.getSuperclass();
             if (entityType.getSuperType() == null && superClass != null && !superClass.equals(Object.class)) {
                 entityType.addSupertype(new Supertype(typeFactory.get(superClass, key.getGenericSuperclass())));
             }
@@ -221,10 +231,11 @@ public abstract class AbstractDomainExporter {
     }
 
     private void registerConfig(EntityType entityType) {
-        Class<?> key = entityType.getJavaClass();
+        Class< ? > key = entityType.getJavaClass();
         Config config = key.getAnnotation(Config.class);
         if (config == null && key.getPackage() != null) {
-            config = key.getPackage().getAnnotation(Config.class);
+            config = key.getPackage()
+                        .getAnnotation(Config.class);
         }
         if (config != null) {
             typeToConfig.put(key, SimpleSerializerConfig.getConfig(config));
@@ -235,29 +246,34 @@ public abstract class AbstractDomainExporter {
     protected Type getTypeOverride(Type propertyType, AnnotatedElement annotated) {
         if (annotated.isAnnotationPresent(QueryType.class)) {
             QueryType queryType = annotated.getAnnotation(QueryType.class);
-            if (queryType.value().equals(PropertyType.NONE)) {
+            if (queryType.value()
+                         .equals(PropertyType.NONE)) {
                 return null;
             }
-            return propertyType.as(TypeCategory.valueOf(queryType.value().name()));
+            return propertyType.as(TypeCategory.valueOf(queryType.value()
+                                                                 .name()));
         } else {
             return propertyType;
         }
     }
 
-    protected Property createProperty(EntityType entityType, String propertyName, Type propertyType,
-            AnnotatedElement annotated) {
+    protected Property createProperty(EntityType entityType,
+                                      String propertyName,
+                                      Type propertyType,
+                                      AnnotatedElement annotated) {
         List<String> inits = Collections.emptyList();
         if (annotated.isAnnotationPresent(QueryInit.class)) {
-            inits = ImmutableList.copyOf(annotated.getAnnotation(QueryInit.class).value());
+            inits = ImmutableList.copyOf(annotated.getAnnotation(QueryInit.class)
+                                                  .value());
         }
         return new Property(entityType, propertyName, propertyType, inits);
     }
 
-    protected EntityType createSuperType(Class<?> cl) {
+    protected EntityType createSuperType(Class< ? > cl) {
         return createEntityType(cl, superTypes);
     }
 
-    protected AnnotatedElement getAnnotatedElement(Class<?> cl, String propertyName) throws NoSuchMethodException {
+    protected AnnotatedElement getAnnotatedElement(Class< ? > cl, String propertyName) throws NoSuchMethodException {
         Field field = ReflectionUtils.getFieldOrNull(cl, propertyName);
         Method method = ReflectionUtils.getGetterOrNull(cl, propertyName);
         if (field != null) {
@@ -277,7 +293,7 @@ public abstract class AbstractDomainExporter {
         return generatedFiles;
     }
 
-    protected Type getType(Class<?> cl, Class<?> mappedType, String propertyName) throws NoSuchMethodException {
+    protected Type getType(Class< ? > cl, Class< ? > mappedType, String propertyName) throws NoSuchMethodException {
         Field field = ReflectionUtils.getFieldOrNull(cl, propertyName);
         if (field != null) {
             if (mappedType.isAssignableFrom(field.getType())) {
@@ -299,12 +315,14 @@ public abstract class AbstractDomainExporter {
         }
     }
 
-    private void serialize(Map<Class<?>, EntityType> types, Serializer serializer) throws IOException {
+    private void serialize(Map<Class< ? >, EntityType> types, Serializer serializer) throws IOException {
         for (EntityType entityType : types.values()) {
             if (serialized.add(entityType)) {
                 Type type = typeMappings.getPathType(entityType, entityType, true);
                 String packageName = type.getPackageName();
-                String className = packageName.length() > 0 ? (packageName + "." + type.getSimpleName()) : type.getSimpleName();
+                String className = packageName.length() > 0
+                        ? (packageName + "." + type.getSimpleName())
+                        : type.getSimpleName();
                 write(serializer, className.replace('.', '/') + ".java", entityType);
             }
         }
@@ -327,7 +345,10 @@ public abstract class AbstractDomainExporter {
     }
 
     private Writer writerFor(File file) {
-        if (!file.getParentFile().exists() && !file.getParentFile().mkdirs()) {
+        if (!file.getParentFile()
+                 .exists()
+                && !file.getParentFile()
+                        .mkdirs()) {
             logger.error("Folder " + file.getParent() + " could not be created");
         }
         try {
@@ -338,7 +359,8 @@ public abstract class AbstractDomainExporter {
     }
 
     protected Type normalize(Type first, Type second) {
-        if (first.getFullName().equals(second.getFullName())) {
+        if (first.getFullName()
+                 .equals(second.getFullName())) {
             return first;
         } else {
             return second;
@@ -350,4 +372,3 @@ public abstract class AbstractDomainExporter {
     }
 
 }
-

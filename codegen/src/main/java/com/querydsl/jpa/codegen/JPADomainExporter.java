@@ -1,3 +1,4 @@
+
 package com.querydsl.jpa.codegen;
 
 /*
@@ -52,8 +53,12 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param metamodel metamodel
      */
     public JPADomainExporter(File targetFolder, Metamodel metamodel) {
-        this("Q", "", targetFolder, SimpleSerializerConfig.DEFAULT, metamodel,
-                Charset.defaultCharset());
+        this("Q",
+             "",
+             targetFolder,
+             SimpleSerializerConfig.DEFAULT,
+             metamodel,
+             Charset.defaultCharset());
     }
 
     /**
@@ -64,8 +69,12 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param metamodel metamodel
      */
     public JPADomainExporter(String namePrefix, File targetFolder, Metamodel metamodel) {
-        this(namePrefix, "", targetFolder, SimpleSerializerConfig.DEFAULT, metamodel,
-                Charset.defaultCharset());
+        this(namePrefix,
+             "",
+             targetFolder,
+             SimpleSerializerConfig.DEFAULT,
+             metamodel,
+             Charset.defaultCharset());
     }
 
     /**
@@ -76,8 +85,10 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param metamodel metamodel
      * @param charset charset (default: system charset)
      */
-    public JPADomainExporter(String namePrefix, File targetFolder, Metamodel metamodel,
-            Charset charset) {
+    public JPADomainExporter(String namePrefix,
+                             File targetFolder,
+                             Metamodel metamodel,
+                             Charset charset) {
         this(namePrefix, "", targetFolder, SimpleSerializerConfig.DEFAULT, metamodel, charset);
     }
 
@@ -89,10 +100,16 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param targetFolder target folder
      * @param metamodel metamodel
      */
-    public JPADomainExporter(String namePrefix, String nameSuffix, File targetFolder,
-            Metamodel metamodel) {
-        this(namePrefix, nameSuffix, targetFolder, SimpleSerializerConfig.DEFAULT, metamodel,
-                Charset.defaultCharset());
+    public JPADomainExporter(String namePrefix,
+                             String nameSuffix,
+                             File targetFolder,
+                             Metamodel metamodel) {
+        this(namePrefix,
+             nameSuffix,
+             targetFolder,
+             SimpleSerializerConfig.DEFAULT,
+             metamodel,
+             Charset.defaultCharset());
     }
 
     /**
@@ -103,8 +120,10 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param serializerConfig serializer config
      * @param metamodel metamodel
      */
-    public JPADomainExporter(String namePrefix, File targetFolder,
-            SerializerConfig serializerConfig, Metamodel metamodel) {
+    public JPADomainExporter(String namePrefix,
+                             File targetFolder,
+                             SerializerConfig serializerConfig,
+                             Metamodel metamodel) {
         this(namePrefix, "", targetFolder, serializerConfig, metamodel, Charset.defaultCharset());
     }
 
@@ -117,8 +136,11 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param metamodel metamodel
      * @param charset charset (default: system charset)
      */
-    public JPADomainExporter(String namePrefix, File targetFolder,
-            SerializerConfig serializerConfig, Metamodel metamodel, Charset charset) {
+    public JPADomainExporter(String namePrefix,
+                             File targetFolder,
+                             SerializerConfig serializerConfig,
+                             Metamodel metamodel,
+                             Charset charset) {
         this(namePrefix, "", targetFolder, serializerConfig, metamodel, charset);
     }
 
@@ -132,18 +154,22 @@ public class JPADomainExporter extends AbstractDomainExporter {
      * @param metamodel metamodel
      * @param charset charset (default: system charset)
      */
-    public JPADomainExporter(String namePrefix, String nameSuffix, File targetFolder,
-            SerializerConfig serializerConfig, Metamodel metamodel, Charset charset) {
+    public JPADomainExporter(String namePrefix,
+                             String nameSuffix,
+                             File targetFolder,
+                             SerializerConfig serializerConfig,
+                             Metamodel metamodel,
+                             Charset charset) {
         super(namePrefix, nameSuffix, targetFolder, serializerConfig, charset);
         this.metamodel = metamodel;
     }
 
     @Override
     protected void collectTypes() throws IOException, XMLStreamException, ClassNotFoundException,
-        NoSuchMethodException {
+            NoSuchMethodException {
 
-        Map<ManagedType<?>, EntityType> types = Maps.newHashMap();
-        for (ManagedType<?> managedType : metamodel.getManagedTypes()) {
+        Map<ManagedType< ? >, EntityType> types = Maps.newHashMap();
+        for (ManagedType< ? > managedType : metamodel.getManagedTypes()) {
             if (managedType instanceof MappedSuperclassType) {
                 types.put(managedType, createSuperType(managedType.getJavaType()));
             } else if (managedType instanceof javax.persistence.metamodel.EntityType) {
@@ -156,18 +182,19 @@ public class JPADomainExporter extends AbstractDomainExporter {
         }
 
         // handle properties
-        for (Map.Entry<ManagedType<?>, EntityType> entry : types.entrySet()) {
+        for (Map.Entry<ManagedType< ? >, EntityType> entry : types.entrySet()) {
             EntityType entityType = entry.getValue();
-            for (Attribute<?,?> attribute : entry.getKey().getDeclaredAttributes()) {
+            for (Attribute< ? , ? > attribute : entry.getKey()
+                                                     .getDeclaredAttributes()) {
                 handleProperty(entityType, entityType.getJavaClass(), attribute);
             }
         }
 
     }
 
-    private void handleProperty(EntityType entityType, Class<?> cl, Attribute<?,?> p)
+    private void handleProperty(EntityType entityType, Class< ? > cl, Attribute< ? , ? > p)
             throws NoSuchMethodException, ClassNotFoundException {
-        Class<?> clazz = Object.class;
+        Class< ? > clazz = Object.class;
         try {
             clazz = p.getJavaType();
         } catch (MappingException e) {
@@ -183,18 +210,26 @@ public class JPADomainExporter extends AbstractDomainExporter {
 
         if (p.isCollection()) {
             if (p instanceof MapAttribute) {
-                MapAttribute<?,?,?> map = (MapAttribute<?,?,?>) p;
+                MapAttribute< ? , ? , ? > map = (MapAttribute< ? , ? , ? >) p;
                 Type keyType = typeFactory.get(map.getKeyJavaType());
-                Type valueType = typeFactory.get(map.getElementType().getJavaType());
+                Type valueType = typeFactory.get(map.getElementType()
+                                                    .getJavaType());
                 valueType = getPropertyType(p, valueType);
                 propertyType = new SimpleType(propertyType,
-                        normalize(propertyType.getParameters().get(0), keyType),
-                        normalize(propertyType.getParameters().get(1), valueType));
+                                              normalize(propertyType.getParameters()
+                                                                    .get(0),
+                                                        keyType),
+                                              normalize(propertyType.getParameters()
+                                                                    .get(1),
+                                                        valueType));
             } else {
-                Type valueType = typeFactory.get(((PluralAttribute<?,?,?>) p).getElementType().getJavaType());
+                Type valueType = typeFactory.get(((PluralAttribute< ? , ? , ? >) p).getElementType()
+                                                                                   .getJavaType());
                 valueType = getPropertyType(p, valueType);
                 propertyType = new SimpleType(propertyType,
-                        normalize(propertyType.getParameters().get(0), valueType));
+                                              normalize(propertyType.getParameters()
+                                                                    .get(0),
+                                                        valueType));
             }
         } else {
             propertyType = getPropertyType(p, propertyType);
@@ -204,13 +239,19 @@ public class JPADomainExporter extends AbstractDomainExporter {
         entityType.addProperty(property);
     }
 
-    private Type getPropertyType(Attribute<?, ?> p, Type propertyType) {
+    private Type getPropertyType(Attribute< ? , ? > p, Type propertyType) {
         Temporal temporal = ((AnnotatedElement) p.getJavaMember()).getAnnotation(Temporal.class);
         if (temporal != null) {
             switch (temporal.value()) {
-            case DATE: propertyType = propertyType.as(TypeCategory.DATE); break;
-            case TIME: propertyType = propertyType.as(TypeCategory.TIME); break;
-            case TIMESTAMP: propertyType = propertyType.as(TypeCategory.DATETIME); break;
+            case DATE:
+                propertyType = propertyType.as(TypeCategory.DATE);
+                break;
+            case TIME:
+                propertyType = propertyType.as(TypeCategory.TIME);
+                break;
+            case TIMESTAMP:
+                propertyType = propertyType.as(TypeCategory.DATETIME);
+                break;
             }
         }
         return propertyType;
