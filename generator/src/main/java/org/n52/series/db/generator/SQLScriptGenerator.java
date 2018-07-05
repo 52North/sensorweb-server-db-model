@@ -26,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.EnumSet;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -54,6 +53,8 @@ import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 import org.hibernate.spatial.dialect.sqlserver.SqlServer2008SpatialDialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
+import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
 import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
@@ -123,21 +124,14 @@ public class SQLScriptGenerator {
     private void setDirectoriesForModelSelection(Concept concept, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
-//        files.add(getDirectory("/hbm/core/Codespace.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureDescriptionFormat.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureResource.hbm.xml"));
-//        files.add(getDirectory("/hbm/core/ProcedureHistory.hbm.xml"));
          files.add(getDirectory("/hbm/core"));
-         files.add(getDirectory("/hbm/dataset"));
 //         files.add(getDirectory("/hbm/feature"));
 //         files.add(getDirectory("/hbm/extension"));
         for (File file : files) {
             if (configuration != null) {
-//                configuration.addFile(file);
                 configuration.addDirectory(file);
             }
             if (metadataSources != null) {
-//                metadataSources.addFile(file);
                 metadataSources.addDirectory(file);
             }
         }
@@ -159,14 +153,20 @@ public class SQLScriptGenerator {
             throws Exception {
         switch (concept) {
         case DEFAULT:
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory("/hbm/dataset"));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory("/hbm/dataset"));
+            }
             break;
         case E_REPORTING:
 
             if (configuration != null) {
-                configuration.addDirectory(getDirectory("/hbm/sos/ereporting"));
+                configuration.addDirectory(getDirectory("/hbm/ereporting"));
             }
             if (metadataSources != null) {
-                metadataSources.addDirectory(getDirectory("/hbm/sos/ereporting"));
+                metadataSources.addDirectory(getDirectory("/hbm/ereporting"));
             }
 
             break;
@@ -403,34 +403,13 @@ public class SQLScriptGenerator {
     }
 
     private void exportTableColumnMetadata(Metadata metadata, Dialect dia) throws IOException {
-        SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
-//        for (PersistentClass entity : metadata.getEntityBindings()) {
-//            Table table = entity.getTable();
-//            StringBuilder builder = new StringBuilder();
-//            builder.append("**").append(table.getName()).append("**").append("\n");
-//            builder.append("*Description*: ").append(table.getComment()).append("\n");
-//            builder.append("\n");
-//            Iterator<Column> columnIterator = entity.getTable().getColumnIterator();
-//            builder.append("| column | comment | sql-type | type | default | NOT-NULL |").append("\n");
-//            builder.append("| --- | --- | --- | --- | --- | --- |").append("\n");
-//            while (columnIterator.hasNext()) {
-//                Column next = columnIterator.next();
-//                builder.append("| ").append(next.getName()).append(" | ");
-//                builder.append(next.getComment() != null ? next.getComment() : "-").append(" | ");
-//                builder.append(next.getSqlType(dia, metadata)).append(" | ");
-//                builder.append(next.getValue().getType().getName()).append(" | ");
-//                builder.append(next.getDefaultValue() != null ? next.getDefaultValue() : "-").append(" | ");
-//                builder.append(!next.isNullable()).append(" | ").append("\n");
-//            }
-//            map.put(table.getName(), builder.toString());
-//        }
         Path path = Paths.get("target/tableMetadata.md");
         Files.deleteIfExists(path);
-        System.out.println(Files.write(path, map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList())));
-//        for (String value : map.values()) {
-//            System.out.println(value);
-//            System.out.println("");
-//        }
+        SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
+        List<String> result = map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList());
+        result.add("");
+        result.add("*Creation date: " +  DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
+        System.out.println(Files.write(path,result));
     }
 
     private SortedMap<String, TableMetadata> extractTableMetadata(Metadata metadata, Dialect dia) {
@@ -484,7 +463,7 @@ public class SQLScriptGenerator {
 
     }
 
-    public class TableMetadata implements Meta {
+    public static class TableMetadata implements Meta {
         private final String name;
         private final String comment;
         private Map<String, ColumnMetadata> columns = new LinkedHashMap<>();
@@ -530,7 +509,7 @@ public class SQLScriptGenerator {
 
     }
 
-    public class ColumnMetadata implements Meta {
+    public static class ColumnMetadata implements Meta {
         private final String name;
         private String comment;
         private String sqlType;

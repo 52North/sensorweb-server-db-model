@@ -15,12 +15,13 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.dataset.TextProfileDataset;
+import org.n52.series.db.beans.dataset.QuantityProfileDataset;
 
-public class TextProfileDatasetEntity extends ProfileDatasetEntity implements TextProfileDataset {
+public class EReportingQuantityProfileDatasetEntity extends EReportingProfileDatasetEntity
+        implements QuantityProfileDataset {
 
-    private static final long serialVersionUID = 5885583199127023243L;
+    private static final long serialVersionUID = 5044958112488692090L;
 
 }

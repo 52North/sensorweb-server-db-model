@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity extends IdEntity implements IdentifierNameDescriptionEntity,
+public class DescribableEntity extends IdEntity implements Describable,
         Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
@@ -62,7 +62,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
 
     private ServiceEntity service;
 
-    private Set<I18nEntity< ? extends DescribableEntity>> translations;
+    private Set<I18nEntity< ? extends Describable>> translations;
 
     private Set<Parameter< ? >> parameters;
 
@@ -116,11 +116,11 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         this.description = description;
     }
 
-    public Set<I18nEntity< ? extends DescribableEntity>> getTranslations() {
+    public Set<I18nEntity< ? extends Describable>> getTranslations() {
         return translations;
     }
 
-    public void setTranslations(Set<I18nEntity< ? extends DescribableEntity>> translations) {
+    public void setTranslations(Set<I18nEntity< ? extends Describable>> translations) {
         this.translations = translations;
     }
 
@@ -159,7 +159,7 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         }
         String candidate = name;
         String countryCode = getCountryCode(locale);
-        for (I18nEntity< ? extends DescribableEntity> translation : translations) {
+        for (I18nEntity< ? extends Describable> translation : translations) {
             String translatedLocale = translation.getLocale();
             if (translatedLocale.equals(locale)) {
                 // locale matches exactly
@@ -186,28 +186,28 @@ public class DescribableEntity extends IdEntity implements IdentifierNameDescrip
         }
     }
 
-    private boolean isNameAvailable() {
-        return getName() != null && !getName().isEmpty();
-    }
-
-    private boolean isDomainAvailable() {
-        return getDomain() != null && !getDomain().isEmpty();
-    }
-
-    private boolean isi18nNameAvailable(String locale) {
-        return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
-    }
-
-    private boolean noTranslationAvailable(String locale) {
-        return translations == null
-                || locale == null
-                || translations.isEmpty()
-                || locale.isEmpty();
-    }
-
-    private String getCountryCode(String locale) {
-        return locale.split("_")[0];
-    }
+    //    private boolean isNameAvailable() {
+    //        return getName() != null && !getName().isEmpty();
+    //    }
+    //
+    //    private boolean isDomainAvailable() {
+    //        return getDomain() != null && !getDomain().isEmpty();
+    //    }
+    //
+    //    private boolean isi18nNameAvailable(String locale) {
+    //        return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
+    //    }
+    //
+    //    private boolean noTranslationAvailable(String locale) {
+    //        return translations == null
+    //                || locale == null
+    //                || translations.isEmpty()
+    //                || locale.isEmpty();
+    //    }
+    //
+    //    private String getCountryCode(String locale) {
+    //        return locale.split("_")[0];
+    //    }
 
     @Override
     public String toString() {

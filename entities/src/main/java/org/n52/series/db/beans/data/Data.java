@@ -20,6 +20,7 @@ package org.n52.series.db.beans.data;
 import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.Date;
+import java.util.Map;
 import java.util.Set;
 
 import org.n52.series.db.beans.DataEntity;
@@ -39,7 +40,7 @@ public interface Data<T>
         HasPhenomenonTime,
         HasDataset {
 
-    BigDecimal NOT_SET_VERTICAL = new BigDecimal("-99999.00");
+    BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
 
     T getValue();
 
@@ -230,6 +231,12 @@ public interface Data<T>
             extends
             Data<String> {
         String DATASET_TYPE = "text";
+    }
+
+    interface RecordData
+            extends
+            Data<Map<String, Object>> {
+        String DATASET_TYPE = "record";
     }
 
 }

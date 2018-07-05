@@ -1,66 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <subclass name="org.n52.series.db.beans.feature.SpecimenEntity"
-    				 extends="AbstractFeatureEntity"
+                     extends="AbstractFeatureEntity"
                      discriminator-value="SpecimenEntity">
         <join table="specimen">
             <key foreign-key="fk_specimen_feature">
-                <column name="fk_feature_id" >
-                    <comment>Foreign Key (FK) to the related feature from the feature table. Contains "feature".id</comment>
-                </column>
+                <column name="fk_feature_id"/>
             </key>
 
             <property name="materialClass" type="string">
-                <column name="material_class" not-null="true">
-                    <comment>Material class</comment>
-                </column>
+                <column name="material_class" not-null="true"/>
             </property>
             <property name="samplingTimeStart"
                       type="timestamp">
                 <column name="sampling_time_start"
                         length="29"
-                        not-null="true">
-                    <comment>Time stamp when the specimen was started</comment>
-                </column>
+                        not-null="true"/>
             </property>
             <property name="samplingTimeEnd"
                       type="timestamp">
                 <column name="sampling_time_end"
                         length="29"
-                        not-null="true">
-                    <comment>Time stamp when the specimen was stopped</comment>
-                </column>
+                        not-null="true"/>
             </property>
             <property name="samplingMethod" type="string">
-                <column name="sampling_method">
-                	<comment>Sampling method as referenced link</comment>
-                </column>
+                <column name="sampling_method"/>
             </property>
             <property name="size" type="big_decimal" precision="20" scale="10">
-                <column name="size" precision="20" scale="10">
-                    <comment>Sampling method as referenced link</comment>
-                </column>
+                <column name="specimen_size" precision="20" scale="10"/>
             </property>
             <many-to-one name="sizeUnit"
                          class="UnitEntity"
                          foreign-key="fk_specimen_unit">
                 <column name="fk_size_unit_id"
-                        not-null="false">
-                    <comment>Foreign Key (FK) to the related unit of measure. Contains "unit".unitid. Optional</comment>
-                </column>
+                        not-null="false"/>
             </many-to-one>
             <property name="currentLocation" type="string">
-                <column name="current_location" >
-                    <comment>Sampling method as referenced link</comment>
-                </column>
+                <column name="current_location"/>
             </property>
             <property name="specimenType" type="string">
-                <column name="specimen_type">
-                    <comment>Specimen type</comment>
-                </column>
+                <column name="specimen_type"/>
             </property>
             <!-- processingDetails  not yet supported -->
         </join>

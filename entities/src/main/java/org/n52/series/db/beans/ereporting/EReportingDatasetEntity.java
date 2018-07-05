@@ -20,7 +20,7 @@ package org.n52.series.db.beans.ereporting;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.dataset.Dataset;
 
-public class EReportingDatasetEntity extends DatasetEntity {
+public abstract class EReportingDatasetEntity extends DatasetEntity {
 
     public static final String SAMPLING_POINT = "samplingPoint";
     private static final long serialVersionUID = -182651044543274208L;

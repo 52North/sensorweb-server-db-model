@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <!-- Comments for the columns are defined in the DataResource.hbm.xml file! -->
@@ -19,7 +19,7 @@
             <property column="sampling_geometry" name="geometry" type="jts_geometry" />
         </component>
 
-        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" not-null="true" foreign-key="fk_sampling_geom_dataset" insert="false" update="false"/>
+        <many-to-one column="fk_dataset_id" name="dataset" class="DatasetEntity" not-null="true" insert="false" update="false"/>
 
     </class>
 </hibernate-mapping>

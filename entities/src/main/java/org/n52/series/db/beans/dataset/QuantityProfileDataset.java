@@ -15,12 +15,14 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.dataset.TextProfileDataset;
+public interface QuantityProfileDataset extends ProfileDataset {
 
-public class TextProfileDatasetEntity extends ProfileDatasetEntity implements TextProfileDataset {
+    String DATASET_TYPE = "quantity-profile";
 
-    private static final long serialVersionUID = 5885583199127023243L;
-
+    @Override
+    default String getDefaultDatasetType() {
+        return DATASET_TYPE;
+    }
 }

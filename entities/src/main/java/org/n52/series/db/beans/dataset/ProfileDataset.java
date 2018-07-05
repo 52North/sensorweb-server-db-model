@@ -25,4 +25,17 @@ public interface ProfileDataset extends Dataset {
     default String getDefaultDatasetType() {
         return DATASET_TYPE;
     }
+
+    String getVerticalParameterName();
+
+    void setVerticalParameterName(String verticalParameterName);
+
+    String getVerticalFromParameterName();
+
+    void setVerticalFromParameterName(String verticalFromParameterName);
+
+    String getVerticalToParameterName();
+
+    void setVerticalToParameterName(String verticalToParameterName);
+
 }

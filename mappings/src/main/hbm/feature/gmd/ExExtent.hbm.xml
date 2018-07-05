@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans.feature.gmd"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ExExtentEntity"
            table="ex_extent">
         <id name="id"
             type="long">
-            <column name="ex_extent_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="ex_extent_id"/>
             <generator class="native">
                 <param name="sequence_name">ex_extent_seq</param>
             </generator>

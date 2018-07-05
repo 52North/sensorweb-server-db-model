@@ -21,6 +21,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.n52.series.db.beans.data.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,7 +61,7 @@ public class ServiceEntity extends DescribableEntity {
         this.type = type;
     }
 
-    public boolean isNoDataValue(DataEntity< ? > observation) {
+    public boolean isNoDataValue(Data< ? > observation) {
         return observation.isNoDataValue(noDataValues);
     }
 

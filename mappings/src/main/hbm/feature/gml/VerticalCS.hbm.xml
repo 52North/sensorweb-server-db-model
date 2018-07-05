@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="org.n52.series.db.beans.feature.gml.VerticalCSEntity"
            table="vertical_cs">
         <id name="id"
             type="long">
-            <column name="vertical_cs_id">
-                <comment>Table primary key, used for relations</comment>
-            </column>
+            <column name="vertical_cs_id"/>
             <generator class="native">
                 <param name="sequence_name">vertical_cs_seq</param>
             </generator>
@@ -24,29 +22,19 @@
         <property name="actuate" column="actuate" type="string" />
         <property name="remoteSchema" column="remote_schema" type="string" />
         <property name="identifier" type="string" >
-            <column name="identifier" unique-key="un_vertical_cs_identifier">
-                <comment>The identifier of the object, gml:identifier. Used as parameter for queries. Optional but unique</comment>
-            </column>
+            <column name="identifier" unique-key="un_vertical_cs_identifier"/>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_codespace">
-            <column name="fk_identifier_codespace_id">
-                <comment>Relation/foreign key to the codespace table. Contains the gml:identifier codespace. Optional</comment>
-            </column>
+            <column name="fk_identifier_codespace_id"/>
         </many-to-one>
         <property name="name" type="string">
-            <column name="name">
-                <comment>The name of the object, gml:name. Optional</comment>
-            </column>
+            <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_name">
-            <column name="fk_name_codespace_id">
-                <comment>The name of the object, gml:name. Optional</comment>
-            </column>
+            <column name="fk_name_codespace_id"/>
         </many-to-one>
         <property name="description" type="string">
-            <column name="description">
-                <comment>Description of the object, gml:description. Optional</comment>
-            </column>
+            <column name="description"/>
         </property>
         <property name="remarks" column="remarks" type="string" />
         <set name="coordinateSystemAxis" table="vertical_cs_axis">

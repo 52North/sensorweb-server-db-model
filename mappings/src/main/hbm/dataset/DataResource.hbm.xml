@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-	xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
@@ -131,7 +131,7 @@
         <!-- Comments are defined in the RelatedDataResource.hbm.xml -->
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
-                <column name="fk_observation_id" not-null="true" index="related_observation_idx" />
+                <column name="fk_observation_id" not-null="true" index="idx_related_observation" />
             </key>
             <one-to-many class="RelatedDataEntity" />
         </set>
@@ -212,7 +212,7 @@
         </subclass>
 
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
-        	<component class="GeometryEntity" name="geometryEntity">
+            <component class="GeometryEntity" name="geometryEntity">
                 <!--
                 <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
                 <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
@@ -243,7 +243,7 @@
         </subclass>
 
         <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
-        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <comment>Storage of the relation of composite data/observation like Complex(Record)-, Profile- or DataArrayObservation </comment>
                 <key foreign-key="fk_composite_observation">
                     <column name="fk_parent_observation_id" not-null="true">
