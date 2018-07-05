@@ -24,7 +24,6 @@ The core data model provides all necessary tables which are required to provide 
 - [format](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#format)
 - [observation](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#observation)
 - [offering](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#offering)
-- [parameter](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#parameter)
 - [phenomenon](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#phenomenon)
 - [procedure](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#procedure)
 - [unit](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#unit)
