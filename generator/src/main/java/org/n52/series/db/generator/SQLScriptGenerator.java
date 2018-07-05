@@ -406,10 +406,15 @@ public class SQLScriptGenerator {
         Path path = Paths.get("target/tableMetadata.md");
         Files.deleteIfExists(path);
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
-        List<String> result = map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList());
+        List<String> result = new LinkedList<>();
+        result.add("# Database model description");
+        result.add("This page describes the tables and columns in the database.");
+        result.add("The *SQL type* column in the tables is generated for Hibernate dialect: *" + dia.getClass().getSimpleName() + "*");
+        result.add("");
+        result.addAll(map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList()));
         result.add("");
         result.add("*Creation date: " +  DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
-        System.out.println(Files.write(path,result));
+        System.out.println("The generated file was written to: " + Files.write(path,result).toAbsolutePath());
     }
 
     private SortedMap<String, TableMetadata> extractTableMetadata(Metadata metadata, Dialect dia) {
@@ -491,20 +496,24 @@ public class SQLScriptGenerator {
 
         public String toMarkdown() {
             StringBuilder builder = new StringBuilder();
-            builder.append("**").append(getName()).append("**").append("\n");
-            builder.append("*Description*: ").append(getComment()).append("\n");
+            builder.append("### ").append(getName()).append("\n");
+            builder.append("**Description**: ").append(checkForNullOrEmpty(getComment())).append("\n");
             builder.append("\n");
-            builder.append("| column | comment | sql-type | type | default | NOT-NULL |").append("\n");
+            builder.append("| column | comment | NOT-NULL | default | SQL type | Java type |").append("\n");
             builder.append("| --- | --- | --- | --- | --- | --- |").append("\n");
             for (ColumnMetadata cm : columns.values()) {
                 builder.append("| ").append(cm.getName()).append(" | ");
-                builder.append(cm.getComment() != null ? cm.getComment() : "-").append(" | ");
+                builder.append(checkForNullOrEmpty(cm.getComment())).append(" | ");
+                builder.append(cm.getNotNull()).append(" | ");
+                builder.append(checkForNullOrEmpty(cm.getDefaultValue())).append(" | ");
                 builder.append(cm.getSqlType()).append(" | ");
-                builder.append(cm.getType()).append(" | ");
-                builder.append(cm.getDefaultValue() != null ? cm.getDefaultValue() : "-").append(" | ");
-                builder.append(cm.getNotNull()).append(" | ").append("\n");
+                builder.append(cm.getType()).append(" | ").append("\n");
             }
             return builder.toString();
+        }
+        
+        private String checkForNullOrEmpty(String value) {
+            return value != null && !value.isEmpty() ? value : "-";
         }
 
     }
