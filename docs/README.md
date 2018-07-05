@@ -23,13 +23,19 @@ Additional features are modeled to extend the core data model but the core data 
 
 ### Datatype
 
+
+
 ![additional-datatype](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-datatype.png)
 
 ### Feature types
 
+
+
 ![additional-featuretypes](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-featuretypes.png)
 
 ### Metadata
+
+The metadata feature provides additional information (metadata) for datasets.
 
 ![additional-metadata](https://github.com/52North/series-hibernate/blob/develop/docs/images/additional-metadata.png)
 
