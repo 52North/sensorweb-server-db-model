@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QEReportingQuantityDataEntity is a Querydsl query type for EReportingQuantityDataEntity
  */
@@ -20,7 +20,8 @@ public class QEReportingQuantityDataEntity extends EntityPathBase<EReportingQuan
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QEReportingQuantityDataEntity eReportingQuantityDataEntity = new QEReportingQuantityDataEntity("eReportingQuantityDataEntity");
+    public static final QEReportingQuantityDataEntity eReportingQuantityDataEntity =
+            new QEReportingQuantityDataEntity("eReportingQuantityDataEntity");
 
     public final QEReportingDataEntity _super;
 
@@ -61,7 +62,7 @@ public class QEReportingQuantityDataEntity extends EntityPathBase<EReportingQuan
     public final org.n52.series.db.beans.QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -120,7 +121,7 @@ public class QEReportingQuantityDataEntity extends EntityPathBase<EReportingQuan
         this(EReportingQuantityDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QEReportingQuantityDataEntity(Path<? extends EReportingQuantityDataEntity> path) {
+    public QEReportingQuantityDataEntity(Path< ? extends EReportingQuantityDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -132,7 +133,9 @@ public class QEReportingQuantityDataEntity extends EntityPathBase<EReportingQuan
         this(EReportingQuantityDataEntity.class, metadata, inits);
     }
 
-    public QEReportingQuantityDataEntity(Class<? extends EReportingQuantityDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QEReportingQuantityDataEntity(Class< ? extends EReportingQuantityDataEntity> type,
+                                         PathMetadata metadata,
+                                         PathInits inits) {
         super(type, metadata, inits);
         this._super = new QEReportingDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -168,4 +171,3 @@ public class QEReportingQuantityDataEntity extends EntityPathBase<EReportingQuan
     }
 
 }
-

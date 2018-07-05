@@ -48,7 +48,7 @@ public class ServiceEntity extends DescribableEntity {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -56,12 +56,12 @@ public class ServiceEntity extends DescribableEntity {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
-    public boolean isNoDataValue(DataEntity< ? > observation) {
-        return observation.isNoDataValue(noDataValues);
+    public boolean isNoDataValue(final DataEntity< ? > observation) {
+        return (observation == null) || observation.isNoDataValue(noDataValues);
     }
 
     public String getNoDataValues() {
@@ -71,12 +71,12 @@ public class ServiceEntity extends DescribableEntity {
                   .substring(0, csv.length() - 2);
     }
 
-    public void setNoDataValues(String noDataValues) {
+    public void setNoDataValues(final String noDataValues) {
         LOGGER.debug("Set noData values: {}", noDataValues);
-        if (noDataValues == null || noDataValues.isEmpty()) {
+        if ((noDataValues == null) || noDataValues.isEmpty()) {
             this.noDataValues = Collections.emptyList();
         } else {
-            String[] values = noDataValues.split(",");
+            final String[] values = noDataValues.split(",");
             this.noDataValues = Arrays.asList(values);
         }
     }
@@ -85,7 +85,7 @@ public class ServiceEntity extends DescribableEntity {
         return supportsFirstLatest;
     }
 
-    public void setSupportsFirstLatest(boolean supportsFirstLatest) {
+    public void setSupportsFirstLatest(final boolean supportsFirstLatest) {
         this.supportsFirstLatest = supportsFirstLatest;
     }
 
@@ -93,13 +93,13 @@ public class ServiceEntity extends DescribableEntity {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(final String version) {
         this.version = version;
     }
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" url: ")

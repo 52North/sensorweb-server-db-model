@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
-
 /**
  * QEReportingAssessmentTypeEntity is a Querydsl query type for EReportingAssessmentTypeEntity
  */
@@ -17,7 +17,8 @@ public class QEReportingAssessmentTypeEntity extends EntityPathBase<EReportingAs
 
     private static final long serialVersionUID = 1784649756L;
 
-    public static final QEReportingAssessmentTypeEntity eReportingAssessmentTypeEntity = new QEReportingAssessmentTypeEntity("eReportingAssessmentTypeEntity");
+    public static final QEReportingAssessmentTypeEntity eReportingAssessmentTypeEntity =
+            new QEReportingAssessmentTypeEntity("eReportingAssessmentTypeEntity");
 
     public final StringPath assessmentType = createString("assessmentType");
 
@@ -27,7 +28,7 @@ public class QEReportingAssessmentTypeEntity extends EntityPathBase<EReportingAs
         super(EReportingAssessmentTypeEntity.class, forVariable(variable));
     }
 
-    public QEReportingAssessmentTypeEntity(Path<? extends EReportingAssessmentTypeEntity> path) {
+    public QEReportingAssessmentTypeEntity(Path< ? extends EReportingAssessmentTypeEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -36,4 +37,3 @@ public class QEReportingAssessmentTypeEntity extends EntityPathBase<EReportingAs
     }
 
 }
-

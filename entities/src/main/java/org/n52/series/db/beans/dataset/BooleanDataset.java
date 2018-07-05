@@ -23,6 +23,6 @@ public interface BooleanDataset extends Dataset {
 
     @Override
     default String getDefaultValueType() {
-        return  Data.BooleanData.VALUE_TYPE;
+        return Data.BooleanData.VALUE_TYPE;
     }
 }

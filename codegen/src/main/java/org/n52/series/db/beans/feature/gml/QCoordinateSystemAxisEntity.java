@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gml;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QCoordinateSystemAxisEntity is a Querydsl query type for CoordinateSystemAxisEntity
  */
@@ -20,9 +20,11 @@ public class QCoordinateSystemAxisEntity extends EntityPathBase<CoordinateSystem
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QCoordinateSystemAxisEntity coordinateSystemAxisEntity = new QCoordinateSystemAxisEntity("coordinateSystemAxisEntity");
+    public static final QCoordinateSystemAxisEntity coordinateSystemAxisEntity =
+            new QCoordinateSystemAxisEntity("coordinateSystemAxisEntity");
 
-    public final org.n52.series.db.beans.feature.QReferenceEntity _super = new org.n52.series.db.beans.feature.QReferenceEntity(this);
+    public final org.n52.series.db.beans.feature.QReferenceEntity _super =
+            new org.n52.series.db.beans.feature.QReferenceEntity(this);
 
     public final StringPath actuate = createString("actuate");
 
@@ -78,7 +80,7 @@ public class QCoordinateSystemAxisEntity extends EntityPathBase<CoordinateSystem
         this(CoordinateSystemAxisEntity.class, forVariable(variable), INITS);
     }
 
-    public QCoordinateSystemAxisEntity(Path<? extends CoordinateSystemAxisEntity> path) {
+    public QCoordinateSystemAxisEntity(Path< ? extends CoordinateSystemAxisEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -90,15 +92,28 @@ public class QCoordinateSystemAxisEntity extends EntityPathBase<CoordinateSystem
         this(CoordinateSystemAxisEntity.class, metadata, inits);
     }
 
-    public QCoordinateSystemAxisEntity(Class<? extends CoordinateSystemAxisEntity> type, PathMetadata metadata, PathInits inits) {
+    public QCoordinateSystemAxisEntity(Class< ? extends CoordinateSystemAxisEntity> type,
+                                       PathMetadata metadata,
+                                       PathInits inits) {
         super(type, metadata, inits);
-        this.codespaceAxisAbbrev = inits.isInitialized("codespaceAxisAbbrev") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceAxisAbbrev")) : null;
-        this.codespaceAxisDirection = inits.isInitialized("codespaceAxisDirection") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceAxisDirection")) : null;
-        this.codespaceRangeMeaning = inits.isInitialized("codespaceRangeMeaning") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceRangeMeaning")) : null;
-        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
-        this.uom = inits.isInitialized("uom") ? new org.n52.series.db.beans.QUnitEntity(forProperty("uom")) : null;
+        this.codespaceAxisAbbrev = inits.isInitialized("codespaceAxisAbbrev")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceAxisAbbrev"))
+                : null;
+        this.codespaceAxisDirection = inits.isInitialized("codespaceAxisDirection")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceAxisDirection"))
+                : null;
+        this.codespaceRangeMeaning = inits.isInitialized("codespaceRangeMeaning")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceRangeMeaning"))
+                : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
+                : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
+                : null;
+        this.uom = inits.isInitialized("uom")
+                ? new org.n52.series.db.beans.QUnitEntity(forProperty("uom"))
+                : null;
     }
 
 }
-

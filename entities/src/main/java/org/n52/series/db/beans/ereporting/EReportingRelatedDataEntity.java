@@ -19,7 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.AbstractRelationEntity;
 
-public class EReportingRelatedDataEntity extends AbstractRelationEntity<EReportingDataEntity> {
+public class EReportingRelatedDataEntity extends AbstractRelationEntity<EReportingDataEntity< ? >> {
 
     private static final long serialVersionUID = 2436177373903826414L;
 

@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 
-
 /**
  * QEReportingQualityEntity is a Querydsl query type for EReportingQualityEntity
  */
@@ -17,7 +17,8 @@ public class QEReportingQualityEntity extends EntityPathBase<EReportingQualityEn
 
     private static final long serialVersionUID = -1340513179L;
 
-    public static final QEReportingQualityEntity eReportingQualityEntity = new QEReportingQualityEntity("eReportingQualityEntity");
+    public static final QEReportingQualityEntity eReportingQualityEntity =
+            new QEReportingQualityEntity("eReportingQualityEntity");
 
     public final org.n52.series.db.beans.QIdEntity _super = new org.n52.series.db.beans.QIdEntity(this);
 
@@ -39,7 +40,7 @@ public class QEReportingQualityEntity extends EntityPathBase<EReportingQualityEn
         super(EReportingQualityEntity.class, forVariable(variable));
     }
 
-    public QEReportingQualityEntity(Path<? extends EReportingQualityEntity> path) {
+    public QEReportingQualityEntity(Path< ? extends EReportingQualityEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -48,4 +49,3 @@ public class QEReportingQualityEntity extends EntityPathBase<EReportingQualityEn
     }
 
 }
-

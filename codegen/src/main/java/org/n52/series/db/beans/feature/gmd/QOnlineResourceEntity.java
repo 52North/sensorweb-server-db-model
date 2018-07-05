@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -7,7 +8,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-
 
 /**
  * QOnlineResourceEntity is a Querydsl query type for OnlineResourceEntity
@@ -59,7 +59,7 @@ public class QOnlineResourceEntity extends EntityPathBase<OnlineResourceEntity> 
         super(OnlineResourceEntity.class, forVariable(variable));
     }
 
-    public QOnlineResourceEntity(Path<? extends OnlineResourceEntity> path) {
+    public QOnlineResourceEntity(Path< ? extends OnlineResourceEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -68,4 +68,3 @@ public class QOnlineResourceEntity extends EntityPathBase<OnlineResourceEntity> 
     }
 
 }
-

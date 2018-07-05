@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QPlatformEntity is a Querydsl query type for PlatformEntity
@@ -32,13 +32,17 @@ public class QPlatformEntity extends EntityPathBase<PlatformEntity> {
 
     public final StringPath name = createString("name");
 
-    public final SetPath<org.n52.series.db.beans.i18n.I18nPlatformEntity, org.n52.series.db.beans.i18n.QI18nPlatformEntity> translations = this.<org.n52.series.db.beans.i18n.I18nPlatformEntity, org.n52.series.db.beans.i18n.QI18nPlatformEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nPlatformEntity.class, org.n52.series.db.beans.i18n.QI18nPlatformEntity.class, PathInits.DIRECT2);
+    public final SetPath<org.n52.series.db.beans.i18n.I18nPlatformEntity, org.n52.series.db.beans.i18n.QI18nPlatformEntity> translations =
+            this.<org.n52.series.db.beans.i18n.I18nPlatformEntity, org.n52.series.db.beans.i18n.QI18nPlatformEntity> createSet("translations",
+                                                                                                                               org.n52.series.db.beans.i18n.I18nPlatformEntity.class,
+                                                                                                                               org.n52.series.db.beans.i18n.QI18nPlatformEntity.class,
+                                                                                                                               PathInits.DIRECT2);
 
     public QPlatformEntity(String variable) {
         super(PlatformEntity.class, forVariable(variable));
     }
 
-    public QPlatformEntity(Path<? extends PlatformEntity> path) {
+    public QPlatformEntity(Path< ? extends PlatformEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -47,4 +51,3 @@ public class QPlatformEntity extends EntityPathBase<PlatformEntity> {
     }
 
 }
-

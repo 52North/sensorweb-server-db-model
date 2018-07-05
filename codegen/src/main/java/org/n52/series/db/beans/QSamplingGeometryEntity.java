@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QSamplingGeometryEntity is a Querydsl query type for SamplingGeometryEntity
  */
@@ -20,11 +20,13 @@ public class QSamplingGeometryEntity extends EntityPathBase<SamplingGeometryEnti
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QSamplingGeometryEntity samplingGeometryEntity = new QSamplingGeometryEntity("samplingGeometryEntity");
+    public static final QSamplingGeometryEntity samplingGeometryEntity =
+            new QSamplingGeometryEntity("samplingGeometryEntity");
 
     public final QIdEntity _super = new QIdEntity(this);
 
-    public final SimplePath<org.n52.series.db.beans.dataset.Dataset> dataset = createSimple("dataset", org.n52.series.db.beans.dataset.Dataset.class);
+    public final SimplePath<org.n52.series.db.beans.dataset.Dataset> dataset =
+            createSimple("dataset", org.n52.series.db.beans.dataset.Dataset.class);
 
     public final QGeometryEntity geometryEntity;
 
@@ -36,7 +38,7 @@ public class QSamplingGeometryEntity extends EntityPathBase<SamplingGeometryEnti
         this(SamplingGeometryEntity.class, forVariable(variable), INITS);
     }
 
-    public QSamplingGeometryEntity(Path<? extends SamplingGeometryEntity> path) {
+    public QSamplingGeometryEntity(Path< ? extends SamplingGeometryEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -48,10 +50,13 @@ public class QSamplingGeometryEntity extends EntityPathBase<SamplingGeometryEnti
         this(SamplingGeometryEntity.class, metadata, inits);
     }
 
-    public QSamplingGeometryEntity(Class<? extends SamplingGeometryEntity> type, PathMetadata metadata, PathInits inits) {
+    public QSamplingGeometryEntity(Class< ? extends SamplingGeometryEntity> type,
+                                   PathMetadata metadata,
+                                   PathInits inits) {
         super(type, metadata, inits);
-        this.geometryEntity = inits.isInitialized("geometryEntity") ? new QGeometryEntity(forProperty("geometryEntity")) : null;
+        this.geometryEntity = inits.isInitialized("geometryEntity")
+                ? new QGeometryEntity(forProperty("geometryEntity"))
+                : null;
     }
 
 }
-

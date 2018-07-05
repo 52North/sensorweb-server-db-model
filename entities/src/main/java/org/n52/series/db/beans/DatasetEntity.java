@@ -55,7 +55,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
 
     private OfferingEntity offering;
 
-    private AbstractFeatureEntity feature;
+    private AbstractFeatureEntity< ? > feature;
 
     private CategoryEntity category;
 
@@ -75,9 +75,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
 
     private Date lastValueAt;
 
-    private Data firstObservation;
+    private Data< ? > firstObservation;
 
-    private Data lastObservation;
+    private Data< ? > lastObservation;
 
     private BigDecimal firstQuantityValue;
 
@@ -160,12 +160,12 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
     }
 
     @Override
-    public AbstractFeatureEntity getFeature() {
+    public AbstractFeatureEntity< ? > getFeature() {
         return feature;
     }
 
     @Override
-    public void setFeature(final AbstractFeatureEntity feature) {
+    public void setFeature(final AbstractFeatureEntity< ? > feature) {
         this.feature = feature;
     }
 
@@ -262,22 +262,22 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
     }
 
     @Override
-    public Data getFirstObservation() {
+    public Data< ? > getFirstObservation() {
         return firstObservation;
     }
 
     @Override
-    public void setFirstObservation(final Data firstObservation) {
+    public void setFirstObservation(final Data< ? > firstObservation) {
         this.firstObservation = firstObservation;
     }
 
     @Override
-    public Data getLastObservation() {
+    public Data< ? > getLastObservation() {
         return lastObservation;
     }
 
     @Override
-    public void setLastObservation(final Data lastObservation) {
+    public void setLastObservation(final Data< ? > lastObservation) {
         this.lastObservation = lastObservation;
     }
 
@@ -304,9 +304,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
     @Override
     public String getValueType() {
         return (valueType == null) || valueType.isEmpty()
-            // backward compatible
-            ? getDefaultValueType()
-            : valueType;
+                // backward compatible
+                ? getDefaultValueType()
+                : valueType;
     }
 
     @Override
@@ -322,8 +322,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
     public Set<Date> getResultTimes() {
         final Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
         return unmodifiableResultTimes != null
-            ? Collections.unmodifiableSet(unmodifiableResultTimes)
-            : null;
+                ? Collections.unmodifiableSet(unmodifiableResultTimes)
+                : null;
     }
 
     /**
@@ -338,10 +338,10 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
 
     private Set<Date> wrapToUnmutables(final Set<Date> dates) {
         return dates != null
-            ? dates.stream()
-                   .map(Utils::createUnmutableTimestamp)
-                   .collect(Collectors.toSet())
-            : null;
+                ? dates.stream()
+                       .map(Utils::createUnmutableTimestamp)
+                       .collect(Collectors.toSet())
+                : null;
     }
 
     @Override
@@ -361,9 +361,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
 
     public String getUnitI18nName(final String locale) {
         return unit != null
-            // ? unit.getNameI18n(locale)
-            ? unit.getUnit()
-            : "";
+                // ? unit.getNameI18n(locale)
+                ? unit.getUnit()
+                : "";
     }
 
     @Override

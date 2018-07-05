@@ -29,26 +29,32 @@ public class ProfileDataEntity extends CompositeDataEntity implements ProfileDat
 
     private UnitEntity verticalUnit;
 
+    @Override
     public String getVerticalFromName() {
         return verticalfromName;
     }
 
+    @Override
     public void setVerticalFromName(String name) {
         this.verticalfromName = name;
     }
 
+    @Override
     public String getVerticalToName() {
         return verticaltoName;
     }
 
+    @Override
     public void setVerticalToName(String name) {
         this.verticaltoName = name;
     }
 
+    @Override
     public UnitEntity getVerticalUnit() {
         return verticalUnit;
     }
 
+    @Override
     public void setVerticalUnit(UnitEntity verticalUnit) {
         this.verticalUnit = verticalUnit;
     }

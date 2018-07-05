@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.i18n;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -7,7 +8,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-
 
 /**
  * QI18nProcedureEntity is a Querydsl query type for I18nProcedureEntity
@@ -24,7 +24,8 @@ public class QI18nProcedureEntity extends EntityPathBase<I18nProcedureEntity> {
     public final StringPath description = createString("description");
 
     // custom
-    public final org.n52.series.db.beans.QDescribableEntity entity = new org.n52.series.db.beans.QDescribableEntity(forProperty("entity"));
+    public final org.n52.series.db.beans.QDescribableEntity entity =
+            new org.n52.series.db.beans.QDescribableEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -40,7 +41,7 @@ public class QI18nProcedureEntity extends EntityPathBase<I18nProcedureEntity> {
         super(I18nProcedureEntity.class, forVariable(variable));
     }
 
-    public QI18nProcedureEntity(Path<? extends I18nProcedureEntity> path) {
+    public QI18nProcedureEntity(Path< ? extends I18nProcedureEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -49,4 +50,3 @@ public class QI18nProcedureEntity extends EntityPathBase<I18nProcedureEntity> {
     }
 
 }
-

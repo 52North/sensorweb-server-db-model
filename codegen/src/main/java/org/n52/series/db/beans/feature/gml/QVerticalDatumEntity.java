@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gml;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QVerticalDatumEntity is a Querydsl query type for VerticalDatumEntity
@@ -22,7 +22,8 @@ public class QVerticalDatumEntity extends EntityPathBase<VerticalDatumEntity> {
 
     public static final QVerticalDatumEntity verticalDatumEntity = new QVerticalDatumEntity("verticalDatumEntity");
 
-    public final org.n52.series.db.beans.feature.QReferenceEntity _super = new org.n52.series.db.beans.feature.QReferenceEntity(this);
+    public final org.n52.series.db.beans.feature.QReferenceEntity _super =
+            new org.n52.series.db.beans.feature.QReferenceEntity(this);
 
     public final StringPath actuate = createString("actuate");
 
@@ -50,7 +51,8 @@ public class QVerticalDatumEntity extends EntityPathBase<VerticalDatumEntity> {
 
     public final StringPath nilReason = createString("nilReason");
 
-    public final DateTimePath<java.util.Date> realizationEpoch = createDateTime("realizationEpoch", java.util.Date.class);
+    public final DateTimePath<java.util.Date> realizationEpoch =
+            createDateTime("realizationEpoch", java.util.Date.class);
 
     public final StringPath remarks = createString("remarks");
 
@@ -58,7 +60,8 @@ public class QVerticalDatumEntity extends EntityPathBase<VerticalDatumEntity> {
 
     public final StringPath role = createString("role");
 
-    public final SetPath<String, StringPath> scope = this.<String, StringPath>createSet("scope", String.class, StringPath.class, PathInits.DIRECT2);
+    public final SetPath<String, StringPath> scope =
+            this.<String, StringPath> createSet("scope", String.class, StringPath.class, PathInits.DIRECT2);
 
     public final StringPath show = createString("show");
 
@@ -70,7 +73,7 @@ public class QVerticalDatumEntity extends EntityPathBase<VerticalDatumEntity> {
         this(VerticalDatumEntity.class, forVariable(variable), INITS);
     }
 
-    public QVerticalDatumEntity(Path<? extends VerticalDatumEntity> path) {
+    public QVerticalDatumEntity(Path< ? extends VerticalDatumEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -82,13 +85,20 @@ public class QVerticalDatumEntity extends EntityPathBase<VerticalDatumEntity> {
         this(VerticalDatumEntity.class, metadata, inits);
     }
 
-    public QVerticalDatumEntity(Class<? extends VerticalDatumEntity> type, PathMetadata metadata, PathInits inits) {
+    public QVerticalDatumEntity(Class< ? extends VerticalDatumEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.codespaceAnchorDefinition = inits.isInitialized("codespaceAnchorDefinition") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceAnchorDefinition")) : null;
-        this.domainOfValidity = inits.isInitialized("domainOfValidity") ? new QDomainOfValidityEntity(forProperty("domainOfValidity"), inits.get("domainOfValidity")) : null;
-        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
+        this.codespaceAnchorDefinition = inits.isInitialized("codespaceAnchorDefinition")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("codespaceAnchorDefinition"))
+                : null;
+        this.domainOfValidity = inits.isInitialized("domainOfValidity")
+                ? new QDomainOfValidityEntity(forProperty("domainOfValidity"), inits.get("domainOfValidity"))
+                : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
+                : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
+                : null;
     }
 
 }
-

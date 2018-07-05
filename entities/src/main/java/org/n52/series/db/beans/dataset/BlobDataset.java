@@ -23,6 +23,6 @@ public interface BlobDataset extends Dataset {
 
     @Override
     default String getDefaultValueType() {
-        return  Data.BlobData.VALUE_TYPE;
+        return Data.BlobData.VALUE_TYPE;
     }
 }

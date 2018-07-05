@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QAddressEntity is a Querydsl query type for AddressEntity
@@ -32,9 +32,14 @@ public class QAddressEntity extends EntityPathBase<AddressEntity> {
 
     public final StringPath country = createString("country");
 
-    public final SetPath<String, StringPath> deliveryPoint = this.<String, StringPath>createSet("deliveryPoint", String.class, StringPath.class, PathInits.DIRECT2);
+    public final SetPath<String, StringPath> deliveryPoint =
+            this.<String, StringPath> createSet("deliveryPoint", String.class, StringPath.class, PathInits.DIRECT2);
 
-    public final SetPath<String, StringPath> electronicMailAddress = this.<String, StringPath>createSet("electronicMailAddress", String.class, StringPath.class, PathInits.DIRECT2);
+    public final SetPath<String, StringPath> electronicMailAddress =
+            this.<String, StringPath> createSet("electronicMailAddress",
+                                                String.class,
+                                                StringPath.class,
+                                                PathInits.DIRECT2);
 
     public final StringPath gmdid = createString("gmdid");
 
@@ -62,7 +67,7 @@ public class QAddressEntity extends EntityPathBase<AddressEntity> {
         super(AddressEntity.class, forVariable(variable));
     }
 
-    public QAddressEntity(Path<? extends AddressEntity> path) {
+    public QAddressEntity(Path< ? extends AddressEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -71,4 +76,3 @@ public class QAddressEntity extends EntityPathBase<AddressEntity> {
     }
 
 }
-

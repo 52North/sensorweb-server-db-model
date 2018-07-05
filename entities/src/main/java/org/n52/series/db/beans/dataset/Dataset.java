@@ -61,9 +61,9 @@ public interface Dataset {
 
     boolean isSetOffering();
 
-    AbstractFeatureEntity getFeature();
+    AbstractFeatureEntity< ? > getFeature();
 
-    void setFeature(AbstractFeatureEntity feature);
+    void setFeature(AbstractFeatureEntity< ? > feature);
 
     boolean isSetFeature();
 
@@ -101,13 +101,13 @@ public interface Dataset {
 
     boolean isSetLastValueAt();
 
-    Data getFirstObservation();
+    Data< ? > getFirstObservation();
 
-    void setFirstObservation(Data observation);
+    void setFirstObservation(Data< ? > observation);
 
-    Data getLastObservation();
+    Data< ? > getLastObservation();
 
-    void setLastObservation(Data observation);
+    void setLastObservation(Data< ? > observation);
 
     BigDecimal getFirstQuantityValue();
 

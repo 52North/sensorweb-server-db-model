@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.parameter;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QParameterQuantity is a Querydsl query type for ParameterQuantity
@@ -44,7 +44,7 @@ public class QParameterQuantity extends EntityPathBase<ParameterQuantity> {
         this(ParameterQuantity.class, forVariable(variable), INITS);
     }
 
-    public QParameterQuantity(Path<? extends ParameterQuantity> path) {
+    public QParameterQuantity(Path< ? extends ParameterQuantity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -56,10 +56,11 @@ public class QParameterQuantity extends EntityPathBase<ParameterQuantity> {
         this(ParameterQuantity.class, metadata, inits);
     }
 
-    public QParameterQuantity(Class<? extends ParameterQuantity> type, PathMetadata metadata, PathInits inits) {
+    public QParameterQuantity(Class< ? extends ParameterQuantity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.unit = inits.isInitialized("unit") ? new org.n52.series.db.beans.QUnitEntity(forProperty("unit")) : null;
+        this.unit = inits.isInitialized("unit")
+                ? new org.n52.series.db.beans.QUnitEntity(forProperty("unit"))
+                : null;
     }
 
 }
-

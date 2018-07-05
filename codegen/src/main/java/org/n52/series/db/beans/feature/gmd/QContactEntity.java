@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QContactEntity is a Querydsl query type for ContactEntity
@@ -62,7 +62,7 @@ public class QContactEntity extends EntityPathBase<ContactEntity> {
         this(ContactEntity.class, forVariable(variable), INITS);
     }
 
-    public QContactEntity(Path<? extends ContactEntity> path) {
+    public QContactEntity(Path< ? extends ContactEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -74,12 +74,17 @@ public class QContactEntity extends EntityPathBase<ContactEntity> {
         this(ContactEntity.class, metadata, inits);
     }
 
-    public QContactEntity(Class<? extends ContactEntity> type, PathMetadata metadata, PathInits inits) {
+    public QContactEntity(Class< ? extends ContactEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.address = inits.isInitialized("address") ? new QAddressEntity(forProperty("address")) : null;
-        this.onlineResource = inits.isInitialized("onlineResource") ? new QOnlineResourceEntity(forProperty("onlineResource")) : null;
-        this.phone = inits.isInitialized("phone") ? new QTelephoneEntity(forProperty("phone")) : null;
+        this.address = inits.isInitialized("address")
+                ? new QAddressEntity(forProperty("address"))
+                : null;
+        this.onlineResource = inits.isInitialized("onlineResource")
+                ? new QOnlineResourceEntity(forProperty("onlineResource"))
+                : null;
+        this.phone = inits.isInitialized("phone")
+                ? new QTelephoneEntity(forProperty("phone"))
+                : null;
     }
 
 }
-

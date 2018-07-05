@@ -1,14 +1,19 @@
+
 package org.n52.series.db.beans;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
-import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
+import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.BooleanPath;
+import com.querydsl.core.types.dsl.DateTimePath;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.NumberPath;
+import com.querydsl.core.types.dsl.PathInits;
+import com.querydsl.core.types.dsl.SetPath;
+import com.querydsl.core.types.dsl.StringPath;
 
 /**
  * QDataArrayDataEntity is a Querydsl query type for DataArrayDataEntity
@@ -57,7 +62,7 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     //inherited
     public final BooleanPath parent;
@@ -82,7 +87,11 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     //inherited
     public final DateTimePath<java.util.Date> validTimeStart;
 
-    public final SetPath<DataEntity<?>, QDataEntity> value = this.<DataEntity<?>, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
+    public final SetPath<DataEntity< ? >, QDataEntity> value =
+            this.<DataEntity< ? >, QDataEntity> createSet("value",
+                                                          DataEntity.class,
+                                                          QDataEntity.class,
+                                                          PathInits.DIRECT2);
 
     //inherited
     public final StringPath valueDescription;
@@ -103,7 +112,7 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
         this(DataArrayDataEntity.class, forVariable(variable), INITS);
     }
 
-    public QDataArrayDataEntity(Path<? extends DataArrayDataEntity> path) {
+    public QDataArrayDataEntity(Path< ? extends DataArrayDataEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -115,7 +124,7 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
         this(DataArrayDataEntity.class, metadata, inits);
     }
 
-    public QDataArrayDataEntity(Class<? extends DataArrayDataEntity> type, PathMetadata metadata, PathInits inits) {
+    public QDataArrayDataEntity(Class< ? extends DataArrayDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QCompositeDataEntity(type, metadata, inits);
         this.child = _super.child;
@@ -144,4 +153,3 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     }
 
 }
-

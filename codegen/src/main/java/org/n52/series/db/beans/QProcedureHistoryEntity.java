@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QProcedureHistoryEntity is a Querydsl query type for ProcedureHistoryEntity
  */
@@ -20,7 +20,8 @@ public class QProcedureHistoryEntity extends EntityPathBase<ProcedureHistoryEnti
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QProcedureHistoryEntity procedureHistoryEntity = new QProcedureHistoryEntity("procedureHistoryEntity");
+    public static final QProcedureHistoryEntity procedureHistoryEntity =
+            new QProcedureHistoryEntity("procedureHistoryEntity");
 
     public final QIdEntity _super = new QIdEntity(this);
 
@@ -40,7 +41,7 @@ public class QProcedureHistoryEntity extends EntityPathBase<ProcedureHistoryEnti
         this(ProcedureHistoryEntity.class, forVariable(variable), INITS);
     }
 
-    public QProcedureHistoryEntity(Path<? extends ProcedureHistoryEntity> path) {
+    public QProcedureHistoryEntity(Path< ? extends ProcedureHistoryEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -52,11 +53,16 @@ public class QProcedureHistoryEntity extends EntityPathBase<ProcedureHistoryEnti
         this(ProcedureHistoryEntity.class, metadata, inits);
     }
 
-    public QProcedureHistoryEntity(Class<? extends ProcedureHistoryEntity> type, PathMetadata metadata, PathInits inits) {
+    public QProcedureHistoryEntity(Class< ? extends ProcedureHistoryEntity> type,
+                                   PathMetadata metadata,
+                                   PathInits inits) {
         super(type, metadata, inits);
-        this.format = inits.isInitialized("format") ? new QFormatEntity(forProperty("format")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
+        this.format = inits.isInitialized("format")
+                ? new QFormatEntity(forProperty("format"))
+                : null;
+        this.procedure = inits.isInitialized("procedure")
+                ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure"))
+                : null;
     }
 
 }
-

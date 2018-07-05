@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gmd;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QResponsiblePartyEntity is a Querydsl query type for ResponsiblePartyEntity
  */
@@ -20,7 +20,8 @@ public class QResponsiblePartyEntity extends EntityPathBase<ResponsiblePartyEnti
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QResponsiblePartyEntity responsiblePartyEntity = new QResponsiblePartyEntity("responsiblePartyEntity");
+    public static final QResponsiblePartyEntity responsiblePartyEntity =
+            new QResponsiblePartyEntity("responsiblePartyEntity");
 
     public final QAbstractCiEntity _super = new QAbstractCiEntity(this);
 
@@ -62,7 +63,7 @@ public class QResponsiblePartyEntity extends EntityPathBase<ResponsiblePartyEnti
         this(ResponsiblePartyEntity.class, forVariable(variable), INITS);
     }
 
-    public QResponsiblePartyEntity(Path<? extends ResponsiblePartyEntity> path) {
+    public QResponsiblePartyEntity(Path< ? extends ResponsiblePartyEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -74,11 +75,16 @@ public class QResponsiblePartyEntity extends EntityPathBase<ResponsiblePartyEnti
         this(ResponsiblePartyEntity.class, metadata, inits);
     }
 
-    public QResponsiblePartyEntity(Class<? extends ResponsiblePartyEntity> type, PathMetadata metadata, PathInits inits) {
+    public QResponsiblePartyEntity(Class< ? extends ResponsiblePartyEntity> type,
+                                   PathMetadata metadata,
+                                   PathInits inits) {
         super(type, metadata, inits);
-        this.ciRole = inits.isInitialized("ciRole") ? new QRoleEntity(forProperty("ciRole")) : null;
-        this.contactInfo = inits.isInitialized("contactInfo") ? new QContactEntity(forProperty("contactInfo"), inits.get("contactInfo")) : null;
+        this.ciRole = inits.isInitialized("ciRole")
+                ? new QRoleEntity(forProperty("ciRole"))
+                : null;
+        this.contactInfo = inits.isInitialized("contactInfo")
+                ? new QContactEntity(forProperty("contactInfo"), inits.get("contactInfo"))
+                : null;
     }
 
 }
-

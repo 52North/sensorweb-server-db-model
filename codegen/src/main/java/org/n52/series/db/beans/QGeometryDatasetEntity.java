@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QGeometryDatasetEntity is a Querydsl query type for GeometryDatasetEntity
  */
@@ -20,7 +20,8 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QGeometryDatasetEntity geometryDatasetEntity = new QGeometryDatasetEntity("geometryDatasetEntity");
+    public static final QGeometryDatasetEntity geometryDatasetEntity =
+            new QGeometryDatasetEntity("geometryDatasetEntity");
 
     public final QDatasetEntity _super;
 
@@ -40,7 +41,8 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
     // inherited
     public final QAbstractFeatureEntity feature;
 
-    public final SimplePath<org.n52.series.db.beans.data.Data> firstObservation = createSimple("firstObservation", org.n52.series.db.beans.data.Data.class);
+    public final SimplePath<org.n52.series.db.beans.data.Data< ? >> firstObservation =
+            createSimple("firstObservation", org.n52.series.db.beans.data.Data.class);
 
     //inherited
     public final NumberPath<java.math.BigDecimal> firstQuantityValue;
@@ -60,7 +62,8 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
     // inherited
     public final QCodespaceEntity identifierCodespace;
 
-    public final SimplePath<org.n52.series.db.beans.data.Data> lastObservation = createSimple("lastObservation", org.n52.series.db.beans.data.Data.class);
+    public final SimplePath<org.n52.series.db.beans.data.Data< ? >> lastObservation =
+            createSimple("lastObservation", org.n52.series.db.beans.data.Data.class);
 
     //inherited
     public final NumberPath<java.math.BigDecimal> lastQuantityValue;
@@ -81,7 +84,7 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
     public final QOfferingEntity offering;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     // inherited
     public final QPhenomenonEntity phenomenon;
@@ -102,7 +105,7 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
         this(GeometryDatasetEntity.class, forVariable(variable), INITS);
     }
 
-    public QGeometryDatasetEntity(Path<? extends GeometryDatasetEntity> path) {
+    public QGeometryDatasetEntity(Path< ? extends GeometryDatasetEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -114,7 +117,9 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
         this(GeometryDatasetEntity.class, metadata, inits);
     }
 
-    public QGeometryDatasetEntity(Class<? extends GeometryDatasetEntity> type, PathMetadata metadata, PathInits inits) {
+    public QGeometryDatasetEntity(Class< ? extends GeometryDatasetEntity> type,
+                                  PathMetadata metadata,
+                                  PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDatasetEntity(type, metadata, inits);
         this.category = _super.category;
@@ -143,4 +148,3 @@ public class QGeometryDatasetEntity extends EntityPathBase<GeometryDatasetEntity
     }
 
 }
-

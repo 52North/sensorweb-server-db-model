@@ -17,7 +17,9 @@
 
 package org.n52.series.db.beans.i18n;
 
-public class I18nDatasetEntity extends I18nEntity {
+import org.n52.series.db.beans.DescribableEntity;
+
+public class I18nDatasetEntity<T extends DescribableEntity> extends I18nEntity<T> {
 
     private static final long serialVersionUID = -6806171135616112674L;
 

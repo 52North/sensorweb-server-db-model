@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QEReportingQuantityDatasetEntity is a Querydsl query type for EReportingQuantityDatasetEntity
  */
@@ -20,7 +20,8 @@ public class QEReportingQuantityDatasetEntity extends EntityPathBase<EReportingQ
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QEReportingQuantityDatasetEntity eReportingQuantityDatasetEntity = new QEReportingQuantityDatasetEntity("eReportingQuantityDatasetEntity");
+    public static final QEReportingQuantityDatasetEntity eReportingQuantityDatasetEntity =
+            new QEReportingQuantityDatasetEntity("eReportingQuantityDatasetEntity");
 
     public final QEReportingDatasetEntity _super;
 
@@ -79,7 +80,7 @@ public class QEReportingQuantityDatasetEntity extends EntityPathBase<EReportingQ
     public final org.n52.series.db.beans.QOfferingEntity offering;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     // inherited
     public final org.n52.series.db.beans.QPhenomenonEntity phenomenon;
@@ -93,7 +94,11 @@ public class QEReportingQuantityDatasetEntity extends EntityPathBase<EReportingQ
     //inherited
     public final BooleanPath published;
 
-    public final ListPath<EReportingDatasetEntity, QEReportingDatasetEntity> referenceValues = this.<EReportingDatasetEntity, QEReportingDatasetEntity>createList("referenceValues", EReportingDatasetEntity.class, QEReportingDatasetEntity.class, PathInits.DIRECT2);
+    public final ListPath<EReportingDatasetEntity, QEReportingDatasetEntity> referenceValues =
+            this.<EReportingDatasetEntity, QEReportingDatasetEntity> createList("referenceValues",
+                                                                                EReportingDatasetEntity.class,
+                                                                                QEReportingDatasetEntity.class,
+                                                                                PathInits.DIRECT2);
 
     // inherited
     public final QEReportingSamplingPointEntity samplingPoint;
@@ -107,7 +112,7 @@ public class QEReportingQuantityDatasetEntity extends EntityPathBase<EReportingQ
         this(EReportingQuantityDatasetEntity.class, forVariable(variable), INITS);
     }
 
-    public QEReportingQuantityDatasetEntity(Path<? extends EReportingQuantityDatasetEntity> path) {
+    public QEReportingQuantityDatasetEntity(Path< ? extends EReportingQuantityDatasetEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -119,7 +124,9 @@ public class QEReportingQuantityDatasetEntity extends EntityPathBase<EReportingQ
         this(EReportingQuantityDatasetEntity.class, metadata, inits);
     }
 
-    public QEReportingQuantityDatasetEntity(Class<? extends EReportingQuantityDatasetEntity> type, PathMetadata metadata, PathInits inits) {
+    public QEReportingQuantityDatasetEntity(Class< ? extends EReportingQuantityDatasetEntity> type,
+                                            PathMetadata metadata,
+                                            PathInits inits) {
         super(type, metadata, inits);
         this._super = new QEReportingDatasetEntity(type, metadata, inits);
         this.category = _super.category;
@@ -145,9 +152,10 @@ public class QEReportingQuantityDatasetEntity extends EntityPathBase<EReportingQ
         this.procedure = _super.procedure;
         this.published = _super.published;
         this.samplingPoint = _super.samplingPoint;
-        this.unit = inits.isInitialized("unit") ? new org.n52.series.db.beans.QUnitEntity(forProperty("unit")) : null;
+        this.unit = inits.isInitialized("unit")
+                ? new org.n52.series.db.beans.QUnitEntity(forProperty("unit"))
+                : null;
         this.valueType = _super.valueType;
     }
 
 }
-

@@ -148,17 +148,17 @@
 
         <!-- Some columns occur several times and are commented only once at her first definition! -->
         <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized">
-        	<property name="unitId" type="long" lazy="true">
+        	<property name="unit" type="long" lazy="true">
                 <column name="fk_unit_id">
                     <comment>Reference to the unit of the data/observations that belongs to this dataset.</comment>
                 </column>
             </property>
-        	<property name="firstObservationId" type="long" lazy="true">
+        	<property name="firstObservation" type="long" lazy="true">
                 <column name="fk_first_observation_id">
                     <comment>Reference to the temporally first data/observation in the observation table that belongs to this dataset.</comment>
                 </column>
             </property>
-        	<property name="lastObservationId" type="long" lazy="true">
+        	<property name="lastObservation" type="long" lazy="true">
                 <column name="fk_last_observation_id">
                     <comment>Reference to the temporally last data/observation in the observation table that belongs to this dataset.</comment>
                 </column>

@@ -24,7 +24,8 @@ import java.util.List;
 import org.n52.series.db.beans.dataset.QuantityDataset;
 
 public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
-        implements QuantityDataset<EReportingQuantityDatasetEntity> {
+        implements
+        QuantityDataset<EReportingQuantityDatasetEntity> {
 
     private static final long serialVersionUID = -8934345303908852017L;
 
@@ -37,8 +38,8 @@ public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
         return referenceValues;
     }
 
-    public EReportingQuantityDatasetEntity setReferenceValues(
-                                                              Collection<EReportingQuantityDatasetEntity> refValues) {
+    @Override
+    public EReportingQuantityDatasetEntity setReferenceValues(Collection<EReportingQuantityDatasetEntity> refValues) {
         this.referenceValues = new ArrayList<>(referenceValues);
         return this;
     }

@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gml;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QVerticalCSEntity is a Querydsl query type for VerticalCSEntity
@@ -22,7 +22,8 @@ public class QVerticalCSEntity extends EntityPathBase<VerticalCSEntity> {
 
     public static final QVerticalCSEntity verticalCSEntity = new QVerticalCSEntity("verticalCSEntity");
 
-    public final org.n52.series.db.beans.feature.QReferenceEntity _super = new org.n52.series.db.beans.feature.QReferenceEntity(this);
+    public final org.n52.series.db.beans.feature.QReferenceEntity _super =
+            new org.n52.series.db.beans.feature.QReferenceEntity(this);
 
     public final StringPath actuate = createString("actuate");
 
@@ -30,7 +31,11 @@ public class QVerticalCSEntity extends EntityPathBase<VerticalCSEntity> {
 
     public final StringPath arcrole = createString("arcrole");
 
-    public final SetPath<CoordinateSystemAxisEntity, QCoordinateSystemAxisEntity> coordinateSystemAxis = this.<CoordinateSystemAxisEntity, QCoordinateSystemAxisEntity>createSet("coordinateSystemAxis", CoordinateSystemAxisEntity.class, QCoordinateSystemAxisEntity.class, PathInits.DIRECT2);
+    public final SetPath<CoordinateSystemAxisEntity, QCoordinateSystemAxisEntity> coordinateSystemAxis =
+            this.<CoordinateSystemAxisEntity, QCoordinateSystemAxisEntity> createSet("coordinateSystemAxis",
+                                                                                     CoordinateSystemAxisEntity.class,
+                                                                                     QCoordinateSystemAxisEntity.class,
+                                                                                     PathInits.DIRECT2);
 
     public final StringPath description = createString("description");
 
@@ -64,7 +69,7 @@ public class QVerticalCSEntity extends EntityPathBase<VerticalCSEntity> {
         this(VerticalCSEntity.class, forVariable(variable), INITS);
     }
 
-    public QVerticalCSEntity(Path<? extends VerticalCSEntity> path) {
+    public QVerticalCSEntity(Path< ? extends VerticalCSEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -76,11 +81,14 @@ public class QVerticalCSEntity extends EntityPathBase<VerticalCSEntity> {
         this(VerticalCSEntity.class, metadata, inits);
     }
 
-    public QVerticalCSEntity(Class<? extends VerticalCSEntity> type, PathMetadata metadata, PathInits inits) {
+    public QVerticalCSEntity(Class< ? extends VerticalCSEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
+                : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
+                : null;
     }
 
 }
-

@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.ereporting;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QEReportingSamplingPointEntity is a Querydsl query type for EReportingSamplingPointEntity
  */
@@ -20,9 +20,11 @@ public class QEReportingSamplingPointEntity extends EntityPathBase<EReportingSam
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QEReportingSamplingPointEntity eReportingSamplingPointEntity = new QEReportingSamplingPointEntity("eReportingSamplingPointEntity");
+    public static final QEReportingSamplingPointEntity eReportingSamplingPointEntity =
+            new QEReportingSamplingPointEntity("eReportingSamplingPointEntity");
 
-    public final org.n52.series.db.beans.QDescribableEntity _super = new org.n52.series.db.beans.QDescribableEntity(this);
+    public final org.n52.series.db.beans.QDescribableEntity _super =
+            new org.n52.series.db.beans.QDescribableEntity(this);
 
     public final QEReportingAssessmentTypeEntity assessmentType;
 
@@ -46,7 +48,7 @@ public class QEReportingSamplingPointEntity extends EntityPathBase<EReportingSam
         this(EReportingSamplingPointEntity.class, forVariable(variable), INITS);
     }
 
-    public QEReportingSamplingPointEntity(Path<? extends EReportingSamplingPointEntity> path) {
+    public QEReportingSamplingPointEntity(Path< ? extends EReportingSamplingPointEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -58,14 +60,25 @@ public class QEReportingSamplingPointEntity extends EntityPathBase<EReportingSam
         this(EReportingSamplingPointEntity.class, metadata, inits);
     }
 
-    public QEReportingSamplingPointEntity(Class<? extends EReportingSamplingPointEntity> type, PathMetadata metadata, PathInits inits) {
+    public QEReportingSamplingPointEntity(Class< ? extends EReportingSamplingPointEntity> type,
+                                          PathMetadata metadata,
+                                          PathInits inits) {
         super(type, metadata, inits);
-        this.assessmentType = inits.isInitialized("assessmentType") ? new QEReportingAssessmentTypeEntity(forProperty("assessmentType")) : null;
-        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
-        this.network = inits.isInitialized("network") ? new QEReportingNetworkEntity(forProperty("network"), inits.get("network")) : null;
-        this.station = inits.isInitialized("station") ? new QEReportingStationEntity(forProperty("station"), inits.get("station")) : null;
+        this.assessmentType = inits.isInitialized("assessmentType")
+                ? new QEReportingAssessmentTypeEntity(forProperty("assessmentType"))
+                : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
+                : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
+                : null;
+        this.network = inits.isInitialized("network")
+                ? new QEReportingNetworkEntity(forProperty("network"), inits.get("network"))
+                : null;
+        this.station = inits.isInitialized("station")
+                ? new QEReportingStationEntity(forProperty("station"), inits.get("station"))
+                : null;
     }
 
 }
-

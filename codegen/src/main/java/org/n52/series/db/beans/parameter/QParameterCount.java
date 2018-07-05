@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.parameter;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -7,7 +8,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-
 
 /**
  * QParameterCount is a Querydsl query type for ParameterCount
@@ -39,7 +39,7 @@ public class QParameterCount extends EntityPathBase<ParameterCount> {
         super(ParameterCount.class, forVariable(variable));
     }
 
-    public QParameterCount(Path<? extends ParameterCount> path) {
+    public QParameterCount(Path< ? extends ParameterCount> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -48,4 +48,3 @@ public class QParameterCount extends EntityPathBase<ParameterCount> {
     }
 
 }
-

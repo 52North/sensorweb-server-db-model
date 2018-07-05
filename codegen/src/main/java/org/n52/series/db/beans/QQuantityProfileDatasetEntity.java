@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QQuantityProfileDatasetEntity is a Querydsl query type for QuantityProfileDatasetEntity
  */
@@ -20,7 +20,8 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QQuantityProfileDatasetEntity quantityProfileDatasetEntity = new QQuantityProfileDatasetEntity("quantityProfileDatasetEntity");
+    public static final QQuantityProfileDatasetEntity quantityProfileDatasetEntity =
+            new QQuantityProfileDatasetEntity("quantityProfileDatasetEntity");
 
     public final QProfileDatasetEntity _super;
 
@@ -40,7 +41,8 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
     // inherited
     public final QAbstractFeatureEntity feature;
 
-    public final SimplePath<org.n52.series.db.beans.data.Data> firstObservation = createSimple("firstObservation", org.n52.series.db.beans.data.Data.class);
+    public final SimplePath<org.n52.series.db.beans.data.Data< ? >> firstObservation =
+            createSimple("firstObservation", org.n52.series.db.beans.data.Data.class);
 
     //inherited
     public final NumberPath<java.math.BigDecimal> firstQuantityValue;
@@ -60,7 +62,8 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
     // inherited
     public final QCodespaceEntity identifierCodespace;
 
-    public final SimplePath<org.n52.series.db.beans.data.Data> lastObservation = createSimple("lastObservation", org.n52.series.db.beans.data.Data.class);
+    public final SimplePath<org.n52.series.db.beans.data.Data< ? >> lastObservation =
+            createSimple("lastObservation", org.n52.series.db.beans.data.Data.class);
 
     //inherited
     public final NumberPath<java.math.BigDecimal> lastQuantityValue;
@@ -81,7 +84,7 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
     public final QOfferingEntity offering;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.Parameter< ? >, org.n52.series.db.beans.parameter.QParameter> parameters;
 
     // inherited
     public final QPhenomenonEntity phenomenon;
@@ -106,7 +109,7 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
         this(QuantityProfileDatasetEntity.class, forVariable(variable), INITS);
     }
 
-    public QQuantityProfileDatasetEntity(Path<? extends QuantityProfileDatasetEntity> path) {
+    public QQuantityProfileDatasetEntity(Path< ? extends QuantityProfileDatasetEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -118,7 +121,9 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
         this(QuantityProfileDatasetEntity.class, metadata, inits);
     }
 
-    public QQuantityProfileDatasetEntity(Class<? extends QuantityProfileDatasetEntity> type, PathMetadata metadata, PathInits inits) {
+    public QQuantityProfileDatasetEntity(Class< ? extends QuantityProfileDatasetEntity> type,
+                                         PathMetadata metadata,
+                                         PathInits inits) {
         super(type, metadata, inits);
         this._super = new QProfileDatasetEntity(type, metadata, inits);
         this.category = _super.category;
@@ -143,9 +148,10 @@ public class QQuantityProfileDatasetEntity extends EntityPathBase<QuantityProfil
         this.platform = _super.platform;
         this.procedure = _super.procedure;
         this.published = _super.published;
-        this.unit = inits.isInitialized("unit") ? new QUnitEntity(forProperty("unit")) : null;
+        this.unit = inits.isInitialized("unit")
+                ? new QUnitEntity(forProperty("unit"))
+                : null;
         this.valueType = _super.valueType;
     }
 
 }
-

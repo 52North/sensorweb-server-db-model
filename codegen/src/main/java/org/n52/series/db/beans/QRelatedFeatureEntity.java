@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -8,7 +9,6 @@ import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-
 
 /**
  * QRelatedFeatureEntity is a Querydsl query type for RelatedFeatureEntity
@@ -27,7 +27,11 @@ public class QRelatedFeatureEntity extends EntityPathBase<RelatedFeatureEntity> 
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final SetPath<OfferingEntity, QOfferingEntity> offerings = this.<OfferingEntity, QOfferingEntity>createSet("offerings", OfferingEntity.class, QOfferingEntity.class, PathInits.DIRECT2);
+    public final SetPath<OfferingEntity, QOfferingEntity> offerings =
+            this.<OfferingEntity, QOfferingEntity> createSet("offerings",
+                                                             OfferingEntity.class,
+                                                             QOfferingEntity.class,
+                                                             PathInits.DIRECT2);
 
     public final StringPath role = createString("role");
 
@@ -35,7 +39,7 @@ public class QRelatedFeatureEntity extends EntityPathBase<RelatedFeatureEntity> 
         super(RelatedFeatureEntity.class, forVariable(variable));
     }
 
-    public QRelatedFeatureEntity(Path<? extends RelatedFeatureEntity> path) {
+    public QRelatedFeatureEntity(Path< ? extends RelatedFeatureEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -44,4 +48,3 @@ public class QRelatedFeatureEntity extends EntityPathBase<RelatedFeatureEntity> 
     }
 
 }
-

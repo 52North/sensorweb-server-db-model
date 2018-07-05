@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans.feature.gml;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -9,7 +10,6 @@ import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
 
-
 /**
  * QDomainOfValidityEntity is a Querydsl query type for DomainOfValidityEntity
  */
@@ -20,9 +20,11 @@ public class QDomainOfValidityEntity extends EntityPathBase<DomainOfValidityEnti
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QDomainOfValidityEntity domainOfValidityEntity = new QDomainOfValidityEntity("domainOfValidityEntity");
+    public static final QDomainOfValidityEntity domainOfValidityEntity =
+            new QDomainOfValidityEntity("domainOfValidityEntity");
 
-    public final org.n52.series.db.beans.feature.QReferenceEntity _super = new org.n52.series.db.beans.feature.QReferenceEntity(this);
+    public final org.n52.series.db.beans.feature.QReferenceEntity _super =
+            new org.n52.series.db.beans.feature.QReferenceEntity(this);
 
     public final StringPath actuate = createString("actuate");
 
@@ -60,7 +62,7 @@ public class QDomainOfValidityEntity extends EntityPathBase<DomainOfValidityEnti
         this(DomainOfValidityEntity.class, forVariable(variable), INITS);
     }
 
-    public QDomainOfValidityEntity(Path<? extends DomainOfValidityEntity> path) {
+    public QDomainOfValidityEntity(Path< ? extends DomainOfValidityEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
@@ -72,12 +74,19 @@ public class QDomainOfValidityEntity extends EntityPathBase<DomainOfValidityEnti
         this(DomainOfValidityEntity.class, metadata, inits);
     }
 
-    public QDomainOfValidityEntity(Class<? extends DomainOfValidityEntity> type, PathMetadata metadata, PathInits inits) {
+    public QDomainOfValidityEntity(Class< ? extends DomainOfValidityEntity> type,
+                                   PathMetadata metadata,
+                                   PathInits inits) {
         super(type, metadata, inits);
-        this.exExtent = inits.isInitialized("exExtent") ? new org.n52.series.db.beans.feature.gmd.QExExtentEntity(forProperty("exExtent")) : null;
-        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace")) : null;
-        this.nameCodespace = inits.isInitialized("nameCodespace") ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace")) : null;
+        this.exExtent = inits.isInitialized("exExtent")
+                ? new org.n52.series.db.beans.feature.gmd.QExExtentEntity(forProperty("exExtent"))
+                : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("identifierCodespace"))
+                : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace")
+                ? new org.n52.series.db.beans.QCodespaceEntity(forProperty("nameCodespace"))
+                : null;
     }
 
 }
-

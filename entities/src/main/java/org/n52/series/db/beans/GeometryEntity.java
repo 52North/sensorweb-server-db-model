@@ -22,6 +22,7 @@ import java.io.Serializable;
 import com.vividsolutions.jts.geom.Coordinate;
 import com.vividsolutions.jts.geom.Geometry;
 import com.vividsolutions.jts.geom.GeometryFactory;
+import com.vividsolutions.jts.geom.PrecisionModel;
 
 public class GeometryEntity implements Serializable {
 
@@ -33,7 +34,7 @@ public class GeometryEntity implements Serializable {
 
     private static final long serialVersionUID = -1411829809704409439L;
 
-    private GeometryFactory geometryFactory;
+    private static final int DEFAULT_SRID = 4326;
 
     private Geometry geometry;
 
@@ -46,10 +47,10 @@ public class GeometryEntity implements Serializable {
     private int srid;
 
     public boolean isSetGeometry() {
-        return geometry != null && !geometry.isEmpty();
+        return (geometry != null) && !geometry.isEmpty();
     }
 
-    public void setGeometry(Geometry geometry) {
+    public void setGeometry(final Geometry geometry) {
         this.geometry = geometry;
     }
 
@@ -60,28 +61,45 @@ public class GeometryEntity implements Serializable {
      * @return the geometry or a created geometry (with given srid)
      */
     public Geometry getGeometry() {
-        Geometry builtGeometry = isSetLonLat()
-                ? createPoint()
+        return getGeometry(createDefaultGeometryFactory());
+    }
+
+    private GeometryFactory createDefaultGeometryFactory() {
+        final PrecisionModel pm = new PrecisionModel(PrecisionModel.FLOATING);
+        return new GeometryFactory(pm, DEFAULT_SRID);
+    }
+
+    /**
+     * Returns the {@link Geometry} or creates a {@link Geometry} with the given srid in case of geometry has
+     * been set via lat/lon.
+     *
+     * @param geometryFactory
+     *        the geometry factory to create points from lat/lon
+     * @return the geometry or a created geometry (with given srid)
+     */
+    public Geometry getGeometry(final GeometryFactory geometryFactory) {
+        final Geometry builtGeometry = isSetLonLat()
+                ? createPoint(geometryFactory)
                 : geometry;
         return builtGeometry;
     }
 
-    private Geometry createPoint() {
-        Coordinate coordinate = alt != null && !alt.isNaN()
+    private Geometry createPoint(final GeometryFactory geometryFactory) {
+        final Coordinate coordinate = (alt != null) && !alt.isNaN()
                 ? new Coordinate(lon, lat, alt)
                 : new Coordinate(lon, lat);
         return geometryFactory.createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
-        return lon != null && lat != null;
+        return (lon != null) && (lat != null);
     }
 
     public Double getLon() {
         return lon;
     }
 
-    public void setLon(Double lon) {
+    public void setLon(final Double lon) {
         this.lon = lon;
     }
 
@@ -89,7 +107,7 @@ public class GeometryEntity implements Serializable {
         return lat;
     }
 
-    public void setLat(Double lat) {
+    public void setLat(final Double lat) {
         this.lat = lat;
     }
 
@@ -97,7 +115,7 @@ public class GeometryEntity implements Serializable {
         return alt;
     }
 
-    public void setAlt(Double alt) {
+    public void setAlt(final Double alt) {
         this.alt = alt;
     }
 
@@ -114,17 +132,9 @@ public class GeometryEntity implements Serializable {
         return !isSetGeometry() && !isSetLonLat();
     }
 
-    public GeometryFactory getGeometryFactory() {
-        return geometryFactory;
-    }
-
-    public void setGeometryFactory(GeometryFactory geometryFactory) {
-        this.geometryFactory = geometryFactory;
-    }
-
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName())
                  .append(" [")
                  .append(" latitude: ")

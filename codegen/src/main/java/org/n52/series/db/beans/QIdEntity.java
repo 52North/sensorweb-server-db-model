@@ -1,3 +1,4 @@
+
 package org.n52.series.db.beans;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
@@ -7,7 +8,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-
 
 /**
  * QIdEntity is a Querydsl query type for IdEntity
@@ -23,7 +23,7 @@ public class QIdEntity extends EntityPathBase<IdEntity> {
         super(IdEntity.class, forVariable(variable));
     }
 
-    public QIdEntity(Path<? extends IdEntity> path) {
+    public QIdEntity(Path< ? extends IdEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
@@ -32,4 +32,3 @@ public class QIdEntity extends EntityPathBase<IdEntity> {
     }
 
 }
-

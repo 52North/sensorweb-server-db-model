@@ -77,10 +77,12 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.insitu = insitu;
     }
 
+    @Override
     public FormatEntity getFormat() {
         return this.format;
     }
 
+    @Override
     public ProcedureEntity setFormat(FormatEntity format) {
         this.format = format;
         return this;
@@ -130,10 +132,12 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.aggregation = isAggregation;
     }
 
+    @Override
     public Set<ProcedureHistoryEntity> getProcedureHistory() {
         return procedureHistory;
     }
 
+    @Override
     public void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory) {
         this.procedureHistory = procedureHistory;
     }
