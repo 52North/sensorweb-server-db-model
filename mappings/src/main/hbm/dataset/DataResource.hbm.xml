@@ -26,19 +26,19 @@
         </many-to-one>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
-            <column index="sampling_time_start_idx" name="sampling_time_start" length="29" not-null="true">
+            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
                 <comment>The timestamp when the observation period has started.</comment>
             </column>
         </property>
 
         <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
-            <column index="sampling_time_end_idx" name="sampling_time_end" length="29" not-null="true">
+            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
                 <comment>The timestamp when the measurement period has finished or the observation took place.</comment>
             </column>
         </property>
 
         <property name="resultTime" type="timestamp" unique-key="un_data_identity">
-            <column index="result_time_idx" name="result_time" length="29" not-null="true">
+            <column index="idx_result_time" name="result_time" length="29" not-null="true">
                 <comment>The timestamp when the observation was published.</comment>
             </column>
         </property>
