@@ -46,8 +46,8 @@ The tables and columns are described here: [Tables and columns description](http
 | foreign key column | fk_ + ( additional information +) referenced table name + _id | fk_unit_id, fk_first_observation_id |
 | index | idx_ + column name | idx_sampling_time_end |
 | unique constraint | un_ + table name + column name/postfix | un_feature_identifier, un_dataset_identity (multiple columns) |
-| not-null columns | columns marked as not null are required and should be mapped as formula | observation.vertical_from, observation.vertical_to |
-
+| not-null columns | columns marked as not null are required and should be mapped as formula or the property | observation.vertical_from, observation.vertical_to |
+| sqmpling_time properties | if only one timestamp column is available, you can map the properties to one column with insert/update=false for one property |
 
 
 **Note**: Documentation is in progress. `graphml` files can
