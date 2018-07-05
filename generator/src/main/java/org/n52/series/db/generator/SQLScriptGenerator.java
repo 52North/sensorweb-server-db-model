@@ -463,7 +463,7 @@ public class SQLScriptGenerator {
 
     }
 
-    public class TableMetadata implements Meta {
+    public static class TableMetadata implements Meta {
         private final String name;
         private final String comment;
         private Map<String, ColumnMetadata> columns = new LinkedHashMap<>();
@@ -509,7 +509,7 @@ public class SQLScriptGenerator {
 
     }
 
-    public class ColumnMetadata implements Meta {
+    public static class ColumnMetadata implements Meta {
         private final String name;
         private String comment;
         private String sqlType;
