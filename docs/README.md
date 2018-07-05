@@ -53,11 +53,13 @@ The tables and columns are described here: [Tables and columns description](http
 
 ### Conventions
 
-- name: _ between words, e.g. sampling_time_end
-- primary key column: table name + _id, e.g. dataset_id
-- foreign key column: fk_ + ( additional information +) referenced table name + _id, e.g. fk_unit_id, fk_first_observation_id
-- index: idx_ + column name
-- unique constraint: un_ + table name + identity
+| convention | description | example |
+| --- | --- | --- |
+| name | _ between words | sampling_time_end |
+| primary key column | table name + _id | dataset_id |
+| foreign key column | fk_ + ( additional information +) referenced table name + _id | fk_unit_id, fk_first_observation_id |
+| index | idx_ + column name | idx_sampling_time_end |
+| unique constraint | un_ + table name + column name/postfix | un_feature_identifier, un_dataset_identity (multiple columns) |
 
 
 **Note**: Documentation is in progress. `graphml` files can
