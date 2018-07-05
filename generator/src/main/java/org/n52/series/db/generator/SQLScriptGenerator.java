@@ -44,9 +44,11 @@ import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.mapping.Column;
+import org.hibernate.mapping.Join;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.Table;
+import org.hibernate.mapping.Value;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
@@ -411,6 +413,9 @@ public class SQLScriptGenerator {
         result.add("This page describes the tables and columns in the database.");
         result.add("The *SQL type* column in the tables is generated for Hibernate dialect: *" + dia.getClass().getSimpleName() + "*");
         result.add("");
+        result.add("## Tables");
+        map.keySet().forEach(k -> result.add("- [" + k + "](#" + k + ")"));
+        result.add("");
         result.addAll(map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList()));
         result.add("");
         result.add("*Creation date: " +  DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
@@ -421,27 +426,56 @@ public class SQLScriptGenerator {
         SortedMap<String, TableMetadata> map = new TreeMap<>();
         for (PersistentClass entity : metadata.getEntityBindings()) {
             Table table = entity.getTable();
+            TableMetadata tm = processTable(table, map, dia, metadata);
+            processJoins((Iterator<Join>) entity.getJoinClosureIterator(), map, dia, metadata);
+            // from Property
+            Iterator<Property> propertyIterator = entity.getPropertyIterator();
+            while (propertyIterator.hasNext()) {
+                Property property = (Property) propertyIterator.next();
+                if (property.getValue() instanceof org.hibernate.mapping.Collection) {
+                    processCollection((org.hibernate.mapping.Collection) property.getValue(), map, dia, metadata);
+                }
+                processColumns(property.getColumnIterator(), tm.getColumns(), dia, metadata);
+            }
+            // from Identifier
+            processColumns(entity.getIdentifier().getColumnIterator(), tm.getColumns(), dia, metadata);
+        }
+        return map;
 
+    }
+
+    private void processJoins(Iterator<Join> ji, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+        if (ji != null) {
+            while (ji.hasNext()) {
+                processTable(ji.next().getTable(), map, dia, metadata);
+            }
+        }
+    }
+
+    private void processCollection(org.hibernate.mapping.Collection collection, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+        Table table = collection.getCollectionTable();
+        if (table != null) {
             if (!map.containsKey(table.getName())) {
                 map.put(table.getName(), new TableMetadata(table.getName(), table.getComment()));
             }
             TableMetadata tm = map.get(table.getName());
             Map<String, ColumnMetadata> columns = tm.getColumns();
             // from Table
-            processColumns(entity.getTable().getColumnIterator(), columns, dia, metadata);
-            // from Property
-            Iterator<Property> propertyIterator = entity.getPropertyIterator();
-            while (propertyIterator.hasNext()) {
-                Property property = (Property) propertyIterator.next();
-                processColumns(property.getColumnIterator(), columns, dia, metadata);
-            }
-            // from Identifier
-            processColumns(entity.getIdentifier().getColumnIterator(), columns, dia, metadata);
+            processColumns(table.getColumnIterator(), columns, dia, metadata);
         }
-        return map;
-
     }
 
+    private TableMetadata processTable(Table table, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+        if (!map.containsKey(table.getName())) {
+            map.put(table.getName(), new TableMetadata(table.getName(), table.getComment()));
+        }
+        TableMetadata tm = map.get(table.getName());
+        Map<String, ColumnMetadata> columns = tm.getColumns();
+        // from Table
+        processColumns(table.getColumnIterator(), columns, dia, metadata);
+        return tm;
+    }
+    
     private void processColumns(Iterator<?> ci, Map<String, ColumnMetadata> columns, Dialect dia, Metadata metadata) {
         while (ci.hasNext()) {
             Object n = ci.next();

@@ -6,17 +6,29 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 - [category](#category)
 - [category_i18n](#category_i18n)
 - [codespace](#codespace)
+- [composite_observation](#composite_observation)
+- [composite_phenomenon](#composite_phenomenon)
 - [dataset](#dataset)
+- [dataset_parameter](#dataset_parameter)
+- [dataset_reference](#dataset_reference)
 - [feature](#feature)
+- [feature_hierarchy](#feature_hierarchy)
 - [feature_i18n](#feature_i18n)
+- [feature_parameter](#feature_parameter)
 - [format](#format)
 - [observation](#observation)
+- [observation_parameter](#observation_parameter)
 - [offering](#offering)
+- [offering_feature_type](#offering_feature_type)
+- [offering_hierarchy](#offering_hierarchy)
 - [offering_i18n](#offering_i18n)
+- [offering_observation_type](#offering_observation_type)
+- [offering_related_feature](#offering_related_feature)
 - [parameter](#parameter)
 - [phenomenon](#phenomenon)
 - [phenomenon_i18n](#phenomenon_i18n)
 - [procedure](#procedure)
+- [procedure_hierarchy](#procedure_hierarchy)
 - [procedure_history](#procedure_history)
 - [procedure_i18n](#procedure_i18n)
 - [related_dataset](#related_dataset)
@@ -26,6 +38,9 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 - [service](#service)
 - [unit](#unit)
 - [unit_i18n](#unit_i18n)
+- [value_blob](#value_blob)
+- [value_data_array](#value_data_array)
+- [value_profile](#value_profile)
 
 ### category
 **Description**: Storage of the categories.
@@ -55,6 +70,22 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | --- | --- | --- | --- | --- | --- |
 | codespace_id | PK column of the table | true | - | int8 | long | 
 | name | Name/definition of the codespace, e.g. of a domain | true | - | varchar(255) | string | 
+
+### composite_observation
+**Description**: Storage of the relation of composite data/observation like Complex(Record)-, Profile- or DataArrayObservation 
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_parent_observation_id | Reference to the parent data/observation | true | - | int8 | long | 
+| fk_child_observation_id | Reference to the child data/observation | true | - | int8 | org.n52.series.db.beans.DataEntity | 
+
+### composite_phenomenon
+**Description**: Storage of hierarchies between phenomenon, e.g. for composite phenomenon like weather with temperature, windspeed, ...
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_child_phenomenon_id | Reference to the child phenomenon in phenomenon table. | true | - | int8 | long | 
+| fk_parent_phenomenon_id | Reference to the parent phenomenon in phenomenon table. | true | - | int8 | org.n52.series.db.beans.PhenomenonEntity | 
 
 ### dataset
 **Description**: Storage of the dataset, the core table of the whole database model.
@@ -87,6 +118,23 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | fk_last_observation_id | Reference to the temporally last data/observation in the observation table that belongs to this dataset. | false | - | int8 | long | 
 | decimals | Number of decimals that should be present in the data/observation values | false | - | int4 | integer | 
 
+### dataset_parameter
+**Description**: Storage of relations between dataset and related parameter
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_dataset_id | The reference to the dataset in the dataset table | true | - | int8 | long | 
+| fk_parameter_id | The reference to the parameter in the dataset parameter | true | - | int8 | org.n52.series.db.beans.parameter.Parameter | 
+
+### dataset_reference
+**Description**: Storage of referenced datasets, e.g. level zero, medium water level,etc. for water level 
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_dataset_id_from | Reference to the dataset that has referenced datasets | true | - | int8 | long | 
+| sort_order | Provides the sort order for the referenced datasets. | true | - | int4 | integer | 
+| fk_dataset_id_to | Reference to the dataset that is the reference | true | - | int8 | org.n52.series.db.beans.DatasetEntity | 
+
 ### feature
 **Description**: Storage of the features (OfInterest).
 
@@ -104,6 +152,14 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | url | Optional URL to an external resource that describes the feature, e.g. a WFS | false | - | varchar(255) | string | 
 | geom | The geometry/location of feature | false | - | GEOMETRY | jts_geometry | 
 
+### feature_hierarchy
+**Description**: Storage of hierarchies between features
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_child_feature_id | Reference to the child feature in feature table. | true | - | int8 | long | 
+| fk_parent_feature_id | Reference to the parent feature in feature table. | true | - | int8 | org.n52.series.db.beans.AbstractFeatureEntity | 
+
 ### feature_i18n
 **Description**: Storage for internationalizations of features.
 
@@ -114,6 +170,14 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | locale | Locale/language specification for this entry | true | - | varchar(255) | string | 
 | name | Locale/language specific name of the feature | false | - | varchar(255) | string | 
 | description | Locale/language specific description of the feature | false | - | varchar(255) | string | 
+
+### feature_parameter
+**Description**: Storage of relations between feature and related parameter
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_feature_id | The reference to the feature in the feature table | true | - | int8 | long | 
+| fk_parameter_id | The reference to the parameter in the feature parameter | true | - | int8 | org.n52.series.db.beans.parameter.Parameter | 
 
 ### format
 **Description**: Storage of types (feature, observation) and formats (procedure)., e.g. http://www.opengis.net/def/observationType/OGC-OM/2.0/OM_Measurement and http://www.opengis.net/sensorml/2.0
@@ -163,6 +227,14 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | vertical_to_name | The name of the vertical from values, e.g. to or depthTo | false | - | varchar(255) | string | 
 | fk_vertical_unit_id | The unit of the vertical value, e.g. m | true | - | int8 | org.n52.series.db.beans.UnitEntity | 
 
+### observation_parameter
+**Description**: Storage of relations between data/observation and related parameter
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_observation_id | The reference to the data/observation in the observation table | true | - | int8 | long | 
+| fk_parameter_id | The reference to the parameter in the data/observation parameter | true | - | int8 | org.n52.series.db.beans.parameter.Parameter | 
+
 ### offering
 **Description**: Storage of the offerings.
 
@@ -182,6 +254,22 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | valid_time_end | The maximum validTimeEnd of all observation that belong to this offering | false | - | timestamp | timestamp | 
 | geom | The envelope/geometry of all features or samplingGeometries of observations that belong to this offering | false | - | GEOMETRY | jts_geometry | 
 
+### offering_feature_type
+**Description**: Relation to store the valid  featureTypes for the offering
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_offering_id | The related offering | true | - | int8 | long | 
+| fk_format_id | The reference of the related featureType from the format table | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
+
+### offering_hierarchy
+**Description**: -
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_child_offering_id | Reference to the child offering in offering table. | true | - | int8 | long | 
+| fk_parent_offering_id | Reference to the parent offering in offering table. | true | - | int8 | org.n52.series.db.beans.OfferingEntity | 
+
 ### offering_i18n
 **Description**: Storage for internationalizations of offerings.
 
@@ -192,6 +280,22 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | locale | Locale/language specification for this entry | true | - | varchar(255) | string | 
 | name | Locale/language specific name of the offering | false | - | varchar(255) | string | 
 | description | Locale/language specific description of the offering | false | - | varchar(255) | string | 
+
+### offering_observation_type
+**Description**: Relation to store the valid observationTypes for the offering
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_offering_id | The related offering | true | - | int8 | long | 
+| fk_format_id | The reference of the related observationType from the format table | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
+
+### offering_related_feature
+**Description**: Storage tfor the relation between offering and relatedFeature
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_offering_id | The related offering | true | - | int8 | long | 
+| fk_related_feature_id | The reference to the relatedFeature from the relatedFeature table | true | - | int8 | org.n52.series.db.beans.RelatedFeatureEntity | 
 
 ### parameter
 **Description**: Storage for additional information for features, observations or datasets
@@ -254,6 +358,14 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | fk_type_of_procedure_id | Reference to a procedure this entry is a typeOf. | false | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
 | is_aggregation | Flag that indicates if the procedure is an aggregated process or a system. | false | 1 | int2 | small_boolean | 
 | fk_format_id | Reference to the format of the procedure description, e.g. SensorML 2.0 | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
+
+### procedure_hierarchy
+**Description**: Storage of hierarchies between procedures
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_child_procedure_id | Reference to the child procedure in procedure table. | true | - | int8 | long | 
+| fk_parent_procedure_id | Reference to the parent procedure in procedure table. | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
 
 ### procedure_history
 **Description**: Storage of historical procedure descriptions as XML encoded text with period of validity.
@@ -355,5 +467,32 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Postgis
 | locale | Locale/language specification for this unit | true | - | varchar(255) | string | 
 | name | Locale/language specific name of the unit | false | - | varchar(255) | string | 
 
+### value_blob
+**Description**: -
 
-*Creation date: 2018-07-05 11:07:44 +02:00*
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_observation_id | Reference to the data/observation in the observation table | true | - | int8 | long | 
+| value | The blob value of an observation | false | - | oid | blob | 
+
+### value_data_array
+**Description**: -
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_observation_id | Reference to the data/observation | true | - | int8 | long | 
+| structure | The structure of the data array | true | - | text | text | 
+| encoding | The encoding of the data array values | true | - | text | text | 
+
+### value_profile
+**Description**: -
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_observation_id | Reference to the data/observation | true | - | int8 | long | 
+| vertical_from_name | The name of the vertical from values, e.g. from or depthFrom | false | - | varchar(255) | string | 
+| vertical_to_name | The name of the vertical from values, e.g. to or depthTo | false | - | varchar(255) | string | 
+| fk_vertical_unit_id | The unit of the vertical value, e.g. m | true | - | int8 | org.n52.series.db.beans.UnitEntity | 
+
+
+*Creation date: 2018-07-05 12:06:38 +02:00*
