@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans.sta"
+                   xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="LocationEntity" table="location">
+        <id name="id" type="long">
+            <column name="location_id"/>
+            <generator class="native">
+                <param name="sequence_name">location_seq</param>
+            </generator>
+        </id>
+        <property name="name" type="string">
+            <column name="name" not-null="true"/>
+        </property>
+        <property name="description" type="string">
+            <column name="description" not-null="true"/>
+        </property>
+        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
+            <property name="geometry" type="jts_geometry">
+                <column name="geom" not-null="false"/>
+            </property>
+        </component>
+        <set name="locationEncodings" table="location_encoding" inverse="true">
+            <key foreign-key="fk_location_encoding">
+                <column name="fk_location_id" not-null="true"/>
+            </key>
+            <one-to-many class="LocationEncodingEntity" />
+        </set>
+    </class>
+
+    <class name="LocationEncodingEntity" table="location_encoding">
+        <id name="id" type="long">
+            <column name="location_encoding_id"/>
+            <generator class="native">
+                <param name="sequence_name">location_encoding_seq</param>
+            </generator>
+        </id>
+        <property name="encodingType" type="string">
+            <column name="encoding_type" not-null="true"/>
+        </property>
+        <property name="location" type="text">
+            <column name="location" not-null="true"/>
+        </property>
+        <many-to-one name="locationEntity" class="LocationEntity" foreign-key="fk_location_encoding">
+            <column name="fk_location_id" not-null="true"/>
+        </many-to-one>
+    </class>
+
+    <class name="HistoricalLocationEntity" table="historical_location">
+        <id name="id" type="long">
+            <column name="historical_location_id"/>
+            <generator class="native">
+                <param name="sequence_name">historical_location_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="locationEntity" class="LocationEntity" foreign-key="fk_historical_location_location">
+            <column name="fk_location_id" not-null="true"/>
+        </many-to-one>
+        <property name="time" type="timestamp">
+            <column name="time" length="29" not-null="true" />
+        </property>
+    </class>
+
+</hibernate-mapping>
