@@ -116,26 +116,32 @@ public class DescribableEntity extends IdEntity implements Describable,
         this.description = description;
     }
 
+    @Override
     public Set<I18nEntity< ? extends Describable>> getTranslations() {
         return translations;
     }
 
+    @Override
     public void setTranslations(Set<I18nEntity< ? extends Describable>> translations) {
         this.translations = translations;
     }
 
+    @Override
     public Set<Parameter< ? >> getParameters() {
         return parameters;
     }
 
+    @Override
     public void setParameters(Set<Parameter< ? >> parameters) {
         this.parameters = parameters;
     }
 
+    @Override
     public boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
+        return (getParameters() != null) && !getParameters().isEmpty();
     }
 
+    @Override
     public Set<Map<String, Object>> getMappedParameters(String locale) {
         return hasParameters()
                 ? parameters.stream()
@@ -144,15 +150,18 @@ public class DescribableEntity extends IdEntity implements Describable,
                 : null;
     }
 
+    @Override
     public ServiceEntity getService() {
         return service;
     }
 
+    @Override
     public DescribableEntity setService(ServiceEntity service) {
         this.service = service;
         return this;
     }
 
+    @Override
     public String getNameI18n(String locale) {
         if (noTranslationAvailable(locale)) {
             return name;
@@ -173,6 +182,7 @@ public class DescribableEntity extends IdEntity implements Describable,
         return candidate;
     }
 
+    @Override
     public String getLabelFrom(String locale) {
         if (isi18nNameAvailable(locale)) {
             return getNameI18n(locale);

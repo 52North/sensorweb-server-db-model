@@ -28,26 +28,32 @@ public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
     private String verticalFromParameterName;
     private String verticalToParameterName;
 
+    @Override
     public String getVerticalParameterName() {
         return verticalParameterName;
     }
 
+    @Override
     public void setVerticalParameterName(String verticalParameterName) {
         this.verticalParameterName = verticalParameterName;
     }
 
+    @Override
     public String getVerticalFromParameterName() {
         return verticalFromParameterName;
     }
 
+    @Override
     public void setVerticalFromParameterName(String verticalFromParameterName) {
         this.verticalFromParameterName = verticalFromParameterName;
     }
 
+    @Override
     public String getVerticalToParameterName() {
         return verticalToParameterName;
     }
 
+    @Override
     public void setVerticalToParameterName(String verticalToParameterName) {
         this.verticalToParameterName = verticalToParameterName;
     }

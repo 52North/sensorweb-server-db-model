@@ -32,11 +32,13 @@ public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity< ? >
 
     @Override
     public Set<DataEntity< ? >> getValue() {
+        // Hibernate needs this to keep types during hbm2ddl processing
         return super.getValue();
     }
 
     @Override
     public void setValue(Set<DataEntity< ? >> value) {
+        // Hibernate needs this to keep types during hbm2ddl processing
         super.setValue(value);
     }
 

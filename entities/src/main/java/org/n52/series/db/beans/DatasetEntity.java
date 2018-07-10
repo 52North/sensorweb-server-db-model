@@ -359,6 +359,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
         return unit != null;
     }
 
+    @Override
     public String getUnitI18nName(final String locale) {
         return unit != null
                 // ? unit.getNameI18n(locale)

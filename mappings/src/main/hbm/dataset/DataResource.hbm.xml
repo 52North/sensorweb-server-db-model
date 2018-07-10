@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
+    <class name="DataEntity" table="observation"
+        check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
         <comment>Storage of the data/observation values.</comment>
         <id name="id" type="long">
             <column name="observation_id">
@@ -13,7 +13,7 @@
                 <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
-		<discriminator force="true" type="string" not-null="true">
+        <discriminator force="true" type="string" not-null="true">
             <column name="value_type">
                 <comment>Indicator used by Hibernate to map value specific entities.</comment>
             </column>
@@ -90,22 +90,22 @@
         </property>
 
         <property name="child" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_child" not-null="true" default="0"  check="is_child in (1,0)">
+            <column name="is_child" not-null="true" default="0" check="is_child in (1,0)">
                 <comment>Flag that indicates if this data/observation is a child observation. Required for composite observation like Complex- or ProfileObservation</comment>
             </column>
         </property>
 
         <property name="parent" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_parent" not-null="true" default="0"  check="is_parent in (1,0)">
+            <column name="is_parent" not-null="true" default="0" check="is_parent in (1,0)">
                 <comment>Flag that indicates if this data/observation is a parent observation. Required for composite observation like Complex- or ProfileObservation</comment>
             </column>
         </property>
 
         <component class="GeometryEntity" name="geometryEntity">
             <!--
-            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
-            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
-             -->
+                <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
+                <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
+            -->
             <property name="geometry" type="jts_geometry" not-null="false">
                 <column name="sampling_geometry">
                     <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations where this geometry is different from the feature geometry.</comment>
@@ -121,7 +121,8 @@
                     <comment>The reference to the data/observation in the observation table</comment>
                 </column>
             </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" foreign-key="fk_parameter_observation">
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter"
+                foreign-key="fk_parameter_observation">
                 <column name="fk_parameter_id">
                     <comment>The reference to the parameter in the data/observation parameter</comment>
                 </column>
@@ -137,28 +138,29 @@
         </set>
 
         <property name="valueIdentifier" type="string">
-        	<column name="value_identifier">
+            <column name="value_identifier">
                 <comment>Identifier of the value. E.g. used in OGC SWE encoded values like SweText</comment>
             </column>
         </property>
         <property name="valueName" type="string">
-        	<column name="value_name">
+            <column name="value_name">
                 <comment>Identifier of the name. E.g. used in OGC SWE encoded values like SweText</comment>
             </column>
         </property>
         <property name="valueDescription" type="string">
-        	<column name="value_description">
+            <column name="value_description">
                 <comment>Identifier of the description. E.g. used in OGC SWE encoded values like SweText</comment>
             </column>
         </property>
 
-        <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
-        	<column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10">
+        <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="20"
+            scale="10">
+            <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10">
                 <comment>The start level of a vertical observation, e.g. profiles</comment>
             </column>
         </property>
         <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
-        	<column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10">
+            <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10">
                 <comment>The end level or the level of a vertical observation, e.g. profiles</comment>
             </column>
         </property>
@@ -196,7 +198,7 @@
         </subclass>
 
         <subclass name="BooleanDataEntity" extends="DataEntity" discriminator-value="boolean">
-        	<property name="value" type="org.n52.hibernate.type.SmallBooleanType">
+            <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>The boolean value of an observation (Boolean/TruthObservation)</comment>
                 </column>
@@ -204,7 +206,7 @@
         </subclass>
 
         <subclass name="CategoryDataEntity" extends="DataEntity" discriminator-value="category">
-        	<property name="value" type="string">
+            <property name="value" type="string">
                 <column name="value_category">
                     <comment>The categorical value of an observation (CategoryObervation)</comment>
                 </column>
@@ -214,31 +216,30 @@
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
             <component class="GeometryEntity" name="geometryEntity">
                 <!--
-                <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
-                <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
+                    <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
+                    <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
                 <property name="geometry" type="jts_geometry">
-                <column name="value_quantity">
-                    <comment>The geometry value of an observation (GeometryObservation)</comment>
-                </column>
-            </property>
+                    <column name="value_quantity">
+                        <comment>The geometry value of an observation (GeometryObservation)</comment>
+                    </column>
+                </property>
             </component>
         </subclass>
 
         <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
-			<join table="value_blob">
+            <join table="value_blob">
                 <comment>Storage of the blog observation value. Separate table because the size of a blob value can be huge.</comment>
-	            <key foreign-key="fk_blob_value">
-	                <column name="fk_observation_id">
+                <key foreign-key="fk_blob_value">
+                    <column name="fk_observation_id">
                         <comment>Reference to the data/observation in the observation table</comment>
-	                </column>
-	            </key>
-	           <property name="value"
-                       type="blob">
-                 <column name="value">
-                     <comment>The blob value of an observation</comment>
-                 </column>
-				</property>
+                    </column>
+                </key>
+                <property name="value" type="blob">
+                    <column name="value">
+                        <comment>The blob value of an observation</comment>
+                    </column>
+                </property>
             </join>
         </subclass>
 
@@ -258,69 +259,70 @@
             </set>
             <join table="value_data_array">
                 <comment>Storage of the data array observation value.</comment>
-	            <key foreign-key="fk_data_array_value">
-	                <column name="fk_observation_id">
+                <key foreign-key="fk_data_array_value">
+                    <column name="fk_observation_id">
                         <comment>Reference to the data/observation</comment>
                     </column>
-	            </key>
-	           <property name="structure" type="text">
-		            <column name="structure" not-null="true">
+                </key>
+                <property name="structure" type="text">
+                    <column name="structure" not-null="true">
                         <comment>The structure of the data array</comment>
                     </column>
-		        </property>
+                </property>
 
-		        <property name="encoding" type="text">
-		            <column name="encoding" not-null="true">
+                <property name="encoding" type="text">
+                    <column name="encoding" not-null="true">
                         <comment>The encoding of the data array values</comment>
                     </column>
-		        </property>
+                </property>
             </join>
         </subclass>
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
             <!-- See above comments for DataArrayDataEntity -->
-        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
                 <key foreign-key="fk_composite_observation">
-                    <column name="fk_parent_observation_id" not-null="true"/>
+                    <column name="fk_parent_observation_id" not-null="true" />
                 </key>
                 <many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
-                    <column name="fk_child_observation_id" not-null="true"/>
+                    <column name="fk_child_observation_id" not-null="true" />
                 </many-to-many>
             </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
             <!-- See above comments for DataArrayDataEntity -->
-        	<set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
-				<key foreign-key="fk_composite_observation">
-					<column name="fk_parent_observation_id" not-null="true"/>
-				</key>
-				<many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
-					<column name="fk_child_observation_id" not-null="true"/>
-				</many-to-many>
-			</set>
-        	<join table="value_profile">
+            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
+                <key foreign-key="fk_composite_observation">
+                    <column name="fk_parent_observation_id" not-null="true" />
+                </key>
+                <many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
+                    <column name="fk_child_observation_id" not-null="true" />
+                </many-to-many>
+            </set>
+            <join table="value_profile">
                 <comment>Storage of the profile observation value.</comment>
-	            <key foreign-key="fk_profile_value">
-	                <column name="fk_observation_id">
+                <key foreign-key="fk_profile_value">
+                    <column name="fk_observation_id">
                         <comment>Reference to the data/observation</comment>
                     </column>
-	            </key>
-	            <property name="verticalFromName" type="string">
-	                <column name="vertical_from_name" not-null="false">
+                </key>
+                <property name="verticalFromName" type="string">
+                    <column name="vertical_from_name" not-null="false">
                         <comment>The name of the vertical from values, e.g. from or depthFrom</comment>
                     </column>
-	            </property>
-	            <property name="verticalToName" type="string">
-	                <column name="vertical_to_name" not-null="false">
+                </property>
+                <property name="verticalToName" type="string">
+                    <column name="vertical_to_name" not-null="false">
                         <comment>The name of the vertical from values, e.g. to or depthTo</comment>
                     </column>
-	            </property>
-	            <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-	                <column name="fk_vertical_unit_id" not-null="true">
+                </property>
+                <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy"
+                    foreign-key="fk_profile_unit">
+                    <column name="fk_vertical_unit_id" not-null="true">
                         <comment>The unit of the vertical value, e.g. m</comment>
                     </column>
-	            </many-to-one>
+                </many-to-one>
             </join>
         </subclass>
 

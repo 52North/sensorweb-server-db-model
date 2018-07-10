@@ -44,7 +44,7 @@ public interface HiberanteEReportingRelations
         void setInspireId(String inspireId);
 
         default boolean isSetInspireId() {
-            return getInspireId() != null && !getInspireId().isEmpty();
+            return (getInspireId() != null) && !getInspireId().isEmpty();
         }
     }
 
@@ -88,7 +88,7 @@ public interface HiberanteEReportingRelations
         void setPrimaryObservation(String primaryObservation);
 
         default boolean isSetPrimaryObservation() {
-            return getPrimaryObservation() != null && !getPrimaryObservation().isEmpty();
+            return (getPrimaryObservation() != null) && !getPrimaryObservation().isEmpty();
         }
     }
 
@@ -176,7 +176,7 @@ public interface HiberanteEReportingRelations
         void setAssessmentType(EReportingAssessmentTypeEntity assessmentType);
 
         default boolean isSetAssessmentType() {
-            return getAssessmentType() != null && getAssessmentType().isSetAssessmentType();
+            return (getAssessmentType() != null) && getAssessmentType().isSetAssessmentType();
         }
     }
 
