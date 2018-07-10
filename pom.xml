@@ -140,10 +140,6 @@
                 <version>${querydsl.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.geolatte</groupId>
-                        <artifactId>geolatte-geom</artifactId>
-                    </exclusion>
-                    <exclusion>
                         <groupId>com.vividsolutions</groupId>
                         <artifactId>jts</artifactId>
                     </exclusion>
