@@ -62,7 +62,7 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     public boolean isNoDataValue(Data< ? > observation) {
-        return observation.isNoDataValue(noDataValues);
+        return (observation == null) || observation.isNoDataValue(noDataValues);
     }
 
     public String getNoDataValues() {
