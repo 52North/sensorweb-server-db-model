@@ -21,9 +21,11 @@ import org.n52.series.db.beans.data.Data;
 
 public interface TextProfileDataset extends ProfileDataset {
 
+    String VALUE_TYPE = Data.TextData.VALUE_TYPE + "-" + Data.ProfileData.VALUE_TYPE;
+
     @Override
-    default String getDefaultValueType() {
-        return Data.TextData.VALUE_TYPE + "-" + Data.ProfileData.VALUE_TYPE;
+    default String getValueType() {
+        return VALUE_TYPE;
     }
 
 }

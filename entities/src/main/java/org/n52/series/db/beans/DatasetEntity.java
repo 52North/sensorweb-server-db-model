@@ -305,7 +305,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
     public String getValueType() {
         return (valueType == null) || valueType.isEmpty()
                 // backward compatible
-                ? getDefaultValueType()
+                ? DEFAULT_VALUE_TYPE
                 : valueType;
     }
 

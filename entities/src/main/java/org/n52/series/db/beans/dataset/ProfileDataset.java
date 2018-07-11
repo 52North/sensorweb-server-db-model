@@ -17,14 +17,7 @@
 
 package org.n52.series.db.beans.dataset;
 
-import org.n52.series.db.beans.data.Data;
-
 public interface ProfileDataset extends Dataset {
-
-    @Override
-    default String getDefaultValueType() {
-        return Data.ProfileData.VALUE_TYPE;
-    }
 
     String getVerticalParameterName();
 

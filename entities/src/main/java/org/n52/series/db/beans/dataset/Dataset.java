@@ -203,8 +203,4 @@ public interface Dataset extends Describable {
 
     void copy(Dataset series);
 
-    default String getDefaultValueType() {
-        return DEFAULT_VALUE_TYPE;
-    }
-
 }

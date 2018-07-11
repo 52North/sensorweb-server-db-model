@@ -38,7 +38,7 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
     }
 
     @Override
-    default String getDefaultValueType() {
+    default String getValueType() {
         return Data.QuantityData.VALUE_TYPE;
     }
 }
