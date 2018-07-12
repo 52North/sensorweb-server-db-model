@@ -470,6 +470,7 @@
                         </includes>
                         <excludes>
                             <exclude>**/generator/**</exclude>
+                            <exclude>**/codegen/**</exclude>
                         </excludes>
                     </configuration>
                 </plugin>
