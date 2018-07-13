@@ -3,14 +3,51 @@ Copyright 2013 52°North Initiative for Geospatial Open Source Software GmbH
 Licensed under GNU General Public License, Version 2.0
 
 This project includes: 
+  AntLR Parser Generator under BSD License
+  Bridge method injection annotations under MIT License
+  ClassMate under The Apache Software License, Version 2.0
+  Codegen under Apache License, Version 2.0
   com.vividsolutions:jts-core under GNU Lesser General Public License, Version 2.1
+  Core Hibernate O/RM functionality under GNU Lesser General Public License
+  dom4j under DOM4J license, http://dom4j.sourceforge.net/dom4j-1.6.1/license.html (BSD style)
+  Eclipse ECJ under Eclipse Public License v1.0
+  FindBugs-Annotations under GNU Lesser Public License
+  FindBugs-jsr305 under The Apache Software License, Version 2.0
   geolatte-geom under LGPL 3.0
+  Hibernate Commons Annotations under GNU Lesser General Public License
+  hibernate-spatial under GNU Lesser General Public License (LGPL) version 2.1
+  Java Annotation Indexer under Apache License, Version 2.0
+  Java Persistence API, Version 2.1 under Eclipse Public License (EPL), Version 1.0 or Eclipse Distribution License (EDL), Version 1.0
+  Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
+  Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
+  javax.inject under The Apache Software License, Version 2.0
+  JBoss Logging 3 under Apache License, version 2.0
   Joda-Time under Apache 2
-  JTS Topology Suite under Lesser General Public License (LGPL)
+  lang under The Apache Software License, Version 2.0
+  Logback Classic Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
+  Logback Core Module under Eclipse Public License - v 1.0 or GNU Lesser General Public License
+  Querydsl - Codegen module under Apache License, Version 2.0
+  Querydsl - Core module under Apache License, Version 2.0
+  Querydsl - JPA Codegen support under Apache License, Version 2.0
+  Querydsl - JPA support under Apache License, Version 2.0
+  Querydsl - Spatial module under Apache License, Version 2.0
+  Reflections under WTFPL or The New BSD License
   Series Database Model - Entities under The Apache Software License, Version 2.0
   Series Database Model - Generator under The Apache Software License, Version 2.0
   Series Database Model - Hibernate Types under The Apache Software License, Version 2.0
   Series Database Model - Mappings under The Apache Software License, Version 2.0
-  Series Database Model - Parent under The Apache Software License, Version 2.0
+  Series Database Model - QueryDSL Code Generation under The Apache Software License, Version 2.0
+  Series Database Model -- Parent under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
+  Spring AOP under Apache License, Version 2.0
+  Spring Beans under Apache License, Version 2.0
+  Spring Boot under Apache License, Version 2.0
+  Spring Boot AutoConfigure under Apache License, Version 2.0
+  Spring Commons Logging Bridge under Apache License, Version 2.0
+  Spring Context under Apache License, Version 2.0
+  Spring Core under Apache License, Version 2.0
+  Spring Expression Language (SpEL) under Apache License, Version 2.0
+  Spring JDBC under Apache License, Version 2.0
+  Spring Object/Relational Mapping under Apache License, Version 2.0
+  Spring Transaction under Apache License, Version 2.0
 
