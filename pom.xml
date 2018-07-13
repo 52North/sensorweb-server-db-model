@@ -383,6 +383,9 @@
                         <excludes>
                             <exclude>**/logback.xml</exclude>
                             <exclude>**/logback-test.xml</exclude>
+                            <exclude>codegen/**/com/**</exclude>
+                            <exclude>codegen/**/org/geolatte/**</exclude>
+                            <exclude>codegen/**/series/db/beans/**</exclude>
                             <exclude>etc/**</exclude>
                         </excludes>
                         <strictCheck>true</strictCheck>
