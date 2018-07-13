@@ -9,7 +9,7 @@ after_success:
 - curl -Ls https://git.io/trigger-build | bash -s -- 52North/dao-series-api "version/v3.x" 
 env:
   global:
-    - SNAPSHOT_BRANCH=develop
+    - SNAPSHOT_BRANCH=v2.x/feature/jpa-xml
 cache:
   directories
     - $HOME/.m2
