@@ -140,10 +140,6 @@
                 <version>${querydsl.version}</version>
                 <exclusions>
                     <exclusion>
-                        <groupId>org.geolatte</groupId>
-                        <artifactId>geolatte-geom</artifactId>
-                    </exclusion>
-                    <exclusion>
                         <groupId>com.vividsolutions</groupId>
                         <artifactId>jts</artifactId>
                     </exclusion>
@@ -387,6 +383,9 @@
                         <excludes>
                             <exclude>**/logback.xml</exclude>
                             <exclude>**/logback-test.xml</exclude>
+                            <exclude>codegen/**/com/**</exclude>
+                            <exclude>codegen/**/org/geolatte/**</exclude>
+                            <exclude>codegen/**/series/db/beans/**</exclude>
                             <exclude>etc/**</exclude>
                         </excludes>
                         <strictCheck>true</strictCheck>
@@ -474,6 +473,7 @@
                         </includes>
                         <excludes>
                             <exclude>**/generator/**</exclude>
+                            <exclude>**/codegen/**</exclude>
                         </excludes>
                     </configuration>
                 </plugin>

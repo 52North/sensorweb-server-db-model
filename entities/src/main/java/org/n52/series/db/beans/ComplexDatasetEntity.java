@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.ComplexDataset;
 
 public class ComplexDatasetEntity extends DatasetEntity implements ComplexDataset {
@@ -24,7 +25,7 @@ public class ComplexDatasetEntity extends DatasetEntity implements ComplexDatase
     private static final long serialVersionUID = -3164247954562059026L;
 
     public ComplexDatasetEntity() {
-        super(DATASET_TYPE);
+        super(Data.ComplexData.VALUE_TYPE);
     }
 
 }

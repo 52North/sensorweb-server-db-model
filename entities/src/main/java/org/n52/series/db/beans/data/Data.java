@@ -154,20 +154,20 @@ public interface Data<T>
         String VALUE_TYPE = "category";
     }
 
-    interface ComplexData extends Data<Set<DataEntity< ? >>> {
-        String VALUE_TYPE = "complex";
-    }
-
     interface CountData extends Data<Integer> {
         String VALUE_TYPE = "count";
+    }
+
+    interface GeometryData extends Data<GeometryEntity> {
+        String VALUE_TYPE = "geoemtry";
     }
 
     interface DataArrayData extends Data<Set<DataEntity< ? >>> {
         String VALUE_TYPE = "dataarray";
     }
 
-    interface GeometryData extends Data<GeometryEntity> {
-        String VALUE_TYPE = "geoemtry";
+    interface ComplexData extends Data<Set<DataEntity< ? >>> {
+        String VALUE_TYPE = "complex";
     }
 
     interface ProfileData extends Data<Set<DataEntity< ? >>> {

@@ -19,7 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.ProfileDataset;
 
-public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
+public abstract class EReportingProfileDatasetEntity extends EReportingDatasetEntity
         implements ProfileDataset {
 
     private static final long serialVersionUID = -7514394037111286838L;
@@ -28,26 +28,32 @@ public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
     private String verticalFromParameterName;
     private String verticalToParameterName;
 
+    @Override
     public String getVerticalParameterName() {
         return verticalParameterName;
     }
 
+    @Override
     public void setVerticalParameterName(String verticalParameterName) {
         this.verticalParameterName = verticalParameterName;
     }
 
+    @Override
     public String getVerticalFromParameterName() {
         return verticalFromParameterName;
     }
 
+    @Override
     public void setVerticalFromParameterName(String verticalFromParameterName) {
         this.verticalFromParameterName = verticalFromParameterName;
     }
 
+    @Override
     public String getVerticalToParameterName() {
         return verticalToParameterName;
     }
 
+    @Override
     public void setVerticalToParameterName(String verticalToParameterName) {
         this.verticalToParameterName = verticalToParameterName;
     }

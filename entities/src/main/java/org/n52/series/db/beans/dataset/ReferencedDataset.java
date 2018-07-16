@@ -22,7 +22,7 @@ import org.n52.series.db.beans.data.Data;
 public interface ReferencedDataset extends Dataset {
 
     @Override
-    default String getDefaultValueType() {
+    default String getValueType() {
         return Data.ReferencedData.VALUE_TYPE;
     }
 

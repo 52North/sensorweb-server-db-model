@@ -1,19 +1,19 @@
 package org.n52.series.db.beans.i18n;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.EntityPathBase;
 
 
 /**
  * QI18nEntity is a Querydsl query type for I18nEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QI18nEntity extends EntityPathBase<I18nEntity<org.n52.series.db.beans.ProcedureEntity>> {
+public class QI18nEntity extends EntityPathBase<I18nEntity<?>> {
 
     private static final long serialVersionUID = -462006752L;
 

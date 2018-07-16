@@ -27,26 +27,32 @@ public abstract class ProfileDatasetEntity extends DatasetEntity implements Prof
     private String verticalFromParameterName;
     private String verticalToParameterName;
 
+    @Override
     public String getVerticalParameterName() {
         return verticalParameterName;
     }
 
+    @Override
     public void setVerticalParameterName(final String verticalParameterName) {
         this.verticalParameterName = verticalParameterName;
     }
 
+    @Override
     public String getVerticalFromParameterName() {
         return verticalFromParameterName;
     }
 
+    @Override
     public void setVerticalFromParameterName(final String verticalFromParameterName) {
         this.verticalFromParameterName = verticalFromParameterName;
     }
 
+    @Override
     public String getVerticalToParameterName() {
         return verticalToParameterName;
     }
 
+    @Override
     public void setVerticalToParameterName(final String verticalToParameterName) {
         this.verticalToParameterName = verticalToParameterName;
     }

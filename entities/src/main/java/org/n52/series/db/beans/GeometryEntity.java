@@ -64,11 +64,6 @@ public class GeometryEntity implements Serializable {
         return getGeometry(createDefaultGeometryFactory());
     }
 
-    private GeometryFactory createDefaultGeometryFactory() {
-        final PrecisionModel pm = new PrecisionModel(PrecisionModel.FLOATING);
-        return new GeometryFactory(pm, DEFAULT_SRID);
-    }
-
     /**
      * Returns the {@link Geometry} or creates a {@link Geometry} with the given srid in case of geometry has
      * been set via lat/lon.
@@ -82,6 +77,11 @@ public class GeometryEntity implements Serializable {
                 ? createPoint(geometryFactory)
                 : geometry;
         return builtGeometry;
+    }
+
+    private GeometryFactory createDefaultGeometryFactory() {
+        final PrecisionModel pm = new PrecisionModel(PrecisionModel.FLOATING);
+        return new GeometryFactory(pm, DEFAULT_SRID);
     }
 
     private Geometry createPoint(final GeometryFactory geometryFactory) {

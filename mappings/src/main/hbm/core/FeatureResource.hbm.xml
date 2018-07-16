@@ -14,8 +14,8 @@
             </generator>
         </id>
 
-        <discriminator type="string" not-null="false">
-            <column name="discriminator">
+        <discriminator type="string">
+            <column name="discriminator" not-null="false" >
                 <comment>Indicator used by Hibernate to map value specific entities.</comment>
             </column>
         </discriminator>

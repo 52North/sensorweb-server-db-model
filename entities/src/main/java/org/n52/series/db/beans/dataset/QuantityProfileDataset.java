@@ -21,8 +21,10 @@ import org.n52.series.db.beans.data.Data;
 
 public interface QuantityProfileDataset extends ProfileDataset {
 
+    String VALUE_TYPE = Data.QuantityData.VALUE_TYPE + "-" + Data.ProfileData.VALUE_TYPE;
+
     @Override
-    default String getDefaultValueType() {
-        return Data.QuantityData.VALUE_TYPE + "-" + Data.ProfileData.VALUE_TYPE;
+    default String getValueType() {
+        return VALUE_TYPE;
     }
 }

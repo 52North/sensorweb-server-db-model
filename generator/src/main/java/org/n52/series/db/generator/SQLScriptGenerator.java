@@ -48,7 +48,6 @@ import org.hibernate.mapping.Join;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.Table;
-import org.hibernate.mapping.Value;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
@@ -209,7 +208,7 @@ public class SQLScriptGenerator {
     private int readSelectionFromStdIo() throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
         String selection = br.readLine();
-        return (selection != null && !selection.isEmpty())
+        return ((selection != null) && !selection.isEmpty())
                 ? Integer.parseInt(selection)
                 : -1;
     }
@@ -317,6 +316,7 @@ public class SQLScriptGenerator {
                     sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, generationType, schema);
                 } catch (IOException ioe) {
                     printToScreen("ERROR: IO error trying to read your input!");
+                    ioe.printStackTrace();
                     System.exit(1);
                 } catch (Exception e) {
                     printToScreen("ERROR: " + e.getMessage());
@@ -335,8 +335,14 @@ public class SQLScriptGenerator {
 
         } catch (IOException ioe) {
             printToScreen("ERROR: IO error trying to read your input!");
+            ioe.printStackTrace();
+            System.exit(1);
+        } catch (Exception e) {
+            printToScreen("ERROR: Could not generate for unknown reasons!");
+            e.printStackTrace();
             System.exit(1);
         }
+
     }
 
     private String getSchema(int i) {
@@ -373,7 +379,7 @@ public class SQLScriptGenerator {
             String fileNameDrop = "target/" + dialect + "_" + concept + "_drop.sql";
             Files.deleteIfExists(Paths.get(fileNameCreate));
             Files.deleteIfExists(Paths.get(fileNameDrop));
-            if (schema != null && !schema.isEmpty()) {
+            if ((schema != null) && !schema.isEmpty()) {
                 p.put("hibernate.default_schema", schema);
             }
             configuration.addProperties(p);
@@ -427,11 +433,11 @@ public class SQLScriptGenerator {
         for (PersistentClass entity : metadata.getEntityBindings()) {
             Table table = entity.getTable();
             TableMetadata tm = processTable(table, map, dia, metadata);
-            processJoins((Iterator<Join>) entity.getJoinClosureIterator(), map, dia, metadata);
+            processJoins(entity.getJoinClosureIterator(), map, dia, metadata);
             // from Property
             Iterator<Property> propertyIterator = entity.getPropertyIterator();
             while (propertyIterator.hasNext()) {
-                Property property = (Property) propertyIterator.next();
+                Property property = propertyIterator.next();
                 if (property.getValue() instanceof org.hibernate.mapping.Collection) {
                     processCollection((org.hibernate.mapping.Collection) property.getValue(), map, dia, metadata);
                 }
@@ -497,7 +503,7 @@ public class SQLScriptGenerator {
     public interface Meta {
 
         default String check(String origin, String current) {
-            return (origin != null && !origin.isEmpty()) ? origin : (current != null && !current.isEmpty()) ? current : null;
+            return ((origin != null) && !origin.isEmpty()) ? origin : ((current != null) && !current.isEmpty()) ? current : null;
         }
 
     }
@@ -548,7 +554,7 @@ public class SQLScriptGenerator {
         }
 
         private String checkForNullOrEmpty(String value) {
-            return value != null && !value.isEmpty() ? value : "-";
+            return (value != null) && !value.isEmpty() ? value : "-";
         }
 
     }

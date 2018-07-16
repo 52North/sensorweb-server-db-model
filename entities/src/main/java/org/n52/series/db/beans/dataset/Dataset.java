@@ -154,42 +154,53 @@ public interface Dataset extends Describable {
 
     boolean hasRelatedDatasets();
 
+    @Override
     Long getId();
 
+    @Override
     void setId(Long id);
 
+    @Override
     String getIdentifier();
 
+    @Override
     void setIdentifier(String identifier);
 
+    @Override
     CodespaceEntity getIdentifierCodespace();
 
+    @Override
     void setIdentifierCodespace(CodespaceEntity codespace);
 
+    @Override
     String getName();
 
+    @Override
     void setName(String name);
 
+    @Override
     CodespaceEntity getNameCodespace();
 
+    @Override
     void setNameCodespace(CodespaceEntity codespace);
 
+    @Override
     String getDescription();
 
+    @Override
     void setDescription(String description);
 
+    @Override
     Set<Parameter< ? >> getParameters();
 
+    @Override
     default boolean hasParameters() {
         return getParameters() != null;
     }
 
+    @Override
     void setParameters(Set<Parameter< ? >> parameters);
 
     void copy(Dataset series);
-
-    default String getDefaultValueType() {
-        return DEFAULT_VALUE_TYPE;
-    }
 
 }

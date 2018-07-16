@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.dataset;
 
-import java.util.Collection;
 import java.util.List;
 
 import org.n52.series.db.beans.DatasetEntity;
@@ -29,7 +28,7 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
 
     T setNumberOfDecimals(Integer numberOfDecimals);
 
-    T setReferenceValues(Collection<T> referencValues);
+    T setReferenceValues(List<T> referencValues);
 
     List<T> getReferenceValues();
 
@@ -38,7 +37,7 @@ public interface QuantityDataset<T extends DatasetEntity> extends Dataset {
     }
 
     @Override
-    default String getDefaultValueType() {
+    default String getValueType() {
         return Data.QuantityData.VALUE_TYPE;
     }
 }

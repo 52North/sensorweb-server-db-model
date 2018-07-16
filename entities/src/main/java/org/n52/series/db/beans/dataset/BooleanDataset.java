@@ -22,7 +22,7 @@ import org.n52.series.db.beans.data.Data;
 public interface BooleanDataset extends Dataset {
 
     @Override
-    default String getDefaultValueType() {
+    default String getValueType() {
         return Data.BooleanData.VALUE_TYPE;
     }
 }
