@@ -13,13 +13,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
 import java.util.Set;
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasName;
-import org.n52.series.db.beans.IdEntity;
 
 /**
  *
@@ -38,7 +38,7 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
     private String name;
     private String description;
     private String properties;
-    private LocationEntity locationEntity;
+    private Set<LocationEntity> locationEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
 
     @Override
@@ -69,12 +69,12 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
         return properties;
     }
 
-    public LocationEntity getLocationEntity() {
-        return locationEntity;
+    public Set<LocationEntity> getLocationEntities() {
+        return locationEntities;
     }
 
-    public void setLocationEntity(LocationEntity locationEntity) {
-        this.locationEntity = locationEntity;
+    public void setLocationEntities(Set<LocationEntity> locationEntities) {
+        this.locationEntities = locationEntities;
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {

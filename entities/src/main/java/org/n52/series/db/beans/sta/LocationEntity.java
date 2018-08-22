@@ -23,7 +23,6 @@ import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasName;
-import org.n52.series.db.beans.IdEntity;
 
 /**
  *
@@ -41,14 +40,14 @@ public class LocationEntity extends AbstractStaEntity
     private String name;
     private String description;
     private GeometryEntity geometryEntity;
-    private Set<LocationEncodingEntity> locationEncodings;
+    private LocationEncodingEntity locationEncoding;
 
-    public Set<LocationEncodingEntity> getLocationEncodings() {
-        return locationEncodings;
+    public LocationEncodingEntity getLocationEncoding() {
+        return locationEncoding;
     }
 
-    public void setLocationEncodings(Set<LocationEncodingEntity> locationEncodings) {
-        this.locationEncodings = locationEncodings;
+    public void setLocationEncodings(LocationEncodingEntity locationEncoding) {
+        this.locationEncoding = locationEncoding;
     }
 
     @Override

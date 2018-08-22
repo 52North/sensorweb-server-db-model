@@ -17,7 +17,6 @@
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
-import org.n52.series.db.beans.IdEntity;
 
 /**
  *
@@ -32,7 +31,6 @@ public class LocationEncodingEntity extends AbstractStaEntity implements Seriali
 
     private String encodingType;
     private String location;
-    private LocationEntity locationEntity;
 
     public String getEncodingType() {
         return encodingType;
@@ -48,14 +46,6 @@ public class LocationEncodingEntity extends AbstractStaEntity implements Seriali
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public LocationEntity getLocationEntity() {
-        return locationEntity;
-    }
-
-    public void setLocationEntity(LocationEntity locationEntity) {
-        this.locationEntity = locationEntity;
     }
 
 }
