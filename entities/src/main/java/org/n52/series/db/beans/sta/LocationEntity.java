@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import com.vividsolutions.jts.geom.Geometry;
@@ -46,7 +45,7 @@ public class LocationEntity extends AbstractStaEntity
         return locationEncoding;
     }
 
-    public void setLocationEncodings(LocationEncodingEntity locationEncoding) {
+    public void setLocationEncoding(LocationEncodingEntity locationEncoding) {
         this.locationEncoding = locationEncoding;
     }
 

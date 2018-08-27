@@ -21,11 +21,7 @@
                 <column name="geom" not-null="false"/>
             </property>
         </component>
-        <one-to-one name="locationEncoding" table="location_encoding">
-            <key foreign-key="fk_location_encoding">
-                <column name="fk_location_id" not-null="true"/>
-            </key>
-        </one-to-one>
+        <one-to-one name="locationEncoding" class="org.n52.series.db.beans.sta.LocationEncodingEntity" ></one-to-one>
     </class>
 
     <class name="LocationEncodingEntity" table="location_encoding">
