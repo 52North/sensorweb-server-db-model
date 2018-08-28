@@ -21,7 +21,9 @@
                 <column name="geom" not-null="false"/>
             </property>
         </component>
-        <one-to-one name="locationEncoding" class="org.n52.series.db.beans.sta.LocationEncodingEntity" ></one-to-one>
+        <one-to-one name="locationEncoding" class="org.n52.series.db.beans.sta.LocationEncodingEntity" 
+                    cascade="all" constrained="true">
+        </one-to-one>
     </class>
 
     <class name="LocationEncodingEntity" table="location_encoding">
