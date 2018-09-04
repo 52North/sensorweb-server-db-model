@@ -2,6 +2,21 @@
 
 Additional features are modeled to extend the core data model but the core data model does not have any dependency on the additional features.
 
+## Features
+
+- [SOS Transactional](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#sos-transactional)
+- [Datatype](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#datatype)
+- [Feature types](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#feature-types)
+- [Metadata](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#metadata)
+- [Hierarchies](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#hierarchies)
+- [Procedure history](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#procedure-history)
+- [Referenced datasets](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#referenced-datasets)
+- [Relations](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#relations)
+- [Result templates](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#result-templates)
+- [Parameter](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#parameter)
+- [Translations](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#translations)
+
+
 ### SOS Transactional
 
 This extension is necessary to support the full transactional profile of the SOS interface.
