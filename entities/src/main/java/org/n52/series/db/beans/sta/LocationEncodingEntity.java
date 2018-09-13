@@ -30,7 +30,6 @@ public class LocationEncodingEntity extends AbstractStaEntity implements Seriali
     public static final String PROPERTY_LOCATION = "location";
 
     private String encodingType;
-    private String location;
 
     public String getEncodingType() {
         return encodingType;
@@ -38,14 +37,6 @@ public class LocationEncodingEntity extends AbstractStaEntity implements Seriali
 
     public void setEncodingType(String encodingType) {
         this.encodingType = encodingType;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
 }

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import com.vividsolutions.jts.geom.Geometry;
 import java.io.Serializable;
-import java.util.Set;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
@@ -28,7 +28,7 @@ import org.n52.series.db.beans.HibernateRelations.HasName;
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
 public class LocationEntity extends AbstractStaEntity
-        implements Serializable, HasName, HasDescription, HasGeometry<LocationEntity> {
+        implements Serializable, HasName, HasDescription, HasGeometry {
 
     private static final long serialVersionUID = -8201429072560300649L;
 
@@ -38,6 +38,7 @@ public class LocationEntity extends AbstractStaEntity
 
     private String name;
     private String description;
+    private String location;
     private GeometryEntity geometryEntity;
     private LocationEncodingEntity locationEncoding;
 
@@ -67,6 +68,14 @@ public class LocationEntity extends AbstractStaEntity
     @Override
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     @Override

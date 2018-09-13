@@ -16,14 +16,17 @@
         <property name="description" type="string">
             <column name="description" not-null="true"/>
         </property>
+        <property name="location" type="text">
+            <column name="location" not-null="false"/>
+        </property>
         <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
             <property name="geometry" type="jts_geometry">
                 <column name="geom" not-null="false"/>
             </property>
         </component>
-        <one-to-one name="locationEncoding" class="org.n52.series.db.beans.sta.LocationEncodingEntity" 
-                    cascade="all" constrained="true">
-        </one-to-one>
+        <many-to-one name="locationEncoding" class="LocationEncodingEntity" foreign-key="fk_location_location_encoding">
+            <column name="fk_location_encoding_id" not-null="true"/>
+        </many-to-one>
     </class>
 
     <class name="LocationEncodingEntity" table="location_encoding">
@@ -35,9 +38,6 @@
         </id>
         <property name="encodingType" type="string">
             <column name="encoding_type" not-null="true"/>
-        </property>
-        <property name="location" type="text">
-            <column name="location" not-null="true"/>
         </property>
     </class>
 
