@@ -40,6 +40,7 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
     private String properties;
     private Set<LocationEntity> locationEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
+    private Set<DatastreamEntity> datastreamEntities;
 
     @Override
     public String getName() {
@@ -83,6 +84,14 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
 
     public void setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
         this.historicalLocationEntities = historicalLocationEntities;
+    }
+
+    public Set<DatastreamEntity> getDatastreamEntities() {
+        return datastreamEntities;
+    }
+
+    public void setDatastreamEntities(Set<DatastreamEntity> datastreamEntities) {
+        this.datastreamEntities = datastreamEntities;
     }
 
 }

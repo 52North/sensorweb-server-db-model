@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import com.vividsolutions.jts.geom.Geometry;
 import java.io.Serializable;
+import java.util.Set;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
@@ -41,6 +41,8 @@ public class LocationEntity extends AbstractStaEntity
     private String location;
     private GeometryEntity geometryEntity;
     private LocationEncodingEntity locationEncoding;
+    private Set<ThingEntity> thingEntities;
+    private Set<HistoricalLocationEntity> historicalLocationEntities;
 
     public LocationEncodingEntity getLocationEncoding() {
         return locationEncoding;
@@ -95,6 +97,22 @@ public class LocationEntity extends AbstractStaEntity
     public LocationEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
+    }
+
+    public Set<ThingEntity> getThingEntities() {
+        return thingEntities;
+    }
+
+    public void setThingEntities(Set<ThingEntity> thingEntities) {
+        this.thingEntities = thingEntities;
+    }
+
+    public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {
+        return historicalLocationEntities;
+    }
+
+    public void setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
+        this.historicalLocationEntities = historicalLocationEntities;
     }
 
 }

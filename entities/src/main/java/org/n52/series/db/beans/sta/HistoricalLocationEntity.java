@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Set;
 import org.n52.series.db.beans.IdEntity;
 
 /**
@@ -31,7 +31,8 @@ public class HistoricalLocationEntity extends AbstractStaEntity implements Seria
     public static final String PROPERTY_TIME = "time";
 
     private Date time;
-    private LocationEntity locationEntity;
+    private Set<LocationEntity> locationEntities;
+    private ThingEntity thingEntity;
 
     public Date getTime() {
         return time;
@@ -41,12 +42,20 @@ public class HistoricalLocationEntity extends AbstractStaEntity implements Seria
         this.time = time;
     }
 
-    public LocationEntity getLocationEntity() {
-        return locationEntity;
+    public Set<LocationEntity>  getLocationEntities() {
+        return locationEntities;
     }
 
-    public void setLocationEntity(LocationEntity locationEntity) {
-        this.locationEntity = locationEntity;
+    public void setLocationEntities(Set<LocationEntity> locationEntities) {
+        this.locationEntities = locationEntities;
+    }
+
+    public ThingEntity getThingEntity() {
+        return thingEntity;
+    }
+
+    public void setThingEntity(ThingEntity thingEntity) {
+        this.thingEntity = thingEntity;
     }
 
 }

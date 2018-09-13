@@ -41,7 +41,8 @@ import org.n52.series.db.beans.UnitEntity;
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
 public class DatastreamEntity extends AbstractStaEntity implements Serializable, HasName,
-        HasDescription, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>, HasPhenomenonTime,
+        HasDescription, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>,
+        HasPhenomenonTime,
         HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
 
     private static final long serialVersionUID = -9067390076853876658L;
