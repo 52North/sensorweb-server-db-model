@@ -28,11 +28,17 @@ public class QLocationEntity extends EntityPathBase<LocationEntity> {
 
     public final org.n52.series.db.beans.QGeometryEntity geometryEntity;
 
+    public final SetPath<HistoricalLocationEntity, QHistoricalLocationEntity> historicalLocationEntities = this.<HistoricalLocationEntity, QHistoricalLocationEntity>createSet("historicalLocationEntities", HistoricalLocationEntity.class, QHistoricalLocationEntity.class, PathInits.DIRECT2);
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
+
+    public final StringPath location = createString("location");
 
     public final QLocationEncodingEntity locationEncoding;
 
     public final StringPath name = createString("name");
+
+    public final SetPath<ThingEntity, QThingEntity> thingEntities = this.<ThingEntity, QThingEntity>createSet("thingEntities", ThingEntity.class, QThingEntity.class, PathInits.DIRECT2);
 
     public QLocationEntity(String variable) {
         this(LocationEntity.class, forVariable(variable), INITS);

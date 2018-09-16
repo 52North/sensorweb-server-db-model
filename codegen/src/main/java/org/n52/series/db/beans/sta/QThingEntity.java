@@ -22,6 +22,8 @@ public class QThingEntity extends EntityPathBase<ThingEntity> {
 
     public final QAbstractStaEntity _super = new QAbstractStaEntity(this);
 
+    public final SetPath<DatastreamEntity, QDatastreamEntity> datastreamEntities = this.<DatastreamEntity, QDatastreamEntity>createSet("datastreamEntities", DatastreamEntity.class, QDatastreamEntity.class, PathInits.DIRECT2);
+
     public final StringPath description = createString("description");
 
     public final SetPath<HistoricalLocationEntity, QHistoricalLocationEntity> historicalLocationEntities = this.<HistoricalLocationEntity, QHistoricalLocationEntity>createSet("historicalLocationEntities", HistoricalLocationEntity.class, QHistoricalLocationEntity.class, PathInits.DIRECT2);

@@ -25,8 +25,6 @@ public class QLocationEncodingEntity extends EntityPathBase<LocationEncodingEnti
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final StringPath location = createString("location");
-
     public QLocationEncodingEntity(String variable) {
         super(LocationEncodingEntity.class, forVariable(variable));
     }
