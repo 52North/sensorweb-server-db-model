@@ -26,7 +26,9 @@ public class QHistoricalLocationEntity extends EntityPathBase<HistoricalLocation
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final QLocationEntity locationEntity;
+    public final SetPath<LocationEntity, QLocationEntity> locationEntities = this.<LocationEntity, QLocationEntity>createSet("locationEntities", LocationEntity.class, QLocationEntity.class, PathInits.DIRECT2);
+
+    public final QThingEntity thingEntity;
 
     public final DateTimePath<java.util.Date> time = createDateTime("time", java.util.Date.class);
 
@@ -48,7 +50,7 @@ public class QHistoricalLocationEntity extends EntityPathBase<HistoricalLocation
 
     public QHistoricalLocationEntity(Class<? extends HistoricalLocationEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.locationEntity = inits.isInitialized("locationEntity") ? new QLocationEntity(forProperty("locationEntity"), inits.get("locationEntity")) : null;
+        this.thingEntity = inits.isInitialized("thingEntity") ? new QThingEntity(forProperty("thingEntity")) : null;
     }
 
 }
