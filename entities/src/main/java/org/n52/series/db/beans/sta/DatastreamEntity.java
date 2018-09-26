@@ -1,11 +1,12 @@
 /*
- * Copyright 2018 52°North Initiative for Geospatial Open Source Software GmbH.
+ * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
@@ -16,10 +17,10 @@
 
 package org.n52.series.db.beans.sta;
 
-import com.vividsolutions.jts.geom.Geometry;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
+
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.GeometryEntity;
@@ -31,21 +32,20 @@ import org.n52.series.db.beans.HibernateRelations.HasObservationType;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.HibernateRelations.HasUnit;
-import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.common.Utils;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class DatastreamEntity extends AbstractStaEntity implements Serializable, HasName,
-        HasDescription, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>,
-        HasPhenomenonTime,
-        HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
-
-    private static final long serialVersionUID = -9067390076853876658L;
+public class DatastreamEntity extends AbstractStaEntity implements Serializable, HasName, HasDescription,
+        HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>, HasPhenomenonTime, HasUnit,
+        HasProcedure<DatastreamEntity>, HasGeometry {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -59,6 +59,8 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
     public static final String PROPERTY_THING = "thing";
     public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
+
+    private static final long serialVersionUID = -9067390076853876658L;
 
     private String name;
     private String description;
@@ -98,38 +100,38 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
 
     @Override
     public Date getSamplingTimeStart() {
-        return samplingTimeStart;
+        return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
-        this.samplingTimeStart = samplingTimeStart;
+        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     @Override
     public Date getSamplingTimeEnd() {
-        return samplingTimeEnd;
+        return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        this.samplingTimeEnd = samplingTimeEnd;
+        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     public Date getResultTimeStart() {
-        return resultTimeStart;
+        return Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
     public void setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = resultTimeStart;
+        this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
     public Date getResultTimeEnd() {
-        return resultTimeEnd;
+        return Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
     public void setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = resultTimeEnd;
+        this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
     @Override
