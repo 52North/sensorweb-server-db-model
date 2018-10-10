@@ -48,7 +48,6 @@ import org.hibernate.mapping.Join;
 import org.hibernate.mapping.PersistentClass;
 import org.hibernate.mapping.Property;
 import org.hibernate.mapping.Table;
-import org.hibernate.mapping.Value;
 import org.hibernate.spatial.dialect.h2geodb.GeoDBDialect;
 import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
@@ -57,6 +56,10 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.n52.hibernate.spatial.dialect.h2geodb.TimestampWithTimeZoneGeoDBDialect;
+import org.n52.hibernate.spatial.dialect.oracle.TimestampWithTimeZoneOracleSpatial10gDialect;
+import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
+import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
 import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
@@ -98,10 +101,10 @@ public class SQLScriptGenerator {
     private Dialect getDialect(DialectSelector selection) throws Exception {
         switch (selection) {
         case POSTGIS:
-            return new PostgisPG95Dialect();
+            return new TimestampWithTimeZonePostgisPG95Dialect();
         case ORACLE:
             // try {
-            //   return new OracleSpatial10gDialect();
+            //   return new TimestampWithTimeZoneOracleSpatial10gDialect();
             // } catch (ExceptionInInitializerError eiie) {
             // printToScreen("The Oracle JDBC driver is missing!");
             // printToScreen("To execute the SQL script generator for Oracle you have to uncomment the
@@ -113,11 +116,11 @@ public class SQLScriptGenerator {
             // }
 
         case GEODB:
-            return new GeoDBDialect();
+            return new TimestampWithTimeZoneGeoDBDialect();
         case MY_SQL_SPATIAL_5:
             return new MySQL56SpatialDialect();
         case SQL_SERVER_2008:
-            return new SqlServer2008SpatialDialect();
+            return new TimestampWithTimeZoneSqlServer2008SpatialDialect();
         default:
             throw new Exception("The entered value is invalid: " + selection);
         }
@@ -475,7 +478,7 @@ public class SQLScriptGenerator {
         processColumns(table.getColumnIterator(), columns, dia, metadata);
         return tm;
     }
-    
+
     private void processColumns(Iterator<?> ci, Map<String, ColumnMetadata> columns, Dialect dia, Metadata metadata) {
         while (ci.hasNext()) {
             Object n = ci.next();
@@ -546,7 +549,7 @@ public class SQLScriptGenerator {
             builder.append("\n[top](#Tables)\n");
             return builder.toString();
         }
-        
+
         private String checkForNullOrEmpty(String value) {
             return value != null && !value.isEmpty() ? value : "-";
         }
