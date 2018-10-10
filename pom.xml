@@ -18,6 +18,7 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
+        <module>dialects</module>
     </modules>
 
     <developers>
@@ -88,6 +89,12 @@
                 <artifactId>types</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>dialects</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
 
             <dependency>
                 <groupId>joda-time</groupId>
