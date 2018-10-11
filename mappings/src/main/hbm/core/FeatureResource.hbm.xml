@@ -15,7 +15,7 @@
         </id>
 
         <discriminator type="string" not-null="false">
-            <column name="discriminator">
+            <column name="discriminator" not-null="false">
                 <comment>Indicator used by Hibernate to map value specific entities.</comment>
             </column>
         </discriminator>
