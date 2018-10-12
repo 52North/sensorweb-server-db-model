@@ -27,6 +27,7 @@ public class TimestampWithTimeZoneOracleSpatial10gDialect extends OracleSpatial1
 
     public TimestampWithTimeZoneOracleSpatial10gDialect() {
         super();
+        registerColumnType(Types.DOUBLE, "float");
         registerColumnType(Types.TIMESTAMP, "timestamp with time zone");
     }
 
