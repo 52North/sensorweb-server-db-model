@@ -189,7 +189,7 @@ public class SQLScriptGenerator {
         printToScreen("Create a all or a single selected script:");
         printToScreen("1   all");
         printToScreen("2   Select script");
-        printToScreen("3   table metadata (core, pg)");
+        printToScreen("3   table documentation (core, pg)");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -244,7 +244,7 @@ public class SQLScriptGenerator {
     private int getGenerationType() throws IOException {
         printToScreen("Which information should be created:");
         printToScreen("0   sql script");
-        printToScreen("1   table metadata");
+        printToScreen("1   table documentation");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
