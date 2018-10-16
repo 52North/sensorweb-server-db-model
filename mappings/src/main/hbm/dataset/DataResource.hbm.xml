@@ -327,9 +327,8 @@
         </subclass>
 
     </class>
-    
-    <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="data_i18n">
-        <comment>Storage for internationalizations of data.</comment>
+
+    <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
         <id name="id" type="long">
             <column name="data_i18n_id">
                 <comment>PK column of the table</comment>

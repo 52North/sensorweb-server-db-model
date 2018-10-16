@@ -17,9 +17,10 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
-        <module>codegen</module>
-  </modules>
 
+        <module>dialects</module>
+        <module>codegen</module>
+    </modules>
     <developers>
         <developer>
             <id>bredel</id>
@@ -103,6 +104,12 @@
                 <artifactId>types</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>dialects</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            
 
             <dependency>
                 <groupId>com.querydsl</groupId>
