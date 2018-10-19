@@ -36,7 +36,7 @@
                 <comment>The codespace of the procedure name, reference to the codespace table.</comment>
             </column>
         </many-to-one>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the procedure</comment>
             </column>
