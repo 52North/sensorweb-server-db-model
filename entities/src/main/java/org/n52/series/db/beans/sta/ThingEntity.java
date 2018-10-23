@@ -95,4 +95,16 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
         this.datastreamEntities = datastreamEntities;
     }
 
+    public boolean hasDatastreamEntities() {
+        return getDatastreamEntities() != null && !getDatastreamEntities().isEmpty();
+    }
+
+    public boolean hasLocationEntities() {
+        return getLocationEntities() != null && !getLocationEntities().isEmpty();
+    }
+
+    public boolean hasHistoricalLocationEntities() {
+        return getHistoricalLocationEntities() != null && !getHistoricalLocationEntities().isEmpty();
+    }
+
 }
