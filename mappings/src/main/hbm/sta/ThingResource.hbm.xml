@@ -33,7 +33,7 @@
             </key>
             <one-to-many class="HistoricalLocationEntity" />
         </set>
-        <set name="datastreamEntities" table="datastream" inverse="false">
+        <set name="datastreamEntities" table="datastream" inverse="true">
             <key foreign-key="fk_datastream_thing">
                 <column name="fk_thing_id" not-null="true"/>
             </key>
