@@ -77,6 +77,7 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
     private PhenomenonEntity observableProperty;
 
     private Set<DatasetEntity> datasets;
+    private Set<StaDataEntity> observations;
 
     @Override
     public String getName() {
@@ -236,6 +237,14 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
     @Override
     public PhenomenonEntity getObservableProperty() {
         return observableProperty;
+    }
+
+    public void setObservations(Set<StaDataEntity> observations) {
+        this.observations = observations;
+    }
+
+    public Set<StaDataEntity> getObservations() {
+        return observations;
     }
 
 }
