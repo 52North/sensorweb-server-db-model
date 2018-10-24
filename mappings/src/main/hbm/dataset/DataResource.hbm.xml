@@ -327,4 +327,35 @@
         </subclass>
 
     </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
+        <id name="id" type="long">
+            <column name="data_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">data_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="DataEntity" foreign-key="fk_data">
+            <column name="fk_data_id" not-null="true">
+                <comment>Reference to the data table this internationalization belongs to.</comment>
+            </column>
+        </many-to-one>
+         <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the data entity</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>Locale/language specific description of the data entity</comment>
+            </column>
+        </property>
+    </class>
 </hibernate-mapping>
