@@ -27,8 +27,8 @@
                 <column name="fk_location_id" not-null="false"/>
             </many-to-many>
         </set>
-        <set name="historicalLocationEntities" table="historical_location" inverse="false">
-            <key foreign-key="fk_thing_historical_location">
+        <set name="historicalLocationEntities" table="historical_location" inverse="false" >
+            <key foreign-key="fk_thing_historical_location" update="false">
                 <column name="fk_thing_id" not-null="true"/>
             </key>
             <one-to-many class="HistoricalLocationEntity" />
