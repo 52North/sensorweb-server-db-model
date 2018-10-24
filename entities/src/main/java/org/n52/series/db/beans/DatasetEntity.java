@@ -94,7 +94,11 @@ public abstract class DatasetEntity extends DescribableEntity
 
     private FormatEntity observationType;
 
-    private Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
+    private boolean mobile;
+
+    private boolean insitu = true;
+
+    private final Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
 
     public DatasetEntity() {
         this((String) null);
@@ -374,6 +378,26 @@ public abstract class DatasetEntity extends DescribableEntity
         return getObservationType() != null && getObservationType().isSetFormat();
     }
 
+    public boolean isMobile() {
+        return mobile;
+    }
+
+    @Override
+    public void setMobile(boolean mobile) {
+        this.mobile = mobile;
+    }
+
+    @Override
+    public boolean isInsitu() {
+        return insitu;
+    }
+
+    @Override
+    public void setInsitu(boolean insitu) {
+        this.insitu = insitu;
+    }
+
+    @Override
     public Set<RelatedDatasetEntity> getRelatedDatasets() {
         return relatedDatasets;
     }

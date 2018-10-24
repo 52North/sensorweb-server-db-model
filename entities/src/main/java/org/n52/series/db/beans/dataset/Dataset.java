@@ -148,6 +148,14 @@ public interface Dataset extends Describable {
 
     boolean isSetObservationtype();
 
+    boolean isMobile();
+
+    void setMobile(boolean mobile);
+
+    boolean isInsitu();
+
+    void setInsitu(boolean insitu);
+
     Set<RelatedDatasetEntity> getRelatedDatasets();
 
     void setRelatedObservations(Set<RelatedDatasetEntity> relatedDatasets);
