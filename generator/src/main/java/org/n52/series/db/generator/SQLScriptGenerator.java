@@ -56,6 +56,10 @@ import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
+import org.n52.hibernate.spatial.dialect.h2geodb.TimestampWithTimeZoneGeoDBDialect;
+import org.n52.hibernate.spatial.dialect.oracle.TimestampWithTimeZoneOracleSpatial10gDialect;
+import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
+import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
 import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
@@ -97,10 +101,10 @@ public class SQLScriptGenerator {
     private Dialect getDialect(DialectSelector selection) throws Exception {
         switch (selection) {
         case POSTGIS:
-            return new PostgisPG95Dialect();
+            return new TimestampWithTimeZonePostgisPG95Dialect();
         case ORACLE:
             // try {
-            //   return new OracleSpatial10gDialect();
+            //   return new TimestampWithTimeZoneOracleSpatial10gDialect();
             // } catch (ExceptionInInitializerError eiie) {
             // printToScreen("The Oracle JDBC driver is missing!");
             // printToScreen("To execute the SQL script generator for Oracle you have to uncomment the
@@ -112,11 +116,11 @@ public class SQLScriptGenerator {
             // }
 
         case GEODB:
-            return new GeoDBDialect();
+            return new TimestampWithTimeZoneGeoDBDialect();
         case MY_SQL_SPATIAL_5:
             return new MySQL56SpatialDialect();
         case SQL_SERVER_2008:
-            return new SqlServer2008SpatialDialect();
+            return new TimestampWithTimeZoneSqlServer2008SpatialDialect();
         default:
             throw new Exception("The entered value is invalid: " + selection);
         }
@@ -185,7 +189,7 @@ public class SQLScriptGenerator {
         printToScreen("Create a all or a single selected script:");
         printToScreen("1   all");
         printToScreen("2   Select script");
-        printToScreen("3   table metadata (core, pg)");
+        printToScreen("3   table documentation (core, pg)");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -240,7 +244,7 @@ public class SQLScriptGenerator {
     private int getGenerationType() throws IOException {
         printToScreen("Which information should be created:");
         printToScreen("0   sql script");
-        printToScreen("1   table metadata");
+        printToScreen("1   table documentation");
         printToScreen("");
         printToScreen("Enter your selection: ");
 

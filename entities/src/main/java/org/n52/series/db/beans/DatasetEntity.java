@@ -91,6 +91,10 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
 
     private FormatEntity observationType;
 
+    private boolean mobile;
+
+    private boolean insitu = true;
+
     private final Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
 
     public DatasetEntity() {
@@ -403,6 +407,25 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
     @Override
     public boolean isSetObservationtype() {
         return (getObservationType() != null) && getObservationType().isSetFormat();
+    }
+
+    public boolean isMobile() {
+        return mobile;
+    }
+
+    @Override
+    public void setMobile(boolean mobile) {
+        this.mobile = mobile;
+    }
+
+    @Override
+    public boolean isInsitu() {
+        return insitu;
+    }
+
+    @Override
+    public void setInsitu(boolean insitu) {
+        this.insitu = insitu;
     }
 
     @Override
