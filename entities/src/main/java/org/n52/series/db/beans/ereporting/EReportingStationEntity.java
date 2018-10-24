@@ -21,7 +21,7 @@ import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 /**
  * Entity for AQD e-Reporting Station

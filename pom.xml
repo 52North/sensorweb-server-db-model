@@ -206,16 +206,9 @@
                 </exclusions>
             </dependency>
             <dependency>
-                <groupId>com.vividsolutions</groupId>
+                <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.14.0</version>
-                <exclusions>
-                    <exclusion>
-                        <!-- old version dependency causes conclicts -->
-                        <groupId>xerces</groupId>
-                        <artifactId>xercesImpl</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>1.16.0</version>
             </dependency>
 
             <dependency>

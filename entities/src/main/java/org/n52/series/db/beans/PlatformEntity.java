@@ -21,7 +21,7 @@ import java.util.Set;
 
 import org.n52.series.db.beans.parameter.Parameter;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 public class PlatformEntity extends DescribableEntity {
 

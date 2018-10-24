@@ -28,7 +28,7 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
