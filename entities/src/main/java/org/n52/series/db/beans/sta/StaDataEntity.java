@@ -38,12 +38,20 @@ public class StaDataEntity extends DataEntity<String> {
         this.datastream = datastream;
     }
 
+    public boolean hasDatatream() {
+        return getDatastream() != null;
+    }
+
     public AbstractFeatureEntity< ? > getFeatureOfInterest() {
         return featureOfInterest;
     }
 
     public void setFeatureOfInterest(AbstractFeatureEntity< ? > featureOfInterest) {
         this.featureOfInterest = featureOfInterest;
+    }
+
+    public boolean hasFeatureOfInterest() {
+        return getFeatureOfInterest() != null;
     }
 
     @Override

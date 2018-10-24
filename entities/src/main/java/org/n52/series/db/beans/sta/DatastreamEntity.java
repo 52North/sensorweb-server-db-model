@@ -127,12 +127,20 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
         this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
+    public boolean hasResultTimeStart() {
+        return getResultTimeStart() != null;
+    }
+
     public Date getResultTimeEnd() {
         return Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
     public void setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
+    }
+
+    public boolean hasResultTimeEnd() {
+        return getResultTimeEnd() != null;
     }
 
     @Override

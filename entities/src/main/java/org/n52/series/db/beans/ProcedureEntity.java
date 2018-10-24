@@ -104,6 +104,10 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.descriptionFile = descriptionFile;
     }
 
+    public boolean isSetDescriptionFile() {
+        return getDescriptionFile() != null && !getDescriptionFile().isEmpty();
+    }
+
     public ProcedureEntity getTypeOf() {
         return typeOf;
     }

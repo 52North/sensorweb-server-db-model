@@ -107,4 +107,8 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
         return getHistoricalLocationEntities() != null && !getHistoricalLocationEntities().isEmpty();
     }
 
+    public boolean hasProperties() {
+        return getProperties() != null && !getProperties().isEmpty();
+    }
+
 }

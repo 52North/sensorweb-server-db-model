@@ -82,6 +82,10 @@ public class LocationEntity extends AbstractStaEntity
         this.location = location;
     }
 
+    public boolean hasLocation() {
+        return getLocation() != null && !getLocation().isEmpty();
+    }
+
     @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -107,6 +111,10 @@ public class LocationEntity extends AbstractStaEntity
 
     public void setThingEntities(Set<ThingEntity> thingEntities) {
         this.thingEntities = thingEntities;
+    }
+
+    public boolean hasThings() {
+        return getThingEntities() != null && !getThingEntities().isEmpty();
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {
