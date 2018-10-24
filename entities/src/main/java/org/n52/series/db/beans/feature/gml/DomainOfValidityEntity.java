@@ -25,7 +25,6 @@ import org.n52.series.db.beans.feature.gmd.ExExtentEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class DomainOfValidityEntity extends ReferenceEntity {
 
@@ -42,7 +41,7 @@ public class DomainOfValidityEntity extends ReferenceEntity {
 
     /**
      * @param exExtent
-     *            the exExtent to set
+     *        the exExtent to set
      */
     public void setExExtent(ExExtentEntity exExtent) {
         this.exExtent = exExtent;

@@ -24,7 +24,6 @@ import java.util.Set;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class AddressEntity extends AbstractCiEntity {
 
@@ -46,7 +45,7 @@ public class AddressEntity extends AbstractCiEntity {
 
     /**
      * @param deliveryPoint
-     *            the deliveryPoint to set
+     *        the deliveryPoint to set
      */
     public void setDeliveryPoint(Set<String> deliveryPoint) {
         this.deliveryPoint = deliveryPoint;
@@ -65,7 +64,7 @@ public class AddressEntity extends AbstractCiEntity {
 
     /**
      * @param city
-     *            the city to set
+     *        the city to set
      */
     public void setCity(String city) {
         this.city = city;
@@ -84,7 +83,7 @@ public class AddressEntity extends AbstractCiEntity {
 
     /**
      * @param administrativeArea
-     *            the administrativeArea to set
+     *        the administrativeArea to set
      */
     public void setAdministrativeArea(String administrativeArea) {
         this.administrativeArea = administrativeArea;
@@ -103,7 +102,7 @@ public class AddressEntity extends AbstractCiEntity {
 
     /**
      * @param postalCode
-     *            the postalCode to set
+     *        the postalCode to set
      */
     public void setPostalCode(String postalCode) {
         this.postalCode = postalCode;
@@ -122,7 +121,7 @@ public class AddressEntity extends AbstractCiEntity {
 
     /**
      * @param country
-     *            the country to set
+     *        the country to set
      */
     public void setCountry(String country) {
         this.country = country;
@@ -141,7 +140,7 @@ public class AddressEntity extends AbstractCiEntity {
 
     /**
      * @param electronicMailAddress
-     *            the electronicMailAddress to set
+     *        the electronicMailAddress to set
      */
     public void setElectronicMailAddress(Set<String> electronicMailAddress) {
         this.electronicMailAddress = electronicMailAddress;

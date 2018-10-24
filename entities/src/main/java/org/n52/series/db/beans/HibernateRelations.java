@@ -198,7 +198,8 @@ public interface HibernateRelations {
     interface HasReadableObservationContext extends HasObservablePropertyGetter, HasProcedureGetter, HasFeatureGetter {
     }
 
-    interface HasWriteableObservationContext<T> extends HasReadableObservationContext, HasObservableProperty<T>,
+    interface HasWriteableObservationContext<T>
+            extends HasReadableObservationContext, HasObservableProperty<T>,
             HasProcedure<T>, HasFeature<T>, HasOffering<T> {
     }
 
@@ -348,7 +349,6 @@ public interface HibernateRelations {
          * Get the start phenomenon time
          *
          * @return Start phenomenon time
-         *
          * @deprecated use {@link HasPhenomenonTime#getSamplingTimeStart()}
          */
         @Deprecated
@@ -360,7 +360,7 @@ public interface HibernateRelations {
          * Set the start phenomenon time
          *
          * @param phenomenonTimeStart
-         *            Start phenomenon time to set
+         *        Start phenomenon time to set
          * @deprecated use {@link HasPhenomenonTime#setSamplingTimeStart(Date)}
          */
         @Deprecated
@@ -377,7 +377,6 @@ public interface HibernateRelations {
          * Get the end phenomenon time
          *
          * @return End phenomenon time
-         *
          * @deprecated use {@link HasPhenomenonTime#getSamplingTimeEnd()}
          */
         @Deprecated
@@ -389,8 +388,7 @@ public interface HibernateRelations {
          * Set the end phenomenon time
          *
          * @param phenomenonTimeEnd
-         *            End phenomenon time to set
-         *
+         *        End phenomenon time to set
          * @deprecated use {@link HasPhenomenonTime#setSamplingTimeEnd(Date)}
          */
         @Deprecated
@@ -421,8 +419,7 @@ public interface HibernateRelations {
          * Set the start result time
          *
          * @param resultTimeStart
-         *            Start result time to set
-         *
+         *        Start result time to set
          * @return this
          */
         T setResultTimeStart(Date resultTimeStart);
@@ -442,7 +439,7 @@ public interface HibernateRelations {
          * Set the end result time
          *
          * @param resultTimeEnd
-         *            End result time to set
+         *        End result time to set
          * @return this
          */
         T setResultTimeEnd(Date resultTimeEnd);
@@ -522,7 +519,7 @@ public interface HibernateRelations {
          * Set the result time
          *
          * @param resultTime
-         *            Result tiem to set
+         *        Result tiem to set
          */
         void setResultTime(Date resultTime);
     }
@@ -559,8 +556,7 @@ public interface HibernateRelations {
          * Set the start valid time
          *
          * @param validTimeStart
-         *            Start valid time to set
-         *
+         *        Start valid time to set
          * @return this
          */
         T setValidTimeStart(Date validTimeStart);
@@ -576,8 +572,7 @@ public interface HibernateRelations {
          * Set the end valid time
          *
          * @param validTimeEnd
-         *            End valid time to set
-         *
+         *        End valid time to set
          * @return this
          */
         T setValidTimeEnd(Date validTimeEnd);
@@ -812,7 +807,7 @@ public interface HibernateRelations {
          * Set the observation id
          *
          * @param observationId
-         *            Observation id to set
+         *        Observation id to set
          */
         void setObservationId(long observationId);
     }
@@ -862,8 +857,8 @@ public interface HibernateRelations {
 
         /**
          * @param remarks
-         *            the remarks to set
-         *             @return this
+         *        the remarks to set
+         * @return this
          */
         T setRemarks(String remarks);
 

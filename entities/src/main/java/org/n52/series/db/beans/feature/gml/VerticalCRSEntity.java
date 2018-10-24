@@ -27,7 +27,6 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<VerticalCRSEntity> {
 
@@ -49,7 +48,7 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
 
     /**
      * @param remarks
-     *            the remarks to set
+     *        the remarks to set
      */
     @Override
     public VerticalCRSEntity setRemarks(String remarks) {
@@ -66,7 +65,7 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
 
     /**
      * @param domainOfValidity
-     *            the domainOfValidity to set
+     *        the domainOfValidity to set
      */
     public void setDomainOfValidity(Set<DomainOfValidityEntity> domainOfValidity) {
         this.domainOfValidity = domainOfValidity;
@@ -85,7 +84,7 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
 
     /**
      * @param scope
-     *            the scope to set
+     *        the scope to set
      */
     public void setScope(Set<String> scope) {
         this.scope = scope;
@@ -104,7 +103,7 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
 
     /**
      * @param verticalCS
-     *            the verticalCS to set
+     *        the verticalCS to set
      */
     public void setVerticalCS(VerticalCSEntity verticalCS) {
         this.verticalCS = verticalCS;
@@ -123,7 +122,7 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
 
     /**
      * @param verticalDatum
-     *            the verticalDatum to set
+     *        the verticalDatum to set
      */
     public void setVerticalDatum(VerticalDatumEntity verticalDatum) {
         this.verticalDatum = verticalDatum;

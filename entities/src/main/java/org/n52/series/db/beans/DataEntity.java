@@ -317,9 +317,10 @@ public abstract class DataEntity<T> extends DescribableEntity
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getId() == null)
-                ? 0
-                : getId().hashCode());
+        result = prime * result
+                + ((getId() == null)
+                        ? 0
+                        : getId().hashCode());
         return result;
     }
 

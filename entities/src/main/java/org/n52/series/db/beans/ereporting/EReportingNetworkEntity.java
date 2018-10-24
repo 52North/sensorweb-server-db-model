@@ -24,7 +24,6 @@ import org.n52.series.db.beans.DescribableEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class EReportingNetworkEntity extends DescribableEntity {
 
@@ -43,7 +42,7 @@ public class EReportingNetworkEntity extends DescribableEntity {
 
     /**
      * @param network
-     *            the network to set
+     *        the network to set
      * @return this
      */
     public EReportingNetworkEntity setNetwork(Long network) {

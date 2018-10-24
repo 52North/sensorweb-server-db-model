@@ -28,7 +28,8 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasStatio
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class EReportingSamplingPointEntity extends DescribableEntity implements HasAssessmentType,
+public class EReportingSamplingPointEntity extends DescribableEntity
+        implements HasAssessmentType,
         HasStation, HasNetwork {
 
     private static final long serialVersionUID = 506067361074437086L;

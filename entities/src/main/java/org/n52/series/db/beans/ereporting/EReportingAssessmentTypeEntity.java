@@ -40,7 +40,7 @@ public class EReportingAssessmentTypeEntity implements Serializable {
 
     /**
      * @param assessmentType
-     *            the assessmentType to set
+     *        the assessmentType to set
      * @return this
      */
     public EReportingAssessmentTypeEntity setAssessmentType(String assessmentType) {
@@ -57,7 +57,7 @@ public class EReportingAssessmentTypeEntity implements Serializable {
 
     /**
      * @param uri
-     *            the uri to set
+     *        the uri to set
      * @return this
      */
     public EReportingAssessmentTypeEntity setUri(String uri) {

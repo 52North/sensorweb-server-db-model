@@ -35,7 +35,8 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
     }
 
     /**
-     * @param structure the structure to set
+     * @param structure
+     *        the structure to set
      */
     public void setStructure(String structure) {
         this.structure = structure;
@@ -49,7 +50,8 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
     }
 
     /**
-     * @param encoding the encoding to set
+     * @param encoding
+     *        the encoding to set
      */
     public void setEncoding(String encoding) {
         this.encoding = encoding;
