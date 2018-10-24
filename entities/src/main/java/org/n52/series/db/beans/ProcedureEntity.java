@@ -35,10 +35,6 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
 
     private boolean reference;
 
-    private boolean mobile;
-
-    private boolean insitu = true;
-
     private FormatEntity format;
 
     private boolean deleted;
@@ -59,22 +55,6 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
 
     public void setReference(boolean reference) {
         this.reference = reference;
-    }
-
-    public boolean isMobile() {
-        return mobile;
-    }
-
-    public void setMobile(boolean mobile) {
-        this.mobile = mobile;
-    }
-
-    public boolean isInsitu() {
-        return insitu;
-    }
-
-    public void setInsitu(boolean insitu) {
-        this.insitu = insitu;
     }
 
     @Override
