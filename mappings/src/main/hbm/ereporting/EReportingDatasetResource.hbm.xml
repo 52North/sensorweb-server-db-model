@@ -67,6 +67,12 @@
             </column>
         </property>
 
+        <property name="originTimezone" type="string" precision="40">
+            <column name="origin_timezome" not-null="false" precision="40">
+                <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin)</comment>
+            </column>
+        </property>
+
         <property name="identifier" type="string" index="idx_dataset_identifier">
             <column name="identifier" not-null="false" unique-key="un_dataset_identifier"/>
         </property>

@@ -156,6 +156,14 @@ public interface Dataset extends Describable {
 
     void setInsitu(boolean insitu);
 
+    String getOriginTimezone();
+
+    void setOriginTimezone(String originTimezone);
+
+    default boolean isSetOriginTimezone() {
+        return getOriginTimezone() != null && !getOriginTimezone().isEmpty();
+    }
+
     Set<RelatedDatasetEntity> getRelatedDatasets();
 
     void setRelatedObservations(Set<RelatedDatasetEntity> relatedDatasets);
