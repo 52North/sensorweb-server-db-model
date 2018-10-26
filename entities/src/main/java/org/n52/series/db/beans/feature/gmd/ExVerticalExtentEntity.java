@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.feature.gmd;
 
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
 
 /**
@@ -129,5 +130,17 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
     public boolean isSetVerticalCRS() {
         return getVerticalCRS() != null;
     }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ExVerticalExtentEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

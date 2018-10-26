@@ -17,20 +17,20 @@
 
 package org.n52.series.db.beans.sta;
 
-import com.vividsolutions.jts.geom.Geometry;
 import java.io.Serializable;
 import java.util.Set;
+
 import org.n52.series.db.beans.GeometryEntity;
-import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
-import org.n52.series.db.beans.HibernateRelations.HasName;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends AbstractStaEntity
-        implements Serializable, HasName, HasDescription, HasGeometry {
+public class LocationEntity extends AbstractNameDescriptionStaEntity
+        implements Serializable, HasGeometry {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -38,8 +38,6 @@ public class LocationEntity extends AbstractStaEntity
 
     private static final long serialVersionUID = -8201429072560300649L;
 
-    private String name;
-    private String description;
     private String location;
     private GeometryEntity geometryEntity;
     private LocationEncodingEntity locationEncoding;
@@ -52,26 +50,6 @@ public class LocationEntity extends AbstractStaEntity
 
     public void setLocationEncoding(LocationEncodingEntity locationEncoding) {
         this.locationEncoding = locationEncoding;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getLocation() {

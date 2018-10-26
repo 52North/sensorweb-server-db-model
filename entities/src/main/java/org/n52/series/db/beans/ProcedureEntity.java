@@ -125,5 +125,18 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     public void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory) {
         this.procedureHistory = procedureHistory;
     }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ProcedureEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 
 }

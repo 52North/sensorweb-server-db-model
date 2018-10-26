@@ -115,4 +115,17 @@ public class ServiceEntity extends DescribableEntity {
                  .toString();
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ServiceEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
 }

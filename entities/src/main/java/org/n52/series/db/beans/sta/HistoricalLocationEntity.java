@@ -19,8 +19,10 @@ package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.common.Utils;
 
 /**
@@ -34,7 +36,9 @@ public class HistoricalLocationEntity extends AbstractStaEntity implements Seria
     private static final long serialVersionUID = 5564686026419270062L;
 
     private Date time;
+
     private Set<LocationEntity> locationEntities;
+
     private ThingEntity thingEntity;
 
     public Date getTime() {
@@ -59,6 +63,22 @@ public class HistoricalLocationEntity extends AbstractStaEntity implements Seria
 
     public void setThingEntity(ThingEntity thingEntity) {
         this.thingEntity = thingEntity;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getTime(), getThingEntity());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof IdEntity)) {
+            return false;
+        }
+        HistoricalLocationEntity other = (HistoricalLocationEntity) obj;
+        return super.equals(other)
+                && Objects.equals(getTime(), other.getTime())
+                && Objects.equals(getThingEntity(), other.getThingEntity());
     }
 
 }

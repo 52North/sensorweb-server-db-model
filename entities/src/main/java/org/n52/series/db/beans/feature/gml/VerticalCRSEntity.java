@@ -19,6 +19,7 @@ package org.n52.series.db.beans.feature.gml;
 
 import java.util.Set;
 
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
 
@@ -131,5 +132,18 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
 
     public boolean isSetVerticalDatum() {
         return getVerticalDatum() != null;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof VerticalCRSEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 }

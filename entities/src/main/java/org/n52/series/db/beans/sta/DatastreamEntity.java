@@ -24,9 +24,7 @@ import java.util.Set;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.GeometryEntity;
-import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
-import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasObservableProperty;
 import org.n52.series.db.beans.HibernateRelations.HasObservationType;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
@@ -43,7 +41,7 @@ import com.vividsolutions.jts.geom.Geometry;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class DatastreamEntity extends AbstractStaEntity implements Serializable, HasName, HasDescription,
+public class DatastreamEntity extends AbstractNameDescriptionStaEntity implements Serializable,
         HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>, HasPhenomenonTime, HasUnit,
         HasProcedure<DatastreamEntity>, HasGeometry {
 
@@ -62,8 +60,6 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
 
     private static final long serialVersionUID = -9067390076853876658L;
 
-    private String name;
-    private String description;
     private GeometryEntity geometryEntity;
     private Date samplingTimeStart;
     private Date samplingTimeEnd;
@@ -78,26 +74,6 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
 
     private Set<DatasetEntity> datasets;
     private Set<StaDataEntity> observations;
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     @Override
     public Date getSamplingTimeStart() {
@@ -253,6 +229,10 @@ public class DatastreamEntity extends AbstractStaEntity implements Serializable,
 
     public Set<StaDataEntity> getObservations() {
         return observations;
+    }
+
+    public boolean hasObservations() {
+        return getObservations() != null && !getObservations().isEmpty();
     }
 
 }

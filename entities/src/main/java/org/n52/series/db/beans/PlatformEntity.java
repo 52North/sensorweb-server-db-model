@@ -19,8 +19,9 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-import com.vividsolutions.jts.geom.Geometry;
 import org.n52.series.db.beans.parameter.Parameter;
+
+import com.vividsolutions.jts.geom.Geometry;
 
 public class PlatformEntity extends DescribableEntity {
 
@@ -76,5 +77,17 @@ public class PlatformEntity extends DescribableEntity {
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof PlatformEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

@@ -19,14 +19,12 @@ package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
 import java.util.Set;
-import org.n52.series.db.beans.HibernateRelations.HasDescription;
-import org.n52.series.db.beans.HibernateRelations.HasName;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class ThingEntity extends AbstractStaEntity implements Serializable, HasName, HasDescription {
+public class ThingEntity extends AbstractNameDescriptionStaEntity implements Serializable {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -36,32 +34,10 @@ public class ThingEntity extends AbstractStaEntity implements Serializable, HasN
 
     private static final long serialVersionUID = -6769297522935770467L;
 
-    private String name;
-    private String description;
     private String properties;
     private Set<LocationEntity> locationEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
     private Set<DatastreamEntity> datastreamEntities;
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getDescription() {
-        return description;
-    }
-
-    @Override
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public void setProperties(String properties) {
         this.properties = properties;

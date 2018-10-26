@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -230,5 +231,21 @@ public class DescribableEntity extends IdEntity implements Describable,
                  .append(getService())
                  .append(" ]")
                  .toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getIdentifier(), getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof DescribableEntity)) {
+            return false;
+        }
+        DescribableEntity other = (DescribableEntity) obj;
+        return super.equals(other)
+                && Objects.equals(getIdentifier(), other.getIdentifier())
+                && Objects.equals(getName(), other.getName());
     }
 }

@@ -17,35 +17,43 @@
 
 package org.n52.series.db.beans.sta;
 
-import java.io.Serializable;
 import java.util.Objects;
 
+import org.n52.series.db.beans.HibernateRelations.HasDescription;
+import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.IdEntity;
 
-/**
- *
- * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
- */
-public class LocationEncodingEntity extends AbstractStaEntity implements Serializable {
+public class AbstractNameDescriptionStaEntity extends AbstractStaEntity implements HasName, HasDescription {
 
-    public static final String PROPERTY_ENCODING_TYPE = "encodingType";
-    public static final String PROPERTY_LOCATION = "location";
+    private static final long serialVersionUID = 948180142611914656L;
 
-    private static final long serialVersionUID = 656748116995263897L;
+    private String name;
 
-    private String encodingType;
+    private String description;
 
-    public String getEncodingType() {
-        return encodingType;
+    @Override
+    public String getName() {
+        return name;
     }
 
-    public void setEncodingType(String encodingType) {
-        this.encodingType = encodingType;
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getEncodingType());
+        return Objects.hash(super.hashCode(), getName());
     }
 
     @Override
@@ -53,8 +61,7 @@ public class LocationEncodingEntity extends AbstractStaEntity implements Seriali
         if (obj == null || !(obj instanceof IdEntity)) {
             return false;
         }
-        LocationEncodingEntity other = (LocationEncodingEntity) obj;
-        return super.equals(other) && Objects.equals(getEncodingType(), other.getEncodingType());
+        AbstractNameDescriptionStaEntity other = (AbstractNameDescriptionStaEntity) obj;
+        return super.equals(other) && Objects.equals(getName(), other.getName());
     }
-
 }

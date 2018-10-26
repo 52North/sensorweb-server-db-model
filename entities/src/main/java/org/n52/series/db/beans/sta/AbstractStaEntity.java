@@ -25,4 +25,6 @@ import org.n52.series.db.beans.IdEntity;
  */
 public abstract class AbstractStaEntity extends IdEntity {
 
+    private static final long serialVersionUID = -425592668160144257L;
+
 }

@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.ereporting;
 
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasAssessmentType;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasNetwork;
@@ -85,6 +86,19 @@ public class EReportingSamplingPointEntity extends DescribableEntity implements 
     @Override
     public boolean isSetStation() {
         return getStation() != null;
+    }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof EReportingSamplingPointEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
 }

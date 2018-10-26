@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans.feature.gmd;
 
+import org.n52.series.db.beans.DatasetEntity;
+
 /**
  * Hibernate entity for responsibleParty.
  *
@@ -123,5 +125,18 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
      */
     public void setCiRole(RoleEntity ciRole) {
         this.ciRole = ciRole;
+    }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ResponsiblePartyEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 }

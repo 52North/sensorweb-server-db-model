@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans.feature.gmd;
 
+import org.n52.series.db.beans.DatasetEntity;
+
 /**
  * Hibernate entity for contact.
  *
@@ -129,4 +131,16 @@ public class ContactEntity extends AbstractCiEntity {
         return getContactInstructions() != null && !getContactInstructions().isEmpty();
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ContactEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }
