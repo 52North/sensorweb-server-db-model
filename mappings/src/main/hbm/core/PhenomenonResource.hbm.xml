@@ -80,7 +80,7 @@
                 <param name="sequence_name">phenomenon_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" class="PhenomenonEntity" foreign-key="fk_phenomenon">
+        <many-to-one name="entity" class="PhenomenonEntity" foreign-key="fk_phenomenon">
             <column name="fk_phenomenon_id" not-null="true">
                 <comment>Reference to the phenomenon table this internationalization belongs to.</comment>
             </column>

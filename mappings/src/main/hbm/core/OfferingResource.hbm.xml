@@ -164,7 +164,7 @@
                 <param name="sequence_name">offering_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" class="OfferingEntity" foreign-key="fk_offering">
+        <many-to-one name="entity" class="OfferingEntity" foreign-key="fk_offering">
             <column name="fk_offering_id" not-null="true">
                 <comment>Reference to the offering table this internationalization belongs to.</comment>
             </column>
