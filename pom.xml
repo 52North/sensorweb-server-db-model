@@ -6,6 +6,7 @@
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
         <version>13-SNAPSHOT</version>
+        <relativePath /> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.n52.series.db</groupId>
     <artifactId>parent</artifactId>
@@ -22,10 +23,10 @@
     </modules>
 
      <organization>
-         <name>52North Initiative for Geospatial Open Source Software GmbH</name> 
-         <url>http://52north.org</url> 
-     </organization> 
-     
+         <name>52North Initiative for Geospatial Open Source Software GmbH</name>
+         <url>http://52north.org</url>
+     </organization>
+
     <developers>
         <developer>
             <id>bredel</id>
@@ -66,12 +67,85 @@
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
         <file.encoding>UTF-8</file.encoding>
-        
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            
+
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-c3p0</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>xml-apis</artifactId>
+                        <groupId>xml-apis</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-ehcache</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-entitymanager</artifactId>
+                <version>${hibernate.version}</version>
+                <exclusions>
+                    <exclusion>
+                        <artifactId>xml-apis</artifactId>
+                        <groupId>xml-apis</groupId>
+                    </exclusion>
+                </exclusions>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-envers</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-hikaricp</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-infinispan</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-java8</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-jcache</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-jpamodelgen</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-proxool</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-spatial</artifactId>
+                <version>${hibernate-spatial.version}</version>
+            </dependency>
+
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -80,7 +154,7 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
-            
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>entities</artifactId>
@@ -106,7 +180,7 @@
                 <artifactId>dialects</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
+
             <dependency>
                 <groupId>xalan</groupId>
                 <artifactId>xalan</artifactId>
@@ -243,7 +317,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>
@@ -261,7 +335,7 @@
         </resources>
 
         <plugins>
-            
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -310,7 +384,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>
@@ -457,11 +531,11 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        
+
     </build>
 
     <profiles>
-        
+
         <profile>
             <id>jdk8</id>
             <activation>
@@ -506,7 +580,7 @@
                 </pluginManagement>
             </build>
         </profile>
-        
+
         <profile>
             <id>create-license-list</id>
             <build>
@@ -550,6 +624,12 @@
             <id>n52-releases</id>
             <name>52n Releases</name>
             <url>http://52north.org/maven/repo/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>geotools</id>
@@ -557,18 +637,47 @@
             <url>http://download.osgeo.org/webdav/geotools/</url>
             <!--<url>https://boundless.artifactoryonline.com/boundless/main</url> -->
             <!--<url>http://repo.boundlessgeo.com/main/</url> -->
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>n52-snapshots</id>
             <name>n52-snapshots</name>
             <url>http://52north.org/maven/repo/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>sonatype-nexus-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snaphots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>
