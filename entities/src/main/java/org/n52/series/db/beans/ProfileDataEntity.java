@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans;
 
+import java.util.Set;
+
 import org.n52.series.db.beans.data.Data.ProfileData;
 
 public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
@@ -28,6 +30,16 @@ public class ProfileDataEntity extends CompositeDataEntity implements ProfileDat
     private String verticaltoName;
 
     private UnitEntity verticalUnit;
+
+    @Override
+    public Set<DataEntity< ? >> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity< ? >> value) {
+        super.setValue(value);
+    }
 
     public String getVerticalFromName() {
         return verticalfromName;
