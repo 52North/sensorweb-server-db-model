@@ -95,16 +95,22 @@
                 <comment>Flag that indicates if this dataset should be published</comment>
             </column>
         </property>
-        
+
         <property name="mobile" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_mobile" not-null="false" default="0" check="is_mobile in (1,0)">
                 <comment>Flag that indicates if the procedure is mobile (1/true) or stationary (0/false).</comment>
             </column>
         </property>
-        
+
         <property name="insitu" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_insitu" not-null="false" default="1" check="is_insitu in (1,0)">
                 <comment>Flag that indicates if the procedure is insitu (1/true) or remote (0/false).</comment>
+            </column>
+        </property>
+
+        <property name="originTimezone" type="string" precision="40">
+            <column name="origin_timezome" not-null="false" precision="40">
+                <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin)</comment>
             </column>
         </property>
 
