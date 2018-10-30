@@ -18,13 +18,16 @@
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
+
+import org.n52.series.db.beans.sta.StaRelations.Locations;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class ThingEntity extends AbstractNameDescriptionStaEntity implements Serializable {
+public class ThingEntity extends AbstractNameDescriptionStaEntity implements Serializable, Locations<ThingEntity> {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -39,8 +42,9 @@ public class ThingEntity extends AbstractNameDescriptionStaEntity implements Ser
     private Set<HistoricalLocationEntity> historicalLocationEntities;
     private Set<DatastreamEntity> datastreamEntities;
 
-    public void setProperties(String properties) {
+    public ThingEntity setProperties(String properties) {
         this.properties = properties;
+        return this;
     }
 
     public String getProperties() {
@@ -51,32 +55,39 @@ public class ThingEntity extends AbstractNameDescriptionStaEntity implements Ser
         return locationEntities;
     }
 
-    public void setLocationEntities(Set<LocationEntity> locationEntities) {
+    public ThingEntity setLocationEntities(Set<LocationEntity> locationEntities) {
         this.locationEntities = locationEntities;
+        return this;
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {
         return historicalLocationEntities;
     }
 
-    public void setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
+    public ThingEntity setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
         this.historicalLocationEntities = historicalLocationEntities;
+        return this;
+    }
+
+    public ThingEntity addHistoricalLocation(HistoricalLocationEntity historicalLocationEntity) {
+        if (historicalLocationEntities == null) {
+            historicalLocationEntities = new LinkedHashSet<>();
+        }
+        historicalLocationEntities.add(historicalLocationEntity);
+        return this;
     }
 
     public Set<DatastreamEntity> getDatastreamEntities() {
         return datastreamEntities;
     }
 
-    public void setDatastreamEntities(Set<DatastreamEntity> datastreamEntities) {
+    public ThingEntity setDatastreamEntities(Set<DatastreamEntity> datastreamEntities) {
         this.datastreamEntities = datastreamEntities;
+        return this;
     }
 
     public boolean hasDatastreamEntities() {
         return getDatastreamEntities() != null && !getDatastreamEntities().isEmpty();
-    }
-
-    public boolean hasLocationEntities() {
-        return getLocationEntities() != null && !getLocationEntities().isEmpty();
     }
 
     public boolean hasHistoricalLocationEntities() {

@@ -27,4 +27,15 @@ public abstract class AbstractStaEntity extends IdEntity {
 
     private static final long serialVersionUID = -425592668160144257L;
 
+    private boolean processsed;
+
+    public boolean isProcesssed() {
+        return processsed;
+    }
+
+    public AbstractStaEntity setProcesssed(boolean processsed) {
+        this.processsed = processsed;
+        return this;
+    }
+
 }

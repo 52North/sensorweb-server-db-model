@@ -21,8 +21,9 @@ import java.util.Collection;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.sta.StaRelations.Datastream;
 
-public class StaDataEntity extends DataEntity<String> {
+public class StaDataEntity extends DataEntity<String> implements Datastream<StaDataEntity> {
 
     private static final long serialVersionUID = -4720091385202877301L;
 
@@ -30,16 +31,15 @@ public class StaDataEntity extends DataEntity<String> {
 
     private AbstractFeatureEntity< ? > featureOfInterest;
 
+    private boolean processsed;
+
     public DatastreamEntity getDatastream() {
         return datastream;
     }
 
-    public void setDatastream(DatastreamEntity datastream) {
+    public StaDataEntity setDatastream(DatastreamEntity datastream) {
         this.datastream = datastream;
-    }
-
-    public boolean hasDatatream() {
-        return getDatastream() != null;
+        return this;
     }
 
     public AbstractFeatureEntity< ? > getFeatureOfInterest() {
@@ -52,6 +52,14 @@ public class StaDataEntity extends DataEntity<String> {
 
     public boolean hasFeatureOfInterest() {
         return getFeatureOfInterest() != null;
+    }
+
+    public boolean isProcesssed() {
+        return processsed;
+    }
+
+    public void setProcesssed(boolean processsed) {
+        this.processsed = processsed;
     }
 
     @Override

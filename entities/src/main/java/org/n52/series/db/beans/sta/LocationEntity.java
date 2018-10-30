@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.GeometryEntity;
@@ -48,16 +49,18 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity
         return locationEncoding;
     }
 
-    public void setLocationEncoding(LocationEncodingEntity locationEncoding) {
+    public LocationEntity setLocationEncoding(LocationEncodingEntity locationEncoding) {
         this.locationEncoding = locationEncoding;
+        return this;
     }
 
     public String getLocation() {
         return location;
     }
 
-    public void setLocation(String location) {
+    public LocationEntity setLocation(String location) {
         this.location = location;
+        return this;
     }
 
     public boolean hasLocation() {
@@ -87,8 +90,9 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity
         return thingEntities;
     }
 
-    public void setThingEntities(Set<ThingEntity> thingEntities) {
+    public LocationEntity setThingEntities(Set<ThingEntity> thingEntities) {
         this.thingEntities = thingEntities;
+        return this;
     }
 
     public boolean hasThings() {
@@ -99,8 +103,17 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity
         return historicalLocationEntities;
     }
 
-    public void setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
+    public LocationEntity setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
         this.historicalLocationEntities = historicalLocationEntities;
+        return this;
+    }
+
+    public LocationEntity addHistoricalLocation(HistoricalLocationEntity historicalLocationEntity) {
+        if (historicalLocationEntities == null) {
+            historicalLocationEntities = new LinkedHashSet<>();
+        }
+        historicalLocationEntities.add(historicalLocationEntity);
+        return this;
     }
 
 }

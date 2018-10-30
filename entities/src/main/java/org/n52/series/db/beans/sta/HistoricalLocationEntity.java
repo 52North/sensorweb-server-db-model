@@ -23,13 +23,15 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.sta.StaRelations.Locations;
 import org.n52.series.db.common.Utils;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class HistoricalLocationEntity extends AbstractStaEntity implements Serializable {
+public class HistoricalLocationEntity extends AbstractStaEntity
+        implements Serializable, Locations<HistoricalLocationEntity> {
 
     public static final String PROPERTY_TIME = "time";
 
@@ -45,24 +47,27 @@ public class HistoricalLocationEntity extends AbstractStaEntity implements Seria
         return Utils.createUnmutableTimestamp(time);
     }
 
-    public void setTime(Date time) {
+    public HistoricalLocationEntity setTime(Date time) {
         this.time = Utils.createUnmutableTimestamp(time);
+        return this;
     }
 
     public Set<LocationEntity> getLocationEntities() {
         return locationEntities;
     }
 
-    public void setLocationEntities(Set<LocationEntity> locationEntities) {
+    public HistoricalLocationEntity setLocationEntities(Set<LocationEntity> locationEntities) {
         this.locationEntities = locationEntities;
+        return this;
     }
 
     public ThingEntity getThingEntity() {
         return thingEntity;
     }
 
-    public void setThingEntity(ThingEntity thingEntity) {
+    public HistoricalLocationEntity setThingEntity(ThingEntity thingEntity) {
         this.thingEntity = thingEntity;
+        return this;
     }
 
     @Override
