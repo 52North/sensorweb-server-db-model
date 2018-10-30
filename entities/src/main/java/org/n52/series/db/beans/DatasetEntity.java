@@ -98,6 +98,8 @@ public abstract class DatasetEntity extends DescribableEntity
 
     private boolean insitu = true;
 
+    private String originTimezone;
+
     private final Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
 
     public DatasetEntity() {
@@ -395,6 +397,16 @@ public abstract class DatasetEntity extends DescribableEntity
     @Override
     public void setInsitu(boolean insitu) {
         this.insitu = insitu;
+    }
+
+    @Override
+    public String getOriginTimezone() {
+        return originTimezone;
+    }
+
+    @Override
+    public void setOriginTimezone(String originTimezone) {
+        this.originTimezone = originTimezone;
     }
 
     @Override
