@@ -18,7 +18,6 @@
 package org.n52.series.db.beans.feature.gml;
 
 import org.n52.series.db.beans.CodespaceEntity;
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.feature.ReferenceEntity;
@@ -220,7 +219,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     public void setUom(UnitEntity uom) {
         this.uom = uom;
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

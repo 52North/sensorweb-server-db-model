@@ -230,7 +230,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         this.relatedFeatures = relatedFeatures;
         return this;
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

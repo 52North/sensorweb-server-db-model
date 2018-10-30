@@ -19,8 +19,6 @@ package org.n52.series.db.beans.feature.gmd;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
-
 /**
  * Hibernate entity for address.
  *
@@ -152,7 +150,7 @@ public class AddressEntity extends AbstractCiEntity {
     public boolean hasElectronicMailAddress() {
         return getElectronicMailAddress() != null && !getElectronicMailAddress().isEmpty();
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

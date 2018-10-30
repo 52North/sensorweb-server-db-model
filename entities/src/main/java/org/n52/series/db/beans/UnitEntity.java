@@ -59,7 +59,7 @@ public class UnitEntity extends DescribableEntity {
     public void setSymbol(String symbol) {
         setIdentifier(symbol);
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

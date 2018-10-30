@@ -77,7 +77,7 @@ public class PlatformEntity extends DescribableEntity {
     public boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

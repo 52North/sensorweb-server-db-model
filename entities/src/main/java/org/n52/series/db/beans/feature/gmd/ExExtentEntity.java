@@ -19,8 +19,6 @@ package org.n52.series.db.beans.feature.gmd;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
-
 /**
  * Hibernate entity for exExtent.
  *
@@ -52,7 +50,7 @@ public class ExExtentEntity extends AbstractCiEntity {
     public boolean hasVerticalExtent() {
         return getVerticalExtent() != null && !getVerticalExtent().isEmpty();
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

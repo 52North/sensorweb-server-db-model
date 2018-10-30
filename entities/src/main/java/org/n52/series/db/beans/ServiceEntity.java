@@ -119,7 +119,7 @@ public class ServiceEntity extends DescribableEntity {
     public int hashCode() {
         return super.hashCode();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof ServiceEntity)) {

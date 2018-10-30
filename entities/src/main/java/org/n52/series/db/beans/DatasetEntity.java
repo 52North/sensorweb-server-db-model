@@ -22,7 +22,6 @@ import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.LinkedHashSet;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -538,7 +537,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Da
         }
         setUnit(dataset.getUnit());
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

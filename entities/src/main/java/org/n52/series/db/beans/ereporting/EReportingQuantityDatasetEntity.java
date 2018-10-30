@@ -19,7 +19,6 @@ package org.n52.series.db.beans.ereporting;
 
 import java.util.List;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.dataset.QuantityDataset;
 
 public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
@@ -53,7 +52,7 @@ public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
         this.numberOfDecimals = numberOfDecimals;
         return this;
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

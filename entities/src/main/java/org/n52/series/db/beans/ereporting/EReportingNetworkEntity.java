@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 
 /**
@@ -51,7 +50,7 @@ public class EReportingNetworkEntity extends DescribableEntity {
         this.network = network;
         return this;
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

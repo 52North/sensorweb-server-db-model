@@ -17,8 +17,6 @@
 
 package org.n52.series.db.beans.feature.gmd;
 
-import org.n52.series.db.beans.DatasetEntity;
-
 /**
  * Hibernate entity for onlineResource.
  *
@@ -121,7 +119,7 @@ public class OnlineResourceEntity extends AbstractCiEntity {
     public boolean isSetFunction() {
         return getFunction() != null && !getFunction().isEmpty();
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

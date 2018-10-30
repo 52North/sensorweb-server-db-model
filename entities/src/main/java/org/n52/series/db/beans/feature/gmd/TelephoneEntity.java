@@ -19,8 +19,6 @@ package org.n52.series.db.beans.feature.gmd;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
-
 /**
  * Hibernate entity for telephone.
  *
@@ -72,7 +70,7 @@ public class TelephoneEntity extends AbstractCiEntity {
     public boolean hasFacsimile() {
         return getFacsimile() != null && !getFacsimile().isEmpty();
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

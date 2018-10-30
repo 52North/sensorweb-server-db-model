@@ -19,7 +19,6 @@ package org.n52.series.db.beans.feature;
 
 import java.util.Date;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.common.Utils;
@@ -162,7 +161,7 @@ public class SpecimenEntity extends FeatureEntity {
     public boolean isSetSpecimenType() {
         return getSpecimenType() != null && !getSpecimenType().isEmpty();
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

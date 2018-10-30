@@ -19,7 +19,6 @@ package org.n52.series.db.beans.feature.gml;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
 
@@ -97,7 +96,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
     public int hashCode() {
         return super.hashCode();
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null || !(obj instanceof VerticalCSEntity)) {

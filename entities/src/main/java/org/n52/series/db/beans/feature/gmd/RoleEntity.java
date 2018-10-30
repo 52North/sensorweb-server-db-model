@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.feature.gmd;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.feature.NilReasonEntity;
 
 /**
@@ -63,7 +62,7 @@ public class RoleEntity extends NilReasonEntity {
     public void setCodeListValue(String codeListValue) {
         this.codeListValue = codeListValue;
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();

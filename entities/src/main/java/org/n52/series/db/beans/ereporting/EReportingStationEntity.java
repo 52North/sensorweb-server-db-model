@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
@@ -72,6 +71,11 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
     public EReportingStationEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override

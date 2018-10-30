@@ -58,7 +58,7 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
         this.numberOfDecimals = numberOfDecimals;
         return this;
     }
-    
+
     @Override
     public int hashCode() {
         return super.hashCode();
