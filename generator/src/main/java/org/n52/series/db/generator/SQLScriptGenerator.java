@@ -84,20 +84,6 @@ public class SQLScriptGenerator {
 
     }
 
-    enum DialectSelector {
-        POSTGIS,
-        ORACLE,
-        GEODB,
-        MY_SQL_SPATIAL_5,
-        SQL_SERVER_2008;
-
-        @Override
-        public String toString() {
-            return name().replaceAll("_", "-")
-                         .toLowerCase();
-        }
-    }
-
     private Dialect getDialect(DialectSelector selection) throws Exception {
         switch (selection) {
         case POSTGIS:
@@ -143,17 +129,6 @@ public class SQLScriptGenerator {
         addConceptDirectories(concept, configuration, metadataSources);
     }
 
-    enum Concept {
-        DEFAULT,
-        E_REPORTING;
-
-        @Override
-        public String toString() {
-            return name().replaceAll("_", "-")
-                         .toLowerCase();
-        }
-    }
-
     private void addConceptDirectories(Concept concept, Configuration configuration, MetadataSources metadataSources)
             throws Exception {
         switch (concept) {
@@ -166,14 +141,20 @@ public class SQLScriptGenerator {
             }
             break;
         case E_REPORTING:
-
             if (configuration != null) {
                 configuration.addDirectory(getDirectory("/hbm/ereporting"));
             }
             if (metadataSources != null) {
                 metadataSources.addDirectory(getDirectory("/hbm/ereporting"));
             }
-
+            break;
+        case SAMPLING:
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory("/hbm/sampling"));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory("/hbm/sampling"));
+            }
             break;
         default:
             throw new Exception("The entered value is invalid: " + concept);
@@ -235,6 +216,7 @@ public class SQLScriptGenerator {
         printToScreen("Which observation concept should be created:");
         printToScreen("0   series");
         printToScreen("1   ereporting");
+        printToScreen("2   sampling");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -494,6 +476,32 @@ public class SQLScriptGenerator {
                 cm.setDefaultValue(next.getDefaultValue());
                 cm.setNotNull(Boolean.toString(!next.isNullable()));
             }
+        }
+    }
+
+    enum DialectSelector {
+        POSTGIS,
+        ORACLE,
+        GEODB,
+        MY_SQL_SPATIAL_5,
+        SQL_SERVER_2008;
+
+        @Override
+        public String toString() {
+            return name().replaceAll("_", "-")
+                         .toLowerCase();
+        }
+    }
+
+    enum Concept {
+        DEFAULT,
+        E_REPORTING,
+        SAMPLING;
+
+        @Override
+        public String toString() {
+            return name().replaceAll("_", "-")
+                         .toLowerCase();
         }
     }
 
