@@ -1,0 +1,62 @@
+<hibernate-mapping package="org.n52.series.db.beans.sampling"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <!-- TODO: check for naming -->
+    <class name="MonitoringProgramEntity"
+        table="monitoring_program">
+        <comment>Storage of the monitoring program.</comment>
+        <id name="id" type="long">
+            <column name="monitoring_program_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">monitoring_program_seq</param>
+            </generator>
+        </id>
+
+        <property name="label" type="string">
+            <column name="label">
+                <comment>The label of the monitoring program.</comment>
+            </column>
+        </property>
+
+         <property name="producer" type="string">
+            <column name="producer">
+                <comment>The producer of the monitoring program.</comment>
+            </column>
+        </property>
+
+         <property name="order" type="string">
+            <column name="order_id">
+                <comment>The order number for the monitoring program.</comment>
+            </column>
+        </property>
+
+        <property name="monitoringTimeStart" type="timestamp">
+            <column index="idx_monitoring_time_start" name="monitoring_time_start" length="29" not-null="true">
+                <comment>The timestamp when the monitoring program period has started.</comment>
+            </column>
+        </property>
+
+        <property name="monitoringTimeEnd" type="timestamp">
+            <column index="idx_monitoring_time_end" name="monitoring_time_end" length="29" not-null="false">
+                <comment>The timestamp when the monitoring program period has finished.</comment>
+            </column>
+        </property>
+
+        <set inverse="false" name="datasets" table="monitoring_program_dataset">
+            <comment>Storage of relations between dataset and related monitoring programs</comment>
+            <key not-null="true" foreign-key="fk_monitoring_program_dataset">
+                <column name="fk_monitoring_program_id">
+                    <comment>The reference to the monitoring program in the dataset monitoring program</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_monitoring_program">
+                <column name="fk_dataset_id">
+                    <comment>The reference to the dataset in the dataset table</comment>
+                </column>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
