@@ -312,8 +312,7 @@ public interface HibernateRelations {
         boolean isSetOffering();
     }
 
-    interface HasPhenomenonTime {
-
+    interface HasSamplingTime {
         /**
          * @return the samplingTimeStart
          */
@@ -343,6 +342,9 @@ public interface HibernateRelations {
         default boolean hasSamplingTimeEnd() {
             return getSamplingTimeStart() != null;
         }
+    }
+
+    interface HasPhenomenonTime extends HasSamplingTime {
 
         /**
          * Get the start phenomenon time
@@ -892,6 +894,18 @@ public interface HibernateRelations {
 
         default boolean isSetDataset() {
             return getDataset() != null;
+        }
+
+    }
+
+    interface HasDatasets {
+
+        void setDatasets(Set<DatasetEntity> dataset);
+
+        Set<DatasetEntity> getDatasets();
+
+        default boolean hasDatasets() {
+            return getDatasets() != null;
         }
 
     }
