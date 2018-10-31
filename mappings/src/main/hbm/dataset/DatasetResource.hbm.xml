@@ -265,4 +265,35 @@
             <property name="verticalParameterName" formula="'depth'" type="string" />
         </subclass>
     </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nDatasetEntity" table="dataset_i18n">
+        <id name="id" type="long">
+            <column name="dataset_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">dataset_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="DatasetEntity" foreign-key="fk_dataset">
+            <column name="fk_dataset_id" not-null="true">
+                <comment>Reference to the dataset table this internationalization belongs to.</comment>
+            </column>
+        </many-to-one>
+         <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the data entity</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>Locale/language specific description of the data entity</comment>
+            </column>
+        </property>
+    </class>
 </hibernate-mapping>
