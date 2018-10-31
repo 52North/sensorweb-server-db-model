@@ -27,6 +27,8 @@ import java.util.Set;
 
 import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.sampling.DetectionLimitEntity;
+import org.n52.series.db.beans.sampling.SamplingEntity;
 import org.n52.series.db.common.Utils;
 
 public abstract class DataEntity<T> extends DescribableEntity
@@ -97,6 +99,10 @@ public abstract class DataEntity<T> extends DescribableEntity
     private BigDecimal verticalFrom = NOT_SET_VERTICAL;
 
     private BigDecimal verticalTo = NOT_SET_VERTICAL;
+
+    private SamplingEntity sampling;
+
+    private DetectionLimitEntity detectionLimit;
 
     protected DataEntity() {
 
@@ -303,6 +309,30 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public void setVerticalTo(BigDecimal verticalTo) {
         this.verticalTo = verticalTo;
+    }
+
+    @Override
+    public void setSampling(SamplingEntity sampling) {
+        this.sampling = sampling;
+    }
+
+    @Override
+    public SamplingEntity getSampling() {
+        return sampling;
+    }
+
+    /**
+     * @return the detectionLimit
+     */
+    public DetectionLimitEntity getDetectionLimit() {
+        return detectionLimit;
+    }
+
+    /**
+     * @param detectionLimit the detectionLimit to set
+     */
+    public void setDetectionLimit(DetectionLimitEntity detectionLimit) {
+        this.detectionLimit = detectionLimit;
     }
 
     @Override

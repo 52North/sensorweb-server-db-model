@@ -29,6 +29,8 @@ import org.n52.series.db.beans.HibernateRelations.HasDataset;
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.sampling.DetectionLimitEntity;
+import org.n52.series.db.beans.sampling.SamplingEntity;
 import org.n52.series.db.beans.IdentifierNameDescriptionEntity;
 import org.n52.series.db.beans.RelatedDataEntity;
 import org.n52.series.db.beans.UnitEntity;
@@ -140,6 +142,22 @@ public interface Data<T>
 
     default boolean hasVerticalTo() {
         return getVerticalTo() != null && !getVerticalFrom().equals(NOT_SET_VERTICAL);
+    }
+
+    void setSampling(SamplingEntity sampling);
+
+    SamplingEntity getSampling();
+
+    default boolean hasSampling() {
+        return getSampling() != null;
+    }
+    
+    DetectionLimitEntity getDetectionLimit();
+
+    void setDetectionLimit(DetectionLimitEntity detectionLimit);
+
+    default boolean isSetDetectionLimit() {
+        return getDetectionLimit() != null && getDetectionLimit().isSetDetectionLimit();
     }
 
     interface BlobData

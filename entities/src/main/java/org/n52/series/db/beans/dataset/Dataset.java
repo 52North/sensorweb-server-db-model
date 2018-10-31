@@ -35,6 +35,8 @@ import org.n52.series.db.beans.RelatedDatasetEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.sampling.MonitoringProgramEntity;
+import org.n52.series.db.beans.sampling.SamplingEntity;
 
 public interface Dataset extends Describable {
 
@@ -168,7 +170,9 @@ public interface Dataset extends Describable {
 
     void setRelatedObservations(Set<RelatedDatasetEntity> relatedDatasets);
 
-    boolean hasRelatedDatasets();
+    default boolean hasRelatedDatasets() {
+        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
+    }
 
     Long getId();
 
@@ -197,10 +201,26 @@ public interface Dataset extends Describable {
     Set<Parameter< ? >> getParameters();
 
     default boolean hasParameters() {
-        return getParameters() != null;
+        return getParameters() != null && !getParameters().isEmpty();
     }
 
     void setParameters(Set<Parameter< ? >> parameters);
+
+    void setSamplings(Set<SamplingEntity> samplings);
+
+    Set<SamplingEntity> getSamplings();
+
+    default boolean hasSamplings() {
+        return getSamplings() != null && !getSamplings().isEmpty();
+    }
+
+    void setMonitoringPrograms(Set<MonitoringProgramEntity> monitoringPrograms);
+
+    Set<MonitoringProgramEntity> getMonitoringPrograms();
+
+    default boolean hasMonitoringPrograms() {
+        return getMonitoringPrograms() != null && !getMonitoringPrograms().isEmpty();
+    }
 
     void copy(Dataset series);
 

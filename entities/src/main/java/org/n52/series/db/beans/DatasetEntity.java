@@ -28,6 +28,8 @@ import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.Dataset;
+import org.n52.series.db.beans.sampling.MonitoringProgramEntity;
+import org.n52.series.db.beans.sampling.SamplingEntity;
 import org.n52.series.db.common.Utils;
 
 public abstract class DatasetEntity extends DescribableEntity
@@ -101,6 +103,10 @@ public abstract class DatasetEntity extends DescribableEntity
     private String originTimezone;
 
     private final Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
+
+    private final Set<SamplingEntity> samplings = new LinkedHashSet<>();
+
+    private final Set<MonitoringProgramEntity> monitoringPrograms = new LinkedHashSet<>();
 
     public DatasetEntity() {
         this((String) null);
@@ -414,6 +420,7 @@ public abstract class DatasetEntity extends DescribableEntity
         return relatedDatasets;
     }
 
+    @Override
     public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
         this.relatedDatasets.clear();
         if (relatedDataset != null) {
@@ -421,8 +428,30 @@ public abstract class DatasetEntity extends DescribableEntity
         }
     }
 
-    public boolean hasRelatedDatasets() {
-        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
+    @Override
+    public Set<SamplingEntity> getSamplings() {
+        return samplings;
+    }
+
+    @Override
+    public void setSamplings(Set<SamplingEntity> samplings) {
+        this.samplings.clear();
+        if (samplings != null) {
+            this.samplings.addAll(samplings);
+        }
+    }
+
+    @Override
+    public Set<MonitoringProgramEntity> getMonitoringPrograms() {
+        return monitoringPrograms;
+    }
+
+    @Override
+    public void setMonitoringPrograms(Set<MonitoringProgramEntity> monitoringPrograms) {
+        this.monitoringPrograms.clear();
+        if (monitoringPrograms != null) {
+            this.monitoringPrograms.addAll(monitoringPrograms);
+        }
     }
 
     @Override
@@ -501,6 +530,16 @@ public abstract class DatasetEntity extends DescribableEntity
             setResultTimes(dataset.getResultTimes()
                                   .stream()
                                   .collect(Collectors.toSet()));
+        }
+        if (dataset.hasSamplings()) {
+            setSamplings(dataset.getSamplings()
+                                .stream()
+                                .collect(Collectors.toSet()));
+        }
+        if (dataset.hasMonitoringPrograms()) {
+            setMonitoringPrograms(dataset.getMonitoringPrograms()
+                                         .stream()
+                                         .collect(Collectors.toSet()));
         }
         setUnit(dataset.getUnit());
     }
