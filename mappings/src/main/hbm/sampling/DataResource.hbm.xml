@@ -171,7 +171,7 @@
 
         <component class="org.n52.series.db.beans.sampling.DetectionLimitEntity" name="detectionLimit">
             <property name="flag" type="java.lang.Short">
-            <column name="detection_limit_flag" not-null="false" default="0"  check="detection_limit_flag in (null, -1, 1)">
+            <column name="detection_limit_flag" not-null="false" check="detection_limit_flag in (null, -1, 1)">
                 <comment>Flag that indicates if measured value lower/higher of the detection limit.</comment>
             </column>
             </property>
