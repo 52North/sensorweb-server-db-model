@@ -19,6 +19,7 @@ package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.DatasetEntity;
@@ -140,6 +141,13 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity implement
 
     public void setDatasets(Set<DatasetEntity> datasets) {
         this.datasets = datasets;
+    }
+
+    public void addDataset(DatasetEntity dataset) {
+        if (datasets == null) {
+            datasets = new LinkedHashSet<>();
+        }
+        datasets.add(dataset);
     }
 
     @Override
