@@ -21,7 +21,7 @@ import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 
-import org.locationtech.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * Entity for AQD e-Reporting Station
@@ -54,6 +54,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
         return this;
     }
 
+    @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
@@ -65,6 +66,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
         return this;
     }
 
+    @Override
     public EReportingStationEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;

@@ -20,7 +20,7 @@ package org.n52.series.db.beans;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasXml;
 
-import org.locationtech.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Geometry;
 
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         implements HasXml<AbstractFeatureEntity<E>>, HasGeometry<AbstractFeatureEntity<E>> {
@@ -37,10 +37,12 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private String url;
     private String xml;
 
+    @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
 
+    @Override
     public AbstractFeatureEntity<E> setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
@@ -48,6 +50,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return this;
     }
 
+    @Override
     public AbstractFeatureEntity<E> setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
@@ -87,7 +90,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     }
 
     public boolean isSetUrl() {
-        return getUrl() != null && !getUrl().isEmpty();
+        return (getUrl() != null) && !getUrl().isEmpty();
     }
 
 }

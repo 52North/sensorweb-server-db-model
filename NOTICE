@@ -6,6 +6,7 @@ This project includes:
   AntLR Parser Generator under BSD License
   Byte Buddy (without dependencies) under The Apache Software License, Version 2.0
   ClassMate under The Apache Software License, Version 2.0
+  com.vividsolutions:jts-core under GNU Lesser General Public License, Version 2.1
   dom4j under BSD 3-clause New License
   geolatte-geom under LGPL 3.0
   Hamcrest Core under New BSD License
@@ -15,21 +16,23 @@ This project includes:
   Java Annotation Indexer under Apache License, Version 2.0
   Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
   JavaBeans Activation Framework API jar under CDDL/GPLv2+CE
+  JavaBeans(TM) Activation Framework under COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0
   Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
+  JAXB RI under CDDL 1.0 or GPL2 w/ CPE
+  jaxb-api under CDDL 1.1 or GPL2 w/ CPE
   JBoss Logging 3 under Apache License, version 2.0
   Joda-Time under Apache 2
-  JTS Topology Suite under Lesser General Public License (LGPL)
   JUnit under Eclipse Public License 1.0
   org.locationtech.jts:jts-core under Eclipse Publish License, Version 1.0 or Eclipse Distribution License - v 1.0
   Postgis JDBC Driver under GNU Lesser General Public License
   PostgreSQL JDBC Driver under BSD License
   PostgreSQL JDBC Driver - JDBC 4.2 under BSD-2-Clause
+  Series Database Model under The Apache Software License, Version 2.0
   Series Database Model - Entities under The Apache Software License, Version 2.0
   Series Database Model - Generator under The Apache Software License, Version 2.0
   Series Database Model - Hibernate Spatial Dialects under The Apache Software License, Version 2.0
   Series Database Model - Hibernate Types under The Apache Software License, Version 2.0
   Series Database Model - Mappings under The Apache Software License, Version 2.0
-  Series Database Model - Parent under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
 

@@ -28,7 +28,7 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
-import org.locationtech.jts.geom.Geometry;
+import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
         implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
@@ -217,7 +217,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     @Override
     public boolean isSetValidTime() {
-        return getValidTimeStart() != null && getValidTimeEnd() != null;
+        return (getValidTimeStart() != null) && (getValidTimeEnd() != null);
     }
 
     @Override
