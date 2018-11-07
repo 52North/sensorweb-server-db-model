@@ -45,7 +45,11 @@
             </column>
         </many-to-one>
         <!-- See above for procedure! -->
-        <many-to-one class="PlatformEntity" column="fk_procedure_id" name="platform" insert="false" update="false" unique-key="un_dataset_identity" />
+        <many-to-one class="PlatformEntity" name="platform" unique-key="un_dataset_identity" foreign-key="fk_dataset_platform">
+            <column name="fk_procedure_id" not-null="true">
+                <comment>Reference to the platform that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
 
         <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
             <column name="fk_format_id">
