@@ -3,7 +3,7 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DatasetEntity" table="dataset" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'quantity-profile', 'text-profile', 'category-profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced', 'not_initialized')">
+    <class name="DatasetEntity" table="dataset" >
         <comment>Storage of the dataset, the core table of the whole database model.</comment>
         <id name="id" type="long">
             <column name="dataset_id">
@@ -13,11 +13,30 @@
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
-        <discriminator force="true" type="string" not-null="true">
+        
+        <discriminator force="true" type="string" >
             <column name="value_type">
                 <comment>Indicator used by Hibernate to map value specific entities.</comment>
             </column>
         </discriminator>
+        
+        <property name="datasetType" type="string">
+            <column name="dataset_type" check="dataset_type in ('single', 'timeseries', 'profile', 'trajectory')">
+                <comment>Indicator whether the dataset provides single observations, timeseries, profiles or trajectories.</comment>
+            </column>
+        </property>
+        
+        <property name="aggregateType" type="string">
+            <column name="aggregate_type" check="aggregate_type in ('none', 'profile', 'trajectory', 'complex', 'dataarray')">
+                <comment>Indicator whether the dataset observations are aggregated to profiles or trajectories </comment>
+            </column>
+        </property>
+        
+        <property name="valueType" type="string">
+            <column name="value_type" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'geometry', 'blob', 'referenced', 'not_initialized')">
+                <comment>Indicator of the type of the single values.</comment>
+            </column>
+        </property>
 
         <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
             <column name="fk_procedure_id"  not-null="true">
@@ -56,9 +75,6 @@
                 <comment>Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset.</comment>
             </column>
         </many-to-one>
-
-        <!-- See 'discriminator' above for comment! -->
-        <property column="value_type" insert="false" name="valueType" type="string" update="false" />
 
         <property name="firstValueAt" type="timestamp">
             <column name="first_time">
