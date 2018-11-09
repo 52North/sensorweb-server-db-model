@@ -11,7 +11,7 @@
     <groupId>org.n52.series.db</groupId>
     <artifactId>parent</artifactId>
     <version>1-SNAPSHOT</version>
-    <name>Series Database Model - Parent</name>
+    <name>Series Database Model</name>
     <packaging>pom</packaging>
 
     <modules>
