@@ -38,6 +38,7 @@ public abstract class DatasetEntity extends DescribableEntity
 
     public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_PROCEDURE = "procedure";
+    public static final String PROPERTY_PLATFORM = "platform";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";

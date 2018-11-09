@@ -24,10 +24,6 @@ import org.n52.series.db.beans.parameter.Parameter;
 
 public class PlatformEntity extends DescribableEntity {
 
-    public static final String PROPERTY_INSITU = "insitu";
-
-    public static final String PROPERTY_MOBILE = "mobile";
-
     private static final long serialVersionUID = 3615089936334873353L;
 
     private Geometry geometry;
