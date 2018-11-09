@@ -61,7 +61,7 @@ public abstract class DatasetEntity extends DescribableEntity
 
     private OfferingEntity offering;
 
-    private AbstractFeatureEntity feature;
+    private AbstractFeatureEntity< ? > feature;
 
     private CategoryEntity category;
 
@@ -81,9 +81,9 @@ public abstract class DatasetEntity extends DescribableEntity
 
     private Date lastValueAt;
 
-    private Data firstObservation;
+    private Data< ? > firstObservation;
 
-    private Data lastObservation;
+    private Data< ? > lastObservation;
 
     private BigDecimal firstQuantityValue;
 
@@ -172,12 +172,12 @@ public abstract class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public AbstractFeatureEntity getFeature() {
+    public AbstractFeatureEntity< ? > getFeature() {
         return feature;
     }
 
     @Override
-    public void setFeature(AbstractFeatureEntity feature) {
+    public void setFeature(AbstractFeatureEntity< ? > feature) {
         this.feature = feature;
     }
 
@@ -274,22 +274,22 @@ public abstract class DatasetEntity extends DescribableEntity
     }
 
     @Override
-    public Data getFirstObservation() {
+    public Data< ? > getFirstObservation() {
         return firstObservation;
     }
 
     @Override
-    public void setFirstObservation(Data firstObservation) {
+    public void setFirstObservation(Data< ? > firstObservation) {
         this.firstObservation = firstObservation;
     }
 
     @Override
-    public Data getLastObservation() {
+    public Data< ? > getLastObservation() {
         return lastObservation;
     }
 
     @Override
-    public void setLastObservation(Data lastObservation) {
+    public void setLastObservation(Data< ? > lastObservation) {
         this.lastObservation = lastObservation;
     }
 
