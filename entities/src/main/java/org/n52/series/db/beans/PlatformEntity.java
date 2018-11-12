@@ -19,41 +19,16 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
+import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.parameter.Parameter;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 public class PlatformEntity extends DescribableEntity {
 
-    public static final String PROPERTY_INSITU = "insitu";
-
-    public static final String PROPERTY_MOBILE = "mobile";
-
     private static final long serialVersionUID = 3615089936334873353L;
-
-    private boolean insitu = true;
-
-    private boolean mobile;
 
     private Geometry geometry;
 
     private Set<Parameter< ? >> parameters;
-
-    public boolean isMobile() {
-        return mobile;
-    }
-
-    public void setMobile(boolean mobile) {
-        this.mobile = mobile;
-    }
-
-    public boolean isInsitu() {
-        return insitu;
-    }
-
-    public void setInsitu(boolean insitu) {
-        this.insitu = insitu;
-    }
 
     public Geometry getGeometry() {
         return geometry;
@@ -75,7 +50,7 @@ public class PlatformEntity extends DescribableEntity {
 
     @Override
     public boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
+        return (getParameters() != null) && !getParameters().isEmpty();
     }
 
 }

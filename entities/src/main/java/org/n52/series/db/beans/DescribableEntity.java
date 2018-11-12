@@ -25,7 +25,8 @@ import java.util.stream.Collectors;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.Parameter;
 
-public class DescribableEntity extends IdEntity implements Describable,
+public class DescribableEntity extends IdEntity
+        implements Describable,
         Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
@@ -186,28 +187,28 @@ public class DescribableEntity extends IdEntity implements Describable,
         }
     }
 
-    //    private boolean isNameAvailable() {
-    //        return getName() != null && !getName().isEmpty();
-    //    }
+    // private boolean isNameAvailable() {
+    // return getName() != null && !getName().isEmpty();
+    // }
     //
-    //    private boolean isDomainAvailable() {
-    //        return getDomain() != null && !getDomain().isEmpty();
-    //    }
+    // private boolean isDomainAvailable() {
+    // return getDomain() != null && !getDomain().isEmpty();
+    // }
     //
-    //    private boolean isi18nNameAvailable(String locale) {
-    //        return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
-    //    }
+    // private boolean isi18nNameAvailable(String locale) {
+    // return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
+    // }
     //
-    //    private boolean noTranslationAvailable(String locale) {
-    //        return translations == null
-    //                || locale == null
-    //                || translations.isEmpty()
-    //                || locale.isEmpty();
-    //    }
+    // private boolean noTranslationAvailable(String locale) {
+    // return translations == null
+    // || locale == null
+    // || translations.isEmpty()
+    // || locale.isEmpty();
+    // }
     //
-    //    private String getCountryCode(String locale) {
-    //        return locale.split("_")[0];
-    //    }
+    // private String getCountryCode(String locale) {
+    // return locale.split("_")[0];
+    // }
 
     @Override
     public String toString() {

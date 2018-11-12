@@ -217,7 +217,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     @Override
     public boolean isSetValidTime() {
-        return getValidTimeStart() != null && getValidTimeEnd() != null;
+        return (getValidTimeStart() != null) && (getValidTimeEnd() != null);
     }
 
     @Override

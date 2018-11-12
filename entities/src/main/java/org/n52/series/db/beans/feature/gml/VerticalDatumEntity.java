@@ -30,7 +30,6 @@ import org.n52.series.db.common.Utils;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<VerticalDatumEntity> {
 
@@ -63,7 +62,7 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
 
     /**
      * @param domainOfValidity
-     *            the domainOfValidity to set
+     *        the domainOfValidity to set
      */
     public void setDomainOfValidity(DomainOfValidityEntity domainOfValidity) {
         this.domainOfValidity = domainOfValidity;
@@ -82,7 +81,7 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
 
     /**
      * @param scope
-     *            the scope to set
+     *        the scope to set
      */
     public void setScope(Set<String> scope) {
         this.scope = scope;
@@ -101,7 +100,7 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
 
     /**
      * @param anchorDefinition
-     *            the anchorDefinition to set
+     *        the anchorDefinition to set
      */
     public void setAnchorDefinition(String anchorDefinition) {
         this.anchorDefinition = anchorDefinition;
@@ -132,7 +131,7 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
 
     /**
      * @param realizationEpoch
-     *            the realizationEpoch to set
+     *        the realizationEpoch to set
      */
     public void setRealizationEpoch(Date realizationEpoch) {
         this.realizationEpoch = Utils.createUnmutableTimestamp(realizationEpoch);

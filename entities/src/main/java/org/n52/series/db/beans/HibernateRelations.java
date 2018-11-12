@@ -58,7 +58,7 @@ public interface HibernateRelations {
         void setIdentifier(String identifier);
 
         default boolean isSetIdentifier() {
-            return getIdentifier() != null && !getIdentifier().isEmpty();
+            return (getIdentifier() != null) && !getIdentifier().isEmpty();
         }
 
         default String getDomain() {
@@ -107,7 +107,7 @@ public interface HibernateRelations {
          * @return <code>true</code>, if description is set
          */
         default boolean isSetDescription() {
-            return getDescription() != null && !getDescription().isEmpty();
+            return (getDescription() != null) && !getDescription().isEmpty();
         }
     }
 
@@ -119,7 +119,7 @@ public interface HibernateRelations {
         void setIdentifierCodespace(CodespaceEntity codespace);
 
         default boolean isSetIdentifierCodespace() {
-            return getIdentifierCodespace() != null && !getIdentifierCodespace().isSetName();
+            return (getIdentifierCodespace() != null) && !getIdentifierCodespace().isSetName();
         }
     }
 
@@ -131,7 +131,7 @@ public interface HibernateRelations {
         void setNameCodespace(CodespaceEntity codespaceName);
 
         default boolean isSetNameCodespace() {
-            return getNameCodespace() != null && !getNameCodespace().isSetName();
+            return (getNameCodespace() != null) && !getNameCodespace().isSetName();
         }
     }
 
@@ -179,7 +179,7 @@ public interface HibernateRelations {
         T setFeatureTypes(Set<FormatEntity> featureOfInterestTypes);
 
         default boolean HasFeaturTypes() {
-            return getFeatureTypes() != null && !getFeatureTypes().isEmpty();
+            return (getFeatureTypes() != null) && !getFeatureTypes().isEmpty();
         }
 
     }
@@ -198,7 +198,8 @@ public interface HibernateRelations {
     interface HasReadableObservationContext extends HasObservablePropertyGetter, HasProcedureGetter, HasFeatureGetter {
     }
 
-    interface HasWriteableObservationContext<T> extends HasReadableObservationContext, HasObservableProperty<T>,
+    interface HasWriteableObservationContext<T>
+            extends HasReadableObservationContext, HasObservableProperty<T>,
             HasProcedure<T>, HasFeature<T>, HasOffering<T> {
     }
 
@@ -254,7 +255,7 @@ public interface HibernateRelations {
         void setName(String name);
 
         default boolean isSetName() {
-            return getName() != null && !getName().isEmpty();
+            return (getName() != null) && !getName().isEmpty();
         }
 
     }
@@ -298,7 +299,7 @@ public interface HibernateRelations {
         T setObservationTypes(Set<FormatEntity> observationTypes);
 
         default boolean hasObservationTypes() {
-            return getObservationTypes() != null && !getObservationTypes().isEmpty();
+            return (getObservationTypes() != null) && !getObservationTypes().isEmpty();
         }
     }
 
@@ -348,7 +349,6 @@ public interface HibernateRelations {
          * Get the start phenomenon time
          *
          * @return Start phenomenon time
-         *
          * @deprecated use {@link HasPhenomenonTime#getSamplingTimeStart()}
          */
         @Deprecated
@@ -360,7 +360,7 @@ public interface HibernateRelations {
          * Set the start phenomenon time
          *
          * @param phenomenonTimeStart
-         *            Start phenomenon time to set
+         *        Start phenomenon time to set
          * @deprecated use {@link HasPhenomenonTime#setSamplingTimeStart(Date)}
          */
         @Deprecated
@@ -377,7 +377,6 @@ public interface HibernateRelations {
          * Get the end phenomenon time
          *
          * @return End phenomenon time
-         *
          * @deprecated use {@link HasPhenomenonTime#getSamplingTimeEnd()}
          */
         @Deprecated
@@ -389,8 +388,7 @@ public interface HibernateRelations {
          * Set the end phenomenon time
          *
          * @param phenomenonTimeEnd
-         *            End phenomenon time to set
-         *
+         *        End phenomenon time to set
          * @deprecated use {@link HasPhenomenonTime#setSamplingTimeEnd(Date)}
          */
         @Deprecated
@@ -421,8 +419,7 @@ public interface HibernateRelations {
          * Set the start result time
          *
          * @param resultTimeStart
-         *            Start result time to set
-         *
+         *        Start result time to set
          * @return this
          */
         T setResultTimeStart(Date resultTimeStart);
@@ -442,7 +439,7 @@ public interface HibernateRelations {
          * Set the end result time
          *
          * @param resultTimeEnd
-         *            End result time to set
+         *        End result time to set
          * @return this
          */
         T setResultTimeEnd(Date resultTimeEnd);
@@ -479,7 +476,7 @@ public interface HibernateRelations {
         T setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures);
 
         default boolean hasRelatedFeatures() {
-            return getRelatedFeatures() != null && !getRelatedFeatures().isEmpty();
+            return (getRelatedFeatures() != null) && !getRelatedFeatures().isEmpty();
         }
     }
 
@@ -491,7 +488,7 @@ public interface HibernateRelations {
         void setEncoding(String resultEncoding);
 
         default boolean isSetEncoding() {
-            return getEncoding() != null && !getEncoding().isEmpty();
+            return (getEncoding() != null) && !getEncoding().isEmpty();
         }
     }
 
@@ -503,7 +500,7 @@ public interface HibernateRelations {
         void setStructure(String resultStructure);
 
         default boolean isSetStructure() {
-            return getStructure() != null && !getStructure().isEmpty();
+            return (getStructure() != null) && !getStructure().isEmpty();
         }
     }
 
@@ -522,7 +519,7 @@ public interface HibernateRelations {
          * Set the result time
          *
          * @param resultTime
-         *            Result tiem to set
+         *        Result tiem to set
          */
         void setResultTime(Date resultTime);
     }
@@ -559,8 +556,7 @@ public interface HibernateRelations {
          * Set the start valid time
          *
          * @param validTimeStart
-         *            Start valid time to set
-         *
+         *        Start valid time to set
          * @return this
          */
         T setValidTimeStart(Date validTimeStart);
@@ -576,8 +572,7 @@ public interface HibernateRelations {
          * Set the end valid time
          *
          * @param validTimeEnd
-         *            End valid time to set
-         *
+         *        End valid time to set
          * @return this
          */
         T setValidTimeEnd(Date validTimeEnd);
@@ -628,7 +623,7 @@ public interface HibernateRelations {
         }
 
         default boolean hasOfferings() {
-            return getOfferings() != null && !getOfferings().isEmpty();
+            return (getOfferings() != null) && !getOfferings().isEmpty();
         }
 
     }
@@ -641,7 +636,7 @@ public interface HibernateRelations {
         void setParameters(Object parameters);
 
         default boolean hasParameters() {
-            return getParameters() != null && !getParameters().isEmpty();
+            return (getParameters() != null) && !getParameters().isEmpty();
         }
 
     }
@@ -654,7 +649,7 @@ public interface HibernateRelations {
         void setRelatedObservations(Set<RelatedDataEntity> relatedObservations);
 
         default boolean hasRelatedObservations() {
-            return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
+            return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
         }
 
     }
@@ -741,7 +736,7 @@ public interface HibernateRelations {
          * @return <code>true</code>, if longitude and latitude are set
          */
         default boolean isSetLongLat() {
-            return getLon() != null && getLat() != null;
+            return (getLon() != null) && (getLat() != null);
         }
 
         Object getAlt();
@@ -768,7 +763,7 @@ public interface HibernateRelations {
         void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory);
 
         default boolean hasProcedureHistory() {
-            return getProcedureHistory() != null && !getProcedureHistory().isEmpty();
+            return (getProcedureHistory() != null) && !getProcedureHistory().isEmpty();
         }
     }
 
@@ -784,7 +779,7 @@ public interface HibernateRelations {
         void addParent(T parent);
 
         default boolean hasParents() {
-            return getParents() != null && !getParents().isEmpty();
+            return (getParents() != null) && !getParents().isEmpty();
         }
 
         Set<T> getChildren();
@@ -794,7 +789,7 @@ public interface HibernateRelations {
         void addChild(T child);
 
         default boolean hasChildren() {
-            return getChildren() != null && !getChildren().isEmpty();
+            return (getChildren() != null) && !getChildren().isEmpty();
         }
     }
 
@@ -812,7 +807,7 @@ public interface HibernateRelations {
          * Set the observation id
          *
          * @param observationId
-         *            Observation id to set
+         *        Observation id to set
          */
         void setObservationId(long observationId);
     }
@@ -836,7 +831,7 @@ public interface HibernateRelations {
         void setSamplingGeometry(Geometry samplingGeometry);
 
         default boolean hasSamplingGeometry() {
-            return getSamplingGeometry() != null && !getSamplingGeometry().isEmpty();
+            return (getSamplingGeometry() != null) && !getSamplingGeometry().isEmpty();
         }
 
     }
@@ -850,7 +845,7 @@ public interface HibernateRelations {
         T setXml(String xml);
 
         default boolean isSetXml() {
-            return getXml() != null && !getXml().isEmpty();
+            return (getXml() != null) && !getXml().isEmpty();
         }
     }
 
@@ -862,13 +857,13 @@ public interface HibernateRelations {
 
         /**
          * @param remarks
-         *            the remarks to set
-         *             @return this
+         *        the remarks to set
+         * @return this
          */
         T setRemarks(String remarks);
 
         default boolean isSetRemarks() {
-            return getRemarks() != null && !getRemarks().isEmpty();
+            return (getRemarks() != null) && !getRemarks().isEmpty();
         }
     }
 
@@ -879,7 +874,7 @@ public interface HibernateRelations {
         String getDatasetType();
 
         default boolean isSetDatasetType() {
-            return getDatasetType() != null && !getDatasetType().isEmpty();
+            return (getDatasetType() != null) && !getDatasetType().isEmpty();
         }
 
     }

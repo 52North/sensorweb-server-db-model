@@ -46,7 +46,7 @@ public class GeometryEntity implements Serializable {
     private int srid;
 
     public boolean isSetGeometry() {
-        return geometry != null && !geometry.isEmpty();
+        return (geometry != null) && !geometry.isEmpty();
     }
 
     public void setGeometry(Geometry geometry) {
@@ -67,14 +67,14 @@ public class GeometryEntity implements Serializable {
     }
 
     private Geometry createPoint() {
-        Coordinate coordinate = alt != null && !alt.isNaN()
+        Coordinate coordinate = (alt != null) && !alt.isNaN()
                 ? new Coordinate(lon, lat, alt)
                 : new Coordinate(lon, lat);
         return geometryFactory.createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
-        return lon != null && lat != null;
+        return (lon != null) && (lat != null);
     }
 
     public Double getLon() {

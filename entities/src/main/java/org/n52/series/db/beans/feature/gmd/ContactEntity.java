@@ -22,7 +22,6 @@ package org.n52.series.db.beans.feature.gmd;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class ContactEntity extends AbstractCiEntity {
 
@@ -43,7 +42,7 @@ public class ContactEntity extends AbstractCiEntity {
 
     /**
      * @param phone
-     *            the phone to set
+     *        the phone to set
      */
     public void setPhone(TelephoneEntity phone) {
         this.phone = phone;
@@ -62,7 +61,7 @@ public class ContactEntity extends AbstractCiEntity {
 
     /**
      * @param address
-     *            the address to set
+     *        the address to set
      */
     public void setAddress(AddressEntity address) {
         this.address = address;
@@ -81,7 +80,7 @@ public class ContactEntity extends AbstractCiEntity {
 
     /**
      * @param onlineResource
-     *            the onlineResource to set
+     *        the onlineResource to set
      */
     public void setOnlineResource(OnlineResourceEntity onlineResource) {
         this.onlineResource = onlineResource;
@@ -100,7 +99,7 @@ public class ContactEntity extends AbstractCiEntity {
 
     /**
      * @param hoursOfService
-     *            the hoursOfService to set
+     *        the hoursOfService to set
      */
     public void setHoursOfService(String hoursOfService) {
         this.hoursOfService = hoursOfService;
@@ -119,7 +118,7 @@ public class ContactEntity extends AbstractCiEntity {
 
     /**
      * @param contactInstructions
-     *            the contactInstructions to set
+     *        the contactInstructions to set
      */
     public void setContactInstructions(String contactInstructions) {
         this.contactInstructions = contactInstructions;

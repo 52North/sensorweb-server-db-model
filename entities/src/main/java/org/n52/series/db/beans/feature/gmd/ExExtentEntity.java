@@ -24,7 +24,6 @@ import java.util.Set;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class ExExtentEntity extends AbstractCiEntity {
 
@@ -41,7 +40,7 @@ public class ExExtentEntity extends AbstractCiEntity {
 
     /**
      * @param verticalExtent
-     *            the verticalExtent to set
+     *        the verticalExtent to set
      */
     public void setVerticalExtent(Set<ExVerticalExtentEntity> verticalExtent) {
         this.verticalExtent = verticalExtent;

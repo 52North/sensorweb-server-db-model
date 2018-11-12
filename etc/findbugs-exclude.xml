@@ -1,8 +1,0 @@
-<FindBugsFilter>
-    <!-- http://findbugs.sourceforge.net/bugDescriptions.html -->
-    <!-- http://findbugs.sourceforge.net/manual/filter.html -->
-    <Match>
-<!--         <Package name="org.n52.series.db.beans" /> -->
-<!--         <Bug pattern="RV_RETURN_VALUE_IGNORED_INFERRED" /> -->
-    </Match>
-</FindBugsFilter>

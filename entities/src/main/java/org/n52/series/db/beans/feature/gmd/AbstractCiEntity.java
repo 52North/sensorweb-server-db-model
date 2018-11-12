@@ -24,7 +24,6 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public abstract class AbstractCiEntity extends ReferenceEntity {
 
@@ -42,7 +41,7 @@ public abstract class AbstractCiEntity extends ReferenceEntity {
 
     /**
      * @param gmdid
-     *            the gmd id to set
+     *        the gmd id to set
      */
     public void setGmdid(String gmdid) {
         this.gmdid = gmdid;
@@ -61,7 +60,7 @@ public abstract class AbstractCiEntity extends ReferenceEntity {
 
     /**
      * @param uuid
-     *            the uuid to set
+     *        the uuid to set
      */
     public void setUuid(String uuid) {
         this.uuid = uuid;

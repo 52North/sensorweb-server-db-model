@@ -110,7 +110,7 @@
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" class="ProcedureEntity" foreign-key="fk_i18n_procedure">
+        <many-to-one name="entity" class="ProcedureEntity" foreign-key="fk_i18n_procedure">
             <column name="fk_procedure_id" not-null="true">
                 <!-- <comment>Reference to the procedure table this internationalization belongs to.</comment> -->
             </column>

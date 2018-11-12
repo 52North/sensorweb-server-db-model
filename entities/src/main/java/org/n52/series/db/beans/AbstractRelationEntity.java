@@ -41,7 +41,7 @@ public abstract class AbstractRelationEntity<T> extends IdEntity {
 
     /**
      * @param item
-     *            the item to set
+     *        the item to set
      */
     public void setItem(T item) {
         this.item = item;
@@ -56,7 +56,7 @@ public abstract class AbstractRelationEntity<T> extends IdEntity {
 
     /**
      * @param relatedItem
-     *            the relatedItem to set
+     *        the relatedItem to set
      */
     public void setRelatedItem(T relatedItem) {
         this.relatedItem = relatedItem;
@@ -70,7 +70,8 @@ public abstract class AbstractRelationEntity<T> extends IdEntity {
     }
 
     /**
-     * @param role the role to set
+     * @param role
+     *        the role to set
      */
     public void setRole(String role) {
         this.role = role;
@@ -88,7 +89,8 @@ public abstract class AbstractRelationEntity<T> extends IdEntity {
     }
 
     /**
-     * @param relatedUrl the relatedUrl to set
+     * @param relatedUrl
+     *        the relatedUrl to set
      */
     public void setRelatedUrl(String relatedUrl) {
         this.relatedUrl = relatedUrl;

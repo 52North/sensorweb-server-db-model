@@ -20,7 +20,6 @@ package org.n52.series.db.beans.feature;
 /**
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public abstract class ReferenceEntity extends NilReasonEntity {
 
@@ -44,7 +43,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param href
-     *            the href to set
+     *        the href to set
      */
     public void setHref(String href) {
         this.href = href;
@@ -63,7 +62,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param type
-     *            the type to set
+     *        the type to set
      */
     public void setType(String type) {
         this.type = type;
@@ -82,7 +81,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param role
-     *            the role to set
+     *        the role to set
      */
     public void setRole(String role) {
         this.role = role;
@@ -101,7 +100,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param arcrole
-     *            the arcrole to set
+     *        the arcrole to set
      */
     public void setArcrole(String arcrole) {
         this.arcrole = arcrole;
@@ -120,7 +119,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param title
-     *            the title to set
+     *        the title to set
      */
     public void setTitle(String title) {
         this.title = title;
@@ -139,7 +138,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param show
-     *            the show to set
+     *        the show to set
      */
     public void setShow(String show) {
         this.show = show;
@@ -158,7 +157,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param actuate
-     *            the actuate to set
+     *        the actuate to set
      */
     public void setActuate(String actuate) {
         this.actuate = actuate;
@@ -177,7 +176,7 @@ public abstract class ReferenceEntity extends NilReasonEntity {
 
     /**
      * @param remoteSchema
-     *            the remoteSchema to set
+     *        the remoteSchema to set
      */
     public void setRemoteSchema(String remoteSchema) {
         this.remoteSchema = remoteSchema;

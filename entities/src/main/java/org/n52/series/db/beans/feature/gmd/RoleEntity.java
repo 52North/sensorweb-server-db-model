@@ -24,7 +24,6 @@ import org.n52.series.db.beans.feature.NilReasonEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class RoleEntity extends NilReasonEntity {
 
@@ -42,7 +41,7 @@ public class RoleEntity extends NilReasonEntity {
 
     /**
      * @param codeList
-     *            the codeList to set
+     *        the codeList to set
      */
     public void setCodeList(String codeList) {
         this.codeList = codeList;
@@ -57,7 +56,7 @@ public class RoleEntity extends NilReasonEntity {
 
     /**
      * @param codeListValue
-     *            the codeListValue to set
+     *        the codeListValue to set
      */
     public void setCodeListValue(String codeListValue) {
         this.codeListValue = codeListValue;

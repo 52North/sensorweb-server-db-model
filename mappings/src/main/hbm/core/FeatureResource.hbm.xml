@@ -131,7 +131,7 @@
                 <param name="sequence_name">feature_i18n_seq</param>
             </generator>
         </id>
-		<many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature">
+        <many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature">
             <column name="fk_feature_id" not-null="true">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>

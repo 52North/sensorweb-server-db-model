@@ -171,7 +171,7 @@ public interface HiberanteEReportingRelations
 
         /**
          * @param assessmentType
-         *            the assessmentType to set
+         *        the assessmentType to set
          */
         void setAssessmentType(EReportingAssessmentTypeEntity assessmentType);
 
@@ -193,7 +193,7 @@ public interface HiberanteEReportingRelations
 
         /**
          * @param station
-         *            the station to set
+         *        the station to set
          * @return this
          */
         HasStation setStation(EReportingStationEntity station);
@@ -219,7 +219,7 @@ public interface HiberanteEReportingRelations
 
         /**
          * @param network
-         *            the network to set
+         *        the network to set
          * @return this
          */
         HasNetwork setNetwork(EReportingNetworkEntity network);

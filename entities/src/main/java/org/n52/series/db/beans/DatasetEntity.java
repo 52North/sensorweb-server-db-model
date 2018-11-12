@@ -38,6 +38,7 @@ public abstract class DatasetEntity extends DescribableEntity
 
     public static final String PROPERTY_OFFERING = "offering";
     public static final String PROPERTY_PROCEDURE = "procedure";
+    public static final String PROPERTY_PLATFORM = "platform";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";
@@ -47,6 +48,8 @@ public abstract class DatasetEntity extends DescribableEntity
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
     public static final String HIDDEN_CHILD = "hidden";
+    public static final String PROPERTY_MOBILE = "mobile";
+    public static final String PROPERTY_INSITU = "insitu";
 
     public static final String PROPERTY_UNIT = "unit";
 
@@ -58,7 +61,7 @@ public abstract class DatasetEntity extends DescribableEntity
 
     private OfferingEntity offering;
 
-    private AbstractFeatureEntity feature;
+    private AbstractFeatureEntity< ? > feature;
 
     private CategoryEntity category;
 
@@ -78,9 +81,9 @@ public abstract class DatasetEntity extends DescribableEntity
 
     private Date lastValueAt;
 
-    private Data firstObservation;
+    private Data< ? > firstObservation;
 
-    private Data lastObservation;
+    private Data< ? > lastObservation;
 
     private BigDecimal firstQuantityValue;
 
@@ -110,18 +113,22 @@ public abstract class DatasetEntity extends DescribableEntity
         this.valueType = type;
     }
 
+    @Override
     public CategoryEntity getCategory() {
         return category;
     }
 
+    @Override
     public void setCategory(CategoryEntity category) {
         this.category = category;
     }
 
+    @Override
     public PhenomenonEntity getPhenomenon() {
         return phenomenon;
     }
 
+    @Override
     public DatasetEntity setPhenomenon(PhenomenonEntity phenomenon) {
         this.phenomenon = phenomenon;
         return this;
@@ -164,30 +171,37 @@ public abstract class DatasetEntity extends DescribableEntity
         return getOffering() != null;
     }
 
-    public AbstractFeatureEntity getFeature() {
+    @Override
+    public AbstractFeatureEntity< ? > getFeature() {
         return feature;
     }
 
-    public void setFeature(AbstractFeatureEntity feature) {
+    @Override
+    public void setFeature(AbstractFeatureEntity< ? > feature) {
         this.feature = feature;
     }
 
+    @Override
     public boolean isSetFeature() {
         return getFeature() != null;
     }
 
+    @Override
     public PlatformEntity getPlatform() {
         return platform;
     }
 
+    @Override
     public void setPlatform(PlatformEntity platform) {
         this.platform = platform;
     }
 
+    @Override
     public Boolean isPublished() {
         return published;
     }
 
+    @Override
     public void setPublished(boolean published) {
         this.published = published;
     }
@@ -226,72 +240,88 @@ public abstract class DatasetEntity extends DescribableEntity
 
     @Override
     public boolean isSetObservationType() {
-        return getObservationType() != null && getObservationType().isSetFormat();
+        return (getObservationType() != null) && getObservationType().isSetFormat();
     }
 
+    @Override
     public Date getFirstValueAt() {
         return Utils.createUnmutableTimestamp(firstValueAt);
     }
 
+    @Override
     public void setFirstValueAt(Date firstValueAt) {
         this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
     }
 
+    @Override
     public boolean isSetFirstValueAt() {
         return getFirstValueAt() != null;
     }
 
+    @Override
     public Date getLastValueAt() {
         return Utils.createUnmutableTimestamp(lastValueAt);
     }
 
+    @Override
     public void setLastValueAt(Date lastValueAt) {
         this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
     }
 
+    @Override
     public boolean isSetLastValueAt() {
         return getLastValueAt() != null;
     }
 
-    public Data getFirstObservation() {
+    @Override
+    public Data< ? > getFirstObservation() {
         return firstObservation;
     }
 
-    public void setFirstObservation(Data firstObservation) {
+    @Override
+    public void setFirstObservation(Data< ? > firstObservation) {
         this.firstObservation = firstObservation;
     }
 
-    public Data getLastObservation() {
+    @Override
+    public Data< ? > getLastObservation() {
         return lastObservation;
     }
 
-    public void setLastObservation(Data lastObservation) {
+    @Override
+    public void setLastObservation(Data< ? > lastObservation) {
         this.lastObservation = lastObservation;
     }
 
+    @Override
     public BigDecimal getFirstQuantityValue() {
         return firstQuantityValue;
     }
 
+    @Override
     public void setFirstQuantityValue(BigDecimal firstValue) {
         this.firstQuantityValue = firstValue;
     }
 
+    @Override
     public BigDecimal getLastQuantityValue() {
         return lastQuantityValue;
     }
 
+    @Override
     public void setLastQuantityValue(BigDecimal lastValue) {
         this.lastQuantityValue = lastValue;
     }
 
+    @Override
     public String getValueType() {
-        return valueType == null || valueType.isEmpty()
+        return (valueType == null) || valueType.isEmpty()
                 // backward compatible
                 ? getDefaultDatasetType()
                 : valueType;
     }
 
+    @Override
     public void setValueType(String valueType) {
         this.valueType = valueType;
     }
@@ -300,6 +330,7 @@ public abstract class DatasetEntity extends DescribableEntity
      * @return a list of result times
      * @since 2.0.0
      */
+    @Override
     public Set<Date> getResultTimes() {
         Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
         return unmodifiableResultTimes != null
@@ -312,6 +343,7 @@ public abstract class DatasetEntity extends DescribableEntity
      *        a list of result times
      * @since 2.0.0
      */
+    @Override
     public void setResultTimes(Set<Date> resultTimes) {
         this.resultTimes = wrapToUnmutables(resultTimes);
     }
@@ -326,29 +358,35 @@ public abstract class DatasetEntity extends DescribableEntity
                 : null;
     }
 
+    @Override
     public UnitEntity getUnit() {
         return unit;
     }
 
+    @Override
     public void setUnit(UnitEntity unit) {
         this.unit = unit;
     }
 
+    @Override
     public boolean hasUnit() {
         return unit != null;
     }
 
+    @Override
     public String getUnitI18nName(String locale) {
         return unit != null
-                //                ? unit.getNameI18n(locale)
+                // ? unit.getNameI18n(locale)
                 ? unit.getUnit()
                 : "";
     }
 
+    @Override
     public void setObservationCount(long count) {
         this.observationCount = count;
     }
 
+    @Override
     public long getObservationCount() {
         return observationCount;
     }
@@ -376,10 +414,12 @@ public abstract class DatasetEntity extends DescribableEntity
         return this;
     }
 
+    @Override
     public boolean isSetObservationtype() {
-        return getObservationType() != null && getObservationType().isSetFormat();
+        return (getObservationType() != null) && getObservationType().isSetFormat();
     }
 
+    @Override
     public boolean isMobile() {
         return mobile;
     }
@@ -414,6 +454,7 @@ public abstract class DatasetEntity extends DescribableEntity
         return relatedDatasets;
     }
 
+    @Override
     public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
         this.relatedDatasets.clear();
         if (relatedDataset != null) {
@@ -421,8 +462,9 @@ public abstract class DatasetEntity extends DescribableEntity
         }
     }
 
+    @Override
     public boolean hasRelatedDatasets() {
-        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
+        return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
     }
 
     @Override

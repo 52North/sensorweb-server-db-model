@@ -22,7 +22,6 @@ package org.n52.series.db.beans.feature.gmd;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class ResponsiblePartyEntity extends AbstractCiEntity {
 
@@ -43,7 +42,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
 
     /**
      * @param individualName
-     *            the individualName to set
+     *        the individualName to set
      */
     public void setIndividualName(String individualName) {
         this.individualName = individualName;
@@ -62,7 +61,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
 
     /**
      * @param organizationName
-     *            the organizationName to set
+     *        the organizationName to set
      */
     public void setOrganizationName(String organizationName) {
         this.organizationName = organizationName;
@@ -81,7 +80,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
 
     /**
      * @param positionName
-     *            the positionName to set
+     *        the positionName to set
      */
     public void setPositionName(String positionName) {
         this.positionName = positionName;
@@ -100,7 +99,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
 
     /**
      * @param contactInfo
-     *            the contactInfo to set
+     *        the contactInfo to set
      */
     public void setContactInfo(ContactEntity contactInfo) {
         this.contactInfo = contactInfo;
@@ -119,7 +118,7 @@ public class ResponsiblePartyEntity extends AbstractCiEntity {
 
     /**
      * @param ciRole
-     *            the ciRole to set
+     *        the ciRole to set
      */
     public void setCiRole(RoleEntity ciRole) {
         this.ciRole = ciRole;

@@ -24,7 +24,6 @@ import java.util.Set;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class TelephoneEntity extends AbstractCiEntity {
 
@@ -42,7 +41,7 @@ public class TelephoneEntity extends AbstractCiEntity {
 
     /**
      * @param voice
-     *            the voice to set
+     *        the voice to set
      */
     public void setVoice(Set<String> voice) {
         this.voice = voice;
@@ -61,7 +60,7 @@ public class TelephoneEntity extends AbstractCiEntity {
 
     /**
      * @param facsimile
-     *            the facsimile to set
+     *        the facsimile to set
      */
     public void setFacsimile(Set<String> facsimile) {
         this.facsimile = facsimile;

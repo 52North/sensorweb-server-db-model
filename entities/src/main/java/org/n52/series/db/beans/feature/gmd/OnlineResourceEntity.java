@@ -22,7 +22,6 @@ package org.n52.series.db.beans.feature.gmd;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class OnlineResourceEntity extends AbstractCiEntity {
 
@@ -45,7 +44,7 @@ public class OnlineResourceEntity extends AbstractCiEntity {
 
     /**
      * @param linkage
-     *            the linkage to set
+     *        the linkage to set
      * @return this
      */
     public OnlineResourceEntity setLinkage(String linkage) {
@@ -66,7 +65,7 @@ public class OnlineResourceEntity extends AbstractCiEntity {
 
     /**
      * @param protocol
-     *            the protocol to set
+     *        the protocol to set
      * @return this
      */
     public OnlineResourceEntity setProtocol(String protocol) {
@@ -87,7 +86,7 @@ public class OnlineResourceEntity extends AbstractCiEntity {
 
     /**
      * @param applicationProfile
-     *            the applicationProfile to set
+     *        the applicationProfile to set
      * @return this
      */
     public OnlineResourceEntity setApplicationProfile(String applicationProfile) {
@@ -108,7 +107,7 @@ public class OnlineResourceEntity extends AbstractCiEntity {
 
     /**
      * @param function
-     *            the function to set
+     *        the function to set
      * @return this
      */
     public OnlineResourceEntity setFunction(String function) {
