@@ -25,9 +25,6 @@ This project includes:
   Joda-Time under Apache 2
   JUnit under Eclipse Public License 1.0
   org.locationtech.jts:jts-core under Eclipse Publish License, Version 1.0 or Eclipse Distribution License - v 1.0
-  Postgis JDBC Driver under GNU Lesser General Public License
-  PostgreSQL JDBC Driver under BSD License
-  PostgreSQL JDBC Driver - JDBC 4.2 under BSD-2-Clause
   Series Database Model under The Apache Software License, Version 2.0
   Series Database Model - Entities under The Apache Software License, Version 2.0
   Series Database Model - Generator under The Apache Software License, Version 2.0
