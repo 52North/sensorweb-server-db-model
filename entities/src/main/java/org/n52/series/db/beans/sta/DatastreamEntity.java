@@ -132,7 +132,7 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity implement
 
     @Override
     public boolean isSetUnit() {
-        return unitOfMeasurement != null;
+        return getUnitOfMeasurement() != null && getUnitOfMeasurement().isSetIdentifier();
     }
 
     public Set<DatasetEntity> getDatasets() {
