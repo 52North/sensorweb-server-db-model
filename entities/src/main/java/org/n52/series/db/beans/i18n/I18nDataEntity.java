@@ -19,7 +19,7 @@ package org.n52.series.db.beans.i18n;
 
 import org.n52.series.db.beans.DataEntity;
 
-public class I18nDataEntity extends I18nEntity<DataEntity< ? >> {
+public class I18nDataEntity extends I18nEntity<DataEntity<?>> {
 
     private static final long serialVersionUID = 6049859871182587108L;
 

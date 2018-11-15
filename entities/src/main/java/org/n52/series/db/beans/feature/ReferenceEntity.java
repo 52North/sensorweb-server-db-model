@@ -20,7 +20,6 @@ package org.n52.series.db.beans.feature;
 /**
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public abstract class ReferenceEntity extends NilReasonEntity {
 

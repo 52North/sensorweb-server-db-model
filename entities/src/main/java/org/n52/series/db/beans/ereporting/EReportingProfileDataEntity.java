@@ -24,7 +24,7 @@ import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.data.Data.ProfileData;
 
-public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements ProfileData {
+public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEntity<?>>> implements ProfileData {
 
     private static final long serialVersionUID = -3450153841771781000L;
     private String verticalfromName;
@@ -43,9 +43,7 @@ public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEn
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        return isSetValue() ? getValue().toString() : "";
     }
 
     public String getVerticalFromName() {

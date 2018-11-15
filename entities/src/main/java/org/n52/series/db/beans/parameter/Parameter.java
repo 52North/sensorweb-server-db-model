@@ -59,15 +59,11 @@ public abstract class Parameter<T> extends IdEntity implements ValuedParameter<T
     }
 
     public Date getLastUpdate() {
-        return lastUpdate != null
-                ? new Timestamp(lastUpdate.getTime())
-                : null;
+        return lastUpdate != null ? new Timestamp(lastUpdate.getTime()) : null;
     }
 
     public void setLastUpdate(Date lastUpdate) {
-        this.lastUpdate = lastUpdate != null
-                ? new Timestamp(lastUpdate.getTime())
-                : null;
+        this.lastUpdate = lastUpdate != null ? new Timestamp(lastUpdate.getTime()) : null;
     }
 
     public boolean isSetLastUpdate() {

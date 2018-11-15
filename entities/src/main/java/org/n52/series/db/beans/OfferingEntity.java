@@ -30,10 +30,9 @@ import org.n52.series.db.common.Utils;
 
 import com.vividsolutions.jts.geom.Geometry;
 
-public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
-        implements HasObservationTypes<OfferingEntity>, HasFeatureTypes<OfferingEntity>,
-        HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime, HasResultTimes<OfferingEntity>,
-        HasValidTime<OfferingEntity> {
+public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes<OfferingEntity>,
+        HasFeatureTypes<OfferingEntity>, HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime,
+        HasResultTimes<OfferingEntity>, HasValidTime<OfferingEntity> {
 
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
@@ -63,9 +62,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
     private Date validTimeEnd;
 
     public Geometry getGeometry() {
-        return geometryEntity != null
-                ? geometryEntity.getGeometry()
-                : null;
+        return geometryEntity != null ? geometryEntity.getGeometry() : null;
     }
 
     public OfferingEntity setGeometry(Geometry geometry) {
@@ -97,7 +94,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param observationTypes
-     *        the observationTypes to set
+     *            the observationTypes to set
      */
     @Override
     public OfferingEntity setObservationTypes(Set<FormatEntity> observationTypes) {
@@ -115,7 +112,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param featureTypes
-     *        the featureTypes to set
+     *            the featureTypes to set
      */
     @Override
     public OfferingEntity setFeatureTypes(Set<FormatEntity> featureTypes) {
@@ -153,7 +150,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param resultTimeStart
-     *        the resultTimeStart to set
+     *            the resultTimeStart to set
      */
     @Override
     public OfferingEntity setResultTimeStart(Date resultTimeStart) {
@@ -171,7 +168,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param resultTimeEnd
-     *        the resultTimeEnd to set
+     *            the resultTimeEnd to set
      */
     @Override
     public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
@@ -189,7 +186,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param validTimeStart
-     *        the validTimeStart to set
+     *            the validTimeStart to set
      */
     @Override
     public OfferingEntity setValidTimeStart(Date validTimeStart) {
@@ -207,7 +204,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     /**
      * @param validTimeEnd
-     *        the validTimeEnd to set
+     *            the validTimeEnd to set
      */
     @Override
     public OfferingEntity setValidTimeEnd(Date validTimeEnd) {
@@ -217,7 +214,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity>
 
     @Override
     public boolean isSetValidTime() {
-        return getValidTimeStart() != null && getValidTimeEnd() != null;
+        return (getValidTimeStart() != null) && (getValidTimeEnd() != null);
     }
 
     @Override

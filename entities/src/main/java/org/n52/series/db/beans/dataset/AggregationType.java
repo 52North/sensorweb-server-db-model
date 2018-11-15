@@ -14,24 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.n52.series.db.beans.dataset;
 
-package org.n52.series.db.beans;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import static org.junit.Assert.assertTrue;
+public enum AggregationType {
+    none, profile, trajectory, complex, dataarray, not_initialized;
 
-import java.util.Arrays;
-import java.util.Collection;
+    public static final String ALL = "all";
 
-import org.junit.Test;
-import org.n52.series.db.beans.CountDataEntity;
-
-public class CountDataEntityTest {
-
-    @Test
-    public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] { "9999", "-9999.9" });
-        CountDataEntity entity = new CountDataEntity();
-        entity.setValue(9999);
-        assertTrue(entity.isNoDataValue(noDataValues));
+    public static Set<AggregationType> convert(Set<String> aggregationType) {
+        if (aggregationType != null) {
+            return aggregationType.stream().map(at -> AggregationType.valueOf(at)).collect(Collectors.toSet());
+        }
+        return null;
     }
 }

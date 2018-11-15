@@ -37,9 +37,7 @@ public class EReportingBlobDataEntity extends EReportingDataEntity<Object> imple
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        return isSetValue() ? getValue().toString() : "";
     }
 
 }

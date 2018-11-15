@@ -35,8 +35,7 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> implements Quanti
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         BigDecimal value = getValue();
-        return value == null
-                || containsValue(noDataValues, value);
+        return value == null || containsValue(noDataValues, value);
     }
 
     private boolean containsValue(Collection<String> collection, BigDecimal key) {
@@ -44,9 +43,7 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> implements Quanti
             return false;
         }
         for (BigDecimal noDataValue : convertToDoubles(collection)) {
-            if (noDataValue.subtract(key)
-                           .abs()
-                           .compareTo(DOUBLE_THRESHOLD) < 0) {
+            if (noDataValue.subtract(key).abs().compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }

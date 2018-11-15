@@ -18,7 +18,9 @@
 package org.n52.series.db.beans.dataset;
 
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
@@ -38,6 +40,7 @@ import org.n52.series.db.beans.parameter.Parameter;
 import org.n52.series.db.beans.sampling.MonitoringProgramEntity;
 import org.n52.series.db.beans.sampling.SamplingEntity;
 
+@Deprecated
 public interface Dataset extends Describable {
 
     String DEFAULT_VALUE_TYPE = "quantity";
@@ -64,9 +67,9 @@ public interface Dataset extends Describable {
 
     boolean isSetOffering();
 
-    AbstractFeatureEntity getFeature();
+    AbstractFeatureEntity<?> getFeature();
 
-    void setFeature(AbstractFeatureEntity feature);
+    void setFeature(AbstractFeatureEntity<?> feature);
 
     boolean isSetFeature();
 
@@ -104,13 +107,13 @@ public interface Dataset extends Describable {
 
     boolean isSetLastValueAt();
 
-    Data getFirstObservation();
+    Data<?> getFirstObservation();
 
-    void setFirstObservation(Data observation);
+    void setFirstObservation(Data<?> observation);
 
-    Data getLastObservation();
+    Data<?> getLastObservation();
 
-    void setLastObservation(Data observation);
+    void setLastObservation(Data<?> observation);
 
     BigDecimal getFirstQuantityValue();
 
@@ -119,10 +122,6 @@ public interface Dataset extends Describable {
     BigDecimal getLastQuantityValue();
 
     void setLastQuantityValue(BigDecimal value);
-
-    String getValueType();
-
-    void setValueType(String valueType);
 
     Set<Date> getResultTimes();
 
@@ -198,13 +197,13 @@ public interface Dataset extends Describable {
 
     void setDescription(String description);
 
-    Set<Parameter< ? >> getParameters();
+    Set<Parameter<?>> getParameters();
 
     default boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }
 
-    void setParameters(Set<Parameter< ? >> parameters);
+    void setParameters(Set<Parameter<?>> parameters);
 
     void setSamplings(Set<SamplingEntity> samplings);
 
@@ -223,6 +222,17 @@ public interface Dataset extends Describable {
     }
 
     void copy(Dataset series);
+    Integer getNumberOfDecimals();
+
+    DatasetEntity setNumberOfDecimals(Integer numberOfDecimals);
+
+    DatasetEntity setReferenceValues(Collection<DatasetEntity> referencValues);
+
+    List<DatasetEntity> getReferenceValues();
+
+    default boolean hasReferenceValues() {
+        return getReferenceValues() != null && !getReferenceValues().isEmpty();
+    }
 
     default String getDefaultDatasetType() {
         return DEFAULT_VALUE_TYPE;

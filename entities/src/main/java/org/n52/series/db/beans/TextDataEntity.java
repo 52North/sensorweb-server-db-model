@@ -58,7 +58,6 @@ public class TextDataEntity extends DataEntity<String> implements TextData {
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+        return value == null || noDataValues.contains(value);
     }
 }

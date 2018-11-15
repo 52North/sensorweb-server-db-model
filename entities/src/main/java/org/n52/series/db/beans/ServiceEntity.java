@@ -61,15 +61,14 @@ public class ServiceEntity extends DescribableEntity {
         this.type = type;
     }
 
-    public boolean isNoDataValue(Data< ? > observation) {
+    public boolean isNoDataValue(Data<?> observation) {
         return observation.isNoDataValue(noDataValues);
     }
 
     public String getNoDataValues() {
         // XXX make parsing more robust
         final String csv = Arrays.toString(noDataValues.toArray(new Double[0]));
-        return csv.substring(1)
-                  .substring(0, csv.length() - 2);
+        return csv.substring(1).substring(0, csv.length() - 2);
     }
 
     public void setNoDataValues(String noDataValues) {
@@ -101,18 +100,9 @@ public class ServiceEntity extends DescribableEntity {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" url: ")
-                 .append(getUrl())
-                 .append(", type: ")
-                 .append(getType())
-                 .append(", version: ")
-                 .append(getVersion())
-                 .append(", noDataValues: ")
-                 .append(getNoDataValues())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" url: ").append(getUrl()).append(", type: ")
+                .append(getType()).append(", version: ").append(getVersion()).append(", noDataValues: ")
+                .append(getNoDataValues()).append(" ]").toString();
     }
 
 }

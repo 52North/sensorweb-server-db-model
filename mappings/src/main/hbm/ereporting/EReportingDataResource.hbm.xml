@@ -81,7 +81,7 @@
                 check="is_child in (1,0)" />
         </property>
 
-	   <property name="parent"
+       <property name="parent"
             type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_parent" not-null="true" default="0"
                 check="is_parent in (1,0)" />
@@ -93,7 +93,7 @@
                 scale="10"/> <property column="lon" name="lon" type="big_decimal" precision="20"
                 scale="10"/> -->
             <property column="sampling_geometry" name="geometry"
-                type="jts_geometry" not-null="false" />
+                type="geolatte_geometry" not-null="false" />
         </component>
 
         <!-- Or add only to specific subclasses -->

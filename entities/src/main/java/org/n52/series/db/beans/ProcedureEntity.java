@@ -25,8 +25,6 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         implements HasProcedureHistory, HasProcedureDescriptionFormat<ProcedureEntity> {
 
-    public static final String PROPERTY_MOBILE = "mobile";
-    public static final String PROPERTY_INSITU = "insitu";
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "format";
@@ -57,10 +55,12 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.reference = reference;
     }
 
+    @Override
     public FormatEntity getFormat() {
         return this.format;
     }
 
+    @Override
     public ProcedureEntity setFormat(FormatEntity format) {
         this.format = format;
         return this;
@@ -110,10 +110,12 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.aggregation = isAggregation;
     }
 
+    @Override
     public Set<ProcedureHistoryEntity> getProcedureHistory() {
         return procedureHistory;
     }
 
+    @Override
     public void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory) {
         this.procedureHistory = procedureHistory;
     }

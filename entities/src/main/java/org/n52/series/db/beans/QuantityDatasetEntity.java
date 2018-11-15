@@ -27,7 +27,7 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
 
     private static final long serialVersionUID = 4788481449399555710L;
 
-    private List<QuantityDatasetEntity> referenceValues = new ArrayList<>();
+    private List<DatasetEntity> referenceValues = new ArrayList<>();
 
     private Integer numberOfDecimals;
 
@@ -36,11 +36,11 @@ public class QuantityDatasetEntity extends DatasetEntity implements QuantityData
     }
 
     @Override
-    public List<QuantityDatasetEntity> getReferenceValues() {
+    public List<DatasetEntity> getReferenceValues() {
         return referenceValues;
     }
 
-    public QuantityDatasetEntity setReferenceValues(Collection<QuantityDatasetEntity> referenceValues) {
+    public QuantityDatasetEntity setReferenceValues(Collection<DatasetEntity> referenceValues) {
         this.referenceValues.clear();
         if (referenceValues != null) {
             this.referenceValues.addAll(referenceValues);

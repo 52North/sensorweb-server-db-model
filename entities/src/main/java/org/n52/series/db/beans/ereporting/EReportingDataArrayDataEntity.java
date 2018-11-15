@@ -23,7 +23,7 @@ import java.util.Set;
 import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.data.Data.DataArrayData;
 
-public class EReportingDataArrayDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements DataArrayData {
+public class EReportingDataArrayDataEntity extends EReportingDataEntity<Set<DataEntity<?>>> implements DataArrayData {
 
     private static final long serialVersionUID = -357644664672153647L;
 
@@ -39,8 +39,6 @@ public class EReportingDataArrayDataEntity extends EReportingDataEntity<Set<Data
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        return isSetValue() ? getValue().toString() : "";
     }
 }

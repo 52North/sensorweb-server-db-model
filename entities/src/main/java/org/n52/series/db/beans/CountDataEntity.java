@@ -34,8 +34,7 @@ public class CountDataEntity extends DataEntity<Integer> implements CountData {
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         Integer value = getValue();
-        return value == null
-                || containsValue(noDataValues, value);
+        return value == null || containsValue(noDataValues, value);
     }
 
     private boolean containsValue(Collection<String> collection, Integer value) {

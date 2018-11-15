@@ -27,10 +27,6 @@ import org.n52.series.db.beans.HibernateRelations.HasNameCodespace;
  * @author Christian Autermann
  */
 public interface IdentifierNameDescriptionEntity
-        extends HasIdentifier,
-        HasIdentifierCodespace,
-        HasName,
-        HasNameCodespace,
-        HasDescription {
+        extends HasIdentifier, HasIdentifierCodespace, HasName, HasNameCodespace, HasDescription {
 
 }

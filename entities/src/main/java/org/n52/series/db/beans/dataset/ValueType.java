@@ -14,24 +14,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.n52.series.db.beans;
-
-import static org.junit.Assert.assertTrue;
+package org.n52.series.db.beans.dataset;
 
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.stream.Collectors;
 
-import org.junit.Test;
-import org.n52.series.db.beans.CountDataEntity;
+public enum ValueType {
+    quantity, count, text, category, bool, geometry, blob, referenced, not_initialized;
 
-public class CountDataEntityTest {
+    public static final String ALL = "all";
 
-    @Test
-    public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] { "9999", "-9999.9" });
-        CountDataEntity entity = new CountDataEntity();
-        entity.setValue(9999);
-        assertTrue(entity.isNoDataValue(noDataValues));
+    public static Set<ValueType> convert(Set<String> valueType) {
+        if (valueType != null) {
+            if (valueType.contains(ALL)) {
+                return new LinkedHashSet<>(Arrays.asList(values()));
+            }
+            return valueType.stream().map(vt -> ValueType.valueOf(vt)).collect(Collectors.toSet());
+        }
+        return null;
     }
 }

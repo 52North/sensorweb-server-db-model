@@ -27,9 +27,7 @@ public interface NotInitializedDataset extends Dataset {
     }
 
     default Long getUnitId() {
-        return getUnit() != null
-                ? getUnit().getId()
-                : null;
+        return getUnit() != null ? getUnit().getId() : null;
     }
 
     default void setUnitId(Long unitId) {
@@ -37,9 +35,7 @@ public interface NotInitializedDataset extends Dataset {
     }
 
     default Long getFirstObservationId() {
-        return getFirstObservation() != null
-                ? getFirstObservation().getId()
-                : null;
+        return getFirstObservation() != null ? getFirstObservation().getId() : null;
     }
 
     default void setFirstObservationId(Long firstObservationId) {
@@ -47,9 +43,7 @@ public interface NotInitializedDataset extends Dataset {
     }
 
     default Long getLastObservationId() {
-        return getLastObservation() != null
-                ? getLastObservation().getId()
-                : null;
+        return getLastObservation() != null ? getLastObservation().getId() : null;
     }
 
     default void setLastObservationId(Long lastObservationId) {
