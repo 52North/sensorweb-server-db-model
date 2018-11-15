@@ -35,8 +35,7 @@ public class EReportingQuantityDataEntity extends EReportingDataEntity<BigDecima
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         BigDecimal value = getValue();
-        return value == null
-                || containsValue(noDataValues, value);
+        return value == null || containsValue(noDataValues, value);
     }
 
     private boolean containsValue(Collection<String> collection, BigDecimal key) {
@@ -44,9 +43,7 @@ public class EReportingQuantityDataEntity extends EReportingDataEntity<BigDecima
             return false;
         }
         for (BigDecimal noDataValue : convertToDoubles(collection)) {
-            if (noDataValue.subtract(key)
-                           .abs()
-                           .compareTo(DOUBLE_THRESHOLD) < 0) {
+            if (noDataValue.subtract(key).abs().compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }
@@ -73,9 +70,7 @@ public class EReportingQuantityDataEntity extends EReportingDataEntity<BigDecima
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        return isSetValue() ? getValue().toString() : "";
     }
 
 }

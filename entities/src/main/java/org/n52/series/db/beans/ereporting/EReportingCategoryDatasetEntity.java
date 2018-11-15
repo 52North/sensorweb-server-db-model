@@ -19,8 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.CategoryDataset;
 
-public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity
-        implements CategoryDataset {
+public class EReportingCategoryDatasetEntity extends EReportingDatasetEntity implements CategoryDataset {
 
     private static final long serialVersionUID = -6644598309866325949L;
 

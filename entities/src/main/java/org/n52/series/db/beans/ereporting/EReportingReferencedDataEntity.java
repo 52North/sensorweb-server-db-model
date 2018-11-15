@@ -28,8 +28,7 @@ public class EReportingReferencedDataEntity extends EReportingDataEntity<String>
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+        return value == null || noDataValues.contains(value);
     }
 
     @Override
@@ -39,9 +38,7 @@ public class EReportingReferencedDataEntity extends EReportingDataEntity<String>
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue()
-                : "";
+        return isSetValue() ? getValue() : "";
     }
 
 }

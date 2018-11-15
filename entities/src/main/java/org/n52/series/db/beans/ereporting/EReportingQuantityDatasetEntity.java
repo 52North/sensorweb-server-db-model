@@ -18,7 +18,6 @@
 package org.n52.series.db.beans.ereporting;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import org.n52.series.db.beans.dataset.QuantityDataset;
@@ -31,20 +30,6 @@ public class EReportingQuantityDatasetEntity extends EReportingDatasetEntity
     private List<EReportingQuantityDatasetEntity> referenceValues = new ArrayList<>();
 
     private Integer numberOfDecimals;
-
-    @Override
-    public List<EReportingQuantityDatasetEntity> getReferenceValues() {
-        return referenceValues;
-    }
-
-    public EReportingQuantityDatasetEntity setReferenceValues(
-                                                              Collection<EReportingQuantityDatasetEntity> refValues) {
-        this.referenceValues.clear();
-        if (refValues != null) {
-            this.referenceValues.addAll(refValues);
-        }
-        return this;
-    }
 
     @Override
     public Integer getNumberOfDecimals() {

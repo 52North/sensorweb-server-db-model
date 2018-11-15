@@ -18,7 +18,6 @@
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.dataset.Dataset;
 
 public abstract class EReportingDatasetEntity extends DatasetEntity {
 
@@ -36,7 +35,7 @@ public abstract class EReportingDatasetEntity extends DatasetEntity {
     }
 
     @Override
-    public void copy(Dataset dataset) {
+    public void copy(DatasetEntity dataset) {
         if (dataset instanceof EReportingDatasetEntity) {
             setSamplingPoint(((EReportingDatasetEntity) dataset).getSamplingPoint());
         }

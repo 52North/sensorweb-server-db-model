@@ -13,29 +13,35 @@
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
-        
-        <discriminator force="true" type="string" >
-            <column name="value_type">
-                <comment>Indicator used by Hibernate to map value specific entities.</comment>
+
+        <property name="datasetType">
+            <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individual_observation', 'timeseries', 'profile', 'trajectory', 'not_initialized')">
+                <comment>Indicator whether the dataset provides individual observations, timeseries, profiles or trajectories.</comment>
             </column>
-        </discriminator>
-        
-        <property name="datasetType" type="string">
-            <column name="dataset_type" check="dataset_type in ('single', 'timeseries', 'profile', 'trajectory')">
-                <comment>Indicator whether the dataset provides single observations, timeseries, profiles or trajectories.</comment>
-            </column>
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">org.n52.series.db.beans.DatasetType</param>
+                <param name="useNamed">true</param>
+            </type>
         </property>
-        
-        <property name="aggregateType" type="string">
-            <column name="aggregate_type" check="aggregate_type in ('none', 'profile', 'trajectory', 'complex', 'dataarray')">
-                <comment>Indicator whether the dataset observations are aggregated to profiles or trajectories </comment>
+
+        <property name="aggregationType">
+            <column name="aggregation_type" scale="20" not-null="true" check="aggregation_type in ('none', 'profile', 'trajectory', 'complex', 'dataarray', 'not_initialized')">
+                <comment>Indicator whether the dataset observations are aggregated to profiles or trajectories, ... </comment>
             </column>
+             <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">org.n52.series.db.beans.AggregationType</param>
+                <param name="useNamed">true</param>
+            </type>
         </property>
-        
-        <property name="valueType" type="string">
-            <column name="value_type" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'geometry', 'blob', 'referenced', 'not_initialized')">
+
+        <property name="valueType">
+            <column name="value_type" scale="20" not-null="true" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'geometry', 'blob', 'referenced', 'not_initialized')">
                 <comment>Indicator of the type of the single values.</comment>
             </column>
+             <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">org.n52.series.db.beans.ValueType</param>
+                <param name="useNamed">true</param>
+            </type>
         </property>
 
         <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
@@ -63,9 +69,8 @@
                 <comment>Reference to the feature that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <!-- See above for procedure! -->
         <many-to-one class="PlatformEntity" name="platform" unique-key="un_dataset_identity" foreign-key="fk_dataset_platform">
-            <column name="fk_procedure_id" not-null="true">
+            <column name="fk_platform_id" not-null="true">
                 <comment>Reference to the platform that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
@@ -76,27 +81,19 @@
             </column>
         </many-to-one>
 
-        <property name="firstValueAt" type="timestamp">
-            <column name="first_time">
-                <comment>The timestamp of the temporally first data/observation that belongs to this dataset.</comment>
+        <many-to-one class="UnitEntity" name="unit" foreign-key="fk_dataset_unit">
+            <column name="fk_unit_id">
+                <comment>Reference to the unit of the data/observations that belongs to this dataset.</comment>
             </column>
-        </property>
-        <property name="lastValueAt" type="timestamp">
-            <column name="last_time">
-                <comment>The timestamp of the temporally last data/observation that belongs to this dataset.</comment>
-            </column>
-        </property>
+        </many-to-one>
 
-        <property name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
-            <column name="first_value">
-                <comment>The value of the temporally first data/observation that belongs to this dataset.</comment>
-            </column>
-        </property>
-        <property name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
-            <column name="last_value">
-                <comment>The value of the temporally last quantity data/observation that belongs to this dataset.</comment>
-            </column>
-        </property>
+
+
+
+
+
+
+
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
@@ -126,19 +123,75 @@
             <column name="is_insitu" not-null="false" default="1" check="is_insitu in (1,0)">
                 <comment>Flag that indicates if the procedure is insitu (1/true) or remote (0/false).</comment>
             </column>
-        </property>
-
-        <property name="originTimezone" type="string" precision="40">
-            <column name="origin_timezone" not-null="false" precision="40">
-                <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin)</comment>
-            </column>
-        </property>
-
-        <property name="hidden" type="org.n52.hibernate.type.SmallBooleanType">
+        </property><property name="hidden" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_hidden" not-null="true" default="0" check="is_hidden in (1,0)">
                 <comment>Flag that indicates if this dataset should be hidden, e.g. for sub-datasets of a complex datasets</comment>
             </column>
         </property>
+
+        <property name="originTimezone" type="string" >
+            <column name="origin_timezone" not-null="false" scale="40">
+                <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin)</comment>
+            </column>
+        </property>
+
+        <property name="firstValueAt" type="timestamp">
+            <column name="first_time">
+                <comment>The timestamp of the temporally first data/observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <property name="lastValueAt" type="timestamp">
+            <column name="last_time">
+                <comment>The timestamp of the temporally last data/observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <property name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
+            <column name="first_value">
+                <comment>The value of the temporally first data/observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <property name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
+            <column name="last_value">
+                <comment>The value of the temporally last quantity data/observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <many-to-one class="DataEntity" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs">
+            <column name="fk_first_observation_id">
+                <comment>Reference to the temporally first data/observation in the observation table that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="DataEntity" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs">
+            <column name="fk_last_observation_id">
+                <comment>Reference to the temporally last data/observation in the observation table that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+
+        <property name="numberOfDecimals" type="int">
+            <column name="decimals">
+                <comment>Number of decimals that should be present in the data/observation values</comment>
+            </column>
+        </property>
+
+        <list name="referenceValues" table="dataset_reference" inverse="false">
+            <comment>Storage of referenced datasets, e.g. level zero, medium water level,etc. for water level </comment>
+            <key not-null="true" foreign-key="fk_dataset_reference_from">
+                <column name="fk_dataset_id_from">
+                    <comment>Reference to the dataset that has referenced datasets</comment>
+                </column>
+            </key>
+            <list-index>
+                <column name="sort_order">
+                     <comment>Provides the sort order for the referenced datasets.</comment>
+                </column>
+            </list-index>
+            <many-to-many class="DatasetEntity" foreign-key="fk_dataset_reference_to">
+                <column name="fk_dataset_id_to">
+                    <comment>Reference to the dataset that is the reference</comment>
+                </column>
+            </many-to-many>
+        </list>
+
+
 
         <property name="identifier" type="string" index="idx_dataset_identifier">
             <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
@@ -183,20 +236,25 @@
                 </column>
             </many-to-many>
         </set>
+        <set name="translations" table="dataset_i18n" inverse="true" fetch="select">
+            <key column="fk_dataset_id" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity" />
+        </set>
 
         <!-- Some columns occur several times and are commented only once at her first definition! -->
+        <!--
         <subclass name="NotInitializedDatasetEntity" discriminator-value="not_initialized">
-        	<property name="unitId" type="long" lazy="true">
+            <property name="unitId" type="long" lazy="true">
                 <column name="fk_unit_id">
                     <comment>Reference to the unit of the data/observations that belongs to this dataset.</comment>
                 </column>
             </property>
-        	<property name="firstObservationId" type="long" lazy="true">
+            <property name="firstObservationId" type="long" lazy="true">
                 <column name="fk_first_observation_id">
                     <comment>Reference to the temporally first data/observation in the observation table that belongs to this dataset.</comment>
                 </column>
             </property>
-        	<property name="lastObservationId" type="long" lazy="true">
+            <property name="lastObservationId" type="long" lazy="true">
                 <column name="fk_last_observation_id">
                     <comment>Reference to the temporally last data/observation in the observation table that belongs to this dataset.</comment>
                 </column>
@@ -283,6 +341,37 @@
             <many-to-one class="ProfileDataEntity" column="fk_first_observation_id" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs"/>
             <many-to-one class="ProfileDataEntity" column="fk_last_observation_id" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs"/>
             <property name="verticalParameterName" formula="'depth'" type="string" />
-        </subclass>
+        </subclass> -->
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nDatasetEntity" table="dataset_i18n">
+        <id name="id" type="long">
+            <column name="dataset_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">dataset_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="DatasetEntity" foreign-key="fk_data">
+            <column name="fk_data_id" not-null="true">
+                <comment>Reference to the dataset table this internationalization belongs to.</comment>
+            </column>
+        </many-to-one>
+         <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the dataset entity</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>Locale/language specific description of the dataset entity</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>

@@ -46,7 +46,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
 
     /**
      * @param station
-     *        the station to set
+     *            the station to set
      * @return this
      */
     public EReportingStationEntity setStation(Long station) {
@@ -54,6 +54,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
         return this;
     }
 
+    @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
@@ -65,6 +66,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
         return this;
     }
 
+    @Override
     public EReportingStationEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;

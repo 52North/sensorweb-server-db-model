@@ -37,9 +37,24 @@
                 <!-- <comment>A short description of the platform</comment> -->
             </column>
         </property>
-           <set name="translations" table="platform_i18n" inverse="true" fetch="select">
+        <!-- Or add only to specific subclasses -->
+        <set inverse="true" name="parameters" table="platform_parameter" cascade="all" fetch="join">
+            <comment>Storage of relations between platform and related parameter</comment>
+            <key not-null="true" foreign-key="fk_platform_parameter">
+                <column name="fk_platform_id">
+                    <comment>The reference to the platform in the observation table</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" foreign-key="fk_parameter_platform">
+                <column name="fk_parameter_id">
+                    <comment>The reference to the parameter in the platform parameter</comment>
+                </column>
+            </many-to-many>
+        </set>
+        <set name="translations" table="platform_i18n" inverse="true" fetch="select">
             <key column="fk_platform_id" not-null="true" />
-            <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />
+            <one-to-many
+                class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />
         </set>
     </class>
 

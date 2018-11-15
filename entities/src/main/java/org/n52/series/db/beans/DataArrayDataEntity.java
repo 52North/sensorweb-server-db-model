@@ -17,6 +17,8 @@
 
 package org.n52.series.db.beans;
 
+import java.util.Set;
+
 import org.n52.series.db.beans.data.Data.DataArrayData;
 
 public class DataArrayDataEntity extends CompositeDataEntity implements DataArrayData {
@@ -27,6 +29,16 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
 
     private String encoding;
 
+    @Override
+    public Set<DataEntity<?>> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity<?>> value) {
+        super.setValue(value);
+    }
+
     /**
      * @return the structure
      */
@@ -35,7 +47,8 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
     }
 
     /**
-     * @param structure the structure to set
+     * @param structure
+     *            the structure to set
      */
     public void setStructure(String structure) {
         this.structure = structure;
@@ -49,7 +62,8 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
     }
 
     /**
-     * @param encoding the encoding to set
+     * @param encoding
+     *            the encoding to set
      */
     public void setEncoding(String encoding) {
         this.encoding = encoding;

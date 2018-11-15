@@ -29,8 +29,7 @@ public class EReportingGeometryDataEntity extends EReportingDataEntity<GeometryE
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         GeometryEntity value = getValue();
-        return value == null
-                || value.isEmpty();
+        return value == null || value.isEmpty();
     }
 
     @Override
@@ -40,9 +39,6 @@ public class EReportingGeometryDataEntity extends EReportingDataEntity<GeometryE
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().getGeometry()
-                            .toText()
-                : "";
+        return isSetValue() ? getValue().getGeometry().toText() : "";
     }
 }

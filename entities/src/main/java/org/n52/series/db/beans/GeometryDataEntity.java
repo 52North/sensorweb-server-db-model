@@ -28,7 +28,6 @@ public class GeometryDataEntity extends DataEntity<GeometryEntity> implements Ge
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         GeometryEntity value = getValue();
-        return value == null
-                || value.isEmpty();
+        return value == null || value.isEmpty();
     }
 }

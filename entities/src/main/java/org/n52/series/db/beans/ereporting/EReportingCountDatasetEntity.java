@@ -19,8 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.CountDataset;
 
-public class EReportingCountDatasetEntity extends EReportingDatasetEntity
-        implements CountDataset {
+public class EReportingCountDatasetEntity extends EReportingDatasetEntity implements CountDataset {
 
     private static final long serialVersionUID = 1131133156959629606L;
 

@@ -34,8 +34,7 @@ public class EReportingCountDataEntity extends EReportingDataEntity<Integer> imp
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         Integer value = getValue();
-        return value == null
-                || containsValue(noDataValues, value);
+        return value == null || containsValue(noDataValues, value);
     }
 
     private boolean containsValue(Collection<String> collection, Integer value) {
@@ -67,9 +66,7 @@ public class EReportingCountDataEntity extends EReportingDataEntity<Integer> imp
 
     @Override
     public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+        return isSetValue() ? getValue().toString() : "";
     }
 
 }

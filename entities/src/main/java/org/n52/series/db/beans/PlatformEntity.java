@@ -25,21 +25,21 @@ public class PlatformEntity extends DescribableEntity {
 
     private static final long serialVersionUID = 3615089936334873353L;
 
-    private Set<Parameter< ? >> parameters;
+    private Set<Parameter<?>> parameters;
 
     @Override
-    public Set<Parameter< ? >> getParameters() {
+    public Set<Parameter<?>> getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(Set<Parameter< ? >> parameters) {
+    public void setParameters(Set<Parameter<?>> parameters) {
         this.parameters = parameters;
     }
 
     @Override
     public boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
+        return (getParameters() != null) && !getParameters().isEmpty();
     }
 
 }

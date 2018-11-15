@@ -33,12 +33,7 @@ import org.n52.series.db.beans.IdentifierNameDescriptionEntity;
 import org.n52.series.db.beans.RelatedDataEntity;
 import org.n52.series.db.beans.UnitEntity;
 
-public interface Data<T>
-        extends
-        HasId,
-        IdentifierNameDescriptionEntity,
-        HasPhenomenonTime,
-        HasDataset {
+public interface Data<T> extends HasId, IdentifierNameDescriptionEntity, HasPhenomenonTime, HasDataset {
 
     BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
 
@@ -94,9 +89,9 @@ public interface Data<T>
         return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
     }
 
-    Set<Parameter< ? >> getParameters();
+    Set<Parameter<?>> getParameters();
 
-    void setParameters(Set<Parameter< ? >> parameters);
+    void setParameters(Set<Parameter<?>> parameters);
 
     default boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
@@ -142,51 +137,35 @@ public interface Data<T>
         return getVerticalTo() != null && !getVerticalFrom().equals(NOT_SET_VERTICAL);
     }
 
-    interface BlobData
-            extends
-            Data<Object> {
+    interface BlobData extends Data<Object> {
         String DATASET_TYPE = "blob";
     }
 
-    interface BooleanData
-            extends
-            Data<Boolean> {
+    interface BooleanData extends Data<Boolean> {
         String DATASET_TYPE = "boolean";
     }
 
-    interface CategoryData
-            extends
-            Data<String> {
+    interface CategoryData extends Data<String> {
         String DATASET_TYPE = "category";
     }
 
-    interface ComplexData
-            extends
-            Data<Set<DataEntity< ? >>> {
+    interface ComplexData extends Data<Set<DataEntity<?>>> {
         String DATASET_TYPE = "complex";
     }
 
-    interface CountData
-            extends
-            Data<Integer> {
+    interface CountData extends Data<Integer> {
         String DATASET_TYPE = "count";
     }
 
-    interface DataArrayData
-            extends
-            Data<Set<DataEntity< ? >>> {
+    interface DataArrayData extends Data<Set<DataEntity<?>>> {
         String DATASET_TYPE = "dataarray";
     }
 
-    interface GeometryData
-            extends
-            Data<GeometryEntity> {
+    interface GeometryData extends Data<GeometryEntity> {
         String DATASET_TYPE = "geoemtry";
     }
 
-    interface ProfileData
-            extends
-            Data<Set<DataEntity< ? >>> {
+    interface ProfileData extends Data<Set<DataEntity<?>>> {
         String DATASET_TYPE = "profile";
 
         String getVerticalFromName();
@@ -214,28 +193,20 @@ public interface Data<T>
         }
     }
 
-    interface QuantityData
-            extends
-            Data<BigDecimal> {
+    interface QuantityData extends Data<BigDecimal> {
         String DATASET_TYPE = "quantity";
         BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     }
 
-    interface ReferencedData
-            extends
-            Data<String> {
+    interface ReferencedData extends Data<String> {
         String DATASET_TYPE = "referenced";
     }
 
-    interface TextData
-            extends
-            Data<String> {
+    interface TextData extends Data<String> {
         String DATASET_TYPE = "text";
     }
 
-    interface RecordData
-            extends
-            Data<Map<String, Object>> {
+    interface RecordData extends Data<Map<String, Object>> {
         String DATASET_TYPE = "record";
     }
 

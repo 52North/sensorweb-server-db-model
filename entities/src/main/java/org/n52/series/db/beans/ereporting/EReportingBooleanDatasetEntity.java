@@ -19,8 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.BooleanDataset;
 
-public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity
-        implements BooleanDataset {
+public class EReportingBooleanDatasetEntity extends EReportingDatasetEntity implements BooleanDataset {
 
     private static final long serialVersionUID = 5026545130550522586L;
 

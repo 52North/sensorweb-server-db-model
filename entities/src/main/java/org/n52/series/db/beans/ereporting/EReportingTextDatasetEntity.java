@@ -19,8 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.TextDataset;
 
-public class EReportingTextDatasetEntity extends EReportingDatasetEntity
-        implements TextDataset {
+public class EReportingTextDatasetEntity extends EReportingDatasetEntity implements TextDataset {
 
     private static final long serialVersionUID = -1403740854226908585L;
 

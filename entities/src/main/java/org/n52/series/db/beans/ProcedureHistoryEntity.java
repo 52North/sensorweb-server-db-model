@@ -28,9 +28,8 @@ import org.n52.series.db.common.Utils;
 /**
  * @since 1.0.0
  */
-public class ProcedureHistoryEntity extends IdEntity implements Serializable,
-        HasProcedure<ProcedureHistoryEntity>, HasProcedureDescriptionFormat<ProcedureHistoryEntity>,
-        HasXml<ProcedureHistoryEntity> {
+public class ProcedureHistoryEntity extends IdEntity implements Serializable, HasProcedure<ProcedureHistoryEntity>,
+        HasProcedureDescriptionFormat<ProcedureHistoryEntity>, HasXml<ProcedureHistoryEntity> {
 
     public static final String START_TIME = "startTime";
 

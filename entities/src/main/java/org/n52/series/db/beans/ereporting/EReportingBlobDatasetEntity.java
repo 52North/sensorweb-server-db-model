@@ -19,8 +19,7 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.dataset.BlobDataset;
 
-public class EReportingBlobDatasetEntity extends EReportingDatasetEntity
-        implements BlobDataset {
+public class EReportingBlobDatasetEntity extends EReportingDatasetEntity implements BlobDataset {
 
     private static final long serialVersionUID = 365032550010162204L;
 
