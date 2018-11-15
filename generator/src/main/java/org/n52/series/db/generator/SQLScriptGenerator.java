@@ -115,9 +115,11 @@ public class SQLScriptGenerator {
     private void setDirectoriesForModelSelection(Concept concept, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
-         files.add(getDirectory("/hbm/core"));
+        if (!concept.equals(Concept.WV)) {
+        files.add(getDirectory("/hbm/core"));
 //         files.add(getDirectory("/hbm/feature"));
 //         files.add(getDirectory("/hbm/extension"));
+        }
         for (File file : files) {
             if (configuration != null) {
                 configuration.addDirectory(file);
@@ -154,6 +156,14 @@ public class SQLScriptGenerator {
             }
             if (metadataSources != null) {
                 metadataSources.addDirectory(getDirectory("/hbm/sampling"));
+            }
+            break;
+        case WV:
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory("/hbm/wv"));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory("/hbm/wv"));
             }
             break;
         default:
@@ -217,6 +227,7 @@ public class SQLScriptGenerator {
         printToScreen("0   series");
         printToScreen("1   ereporting");
         printToScreen("2   sampling");
+        printToScreen("3   wupperverband");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -496,7 +507,8 @@ public class SQLScriptGenerator {
     enum Concept {
         DEFAULT,
         E_REPORTING,
-        SAMPLING;
+        SAMPLING,
+        WV;
 
         @Override
         public String toString() {

@@ -1,0 +1,79 @@
+<hibernate-mapping package="org.n52.series.db.beans.sampling"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="SamplingEntity"
+        table="sampling">
+        <comment>Storage of the samplings.</comment>
+        <id name="id" type="long">
+            <column name="sampling_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">sampling_seq</param>
+            </generator>
+        </id>
+
+        <many-to-one name="measuringProgram" class="MeasuringProgramEntity" foreign-key="fk_measuring_program">
+            <column name="fk_measuring_program_id" not-null="true">
+                <comment>Reference to the measuring program to which this sampling belongs.</comment>
+            </column>
+        </many-to-one>
+
+         <property name="label" type="string">
+            <column name="label">
+                <comment>The label of the sample.</comment>
+            </column>
+        </property>
+
+         <property name="sampler" type="string">
+            <column name="sampler">
+                <comment>The sampler who take the sample.</comment>
+            </column>
+        </property>
+
+         <property name="samplingMethod" type="string">
+            <column name="sampling_method">
+                <comment>The sampling method used to take the sample</comment>
+            </column>
+        </property>
+
+         <property name="environmentalConditions" type="string">
+            <column name="environmental_conditions">
+                <comment>The environmental conditions when the sample was made.</comment>
+            </column>
+        </property>
+
+         <property name="comment" type="string">
+            <column name="comment">
+                <comment>A comment for the sample.</comment>
+            </column>
+        </property>
+
+        <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
+            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
+                <comment>The timestamp when the observation period has started.</comment>
+            </column>
+        </property>
+
+        <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
+            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
+                <comment>The timestamp when the measurement period has finished or the observation took place.</comment>
+            </column>
+        </property>
+
+        <set inverse="true" name="datasets" table="sampling_dataset" >
+            <comment>Storage of relations between dataset and related samplings</comment>
+            <key not-null="true" foreign-key="fk_sampling_dataset">
+                <column name="fk_sampling_id">
+                    <comment>The reference to the sampling in the dataset samplingThe reference to the dataset in the dataset table</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_sampling">
+                <column name="fk_dataset_id">
+                    <comment>The reference to the dataset in the dataset table</comment>
+                </column>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
