@@ -16,9 +16,9 @@
             </generator>
         </id>
 
-        <many-to-one name="monitoringProgram" class="MonitoringProgramEntity" foreign-key="fk_monitoring_program">
-            <column name="fk_monitoring_program_id" not-null="true">
-                <comment>Reference to the monitoring program to which this sampling belongs.</comment>
+        <many-to-one name="measuringProgram" class="MeasuringProgramEntity" foreign-key="fk_measuring_program">
+            <column name="fk_measuring_program_id" not-null="true">
+                <comment>Reference to the measuring program to which this sampling belongs.</comment>
             </column>
         </many-to-one>
 

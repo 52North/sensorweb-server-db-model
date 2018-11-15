@@ -373,7 +373,8 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     /**
-     * @param detectionLimit the detectionLimit to set
+     * @param detectionLimit
+     *            the detectionLimit to set
      */
     public void setDetectionLimit(DetectionLimitEntity detectionLimit) {
         this.detectionLimit = detectionLimit;

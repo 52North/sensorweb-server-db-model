@@ -37,7 +37,7 @@ import org.n52.series.db.beans.RelatedDatasetEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.parameter.Parameter;
-import org.n52.series.db.beans.sampling.MonitoringProgramEntity;
+import org.n52.series.db.beans.sampling.MeasuringProgramEntity;
 import org.n52.series.db.beans.sampling.SamplingEntity;
 
 @Deprecated
@@ -213,15 +213,16 @@ public interface Dataset extends Describable {
         return getSamplings() != null && !getSamplings().isEmpty();
     }
 
-    void setMonitoringPrograms(Set<MonitoringProgramEntity> monitoringPrograms);
+    void setMeasuringPrograms(Set<MeasuringProgramEntity> monitoringPrograms);
 
-    Set<MonitoringProgramEntity> getMonitoringPrograms();
+    Set<MeasuringProgramEntity> getMeasuringPrograms();
 
-    default boolean hasMonitoringPrograms() {
-        return getMonitoringPrograms() != null && !getMonitoringPrograms().isEmpty();
+    default boolean hasMeasuringPrograms() {
+        return getMeasuringPrograms() != null && !getMeasuringPrograms().isEmpty();
     }
 
-    void copy(Dataset series);
+    // void copy(Dataset series);
+
     Integer getNumberOfDecimals();
 
     DatasetEntity setNumberOfDecimals(Integer numberOfDecimals);

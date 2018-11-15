@@ -146,7 +146,7 @@ public interface Data<T> extends HasId, IdentifierNameDescriptionEntity, HasPhen
     default boolean hasSampling() {
         return getSampling() != null;
     }
-    
+
     DetectionLimitEntity getDetectionLimit();
 
     void setDetectionLimit(DetectionLimitEntity detectionLimit);

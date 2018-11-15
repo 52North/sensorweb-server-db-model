@@ -164,7 +164,6 @@
             </many-to-many>
         </set>
 
-        <!-- TODO: check for naming -->
         <set inverse="true" name="samplings" table="sampling_dataset" >
             <comment>Storage of relations between dataset and related samplings</comment>
             <key not-null="true" foreign-key="fk_dataset_sampling">
@@ -179,17 +178,16 @@
             </many-to-many>
         </set>
 
-        <!-- TODO: check for naming -->
-        <set inverse="true" name="monitoringPrograms" table="monitoring_program_dataset">
-            <comment>Storage of relations between dataset and related monitoring programs</comment>
-            <key not-null="true" foreign-key="fk_dataset_monitoring_program">
+        <set inverse="true" name="measuringPrograms" table="measuring_program_dataset">
+            <comment>Storage of relations between dataset and related measuring programs</comment>
+            <key not-null="true" foreign-key="fk_dataset_measuring_program">
                 <column name="fk_dataset_id">
                     <comment>The reference to the dataset in the dataset table</comment>
                 </column>
             </key>
-            <many-to-many class="org.n52.series.db.beans.sampling.MonitoringProgramEntity" foreign-key="fk_monitoring_program_dataset">
-                <column name="fk_monitoring_program_id">
-                    <comment>The reference to the monitoring program in the dataset monitoring program</comment>
+            <many-to-many class="org.n52.series.db.beans.sampling.MeasuringProgramEntity" foreign-key="fk_measuring_program_dataset">
+                <column name="fk_measuring_program_id">
+                    <comment>The reference to the measuring program in the dataset measuring program</comment>
                 </column>
             </many-to-many>
         </set>

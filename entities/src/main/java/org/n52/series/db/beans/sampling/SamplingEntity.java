@@ -33,7 +33,7 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
 
     private final Set<DatasetEntity> datasets = new LinkedHashSet<>();
 
-    private MonitoringProgramEntity monitoringProgram;
+    private MeasuringProgramEntity measuringProgram;
 
     private String label;
 
@@ -50,17 +50,18 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
     private Date samplingTimeEnd;
 
     /**
-     * @return the monitoringProgram
+     * @return the measuringProgram
      */
-    public MonitoringProgramEntity getMonitoringProgram() {
-        return monitoringProgram;
+    public MeasuringProgramEntity getMeasuringProgram() {
+        return measuringProgram;
     }
 
     /**
-     * @param monitoringProgram the monitoringProgram to set
+     * @param measuringProgram
+     *            the measuringProgram to set
      */
-    public void setMonitoringProgram(MonitoringProgramEntity monitoringProgram) {
-        this.monitoringProgram = monitoringProgram;
+    public void setMeasuringProgram(MeasuringProgramEntity measuringProgram) {
+        this.measuringProgram = measuringProgram;
     }
 
     /**
@@ -71,7 +72,8 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
     }
 
     /**
-     * @param label the label to set
+     * @param label
+     *            the label to set
      */
     public void setLabel(String label) {
         this.label = label;
@@ -85,7 +87,8 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
     }
 
     /**
-     * @param sampler the sampler to set
+     * @param sampler
+     *            the sampler to set
      */
     public void setSampler(String sampler) {
         this.sampler = sampler;
@@ -99,7 +102,8 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
     }
 
     /**
-     * @param samplingMethod the samplingMethod to set
+     * @param samplingMethod
+     *            the samplingMethod to set
      */
     public void setSamplingMethod(String samplingMethod) {
         this.samplingMethod = samplingMethod;
@@ -113,7 +117,8 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
     }
 
     /**
-     * @param environmentalConditions the environmentalConditions to set
+     * @param environmentalConditions
+     *            the environmentalConditions to set
      */
     public void setEnvironmentalConditions(String environmentalConditions) {
         this.environmentalConditions = environmentalConditions;
@@ -127,7 +132,8 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
     }
 
     /**
-     * @param comment the comment to set
+     * @param comment
+     *            the comment to set
      */
     public void setComment(String comment) {
         this.comment = comment;
@@ -142,7 +148,7 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
 
     /**
      * @param samplingTimeStart
-     *        the samplingTimeStart
+     *            the samplingTimeStart
      */
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
@@ -157,7 +163,7 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
 
     /**
      * @param samplingTimeEnd
-     *        the samplingTimeEnd
+     *            the samplingTimeEnd
      */
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);

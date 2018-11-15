@@ -33,7 +33,8 @@ public class DetectionLimitEntity {
     }
 
     /**
-     * @param flag the flag to set
+     * @param flag
+     *            the flag to set
      */
     public void setFlag(Short flag) {
         this.flag = flag;
@@ -51,7 +52,8 @@ public class DetectionLimitEntity {
     }
 
     /**
-     * @param detectionLimit the detectionLimit to set
+     * @param detectionLimit
+     *            the detectionLimit to set
      */
     public void setDetectionLimit(BigDecimal detectionLimit) {
         this.detectionLimit = detectionLimit;

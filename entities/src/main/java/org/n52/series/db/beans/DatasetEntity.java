@@ -33,7 +33,7 @@ import org.n52.series.db.beans.data.Data;
 import org.n52.series.db.beans.dataset.AggregationType;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ValueType;
-import org.n52.series.db.beans.sampling.MonitoringProgramEntity;
+import org.n52.series.db.beans.sampling.MeasuringProgramEntity;
 import org.n52.series.db.beans.sampling.SamplingEntity;
 import org.n52.series.db.common.Utils;
 
@@ -123,7 +123,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private final Set<SamplingEntity> samplings = new LinkedHashSet<>();
 
-    private final Set<MonitoringProgramEntity> monitoringPrograms = new LinkedHashSet<>();
+    private final Set<MeasuringProgramEntity> measuringPrograms = new LinkedHashSet<>();
 
     public DatasetEntity() {
         this(ValueType.not_initialized);
@@ -455,7 +455,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return relatedDatasets;
     }
 
-    @Override
     public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
         this.relatedDatasets.clear();
         if (relatedDataset != null) {
@@ -465,7 +464,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     public boolean hasRelatedDatasets() {
         return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
-    @Override
+    }
+
     public Set<SamplingEntity> getSamplings() {
         return samplings;
     }
@@ -477,17 +477,23 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         }
     }
 
-    @Override
-    public Set<MonitoringProgramEntity> getMonitoringPrograms() {
-        return monitoringPrograms;
+    public boolean hasSamplings() {
+        return getSamplings() != null && !getSamplings().isEmpty();
     }
 
-    @Override
-    public void setMonitoringPrograms(Set<MonitoringProgramEntity> monitoringPrograms) {
-        this.monitoringPrograms.clear();
-        if (monitoringPrograms != null) {
-            this.monitoringPrograms.addAll(monitoringPrograms);
+    public Set<MeasuringProgramEntity> getMeasuringPrograms() {
+        return measuringPrograms;
+    }
+
+    public void setMeasuringPrograms(Set<MeasuringProgramEntity> measuringPrograms) {
+        this.measuringPrograms.clear();
+        if (measuringPrograms != null) {
+            this.measuringPrograms.addAll(measuringPrograms);
         }
+    }
+
+    public boolean hasMeasuringPrograms() {
+        return getMeasuringPrograms() != null && !getMeasuringPrograms().isEmpty();
     }
 
     @Override
@@ -543,14 +549,10 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
             setResultTimes(dataset.getResultTimes().stream().collect(Collectors.toSet()));
         }
         if (dataset.hasSamplings()) {
-            setSamplings(dataset.getSamplings()
-                                .stream()
-                                .collect(Collectors.toSet()));
+            setSamplings(dataset.getSamplings().stream().collect(Collectors.toSet()));
         }
-        if (dataset.hasMonitoringPrograms()) {
-            setMonitoringPrograms(dataset.getMonitoringPrograms()
-                                         .stream()
-                                         .collect(Collectors.toSet()));
+        if (dataset.hasMeasuringPrograms()) {
+            setMeasuringPrograms(dataset.getMeasuringPrograms().stream().collect(Collectors.toSet()));
         }
         setUnit(dataset.getUnit());
     }

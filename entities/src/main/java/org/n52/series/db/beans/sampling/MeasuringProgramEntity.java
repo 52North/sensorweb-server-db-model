@@ -27,7 +27,7 @@ import java.util.Set;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.IdEntity;
 
-public class MonitoringProgramEntity extends IdEntity implements HasDatasets {
+public class MeasuringProgramEntity extends IdEntity implements HasDatasets {
 
     private static final long serialVersionUID = 2525309717383048842L;
 
@@ -35,11 +35,11 @@ public class MonitoringProgramEntity extends IdEntity implements HasDatasets {
 
     private String producer;
 
-    private String order;
+    private String orderId;
 
-    private Date monitoringTimeStart;
+    private Date measuringTimeStart;
 
-    private Date monitoringTimeEnd;
+    private Date measuringTimeEnd;
 
     private final Set<DatasetEntity> datasets = new LinkedHashSet<>();
 
@@ -51,7 +51,8 @@ public class MonitoringProgramEntity extends IdEntity implements HasDatasets {
     }
 
     /**
-     * @param label the label to set
+     * @param label
+     *            the label to set
      */
     public void setLabel(String label) {
         this.label = label;
@@ -65,54 +66,56 @@ public class MonitoringProgramEntity extends IdEntity implements HasDatasets {
     }
 
     /**
-     * @param producer the producer to set
+     * @param producer
+     *            the producer to set
      */
     public void setProducer(String producer) {
         this.producer = producer;
     }
 
     /**
-     * @return the order
+     * @return the orderId
      */
-    public String getOrder() {
-        return order;
+    public String getOrderId() {
+        return orderId;
     }
 
     /**
-     * @param order the order to set
+     * @param orderId
+     *            the order id to set
      */
-    public void setOrder(String order) {
-        this.order = order;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     /**
-     * @return the monitoringTimeStart
+     * @return the measuringTimeStart
      */
-    public Date getMonitoringTimeStart() {
-        return Utils.createUnmutableTimestamp(monitoringTimeStart);
+    public Date getMeasuringTimeStart() {
+        return Utils.createUnmutableTimestamp(measuringTimeStart);
     }
 
     /**
-     * @param monitoringTimeStart
-     *        the monitoringTimeStart
+     * @param measuringTimeStart
+     *            the measuringTimeStart
      */
-    public void setMonitoringTimeStart(Date monitoringTimeStart) {
-        this.monitoringTimeStart = Utils.createUnmutableTimestamp(monitoringTimeStart);
+    public void setMeasuringTimeStart(Date measuringTimeStart) {
+        this.measuringTimeStart = Utils.createUnmutableTimestamp(measuringTimeStart);
     }
 
     /**
-     * @return the monitoringTimeEnd
+     * @return the measuringTimeEnd
      */
-    public Date getMonitoringTimeEnd() {
-        return Utils.createUnmutableTimestamp(monitoringTimeEnd);
+    public Date getMeasuringTimeEnd() {
+        return Utils.createUnmutableTimestamp(measuringTimeEnd);
     }
 
     /**
-     * @param monitoringTimeEnd
-     *        the monitoringTimeEnd
+     * @param measuringTimeEnd
+     *            the measuringTimeEnd
      */
-    public void setMonitoringTimeEnd(Date monitoringTimeEnd) {
-        this.monitoringTimeEnd = Utils.createUnmutableTimestamp(monitoringTimeEnd);
+    public void setMeasuringTimeEnd(Date measuringTimeEnd) {
+        this.measuringTimeEnd = Utils.createUnmutableTimestamp(measuringTimeEnd);
     }
 
     @Override
