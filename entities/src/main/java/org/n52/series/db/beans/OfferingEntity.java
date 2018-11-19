@@ -20,6 +20,7 @@ package org.n52.series.db.beans;
 import java.util.Date;
 import java.util.Set;
 
+import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasFeatureTypes;
 import org.n52.series.db.beans.HibernateRelations.HasObservationTypes;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
@@ -27,8 +28,6 @@ import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatures;
 import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes<OfferingEntity>,
         HasFeatureTypes<OfferingEntity>, HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime,
