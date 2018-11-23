@@ -16,41 +16,22 @@
         <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="platformServiceFk"> -->
         <!-- <column name="service" not-null="true"/> -->
         <!-- </many-to-one> -->
-        <property column="identifier" insert="false" name="identifier" not-null="true" type="string" update="false" />
-        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_platform_identifier_codespace">
-            <column name="fk_identifier_codespace_id">
-                <!-- <comment>The codespace of the platform identifier, reference to the codespace table.</comment> -->
+        <property name="identifier" type="string" index="idx_platform_identifier">
+            <column name="identifier" unique-key="un_platform_identifier">
+                <comment>Unique identifier of the platform which can be used for filtering.</comment>
             </column>
-        </many-to-one>
+        </property>
         <property name="name" type="string">
             <column name="name">
-                <!-- <comment>The human readable name of the platform.</comment> -->
+                <comment>The human readable name of the platform.</comment>
             </column>
         </property>
-         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_platform_name_codespace">
-            <column name="fk_name_codespace_id">
-                <!-- <comment>The codespace of the platform name, reference to the codespace table.</comment> -->
-            </column>
-        </many-to-one>
+
          <property name="description" type="string">
             <column name="description">
-                <!-- <comment>A short description of the platform</comment> -->
+                <comment>A short description of the platform</comment>
             </column>
         </property>
-        <!-- Or add only to specific subclasses -->
-        <set inverse="true" name="parameters" table="platform_parameter" cascade="all" fetch="join">
-            <comment>Storage of relations between platform and related parameter</comment>
-            <key not-null="true" foreign-key="fk_platform_parameter">
-                <column name="fk_platform_id">
-                    <comment>The reference to the platform in the observation table</comment>
-                </column>
-            </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" foreign-key="fk_parameter_platform">
-                <column name="fk_parameter_id">
-                    <comment>The reference to the parameter in the platform parameter</comment>
-                </column>
-            </many-to-many>
-        </set>
         <set name="translations" table="platform_i18n" inverse="true" fetch="select">
             <key column="fk_platform_id" not-null="true" />
             <one-to-many

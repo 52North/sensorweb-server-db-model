@@ -15,7 +15,7 @@
         </id>
         <property name="identifier" type="string" index="idx_category_identifier">
             <column name="identifier" not-null="true">
-                <comment>Unique identifier of the category which can be for filtering, e.g. in the SOS.</comment>
+                <comment>Unique identifier of the category which can be used for filtering.</comment>
             </column>
         </property>
         <property name="name" type="string">

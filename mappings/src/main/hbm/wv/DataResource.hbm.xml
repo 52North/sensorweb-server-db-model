@@ -45,12 +45,12 @@
 
         <property name="identifier" type="string" unique-key="un_data_identifier">
             <column name="identifier">
-                <comment>Unique identifier of the data/observation which can be for filtering, e.g. GetObservationById in the SOS</comment>
+                <comment>Unique identifier of the data/observation which can be for used filtering, e.g. GetObservationById in the SOS</comment>
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codespace">
             <column name="fk_identifier_codespace_id">
-                <comment>The codespace of the data/observation identifier, reference to the codespace table.</comment>
+                <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
 
@@ -62,7 +62,7 @@
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_data_name_codespace">
             <column name="fk_name_codespace_id">
-                <comment>The codespace of the data/observation name, reference to the codespace table.</comment>
+                <comment>The codespace of the data/observation name, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
         <property name="description" type="string">
@@ -153,6 +153,12 @@
             </property>
         </component>
 
+        <many-to-one name="sampling" class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling">
+            <column name="fk_sampling_id" not-null="false" >
+                <comment>The id of the sampling this observation belongs to.</comment>
+            </column>
+        </many-to-one>
+
         <set name="translations" table="observation_i18n" inverse="true" fetch="select">
             <key column="fk_data_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
@@ -183,6 +189,11 @@
                         <comment>Reference to the data/observation</comment>
                     </column>
                 </key>
+                <property name="orientation" type="string">
+                    <column name="orientation" not-null="false">
+                        <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
+                    </column>
+                </property>
                 <property name="verticalFromName" type="string">
                     <column name="vertical_from_name" not-null="false">
                         <comment>The name of the vertical from values, e.g. from or depthFrom</comment>

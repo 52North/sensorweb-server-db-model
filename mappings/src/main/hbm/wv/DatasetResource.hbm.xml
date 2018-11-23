@@ -15,7 +15,7 @@
         </id>
 
         <property name="datasetType" index="idx_dataset_dataset_type">
-            <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individual_observation', 'timeseries', 'profile', 'trajectory', 'not_initialized')">
+            <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectroy', 'not_initialized')">
                 <comment>Indicator whether the dataset provides individual observations, timeseries, profiles or trajectories.</comment>
             </column>
             <type name="org.hibernate.type.EnumType">
@@ -25,8 +25,8 @@
         </property>
 
         <property name="aggregationType" index="idx_dataset_aggregation_type">
-            <column name="aggregation_type" scale="20" not-null="true" check="aggregation_type in ('none', 'profile', 'trajectory', 'complex', 'dataarray', 'not_initialized')">
-                <comment>Indicator whether the dataset observations are aggregated to profiles or trajectories, ... </comment>
+            <column name="aggregation_type" scale="20" not-null="true" check="aggregation_type in ('discrete', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
+                <comment>Indicator whether the dataset observations are aggregated to profiles, trajectories, timeseries, ... </comment>
             </column>
              <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">org.n52.series.db.beans.dataset.AggregationType</param>
@@ -35,7 +35,7 @@
         </property>
 
         <property name="valueType" index="idx_dataset_value_type">
-            <column name="value_type" scale="20" not-null="true" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'geometry', 'blob', 'referenced', 'not_initialized')">
+            <column name="value_type" scale="20" not-null="true" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'geometry', 'blob', 'referenced', 'complex', 'dataarray', 'not_initialized')">
                 <comment>Indicator of the type of the single values.</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
@@ -187,13 +187,13 @@
 
         <property name="identifier" type="string" index="idx_dataset_identifier">
             <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
-                <comment>Unique identifier of the dataset which can be for filtering, e.g. GetObservationById in the SOS</comment>
+                <comment>Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS</comment>
             </column>
         </property>
 
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codespace">
             <column name="fk_identifier_codespace_id">
-                <comment>The codespace of the dataset identifier, reference to the codespace table.</comment>
+                <comment>The codespace of the dataset identifier, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
 
@@ -205,7 +205,7 @@
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
             <column name="fk_name_codespace_id">
-                <comment>The codespace of the dataset name, reference to the codespace table.</comment>
+                <comment>The codespace of the dataset name, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
 
@@ -214,20 +214,6 @@
                 <comment>A short description of the dataset</comment>
             </column>
         </property>
-
-        <set inverse="false" name="parameters" table="dataset_parameter" cascade="delete-orphan">
-            <comment>Storage of relations between dataset and related parameter</comment>
-            <key not-null="true" foreign-key="fk_dataset_parameter">
-                <column name="fk_dataset_id">
-                    <comment>The reference to the dataset in the dataset table</comment>
-                </column>
-            </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.Parameter" foreign-key="fk_parameter_dataset">
-                <column name="fk_parameter_id">
-                    <comment>The reference to the parameter in the dataset parameter</comment>
-                </column>
-            </many-to-many>
-        </set>
 
         <set inverse="true" name="samplings" table="sampling_dataset" >
             <comment>Storage of relations between dataset and related samplings</comment>

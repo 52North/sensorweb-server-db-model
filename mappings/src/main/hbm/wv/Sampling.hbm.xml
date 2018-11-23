@@ -20,9 +20,21 @@
             </column>
         </many-to-one>
 
-         <property name="label" type="string">
-            <column name="label">
-                <comment>The label of the sample.</comment>
+        <property name="identifier" type="string" index="idx_sampling_identifier">
+            <column name="identifier" not-null="false" unique-key="un_sampling_identifier">
+                <comment>The identifier of the sampling.</comment>
+            </column>
+        </property>
+
+        <property name="name" type="string">
+            <column name="name">
+                <comment>The human readable name or the label of the sampling.</comment>
+            </column>
+        </property>
+
+        <property name="description" type="string">
+            <column name="description">
+                <comment>A short description or the COMMENT of the sampling</comment>
             </column>
         </property>
 
@@ -44,20 +56,14 @@
             </column>
         </property>
 
-         <property name="comment" type="string">
-            <column name="comment">
-                <comment>A comment for the sample.</comment>
-            </column>
-        </property>
-
-        <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
-            <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
+        <property name="samplingTimeStart" type="timestamp">
+            <column index="idx_samplg_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
                 <comment>The timestamp when the observation period has started.</comment>
             </column>
         </property>
 
-        <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
-            <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
+        <property name="samplingTimeEnd" type="timestamp">
+            <column index="idx_samplg_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
                 <comment>The timestamp when the measurement period has finished or the observation took place.</comment>
             </column>
         </property>
@@ -75,5 +81,41 @@
                 </column>
             </many-to-many>
         </set>
+
+         <set name="translations" table="sampling_i18n" inverse="true" fetch="select">
+            <key column="fk_sampling_id" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nSamplingEntity" />
+        </set>
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nSamplingEntity" table="sampling_i18n">
+        <id name="id" type="long">
+            <column name="sampling_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">sampling_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="SamplingEntity" foreign-key="fk_sampling">
+            <column name="fk_sampling_id" not-null="true">
+                <comment>Reference to the sampling table this internationalization belongs to.</comment>
+            </column>
+        </many-to-one>
+         <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the data entity</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>Locale/language specific description of the data entity</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>
