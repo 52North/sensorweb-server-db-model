@@ -81,7 +81,7 @@
             <dependency>
                 <groupId>org.hibernate</groupId>
                 <artifactId>hibernate-spatial</artifactId>
-                <version>${hibernate-spatial.version}</version>
+                <version>${hibernate.version}</version>
             </dependency>
 
             <dependency>

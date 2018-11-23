@@ -6,13 +6,15 @@ This project includes:
   AntLR Parser Generator under BSD License
   Byte Buddy (without dependencies) under The Apache Software License, Version 2.0
   ClassMate under The Apache Software License, Version 2.0
-  com.vividsolutions:jts-core under GNU Lesser General Public License, Version 2.1
   dom4j under BSD 3-clause New License
+  Extended StAX API under Dual license consisting of the CDDL v1.1 and GPL v2
+  fastinfoset under Apache License, Version 2.0
   geolatte-geom under LGPL 3.0
   Hamcrest Core under New BSD License
-  Hibernate Commons Annotations under GNU Lesser General Public License v2.1 or later
+  Hibernate Commons Annotations under GNU Library General Public License v2.1 or later
   Hibernate ORM - hibernate-core under GNU Library General Public License v2.1 or later
-  hibernate-spatial under GNU Lesser General Public License (LGPL) version 2.1
+  Hibernate ORM - hibernate-spatial under GNU Library General Public License v2.1 or later
+  istack common utility code runtime under CDDL 1.1 or GPL2 w/ CPE
   Java Annotation Indexer under Apache License, Version 2.0
   Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
   JavaBeans Activation Framework API jar under CDDL/GPLv2+CE
@@ -20,10 +22,12 @@ This project includes:
   Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
   JAXB RI under CDDL 1.0 or GPL2 w/ CPE
+  JAXB Runtime under CDDL+GPL License
   jaxb-api under CDDL 1.1 or GPL2 w/ CPE
   JBoss Logging 3 under Apache License, version 2.0
   Joda-Time under Apache 2
   JUnit under Eclipse Public License 1.0
+  org.locationtech.jts:jts-core under Eclipse Publish License, Version 1.0 or Eclipse Distribution License - v 1.0
   Series Database Model - Entities under The Apache Software License, Version 2.0
   Series Database Model - Generator under The Apache Software License, Version 2.0
   Series Database Model - Hibernate Spatial Dialects under The Apache Software License, Version 2.0
@@ -31,4 +35,5 @@ This project includes:
   Series Database Model - Mappings under The Apache Software License, Version 2.0
   Series Database Model - Parent under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
+  TXW2 Runtime under CDDL+GPL License
 
