@@ -325,6 +325,11 @@
                         <comment>Reference to the data/observation</comment>
                     </column>
 	            </key>
+                <property name="orientation" type="string">
+                    <column name="orientation" not-null="false">
+                        <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
+                    </column>
+                </property>
 	            <property name="verticalFromName" type="string">
 	                <column name="vertical_from_name" not-null="false">
                         <comment>The name of the vertical from values, e.g. from or depthFrom</comment>

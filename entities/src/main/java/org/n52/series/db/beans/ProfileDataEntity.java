@@ -25,10 +25,9 @@ public class ProfileDataEntity extends CompositeDataEntity implements ProfileDat
 
     private static final long serialVersionUID = -7431276500677067329L;
 
+    private String orientation;
     private String verticalfromName;
-
     private String verticaltoName;
-
     private UnitEntity verticalUnit;
 
     @Override
@@ -39,6 +38,14 @@ public class ProfileDataEntity extends CompositeDataEntity implements ProfileDat
     @Override
     public void setValue(Set<DataEntity<?>> value) {
         super.setValue(value);
+    }
+
+    public String getOrientation() {
+        return orientation;
+    }
+
+    public void setOrientation(String orientation) {
+        this.orientation = orientation;
     }
 
     @Override
