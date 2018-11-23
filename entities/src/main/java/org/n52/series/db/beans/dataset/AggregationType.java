@@ -20,7 +20,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum AggregationType {
-    none, profile, trajectory, complex, dataarray, not_initialized;
+    discrete, profile, trajectory, timeseries, not_initialized;
 
     public static final String ALL = "all";
 

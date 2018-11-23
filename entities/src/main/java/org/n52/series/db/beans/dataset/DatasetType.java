@@ -16,42 +16,17 @@
  */
 package org.n52.series.db.beans.dataset;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum DatasetType {
-    individual_observation("individualObservation"), timeseries("timeseries"), profile("profile"), trajectory(
-            "trajectory"), not_initialized("NotInitialized");
+    individualObservation, timeseries, profile, trajectory, not_initialized;
 
     public static final String ALL = "all";
 
-    private String outputString;
-
-    DatasetType(String outputString) {
-        this.outputString = outputString;
-    }
-
-    public String getOutputString() {
-        return outputString;
-    }
-
-    private static DatasetType getEnum(String dt) {
-        for (DatasetType datasetType : DatasetType.values()) {
-            if (datasetType.getOutputString().equalsIgnoreCase(dt)) {
-                return datasetType;
-            }
-        }
-        return DatasetType.valueOf(dt);
-    }
-
     public static Set<DatasetType> convert(Set<String> datasetType) {
         if (datasetType != null) {
-            if (datasetType.contains(ALL)) {
-                return new LinkedHashSet<>(Arrays.asList(values()));
-            }
-            return datasetType.stream().map(dt -> DatasetType.getEnum(dt)).collect(Collectors.toSet());
+            return datasetType.stream().map(at -> DatasetType.valueOf(at)).collect(Collectors.toSet());
         }
         return null;
     }
