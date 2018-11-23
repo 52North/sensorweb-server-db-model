@@ -17,17 +17,17 @@
 
 package org.n52.series.db.beans.sampling;
 
-import org.n52.series.db.beans.HibernateRelations.*;
-import org.n52.series.db.common.Utils;
-
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.HibernateRelations.HasDatasets;
+import org.n52.series.db.beans.HibernateRelations.HasSamplingTime;
+import org.n52.series.db.common.Utils;
 
-public class SamplingEntity extends IdEntity implements HasDatasets, HasSamplingTime {
+public class SamplingEntity extends DescribableEntity implements HasDatasets, HasSamplingTime {
 
     private static final long serialVersionUID = -8840602794587590180L;
 
@@ -35,15 +35,11 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
 
     private MeasuringProgramEntity measuringProgram;
 
-    private String label;
-
     private String sampler;
 
     private String samplingMethod;
 
     private String environmentalConditions;
-
-    private String comment;
 
     private Date samplingTimeStart;
 
@@ -62,21 +58,6 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
      */
     public void setMeasuringProgram(MeasuringProgramEntity measuringProgram) {
         this.measuringProgram = measuringProgram;
-    }
-
-    /**
-     * @return the label
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * @param label
-     *            the label to set
-     */
-    public void setLabel(String label) {
-        this.label = label;
     }
 
     /**
@@ -122,21 +103,6 @@ public class SamplingEntity extends IdEntity implements HasDatasets, HasSampling
      */
     public void setEnvironmentalConditions(String environmentalConditions) {
         this.environmentalConditions = environmentalConditions;
-    }
-
-    /**
-     * @return the comment
-     */
-    public String getComment() {
-        return comment;
-    }
-
-    /**
-     * @param comment
-     *            the comment to set
-     */
-    public void setComment(String comment) {
-        this.comment = comment;
     }
 
     /**

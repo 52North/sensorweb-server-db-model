@@ -169,6 +169,12 @@
             </column>
         </property>
 
+        <many-to-one name="sampling" class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling">
+            <column name="fk_sampling_id" not-null="false" >
+                <comment>The id of the sampling this observation belongs to.</comment>
+            </column>
+        </many-to-one>
+
         <component class="org.n52.series.db.beans.sampling.DetectionLimitEntity" name="detectionLimit">
             <property name="flag" type="java.lang.Short">
             <column name="detection_limit_flag" not-null="false" check="detection_limit_flag in (null, -1, 1)">

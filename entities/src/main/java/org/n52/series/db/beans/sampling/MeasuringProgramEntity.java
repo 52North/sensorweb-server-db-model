@@ -25,38 +25,21 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.DescribableEntity;
 
-public class MeasuringProgramEntity extends IdEntity implements HasDatasets {
+public class MeasuringProgramEntity extends DescribableEntity implements HasDatasets {
 
     private static final long serialVersionUID = 2525309717383048842L;
 
-    private String label;
-
     private String producer;
-
-    private String orderId;
 
     private Date measuringTimeStart;
 
     private Date measuringTimeEnd;
 
+    private final Set<SamplingEntity> samplings = new LinkedHashSet<>();
+
     private final Set<DatasetEntity> datasets = new LinkedHashSet<>();
-
-    /**
-     * @return the label
-     */
-    public String getLabel() {
-        return label;
-    }
-
-    /**
-     * @param label
-     *            the label to set
-     */
-    public void setLabel(String label) {
-        this.label = label;
-    }
 
     /**
      * @return the producer
@@ -77,7 +60,7 @@ public class MeasuringProgramEntity extends IdEntity implements HasDatasets {
      * @return the orderId
      */
     public String getOrderId() {
-        return orderId;
+        return getIdentifier();
     }
 
     /**
@@ -85,7 +68,7 @@ public class MeasuringProgramEntity extends IdEntity implements HasDatasets {
      *            the order id to set
      */
     public void setOrderId(String orderId) {
-        this.orderId = orderId;
+        this.setIdentifier(orderId);
     }
 
     /**
@@ -116,6 +99,17 @@ public class MeasuringProgramEntity extends IdEntity implements HasDatasets {
      */
     public void setMeasuringTimeEnd(Date measuringTimeEnd) {
         this.measuringTimeEnd = Utils.createUnmutableTimestamp(measuringTimeEnd);
+    }
+
+    public void setSamplings(Set<SamplingEntity> samplings) {
+        this.samplings.clear();
+        if (samplings != null) {
+            this.samplings.addAll(samplings);
+        }
+    }
+
+    public Set<SamplingEntity> getSamplings() {
+        return samplings;
     }
 
     @Override
