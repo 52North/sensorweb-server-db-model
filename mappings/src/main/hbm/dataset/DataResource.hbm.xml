@@ -223,7 +223,7 @@
                 <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
                 <property name="geometry" type="geolatte_geometry">
-                <column name="value_quantity">
+                <column name="value_geometry">
                     <comment>The geometry value of an observation (GeometryObservation)</comment>
                 </column>
             </property>
