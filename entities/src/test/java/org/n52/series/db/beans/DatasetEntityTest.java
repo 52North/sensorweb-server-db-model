@@ -29,7 +29,7 @@ public class DatasetEntityTest {
 
     @Test
     public void when_settingFirstValueAtWithNanos_then_nanosAvailableOnGetting() {
-        DatasetEntity datasetEntity = new CountDatasetEntity();
+        DatasetEntity datasetEntity = new DatasetEntity();
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
         datasetEntity.setFirstValueAt(timestamp);
@@ -39,7 +39,7 @@ public class DatasetEntityTest {
 
     @Test
     public void when_settingLastValueAtWithNanos_then_nanosAvailableOnGetting() {
-        DatasetEntity datasetEntity = new CountDatasetEntity();
+        DatasetEntity datasetEntity = new DatasetEntity();
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
         datasetEntity.setLastValueAt(timestamp);
