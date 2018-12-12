@@ -20,35 +20,25 @@
             </column>
         </discriminator>
 
-        <many-to-one name="featureType" class="FormatEntity" foreign-key="fk_feature_format">
-            <column name="fk_format_id" not-null="true">
-                <comment>Reference to the featureType in the format table. Required by the SOS to identify the typ of the feature, e.g. http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint.</comment>
-            </column>
-        </many-to-one>
-
         <property name="identifier" type="string" index="idx_feature_identifier">
-            <column name="identifier" unique-key="un_feature_identifier">
+            <column name="identifier" not-null="true" unique-key="un_feature_identifier">
                 <comment>Unique identifier of the feature which can be used for filtering, e.g. in the SOS.</comment>
             </column>
         </property>
-        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_feature_identifier_codespace">
-            <column name="fk_identifier_codespace_id">
-                <comment>The codespace of the feature identifier, reference to the codespace table. Can be empty.</comment>
-            </column>
-        </many-to-one>
         <property name="name" type="string">
             <column name="name">
                 <comment>The human readable name of the feature.</comment>
             </column>
         </property>
-        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
-            <column name="fk_name_codespace_id">
-                <comment>The codespace of the feature name, reference to the codespace table. Can be empty.</comment>
-            </column>
-        </many-to-one>
         <property name="description" type="string">
             <column name="description">
                 <comment>A short description of the feature</comment>
+            </column>
+        </property>
+
+        <property name="url" type="string">
+            <column name="url" unique-key="un_feature_url">
+                <comment>Optional URL to an external resource that describes the feature, e.g. a WFS</comment>
             </column>
         </property>
 
