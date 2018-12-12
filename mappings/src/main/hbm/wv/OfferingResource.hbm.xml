@@ -77,34 +77,6 @@
             </property>
         </component>
 
-        <set name="observationTypes" table="offering_observation_type" inverse="false" fetch="select">
-            <comment>Relation to store the valid observationTypes for the offering. Required for SOS support.</comment>
-            <key foreign-key="fk_offering_observation_type">
-                <column name="fk_offering_id" not-null="true">
-                    <comment>The related offering</comment>
-                </column>
-            </key>
-            <many-to-many class="FormatEntity" foreign-key="fk_observation_type_offering">
-                <column name="fk_format_id" not-null="true">
-                    <comment>The reference of the related observationType from the format table</comment>
-                </column>
-            </many-to-many>
-        </set>
-
-        <set name="featureTypes" table="offering_feature_type" inverse="false">
-            <comment>Relation to store the valid  featureTypes for the offering. Required for SOS support.</comment>
-            <key foreign-key="fk_offering_feature_type">
-                <column name="fk_offering_id" not-null="true">
-                    <comment>The related offering</comment>
-                </column>
-            </key>
-            <many-to-many class="FormatEntity" foreign-key="fk_feature_type_offering">
-                <column name="fk_format_id" not-null="true">
-                    <comment>The reference of the related featureType from the format table</comment>
-                </column>
-            </many-to-many>
-        </set>
-
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="offering_i18n" inverse="true" fetch="select">
             <key column="fk_offering_id" not-null="true" />
