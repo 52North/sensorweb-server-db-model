@@ -23,7 +23,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.i18n.I18nEntity;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 public class DescribableEntity extends IdEntity implements Describable, Serializable {
 
@@ -63,7 +63,7 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
 
     private Set<I18nEntity<? extends Describable>> translations;
 
-    private Set<Parameter<?>> parameters;
+    private Set<ParameterEntity<?>> parameters;
 
     @Override
     public String getIdentifier() {
@@ -123,11 +123,11 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
         this.translations = translations;
     }
 
-    public Set<Parameter<?>> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<Parameter<?>> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 

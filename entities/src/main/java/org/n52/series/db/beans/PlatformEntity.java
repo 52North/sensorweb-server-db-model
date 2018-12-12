@@ -19,21 +19,21 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 public class PlatformEntity extends DescribableEntity {
 
     private static final long serialVersionUID = 3615089936334873353L;
 
-    private Set<Parameter<?>> parameters;
+    private Set<ParameterEntity<?>> parameters;
 
     @Override
-    public Set<Parameter<?>> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(Set<Parameter<?>> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 

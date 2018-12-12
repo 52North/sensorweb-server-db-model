@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.i18n.I18nEntity;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 public interface Describable extends IdentifierNameDescriptionEntity, HasId {
 
@@ -31,9 +31,9 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
 
     void setTranslations(Set<I18nEntity<? extends Describable>> translations);
 
-    Set<Parameter<?>> getParameters();
+    Set<ParameterEntity<?>> getParameters();
 
-    void setParameters(Set<Parameter<?>> parameters);
+    void setParameters(Set<ParameterEntity<?>> parameters);
 
     default boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();

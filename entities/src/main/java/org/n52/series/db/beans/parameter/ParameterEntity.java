@@ -24,7 +24,7 @@ import java.util.Map;
 
 import org.n52.series.db.beans.IdEntity;
 
-public abstract class Parameter<T> extends IdEntity implements ValuedParameter<T, Parameter<T>> {
+public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T, ParameterEntity<T>> {
 
     private static final long serialVersionUID = -1489503368673412638L;
 

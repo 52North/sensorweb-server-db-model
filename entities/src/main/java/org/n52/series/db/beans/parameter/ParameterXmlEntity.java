@@ -17,7 +17,7 @@
 
 package org.n52.series.db.beans.parameter;
 
-public class ParameterXml extends Parameter<String> {
+public class ParameterXmlEntity extends ParameterEntity<String> {
 
     private static final long serialVersionUID = 1209102870245642049L;
 

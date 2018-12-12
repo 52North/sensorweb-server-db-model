@@ -21,7 +21,7 @@ import java.util.Map;
 
 import org.n52.series.db.beans.UnitEntity;
 
-public class ParameterCategory extends Parameter<String> {
+public class ParameterCategoryEntity extends ParameterEntity<String> {
 
     private static final long serialVersionUID = -6262887605542676492L;
 

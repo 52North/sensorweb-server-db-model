@@ -17,7 +17,7 @@
 
 package org.n52.series.db.beans.parameter;
 
-public class ParameterBoolean extends Parameter<Boolean> {
+public class ParameterBooleanEntity extends ParameterEntity<Boolean> {
 
     private static final long serialVersionUID = -1280123654095577480L;
 

@@ -22,7 +22,7 @@ import java.util.Map;
 
 import org.n52.series.db.beans.UnitEntity;
 
-public class ParameterQuantity extends Parameter<BigDecimal> {
+public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> {
 
     private static final long serialVersionUID = 7528516075676290716L;
 

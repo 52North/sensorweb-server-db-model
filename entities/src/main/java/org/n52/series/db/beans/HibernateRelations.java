@@ -22,7 +22,7 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.locationtech.jts.geom.Geometry;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
  * Interfaces that entities can implement to share constants and to make clear
@@ -629,7 +629,7 @@ public interface HibernateRelations {
     interface HasParameters {
         String PARAMETERS = "parameters";
 
-        Set<Parameter<?>> getParameters();
+        Set<ParameterEntity<?>> getParameters();
 
         void setParameters(Object parameters);
 

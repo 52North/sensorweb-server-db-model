@@ -17,7 +17,7 @@
 
 package org.n52.series.db.beans.parameter;
 
-public class ParameterCount extends Parameter<Integer> {
+public class ParameterCountEntity extends ParameterEntity<Integer> {
 
     private static final long serialVersionUID = -7778025481981408886L;
 
