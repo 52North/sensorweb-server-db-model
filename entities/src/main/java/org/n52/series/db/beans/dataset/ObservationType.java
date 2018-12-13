@@ -19,14 +19,14 @@ package org.n52.series.db.beans.dataset;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public enum AggregationType {
+public enum ObservationType {
     discrete, profile, trajectory, timeseries, not_initialized;
 
     public static final String ALL = "all";
 
-    public static Set<AggregationType> convert(Set<String> aggregationType) {
-        if (aggregationType != null) {
-            return aggregationType.stream().map(at -> AggregationType.valueOf(at)).collect(Collectors.toSet());
+    public static Set<ObservationType> convert(Set<String> observationType) {
+        if (observationType != null) {
+            return observationType.stream().map(at -> ObservationType.valueOf(at)).collect(Collectors.toSet());
         }
         return null;
     }
