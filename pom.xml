@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>13-SNAPSHOT</version>
-        <relativePath /> <!-- lookup parent from repository -->
+        <version>14</version>
     </parent>
     <groupId>org.n52.series.db</groupId>
     <artifactId>parent</artifactId>
@@ -44,8 +42,8 @@
     </licenses>
 
     <scm>
-        <connection>scm:git:git://github.com/52North/series-hibernate.git</connection>
-        <developerConnection>scm:git:ssh://git@github.com/52North/series-hibernate.git</developerConnection>
+        <connection>scm:git:https://github.com/52North/series-hibernate.git</connection>
+        <developerConnection>scm:git:https://github.com/52North/series-hibernate.git</developerConnection>
         <url>https://github.com/52North/series-hibernate</url>
         <tag>HEAD</tag>
     </scm>
@@ -117,6 +115,12 @@
                 <groupId>${project.groupId}</groupId>
                 <artifactId>dialects</artifactId>
                 <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>joda-time</groupId>
+                <artifactId>joda-time</artifactId>
+                <version>2.10.1</version>
             </dependency>
 
             <dependency>
