@@ -19,9 +19,7 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.ReferencedData;
-
-public class ReferencedDataEntity extends DataEntity<String> implements ReferencedData {
+public class ReferencedDataEntity extends DataEntity<String> {
 
     private static final long serialVersionUID = 4925354534934095827L;
 

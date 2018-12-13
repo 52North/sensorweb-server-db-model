@@ -29,12 +29,11 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.n52.series.db.beans.data.Data;
-import org.n52.series.db.beans.dataset.AggregationType;
 import org.n52.series.db.beans.dataset.DatasetType;
+import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
-import org.n52.series.db.beans.sampling.MeasuringProgramEntity;
-import org.n52.series.db.beans.sampling.SamplingEntity;
+import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
+import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 import org.n52.series.db.common.Utils;
 
 public class DatasetEntity extends DescribableEntity implements Serializable {
@@ -48,7 +47,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
-    public static final String PROPERTY_AGGREGATION_TYPE = "aggregationType";
+    public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
@@ -60,6 +59,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     public static final String PROPERTY_INSITU = "insitu";
 
     public static final String PROPERTY_UNIT = "unit";
+
+    public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
+    public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
 
     private static final long serialVersionUID = -7491530543976690237L;
 
@@ -83,7 +85,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private DatasetType datasetType;
 
-    private AggregationType aggregationType;
+    private ObservationType observationType;
 
     private ValueType valueType;
 
@@ -93,9 +95,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private Date lastValueAt;
 
-    private Data<?> firstObservation;
+    private DataEntity<?> firstObservation;
 
-    private Data<?> lastObservation;
+    private DataEntity<?> lastObservation;
 
     private BigDecimal firstQuantityValue;
 
@@ -107,7 +109,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private boolean hidden;
 
-    private FormatEntity observationType;
+    private FormatEntity omObservationType;
 
     private boolean mobile;
 
@@ -121,9 +123,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private Integer numberOfDecimals;
 
-    private final Set<SamplingEntity> samplings = new LinkedHashSet<>();
+    private SamplingProfileDatasetEntity samplingProfile;
 
-    private final Set<MeasuringProgramEntity> measuringPrograms = new LinkedHashSet<>();
+    private EReportingProfileDatasetEntity ereportingProfile;
 
     public DatasetEntity() {
         this(ValueType.not_initialized);
@@ -239,7 +241,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     }
 
     public boolean isSetObservationType() {
-        return (getObservationType() != null) && getObservationType().isSetFormat();
+        return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
     }
 
     public Date getFirstValueAt() {
@@ -266,19 +268,19 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return getLastValueAt() != null;
     }
 
-    public Data<?> getFirstObservation() {
+    public DataEntity<?> getFirstObservation() {
         return firstObservation;
     }
 
-    public void setFirstObservation(Data<?> firstObservation) {
+    public void setFirstObservation(DataEntity<?> firstObservation) {
         this.firstObservation = firstObservation;
     }
 
-    public Data<?> getLastObservation() {
+    public DataEntity<?> getLastObservation() {
         return lastObservation;
     }
 
-    public void setLastObservation(Data<?> lastObservation) {
+    public void setLastObservation(DataEntity<?> lastObservation) {
         this.lastObservation = lastObservation;
     }
 
@@ -306,12 +308,12 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         this.datasetType = datasetType;
     }
 
-    public AggregationType getAggregationType() {
-        return aggregationType;
+    public ObservationType getObservationType() {
+        return observationType;
     }
 
-    public void setAggregationType(AggregationType aggregationType) {
-        this.aggregationType = aggregationType;
+    public void setObservationType(ObservationType observationType) {
+        this.observationType = observationType;
     }
 
     public ValueType getValueType() {
@@ -409,18 +411,17 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return this;
     }
 
-    public FormatEntity getObservationType() {
-        return observationType;
-
+    public FormatEntity getOmObservationType() {
+        return omObservationType;
     }
 
-    public DatasetEntity setObservationType(FormatEntity observationType) {
-        this.observationType = observationType;
+    public DatasetEntity setOmObservationType(FormatEntity omObservationType) {
+        this.omObservationType = omObservationType;
         return this;
     }
 
-    public boolean isSetObservationtype() {
-        return (getObservationType() != null) && getObservationType().isSetFormat();
+    public boolean isSetOmObservationtype() {
+        return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
     }
 
     public boolean isMobile() {
@@ -466,34 +467,28 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
     }
 
-    public Set<SamplingEntity> getSamplings() {
-        return samplings;
+    public SamplingProfileDatasetEntity getSamplingProfile() {
+        return samplingProfile;
     }
 
-    public void setSamplings(Set<SamplingEntity> samplings) {
-        this.samplings.clear();
-        if (samplings != null) {
-            this.samplings.addAll(samplings);
-        }
+    public void setSamplingProfile(SamplingProfileDatasetEntity samplingProfile) {
+        this.samplingProfile = samplingProfile;
     }
 
-    public boolean hasSamplings() {
-        return getSamplings() != null && !getSamplings().isEmpty();
+    public boolean hasSamplingProfile() {
+        return getSamplingProfile() != null;
     }
 
-    public Set<MeasuringProgramEntity> getMeasuringPrograms() {
-        return measuringPrograms;
+    public EReportingProfileDatasetEntity getEreportingProfile() {
+        return ereportingProfile;
     }
 
-    public void setMeasuringPrograms(Set<MeasuringProgramEntity> measuringPrograms) {
-        this.measuringPrograms.clear();
-        if (measuringPrograms != null) {
-            this.measuringPrograms.addAll(measuringPrograms);
-        }
+    public void setEreportingProfile(EReportingProfileDatasetEntity ereportingProfile) {
+        this.ereportingProfile = ereportingProfile;
     }
 
-    public boolean hasMeasuringPrograms() {
-        return getMeasuringPrograms() != null && !getMeasuringPrograms().isEmpty();
+    public boolean hasEreportingProfile() {
+        return getEreportingProfile() != null;
     }
 
     @Override
@@ -536,7 +531,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         setLastQuantityValue(dataset.getLastQuantityValue());
         setLastValueAt(dataset.getLastValueAt());
         setObservationCount(dataset.getObservationCount());
-        setObservationType(dataset.getObservationType());
+        setOmObservationType(dataset.getOmObservationType());
         setOffering(dataset.getOffering());
         setPhenomenon(dataset.getPhenomenon());
         setPlatform(dataset.getPlatform());
@@ -548,11 +543,11 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         if (dataset.getResultTimes() != null) {
             setResultTimes(dataset.getResultTimes().stream().collect(Collectors.toSet()));
         }
-        if (dataset.hasSamplings()) {
-            setSamplings(dataset.getSamplings().stream().collect(Collectors.toSet()));
+        if (dataset.hasSamplingProfile()) {
+            setSamplingProfile(new SamplingProfileDatasetEntity().copy(dataset.getSamplingProfile()));
         }
-        if (dataset.hasMeasuringPrograms()) {
-            setMeasuringPrograms(dataset.getMeasuringPrograms().stream().collect(Collectors.toSet()));
+        if (dataset.hasEreportingProfile()) {
+            setEreportingProfile(new EReportingProfileDatasetEntity().copy(dataset.getEreportingProfile()));
         }
         setUnit(dataset.getUnit());
     }

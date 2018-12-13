@@ -19,9 +19,7 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.GeometryData;
-
-public class GeometryDataEntity extends DataEntity<GeometryEntity> implements GeometryData {
+public class GeometryDataEntity extends DataEntity<GeometryEntity> {
 
     private static final long serialVersionUID = 3759168838980730712L;
 

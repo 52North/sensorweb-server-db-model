@@ -19,9 +19,7 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.BlobData;
-
-public class BlobDataEntity extends DataEntity<Object> implements BlobData {
+public class BlobDataEntity extends DataEntity<Object> {
 
     private static final long serialVersionUID = 2881474333508410655L;
 

@@ -19,9 +19,7 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.data.Data.ComplexData;
-
-public class ComplexDataEntity extends CompositeDataEntity implements ComplexData {
+public class ComplexDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = 2206385928964743369L;
 

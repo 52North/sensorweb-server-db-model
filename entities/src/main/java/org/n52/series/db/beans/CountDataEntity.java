@@ -21,11 +21,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.n52.series.db.beans.data.Data.CountData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CountDataEntity extends DataEntity<Integer> implements CountData {
+public class CountDataEntity extends DataEntity<Integer> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountDataEntity.class);
 

@@ -22,14 +22,13 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.n52.series.db.beans.data.Data.QuantityData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class QuantityDataEntity extends DataEntity<BigDecimal> implements QuantityData {
+public class QuantityDataEntity extends DataEntity<BigDecimal> {
 
+    public static final BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
-
     private static final long serialVersionUID = 7619426522406105659L;
 
     @Override

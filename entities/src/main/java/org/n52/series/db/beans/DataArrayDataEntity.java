@@ -19,9 +19,7 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.data.Data.DataArrayData;
-
-public class DataArrayDataEntity extends CompositeDataEntity implements DataArrayData {
+public class DataArrayDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -1618516259763515255L;
 

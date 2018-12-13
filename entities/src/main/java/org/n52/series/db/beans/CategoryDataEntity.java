@@ -19,9 +19,7 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.CategoryData;
-
-public class CategoryDataEntity extends DataEntity<String> implements CategoryData {
+public class CategoryDataEntity extends DataEntity<String> {
 
     private static final long serialVersionUID = -4691677115635740162L;
 

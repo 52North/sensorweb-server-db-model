@@ -19,16 +19,23 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.data.Data.ProfileData;
-
-public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
+public class ProfileDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -7431276500677067329L;
 
-    private String orientation;
-    private String verticalfromName;
-    private String verticaltoName;
-    private UnitEntity verticalUnit;
+    private VerticalMetadataEntity verticalMetadata;
+
+    public VerticalMetadataEntity getVerticalMetadata() {
+        return verticalMetadata;
+    }
+
+    public void setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
+        this.verticalMetadata = verticalMetadata;
+    }
+
+    public boolean hasVerticalMetadata() {
+        return getVerticalMetadata() != null;
+    }
 
     @Override
     public Set<DataEntity<?>> getValue() {
@@ -41,41 +48,43 @@ public class ProfileDataEntity extends CompositeDataEntity implements ProfileDat
     }
 
     public String getOrientation() {
-        return orientation;
+        return hasVerticalMetadata() ? getVerticalMetadata().getOrientation() : null;
     }
 
     public void setOrientation(String orientation) {
-        this.orientation = orientation;
+        checkAndGetVerticalMetadata().setOrientation(orientation);
     }
 
-    @Override
+    private VerticalMetadataEntity checkAndGetVerticalMetadata() {
+        if (hasVerticalMetadata()) {
+            setVerticalMetadata(new VerticalMetadataEntity());
+        }
+        return getVerticalMetadata();
+
+    }
+
     public String getVerticalFromName() {
-        return verticalfromName;
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalFromName() : null;
     }
 
-    @Override
     public void setVerticalFromName(String name) {
-        this.verticalfromName = name;
+        checkAndGetVerticalMetadata().setVerticalFromName(name);
     }
 
-    @Override
     public String getVerticalToName() {
-        return verticaltoName;
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalToName() : null;
     }
 
-    @Override
     public void setVerticalToName(String name) {
-        this.verticaltoName = name;
+        checkAndGetVerticalMetadata().setVerticalToName(name);
     }
 
-    @Override
     public UnitEntity getVerticalUnit() {
-        return verticalUnit;
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalUnit() : null;
     }
 
-    @Override
     public void setVerticalUnit(UnitEntity verticalUnit) {
-        this.verticalUnit = verticalUnit;
+        checkAndGetVerticalMetadata().setVerticalUnit(verticalUnit);
     }
 
 }

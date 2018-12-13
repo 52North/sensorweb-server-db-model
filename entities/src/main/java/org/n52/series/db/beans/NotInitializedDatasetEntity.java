@@ -17,10 +17,56 @@
 
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.dataset.NotInitializedDataset;
-
-public class NotInitializedDatasetEntity extends DatasetEntity implements NotInitializedDataset {
+public class NotInitializedDatasetEntity extends DatasetEntity {
 
     private static final long serialVersionUID = 3447190730799856292L;
+
+    @Override
+    public void setFirstObservation(DataEntity<?> observation) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public void setLastObservation(DataEntity<?> observation) {
+        // TODO Auto-generated method stub
+
+    }
+
+    @Override
+    public DataEntity<?> getFirstObservation() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public DataEntity<?> getLastObservation() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    public Long getUnitId() {
+        return getUnit() != null ? getUnit().getId() : null;
+    }
+
+    public void setUnitId(Long unitId) {
+        // only required for Hibernate
+    }
+
+    public Long getFirstObservationId() {
+        return getFirstObservation() != null ? getFirstObservation().getId() : null;
+    }
+
+    public void setFirstObservationId(Long firstObservationId) {
+        // only required for Hibernate
+    }
+
+    public Long getLastObservationId() {
+        return getLastObservation() != null ? getLastObservation().getId() : null;
+    }
+
+    public void setLastObservationId(Long lastObservationId) {
+        // only required for Hibernate
+    }
 
 }
