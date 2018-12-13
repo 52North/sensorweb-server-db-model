@@ -101,6 +101,10 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
         this.measuringTimeEnd = Utils.createUnmutableTimestamp(measuringTimeEnd);
     }
 
+    public boolean isSetMeasuringTimeEnd() {
+        return getMeasuringTimeEnd() != null;
+    }
+
     public void setSamplings(Set<SamplingEntity> samplings) {
         this.samplings.clear();
         if (samplings != null) {

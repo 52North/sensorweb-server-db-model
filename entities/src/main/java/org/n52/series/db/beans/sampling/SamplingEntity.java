@@ -31,7 +31,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
 
     private static final long serialVersionUID = -8840602794587590180L;
 
-    private final Set<DatasetEntity> datasets = new LinkedHashSet<>();
+    private Set<DatasetEntity> datasets;
 
     private MeasuringProgramEntity measuringProgram;
 
@@ -75,6 +75,10 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
         this.sampler = sampler;
     }
 
+    public boolean isSetSampler() {
+        return getSampler() != null;
+    }
+
     /**
      * @return the samplingMethod
      */
@@ -90,6 +94,10 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
         this.samplingMethod = samplingMethod;
     }
 
+    public boolean isSetSamplingMethod() {
+        return getSamplingMethod() != null && !getSamplingMethod().isEmpty();
+    }
+
     /**
      * @return the environmentalConditions
      */
@@ -103,6 +111,10 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      */
     public void setEnvironmentalConditions(String environmentalConditions) {
         this.environmentalConditions = environmentalConditions;
+    }
+
+    public boolean isSetEnvironmentalConditions() {
+        return getEnvironmentalConditions() != null && !getEnvironmentalConditions().isEmpty();
     }
 
     /**
@@ -137,10 +149,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
 
     @Override
     public void setDatasets(Set<DatasetEntity> datasets) {
-        this.datasets.clear();
-        if (datasets != null) {
-            this.datasets.addAll(datasets);
-        }
+        this.datasets = datasets;
     }
 
     @Override
