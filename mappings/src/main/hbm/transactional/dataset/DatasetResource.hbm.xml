@@ -24,9 +24,9 @@
             </type>
         </property>
 
-        <property name="aggregationType" index="idx_dataset_aggregation_type">
-            <column name="aggregation_type" scale="20" not-null="true" check="aggregation_type in ('discrete', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
-                <comment>Indicator whether the dataset observations are aggregated to profiles, trajectories, timeseries, ... </comment>
+        <property name="observationType" index="idx_dataset_observation_type">
+            <column name="observation_type" scale="20" not-null="true" check="observation_type in ('discrete', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
+                <comment>Indicator whether the dataset observations are of type profile, trajectories, timeseries, ... </comment>
             </column>
              <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">org.n52.series.db.beans.dataset.ObservationType</param>
@@ -75,7 +75,7 @@
             </column>
         </many-to-one>
 
-        <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
+        <many-to-one name="omObservationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_om_observation_type">
             <column name="fk_format_id">
                 <comment>Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset.</comment>
             </column>
