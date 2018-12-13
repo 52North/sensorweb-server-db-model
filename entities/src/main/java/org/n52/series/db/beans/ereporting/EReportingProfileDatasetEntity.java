@@ -17,12 +17,13 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.DatasetEntity;
+import java.io.Serializable;
 
-public abstract class EReportingDatasetEntity extends DatasetEntity {
+public class EReportingProfileDatasetEntity implements Serializable {
 
     public static final String SAMPLING_POINT = "samplingPoint";
-    private static final long serialVersionUID = -182651044543274208L;
+
+    private static final long serialVersionUID = 3767122728005217055L;
 
     private EReportingSamplingPointEntity samplingPoint;
 
@@ -30,15 +31,13 @@ public abstract class EReportingDatasetEntity extends DatasetEntity {
         return samplingPoint;
     }
 
-    public void setSamplingPoint(EReportingSamplingPointEntity samplingPoint) {
+    public EReportingProfileDatasetEntity setSamplingPoint(EReportingSamplingPointEntity samplingPoint) {
         this.samplingPoint = samplingPoint;
+        return this;
     }
 
-    @Override
-    public void copy(DatasetEntity dataset) {
-        if (dataset instanceof EReportingDatasetEntity) {
-            setSamplingPoint(((EReportingDatasetEntity) dataset).getSamplingPoint());
-        }
-        super.copy(dataset);
+    public EReportingProfileDatasetEntity copy(EReportingProfileDatasetEntity dataset) {
+        setSamplingPoint(((EReportingProfileDatasetEntity) dataset).getSamplingPoint());
+        return this;
     }
 }

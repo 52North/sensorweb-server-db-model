@@ -17,18 +17,20 @@
 
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.DataEntity;
-import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingData;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasDataCapture;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasValidation;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasVerification;
 
-public abstract class EReportingDataEntity<T> extends DataEntity<T> implements EReportingData<T> {
+public class EReportingProfileDataEntity
+        implements HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
 
-    private static final long serialVersionUID = 6718001163355558735L;
+    private Integer validation = HasValidation.DEFAULT_VALIDATION;
 
-    private Integer validation = EReportingData.DEFAULT_VALIDATION;
+    private Integer verification = HasVerification.DEFAULT_VERIFICATION;
 
-    private Integer verification = EReportingData.DEFAULT_VERIFICATION;
-
-    private String primaryObservation = EReportingData.DEFAULT_PRIMARY_OBSERVATION;
+    private String primaryObservation = HasPrimaryObservation.DEFAULT_PRIMARY_OBSERVATION;
 
     private Boolean timeCoverageFlag;
 
@@ -38,72 +40,58 @@ public abstract class EReportingDataEntity<T> extends DataEntity<T> implements E
 
     private Double uncertaintyEstimation;
 
-    @Override
     public Integer getVerification() {
         return verification;
     }
 
-    @Override
     public void setVerification(Integer verification) {
         this.verification = verification;
     }
 
-    @Override
     public Integer getValidation() {
         return validation;
     }
 
-    @Override
     public void setValidation(Integer validation) {
         this.validation = validation;
     }
 
-    @Override
     public String getPrimaryObservation() {
         return primaryObservation;
     }
 
-    @Override
     public void setPrimaryObservation(String primaryObservation) {
         this.primaryObservation = primaryObservation;
     }
 
-    @Override
     public Boolean getDataCaptureFlag() {
         return this.dataCaptureFlag;
     }
 
-    @Override
     public void setDataCaptureFlag(Boolean dataCaptureFlag) {
         this.dataCaptureFlag = dataCaptureFlag;
     }
 
-    @Override
     public Double getDataCapture() {
         return this.dataCapture;
     }
 
-    @Override
     public void setDataCapture(Double dataCapture) {
         this.dataCapture = dataCapture;
     }
 
-    @Override
     public Boolean getTimeCoverageFlag() {
         return this.timeCoverageFlag;
     }
 
-    @Override
     public void setTimeCoverageFlag(Boolean timeCoverageFlag) {
         this.timeCoverageFlag = timeCoverageFlag;
     }
 
-    @Override
     public Double getUncertaintyEstimation() {
         return this.uncertaintyEstimation;
     }
 
-    @Override
     public void setUncertaintyEstimation(Double uncertaintyEstimation) {
         this.uncertaintyEstimation = uncertaintyEstimation;
     }
