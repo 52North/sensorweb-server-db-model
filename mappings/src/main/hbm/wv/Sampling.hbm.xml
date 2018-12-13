@@ -82,6 +82,11 @@
             </many-to-many>
         </set>
 
+        <set name="observations" table="observation" inverse="true">
+            <key column="fk_sampling_id" />
+            <one-to-many class="org.n52.series.db.beans.DataEntity" />
+        </set>
+
          <set name="translations" table="sampling_i18n" inverse="true" fetch="select">
             <key column="fk_sampling_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nSamplingEntity" />

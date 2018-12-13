@@ -3,7 +3,7 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DatasetEntity" table="dataset" >
+    <class name="DatasetEntity" table="dataset">
         <comment>Storage of the dataset, the core table of the whole database model.</comment>
         <id name="id" type="long">
             <column name="dataset_id">
@@ -24,12 +24,12 @@
             </type>
         </property>
 
-        <property name="aggregationType" index="idx_dataset_aggregation_type">
-            <column name="aggregation_type" scale="20" not-null="true" check="aggregation_type in ('discrete', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
-                <comment>Indicator whether the dataset observations are aggregated to profiles, trajectories, timeseries, ... </comment>
+        <property name="observationType" index="idx_dataset_observation_type">
+            <column name="observation_type" scale="20" not-null="true" check="observation_type in ('discrete', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
+                <comment>Indicator whether the dataset observations are of type profile, trajectories, timeseries, ... </comment>
             </column>
              <type name="org.hibernate.type.EnumType">
-                <param name="enumClass">org.n52.series.db.beans.dataset.AggregationType</param>
+                <param name="enumClass">org.n52.series.db.beans.dataset.ObservationType</param>
                 <param name="useNamed">true</param>
             </type>
         </property>
@@ -75,12 +75,6 @@
             </column>
         </many-to-one>
 
-        <many-to-one name="observationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_observation_type">
-            <column name="fk_format_id">
-                <comment>Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset.</comment>
-            </column>
-        </many-to-one>
-
         <many-to-one class="UnitEntity" name="unit" foreign-key="fk_dataset_unit">
             <column name="fk_unit_id">
                 <comment>Reference to the unit of the data/observations that belongs to this dataset.</comment>
@@ -123,8 +117,8 @@
             </column>
         </property>
 
-        <property name="originTimezone" type="string" >
-            <column name="origin_timezone" not-null="false" scale="40">
+        <property name="originTimezone" type="string">
+            <column name="origin_timezone" not-null="false" length="40">
                 <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin)</comment>
             </column>
         </property>
@@ -191,23 +185,11 @@
             </column>
         </property>
 
-        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codespace">
-            <column name="fk_identifier_codespace_id">
-                <comment>The codespace of the dataset identifier, reference to the codespace table. Can be null.</comment>
-            </column>
-        </many-to-one>
-
         <property name="name" type="string">
             <column name="name">
                 <comment>The human readable name of the dataset.</comment>
             </column>
         </property>
-
-        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
-            <column name="fk_name_codespace_id">
-                <comment>The codespace of the dataset name, reference to the codespace table. Can be null.</comment>
-            </column>
-        </many-to-one>
 
         <property name="description" type="string">
             <column name="description">
@@ -215,33 +197,34 @@
             </column>
         </property>
 
-        <set inverse="true" name="samplings" table="sampling_dataset" >
-            <comment>Storage of relations between dataset and related samplings</comment>
-            <key not-null="true" foreign-key="fk_dataset_sampling">
-                <column name="fk_dataset_id">
-                    <comment>The reference to the dataset in the dataset table</comment>
-                </column>
-            </key>
-            <many-to-many class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling_dataset">
-                <column name="fk_sampling_id">
-                    <comment>The reference to the sampling in the dataset sampling</comment>
-                </column>
-            </many-to-many>
-        </set>
-
-        <set inverse="true" name="measuringPrograms" table="measuring_program_dataset">
-            <comment>Storage of relations between dataset and related measuring programs</comment>
-            <key not-null="true" foreign-key="fk_dataset_measuring_program">
-                <column name="fk_dataset_id">
-                    <comment>The reference to the dataset in the dataset table</comment>
-                </column>
-            </key>
-            <many-to-many class="org.n52.series.db.beans.sampling.MeasuringProgramEntity" foreign-key="fk_measuring_program_dataset">
-                <column name="fk_measuring_program_id">
-                    <comment>The reference to the measuring program in the dataset measuring program</comment>
-                </column>
-            </many-to-many>
-        </set>
+        <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity">
+            <set inverse="true" name="samplings" table="sampling_dataset" >
+                <comment>Storage of relations between dataset and related samplings</comment>
+                <key not-null="true" foreign-key="fk_dataset_sampling">
+                    <column name="fk_dataset_id">
+                        <comment>The reference to the dataset in the dataset table</comment>
+                    </column>
+                </key>
+                <many-to-many class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling_dataset">
+                    <column name="fk_sampling_id">
+                        <comment>The reference to the sampling in the dataset sampling</comment>
+                    </column>
+                </many-to-many>
+            </set>
+            <set inverse="true" name="measuringPrograms" table="measuring_program_dataset">
+                <comment>Storage of relations between dataset and related measuring programs</comment>
+                <key not-null="true" foreign-key="fk_dataset_measuring_program">
+                    <column name="fk_dataset_id">
+                        <comment>The reference to the dataset in the dataset table</comment>
+                    </column>
+                </key>
+                <many-to-many class="org.n52.series.db.beans.sampling.MeasuringProgramEntity" foreign-key="fk_measuring_program_dataset">
+                    <column name="fk_measuring_program_id">
+                        <comment>The reference to the measuring program in the dataset measuring program</comment>
+                    </column>
+                </many-to-many>
+            </set>
+        </component>
 
         <set name="translations" table="dataset_i18n" inverse="true" fetch="select">
             <key column="fk_dataset_id" not-null="true" />
@@ -270,13 +253,14 @@
         </property>
         <property name="name" type="string">
             <column name="name">
-                <comment>Locale/language specific name of the data entity</comment>
+                <comment>Locale/language specific name of the dataset entity</comment>
             </column>
         </property>
         <property name="description" type="string">
             <column name="description">
-                <comment>Locale/language specific description of the data entity</comment>
+                <comment>Locale/language specific description of the dataset entity</comment>
             </column>
         </property>
     </class>
+
 </hibernate-mapping>

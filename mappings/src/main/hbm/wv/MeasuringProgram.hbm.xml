@@ -50,8 +50,8 @@
             </column>
         </property>
 
-        <set name="samplings">
-            <key column="sampling_id" />
+        <set name="samplings" table="sampling"  inverse="true">
+            <key column="fk_measuring_program_id" not-null="true"/>
             <one-to-many class="SamplingEntity" />
         </set>
 

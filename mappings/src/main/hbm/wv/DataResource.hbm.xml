@@ -79,18 +79,6 @@
             </column>
         </property>
 
-        <property name="child" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_child" not-null="true" default="0"  check="is_child in (1,0)">
-                <comment>Flag that indicates if this data/observation is a child observation. Required for composite observation like Complex- or ProfileObservation</comment>
-            </column>
-        </property>
-
-        <property name="parent" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_parent" not-null="true" default="0"  check="is_parent in (1,0)">
-                <comment>Flag that indicates if this data/observation is a parent observation. Required for composite observation like Complex- or ProfileObservation</comment>
-            </column>
-        </property>
-
         <component class="GeometryEntity" name="geometryEntity">
             <!--
             <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
@@ -130,24 +118,32 @@
             </column>
         </property>
 
-        <component class="org.n52.series.db.beans.sampling.DetectionLimitEntity" name="detectionLimit">
-            <property name="flag" type="java.lang.Short">
-            <column name="detection_limit_flag" not-null="false" check="detection_limit_flag in (null, -1, 1)">
-                <comment>Flag that indicates if measured value lower/higher of the detection limit.</comment>
+        <property name="parent" type="long" insert="false" update="false">
+           <column name="fk_parent_observation_id" not-null="false">
+                <comment>Reference to the parent data/observation</comment>
             </column>
-            </property>
-            <property name="detectionLimit" type="big_decimal" precision="20" scale="10">
-                <column name="detection_imit" not-null="false">
-                    <comment>The detection limit</comment>
-                </column>
-            </property>
-        </component>
+        </property>
 
-        <many-to-one name="sampling" class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling">
-            <column name="fk_sampling_id" not-null="false" >
-                <comment>The id of the sampling this observation belongs to.</comment>
-            </column>
-        </many-to-one>
+        <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDataEntity">
+            <many-to-one name="sampling" class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling">
+                <column name="fk_sampling_id" not-null="false">
+                    <comment>The id of the sampling this observation belongs to.</comment>
+                </column>
+            </many-to-one>
+
+            <component class="org.n52.series.db.beans.sampling.DetectionLimitEntity" name="detectionLimit">
+                <property name="flag" type="java.lang.Short">
+                    <column name="detection_limit_flag" not-null="false" check="detection_limit_flag in (null, -1, 1)">
+                        <comment>Flag that indicates if measured value lower/higher of the detection limit.</comment>
+                    </column>
+                </property>
+                <property name="detectionLimit" type="big_decimal" precision="20" scale="10">
+                    <column name="detection_imit" not-null="false" precision="20" scale="10">
+                        <comment>The detection limit</comment>
+                    </column>
+                </property>
+            </component>
+        </component>
 
         <set name="translations" table="observation_i18n" inverse="true" fetch="select">
             <key column="fk_data_id" not-null="true" />
@@ -156,69 +152,112 @@
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
             <property name="value" type="big_decimal" precision="20" scale="10">
-                <column name="value_quantity">
-                    <comment>The quantity value of an observation (Measruement)</comment>
+                <column name="value_quantity" precision="20" scale="10">
+                    <comment>The quantity value of an observation (Measurement)</comment>
+                </column>
+            </property>
+        </subclass>
+
+        <subclass extends="DataEntity" name="TextDataEntity" discriminator-value="text">
+            <property name="value" type="string">
+                <column name="value_text">
+                    <comment>The textual value of an observation (TextObservation))</comment>
+                </column>
+            </property>
+        </subclass>
+
+        <subclass extends="DataEntity" name="ReferencedDataEntity" discriminator-value="referenced">
+            <property name="value" type="string">
+                <column name="value_referenced">
+                    <comment>The reference value (URI) of an observation (ReferencedObservation)</comment>
+                </column>
+            </property>
+        </subclass>
+
+        <subclass extends="DataEntity" name="CountDataEntity" discriminator-value="count">
+            <property name="value" type="integer">
+                <column name="value_count">
+                    <comment>The count/integer value of an observation (CountObservation)</comment>
+                </column>
+            </property>
+        </subclass>
+
+        <subclass name="BooleanDataEntity" extends="DataEntity" discriminator-value="boolean">
+            <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
+                <column name="value_boolean">
+                    <comment>The boolean value of an observation (Boolean/TruthObservation)</comment>
+                </column>
+            </property>
+        </subclass>
+
+        <subclass name="CategoryDataEntity" extends="DataEntity" discriminator-value="category">
+            <property name="value" type="string">
+                <column name="value_category">
+                    <comment>The categorical value of an observation (CategoryObervation)</comment>
                 </column>
             </property>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <!-- See above comments for DataArrayDataEntity -->
-            <set name="value" table="composite_observation" inverse="false" sort="natural" cascade="delete-orphan">
-                <key foreign-key="fk_composite_observation">
-                    <column name="fk_parent_observation_id" not-null="true" />
-                </key>
-                <many-to-many class="DataEntity" foreign-key="fk_composite_observation_child">
-                    <column name="fk_child_observation_id" not-null="true" />
-                </many-to-many>
+            <set name="value" table="observation" inverse="true">
+                <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
+                <one-to-many class="DataEntity" />
             </set>
-            <join table="value_profile">
-                <comment>Storage of the profile observation value.</comment>
-                <key foreign-key="fk_profile_value">
-                    <column name="fk_observation_id">
-                        <comment>Reference to the data/observation</comment>
-                    </column>
-                </key>
-                <property name="orientation" type="string">
-                    <column name="orientation" not-null="false">
-                        <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
-                    </column>
-                </property>
-                <property name="verticalFromName" type="string">
-                    <column name="vertical_from_name" not-null="false">
-                        <comment>The name of the vertical from values, e.g. from or depthFrom</comment>
-                    </column>
-                </property>
-                <property name="verticalToName" type="string">
-                    <column name="vertical_to_name" not-null="false">
-                        <comment>The name of the vertical from values, e.g. to or depthTo</comment>
-                    </column>
-                </property>
-                <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-                    <column name="fk_vertical_unit_id" not-null="true">
-                        <comment>The unit of the vertical value, e.g. m</comment>
-                    </column>
-                </many-to-one>
-            </join>
+            <many-to-one name="verticalMetadata"
+                column="fk_dataset_id" class="VerticalMetadataEntity"
+                insert="false" update="false" foreign-key="fk_vertical_metadata" />
         </subclass>
 
     </class>
 
+    <class name="VerticalMetadataEntity" table="value_profile">
+        <id name="id" type="long" >
+            <column name="fk_dataset_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="assigned"/>
+        </id>
+        <property name="orientation" type="string">
+            <column name="orientation" not-null="false">
+                <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
+            </column>
+        </property>
+        <property name="verticalFromName" type="string">
+            <column name="vertical_from_name" not-null="false">
+                <comment>The name of the vertical from values, e.g. from or depthFrom</comment>
+            </column>
+        </property>
+        <property name="verticalToName" type="string">
+            <column name="vertical_to_name" not-null="false">
+                <comment>The name of the vertical from values, e.g. to or depthTo</comment>
+            </column>
+        </property>
+        <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
+            <column name="fk_vertical_unit_id" not-null="true">
+                <comment>The unit of the vertical value, e.g. m</comment>
+            </column>
+        </many-to-one>
+        <set name="translations" table="value_profile_i18n" inverse="true" fetch="select">
+            <key column="fk_dataset_id" not-null="true" foreign-key="fk_value_profile_i18n"/>
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" />
+        </set>
+    </class>
+
     <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
         <id name="id" type="long">
-            <column name="data_i18n_id">
+            <column name="observation_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
             <generator class="native">
-                <param name="sequence_name">data_i18n_seq</param>
+                <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="DataEntity" foreign-key="fk_data">
-            <column name="fk_data_id" not-null="true">
-                <comment>Reference to the data table this internationalization belongs to.</comment>
+        <many-to-one name="entity" class="DatasetEntity" foreign-key="fk_dataset_id">
+            <column name="fk_dataset_id" not-null="true">
+                <comment>Reference to the dataset table this internationalization belongs to.</comment>
             </column>
         </many-to-one>
-         <property name="locale" not-null="true" type="string">
+        <property name="locale" not-null="true" type="string">
             <column name="locale">
                 <comment>Locale/language specification for this entry</comment>
             </column>
@@ -231,6 +270,52 @@
         <property name="description" type="string">
             <column name="description">
                 <comment>Locale/language specific description of the data entity</comment>
+            </column>
+        </property>
+         <property name="valueName" type="string">
+            <column name="value_name">
+                <comment>Locale/language specific name of the data entity</comment>
+            </column>
+        </property>
+        <property name="valueDescription" type="string">
+            <column name="value_description">
+                <comment>Locale/language specific description of the data entity</comment>
+            </column>
+        </property>
+    </class>
+
+     <class name="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" table="value_profile_i18n">
+        <id name="id" type="long">
+            <column name="value_profile_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">data_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_value_profile_i18n_dataset_id">
+            <column name="fk_dataset_id" not-null="true">
+                <comment>Reference to the data table this internationalization belongs to.</comment>
+            </column>
+        </many-to-one>
+          <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="orientation" type="string">
+            <column name="orientation">
+                <comment>Locale/language specific orientation of the data entity</comment>
+            </column>
+        </property>
+        <property name="verticalFromName" type="string">
+            <column name="vertical_from_name">
+                <comment>Locale/language specific verticalTo name of the data entity</comment>
+            </column>
+        </property>
+        <property name="verticalToName" type="string">
+            <column name="vertical_to_name">
+                <comment>Locale/language specific verticalTo name of the data entity</comment>
             </column>
         </property>
     </class>

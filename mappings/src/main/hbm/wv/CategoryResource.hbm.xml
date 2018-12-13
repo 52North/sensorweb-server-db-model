@@ -14,7 +14,7 @@
             </generator>
         </id>
         <property name="identifier" type="string" index="idx_category_identifier">
-            <column name="identifier" not-null="true">
+            <column name="identifier" not-null="true" unique-key="un_category_identifier">
                 <comment>Unique identifier of the category which can be used for filtering.</comment>
             </column>
         </property>
