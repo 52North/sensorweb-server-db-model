@@ -14,15 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.sampling;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
-
-import org.n52.series.db.beans.sampling.MeasuringProgramEntity;
-import org.n52.series.db.beans.sampling.SamplingEntity;
 
 public class SamplingProfileDatasetEntity implements Serializable {
 

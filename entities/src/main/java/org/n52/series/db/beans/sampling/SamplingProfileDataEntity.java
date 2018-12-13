@@ -14,10 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
-
-import org.n52.series.db.beans.sampling.DetectionLimitEntity;
-import org.n52.series.db.beans.sampling.SamplingEntity;
+package org.n52.series.db.beans.sampling;
 
 public class SamplingProfileDataEntity {
 
