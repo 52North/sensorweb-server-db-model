@@ -75,7 +75,7 @@
             </column>
         </many-to-one>
 
-        <component name="ereportingProfile" class="EReportingProfileDatasetEntity">
+        <component name="ereportingProfile" class="org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity">
             <many-to-one class="org.n52.series.db.beans.ereporting.EReportingSamplingPointEntity" name="samplingPoint" foreign-key="fk_dataset_sampling_point">
                 <column name="fk_sampling_point_id" not-null="false" unique-key="un_dataset_identity">
                     <comment></comment>

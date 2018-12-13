@@ -157,7 +157,7 @@
             </column>
         </property>
 
-        <component name="ereportingProfile" class="EReportingProfileDataEntity">
+        <component name="ereportingProfile" class="org.n52.series.db.beans.ereporting.EReportingProfileDataEntity">
             <property name="validation" type="int">
                 <column name="validation" not-null="true" default="-1" />
             </property>

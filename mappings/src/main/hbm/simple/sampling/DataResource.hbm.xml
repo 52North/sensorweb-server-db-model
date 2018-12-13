@@ -124,7 +124,7 @@
             </column>
         </property>
 
-        <component name="samplingProfile" class="SamplingProfileDataEntity">
+        <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDataEntity">
             <many-to-one name="sampling" class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling">
                 <column name="fk_sampling_id" not-null="false">
                     <comment>The id of the sampling this observation belongs to.</comment>

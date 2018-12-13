@@ -197,7 +197,7 @@
             </column>
         </property>
 
-        <component name="samplingProfile" class="SamplingProfileDatasetEntity">
+        <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity">
             <set inverse="true" name="samplings" table="sampling_dataset" >
                 <comment>Storage of relations between dataset and related samplings</comment>
                 <key not-null="true" foreign-key="fk_dataset_sampling">
