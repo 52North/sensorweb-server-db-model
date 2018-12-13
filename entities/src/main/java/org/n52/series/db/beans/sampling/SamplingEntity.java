@@ -18,9 +18,9 @@
 package org.n52.series.db.beans.sampling;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations.HasDatasets;
@@ -44,6 +44,8 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
     private Date samplingTimeStart;
 
     private Date samplingTimeEnd;
+
+    private Set<DataEntity<?>> observations;
 
     /**
      * @return the measuringProgram
@@ -155,6 +157,23 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
     @Override
     public Set<DatasetEntity> getDatasets() {
         return datasets;
+    }
+
+    @Override
+    public boolean hasDatasets() {
+        return HasDatasets.super.hasDatasets() && !getDatasets().isEmpty();
+    }
+
+    public void setObservations(Set<DataEntity<?>> observations) {
+        this.observations = observations;
+    }
+
+    public Set<DataEntity<?>> getObservations() {
+        return observations;
+    }
+
+    public boolean hasObservations() {
+        return getObservations() != null && !getObservations().isEmpty();
     }
 
 }
