@@ -3,19 +3,16 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <!-- Comments for the columns are defined in the ProcedureResource.hbm.xml file! -->
     <class name="PlatformEntity" table="platform">
+        <comment>Storage of the platforms. A platform can be a weather station or a vessel.</comment>
         <id name="id" type="long">
             <column name="platform_id">
-                <!-- <comment>PK column of the table</comment> -->
+                <comment>PK column of the table</comment>
             </column>
             <generator class="native">
                 <param name="sequence_name">platform_seq</param>
             </generator>
         </id>
-        <!-- <many-to-one name="service" class="ServiceEntity" foreign-key="platformServiceFk"> -->
-        <!-- <column name="service" not-null="true"/> -->
-        <!-- </many-to-one> -->
         <property name="identifier" type="string" index="idx_platform_identifier">
             <column name="identifier" not-null="true" unique-key="un_platform_identifier">
                 <comment>Unique identifier of the platform which can be used for filtering.</comment>
@@ -81,12 +78,12 @@
         </property>
         <property name="name" type="string">
             <column name="name">
-                <comment>Locale/language specific name of the feature</comment>
+                <comment>Locale/language specific name of the platform</comment>
             </column>
         </property>
         <property name="description" type="string">
             <column name="description">
-                <comment>Locale/language specific description of the feature</comment>
+                <comment>Locale/language specific description of the platform</comment>
             </column>
         </property>
     </class>

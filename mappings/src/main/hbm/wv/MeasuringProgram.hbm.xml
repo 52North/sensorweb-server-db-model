@@ -96,12 +96,12 @@
         </property>
         <property name="name" type="string">
             <column name="name">
-                <comment>Locale/language specific name of the data entity</comment>
+                <comment>Locale/language specific name of the measuring program entity</comment>
             </column>
         </property>
         <property name="description" type="string">
             <column name="description">
-                <comment>Locale/language specific description of the data entity</comment>
+                <comment>Locale/language specific description of the measuring program entity</comment>
             </column>
         </property>
     </class>

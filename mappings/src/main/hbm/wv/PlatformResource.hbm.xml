@@ -55,12 +55,12 @@
         </property>
         <property name="name" type="string">
             <column name="name">
-                <comment>Locale/language specific name of the feature</comment>
+                <comment>Locale/language specific name of the platform</comment>
             </column>
         </property>
         <property name="description" type="string">
             <column name="description">
-                <comment>Locale/language specific description of the feature</comment>
+                <comment>Locale/language specific description of the platform</comment>
             </column>
         </property>
     </class>

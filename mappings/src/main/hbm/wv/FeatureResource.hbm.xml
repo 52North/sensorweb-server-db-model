@@ -36,12 +36,6 @@
             </column>
         </property>
 
-        <property name="url" type="string">
-            <column name="url" unique-key="un_feature_url">
-                <comment>Optional URL to an external resource that describes the feature, e.g. a WFS</comment>
-            </column>
-        </property>
-
         <component class="GeometryEntity" name="geometryEntity">
             <!--
             <property column="lat" name="lat" type="big_decimal" precision="20" scale="10"/>
