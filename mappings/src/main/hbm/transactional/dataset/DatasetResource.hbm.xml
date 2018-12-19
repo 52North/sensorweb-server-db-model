@@ -60,7 +60,7 @@
             </column>
         </many-to-one>
         <many-to-one class="CategoryEntity" name="category" unique-key="un_dataset_identity" foreign-key="fk_dataset_category">
-            <column name="fk_category_id" not-null="false">
+            <column name="fk_category_id" not-null="true">
                 <comment>Reference to the category that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
@@ -70,7 +70,7 @@
             </column>
         </many-to-one>
         <many-to-one class="PlatformEntity" name="platform" unique-key="un_dataset_identity" foreign-key="fk_dataset_platform">
-            <column name="fk_platform_id" not-null="true">
+            <column name="fk_platform_id" not-null="false">
                 <comment>Reference to the platform that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
