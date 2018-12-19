@@ -22,5 +22,45 @@ public class I18nSamplingEntity extends I18nEntity<SamplingEntity> {
 
     private static final long serialVersionUID = 6375003360445007130L;
 
-    // serves for clear distinction
+    private String samplingMethod;
+
+    private String environmentalConditions;
+
+    /**
+     * @return the samplingMethod
+     */
+    public String getSamplingMethod() {
+        return samplingMethod;
+    }
+
+    /**
+     * @param samplingMethod
+     *            the samplingMethod to set
+     */
+    public void setSamplingMethod(String samplingMethod) {
+        this.samplingMethod = samplingMethod;
+    }
+
+    public boolean isSetSamplingMethod() {
+        return getSamplingMethod() != null && !getSamplingMethod().isEmpty();
+    }
+
+    /**
+     * @return the environmentalConditions
+     */
+    public String getEnvironmentalConditions() {
+        return environmentalConditions;
+    }
+
+    /**
+     * @param environmentalConditions
+     *            the environmentalConditions to set
+     */
+    public void setEnvironmentalConditions(String environmentalConditions) {
+        this.environmentalConditions = environmentalConditions;
+    }
+
+    public boolean isSetEnvironmentalConditions() {
+        return getEnvironmentalConditions() != null && !getEnvironmentalConditions().isEmpty();
+    }
 }
