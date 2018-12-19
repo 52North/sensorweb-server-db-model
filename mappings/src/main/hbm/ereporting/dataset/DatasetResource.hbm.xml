@@ -148,12 +148,12 @@
             </column>
         </property>
         <property name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
-            <column name="first_value">
+            <column name="first_value" precision="20" scale="10">
                 <comment>The value of the temporally first data/observation that belongs to this dataset.</comment>
             </column>
         </property>
         <property name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
-            <column name="last_value">
+            <column name="last_value" precision="20" scale="10">
                 <comment>The value of the temporally last quantity data/observation that belongs to this dataset.</comment>
             </column>
         </property>
