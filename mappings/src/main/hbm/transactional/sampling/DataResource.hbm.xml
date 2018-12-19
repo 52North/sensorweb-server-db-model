@@ -305,10 +305,6 @@
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
-            <set name="translations" table="value_profile_i18n" inverse="true" fetch="select">
-                <key column="fk_observation_id" not-null="true" />
-                <one-to-many class="org.n52.series.db.beans.i18n.I18nProfileDataEntity" />
-            </set>
             <many-to-one name="verticalMetadata"
                 column="fk_observation_id" class="VerticalMetadataEntity"
                 insert="false" update="false" foreign-key="fk_vertical_metadata" />
@@ -343,6 +339,10 @@
                 <comment>The unit of the vertical value, e.g. m</comment>
             </column>
         </many-to-one>
+        <set name="translations" table="value_profile_i18n" inverse="true" fetch="select">
+            <key column="fk_dataset_id" not-null="true" foreign-key="fk_value_profile_i18n"/>
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" />
+        </set>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
@@ -386,7 +386,7 @@
         </property>
     </class>
 
-     <class name="org.n52.series.db.beans.i18n.I18nProfileDataEntity" table="value_profile_i18n">
+     <class name="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" table="value_profile_i18n">
         <id name="id" type="long">
             <column name="value_profile_i18n_id">
                 <comment>PK column of the table</comment>
@@ -395,7 +395,7 @@
                 <param name="sequence_name">data_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="ProfileDataEntity" foreign-key="fk_data">
+        <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_value_profile_i18n_data_id">
             <column name="fk_observation_id" not-null="true">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
