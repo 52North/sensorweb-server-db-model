@@ -171,7 +171,7 @@
                     </column>
                 </property>
                 <property name="detectionLimit" type="big_decimal" precision="20" scale="10">
-                    <column name="detection_imit" not-null="false">
+                    <column name="detection_limit" not-null="false" precision="20" scale="10">
                         <comment>The detection limit</comment>
                     </column>
                 </property>
@@ -179,13 +179,13 @@
         </component>
 
         <set name="translations" table="observation_i18n" inverse="true" fetch="select">
-            <key column="fk_data_id" not-null="true" />
+            <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
             <property name="value" type="big_decimal" precision="20" scale="10">
-                <column name="value_quantity">
+                <column name="value_quantity" precision="20" scale="10">
                     <comment>The quantity value of an observation (Measurement)</comment>
                 </column>
             </property>
@@ -354,7 +354,7 @@
                 <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="DataEntity" foreign-key="fk_data">
+        <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
             <column name="fk_observation_id" not-null="true">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>

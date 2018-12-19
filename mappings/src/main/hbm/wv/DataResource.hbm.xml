@@ -3,7 +3,7 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
+    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
         <comment>Storage of the data/observation values.</comment>
         <id name="id" type="long">
             <column name="observation_id">
@@ -119,7 +119,7 @@
         </property>
 
         <property name="parent" type="long" insert="false" update="false">
-           <column name="fk_parent_observation_id" not-null="false">
+            <column name="fk_parent_observation_id" not-null="false">
                 <comment>Reference to the parent data/observation</comment>
             </column>
         </property>
@@ -138,7 +138,7 @@
                     </column>
                 </property>
                 <property name="detectionLimit" type="big_decimal" precision="20" scale="10">
-                    <column name="detection_imit" not-null="false" precision="20" scale="10">
+                    <column name="detection_limit" not-null="false" precision="20" scale="10">
                         <comment>The detection limit</comment>
                     </column>
                 </property>
@@ -146,7 +146,7 @@
         </component>
 
         <set name="translations" table="observation_i18n" inverse="true" fetch="select">
-            <key column="fk_data_id" not-null="true" />
+            <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
 
@@ -252,9 +252,8 @@
                 <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="DatasetEntity" foreign-key="fk_dataset_id">
-            <column name="fk_dataset_id" not-null="true">
-                <comment>Reference to the dataset table this internationalization belongs to.</comment>
+        <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
+            <column name="fk_observation_id" not-null="true">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

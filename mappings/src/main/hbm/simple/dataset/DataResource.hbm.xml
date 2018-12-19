@@ -119,19 +119,19 @@
         </property>
 
         <property name="parent" type="long" insert="false" update="false">
-           <column name="fk_parent_observation_id" not-null="false">
+            <column name="fk_parent_observation_id" not-null="false">
                 <comment>Reference to the parent data/observation</comment>
             </column>
         </property>
 
         <set name="translations" table="observation_i18n" inverse="true" fetch="select">
-            <key column="fk_data_id" not-null="true" />
+            <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
             <property name="value" type="big_decimal" precision="20" scale="10">
-                <column name="value_quantity">
+                <column name="value_quantity" precision="20" scale="10">
                     <comment>The quantity value of an observation (Measurement)</comment>
                 </column>
             </property>
@@ -175,75 +175,6 @@
                     <comment>The categorical value of an observation (CategoryObervation)</comment>
                 </column>
             </property>
-        </subclass>
-
-        <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
-            <component class="GeometryEntity" name="geometryEntity">
-                <!--
-                <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
-                <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
-                -->
-                <property name="geometry" type="geolatte_geometry">
-                <column name="value_geometry">
-                    <comment>The geometry value of an observation (GeometryObservation)</comment>
-                </column>
-            </property>
-            </component>
-        </subclass>
-
-        <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
-            <join table="value_blob">
-                <comment>Storage of the blog observation value. Separate table because the size of a blob value can be huge.</comment>
-                <key foreign-key="fk_blob_value">
-                    <column name="fk_observation_id">
-                        <comment>Reference to the data/observation in the observation table</comment>
-                    </column>
-                </key>
-               <property name="value"
-                       type="blob">
-                 <column name="value">
-                     <comment>The blob value of an observation</comment>
-                 </column>
-                </property>
-            </join>
-        </subclass>
-
-        <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
-            <set name="value" table="observation" inverse="true">
-                <key foreign-key="fk_parent_observation">
-                     <column name="fk_parent_observation_id" not-null="false">
-                        <comment>Reference to the parent data/observation</comment>
-                    </column>
-                </key>
-                <one-to-many class="DataEntity" />
-            </set>
-            <join table="value_data_array">
-                <comment>Storage of the data array observation value.</comment>
-                <key foreign-key="fk_data_array_value">
-                    <column name="fk_observation_id">
-                        <comment>Reference to the data/observation</comment>
-                    </column>
-                </key>
-               <property name="structure" type="text">
-                    <column name="structure" not-null="true">
-                        <comment>The structure of the data array</comment>
-                    </column>
-                </property>
-
-                <property name="encoding" type="text">
-                    <column name="encoding" not-null="true">
-                        <comment>The encoding of the data array values</comment>
-                    </column>
-                </property>
-            </join>
-        </subclass>
-
-        <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
-            <!-- See above comments for DataArrayDataEntity -->
-            <set name="value" table="observation" inverse="true">
-                <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
-                <one-to-many class="DataEntity" />
-            </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
@@ -300,7 +231,7 @@
                 <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="DataEntity" foreign-key="fk_data">
+        <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
             <column name="fk_observation_id" not-null="true">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
