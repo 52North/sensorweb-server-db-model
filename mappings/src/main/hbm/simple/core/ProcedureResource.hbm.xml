@@ -28,16 +28,6 @@
                 <!-- <comment>A short description of the procedure</comment> -->
             </column>
         </property>
-        <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <!-- <comment>Flag that indicates if the procedure is deleted.</comment> -->
-            </column>
-        </property>
-        <property name="descriptionFile" type="text">
-            <column name="description_file">
-                <!-- <comment>Location to or XML encoded description of the procedure. Can be used if procedure history is not supported.</comment> -->
-            </column>
-        </property>
         <property name="reference" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_reference" default="0" check="is_reference in (1,0)">
                 <!-- <comment>Flag that indicates if the procedure is a reference.</comment> -->
