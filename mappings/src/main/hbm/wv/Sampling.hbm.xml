@@ -122,5 +122,15 @@
                 <comment>Locale/language specific description of the sampling entity</comment>
             </column>
         </property>
+        <property name="samplingMethod" type="string">
+            <column name="sampling_method">
+                <comment>Locale/language specific sampling method of the sampling entity</comment>
+            </column>
+        </property>
+        <property name="environmentalConditions" type="string">
+            <column name="environmental_conditions">
+                <comment>Locale/language specific environmental conditions of the sampling entity</comment>
+            </column>
+        </property>
     </class>
 </hibernate-mapping>
