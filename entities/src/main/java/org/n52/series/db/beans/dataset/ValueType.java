@@ -16,8 +16,7 @@
  */
 package org.n52.series.db.beans.dataset;
 
-import java.util.Arrays;
-import java.util.LinkedHashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,12 +25,19 @@ public enum ValueType {
 
     public static final String ALL = "all";
 
-    public static Set<ValueType> convert(Set<String> valueType) {
-        if (valueType != null) {
-            if (valueType.contains(ALL)) {
-                return new LinkedHashSet<>(Arrays.asList(values()));
+    public static Set<ValueType> convert(Set<String> values) {
+        if (values != null) {
+            return values.stream().map(at -> ValueType.getIgnoreCase(at)).filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+        }
+        return null;
+    }
+
+    private static ValueType getIgnoreCase(String value) {
+        for (ValueType dt : values()) {
+            if (dt.name().equalsIgnoreCase(value)) {
+                return dt;
             }
-            return valueType.stream().map(vt -> ValueType.valueOf(vt)).collect(Collectors.toSet());
         }
         return null;
     }

@@ -16,6 +16,7 @@
  */
 package org.n52.series.db.beans.dataset;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,9 +25,19 @@ public enum DatasetType {
 
     public static final String ALL = "all";
 
-    public static Set<DatasetType> convert(Set<String> datasetType) {
-        if (datasetType != null) {
-            return datasetType.stream().map(at -> DatasetType.valueOf(at)).collect(Collectors.toSet());
+    public static Set<DatasetType> convert(Set<String> values) {
+        if (values != null) {
+            return values.stream().map(at -> DatasetType.getIgnoreCase(at)).filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+        }
+        return null;
+    }
+
+    private static DatasetType getIgnoreCase(String value) {
+        for (DatasetType dt : values()) {
+            if (dt.name().equalsIgnoreCase(value)) {
+                return dt;
+            }
         }
         return null;
     }

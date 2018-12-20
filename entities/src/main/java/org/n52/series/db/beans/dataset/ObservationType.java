@@ -16,6 +16,7 @@
  */
 package org.n52.series.db.beans.dataset;
 
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,9 +25,19 @@ public enum ObservationType {
 
     public static final String ALL = "all";
 
-    public static Set<ObservationType> convert(Set<String> observationType) {
-        if (observationType != null) {
-            return observationType.stream().map(at -> ObservationType.valueOf(at)).collect(Collectors.toSet());
+    public static Set<ObservationType> convert(Set<String> values) {
+        if (values != null) {
+            return values.stream().map(at -> ObservationType.getIgnoreCase(at)).filter(Objects::nonNull)
+                    .collect(Collectors.toSet());
+        }
+        return null;
+    }
+
+    private static ObservationType getIgnoreCase(String value) {
+        for (ObservationType dt : values()) {
+            if (dt.name().equalsIgnoreCase(value)) {
+                return dt;
+            }
         }
         return null;
     }
