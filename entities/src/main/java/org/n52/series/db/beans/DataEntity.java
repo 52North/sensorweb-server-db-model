@@ -309,7 +309,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasVerticalTo() {
-        return getVerticalTo() != null && getVerticalFrom().compareTo(NOT_SET_VERTICAL) != 0;
+        return getVerticalTo() != null && getVerticalTo().compareTo(NOT_SET_VERTICAL) != 0;
     }
 
     public SamplingProfileDataEntity getSamplingProfile() {
