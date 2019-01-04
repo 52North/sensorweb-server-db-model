@@ -239,7 +239,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return disabled;
     }
 
-    public boolean isSetObservationType() {
+    public boolean isSetOmObservationType() {
         return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
     }
 
