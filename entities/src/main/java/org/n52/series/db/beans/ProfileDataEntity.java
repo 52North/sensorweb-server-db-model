@@ -86,4 +86,8 @@ public class ProfileDataEntity extends CompositeDataEntity {
         checkAndGetVerticalMetadata().setVerticalUnit(verticalUnit);
     }
 
+    public boolean hasVerticalUnit() {
+        return getVerticalUnit() != null && getVerticalUnit().isSetIdentifier();
+    }
+
 }
