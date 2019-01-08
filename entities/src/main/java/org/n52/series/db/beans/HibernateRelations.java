@@ -176,7 +176,7 @@ public interface HibernateRelations {
 
         T setFeatureTypes(Set<FormatEntity> featureOfInterestTypes);
 
-        default boolean HasFeaturTypes() {
+        default boolean hasFeatureTypes() {
             return (getFeatureTypes() != null) && !getFeatureTypes().isEmpty();
         }
 
