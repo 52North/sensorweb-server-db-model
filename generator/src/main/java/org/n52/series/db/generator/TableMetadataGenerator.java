@@ -104,8 +104,8 @@ public class TableMetadataGenerator extends AbstractGenerator{
     private int getConceptSelection() throws IOException {
         printToScreen("Which observation concept should be used:");
         printToScreen("0   simple");
-        printToScreen("1   ereporting");
-        printToScreen("2   transactional");
+        printToScreen("1   transactional");
+        printToScreen("2   ereporting");
         printToScreen("3   wupperverband");
         printToScreen("");
         printToScreen("Enter your selection: ");
