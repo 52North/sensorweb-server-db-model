@@ -68,7 +68,7 @@
             </column>
         </property>
 
-        <set inverse="true" name="datasets" table="sampling_dataset" >
+        <set inverse="false" name="datasets" table="sampling_dataset" >
             <comment>Storage of relations between dataset and related samplings</comment>
             <key not-null="true" foreign-key="fk_sampling_dataset">
                 <column name="fk_sampling_id">
