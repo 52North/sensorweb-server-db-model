@@ -163,7 +163,7 @@ public class TableMetadataGenerator extends AbstractGenerator{
         Profile profile = Profile.values()[profileSelection];
         Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
         DialectSelector dialect = DialectSelector.values()[dialectSelection];
-        Dialect dia = sqlScriptGenerator.getDialect(dialect);
+        Dialect dia = sqlScriptGenerator.getDialect(dialect, true);
         Properties p = new Properties();
         p.put("hibernate.dialect", dia.getClass().getName());
         configuration.addProperties(p);

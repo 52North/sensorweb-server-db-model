@@ -17,32 +17,21 @@
 package org.n52.series.db.generator;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Collection;
 import java.util.EnumSet;
-import java.util.LinkedHashSet;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Properties;
-import java.util.Set;
 
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
 import org.hibernate.tool.schema.TargetType;
-import org.n52.hibernate.spatial.dialect.h2geodb.TimestampWithTimeZoneGeoDBDialect;
-import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
-import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
 import org.n52.hibernate.type.SmallBooleanType;
 
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
@@ -138,7 +127,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
                         for (int k = 0; k < 4; k++) {
                             try {
                                 // execute(sqlScriptGenerator, i, j, k, schema);
-                                sqlScriptGenerator.execute(sqlScriptGenerator, i, j, k, schema);
+                                sqlScriptGenerator.execute(sqlScriptGenerator, i, j, k, schema, true);
                             } catch (Exception e) {
                                 printToScreen("ERROR: " + e.getMessage());
                                 e.printStackTrace();
@@ -149,11 +138,12 @@ public class SQLScriptGenerator extends AbstractGenerator{
                 }
             } else {
                 try {
+                    boolean addComments = sqlScriptGenerator.getAddComments();
                     int dialectSelection = sqlScriptGenerator.getDialectSelection();
                     int concept = sqlScriptGenerator.getConceptSelection();
                     String schema = sqlScriptGenerator.getSchema();
                     int modelSelection = sqlScriptGenerator.getModelSelection();
-                    sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema);
+                    sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema, addComments);
                 } catch (IOException ioe) {
                     printToScreen("ERROR: IO error trying to read your input!");
                     System.exit(1);
@@ -168,6 +158,16 @@ public class SQLScriptGenerator extends AbstractGenerator{
             printToScreen("ERROR: IO error trying to read your input!");
             System.exit(1);
         }
+    }
+
+    private boolean getAddComments() throws IOException {
+        printToScreen("Should comments be added to the script (default=true):");
+        printToScreen("0   false");
+        printToScreen("1   true");
+        printToScreen("");
+        printToScreen("Enter your selection: ");
+
+        return readSelectionFromStdIoWithDefault(1) == 1 ? true : false;
     }
 
     private String getSchema(int i) {
@@ -191,13 +191,14 @@ public class SQLScriptGenerator extends AbstractGenerator{
                                 int dialectSelection,
                                 int profileSelection,
                                 int conceptSelection,
-                                String schema)
+                                String schema,
+                                boolean comments)
             throws Exception {
             Concept concept = Concept.values()[conceptSelection];
             Profile profile = Profile.values()[profileSelection];
             Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
             DialectSelector dialect = DialectSelector.values()[dialectSelection];
-            Dialect dia = sqlScriptGenerator.getDialect(dialect);
+            Dialect dia = sqlScriptGenerator.getDialect(dialect, comments);
             Properties p = new Properties();
             p.put("hibernate.dialect", dia.getClass().getName());
             String fileNameCreate = "target/" + dialect + "_" + concept + "_" + profile + "_create.sql";

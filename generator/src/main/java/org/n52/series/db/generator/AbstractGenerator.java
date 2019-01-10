@@ -31,20 +31,23 @@ import java.util.Map;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
-import org.hibernate.spatial.dialect.mysql.MySQL56SpatialDialect;
+import org.n52.hibernate.spatial.dialect.TimestampWithTimeZoneGeoDBDialectNoComments;
+import org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments;
+import org.n52.hibernate.spatial.dialect.TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments;
 import org.n52.hibernate.spatial.dialect.h2geodb.TimestampWithTimeZoneGeoDBDialect;
 import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
 import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
 
 public abstract class AbstractGenerator {
 
-    protected Dialect getDialect(DialectSelector selection) throws Exception {
+    protected Dialect getDialect(DialectSelector selection, boolean comments) throws Exception {
         switch (selection) {
         case POSTGIS:
-            return new TimestampWithTimeZonePostgisPG95Dialect();
+            return comments ? new TimestampWithTimeZonePostgisPG95Dialect()
+                    : new TimestampWithTimeZonePostgisPG95DialectNoComments();
         case ORACLE:
             // try {
-            //   return new TimestampWithTimeZoneOracleSpatial10gDialect();
+            // return comments ? new TimestampWithTimeZoneOracleSpatial10gDialect() : new TimestampWithTimeZoneOracleSpatial10gDialectNoComments();
             // } catch (ExceptionInInitializerError eiie) {
             // printToScreen("The Oracle JDBC driver is missing!");
             // printToScreen("To execute the SQL script generator for Oracle you have to uncomment the
@@ -54,13 +57,15 @@ public abstract class AbstractGenerator {
             // printToScreen("https://wiki.52north.org/bin/view/SensorWeb/SensorObservationServiceIVDocumentation#Oracle_support.");
             // throw new MissingDriverException();
             // }
-
         case GEODB:
-            return new TimestampWithTimeZoneGeoDBDialect();
+            return comments ? new TimestampWithTimeZoneGeoDBDialect()
+                    : new TimestampWithTimeZoneGeoDBDialectNoComments();
         case MY_SQL_SPATIAL_5:
-            return new MySQL56SpatialDialect();
+            return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
+                    : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
         case SQL_SERVER_2008:
-            return new TimestampWithTimeZoneSqlServer2008SpatialDialect();
+            return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
+                    : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
         default:
             throw new Exception("The entered value is invalid: " + selection);
         }
@@ -144,6 +149,14 @@ public abstract class AbstractGenerator {
         return (selection != null && !selection.isEmpty())
                 ? Integer.parseInt(selection)
                 : 0;
+    }
+
+    protected int readSelectionFromStdIoWithDefault(int defaultValue) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
+        String selection = br.readLine();
+        return (selection != null && !selection.isEmpty())
+                ? Integer.parseInt(selection)
+                : defaultValue;
     }
 
     enum DialectSelector {
