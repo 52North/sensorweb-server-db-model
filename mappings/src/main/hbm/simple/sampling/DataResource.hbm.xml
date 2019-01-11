@@ -217,7 +217,6 @@
             </column>
             <generator class="assigned"/>
         </id>
-        <one-to-one name="" ></one-to-one>
         <many-to-one name="idEntity" class="DatasetEntity" foreign-key="fk_value_profile_dataset" insert="false" update="false">
             <column name="fk_dataset_id" not-null="true" >
                 <comment>Reference to the dataset to which this data/observation belongs.</comment>
