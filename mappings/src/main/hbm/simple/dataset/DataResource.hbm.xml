@@ -3,7 +3,7 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'boolean', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
+    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'referenced')">
         <comment>Storage of the data/observation values.</comment>
         <id name="id" type="long">
             <column name="observation_id">
@@ -184,7 +184,7 @@
             </set>
             <many-to-one name="verticalMetadata"
                 column="fk_dataset_id" class="VerticalMetadataEntity"
-                insert="false" update="false" foreign-key="fk_vertical_metadata" />
+                insert="false" update="false" foreign-key="fk_dataset" />
         </subclass>
 
     </class>
@@ -196,6 +196,11 @@
             </column>
             <generator class="assigned"/>
         </id>
+        <many-to-one name="idEntity" class="DatasetEntity" foreign-key="fk_value_profile_dataset" insert="false" update="false">
+            <column name="fk_dataset_id" not-null="true" >
+                <comment>Reference to the dataset to which this data/observation belongs.</comment>
+            </column>
+        </many-to-one>
         <property name="orientation" type="string">
             <column name="orientation" not-null="false">
                 <comment>The "orientation" of the vertical values, e.g. depth or height</comment>

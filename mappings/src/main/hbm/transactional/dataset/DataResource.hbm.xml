@@ -298,6 +298,11 @@
             </column>
             <generator class="assigned"/>
         </id>
+        <many-to-one name="idEntity" class="DataEntity" foreign-key="fk_value_profile_dataset" insert="false" update="false">
+            <column name="fk_observation_id" not-null="true" >
+                <comment>Reference to the data to which this data/observation belongs.</comment>
+            </column>
+        </many-to-one>
         <property name="orientation" type="string">
             <column name="orientation" not-null="false">
                 <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
