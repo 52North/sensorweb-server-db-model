@@ -197,6 +197,12 @@
             </column>
         </property>
 
+        <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_vertical_metadata">
+            <column name="fk_vertical_metadata_id" not-null="false">
+                <comment>Reference to the vertical metadata that belongs that belongs to this profile dataset.</comment>
+            </column>
+        </many-to-one>
+
         <set name="translations" table="dataset_i18n" inverse="true" fetch="select">
             <key column="fk_dataset_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity" />

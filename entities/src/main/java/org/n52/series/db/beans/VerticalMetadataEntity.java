@@ -23,20 +23,11 @@ import org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity;
 public class VerticalMetadataEntity extends IdEntity {
 
     private static final long serialVersionUID = 3156288491348980598L;
-    private IdEntity idEntity;
     private String orientation;
     private String verticalfromName;
     private String verticaltoName;
     private UnitEntity verticalUnit;
     private Set<I18nVerticalMetadataEntity> translations;
-
-    public IdEntity getIdEntity() {
-        return idEntity;
-    }
-
-    public void setIdEntity(IdEntity idEntity) {
-        this.idEntity = idEntity;
-    }
 
     public String getOrientation() {
         return orientation;

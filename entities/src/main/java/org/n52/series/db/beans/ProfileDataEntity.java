@@ -25,15 +25,22 @@ public class ProfileDataEntity extends CompositeDataEntity {
     private VerticalMetadataEntity verticalMetadata;
 
     public VerticalMetadataEntity getVerticalMetadata() {
+        if (!hasVerticalMetadataLocal() && getDataset().hasVerticalMetadata()) {
+            return getDataset().getVerticalMetadata();
+        }
         return verticalMetadata;
     }
 
     public void setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
         this.verticalMetadata = verticalMetadata;
     }
+    
+    private boolean hasVerticalMetadataLocal() {
+        return getVerticalMetadata() != null;
+    }
 
     public boolean hasVerticalMetadata() {
-        return getVerticalMetadata() != null;
+        return hasVerticalMetadataLocal() || getDataset().hasVerticalMetadata();
     }
 
     @Override

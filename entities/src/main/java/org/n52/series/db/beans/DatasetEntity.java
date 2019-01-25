@@ -122,6 +122,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private Integer numberOfDecimals;
 
+    private VerticalMetadataEntity verticalMetadata;
+
     private SamplingProfileDatasetEntity samplingProfile;
 
     private EReportingProfileDatasetEntity ereportingProfile;
@@ -466,6 +468,18 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
     }
 
+    public VerticalMetadataEntity getVerticalMetadata() {
+        return verticalMetadata;
+    }
+
+    public void setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
+        this.verticalMetadata = verticalMetadata;
+    }
+
+    public boolean hasVerticalMetadata() {
+        return getVerticalMetadata() != null;
+    }
+
     public SamplingProfileDatasetEntity getSamplingProfile() {
         return samplingProfile;
     }
@@ -499,6 +513,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return sb.append(offering.getLabelFrom(locale)).toString();
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId())
