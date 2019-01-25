@@ -136,7 +136,7 @@ public abstract class AbstractGenerator {
     }
 
     protected static File getDirectory(String path) throws URISyntaxException {
-        return new File(TableMetadataGenerator.class.getResource(path).toURI());
+        return new File(AbstractGenerator.class.getResource(path).toURI());
     }
 
     public static void printToScreen(String lineToPrint) {

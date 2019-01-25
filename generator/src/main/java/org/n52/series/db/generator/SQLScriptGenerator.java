@@ -194,42 +194,42 @@ public class SQLScriptGenerator extends AbstractGenerator{
                                 String schema,
                                 boolean comments)
             throws Exception {
-            Concept concept = Concept.values()[conceptSelection];
-            Profile profile = Profile.values()[profileSelection];
-            Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-            DialectSelector dialect = DialectSelector.values()[dialectSelection];
-            Dialect dia = sqlScriptGenerator.getDialect(dialect, comments);
-            Properties p = new Properties();
-            p.put("hibernate.dialect", dia.getClass().getName());
-            String fileNameCreate = "target/" + dialect + "_" + concept + "_" + profile + "_create.sql";
-            String fileNameDrop = "target/" + dialect + "_" + concept + "_" + profile + "_drop.sql";
-            Files.deleteIfExists(Paths.get(fileNameCreate));
-            Files.deleteIfExists(Paths.get(fileNameDrop));
-            if (schema != null && !schema.isEmpty()) {
-                p.put("hibernate.default_schema", schema);
-            }
-            configuration.addProperties(p);
-            sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, configuration, null);
-            configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
+        Concept concept = Concept.values()[conceptSelection];
+        Profile profile = Profile.values()[profileSelection];
+        Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
+        DialectSelector dialect = DialectSelector.values()[dialectSelection];
+        Dialect dia = sqlScriptGenerator.getDialect(dialect, comments);
+        Properties p = new Properties();
+        p.put("hibernate.dialect", dia.getClass().getName());
+        String fileNameCreate = "target/" + dialect + "_" + concept + "_" + profile + "_create.sql";
+        String fileNameDrop = "target/" + dialect + "_" + concept + "_" + profile + "_drop.sql";
+        Files.deleteIfExists(Paths.get(fileNameCreate));
+        Files.deleteIfExists(Paths.get(fileNameDrop));
+        if (schema != null && !schema.isEmpty()) {
+            p.put("hibernate.default_schema", schema);
+        }
+        configuration.addProperties(p);
+        sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, configuration, null);
+        configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
-            configuration.buildSessionFactory();
-            StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        configuration.buildSessionFactory();
+        StandardServiceRegistry serviceRegistry =
+                configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
-            MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-            sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, null, metadataSources);
-            Metadata metadata = metadataSources.buildMetadata();
+        MetadataSources metadataSources = new MetadataSources(serviceRegistry);
+        sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, null, metadataSources);
+        Metadata metadata = metadataSources.buildMetadata();
 
-          // create script
-          SchemaExport schemaExport = new SchemaExport();
-          EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
-          schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
-          schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
-          printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
-          // create drop
-          schemaExport.setOutputFile(fileNameDrop);
-          schemaExport.execute(targetTypes, SchemaExport.Action.DROP, metadata);
-          printToScreen("Finished! Check for file: " + fileNameDrop + "\n");
-
+        // create script
+        SchemaExport schemaExport = new SchemaExport();
+        EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
+        schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
+        schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
+        printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
+        // create drop
+        schemaExport.setOutputFile(fileNameDrop);
+        schemaExport.execute(targetTypes, SchemaExport.Action.DROP, metadata);
+        printToScreen("Finished! Check for file: " + fileNameDrop + "\n");
     }
 
 }
