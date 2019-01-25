@@ -19,31 +19,31 @@
             </column>
         </discriminator>
 
-        <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_data_identity">
+        <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity">
             <column name="fk_dataset_id" not-null="true">
                 <comment>Reference to the dataset to which this data/observation belongs.</comment>
             </column>
         </many-to-one>
 
-        <property name="samplingTimeStart" type="timestamp" unique-key="un_data_identity">
+        <property name="samplingTimeStart" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
                 <comment>The timestamp when the observation period has started.</comment>
             </column>
         </property>
 
-        <property name="samplingTimeEnd" type="timestamp" unique-key="un_data_identity">
+        <property name="samplingTimeEnd" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
                 <comment>The timestamp when the measurement period has finished or the observation took place.</comment>
             </column>
         </property>
 
-        <property name="resultTime" type="timestamp" unique-key="un_data_identity">
+        <property name="resultTime" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_result_time" name="result_time" length="29" not-null="true">
                 <comment>The timestamp when the observation was published.</comment>
             </column>
         </property>
 
-        <property name="identifier" type="string" unique-key="un_data_identifier">
+        <property name="identifier" type="string" unique-key="un_observation_identifier">
             <column name="identifier">
                 <comment>Unique identifier of the data/observation which can be for used filtering, e.g. GetObservationById in the SOS</comment>
             </column>
@@ -140,12 +140,12 @@
             </column>
         </property>
 
-        <property name="verticalFrom" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
+        <property name="verticalFrom" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
             <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10">
                 <comment>The start level of a vertical observation, e.g. profiles</comment>
             </column>
         </property>
-        <property name="verticalTo" type="big_decimal" unique-key="un_data_identity" precision="20" scale="10">
+        <property name="verticalTo" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
             <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10">
                 <comment>The end level or the level of a vertical observation, e.g. profiles</comment>
             </column>
