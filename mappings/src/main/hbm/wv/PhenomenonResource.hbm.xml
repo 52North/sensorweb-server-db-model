@@ -9,7 +9,7 @@
             <column name="phenomenon_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">phenomenon_seq</param>
             </generator>
         </id>
@@ -44,7 +44,7 @@
             <column name="phenomenon_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">phenomenon_i18n_seq</param>
             </generator>
         </id>

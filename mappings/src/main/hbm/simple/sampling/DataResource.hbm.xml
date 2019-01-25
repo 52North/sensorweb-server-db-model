@@ -9,7 +9,7 @@
             <column name="observation_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
@@ -253,7 +253,7 @@
             <column name="observation_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>

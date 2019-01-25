@@ -9,7 +9,7 @@
             <column name="dataset_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">dataset_seq</param>
             </generator>
         </id>
@@ -243,7 +243,7 @@
             <column name="dataset_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">dataset_i18n_seq</param>
             </generator>
         </id>

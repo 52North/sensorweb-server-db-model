@@ -9,7 +9,7 @@
             <column name="procedure_id">
                 <!-- <comment>PK column of the table</comment> -->
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
@@ -46,7 +46,7 @@
             <column name="procedure_i18n_id">
                 <!-- <comment>PK column of the table</comment> -->
             </column>
-            <generator class="native">
+            <generator class="assigned">
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
