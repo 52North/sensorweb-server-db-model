@@ -203,9 +203,6 @@
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
-            <many-to-one name="verticalMetadata"
-                column="fk_dataset_id" class="VerticalMetadataEntity"
-                insert="false" update="false" foreign-key="fk_dataset" />
         </subclass>
 
     </class>

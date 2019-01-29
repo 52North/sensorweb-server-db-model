@@ -203,49 +203,8 @@
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
-            <many-to-one name="verticalMetadata"
-                column="fk_dataset_id" class="VerticalMetadataEntity"
-                insert="false" update="false" foreign-key="fk_dataset" />
         </subclass>
 
-    </class>
-
-    <class name="VerticalMetadataEntity" table="value_profile">
-        <id name="id" type="long" >
-            <column name="fk_dataset_id">
-                <comment>PK column of the table</comment>
-            </column>
-            <generator class="assigned"/>
-        </id>
-        <many-to-one name="idEntity" class="DatasetEntity" foreign-key="fk_value_profile_dataset" insert="false" update="false">
-            <column name="fk_dataset_id" not-null="true" >
-                <comment>Reference to the dataset to which this data/observation belongs.</comment>
-            </column>
-        </many-to-one>
-        <property name="orientation" type="string">
-            <column name="orientation" not-null="false">
-                <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
-            </column>
-        </property>
-        <property name="verticalFromName" type="string">
-            <column name="vertical_from_name" not-null="false">
-                <comment>The name of the vertical from values, e.g. from or depthFrom</comment>
-            </column>
-        </property>
-        <property name="verticalToName" type="string">
-            <column name="vertical_to_name" not-null="false">
-                <comment>The name of the vertical from values, e.g. to or depthTo</comment>
-            </column>
-        </property>
-        <many-to-one name="verticalUnit" class="UnitEntity" fetch="select" lazy="no-proxy" foreign-key="fk_profile_unit">
-            <column name="fk_vertical_unit_id" not-null="true">
-                <comment>The unit of the vertical value, e.g. m</comment>
-            </column>
-        </many-to-one>
-        <set name="translations" table="value_profile_i18n" inverse="true" fetch="select">
-            <key column="fk_dataset_id" not-null="true" foreign-key="fk_value_profile_i18n"/>
-            <one-to-many class="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" />
-        </set>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
