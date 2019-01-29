@@ -36,7 +36,7 @@ public class ProfileDataEntity extends CompositeDataEntity {
     }
 
     private boolean hasVerticalMetadataLocal() {
-        return getVerticalMetadata() != null;
+        return verticalMetadata != null;
     }
 
     public boolean hasVerticalMetadata() {
