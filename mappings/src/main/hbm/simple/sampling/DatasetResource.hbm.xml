@@ -226,8 +226,8 @@
             </set>
         </component>
 
-        <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_vertical_metadata">
-            <column name="fk_vertical_metadata_id" not-null="false">
+        <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile">
+            <column name="fk_value_profile_id" not-null="false">
                 <comment>Reference to the vertical metadata that belongs that belongs to this profile dataset.</comment>
             </column>
         </many-to-one>

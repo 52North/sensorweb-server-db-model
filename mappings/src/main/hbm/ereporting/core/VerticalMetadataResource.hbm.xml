@@ -5,7 +5,7 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="VerticalMetadataEntity" table="value_profile">
         <id name="id" type="long" >
-             <column name="vertical_metadata_id">
+             <column name="value_profile_id">
                 <comment>PK column of the table</comment>
             </column>
             <generator class="native">
@@ -33,7 +33,7 @@
             </column>
         </many-to-one>
         <set name="translations" table="value_profile_i18n" inverse="true" fetch="select">
-            <key column="fk_vertical_metadata_id" not-null="true" foreign-key="fk_value_profile_i18n"/>
+            <key column="fk_value_profile_id" not-null="true" foreign-key="fk_value_profile_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" />
         </set>
     </class>
@@ -47,8 +47,8 @@
                 <param name="sequence_name">value_profile_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_i18n_vertical_metadata">
-            <column name="fk_vertical_metadata_id" not-null="true">
+        <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_i18n_value_profile">
+            <column name="fk_value_profile_id" not-null="true">
                 <comment>Reference to the value_profile table this internationalization belongs to.</comment>
             </column>
         </many-to-one>
