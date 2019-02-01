@@ -44,32 +44,32 @@
             </type>
         </property>
 
-        <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
+        <many-to-one class="ProcedureEntity" name="procedure" foreign-key="fk_dataset_procedure">
             <column name="fk_procedure_id"  not-null="true">
                 <comment>Reference to the procedure that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="PhenomenonEntity" name="phenomenon" unique-key="un_dataset_identity" foreign-key="fk_dataset_phenomenon">
+        <many-to-one class="PhenomenonEntity" name="phenomenon" foreign-key="fk_dataset_phenomenon">
             <column name="fk_phenomenon_id"  not-null="true">
                 <comment>Reference to the phenomenon that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="OfferingEntity" name="offering" unique-key="un_dataset_identity" foreign-key="fk_dataset_offering">
+        <many-to-one class="OfferingEntity" name="offering" foreign-key="fk_dataset_offering">
             <column name="fk_offering_id" not-null="true">
                 <comment>Reference to the offering that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="CategoryEntity" name="category" unique-key="un_dataset_identity" foreign-key="fk_dataset_category">
+        <many-to-one class="CategoryEntity" name="category" foreign-key="fk_dataset_category">
             <column name="fk_category_id" not-null="true">
                 <comment>Reference to the category that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="FeatureEntity" name="feature" unique-key="un_dataset_identity" foreign-key="fk_dataset_feature">
+        <many-to-one class="FeatureEntity" name="feature" foreign-key="fk_dataset_feature">
             <column name="fk_feature_id" not-null="true">
                 <comment>Reference to the feature that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="PlatformEntity" name="platform" unique-key="un_dataset_identity" foreign-key="fk_dataset_platform">
+        <many-to-one class="PlatformEntity" name="platform" foreign-key="fk_dataset_platform">
             <column name="fk_platform_id" not-null="true">
                 <comment>Reference to the platform that belongs that belongs to this dataset.</comment>
             </column>
