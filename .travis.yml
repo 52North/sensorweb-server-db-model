@@ -15,8 +15,10 @@ matrix:
       before_install:
         - rm "${JAVA_HOME}/lib/security/cacerts"
         - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-        
-script: mvn -fae -U -B clean license:check notice:check install -P check
+
+# notice:check is disabled because build with JDK > 8 ignores excludes         
+#script: mvn -fae -U -B clean license:check notice:check install -P check
+script: mvn -fae -U -B clean license:check install -P check
 after_success: 
 - chmod +x .travis/deploy-docs.sh && .travis/deploy-docs.sh
 - curl -Ls https://git.io/deploy-maven-snapshot | bash

@@ -386,12 +386,10 @@
                             <param>etc/license-mappings.xml</param>
                         </licenseMapping>
                         <generateChildNotices>false</generateChildNotices>
-                        <!-- 
                         <excludeScopes>
                             <excludeScopes>test</excludeScopes>
                             <excludeScopes>provided</excludeScopes>
                         </excludeScopes>
-                         -->
                     </configuration>
                 </plugin>
 
