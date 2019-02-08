@@ -3,18 +3,18 @@ matrix:
   include:
     - jdk: oraclejdk8
     # https://www.deps.co/guides/travis-ci-latest-java/#certificate-issues
-#    - jdk: openjdk9
-#      before_install:
-#        - rm "${JAVA_HOME}/lib/security/cacerts"
-#        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-#    - jdk: openjdk10
-#      before_install:
-#        - rm "${JAVA_HOME}/lib/security/cacerts"
-#        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
-#    - jdk: openjdk11
-#      before_install:
-#        - rm "${JAVA_HOME}/lib/security/cacerts"
-#        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: openjdk9
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: openjdk10
+      before_install:
+       - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
+    - jdk: openjdk11
+      before_install:
+        - rm "${JAVA_HOME}/lib/security/cacerts"
+        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
         
 script: mvn -fae -U -B clean license:check notice:check install -P check
 after_success: 
