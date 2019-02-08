@@ -25,9 +25,9 @@ import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
 
 /**
  * Hibernate entiity for the abstract monitoringPoint
+ *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
@@ -43,7 +43,8 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
     }
 
     /**
-     * @param content the content to set
+     * @param content
+     *            the content to set
      */
     public void setContent(MonitoringPointContent content) {
         this.content = content;
@@ -85,9 +86,7 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
     }
 
     public boolean hasRelatedParty() {
-        return isSetContent()
-                ? getContent().hasRelatedParties()
-                : false;
+        return isSetContent() ? getContent().hasRelatedParties() : false;
     }
 
     public Collection<VerticalDatumEntity> getVerticalDatum() {
@@ -122,8 +121,6 @@ public abstract class AbstractMonitoringFeature extends FeatureEntity {
     }
 
     public boolean hasVerticalDatum() {
-        return isSetContent()
-                ? getContent().hasVerticalDatum()
-                : false;
+        return isSetContent() ? getContent().hasVerticalDatum() : false;
     }
 }

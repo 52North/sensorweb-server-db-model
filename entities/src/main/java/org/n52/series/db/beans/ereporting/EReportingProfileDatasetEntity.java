@@ -16,39 +16,27 @@
  */
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.dataset.ProfileDataset;
+import java.io.Serializable;
 
-public class EReportingProfileDatasetEntity extends EReportingDatasetEntity
-        implements ProfileDataset {
+public class EReportingProfileDatasetEntity implements Serializable {
 
-    private static final long serialVersionUID = -7514394037111286838L;
+    public static final String SAMPLING_POINT = "samplingPoint";
 
-    private String verticalParameterName;
-    private String verticalFromParameterName;
-    private String verticalToParameterName;
+    private static final long serialVersionUID = 3767122728005217055L;
 
-    public String getVerticalParameterName() {
-        return verticalParameterName;
+    private EReportingSamplingPointEntity samplingPoint;
+
+    public EReportingSamplingPointEntity getSamplingPoint() {
+        return samplingPoint;
     }
 
-    public void setVerticalParameterName(String verticalParameterName) {
-        this.verticalParameterName = verticalParameterName;
+    public EReportingProfileDatasetEntity setSamplingPoint(EReportingSamplingPointEntity samplingPoint) {
+        this.samplingPoint = samplingPoint;
+        return this;
     }
 
-    public String getVerticalFromParameterName() {
-        return verticalFromParameterName;
+    public EReportingProfileDatasetEntity copy(EReportingProfileDatasetEntity dataset) {
+        setSamplingPoint(((EReportingProfileDatasetEntity) dataset).getSamplingPoint());
+        return this;
     }
-
-    public void setVerticalFromParameterName(String verticalFromParameterName) {
-        this.verticalFromParameterName = verticalFromParameterName;
-    }
-
-    public String getVerticalToParameterName() {
-        return verticalToParameterName;
-    }
-
-    public void setVerticalToParameterName(String verticalToParameterName) {
-        this.verticalToParameterName = verticalToParameterName;
-    }
-
 }

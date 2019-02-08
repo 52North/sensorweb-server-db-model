@@ -53,7 +53,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     /**
      * @param dataset
-     *        the dataset to set
+     *            the dataset to set
      */
     public void setDataset(long dataset) {
         this.dataset = dataset;
@@ -68,7 +68,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     /**
      * @param year
-     *        the year to set
+     *            the year to set
      */
     public void setYear(int year) {
         this.year = year;
@@ -83,7 +83,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     /**
      * @param series
-     *        the series to set
+     *            the series to set
      */
     public void setSeries(long series) {
         this.series = series;

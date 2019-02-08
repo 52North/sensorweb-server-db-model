@@ -23,7 +23,6 @@ import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
 
 /**
  * @since 1.0.0
- *
  */
 public class ResultTemplateEntity extends IdEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
@@ -72,7 +71,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param phenomenon the phenomenon to set
+     * @param phenomenon
+     *            the phenomenon to set
      */
     public void setPhenomenon(PhenomenonEntity phenomenon) {
         this.phenomenon = phenomenon;
@@ -86,7 +86,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param offering the offering to set
+     * @param offering
+     *            the offering to set
      */
     public void setOffering(OfferingEntity offering) {
         this.offering = offering;
@@ -100,7 +101,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param procedure the procedure to set
+     * @param procedure
+     *            the procedure to set
      */
     public void setProcedure(ProcedureEntity procedure) {
         this.procedure = procedure;
@@ -114,7 +116,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param featureOfInterest the featureOfInterest to set
+     * @param featureOfInterest
+     *            the featureOfInterest to set
      */
     public void setFeature(AbstractFeatureEntity featureOfInterest) {
         this.feature = featureOfInterest;

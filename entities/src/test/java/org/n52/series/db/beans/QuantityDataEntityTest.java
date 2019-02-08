@@ -28,10 +28,7 @@ public class QuantityDataEntityTest {
 
     @Test
     public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] {
-            "9999",
-            "-9999.9"
-        });
+        Collection<String> noDataValues = Arrays.asList(new String[] { "9999", "-9999.9" });
         QuantityDataEntity entity = new QuantityDataEntity();
         entity.setValue(BigDecimal.valueOf(9999d));
         assertTrue(entity.isNoDataValue(noDataValues));

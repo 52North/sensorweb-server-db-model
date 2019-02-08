@@ -27,22 +27,22 @@ import org.junit.Test;
 public class OfferingEntityTest {
 
     @Test
-    public void when_settingPhenomenonTimeStartWithNanos_then_nanosAvailableOnGetting() {
+    public void when_settingSamplingTimeStartWithNanos_then_nanosAvailableOnGetting() {
         OfferingEntity entity = new OfferingEntity();
         Timestamp expected = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
-        entity.setPhenomenonTimeStart(expected);
-        Timestamp actual = (Timestamp) entity.getPhenomenonTimeStart();
+        entity.setSamplingTimeStart(expected);
+        Timestamp actual = (Timestamp) entity.getSamplingTimeStart();
         MatcherAssert.assertThat(actual.getNanos(), is(expected.getNanos()));
     }
 
     @Test
-    public void when_settingPhenomenonTimeEndWithNanos_then_nanosAvailableOnGetting() {
+    public void when_settingSamplingTimeEndWithNanos_then_nanosAvailableOnGetting() {
         OfferingEntity entity = new OfferingEntity();
         Timestamp expected = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
-        entity.setPhenomenonTimeEnd(expected);
-        Timestamp actual = (Timestamp) entity.getPhenomenonTimeEnd();
+        entity.setSamplingTimeEnd(expected);
+        Timestamp actual = (Timestamp) entity.getSamplingTimeEnd();
         MatcherAssert.assertThat(actual.getNanos(), is(expected.getNanos()));
     }
 

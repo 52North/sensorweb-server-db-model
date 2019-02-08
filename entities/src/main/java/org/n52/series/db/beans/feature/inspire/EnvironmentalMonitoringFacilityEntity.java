@@ -36,7 +36,8 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     }
 
     /**
-     * @param mediaMonitored the mediaMonitored to set
+     * @param mediaMonitored
+     *            the mediaMonitored to set
      */
     public void setMediaMonitored(MediaMonitored mediaMonitored) {
         this.mediaMonitored = mediaMonitored;
@@ -50,7 +51,8 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     }
 
     /**
-     * @param measurementRegime the measurementRegime to set
+     * @param measurementRegime
+     *            the measurementRegime to set
      */
     public void setMeasurementRegime(String measurementRegime) {
         this.measurementRegime = measurementRegime;
@@ -64,7 +66,8 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     }
 
     /**
-     * @param mobile the mobile to set
+     * @param mobile
+     *            the mobile to set
      */
     public void setMobile(boolean mobile) {
         this.mobile = mobile;

@@ -18,7 +18,6 @@ package org.n52.series.db.beans;
 
 import java.util.Date;
 
-import org.n52.series.db.beans.dataset.Dataset;
 import org.n52.series.db.common.Utils;
 
 public class SamplingGeometryEntity extends IdEntity {
@@ -29,7 +28,7 @@ public class SamplingGeometryEntity extends IdEntity {
 
     private GeometryEntity geometryEntity;
 
-    private Dataset dataset;
+    private DatasetEntity dataset;
 
     public Date getTimestamp() {
         return Utils.createUnmutableTimestamp(timestamp);
@@ -47,11 +46,11 @@ public class SamplingGeometryEntity extends IdEntity {
         this.geometryEntity = geometryEntity;
     }
 
-    public Dataset getDataset() {
+    public DatasetEntity getDataset() {
         return dataset;
     }
 
-    public void setDataset(Dataset dataset) {
+    public void setDataset(DatasetEntity dataset) {
         this.dataset = dataset;
     }
 }

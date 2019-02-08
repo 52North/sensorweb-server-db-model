@@ -28,10 +28,7 @@ public class TextDataEntityTest {
 
     @Test
     public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] {
-            "blubb",
-            "-9999.9"
-        });
+        Collection<String> noDataValues = Arrays.asList(new String[] { "blubb", "-9999.9" });
         TextDataEntity entity = new TextDataEntity();
         entity.setValue("blubb");
         assertTrue(entity.isNoDataValue(noDataValues));

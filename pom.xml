@@ -20,6 +20,11 @@
         <module>dialects</module>
     </modules>
 
+     <organization>
+         <name>52North Initiative for Geospatial Open Source Software GmbH</name>
+         <url>http://52north.org</url>
+     </organization>
+
     <developers>
         <developer>
             <id>bredel</id>
@@ -50,24 +55,41 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.logback>1.2.3</version.logback>
-        <version.geotools>19.0</version.geotools>
-        <version.slf4j>1.7.25</version.slf4j>
-        <version.hamcrest>1.3</version.hamcrest>
-        <version.hibernate>5.2.12.Final</version.hibernate>
+        <hamcrest.version>1.3</hamcrest.version>
+        <geotools.version>20.1</geotools.version>
+        <geolatte.version>1.4.0</geolatte.version>
+        <hibernate.version>5.4.0.Final</hibernate.version>
+        <spring-boot.version>2.1.1.RELEASE</spring-boot.version>
 
-        <java.compiler.source>1.8</java.compiler.source>
-        <java.compiler.target>1.8</java.compiler.target>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <file.encoding>UTF-8</file.encoding>
-        
+
     </properties>
 
     <dependencyManagement>
         <dependencies>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-core</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.hibernate</groupId>
+                <artifactId>hibernate-spatial</artifactId>
+                <version>${hibernate.version}</version>
+            </dependency>
+
+            <dependency>
+                <!-- Import dependency management from Spring Boot -->
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>entities</artifactId>
@@ -93,7 +115,6 @@
                 <artifactId>dialects</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
 
             <dependency>
                 <groupId>joda-time</groupId>
@@ -117,7 +138,7 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-api</artifactId>
-                <version>${version.geotools}</version>
+                <version>${geotools.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.media</groupId>
@@ -132,7 +153,7 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-main</artifactId>
-                <version>${version.geotools}</version>
+                <version>${geotools.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.media</groupId>
@@ -147,7 +168,7 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-epsg-hsql</artifactId>
-                <version>${version.geotools}</version>
+                <version>${geotools.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.media</groupId>
@@ -162,7 +183,7 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-referencing</artifactId>
-                <version>${version.geotools}</version>
+                <version>${geotools.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.media</groupId>
@@ -177,7 +198,7 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-metadata</artifactId>
-                <version>${version.geotools}</version>
+                <version>${geotools.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.media</groupId>
@@ -192,7 +213,7 @@
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-shapefile</artifactId>
-                <version>${version.geotools}</version>
+                <version>${geotools.version}</version>
                 <exclusions>
                     <exclusion>
                         <groupId>javax.media</groupId>
@@ -204,113 +225,22 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
-                <groupId>com.vividsolutions</groupId>
+                <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.14.0</version>
-                <exclusions>
-                    <exclusion>
-                        <!-- old version dependency causes conclicts -->
-                        <groupId>xerces</groupId>
-                        <artifactId>xercesImpl</artifactId>
-                    </exclusion>
-                </exclusions>
+                <version>1.16.0</version>
+            </dependency>
+            <dependency>
+                <groupId>org.geolatte</groupId>
+                <artifactId>geolatte-geom</artifactId>
+                <version>${geolatte.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>org.slf4j</groupId>
-                <artifactId>slf4j-api</artifactId>
-                <version>${version.slf4j}</version>
-            </dependency>
-            <dependency>
-                <!-- drop-in replacement for JCL -->
-                <groupId>org.slf4j</groupId>
-                <artifactId>jcl-over-slf4j</artifactId>
-                <version>${version.slf4j}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <!-- drop-in replacement for jog4j -->
-                <groupId>org.slf4j</groupId>
-                <artifactId>log4j-over-slf4j</artifactId>
-                <version>${version.slf4j}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <!-- excludes commons logging -->
-                <groupId>commons-logging</groupId>
-                <artifactId>commons-logging</artifactId>
-                <version>1.2</version>
-                <scope>provided</scope>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-classic</artifactId>
-                <version>${version.logback}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-                <groupId>ch.qos.logback</groupId>
-                <artifactId>logback-core</artifactId>
-                <version>${version.logback}</version>
-                <scope>runtime</scope>
-            </dependency>
-            <dependency>
-	            <groupId>org.hibernate</groupId>
-	            <artifactId>hibernate-core</artifactId>
-	            <version>${version.hibernate}</version>
-	            <scope>provided</scope>
-	            <exclusions>
-	                <exclusion>
-	                    <groupId>org.slf4j</groupId>
-	                    <artifactId>slf4j-api</artifactId>
-	                </exclusion>
-	            </exclusions>
-	        </dependency>
-            <dependency>
-                <groupId>org.hibernate.common</groupId>
-                <artifactId>hibernate-commons-annotations</artifactId>
-                <version>5.0.1.Final</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.jboss.logging</groupId>
-                        <artifactId>jboss-logging</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>org.hibernate</groupId>
-                <artifactId>hibernate-spatial</artifactId>
-                <version>${version.hibernate}</version>
-                <scope>provided</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>org.slf4j</groupId>
-                        <artifactId>slf4j-api</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
-                <version>4.12</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.hamcrest</groupId>
-                <artifactId>hamcrest-core</artifactId>
-                <version>${version.hamcrest}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
                 <groupId>org.hamcrest</groupId>
                 <artifactId>hamcrest-all</artifactId>
-                <version>${version.hamcrest}</version>
-                <scope>test</scope>
+                <version>${hamcrest.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -324,6 +254,7 @@
         </resources>
 
         <plugins>
+
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -338,8 +269,8 @@
             </plugin>
 
             <plugin>
-                <groupId>org.codehaus.groovy.maven</groupId>
-                <artifactId>gmaven-plugin</artifactId>
+                <groupId>org.codehaus.gmaven</groupId>
+                <artifactId>groovy-maven-plugin</artifactId>
                 <executions>
                     <execution>
                         <phase>initialize</phase>
@@ -372,7 +303,7 @@
                     </execution>
                 </executions>
             </plugin>
-            
+
             <plugin>
                 <groupId>net.revelc.code.formatter</groupId>
                 <artifactId>formatter-maven-plugin</artifactId>
@@ -392,26 +323,22 @@
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
-                    <version>3.0.2</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <version>2.6</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-dependency-plugin</artifactId>
-                    <version>2.10</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
+                            </manifest>
+                            <manifestEntries>
+                                <Implementation-Build>${git.commit.id}</Implementation-Build>
+                            </manifestEntries>
+                        </archive>
+                    </configuration>
                 </plugin>
 
                 <plugin>
                     <!-- license headers -->
                     <groupId>com.mycila</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>2.11</version>
                     <configuration>
                         <header>etc/license-header.txt</header>
                         <properties>
@@ -433,7 +360,6 @@
                     <!-- dependencies' licenses -->
                     <groupId>org.codehaus.mojo</groupId>
                     <artifactId>license-maven-plugin</artifactId>
-                    <version>1.8</version>
                     <configuration>
                         <useMissingFile>true</useMissingFile>
                         <fileTemplate>etc/license-as-csv.ftl</fileTemplate>
@@ -458,7 +384,6 @@
                         <noticeTemplate>etc/NOTICE.template</noticeTemplate>
                         <licenseMapping>
                             <param>etc/license-mappings.xml</param>
-                            <param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
                         </licenseMapping>
                         <generateChildNotices>false</generateChildNotices>
                         <excludeScopes>
@@ -469,9 +394,8 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.codehaus.groovy.maven</groupId>
-                    <artifactId>gmaven-plugin</artifactId>
-                    <version>1.0</version>
+                    <groupId>org.codehaus.gmaven</groupId>
+                    <artifactId>groovy-maven-plugin</artifactId>
                     <configuration>
                         <source>
                             import java.util.Date
@@ -483,24 +407,9 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>pl.project13.maven</groupId>
-                    <artifactId>git-commit-id-plugin</artifactId>
-                    <version>2.2.1</version>
-                    <configuration>
-                        <dateFormat>yyyy-MM-dd HH:mm:ssZ</dateFormat>
-                        <gitDescribe>
-                            <!-- Faster to get just branch if skip = true -->
-                            <skip>false</skip>
-                        </gitDescribe>
-                        <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
-                        <timestampFormat>{0,date,yyyy-MM-dd HH:mm:ss}</timestampFormat>
-                    </configuration>
-                </plugin>
-
-                <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>2.0.1</version>
+                    <version>2.8.0</version>
                     <configuration>
                         <configFile>${project.basedir}/etc/eclipse_formatter.xml</configFile>
                         <lineEnding>LF</lineEnding>
@@ -525,38 +434,6 @@
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.3</version>
-                    <configuration>
-                        <source>${java.compiler.source}</source>
-                        <target>${java.compiler.target}</target>
-                        <meminitial>256m</meminitial>
-                        <maxmem>512m</maxmem>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <artifactId>maven-release-plugin</artifactId>
-                    <version>2.5.2</version>
-                    <configuration>
-                        <preparationGoals>clean</preparationGoals>
-                        <autoVersionSubmodules>true</autoVersionSubmodules>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.6</version>
-                    <configuration>
-                        <descriptors>
-                            <descriptor>src/main/assembly/release.xml</descriptor>
-                        </descriptors>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-enforcer-plugin</artifactId>
                     <configuration>
                         <rules>
@@ -573,17 +450,56 @@
                 </plugin>
             </plugins>
         </pluginManagement>
-        <extensions>
-            <extension>
-                <groupId>org.apache.maven.wagon</groupId>
-                <artifactId>wagon-webdav-jackrabbit</artifactId>
-                <version>2.10</version>
-            </extension>
-        </extensions>
 
     </build>
 
     <profiles>
+
+        <profile>
+            <id>jdk8</id>
+            <activation>
+                <jdk>1.8</jdk>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <!-- assemble licenses -->
+                            <groupId>org.jasig.maven</groupId>
+                            <artifactId>maven-notice-plugin</artifactId>
+                            <configuration>
+                                <licenseMapping>
+                                    <param>http://52north.github.io/cdn/licenses/license-mappings.xml</param>
+                                </licenseMapping>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+        <profile>
+            <id>since-jdk9</id>
+            <activation>
+                <jdk>[9,)</jdk>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <plugin>
+                            <!-- assemble licenses -->
+                            <groupId>org.jasig.maven</groupId>
+                            <artifactId>maven-notice-plugin</artifactId>
+                            <configuration>
+                                <licenseMapping>
+                                    <param>http://52north.github.io/cdn/licenses/license-mappings-jdk9.xml</param>
+                                </licenseMapping>
+                            </configuration>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+        </profile>
+
         <profile>
             <id>create-license-list</id>
             <build>
@@ -627,6 +543,12 @@
             <id>n52-releases</id>
             <name>52n Releases</name>
             <url>http://52north.org/maven/repo/releases/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>geotools</id>
@@ -634,18 +556,47 @@
             <url>http://download.osgeo.org/webdav/geotools/</url>
             <!--<url>https://boundless.artifactoryonline.com/boundless/main</url> -->
             <!--<url>http://repo.boundlessgeo.com/main/</url> -->
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>n52-snapshots</id>
             <name>n52-snapshots</name>
             <url>http://52north.org/maven/repo/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
         </repository>
         <repository>
             <id>sonatype-nexus-snapshots</id>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
             <snapshots>
                 <enabled>true</enabled>
             </snapshots>
         </repository>
     </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>sonatype-nexus-snapshots</id>
+            <name>Sonatype Nexus Snaphots</name>
+            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
 </project>

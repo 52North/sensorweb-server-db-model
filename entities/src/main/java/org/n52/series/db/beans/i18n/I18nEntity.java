@@ -17,9 +17,8 @@
 package org.n52.series.db.beans.i18n;
 
 import org.n52.series.db.beans.DescribableEntity;
-import org.n52.series.db.beans.IdEntity;
 
-public class I18nEntity<T extends DescribableEntity> extends IdEntity {
+public class I18nEntity<T extends DescribableEntity> extends AbstractI18nEntity<T> {
 
     public static final String PROPERTY_LOCALE = "locale";
 
@@ -27,33 +26,9 @@ public class I18nEntity<T extends DescribableEntity> extends IdEntity {
 
     private static final long serialVersionUID = 693520332508628558L;
 
-    private T entity;
-
-    private String locale;
-
     private String name;
 
-    private String shortName;
-
-    private String longName;
-
     private String description;
-
-    public T getEntity() {
-        return entity;
-    }
-
-    public void setEntity(T entity) {
-        this.entity = entity;
-    }
-
-    public String getLocale() {
-        return locale;
-    }
-
-    public void setLocale(String locale) {
-        this.locale = locale;
-    }
 
     public String getName() {
         return name;
@@ -61,22 +36,6 @@ public class I18nEntity<T extends DescribableEntity> extends IdEntity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public String getShortName() {
-        return shortName;
-    }
-
-    public void setShortName(String shortName) {
-        this.shortName = shortName;
-    }
-
-    public String getLongName() {
-        return longName;
-    }
-
-    public void setLongName(String longName) {
-        this.longName = longName;
     }
 
     public String getDescription() {
@@ -95,11 +54,4 @@ public class I18nEntity<T extends DescribableEntity> extends IdEntity {
         return getDescription() != null && !getDescription().isEmpty();
     }
 
-    public boolean hasLongName() {
-        return getLongName() != null && !getLongName().isEmpty();
-    }
-
-    public boolean hasShortName() {
-        return getShortName() != null && !getShortName().isEmpty();
-    }
 }

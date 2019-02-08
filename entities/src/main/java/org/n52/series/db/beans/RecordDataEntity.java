@@ -29,9 +29,7 @@ public class RecordDataEntity extends DataEntity<Map<String, Object>> {
     }
 
     public int getDimension() {
-        return getValue() != null
-                ? getValue().size()
-                : 0;
+        return getValue() != null ? getValue().size() : 0;
     }
 
 }

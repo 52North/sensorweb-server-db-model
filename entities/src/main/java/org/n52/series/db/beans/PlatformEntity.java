@@ -18,63 +18,27 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.parameter.Parameter;
-
-import com.vividsolutions.jts.geom.Geometry;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 public class PlatformEntity extends DescribableEntity {
 
-    public static final String PROPERTY_INSITU = "insitu";
-
-    public static final String PROPERTY_MOBILE = "mobile";
-
     private static final long serialVersionUID = 3615089936334873353L;
 
-    private boolean insitu = true;
-
-    private boolean mobile;
-
-    private Geometry geometry;
-
-    private Set<Parameter< ? >> parameters;
-
-    public boolean isMobile() {
-        return mobile;
-    }
-
-    public void setMobile(boolean mobile) {
-        this.mobile = mobile;
-    }
-
-    public boolean isInsitu() {
-        return insitu;
-    }
-
-    public void setInsitu(boolean insitu) {
-        this.insitu = insitu;
-    }
-
-    public Geometry getGeometry() {
-        return geometry;
-    }
-
-    public void setGeometry(Geometry geometry) {
-        this.geometry = geometry;
-    }
+    private Set<ParameterEntity<?>> parameters;
 
     @Override
-    public Set<Parameter< ? >> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(Set<Parameter< ? >> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 
     @Override
     public boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
+        return (getParameters() != null) && !getParameters().isEmpty();
     }
 
 }

@@ -20,9 +20,9 @@ import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
 
 /**
  * Hibernate entiity for the WaterML MonitoringPoint
+ *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class MonitoringPointEntity extends AbstractMonitoringFeature {
 

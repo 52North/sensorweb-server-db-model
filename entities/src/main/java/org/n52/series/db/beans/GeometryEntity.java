@@ -18,9 +18,9 @@ package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
 
 public class GeometryEntity implements Serializable {
 
@@ -45,7 +45,7 @@ public class GeometryEntity implements Serializable {
     private int srid;
 
     public boolean isSetGeometry() {
-        return geometry != null && !geometry.isEmpty();
+        return (geometry != null) && !geometry.isEmpty();
     }
 
     public void setGeometry(Geometry geometry) {
@@ -53,27 +53,24 @@ public class GeometryEntity implements Serializable {
     }
 
     /**
-     * Returns the {@link Geometry} or creates a {@link Geometry} with the given srid in case of geometry has
-     * been set via lat/lon.
+     * Returns the {@link Geometry} or creates a {@link Geometry} with the given
+     * srid in case of geometry has been set via lat/lon.
      *
      * @return the geometry or a created geometry (with given srid)
      */
     public Geometry getGeometry() {
-        Geometry builtGeometry = isSetLonLat()
-                ? createPoint()
-                : geometry;
+        Geometry builtGeometry = isSetLonLat() ? createPoint() : geometry;
         return builtGeometry;
     }
 
     private Geometry createPoint() {
-        Coordinate coordinate = alt != null && !alt.isNaN()
-                ? new Coordinate(lon, lat, alt)
+        Coordinate coordinate = (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt)
                 : new Coordinate(lon, lat);
         return geometryFactory.createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
-        return lon != null && lat != null;
+        return (lon != null) && (lat != null);
     }
 
     public Double getLon() {
@@ -124,14 +121,8 @@ public class GeometryEntity implements Serializable {
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" latitude: ")
-                 .append(getLat())
-                 .append(", longitude: ")
-                 .append(getLon())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" latitude: ").append(getLat())
+                .append(", longitude: ").append(getLon()).append(" ]").toString();
     }
 
 }

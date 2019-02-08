@@ -23,7 +23,6 @@ import org.n52.series.db.beans.DescribableEntity;
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public class EReportingNetworkEntity extends DescribableEntity {
 

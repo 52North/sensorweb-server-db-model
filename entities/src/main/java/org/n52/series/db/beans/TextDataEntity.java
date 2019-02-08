@@ -18,9 +18,7 @@ package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.TextData;
-
-public class TextDataEntity extends DataEntity<String> implements TextData {
+public class TextDataEntity extends DataEntity<String> {
 
     private static final long serialVersionUID = 4925354534934095827L;
 
@@ -57,7 +55,6 @@ public class TextDataEntity extends DataEntity<String> implements TextData {
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();
-        return value == null
-                || noDataValues.contains(value);
+        return value == null || noDataValues.contains(value);
     }
 }

@@ -32,7 +32,8 @@ public class UnitEntity extends DescribableEntity {
     }
 
     /**
-     * @param link the link to set
+     * @param link
+     *            the link to set
      */
     public void setLink(String link) {
         this.link = link;

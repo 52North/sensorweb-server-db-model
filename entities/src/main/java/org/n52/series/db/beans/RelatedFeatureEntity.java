@@ -27,8 +27,7 @@ import org.n52.series.db.beans.HibernateRelations.HasOfferings;
  * @since 1.0.0
  */
 public class RelatedFeatureEntity extends IdEntity
-        implements Serializable, HasFeature<RelatedFeatureEntity>,
-        HasOfferings<RelatedFeatureEntity> {
+        implements Serializable, HasFeature<RelatedFeatureEntity>, HasOfferings<RelatedFeatureEntity> {
 
     private static final long serialVersionUID = -8143897383050691280L;
 
@@ -69,7 +68,7 @@ public class RelatedFeatureEntity extends IdEntity
     @SuppressWarnings("unchecked")
     @Override
     public RelatedFeatureEntity setOfferings(final Object offerings) {
-        if (offerings instanceof Set< ? >) {
+        if (offerings instanceof Set<?>) {
             this.offerings = (Set<OfferingEntity>) offerings;
         } else {
             getOfferings().add((OfferingEntity) offerings);

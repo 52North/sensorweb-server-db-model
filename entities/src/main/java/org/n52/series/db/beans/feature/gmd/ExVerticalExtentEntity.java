@@ -43,7 +43,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param minimumValue
-     *        the minimumValue to set
+     *            the minimumValue to set
      */
     public void setMinimumValue(Double minimumValue) {
         this.minimumValue = minimumValue;
@@ -62,7 +62,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param minValuNilReason
-     *        the minValuNilReason to set
+     *            the minValuNilReason to set
      */
     public void setMinValuNilReason(String minValuNilReason) {
         this.minValuNilReason = minValuNilReason;
@@ -81,7 +81,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param maximumValue
-     *        the maximumValue to set
+     *            the maximumValue to set
      */
     public void setMaximumValue(Double maximumValue) {
         this.maximumValue = maximumValue;
@@ -100,7 +100,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param maxValuNilReason
-     *        the maxValuNilReason to set
+     *            the maxValuNilReason to set
      */
     public void setMaxValuNilReason(String maxValuNilReason) {
         this.maxValuNilReason = maxValuNilReason;
@@ -119,7 +119,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param verticalCRS
-     *        the verticalCRS to set
+     *            the verticalCRS to set
      */
     public void setVerticalCRS(VerticalCRSEntity verticalCRS) {
         this.verticalCRS = verticalCRS;

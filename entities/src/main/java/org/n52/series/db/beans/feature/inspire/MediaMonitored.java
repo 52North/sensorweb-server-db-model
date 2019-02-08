@@ -42,7 +42,8 @@ public class MediaMonitored implements Serializable {
     }
 
     /**
-     * @param mediaMonitored the mediaMonitored to set
+     * @param mediaMonitored
+     *            the mediaMonitored to set
      */
     public void setMediaMonitored(Set<String> mediaMonitored) {
         this.mediaMonitored = mediaMonitored;

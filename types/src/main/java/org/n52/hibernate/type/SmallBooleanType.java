@@ -44,7 +44,7 @@ public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Bool
     }
 
     @Override
-    public Class< ? > getPrimitiveClass() {
+    public Class<?> getPrimitiveClass() {
         return Boolean.class;
     }
 
@@ -60,9 +60,7 @@ public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Bool
 
     @Override
     public String objectToSQLString(Boolean value, Dialect dialect) {
-        return value
-                ? "1"
-                : "0";
+        return value ? "1" : "0";
     }
 
 }

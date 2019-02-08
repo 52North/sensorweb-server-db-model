@@ -25,8 +25,7 @@ public final class Utils {
         if (value == null) {
             return null;
         }
-        return !(value instanceof Timestamp)
-                ? new Timestamp(value.getTime())
+        return !(value instanceof Timestamp) ? new Timestamp(value.getTime())
                 // keeps nano seconds if available
                 : Timestamp.class.cast(value);
     }

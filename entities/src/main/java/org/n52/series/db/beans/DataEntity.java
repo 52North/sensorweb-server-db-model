@@ -24,12 +24,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.data.Data;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity
-        implements Comparable<DataEntity<T>>, Serializable, Data<T> {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
 
     public static final String PROPERTY_ID = "id";
 
@@ -53,11 +53,15 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
 
-    public static final String PROPERTY_CHILD = "child";
-
     public static final String PROPERTY_VALUE = "value";
 
     public static final String PROPERTY_PARAMETERS = "parameters";
+
+    public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
+
+    public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
+
+    public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
 
     private static final long serialVersionUID = 273612846605300612L;
 
@@ -77,13 +81,11 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private Date resultTime;
 
-    private boolean parent;
-
-    private boolean child;
+    private Long parent;
 
     private DatasetEntity dataset;
 
-    private Set<Parameter< ? >> parameters = new HashSet<>(0);
+    private Set<ParameterEntity<?>> parameters = new HashSet<>(0);
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -97,6 +99,10 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private BigDecimal verticalTo = NOT_SET_VERTICAL;
 
+    private SamplingProfileDataEntity samplingProfile;
+
+    private EReportingProfileDataEntity ereportingProfile;
+
     protected DataEntity() {
 
     }
@@ -104,14 +110,16 @@ public abstract class DataEntity<T> extends DescribableEntity
     /**
      * @return the samplingTimeStart
      */
+
     public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @param samplingTimeStart
-     *        the samplingTimeStart
+     *            the samplingTimeStart
      */
+
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -119,14 +127,16 @@ public abstract class DataEntity<T> extends DescribableEntity
     /**
      * @return the samplingTimeEnd
      */
+
     public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
      * @param samplingTimeEnd
-     *        the samplingTimeEnd
+     *            the samplingTimeEnd
      */
+
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -154,7 +164,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean isSetGeometryEntity() {
-        return geometryEntity != null && !geometryEntity.isEmpty();
+        return (geometryEntity != null) && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
@@ -201,35 +211,24 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
-    public boolean isParent() {
+    public Long getParent() {
         return parent;
     }
 
-    public void setParent(boolean parent) {
+    public void setParent(Long parent) {
         this.parent = parent;
     }
 
-    public boolean isChild() {
-        return child;
-    }
-
-    public void setChild(boolean child) {
-        this.child = child;
-    }
-
-    @Override
-    public Set<Parameter< ? >> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
-    @Override
-    public void setParameters(Set<Parameter< ? >> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 
-    @Override
     public boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
+        return (getParameters() != null) && !getParameters().isEmpty();
     }
 
     public DatasetEntity getDataset() {
@@ -249,7 +248,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasRelatedObservations() {
-        return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
+        return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
     }
 
     public String getValueIdentifier() {
@@ -261,7 +260,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueIdentifier() {
-        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
+        return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
     }
 
     public String getValueName() {
@@ -273,7 +272,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueName() {
-        return getValueName() != null && !getValueName().isEmpty();
+        return (getValueName() != null) && !getValueName().isEmpty();
     }
 
     public String getValueDescription() {
@@ -285,7 +284,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueDescription() {
-        return getValueDescription() != null && !getValueDescription().isEmpty();
+        return (getValueDescription() != null) && !getValueDescription().isEmpty();
     }
 
     public BigDecimal getVerticalFrom() {
@@ -296,6 +295,10 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.verticalFrom = verticalFrom;
     }
 
+    public boolean hasVerticalFrom() {
+        return getVerticalFrom() != null && getVerticalFrom().compareTo(NOT_SET_VERTICAL) != 0;
+    }
+
     public BigDecimal getVerticalTo() {
         return verticalTo;
     }
@@ -304,25 +307,47 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.verticalTo = verticalTo;
     }
 
-    @Override
-    public int compareTo(DataEntity<T> o) {
-        return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
-                         .thenComparing(DataEntity<T>::getSamplingTimeStart)
-                         .thenComparing(DataEntity<T>::getId)
-                         .compare(this, o);
+    public boolean hasVerticalTo() {
+        return getVerticalTo() != null && getVerticalTo().compareTo(NOT_SET_VERTICAL) != 0;
     }
 
-    @Override
+    public SamplingProfileDataEntity getSamplingProfile() {
+        return samplingProfile;
+    }
+
+    public void setSamplingProfile(SamplingProfileDataEntity samplingProfile) {
+        this.samplingProfile = samplingProfile;
+    }
+
+    public boolean hasSamplingProfile() {
+        return getSamplingProfile() != null;
+    }
+
+    public EReportingProfileDataEntity getEreportingProfile() {
+        return ereportingProfile;
+    }
+
+    public void setEreportingProfile(EReportingProfileDataEntity ereportingProfile) {
+        this.ereportingProfile = ereportingProfile;
+    }
+
+    public boolean hasEreportingProfile() {
+        return getEreportingProfile() != null;
+    }
+
+    public int compareTo(DataEntity<T> o) {
+        return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
+                .thenComparing(DataEntity<T>::getSamplingTimeStart).thenComparing(DataEntity<T>::getId)
+                .compare(this, o);
+    }
+
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = prime * result + ((getId() == null)
-                ? 0
-                : getId().hashCode());
+        result = (prime * result) + ((getId() == null) ? 0 : getId().hashCode());
         return result;
     }
 
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -333,7 +358,7 @@ public abstract class DataEntity<T> extends DescribableEntity
         if (getClass() != obj.getClass()) {
             return false;
         }
-        DataEntity< ? > other = (DataEntity< ? >) obj;
+        DataEntity<?> other = (DataEntity<?>) obj;
         if (getId() == null) {
             if (other.getId() != null) {
                 return false;
@@ -344,14 +369,9 @@ public abstract class DataEntity<T> extends DescribableEntity
         return true;
     }
 
-    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" id: ")
-                 .append(getId())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
+                .toString();
     }
 }

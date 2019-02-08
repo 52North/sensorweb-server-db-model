@@ -16,59 +16,83 @@
  */
 package org.n52.series.db.beans.ereporting;
 
-import java.util.Collection;
-import java.util.Set;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasDataCapture;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasValidation;
+import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasVerification;
 
-import org.n52.series.db.beans.DataEntity;
-import org.n52.series.db.beans.UnitEntity;
-import org.n52.series.db.beans.data.Data.ProfileData;
+public class EReportingProfileDataEntity
+        implements HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
 
-public class EReportingProfileDataEntity extends EReportingDataEntity<Set<DataEntity< ? >>> implements ProfileData {
+    private Integer validation = HasValidation.DEFAULT_VALIDATION;
 
-    private static final long serialVersionUID = -3450153841771781000L;
-    private String verticalfromName;
-    private String verticaltoName;
-    private UnitEntity verticalUnit;
+    private Integer verification = HasVerification.DEFAULT_VERIFICATION;
 
-    @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        return getValue() == null;
+    private String primaryObservation = HasPrimaryObservation.DEFAULT_PRIMARY_OBSERVATION;
+
+    private Boolean timeCoverageFlag;
+
+    private Boolean dataCaptureFlag;
+
+    private Double dataCapture;
+
+    private Double uncertaintyEstimation;
+
+    public Integer getVerification() {
+        return verification;
     }
 
-    @Override
-    public boolean isSetValue() {
-        return getValue() != null;
+    public void setVerification(Integer verification) {
+        this.verification = verification;
     }
 
-    @Override
-    public String getValueAsString() {
-        return isSetValue()
-                ? getValue().toString()
-                : "";
+    public Integer getValidation() {
+        return validation;
     }
 
-    public String getVerticalFromName() {
-        return verticalfromName;
+    public void setValidation(Integer validation) {
+        this.validation = validation;
     }
 
-    public void setVerticalFromName(String name) {
-        this.verticalfromName = name;
+    public String getPrimaryObservation() {
+        return primaryObservation;
     }
 
-    public String getVerticalToName() {
-        return verticaltoName;
+    public void setPrimaryObservation(String primaryObservation) {
+        this.primaryObservation = primaryObservation;
     }
 
-    public void setVerticalToName(String name) {
-        this.verticaltoName = name;
+    public Boolean getDataCaptureFlag() {
+        return this.dataCaptureFlag;
     }
 
-    public UnitEntity getVerticalUnit() {
-        return verticalUnit;
+    public void setDataCaptureFlag(Boolean dataCaptureFlag) {
+        this.dataCaptureFlag = dataCaptureFlag;
     }
 
-    public void setVerticalUnit(UnitEntity unit) {
-        this.verticalUnit = unit;
+    public Double getDataCapture() {
+        return this.dataCapture;
+    }
+
+    public void setDataCapture(Double dataCapture) {
+        this.dataCapture = dataCapture;
+    }
+
+    public Boolean getTimeCoverageFlag() {
+        return this.timeCoverageFlag;
+    }
+
+    public void setTimeCoverageFlag(Boolean timeCoverageFlag) {
+        this.timeCoverageFlag = timeCoverageFlag;
+    }
+
+    public Double getUncertaintyEstimation() {
+        return this.uncertaintyEstimation;
+    }
+
+    public void setUncertaintyEstimation(Double uncertaintyEstimation) {
+        this.uncertaintyEstimation = uncertaintyEstimation;
     }
 
 }
