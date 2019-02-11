@@ -12,9 +12,14 @@
                 <param name="sequence_name">value_profile_seq</param>
             </generator>
         </id>
-        <property name="orientation" type="string">
+        <property name="orientation" type="integer">
             <column name="orientation" not-null="false">
-                <comment>The "orientation" of the vertical values, e.g. depth or height</comment>
+                <comment>The "orientation" of the vertical values as integer. 1 => above verticalOriginName and -1 => below verticalOriginName</comment>
+            </column>
+        </property>
+        <property name="verticalOriginName" type="string">
+            <column name="vertical_origin_name" not-null="false">
+                <comment>The vertical origin name of the vertical values, e.g. water surface</comment>
             </column>
         </property>
         <property name="verticalFromName" type="string">
@@ -57,9 +62,9 @@
                 <comment>Locale/language specification for this entry</comment>
             </column>
         </property>
-        <property name="orientation" type="string">
-            <column name="orientation">
-                <comment>Locale/language specific orientation of the vertical metadata entity</comment>
+        <property name="verticalOriginName" type="string">
+            <column name="vertical_origin_name" not-null="false">
+                <comment>Locale/language specific vertical origin name of the vertical metadata entity</comment>
             </column>
         </property>
         <property name="verticalFromName" type="string">
