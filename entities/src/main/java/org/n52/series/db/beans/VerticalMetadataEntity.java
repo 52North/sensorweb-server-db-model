@@ -23,18 +23,39 @@ import org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity;
 public class VerticalMetadataEntity extends IdEntity {
 
     private static final long serialVersionUID = 3156288491348980598L;
-    private String orientation;
+    private Integer orientation;
+    private String verticalOriginName;
     private String verticalfromName;
     private String verticaltoName;
     private UnitEntity verticalUnit;
     private Set<I18nVerticalMetadataEntity> translations;
 
-    public String getOrientation() {
+    public Integer getOrientation() {
         return orientation;
     }
 
-    public void setOrientation(String orientation) {
+    public void setOrientation(Integer orientation) {
         this.orientation = orientation;
+    }
+
+    public boolean isSetOrientation() {
+        return orientation != null;
+    }
+
+    public boolean isAboveVerticalOrigin() {
+        return isSetOrientation() && getOrientation() >= 1;
+    }
+
+    public boolean isBelowVerticalOrigin() {
+        return isSetOrientation() && getOrientation() <= -1;
+    }
+
+    public String getVerticalOriginName() {
+        return verticalOriginName;
+    }
+
+    public void setVerticalOriginName(String name) {
+        this.verticalOriginName = name;
     }
 
     public String getVerticalFromName() {

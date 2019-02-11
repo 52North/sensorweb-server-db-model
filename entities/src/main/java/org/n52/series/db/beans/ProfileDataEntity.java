@@ -53,12 +53,20 @@ public class ProfileDataEntity extends CompositeDataEntity {
         super.setValue(value);
     }
 
-    public String getOrientation() {
+    public Integer getOrientation() {
         return hasVerticalMetadata() ? getVerticalMetadata().getOrientation() : null;
     }
 
-    public void setOrientation(String orientation) {
+    public void setOrientation(Integer orientation) {
         checkAndGetVerticalMetadata().setOrientation(orientation);
+    }
+
+    public String getVerticalOriginName() {
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalOriginName() : null;
+    }
+
+    public void setVerticalOriginName(String name) {
+        checkAndGetVerticalMetadata().setVerticalOriginName(name);
     }
 
     private VerticalMetadataEntity checkAndGetVerticalMetadata() {
