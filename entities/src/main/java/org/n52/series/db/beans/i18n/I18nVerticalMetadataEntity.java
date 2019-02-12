@@ -22,16 +22,16 @@ public class I18nVerticalMetadataEntity extends AbstractI18nEntity<VerticalMetad
 
     private static final long serialVersionUID = 329570776993990200L;
 
-    private String orientation;
+    private String verticalOriginName;
     private String verticalfromName;
     private String verticaltoName;
 
-    public String getOrientation() {
-        return orientation;
+    public String getverticalOriginName() {
+        return verticalOriginName;
     }
 
-    public void setOrientation(String orientation) {
-        this.orientation = orientation;
+    public void setVerticalOriginName(String name) {
+        this.verticalOriginName = name;
     }
 
     public String getVerticalFromName() {
