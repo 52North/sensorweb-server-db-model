@@ -84,7 +84,7 @@
                 <param name="sequence_name">measuring_program_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="MeasuringProgramEntity" foreign-key="fk_measuring_program">
+        <many-to-one name="entity" class="MeasuringProgramEntity" foreign-key="fk_measuring_program_i18n">
             <column name="fk_measuring_program_id" not-null="true">
                 <comment>Reference to the measuring program table this internationalization belongs to.</comment>
             </column>

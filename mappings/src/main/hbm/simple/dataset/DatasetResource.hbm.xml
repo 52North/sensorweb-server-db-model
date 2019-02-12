@@ -218,7 +218,7 @@
                 <param name="sequence_name">dataset_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="DatasetEntity" foreign-key="fk_dataset">
+        <many-to-one name="entity" class="DatasetEntity" foreign-key="fk_dataset_i18n">
             <column name="fk_dataset_id" not-null="true">
                 <comment>Reference to the dataset table this internationalization belongs to.</comment>
             </column>
