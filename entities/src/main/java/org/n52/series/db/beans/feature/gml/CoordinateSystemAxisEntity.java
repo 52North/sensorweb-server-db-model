@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature.gml;
 
 import org.n52.series.db.beans.CodespaceEntity;
@@ -53,7 +52,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param remarks
-     *        the remarks to set
+     *            the remarks to set
      */
     @Override
     public CoordinateSystemAxisEntity setRemarks(String remarks) {
@@ -70,7 +69,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param axisAbbrev
-     *        the axisAbbrev to set
+     *            the axisAbbrev to set
      */
     public void setAxisAbbrev(String axisAbbrev) {
         this.axisAbbrev = axisAbbrev;
@@ -85,7 +84,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param codespaceAxisAbbrev
-     *        the codespaceAxisAbbrev to set
+     *            the codespaceAxisAbbrev to set
      */
     public void setCodespaceAxisAbbrev(CodespaceEntity codespaceAxisAbbrev) {
         this.codespaceAxisAbbrev = codespaceAxisAbbrev;
@@ -104,7 +103,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param axisDirection
-     *        the axisDirection to set
+     *            the axisDirection to set
      */
     public void setAxisDirection(String axisDirection) {
         this.axisDirection = axisDirection;
@@ -119,7 +118,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param codespaceAxisDirection
-     *        the codespaceAxisDirection to set
+     *            the codespaceAxisDirection to set
      */
     public void setCodespaceAxisDirection(CodespaceEntity codespaceAxisDirection) {
         this.codespaceAxisDirection = codespaceAxisDirection;
@@ -138,7 +137,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param minimumValue
-     *        the minimumValue to set
+     *            the minimumValue to set
      */
     public void setMinimumValue(double minimumValue) {
         this.minimumValue = minimumValue;
@@ -157,7 +156,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param maximumValue
-     *        the maximumValue to set
+     *            the maximumValue to set
      */
     public void setMaximumValue(double maximumValue) {
         this.maximumValue = maximumValue;
@@ -176,7 +175,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param rangeMeaning
-     *        the rangeMeaning to set
+     *            the rangeMeaning to set
      */
     public void setRangeMeaning(String rangeMeaning) {
         this.rangeMeaning = rangeMeaning;
@@ -195,7 +194,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param codespaceRangeMeaning
-     *        the codespaceRangeMeaning to set
+     *            the codespaceRangeMeaning to set
      */
     public void setCodespaceRangeMeaning(CodespaceEntity codespaceRangeMeaning) {
         this.codespaceRangeMeaning = codespaceRangeMeaning;
@@ -214,7 +213,7 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
 
     /**
      * @param uom
-     *        the uom to set
+     *            the uom to set
      */
     public void setUom(UnitEntity uom) {
         this.uom = uom;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature.gmd;
 
 import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
@@ -44,7 +43,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param minimumValue
-     *        the minimumValue to set
+     *            the minimumValue to set
      */
     public void setMinimumValue(Double minimumValue) {
         this.minimumValue = minimumValue;
@@ -63,7 +62,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param minValuNilReason
-     *        the minValuNilReason to set
+     *            the minValuNilReason to set
      */
     public void setMinValuNilReason(String minValuNilReason) {
         this.minValuNilReason = minValuNilReason;
@@ -82,7 +81,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param maximumValue
-     *        the maximumValue to set
+     *            the maximumValue to set
      */
     public void setMaximumValue(Double maximumValue) {
         this.maximumValue = maximumValue;
@@ -101,7 +100,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param maxValuNilReason
-     *        the maxValuNilReason to set
+     *            the maxValuNilReason to set
      */
     public void setMaxValuNilReason(String maxValuNilReason) {
         this.maxValuNilReason = maxValuNilReason;
@@ -120,7 +119,7 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     /**
      * @param verticalCRS
-     *        the verticalCRS to set
+     *            the verticalCRS to set
      */
     public void setVerticalCRS(VerticalCRSEntity verticalCRS) {
         this.verticalCRS = verticalCRS;

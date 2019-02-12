@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -23,10 +22,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.i18n.I18nEntity;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
-public class DescribableEntity extends IdEntity implements Describable,
-        Serializable {
+public class DescribableEntity extends IdEntity implements Describable, Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
     public static final String PROPERTY_IDENTIFIER_CODESPACE = IDENTIFIER_CODESPACE;
@@ -62,9 +60,9 @@ public class DescribableEntity extends IdEntity implements Describable,
 
     private ServiceEntity service;
 
-    private Set<I18nEntity< ? extends Describable>> translations;
+    private Set<I18nEntity<? extends Describable>> translations;
 
-    private Set<Parameter< ? >> parameters;
+    private Set<ParameterEntity<?>> parameters;
 
     @Override
     public String getIdentifier() {
@@ -116,23 +114,19 @@ public class DescribableEntity extends IdEntity implements Describable,
         this.description = description;
     }
 
-    @Override
-    public Set<I18nEntity< ? extends Describable>> getTranslations() {
+    public Set<I18nEntity<? extends Describable>> getTranslations() {
         return translations;
     }
 
-    @Override
-    public void setTranslations(Set<I18nEntity< ? extends Describable>> translations) {
+    public void setTranslations(Set<I18nEntity<? extends Describable>> translations) {
         this.translations = translations;
     }
 
-    @Override
-    public Set<Parameter< ? >> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
-    @Override
-    public void setParameters(Set<Parameter< ? >> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 
@@ -143,11 +137,7 @@ public class DescribableEntity extends IdEntity implements Describable,
 
     @Override
     public Set<Map<String, Object>> getMappedParameters(String locale) {
-        return hasParameters()
-                ? parameters.stream()
-                            .map(e -> e.toValueMap(locale))
-                            .collect(Collectors.toSet())
-                : null;
+        return hasParameters() ? parameters.stream().map(e -> e.toValueMap(locale)).collect(Collectors.toSet()) : null;
     }
 
     @Override
@@ -168,7 +158,7 @@ public class DescribableEntity extends IdEntity implements Describable,
         }
         String candidate = name;
         String countryCode = getCountryCode(locale);
-        for (I18nEntity< ? extends Describable> translation : translations) {
+        for (I18nEntity<? extends Describable> translation : translations) {
             String translatedLocale = translation.getLocale();
             if (translatedLocale.equals(locale)) {
                 // locale matches exactly
@@ -196,39 +186,33 @@ public class DescribableEntity extends IdEntity implements Describable,
         }
     }
 
-    //    private boolean isNameAvailable() {
-    //        return getName() != null && !getName().isEmpty();
-    //    }
+    // private boolean isNameAvailable() {
+    // return getName() != null && !getName().isEmpty();
+    // }
     //
-    //    private boolean isDomainAvailable() {
-    //        return getDomain() != null && !getDomain().isEmpty();
-    //    }
+    // private boolean isDomainAvailable() {
+    // return getDomain() != null && !getDomain().isEmpty();
+    // }
     //
-    //    private boolean isi18nNameAvailable(String locale) {
-    //        return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
-    //    }
+    // private boolean isi18nNameAvailable(String locale) {
+    // return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
+    // }
     //
-    //    private boolean noTranslationAvailable(String locale) {
-    //        return translations == null
-    //                || locale == null
-    //                || translations.isEmpty()
-    //                || locale.isEmpty();
-    //    }
+    // private boolean noTranslationAvailable(String locale) {
+    // return translations == null
+    // || locale == null
+    // || translations.isEmpty()
+    // || locale.isEmpty();
+    // }
     //
-    //    private String getCountryCode(String locale) {
-    //        return locale.split("_")[0];
-    //    }
+    // private String getCountryCode(String locale) {
+    // return locale.split("_")[0];
+    // }
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" Domain id: ")
-                 .append(getDomain())
-                 .append(", service: ")
-                 .append(getService())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" Domain id: ").append(getDomain())
+                .append(", service: ").append(getService()).append(" ]").toString();
     }
 }

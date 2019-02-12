@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.hibernate.spatial.dialect.postgis;
 
 import java.sql.Types;
@@ -46,23 +45,14 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         Iterator<Column> columns = index.getColumnIterator();
         java.util.Map<Column, String> columnOrderMap = new HashMap<Column, String>();
 
-        StringBuilder buf = new StringBuilder("create")
-                                                       .append(" index ")
-                                                       .append(this.qualifyIndexName()
-                                                               ? name
-                                                               : StringHelper.unqualify(name))
-                                                       .append(" on ")
-                                                       .append(table.getQualifiedName(this,
-                                                                                      defaultCatalog,
-                                                                                      defaultSchema))
-                                                       .append(" USING GIST")
-                                                       .append(" (");
+        StringBuilder buf = new StringBuilder("create").append(" index ")
+                .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
+                .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST").append(" (");
         while (columns.hasNext()) {
             Column column = columns.next();
             buf.append(column.getQuotedName(this));
             if (columnOrderMap.containsKey(column)) {
-                buf.append(" ")
-                   .append(columnOrderMap.get(column));
+                buf.append(" ").append(columnOrderMap.get(column));
             }
             if (columns.hasNext()) {
                 buf.append(", ");

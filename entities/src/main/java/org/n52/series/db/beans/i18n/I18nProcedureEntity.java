@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.i18n;
 
 import org.n52.series.db.beans.ProcedureEntity;
@@ -23,5 +22,31 @@ public class I18nProcedureEntity extends I18nEntity<ProcedureEntity> {
 
     private static final long serialVersionUID = -7990237043788544558L;
 
-    // serves for clear distinction
+    private String shortName;
+
+    private String longName;
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public void setShortName(String shortName) {
+        this.shortName = shortName;
+    }
+
+    public String getLongName() {
+        return longName;
+    }
+
+    public void setLongName(String longName) {
+        this.longName = longName;
+    }
+
+    public boolean hasLongName() {
+        return getLongName() != null && !getLongName().isEmpty();
+    }
+
+    public boolean hasShortName() {
+        return getShortName() != null && !getShortName().isEmpty();
+    }
 }

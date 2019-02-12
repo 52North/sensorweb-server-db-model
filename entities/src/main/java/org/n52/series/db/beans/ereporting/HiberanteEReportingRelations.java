@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +14,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.HibernateRelations;
-import org.n52.series.db.beans.data.Data;
 
-public interface HiberanteEReportingRelations
-        extends
-        HibernateRelations {
+public interface HiberanteEReportingRelations extends HibernateRelations {
 
     interface HasEReportingSamplingPoint {
         String SAMPLING_POINT = "samplingPoint";
@@ -141,23 +137,7 @@ public interface HiberanteEReportingRelations
         }
     }
 
-    interface EReportingQualityData
-            extends
-            HasTimeCoverageFlag,
-            HasDataCaptureFlag,
-            HasUncertaintyEstimation {
-
-    }
-
-    interface EReportingData<T>
-            extends
-            Data<T>,
-            HasValidation,
-            HasVerification,
-            HasPrimaryObservation,
-            HasDataCapture,
-            EReportingQualityData,
-            GetStringValue {
+    interface EReportingQualityData extends HasTimeCoverageFlag, HasDataCaptureFlag, HasUncertaintyEstimation {
 
     }
 

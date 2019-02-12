@@ -121,7 +121,6 @@
         <dependency>
             <groupId>org.geolatte</groupId>
             <artifactId>geolatte-geom</artifactId>
-            <version>1.3.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -133,11 +132,6 @@
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.vividsolutions</groupId>
-            <artifactId>jts-core</artifactId>
             <scope>provided</scope>
         </dependency>
 

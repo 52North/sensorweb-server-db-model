@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature;
 
 import org.n52.series.db.beans.DescribableEntity;
@@ -22,7 +21,6 @@ import org.n52.series.db.beans.DescribableEntity;
 /**
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
- *
  */
 public abstract class NilReasonEntity extends DescribableEntity {
 
@@ -38,7 +36,8 @@ public abstract class NilReasonEntity extends DescribableEntity {
     }
 
     /**
-     * @param nilReason the nilReason to set
+     * @param nilReason
+     *            the nilReason to set
      */
     public void setNilReason(String nilReason) {
         this.nilReason = nilReason;

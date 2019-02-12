@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,13 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.util.Collection;
 import java.util.Set;
 
-public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity< ? >>> {
+public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity<?>>> {
 
     private static final long serialVersionUID = -2942122854792122664L;
 
@@ -28,18 +27,6 @@ public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity< ? >
     public boolean isNoDataValue(Collection<String> noDataValues) {
         // TODO Auto-generated method stub
         return false;
-    }
-
-    @Override
-    public Set<DataEntity< ? >> getValue() {
-        // Hibernate needs this to keep types during hbm2ddl processing
-        return super.getValue();
-    }
-
-    @Override
-    public void setValue(Set<DataEntity< ? >> value) {
-        // Hibernate needs this to keep types during hbm2ddl processing
-        super.setValue(value);
     }
 
 }

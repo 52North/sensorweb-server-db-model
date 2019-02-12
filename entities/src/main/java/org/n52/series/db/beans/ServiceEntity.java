@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import org.n52.series.db.beans.data.Data;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -61,15 +59,14 @@ public class ServiceEntity extends DescribableEntity {
         this.type = type;
     }
 
-    public boolean isNoDataValue(Data< ? > observation) {
+    public boolean isNoDataValue(DataEntity<?> observation) {
         return (observation == null) || observation.isNoDataValue(noDataValues);
     }
 
     public String getNoDataValues() {
         // XXX make parsing more robust
         final String csv = Arrays.toString(noDataValues.toArray(new Double[0]));
-        return csv.substring(1)
-                  .substring(0, csv.length() - 2);
+        return csv.substring(1).substring(0, csv.length() - 2);
     }
 
     public void setNoDataValues(final String noDataValues) {
@@ -101,18 +98,9 @@ public class ServiceEntity extends DescribableEntity {
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" url: ")
-                 .append(getUrl())
-                 .append(", type: ")
-                 .append(getType())
-                 .append(", version: ")
-                 .append(getVersion())
-                 .append(", noDataValues: ")
-                 .append(getNoDataValues())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" url: ").append(getUrl()).append(", type: ")
+                .append(getType()).append(", version: ").append(getVersion()).append(", noDataValues: ")
+                .append(getNoDataValues()).append(" ]").toString();
     }
 
 }

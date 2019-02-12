@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.common;
 
 import java.sql.Timestamp;
@@ -26,8 +25,7 @@ public final class Utils {
         if (value == null) {
             return null;
         }
-        return !(value instanceof Timestamp)
-                ? new Timestamp(value.getTime())
+        return !(value instanceof Timestamp) ? new Timestamp(value.getTime())
                 // keeps nano seconds if available
                 : Timestamp.class.cast(value);
     }

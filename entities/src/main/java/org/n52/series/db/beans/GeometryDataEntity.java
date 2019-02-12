@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,21 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.util.Collection;
 
-import org.n52.series.db.beans.data.Data.GeometryData;
-
-public class GeometryDataEntity extends DataEntity<GeometryEntity> implements GeometryData {
+public class GeometryDataEntity extends DataEntity<GeometryEntity> {
 
     private static final long serialVersionUID = 3759168838980730712L;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         GeometryEntity value = getValue();
-        return value == null
-                || value.isEmpty();
+        return value == null || value.isEmpty();
     }
 }

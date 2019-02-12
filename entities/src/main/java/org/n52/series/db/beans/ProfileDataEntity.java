@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,49 +14,95 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.data.Data.ProfileData;
+import java.util.Set;
 
-public class ProfileDataEntity extends CompositeDataEntity implements ProfileData {
+public class ProfileDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -7431276500677067329L;
 
-    private String verticalfromName;
+    private VerticalMetadataEntity verticalMetadata;
 
-    private String verticaltoName;
+    public VerticalMetadataEntity getVerticalMetadata() {
+        if (!hasVerticalMetadataLocal() && getDataset().hasVerticalMetadata()) {
+            return getDataset().getVerticalMetadata();
+        }
+        return verticalMetadata;
+    }
 
-    private UnitEntity verticalUnit;
+    public void setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
+        this.verticalMetadata = verticalMetadata;
+    }
+
+    private boolean hasVerticalMetadataLocal() {
+        return verticalMetadata != null;
+    }
+
+    public boolean hasVerticalMetadata() {
+        return hasVerticalMetadataLocal() || getDataset().hasVerticalMetadata();
+    }
 
     @Override
+    public Set<DataEntity<?>> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity<?>> value) {
+        super.setValue(value);
+    }
+
+    public Integer getOrientation() {
+        return hasVerticalMetadata() ? getVerticalMetadata().getOrientation() : null;
+    }
+
+    public void setOrientation(Integer orientation) {
+        checkAndGetVerticalMetadata().setOrientation(orientation);
+    }
+
+    public String getVerticalOriginName() {
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalOriginName() : null;
+    }
+
+    public void setVerticalOriginName(String name) {
+        checkAndGetVerticalMetadata().setVerticalOriginName(name);
+    }
+
+    private VerticalMetadataEntity checkAndGetVerticalMetadata() {
+        if (hasVerticalMetadata()) {
+            setVerticalMetadata(new VerticalMetadataEntity());
+        }
+        return getVerticalMetadata();
+
+    }
+
     public String getVerticalFromName() {
-        return verticalfromName;
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalFromName() : null;
     }
 
-    @Override
     public void setVerticalFromName(String name) {
-        this.verticalfromName = name;
+        checkAndGetVerticalMetadata().setVerticalFromName(name);
     }
 
-    @Override
     public String getVerticalToName() {
-        return verticaltoName;
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalToName() : null;
     }
 
-    @Override
     public void setVerticalToName(String name) {
-        this.verticaltoName = name;
+        checkAndGetVerticalMetadata().setVerticalToName(name);
     }
 
-    @Override
     public UnitEntity getVerticalUnit() {
-        return verticalUnit;
+        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalUnit() : null;
     }
 
-    @Override
     public void setVerticalUnit(UnitEntity verticalUnit) {
-        this.verticalUnit = verticalUnit;
+        checkAndGetVerticalMetadata().setVerticalUnit(verticalUnit);
+    }
+
+    public boolean hasVerticalUnit() {
+        return getVerticalUnit() != null && getVerticalUnit().isSetIdentifier();
     }
 
 }

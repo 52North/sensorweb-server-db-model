@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature.gml;
 
 import java.util.Set;
@@ -46,7 +45,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
 
     /**
      * @param remarks
-     *        the remarks to set
+     *            the remarks to set
      */
     @Override
     public VerticalCSEntity setRemarks(String remarks) {
@@ -63,7 +62,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
 
     /**
      * @param coordinateSystemAxis
-     *        the coordinateSystemAxis to set
+     *            the coordinateSystemAxis to set
      */
     public void setCoordinateSystemAxis(Set<CoordinateSystemAxisEntity> coordinateSystemAxis) {
         this.coordinateSystemAxis = coordinateSystemAxis;
@@ -82,7 +81,7 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
 
     /**
      * @param aggregation
-     *        the aggregation to set
+     *            the aggregation to set
      */
     public void setAggregation(String aggregation) {
         this.aggregation = aggregation;

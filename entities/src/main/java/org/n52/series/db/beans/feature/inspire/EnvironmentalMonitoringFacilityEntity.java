@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature.inspire;
 
 import org.n52.series.db.beans.FeatureEntity;
@@ -37,7 +36,8 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     }
 
     /**
-     * @param mediaMonitored the mediaMonitored to set
+     * @param mediaMonitored
+     *            the mediaMonitored to set
      */
     public void setMediaMonitored(MediaMonitored mediaMonitored) {
         this.mediaMonitored = mediaMonitored;
@@ -51,7 +51,8 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     }
 
     /**
-     * @param measurementRegime the measurementRegime to set
+     * @param measurementRegime
+     *            the measurementRegime to set
      */
     public void setMeasurementRegime(String measurementRegime) {
         this.measurementRegime = measurementRegime;
@@ -65,7 +66,8 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
     }
 
     /**
-     * @param mobile the mobile to set
+     * @param mobile
+     *            the mobile to set
      */
     public void setMobile(boolean mobile) {
         this.mobile = mobile;

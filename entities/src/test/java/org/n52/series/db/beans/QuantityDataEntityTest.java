@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import static org.junit.Assert.assertTrue;
@@ -29,10 +28,7 @@ public class QuantityDataEntityTest {
 
     @Test
     public void when_noDataCollectionContainsValue_then_detectNoDataValue() {
-        Collection<String> noDataValues = Arrays.asList(new String[] {
-            "9999",
-            "-9999.9"
-        });
+        Collection<String> noDataValues = Arrays.asList(new String[] { "9999", "-9999.9" });
         QuantityDataEntity entity = new QuantityDataEntity();
         entity.setValue(BigDecimal.valueOf(9999d));
         assertTrue(entity.isNoDataValue(noDataValues));

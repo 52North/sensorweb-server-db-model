@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.util.Set;
@@ -25,8 +24,6 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         implements HasProcedureHistory, HasProcedureDescriptionFormat<ProcedureEntity> {
 
-    public static final String PROPERTY_MOBILE = "mobile";
-    public static final String PROPERTY_INSITU = "insitu";
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "format";

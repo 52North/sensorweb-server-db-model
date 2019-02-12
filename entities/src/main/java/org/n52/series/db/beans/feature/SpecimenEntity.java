@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature;
 
 import java.util.Date;
@@ -44,7 +43,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param materialClass the materialClass to set
+     * @param materialClass
+     *            the materialClass to set
      */
     public void setMaterialClass(String materialClass) {
         this.materialClass = materialClass;
@@ -58,7 +58,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param samplingTimeStart the samplingTimeStart to set
+     * @param samplingTimeStart
+     *            the samplingTimeStart to set
      */
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
@@ -72,7 +73,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param samplingTimeEnd the samplingTimeEnd to set
+     * @param samplingTimeEnd
+     *            the samplingTimeEnd to set
      */
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
@@ -86,7 +88,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param samplingMethod the samplingMethod to set
+     * @param samplingMethod
+     *            the samplingMethod to set
      */
     public void setSamplingMethod(String samplingMethod) {
         this.samplingMethod = samplingMethod;
@@ -104,7 +107,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param size the size to set
+     * @param size
+     *            the size to set
      */
     public void setSize(Double size) {
         this.size = size;
@@ -134,7 +138,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param currentLocation the currentLocation to set
+     * @param currentLocation
+     *            the currentLocation to set
      */
     public void setCurrentLocation(String currentLocation) {
         this.currentLocation = currentLocation;
@@ -152,7 +157,8 @@ public class SpecimenEntity extends FeatureEntity {
     }
 
     /**
-     * @param specimenType the specimenType to set
+     * @param specimenType
+     *            the specimenType to set
      */
     public void setSpecimenType(String specimenType) {
         this.specimenType = specimenType;
