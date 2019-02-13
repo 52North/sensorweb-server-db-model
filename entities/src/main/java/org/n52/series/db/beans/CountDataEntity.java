@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.n52.series.db.beans.data.Data.CountData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CountDataEntity extends DataEntity<Integer> implements CountData {
+public class CountDataEntity extends DataEntity<Integer> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountDataEntity.class);
 
@@ -34,8 +32,7 @@ public class CountDataEntity extends DataEntity<Integer> implements CountData {
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         Integer value = getValue();
-        return value == null
-                || containsValue(noDataValues, value);
+        return value == null || containsValue(noDataValues, value);
     }
 
     private boolean containsValue(Collection<String> collection, Integer value) {

@@ -68,9 +68,8 @@ public abstract class AbstractDomainExporter {
 
     private final Map<Class< ? >, SerializerConfig> typeToConfig = Maps.newHashMap();
 
-    private final Set<EntityType> serialized = new HashSet<EntityType>();
+    private final Set<EntityType> serialized = new HashSet<>();
 
-    @SuppressWarnings("unchecked")
     protected final TypeFactory typeFactory = new TypeFactory(Arrays.asList(Entity.class,
                                                                             javax.persistence.MappedSuperclass.class,
                                                                             Embeddable.class));
@@ -89,7 +88,7 @@ public abstract class AbstractDomainExporter {
 
     private final Charset charset;
 
-    private final Set<File> generatedFiles = new HashSet<File>();
+    private final Set<File> generatedFiles = new HashSet<>();
 
     private Function<EntityType, String> variableNameFunction;
 
@@ -117,7 +116,7 @@ public abstract class AbstractDomainExporter {
     /**
      * Export the contents
      *
-     * @throws IOException
+     * @throws IOException if execution fails
      */
     public void execute() throws IOException {
         // collect types
@@ -144,7 +143,7 @@ public abstract class AbstractDomainExporter {
         }
 
         // merge supertype fields into subtypes
-        Set<EntityType> handled = new HashSet<EntityType>();
+        Set<EntityType> handled = new HashSet<>();
         for (EntityType type : superTypes.values()) {
             addSupertypeFields(type, allTypes, handled);
         }

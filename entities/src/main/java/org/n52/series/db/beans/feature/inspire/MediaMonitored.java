@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.feature.inspire;
 
 import java.io.Serializable;
@@ -43,7 +42,8 @@ public class MediaMonitored implements Serializable {
     }
 
     /**
-     * @param mediaMonitored the mediaMonitored to set
+     * @param mediaMonitored
+     *            the mediaMonitored to set
      */
     public void setMediaMonitored(Set<String> mediaMonitored) {
         this.mediaMonitored = mediaMonitored;

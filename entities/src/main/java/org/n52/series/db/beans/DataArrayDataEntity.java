@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,18 +14,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.data.Data.DataArrayData;
+import java.util.Set;
 
-public class DataArrayDataEntity extends CompositeDataEntity implements DataArrayData {
+public class DataArrayDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -1618516259763515255L;
 
     private String structure;
 
     private String encoding;
+
+    @Override
+    public Set<DataEntity<?>> getValue() {
+        return super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<DataEntity<?>> value) {
+        super.setValue(value);
+    }
 
     /**
      * @return the structure
@@ -35,7 +44,8 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
     }
 
     /**
-     * @param structure the structure to set
+     * @param structure
+     *            the structure to set
      */
     public void setStructure(String structure) {
         this.structure = structure;
@@ -49,7 +59,8 @@ public class DataArrayDataEntity extends CompositeDataEntity implements DataArra
     }
 
     /**
-     * @param encoding the encoding to set
+     * @param encoding
+     *            the encoding to set
      */
     public void setEncoding(String encoding) {
         this.encoding = encoding;

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.IdEntity;
@@ -54,7 +53,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     /**
      * @param dataset
-     *        the dataset to set
+     *            the dataset to set
      */
     public void setDataset(long dataset) {
         this.dataset = dataset;
@@ -69,7 +68,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     /**
      * @param year
-     *        the year to set
+     *            the year to set
      */
     public void setYear(int year) {
         this.year = year;
@@ -84,7 +83,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     /**
      * @param series
-     *        the series to set
+     *            the series to set
      */
     public void setSeries(long series) {
         this.series = series;

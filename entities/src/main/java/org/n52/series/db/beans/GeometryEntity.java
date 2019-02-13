@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,15 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-import com.vividsolutions.jts.geom.Coordinate;
-import com.vividsolutions.jts.geom.Geometry;
-import com.vividsolutions.jts.geom.GeometryFactory;
-import com.vividsolutions.jts.geom.PrecisionModel;
+import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Geometry;
+import org.locationtech.jts.geom.GeometryFactory;
 
 public class GeometryEntity implements Serializable {
 
@@ -35,6 +33,8 @@ public class GeometryEntity implements Serializable {
     private static final long serialVersionUID = -1411829809704409439L;
 
     private static final int DEFAULT_SRID = 4326;
+
+    private GeometryFactory geometryFactory;
 
     private Geometry geometry;
 
@@ -55,40 +55,20 @@ public class GeometryEntity implements Serializable {
     }
 
     /**
-     * Returns the {@link Geometry} or creates a {@link Geometry} with the given srid in case of geometry has
-     * been set via lat/lon.
+     * Returns the {@link Geometry} or creates a {@link Geometry} with the given
+     * srid in case of geometry has been set via lat/lon.
      *
      * @return the geometry or a created geometry (with given srid)
      */
     public Geometry getGeometry() {
-        return getGeometry(createDefaultGeometryFactory());
-    }
-
-    /**
-     * Returns the {@link Geometry} or creates a {@link Geometry} with the given srid in case of geometry has
-     * been set via lat/lon.
-     *
-     * @param geometryFactory
-     *        the geometry factory to create points from lat/lon
-     * @return the geometry or a created geometry (with given srid)
-     */
-    public Geometry getGeometry(final GeometryFactory geometryFactory) {
-        final Geometry builtGeometry = isSetLonLat()
-                ? createPoint(geometryFactory)
-                : geometry;
+        Geometry builtGeometry = isSetLonLat() ? createPoint() : geometry;
         return builtGeometry;
     }
 
-    private GeometryFactory createDefaultGeometryFactory() {
-        final PrecisionModel pm = new PrecisionModel(PrecisionModel.FLOATING);
-        return new GeometryFactory(pm, DEFAULT_SRID);
-    }
-
-    private Geometry createPoint(final GeometryFactory geometryFactory) {
-        final Coordinate coordinate = (alt != null) && !alt.isNaN()
-                ? new Coordinate(lon, lat, alt)
+    private Geometry createPoint() {
+        Coordinate coordinate = (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt)
                 : new Coordinate(lon, lat);
-        return geometryFactory.createPoint(coordinate);
+        return getGeometryFactory().createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
@@ -132,17 +112,19 @@ public class GeometryEntity implements Serializable {
         return !isSetGeometry() && !isSetLonLat();
     }
 
+    public GeometryFactory getGeometryFactory() {
+        return geometryFactory;
+    }
+
+    public void setGeometryFactory(GeometryFactory geometryFactory) {
+        this.geometryFactory = geometryFactory;
+    }
+
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" latitude: ")
-                 .append(getLat())
-                 .append(", longitude: ")
-                 .append(getLon())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" latitude: ").append(getLat())
+                .append(", longitude: ").append(getLon()).append(" ]").toString();
     }
 
 }

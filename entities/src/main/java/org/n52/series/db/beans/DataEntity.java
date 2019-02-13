@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -25,12 +24,12 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.data.Data;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity
-        implements Comparable<DataEntity<T>>, Serializable, Data<T> {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
 
     public static final String PROPERTY_ID = "id";
 
@@ -54,11 +53,15 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
 
-    public static final String PROPERTY_CHILD = "child";
-
     public static final String PROPERTY_VALUE = "value";
 
     public static final String PROPERTY_PARAMETERS = "parameters";
+
+    public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
+
+    public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
+
+    public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
 
     private static final long serialVersionUID = 273612846605300612L;
 
@@ -78,13 +81,11 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private Date resultTime;
 
-    private boolean parent;
-
-    private boolean child;
+    private Long parent;
 
     private DatasetEntity dataset;
 
-    private Set<Parameter< ? >> parameters = new HashSet<>(0);
+    private Set<ParameterEntity<?>> parameters = new HashSet<>(0);
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -98,6 +99,10 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private BigDecimal verticalTo = NOT_SET_VERTICAL;
 
+    private SamplingProfileDataEntity samplingProfile;
+
+    private EReportingProfileDataEntity ereportingProfile;
+
     protected DataEntity() {
 
     }
@@ -105,152 +110,122 @@ public abstract class DataEntity<T> extends DescribableEntity
     /**
      * @return the samplingTimeStart
      */
-    @Override
+
     public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @param samplingTimeStart
-     *        the samplingTimeStart
+     *            the samplingTimeStart
      */
-    @Override
-    public void setSamplingTimeStart(final Date samplingTimeStart) {
+
+    public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
     /**
      * @return the samplingTimeEnd
      */
-    @Override
+
     public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /**
      * @param samplingTimeEnd
-     *        the samplingTimeEnd
+     *            the samplingTimeEnd
      */
-    @Override
-    public void setSamplingTimeEnd(final Date samplingTimeEnd) {
+
+    public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
-    @Override
     public T getValue() {
         return value;
     }
 
-    @Override
     public void setValue(final T value) {
         this.value = value;
     }
 
-    @Override
     public boolean hasValue() {
         return getValue() != null;
     }
 
-    @Override
     public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
-    @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
     }
 
-    @Override
     public void setGeometryEntity(final GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
     }
 
-    @Override
     public boolean isSetGeometryEntity() {
         return (geometryEntity != null) && !geometryEntity.isEmpty();
     }
 
-    @Override
     public boolean getDeleted() {
         return deleted;
     }
 
-    @Override
     public void setDeleted(final boolean deleted) {
         this.deleted = deleted;
     }
 
-    @Override
     public Date getValidTimeStart() {
         return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
-    @Override
     public void setValidTimeStart(final Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
     }
 
-    @Override
     public Date getValidTimeEnd() {
         return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
-    @Override
     public void setValidTimeEnd(final Date validTimeEnd) {
         this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
-    @Override
     public boolean isSetValidTime() {
         return isSetValidStartTime() && isSetValidEndTime();
     }
 
-    @Override
     public boolean isSetValidStartTime() {
         return validTimeStart != null;
     }
 
-    @Override
     public boolean isSetValidEndTime() {
         return validTimeEnd != null;
     }
 
-    @Override
     public Date getResultTime() {
         return Utils.createUnmutableTimestamp(resultTime);
     }
 
-    @Override
     public void setResultTime(final Date resultTime) {
         this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
-    @Override
-    public boolean isParent() {
+    public Long getParent() {
         return parent;
     }
 
-    @Override
-    public void setParent(final boolean parent) {
+    public void setParent(Long parent) {
         this.parent = parent;
     }
 
     @Override
-    public boolean isChild() {
-        return child;
-    }
-
-    @Override
-    public void setChild(final boolean child) {
-        this.child = child;
-    }
-
-    @Override
-    public Set<Parameter< ? >> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(final Set<Parameter< ? >> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 
@@ -259,111 +234,122 @@ public abstract class DataEntity<T> extends DescribableEntity
         return (getParameters() != null) && !getParameters().isEmpty();
     }
 
-    @Override
     public DatasetEntity getDataset() {
         return dataset;
     }
 
-    @Override
     public void setDataset(final DatasetEntity dataset) {
         this.dataset = dataset;
     }
 
-    @Override
     public Set<RelatedDataEntity> getRelatedObservations() {
         return relatedObservations;
     }
 
-    @Override
     public void setRelatedObservations(final Set<RelatedDataEntity> relatedObservations) {
         this.relatedObservations = relatedObservations;
     }
 
-    @Override
     public boolean hasRelatedObservations() {
         return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
     }
 
-    @Override
     public String getValueIdentifier() {
         return valueIdentifier;
     }
 
-    @Override
     public void setValueIdentifier(final String valueIdentifier) {
         this.valueIdentifier = valueIdentifier;
     }
 
-    @Override
     public boolean hasValueIdentifier() {
         return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
     }
 
-    @Override
     public String getValueName() {
         return valueName;
     }
 
-    @Override
     public void setValueName(final String valueName) {
         this.valueName = valueName;
     }
 
-    @Override
     public boolean hasValueName() {
         return (getValueName() != null) && !getValueName().isEmpty();
     }
 
-    @Override
     public String getValueDescription() {
         return valueDescription;
     }
 
-    @Override
     public void setValueDescription(final String valueDescription) {
         this.valueDescription = valueDescription;
     }
 
-    @Override
     public boolean hasValueDescription() {
         return (getValueDescription() != null) && !getValueDescription().isEmpty();
     }
 
-    @Override
     public BigDecimal getVerticalFrom() {
         return verticalFrom;
     }
 
-    @Override
     public void setVerticalFrom(final BigDecimal verticalFrom) {
         this.verticalFrom = verticalFrom;
     }
 
-    @Override
+    public boolean hasVerticalFrom() {
+        return getVerticalFrom() != null && getVerticalFrom().compareTo(NOT_SET_VERTICAL) != 0;
+    }
+
     public BigDecimal getVerticalTo() {
         return verticalTo;
     }
 
-    @Override
     public void setVerticalTo(final BigDecimal verticalTo) {
         this.verticalTo = verticalTo;
+    }
+
+    public boolean hasVerticalTo() {
+        return getVerticalTo() != null && getVerticalTo().compareTo(NOT_SET_VERTICAL) != 0;
+    }
+
+    public SamplingProfileDataEntity getSamplingProfile() {
+        return samplingProfile;
+    }
+
+    public void setSamplingProfile(SamplingProfileDataEntity samplingProfile) {
+        this.samplingProfile = samplingProfile;
+    }
+
+    public boolean hasSamplingProfile() {
+        return getSamplingProfile() != null;
+    }
+
+    public EReportingProfileDataEntity getEreportingProfile() {
+        return ereportingProfile;
+    }
+
+    public void setEreportingProfile(EReportingProfileDataEntity ereportingProfile) {
+        this.ereportingProfile = ereportingProfile;
+    }
+
+    public boolean hasEreportingProfile() {
+        return getEreportingProfile() != null;
     }
 
     @Override
     public int compareTo(final DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
-                         .thenComparing(DataEntity<T>::getSamplingTimeStart)
-                         .thenComparing(DataEntity<T>::getId)
-                         .compare(this, o);
+                .thenComparing(DataEntity<T>::getSamplingTimeStart).thenComparing(DataEntity<T>::getId)
+                .compare(this, o);
     }
 
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
-        result = (prime * result) + ((getId() == null)
-                ? 0
-                : getId().hashCode());
+        result = (prime * result) + ((getId() == null) ? 0 : getId().hashCode());
         return result;
     }
 
@@ -378,7 +364,7 @@ public abstract class DataEntity<T> extends DescribableEntity
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final DataEntity< ? > other = (DataEntity< ? >) obj;
+        DataEntity<?> other = (DataEntity<?>) obj;
         if (getId() == null) {
             if (other.getId() != null) {
                 return false;
@@ -392,11 +378,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     @Override
     public String toString() {
         final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName())
-                 .append(" [")
-                 .append(" id: ")
-                 .append(getId())
-                 .append(" ]")
-                 .toString();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
+                .toString();
     }
 }

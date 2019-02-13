@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,48 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.ereporting;
 
-import org.n52.series.db.beans.dataset.ProfileDataset;
+import java.io.Serializable;
 
-public abstract class EReportingProfileDatasetEntity extends EReportingDatasetEntity
-        implements ProfileDataset {
+public class EReportingProfileDatasetEntity implements Serializable {
 
-    private static final long serialVersionUID = -7514394037111286838L;
+    public static final String SAMPLING_POINT = "samplingPoint";
 
-    private String verticalParameterName;
-    private String verticalFromParameterName;
-    private String verticalToParameterName;
+    private static final long serialVersionUID = 3767122728005217055L;
 
-    @Override
-    public String getVerticalParameterName() {
-        return verticalParameterName;
+    private EReportingSamplingPointEntity samplingPoint;
+
+    public EReportingSamplingPointEntity getSamplingPoint() {
+        return samplingPoint;
     }
 
-    @Override
-    public void setVerticalParameterName(String verticalParameterName) {
-        this.verticalParameterName = verticalParameterName;
+    public EReportingProfileDatasetEntity setSamplingPoint(EReportingSamplingPointEntity samplingPoint) {
+        this.samplingPoint = samplingPoint;
+        return this;
     }
 
-    @Override
-    public String getVerticalFromParameterName() {
-        return verticalFromParameterName;
+    public EReportingProfileDatasetEntity copy(EReportingProfileDatasetEntity dataset) {
+        setSamplingPoint(((EReportingProfileDatasetEntity) dataset).getSamplingPoint());
+        return this;
     }
-
-    @Override
-    public void setVerticalFromParameterName(String verticalFromParameterName) {
-        this.verticalFromParameterName = verticalFromParameterName;
-    }
-
-    @Override
-    public String getVerticalToParameterName() {
-        return verticalToParameterName;
-    }
-
-    @Override
-    public void setVerticalToParameterName(String verticalToParameterName) {
-        this.verticalToParameterName = verticalToParameterName;
-    }
-
 }

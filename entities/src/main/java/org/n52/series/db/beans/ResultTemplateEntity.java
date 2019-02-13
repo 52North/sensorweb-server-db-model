@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -24,7 +23,6 @@ import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
 
 /**
  * @since 1.0.0
- *
  */
 public class ResultTemplateEntity extends IdEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
@@ -44,7 +42,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     private ProcedureEntity procedure;
 
-    private AbstractFeatureEntity< ? > feature;
+    private AbstractFeatureEntity<?> feature;
 
     private String identifier;
 
@@ -73,7 +71,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param phenomenon the phenomenon to set
+     * @param phenomenon
+     *            the phenomenon to set
      */
     public void setPhenomenon(PhenomenonEntity phenomenon) {
         this.phenomenon = phenomenon;
@@ -87,7 +86,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param offering the offering to set
+     * @param offering
+     *            the offering to set
      */
     public void setOffering(OfferingEntity offering) {
         this.offering = offering;
@@ -101,7 +101,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     /**
-     * @param procedure the procedure to set
+     * @param procedure
+     *            the procedure to set
      */
     public void setProcedure(ProcedureEntity procedure) {
         this.procedure = procedure;
@@ -110,14 +111,15 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     /**
      * @return the featureOfInterest
      */
-    public AbstractFeatureEntity< ? > getFeature() {
+    public AbstractFeatureEntity<?> getFeature() {
         return feature;
     }
 
     /**
-     * @param featureOfInterest the featureOfInterest to set
+     * @param featureOfInterest
+     *            the featureOfInterest to set
      */
-    public void setFeature(AbstractFeatureEntity< ? > featureOfInterest) {
+    public void setFeature(AbstractFeatureEntity<?> featureOfInterest) {
         this.feature = featureOfInterest;
     }
 

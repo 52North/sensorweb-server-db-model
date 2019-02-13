@@ -1,16 +1,13 @@
 package org.n52.series.db.beans;
 
-import static com.querydsl.core.types.PathMetadataFactory.forVariable;
+import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.querydsl.core.types.dsl.*;
 
-import com.querydsl.core.types.Path;
 import com.querydsl.core.types.PathMetadata;
-import com.querydsl.core.types.dsl.EntityPathBase;
-import com.querydsl.core.types.dsl.NumberPath;
+import javax.annotation.Generated;
+import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import com.querydsl.core.types.dsl.SetPath;
-import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -28,7 +25,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final QAbstractFeatureEntity _super;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> children;
+    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> children;
 
     //inherited
     public final StringPath description;
@@ -55,10 +52,10 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents;
+    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;

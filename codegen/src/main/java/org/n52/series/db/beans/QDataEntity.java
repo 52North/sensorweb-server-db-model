@@ -24,13 +24,13 @@ public class QDataEntity extends EntityPathBase<DataEntity<?>> {
 
     public final QDescribableEntity _super = new QDescribableEntity(this);
 
-    public final BooleanPath child = createBoolean("child");
-
     public final QDatasetEntity dataset;
 
     public final BooleanPath deleted = createBoolean("deleted");
 
     public final StringPath description = createString("description");
+
+    public final org.n52.series.db.beans.ereporting.QEReportingProfileDataEntity ereportingProfile;
 
     public final QGeometryEntity geometryEntity;
 
@@ -44,9 +44,9 @@ public class QDataEntity extends EntityPathBase<DataEntity<?>> {
 
     public final QCodespaceEntity nameCodespace;
 
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters = this.<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter>createSet("parameters", org.n52.series.db.beans.parameter.Parameter.class, org.n52.series.db.beans.parameter.QParameter.class, PathInits.DIRECT2);
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
-    public final BooleanPath parent = createBoolean("parent");
+    public final NumberPath<Long> parent = createNumber("parent", Long.class);
 
     public final SetPath<RelatedDataEntity, QRelatedDataEntity> relatedObservations = this.<RelatedDataEntity, QRelatedDataEntity>createSet("relatedObservations", RelatedDataEntity.class, QRelatedDataEntity.class, PathInits.DIRECT2);
 
@@ -55,6 +55,8 @@ public class QDataEntity extends EntityPathBase<DataEntity<?>> {
     public final DateTimePath<java.util.Date> samplingTimeEnd = createDateTime("samplingTimeEnd", java.util.Date.class);
 
     public final DateTimePath<java.util.Date> samplingTimeStart = createDateTime("samplingTimeStart", java.util.Date.class);
+
+    public final SetPath<org.n52.series.db.beans.i18n.I18nDataEntity, org.n52.series.db.beans.i18n.QI18nDataEntity> translations = this.<org.n52.series.db.beans.i18n.I18nDataEntity, org.n52.series.db.beans.i18n.QI18nDataEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nDataEntity.class, org.n52.series.db.beans.i18n.QI18nDataEntity.class, PathInits.DIRECT2);
 
     public final DateTimePath<java.util.Date> validTimeEnd = createDateTime("validTimeEnd", java.util.Date.class);
 
@@ -92,6 +94,7 @@ public class QDataEntity extends EntityPathBase<DataEntity<?>> {
     public QDataEntity(Class<? extends DataEntity<?>> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.dataset = inits.isInitialized("dataset") ? new QDatasetEntity(forProperty("dataset"), inits.get("dataset")) : null;
+        this.ereportingProfile = inits.isInitialized("ereportingProfile") ? new org.n52.series.db.beans.ereporting.QEReportingProfileDataEntity(forProperty("ereportingProfile")) : null;
         this.geometryEntity = inits.isInitialized("geometryEntity") ? new QGeometryEntity(forProperty("geometryEntity")) : null;
         this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new QCodespaceEntity(forProperty("identifierCodespace")) : null;
         this.nameCodespace = inits.isInitialized("nameCodespace") ? new QCodespaceEntity(forProperty("nameCodespace")) : null;

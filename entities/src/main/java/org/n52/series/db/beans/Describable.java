@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.util.Map;
@@ -23,27 +22,24 @@ import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.i18n.I18nEntity;
-import org.n52.series.db.beans.parameter.Parameter;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 public interface Describable extends IdentifierNameDescriptionEntity, HasId {
 
-    Set<I18nEntity< ? extends Describable>> getTranslations();
+    Set<I18nEntity<? extends Describable>> getTranslations();
 
-    void setTranslations(Set<I18nEntity< ? extends Describable>> translations);
+    void setTranslations(Set<I18nEntity<? extends Describable>> translations);
 
-    Set<Parameter< ? >> getParameters();
+    Set<ParameterEntity<?>> getParameters();
 
-    void setParameters(Set<Parameter< ? >> parameters);
+    void setParameters(Set<ParameterEntity<?>> parameters);
 
     default boolean hasParameters() {
         return getParameters() != null && !getParameters().isEmpty();
     }
 
     default Set<Map<String, Object>> getMappedParameters(String locale) {
-        return hasParameters()
-                ? getParameters().stream()
-                                 .map(e -> e.toValueMap(locale))
-                                 .collect(Collectors.toSet())
+        return hasParameters() ? getParameters().stream().map(e -> e.toValueMap(locale)).collect(Collectors.toSet())
                 : null;
     }
 
@@ -79,10 +75,7 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
     }
 
     default boolean noTranslationAvailable(String locale) {
-        return getTranslations() == null
-                || locale == null
-                || getTranslations().isEmpty()
-                || locale.isEmpty();
+        return getTranslations() == null || locale == null || getTranslations().isEmpty() || locale.isEmpty();
     }
 
     default String getCountryCode(String locale) {

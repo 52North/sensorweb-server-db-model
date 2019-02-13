@@ -22,13 +22,11 @@ public class QPlatformEntity extends EntityPathBase<PlatformEntity> {
 
     public final QDescribableEntity _super = new QDescribableEntity(this);
 
+    public final StringPath description = createString("description");
+
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath identifier = createString("identifier");
-
-    public final BooleanPath insitu = createBoolean("insitu");
-
-    public final BooleanPath mobile = createBoolean("mobile");
 
     public final StringPath name = createString("name");
 

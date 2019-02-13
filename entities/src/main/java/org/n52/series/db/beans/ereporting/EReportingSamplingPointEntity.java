@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.DescribableEntity;
@@ -28,8 +27,8 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasStatio
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class EReportingSamplingPointEntity extends DescribableEntity implements HasAssessmentType,
-        HasStation, HasNetwork {
+public class EReportingSamplingPointEntity extends DescribableEntity
+        implements HasAssessmentType, HasStation, HasNetwork {
 
     private static final long serialVersionUID = 506067361074437086L;
 
@@ -51,8 +50,7 @@ public class EReportingSamplingPointEntity extends DescribableEntity implements 
 
     @Override
     public boolean isSetAssessmentType() {
-        return getAssessmentType() != null
-                && getAssessmentType().isSetAssessmentType();
+        return getAssessmentType() != null && getAssessmentType().isSetAssessmentType();
     }
 
     @Override

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 public abstract class AbstractRelationEntity<T> extends IdEntity {
@@ -70,7 +69,8 @@ public abstract class AbstractRelationEntity<T> extends IdEntity {
     }
 
     /**
-     * @param role the role to set
+     * @param role
+     *            the role to set
      */
     public void setRole(String role) {
         this.role = role;
@@ -88,7 +88,8 @@ public abstract class AbstractRelationEntity<T> extends IdEntity {
     }
 
     /**
-     * @param relatedUrl the relatedUrl to set
+     * @param relatedUrl
+     *            the relatedUrl to set
      */
     public void setRelatedUrl(String relatedUrl) {
         this.relatedUrl = relatedUrl;

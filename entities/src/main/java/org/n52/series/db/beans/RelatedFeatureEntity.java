@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -28,8 +27,7 @@ import org.n52.series.db.beans.HibernateRelations.HasOfferings;
  * @since 1.0.0
  */
 public class RelatedFeatureEntity extends IdEntity
-        implements Serializable, HasFeature<RelatedFeatureEntity>,
-        HasOfferings<RelatedFeatureEntity> {
+        implements Serializable, HasFeature<RelatedFeatureEntity>, HasOfferings<RelatedFeatureEntity> {
 
     private static final long serialVersionUID = -8143897383050691280L;
 
@@ -70,7 +68,7 @@ public class RelatedFeatureEntity extends IdEntity
     @SuppressWarnings("unchecked")
     @Override
     public RelatedFeatureEntity setOfferings(final Object offerings) {
-        if (offerings instanceof Set< ? >) {
+        if (offerings instanceof Set<?>) {
             this.offerings = (Set<OfferingEntity>) offerings;
         } else {
             getOfferings().add((OfferingEntity) offerings);

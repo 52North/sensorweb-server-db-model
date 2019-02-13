@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -29,7 +28,7 @@ public class DatasetEntityTest {
 
     @Test
     public void when_settingFirstValueAtWithNanos_then_nanosAvailableOnGetting() {
-        DatasetEntity datasetEntity = new CountDatasetEntity();
+        DatasetEntity datasetEntity = new DatasetEntity();
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
         datasetEntity.setFirstValueAt(timestamp);
@@ -39,7 +38,7 @@ public class DatasetEntityTest {
 
     @Test
     public void when_settingLastValueAtWithNanos_then_nanosAvailableOnGetting() {
-        DatasetEntity datasetEntity = new CountDatasetEntity();
+        DatasetEntity datasetEntity = new DatasetEntity();
         Timestamp timestamp = createTimestamp("2015-07-17T21:14:35.022+02", 321);
 
         datasetEntity.setLastValueAt(timestamp);

@@ -55,7 +55,7 @@ public class QProcedureHistoryEntity extends EntityPathBase<ProcedureHistoryEnti
     public QProcedureHistoryEntity(Class<? extends ProcedureHistoryEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.format = inits.isInitialized("format") ? new QFormatEntity(forProperty("format")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure")) : null;
     }
 
 }

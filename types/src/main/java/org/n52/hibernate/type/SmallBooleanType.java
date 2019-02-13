@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.hibernate.type;
 
 import java.io.Serializable;
@@ -45,7 +44,7 @@ public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Bool
     }
 
     @Override
-    public Class< ? > getPrimitiveClass() {
+    public Class<?> getPrimitiveClass() {
         return Boolean.class;
     }
 
@@ -61,9 +60,7 @@ public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Bool
 
     @Override
     public String objectToSQLString(Boolean value, Dialect dialect) {
-        return value
-                ? "1"
-                : "0";
+        return value ? "1" : "0";
     }
 
 }

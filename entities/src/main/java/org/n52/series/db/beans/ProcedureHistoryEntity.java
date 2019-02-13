@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
@@ -28,9 +27,8 @@ import org.n52.series.db.common.Utils;
 /**
  * @since 1.0.0
  */
-public class ProcedureHistoryEntity extends IdEntity implements Serializable,
-        HasProcedure<ProcedureHistoryEntity>, HasProcedureDescriptionFormat<ProcedureHistoryEntity>,
-        HasXml<ProcedureHistoryEntity> {
+public class ProcedureHistoryEntity extends IdEntity implements Serializable, HasProcedure<ProcedureHistoryEntity>,
+        HasProcedureDescriptionFormat<ProcedureHistoryEntity>, HasXml<ProcedureHistoryEntity> {
 
     public static final String START_TIME = "startTime";
 

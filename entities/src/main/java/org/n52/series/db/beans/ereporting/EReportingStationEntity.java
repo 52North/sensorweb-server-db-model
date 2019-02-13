@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,14 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.ereporting;
 
+import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 /**
  * Entity for AQD e-Reporting Station
@@ -46,7 +44,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
 
     /**
      * @param station
-     *        the station to set
+     *            the station to set
      * @return this
      */
     public EReportingStationEntity setStation(Long station) {
