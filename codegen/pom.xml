@@ -42,14 +42,23 @@
             <artifactId>hibernate-core</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.hibernate.javax.persistence</groupId>
-            <artifactId>hibernate-jpa-2.1-api</artifactId>
-            <version>1.0.0.Final</version>
+            <groupId>javax.persistence</groupId>
+            <artifactId>javax.persistence-api</artifactId>
         </dependency>
 
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-core</artifactId>
+            <exclusions>
+              <exclusion>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-jpa-codegen</artifactId>
+              </exclusion>
+              <exclusion>
+                <groupId>com.querydsl</groupId>
+                <artifactId>querydsl-spatial</artifactId>
+              </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>com.querydsl</groupId>
@@ -76,6 +85,7 @@
         <dependency>
             <groupId>com.querydsl</groupId>
             <artifactId>querydsl-spatial</artifactId>
+            <scope>runtime</scope>
             <exclusions>
                 <exclusion>
                     <groupId>org.geolatte</groupId>
