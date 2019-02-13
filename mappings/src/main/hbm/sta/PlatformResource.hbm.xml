@@ -67,13 +67,13 @@
             <key foreign-key="fk_thing_historical_location" update="false">
                 <column name="fk_thing_id" not-null="true"/>
             </key>
-            <one-to-many class="HistoricalLocationEntity" />
+            <one-to-many class="org.n52.series.db.beans.sta.HistoricalLocationEntity" />
         </set>
         <set name="datastreamEntities" table="datastream" inverse="true">
             <key foreign-key="fk_datastream_thing">
                 <column name="fk_thing_id" not-null="true"/>
             </key>
-            <one-to-many class="DatastreamEntity" />
+            <one-to-many class="org.n52.series.db.beans.sta.DatastreamEntity" />
         </set>
     </class>
 

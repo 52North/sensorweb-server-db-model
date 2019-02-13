@@ -36,8 +36,6 @@ public class QAbstractFeatureEntity extends EntityPathBase<AbstractFeatureEntity
 
     public final StringPath name = createString("name");
 
-    public final QCodespaceEntity nameCodespace;
-
     public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
     public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents = this.<AbstractFeatureEntity<?>, QAbstractFeatureEntity>createSet("parents", AbstractFeatureEntity.class, QAbstractFeatureEntity.class, PathInits.DIRECT2);
