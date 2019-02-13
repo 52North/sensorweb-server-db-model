@@ -22,7 +22,7 @@ public class QDatastreamEntity extends EntityPathBase<DatastreamEntity> {
 
     public static final QDatastreamEntity datastreamEntity = new QDatastreamEntity("datastreamEntity");
 
-    public final QAbstractStaEntity _super = new QAbstractStaEntity(this);
+    public final QAbstractNameDescriptionStaEntity _super = new QAbstractNameDescriptionStaEntity(this);
 
     public final SetPath<org.n52.series.db.beans.DatasetEntity, org.n52.series.db.beans.QDatasetEntity> datasets = this.<org.n52.series.db.beans.DatasetEntity, org.n52.series.db.beans.QDatasetEntity>createSet("datasets", org.n52.series.db.beans.DatasetEntity.class, org.n52.series.db.beans.QDatasetEntity.class, PathInits.DIRECT2);
 
@@ -48,7 +48,7 @@ public class QDatastreamEntity extends EntityPathBase<DatastreamEntity> {
 
     public final DateTimePath<java.util.Date> samplingTimeStart = createDateTime("samplingTimeStart", java.util.Date.class);
 
-    public final QThingEntity thing;
+    public final org.n52.series.db.beans.QPlatformEntity thing;
 
     public final org.n52.series.db.beans.QUnitEntity unitOfMeasurement;
 
@@ -73,8 +73,8 @@ public class QDatastreamEntity extends EntityPathBase<DatastreamEntity> {
         this.geometryEntity = inits.isInitialized("geometryEntity") ? new org.n52.series.db.beans.QGeometryEntity(forProperty("geometryEntity")) : null;
         this.observableProperty = inits.isInitialized("observableProperty") ? new org.n52.series.db.beans.QPhenomenonEntity(forProperty("observableProperty"), inits.get("observableProperty")) : null;
         this.observationType = inits.isInitialized("observationType") ? new org.n52.series.db.beans.QFormatEntity(forProperty("observationType")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new org.n52.series.db.beans.QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
-        this.thing = inits.isInitialized("thing") ? new QThingEntity(forProperty("thing")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new org.n52.series.db.beans.QProcedureEntity(forProperty("procedure")) : null;
+        this.thing = inits.isInitialized("thing") ? new org.n52.series.db.beans.QPlatformEntity(forProperty("thing"), inits.get("thing")) : null;
         this.unitOfMeasurement = inits.isInitialized("unitOfMeasurement") ? new org.n52.series.db.beans.QUnitEntity(forProperty("unitOfMeasurement")) : null;
     }
 

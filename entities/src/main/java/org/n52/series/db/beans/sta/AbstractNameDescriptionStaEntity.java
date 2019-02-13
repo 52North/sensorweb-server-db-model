@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.util.Objects;
@@ -23,7 +22,7 @@ import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.IdEntity;
 
-public class AbstractNameDescriptionStaEntity extends AbstractStaEntity implements HasName, HasDescription {
+public class AbstractNameDescriptionStaEntity extends IdEntity implements AbstractStaEntity, HasName, HasDescription {
 
     private static final long serialVersionUID = 948180142611914656L;
 

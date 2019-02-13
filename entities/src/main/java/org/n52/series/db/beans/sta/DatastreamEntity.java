@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
@@ -22,6 +21,7 @@ import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.GeometryEntity;
@@ -32,19 +32,18 @@ import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasProcedure;
 import org.n52.series.db.beans.HibernateRelations.HasUnit;
 import org.n52.series.db.beans.PhenomenonEntity;
+import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.common.Utils;
-
-import com.vividsolutions.jts.geom.Geometry;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class DatastreamEntity extends AbstractNameDescriptionStaEntity implements Serializable,
-        HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>, HasPhenomenonTime, HasUnit,
-        HasProcedure<DatastreamEntity>, HasGeometry {
+public class DatastreamEntity extends AbstractNameDescriptionStaEntity
+        implements Serializable, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>,
+        HasPhenomenonTime, HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -69,7 +68,7 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity implement
 
     private FormatEntity observationType;
     private UnitEntity unitOfMeasurement;
-    private ThingEntity thing;
+    private PlatformEntity thing;
     private ProcedureEntity procedure;
     private PhenomenonEntity observableProperty;
 
@@ -166,11 +165,11 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity implement
         return this.observationType != null;
     }
 
-    public ThingEntity getThing() {
+    public PlatformEntity getThing() {
         return thing;
     }
 
-    public void setThing(ThingEntity thing) {
+    public void setThing(PlatformEntity thing) {
         this.thing = thing;
     }
 

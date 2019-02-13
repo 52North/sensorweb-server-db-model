@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
@@ -23,6 +22,7 @@ import java.util.Objects;
 import java.util.Set;
 
 import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
 import org.n52.series.db.common.Utils;
 
@@ -30,8 +30,8 @@ import org.n52.series.db.common.Utils;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class HistoricalLocationEntity extends AbstractStaEntity
-        implements Serializable, Locations<HistoricalLocationEntity> {
+public class HistoricalLocationEntity extends IdEntity
+        implements AbstractStaEntity, Serializable, Locations<HistoricalLocationEntity> {
 
     public static final String PROPERTY_TIME = "time";
 
@@ -41,7 +41,7 @@ public class HistoricalLocationEntity extends AbstractStaEntity
 
     private Set<LocationEntity> locationEntities;
 
-    private ThingEntity thingEntity;
+    private PlatformEntity thingEntity;
 
     public Date getTime() {
         return Utils.createUnmutableTimestamp(time);
@@ -52,20 +52,22 @@ public class HistoricalLocationEntity extends AbstractStaEntity
         return this;
     }
 
+    @Override
     public Set<LocationEntity> getLocationEntities() {
         return locationEntities;
     }
 
+    @Override
     public HistoricalLocationEntity setLocationEntities(Set<LocationEntity> locationEntities) {
         this.locationEntities = locationEntities;
         return this;
     }
 
-    public ThingEntity getThingEntity() {
+    public PlatformEntity getThingEntity() {
         return thingEntity;
     }
 
-    public HistoricalLocationEntity setThingEntity(ThingEntity thingEntity) {
+    public HistoricalLocationEntity setThingEntity(PlatformEntity thingEntity) {
         this.thingEntity = thingEntity;
         return this;
     }
@@ -81,8 +83,7 @@ public class HistoricalLocationEntity extends AbstractStaEntity
             return false;
         }
         HistoricalLocationEntity other = (HistoricalLocationEntity) obj;
-        return super.equals(other)
-                && Objects.equals(getTime(), other.getTime())
+        return super.equals(other) && Objects.equals(getTime(), other.getTime())
                 && Objects.equals(getThingEntity(), other.getThingEntity());
     }
 

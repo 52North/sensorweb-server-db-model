@@ -22,13 +22,13 @@ public class QHistoricalLocationEntity extends EntityPathBase<HistoricalLocation
 
     public static final QHistoricalLocationEntity historicalLocationEntity = new QHistoricalLocationEntity("historicalLocationEntity");
 
-    public final QAbstractStaEntity _super = new QAbstractStaEntity(this);
+    public final org.n52.series.db.beans.QIdEntity _super = new org.n52.series.db.beans.QIdEntity(this);
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final SetPath<LocationEntity, QLocationEntity> locationEntities = this.<LocationEntity, QLocationEntity>createSet("locationEntities", LocationEntity.class, QLocationEntity.class, PathInits.DIRECT2);
 
-    public final QThingEntity thingEntity;
+    public final org.n52.series.db.beans.QPlatformEntity thingEntity;
 
     public final DateTimePath<java.util.Date> time = createDateTime("time", java.util.Date.class);
 
@@ -50,7 +50,7 @@ public class QHistoricalLocationEntity extends EntityPathBase<HistoricalLocation
 
     public QHistoricalLocationEntity(Class<? extends HistoricalLocationEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this.thingEntity = inits.isInitialized("thingEntity") ? new QThingEntity(forProperty("thingEntity")) : null;
+        this.thingEntity = inits.isInitialized("thingEntity") ? new org.n52.series.db.beans.QPlatformEntity(forProperty("thingEntity"), inits.get("thingEntity")) : null;
     }
 
 }

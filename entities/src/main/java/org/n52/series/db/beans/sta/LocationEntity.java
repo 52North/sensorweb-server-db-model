@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,24 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
-
-import com.vividsolutions.jts.geom.Geometry;
+import org.n52.series.db.beans.PlatformEntity;
 
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends AbstractNameDescriptionStaEntity
-        implements Serializable, HasGeometry {
+public class LocationEntity extends AbstractNameDescriptionStaEntity implements Serializable, HasGeometry {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -42,7 +40,7 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity
     private String location;
     private GeometryEntity geometryEntity;
     private LocationEncodingEntity locationEncoding;
-    private Set<ThingEntity> thingEntities;
+    private Set<PlatformEntity> thingEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
 
     public LocationEncodingEntity getLocationEncoding() {
@@ -86,11 +84,11 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity
         return this;
     }
 
-    public Set<ThingEntity> getThingEntities() {
+    public Set<PlatformEntity> getThingEntities() {
         return thingEntities;
     }
 
-    public LocationEntity setThingEntities(Set<ThingEntity> thingEntities) {
+    public LocationEntity setThingEntities(Set<PlatformEntity> thingEntities) {
         this.thingEntities = thingEntities;
         return this;
     }

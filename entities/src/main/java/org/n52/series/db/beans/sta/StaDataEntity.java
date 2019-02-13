@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.util.Collection;
@@ -29,7 +28,7 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
 
     private DatastreamEntity datastream;
 
-    private AbstractFeatureEntity< ? > featureOfInterest;
+    private AbstractFeatureEntity<?> featureOfInterest;
 
     private boolean processsed;
 
@@ -42,11 +41,11 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
         return this;
     }
 
-    public AbstractFeatureEntity< ? > getFeatureOfInterest() {
+    public AbstractFeatureEntity<?> getFeatureOfInterest() {
         return featureOfInterest;
     }
 
-    public void setFeatureOfInterest(AbstractFeatureEntity< ? > featureOfInterest) {
+    public void setFeatureOfInterest(AbstractFeatureEntity<?> featureOfInterest) {
         this.featureOfInterest = featureOfInterest;
     }
 
@@ -65,8 +64,7 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         String value = getValue();
-        return (value == null)
-                || noDataValues.contains(value);
+        return (value == null) || noDataValues.contains(value);
     }
 
 }

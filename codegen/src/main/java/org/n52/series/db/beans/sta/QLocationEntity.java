@@ -22,7 +22,7 @@ public class QLocationEntity extends EntityPathBase<LocationEntity> {
 
     public static final QLocationEntity locationEntity = new QLocationEntity("locationEntity");
 
-    public final QAbstractStaEntity _super = new QAbstractStaEntity(this);
+    public final QAbstractNameDescriptionStaEntity _super = new QAbstractNameDescriptionStaEntity(this);
 
     public final StringPath description = createString("description");
 
@@ -38,7 +38,7 @@ public class QLocationEntity extends EntityPathBase<LocationEntity> {
 
     public final StringPath name = createString("name");
 
-    public final SetPath<ThingEntity, QThingEntity> thingEntities = this.<ThingEntity, QThingEntity>createSet("thingEntities", ThingEntity.class, QThingEntity.class, PathInits.DIRECT2);
+    public final SetPath<org.n52.series.db.beans.PlatformEntity, org.n52.series.db.beans.QPlatformEntity> thingEntities = this.<org.n52.series.db.beans.PlatformEntity, org.n52.series.db.beans.QPlatformEntity>createSet("thingEntities", org.n52.series.db.beans.PlatformEntity.class, org.n52.series.db.beans.QPlatformEntity.class, PathInits.DIRECT2);
 
     public QLocationEntity(String variable) {
         this(LocationEntity.class, forVariable(variable), INITS);

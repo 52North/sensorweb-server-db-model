@@ -19,7 +19,7 @@ public class QLocationEncodingEntity extends EntityPathBase<LocationEncodingEnti
 
     public static final QLocationEncodingEntity locationEncodingEntity = new QLocationEncodingEntity("locationEncodingEntity");
 
-    public final QAbstractStaEntity _super = new QAbstractStaEntity(this);
+    public final org.n52.series.db.beans.QIdEntity _super = new org.n52.series.db.beans.QIdEntity(this);
 
     public final StringPath encodingType = createString("encodingType");
 

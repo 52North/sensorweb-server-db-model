@@ -121,6 +121,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
     /**
      * @return the samplingTimeStart
      */
+    @Override
     public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -129,6 +130,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      * @param samplingTimeStart
      *            the samplingTimeStart
      */
+    @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -136,6 +138,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
     /**
      * @return the samplingTimeEnd
      */
+    @Override
     public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -144,6 +147,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      * @param samplingTimeEnd
      *            the samplingTimeEnd
      */
+    @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -173,6 +177,16 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
 
     public boolean hasObservations() {
         return getObservations() != null && !getObservations().isEmpty();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
 }

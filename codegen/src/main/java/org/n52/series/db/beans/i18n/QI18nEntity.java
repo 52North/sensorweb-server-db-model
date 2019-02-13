@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QI18nEntity is a Querydsl query type for I18nEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QI18nEntity extends EntityPathBase<I18nEntity<org.n52.series.db.beans.FeatureEntity>> {
+public class QI18nEntity extends EntityPathBase<I18nEntity<org.n52.series.db.beans.UnitEntity>> {
 
     private static final long serialVersionUID = -462006752L;
 

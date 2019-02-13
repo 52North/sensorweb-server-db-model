@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2018 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import java.io.Serializable;
@@ -26,7 +25,7 @@ import org.n52.series.db.beans.IdEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEncodingEntity extends AbstractStaEntity implements Serializable {
+public class LocationEncodingEntity extends IdEntity implements AbstractStaEntity, Serializable {
 
     public static final String PROPERTY_ENCODING_TYPE = "encodingType";
     public static final String PROPERTY_LOCATION = "location";

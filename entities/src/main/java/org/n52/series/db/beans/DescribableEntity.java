@@ -228,8 +228,7 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
             return false;
         }
         DescribableEntity other = (DescribableEntity) obj;
-        return super.equals(other)
-                && Objects.equals(getIdentifier(), other.getIdentifier())
+        return super.equals(other) && Objects.equals(getIdentifier(), other.getIdentifier())
                 && Objects.equals(getName(), other.getName());
     }
 }

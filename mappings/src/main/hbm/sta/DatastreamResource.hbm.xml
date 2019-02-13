@@ -39,7 +39,7 @@
         <many-to-one name="unitOfMeasurement" class="org.n52.series.db.beans.UnitEntity" not-null="false" foreign-key="fk_datastream_unit">
             <column name="fk_unit_id" not-null="false"/>
         </many-to-one>
-        <many-to-one name="thing" class="org.n52.series.db.beans.sta.ThingEntity" not-null="true" foreign-key="fk_datastream_thing">
+        <many-to-one name="thing" class="org.n52.series.db.beans.PlatformEntity" not-null="true" foreign-key="fk_datastream_thing">
             <column name="fk_thing_id" not-null="true"/>
         </many-to-one>
         <many-to-one name="procedure" class="org.n52.series.db.beans.ProcedureEntity" not-null="true" foreign-key="fk_datastream_procedure">

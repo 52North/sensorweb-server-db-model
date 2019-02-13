@@ -31,7 +31,7 @@
             <key foreign-key="fk_location_thing">
                 <column name="fk_location_id" not-null="false"/>
             </key>
-            <many-to-many class="org.n52.series.db.beans.sta.ThingEntity" foreign-key="fk_thing_location">
+            <many-to-many class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_thing_location">
                 <column name="fk_thing_id" not-null="false"/>
             </many-to-many>
         </set>
@@ -39,7 +39,7 @@
             <key foreign-key="fk_location_historical_location">
                 <column name="fk_location_id" not-null="true"/>
             </key>
-            <many-to-many class="org.n52.series.db.beans.sta.HistoricalLocationEntity" foreign-key="fk_historical_location_location">
+            <many-to-many class="HistoricalLocationEntity" foreign-key="fk_historical_location_location">
                 <column name="fk_historical_location_id" not-null="true"/>
             </many-to-many>
         </set>
@@ -64,14 +64,14 @@
                 <param name="sequence_name">historical_location_seq</param>
             </generator>
         </id>
-        <many-to-one name="thingEntity" class="ThingEntity" foreign-key="fk_thing_historical_location">
+        <many-to-one name="thingEntity" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_thing_historical_location">
             <column name="fk_thing_id" not-null="true"/>
         </many-to-one>
         <set name="locationEntities" table="location_historical_location" inverse="true">
             <key foreign-key="fk_historical_location_location">
                 <column name="fk_historical_location_id" not-null="true"/>
             </key>
-            <many-to-many class="org.n52.series.db.beans.sta.LocationEntity" foreign-key="fk_location_historical_location">
+            <many-to-many class="LocationEntity" foreign-key="fk_location_historical_location">
                 <column name="fk_location_id" not-null="true"/>
             </many-to-many>
         </set>

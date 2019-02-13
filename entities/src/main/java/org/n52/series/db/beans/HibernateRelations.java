@@ -23,8 +23,6 @@ import java.util.Set;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
-import com.vividsolutions.jts.geom.Geometry;
-
 /**
  * Interfaces that entities can implement to share constants and to make clear
  * which entities have which relations. Allows to throw compile time errors for

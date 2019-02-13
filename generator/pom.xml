@@ -96,16 +96,6 @@
             </activation>
             <dependencies>
                 <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-spatial</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-                <dependency>
-                    <groupId>org.hibernate</groupId>
-                    <artifactId>hibernate-core</artifactId>
-                    <scope>compile</scope>
-                </dependency>
-                <dependency>
                     <groupId>org.postgresql</groupId>
                     <artifactId>postgresql</artifactId>
                     <scope>provided</scope>

@@ -25,13 +25,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final QAbstractFeatureEntity _super;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> children;
-
-    //inherited
     public final StringPath description;
-
-    // inherited
-    public final QFormatEntity featureType;
 
     // inherited
     public final QGeometryEntity geometryEntity;
@@ -42,29 +36,11 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     //inherited
     public final StringPath identifier;
 
-    // inherited
-    public final QCodespaceEntity identifierCodespace;
-
     //inherited
     public final StringPath name;
 
-    // inherited
-    public final QCodespaceEntity nameCodespace;
-
-    //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
-
-    //inherited
-    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> parents;
-
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;
-
-    //inherited
-    public final StringPath url;
-
-    //inherited
-    public final StringPath xml;
 
     public QFeatureEntity(String variable) {
         this(FeatureEntity.class, forVariable(variable), INITS);
@@ -85,20 +61,12 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public QFeatureEntity(Class<? extends FeatureEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QAbstractFeatureEntity(type, metadata, inits);
-        this.children = _super.children;
         this.description = _super.description;
-        this.featureType = _super.featureType;
         this.geometryEntity = _super.geometryEntity;
         this.id = _super.id;
         this.identifier = _super.identifier;
-        this.identifierCodespace = _super.identifierCodespace;
         this.name = _super.name;
-        this.nameCodespace = _super.nameCodespace;
-        this.parameters = _super.parameters;
-        this.parents = _super.parents;
         this.translations = _super.translations;
-        this.url = _super.url;
-        this.xml = _super.xml;
     }
 
 }
