@@ -25,7 +25,7 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
     public final org.n52.series.db.beans.QFeatureEntity _super;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity, org.n52.series.db.beans.QAbstractFeatureEntity> children;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> children;
 
     //inherited
     public final StringPath description;
@@ -55,7 +55,7 @@ public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitorin
     public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;

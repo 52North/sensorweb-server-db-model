@@ -25,7 +25,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final QAbstractFeatureEntity _super;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> children;
+    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> children;
 
     //inherited
     public final StringPath description;
@@ -55,7 +55,7 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> parents;
+    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;

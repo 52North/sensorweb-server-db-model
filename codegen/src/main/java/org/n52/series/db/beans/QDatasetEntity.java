@@ -90,7 +90,7 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final org.n52.series.db.beans.sampling.QSamplingProfileDatasetEntity samplingProfile;
 
-    public final SetPath<org.n52.series.db.beans.i18n.I18nDatasetEntity, org.n52.series.db.beans.i18n.QI18nDatasetEntity> translations = this.<org.n52.series.db.beans.i18n.I18nDatasetEntity, org.n52.series.db.beans.i18n.QI18nDatasetEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nDatasetEntity.class, org.n52.series.db.beans.i18n.QI18nDatasetEntity.class, PathInits.DIRECT2);
+    public final SetPath<org.n52.series.db.beans.i18n.I18nDatasetEntity<?>, org.n52.series.db.beans.i18n.QI18nDatasetEntity> translations = this.<org.n52.series.db.beans.i18n.I18nDatasetEntity<?>, org.n52.series.db.beans.i18n.QI18nDatasetEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nDatasetEntity.class, org.n52.series.db.beans.i18n.QI18nDatasetEntity.class, PathInits.DIRECT2);
 
     public final QUnitEntity unit;
 

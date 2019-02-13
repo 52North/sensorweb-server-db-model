@@ -85,7 +85,7 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     //inherited
     public final DateTimePath<java.util.Date> validTimeStart;
 
-    public final SetPath<DataEntity, QDataEntity> value = this.<DataEntity, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
+    public final SetPath<DataEntity<?>, QDataEntity> value = this.<DataEntity<?>, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
 
     //inherited
     public final StringPath valueDescription;
