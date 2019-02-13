@@ -10,14 +10,14 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QParameter is a Querydsl query type for Parameter
+ * QParameterEntity is a Querydsl query type for ParameterEntity
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QParameter extends EntityPathBase<Parameter<?>> {
+public class QParameterEntity extends EntityPathBase<ParameterEntity<?>> {
 
-    private static final long serialVersionUID = 1651258515L;
+    private static final long serialVersionUID = -2119431594L;
 
-    public static final QParameter parameter = new QParameter("parameter");
+    public static final QParameterEntity parameterEntity = new QParameterEntity("parameterEntity");
 
     public final org.n52.series.db.beans.QIdEntity _super = new org.n52.series.db.beans.QIdEntity(this);
 
@@ -30,18 +30,18 @@ public class QParameter extends EntityPathBase<Parameter<?>> {
     public final StringPath name = createString("name");
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
-    public QParameter(String variable) {
-        super((Class) Parameter.class, forVariable(variable));
+    public QParameterEntity(String variable) {
+        super((Class) ParameterEntity.class, forVariable(variable));
     }
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
-    public QParameter(Path<? extends Parameter> path) {
+    public QParameterEntity(Path<? extends ParameterEntity> path) {
         super((Class) path.getType(), path.getMetadata());
     }
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
-    public QParameter(PathMetadata metadata) {
-        super((Class) Parameter.class, metadata);
+    public QParameterEntity(PathMetadata metadata) {
+        super((Class) ParameterEntity.class, metadata);
     }
 
 }

@@ -26,14 +26,18 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final QCategoryEntity category;
 
+    public final EnumPath<org.n52.series.db.beans.dataset.DatasetType> datasetType = createEnum("datasetType", org.n52.series.db.beans.dataset.DatasetType.class);
+
     public final BooleanPath deleted = createBoolean("deleted");
 
     public final StringPath description = createString("description");
 
     public final BooleanPath disabled = createBoolean("disabled");
 
+    public final QFeatureEntity feature;
+
     // custom
-    public final QAbstractFeatureEntity feature = new QAbstractFeatureEntity(forProperty("feature"));
+    public final QDataEntity firstObservation = new QDataEntity(forProperty("firstObservation"));
 
     public final NumberPath<java.math.BigDecimal> firstQuantityValue = createNumber("firstQuantityValue", java.math.BigDecimal.class);
 
@@ -47,19 +51,32 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final QCodespaceEntity identifierCodespace;
 
+    public final BooleanPath insitu = createBoolean("insitu");
+
+    // custom
+    public final QDataEntity lastObservation = new QDataEntity(forProperty("lastObservation"));
+
     public final NumberPath<java.math.BigDecimal> lastQuantityValue = createNumber("lastQuantityValue", java.math.BigDecimal.class);
 
     public final DateTimePath<java.util.Date> lastValueAt = createDateTime("lastValueAt", java.util.Date.class);
+
+    public final BooleanPath mobile = createBoolean("mobile");
 
     public final StringPath name = createString("name");
 
     public final QCodespaceEntity nameCodespace;
 
-    public final QFormatEntity observationType;
+    public final NumberPath<Integer> numberOfDecimals = createNumber("numberOfDecimals", Integer.class);
+
+    public final EnumPath<org.n52.series.db.beans.dataset.ObservationType> observationType = createEnum("observationType", org.n52.series.db.beans.dataset.ObservationType.class);
 
     public final QOfferingEntity offering;
 
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters = this.<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter>createSet("parameters", org.n52.series.db.beans.parameter.Parameter.class, org.n52.series.db.beans.parameter.QParameter.class, PathInits.DIRECT2);
+    public final QFormatEntity omObservationType;
+
+    public final StringPath originTimezone = createString("originTimezone");
+
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
     public final QPhenomenonEntity phenomenon;
 
@@ -69,7 +86,15 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final BooleanPath published = createBoolean("published");
 
-    public final StringPath valueType = createString("valueType");
+    public final ListPath<DatasetEntity, QDatasetEntity> referenceValues = this.<DatasetEntity, QDatasetEntity>createList("referenceValues", DatasetEntity.class, QDatasetEntity.class, PathInits.DIRECT2);
+
+    public final org.n52.series.db.beans.sampling.QSamplingProfileDatasetEntity samplingProfile;
+
+    public final SetPath<org.n52.series.db.beans.i18n.I18nDatasetEntity, org.n52.series.db.beans.i18n.QI18nDatasetEntity> translations = this.<org.n52.series.db.beans.i18n.I18nDatasetEntity, org.n52.series.db.beans.i18n.QI18nDatasetEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nDatasetEntity.class, org.n52.series.db.beans.i18n.QI18nDatasetEntity.class, PathInits.DIRECT2);
+
+    public final QUnitEntity unit;
+
+    public final EnumPath<org.n52.series.db.beans.dataset.ValueType> valueType = createEnum("valueType", org.n52.series.db.beans.dataset.ValueType.class);
 
     public QDatasetEntity(String variable) {
         this(DatasetEntity.class, forVariable(variable), INITS);
@@ -90,13 +115,16 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
     public QDatasetEntity(Class<? extends DatasetEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.category = inits.isInitialized("category") ? new QCategoryEntity(forProperty("category")) : null;
+        this.feature = inits.isInitialized("feature") ? new QFeatureEntity(forProperty("feature"), inits.get("feature")) : null;
         this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new QCodespaceEntity(forProperty("identifierCodespace")) : null;
         this.nameCodespace = inits.isInitialized("nameCodespace") ? new QCodespaceEntity(forProperty("nameCodespace")) : null;
-        this.observationType = inits.isInitialized("observationType") ? new QFormatEntity(forProperty("observationType")) : null;
         this.offering = inits.isInitialized("offering") ? new QOfferingEntity(forProperty("offering"), inits.get("offering")) : null;
+        this.omObservationType = inits.isInitialized("omObservationType") ? new QFormatEntity(forProperty("omObservationType")) : null;
         this.phenomenon = inits.isInitialized("phenomenon") ? new QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon")) : null;
         this.platform = inits.isInitialized("platform") ? new QPlatformEntity(forProperty("platform")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure")) : null;
+        this.samplingProfile = inits.isInitialized("samplingProfile") ? new org.n52.series.db.beans.sampling.QSamplingProfileDatasetEntity(forProperty("samplingProfile")) : null;
+        this.unit = inits.isInitialized("unit") ? new QUnitEntity(forProperty("unit")) : null;
     }
 
 }

@@ -10,16 +10,16 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QParameterText is a Querydsl query type for ParameterText
+ * QParameterBooleanEntity is a Querydsl query type for ParameterBooleanEntity
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QParameterText extends EntityPathBase<ParameterText> {
+public class QParameterBooleanEntity extends EntityPathBase<ParameterBooleanEntity> {
 
-    private static final long serialVersionUID = 829516896L;
+    private static final long serialVersionUID = 815317080L;
 
-    public static final QParameterText parameterText = new QParameterText("parameterText");
+    public static final QParameterBooleanEntity parameterBooleanEntity = new QParameterBooleanEntity("parameterBooleanEntity");
 
-    public final QParameter _super = new QParameter(this);
+    public final QParameterEntity _super = new QParameterEntity(this);
 
     //inherited
     public final StringPath domain = _super.domain;
@@ -35,16 +35,16 @@ public class QParameterText extends EntityPathBase<ParameterText> {
 
     public final SimplePath<Object> value = createSimple("value", Object.class);
 
-    public QParameterText(String variable) {
-        super(ParameterText.class, forVariable(variable));
+    public QParameterBooleanEntity(String variable) {
+        super(ParameterBooleanEntity.class, forVariable(variable));
     }
 
-    public QParameterText(Path<? extends ParameterText> path) {
+    public QParameterBooleanEntity(Path<? extends ParameterBooleanEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QParameterText(PathMetadata metadata) {
-        super(ParameterText.class, metadata);
+    public QParameterBooleanEntity(PathMetadata metadata) {
+        super(ParameterBooleanEntity.class, metadata);
     }
 
 }

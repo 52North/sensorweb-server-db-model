@@ -11,18 +11,18 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QParameterCategory is a Querydsl query type for ParameterCategory
+ * QParameterQuantityEntity is a Querydsl query type for ParameterQuantityEntity
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QParameterCategory extends EntityPathBase<ParameterCategory> {
+public class QParameterQuantityEntity extends EntityPathBase<ParameterQuantityEntity> {
 
-    private static final long serialVersionUID = 1193349809L;
+    private static final long serialVersionUID = 1306026945L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QParameterCategory parameterCategory = new QParameterCategory("parameterCategory");
+    public static final QParameterQuantityEntity parameterQuantityEntity = new QParameterQuantityEntity("parameterQuantityEntity");
 
-    public final QParameter _super = new QParameter(this);
+    public final QParameterEntity _super = new QParameterEntity(this);
 
     //inherited
     public final StringPath domain = _super.domain;
@@ -40,23 +40,23 @@ public class QParameterCategory extends EntityPathBase<ParameterCategory> {
 
     public final SimplePath<Object> value = createSimple("value", Object.class);
 
-    public QParameterCategory(String variable) {
-        this(ParameterCategory.class, forVariable(variable), INITS);
+    public QParameterQuantityEntity(String variable) {
+        this(ParameterQuantityEntity.class, forVariable(variable), INITS);
     }
 
-    public QParameterCategory(Path<? extends ParameterCategory> path) {
+    public QParameterQuantityEntity(Path<? extends ParameterQuantityEntity> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QParameterCategory(PathMetadata metadata) {
+    public QParameterQuantityEntity(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QParameterCategory(PathMetadata metadata, PathInits inits) {
-        this(ParameterCategory.class, metadata, inits);
+    public QParameterQuantityEntity(PathMetadata metadata, PathInits inits) {
+        this(ParameterQuantityEntity.class, metadata, inits);
     }
 
-    public QParameterCategory(Class<? extends ParameterCategory> type, PathMetadata metadata, PathInits inits) {
+    public QParameterQuantityEntity(Class<? extends ParameterQuantityEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.unit = inits.isInitialized("unit") ? new org.n52.series.db.beans.QUnitEntity(forProperty("unit")) : null;
     }

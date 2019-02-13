@@ -10,16 +10,16 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QParameterBoolean is a Querydsl query type for ParameterBoolean
+ * QParameterXmlEntity is a Querydsl query type for ParameterXmlEntity
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QParameterBoolean extends EntityPathBase<ParameterBoolean> {
+public class QParameterXmlEntity extends EntityPathBase<ParameterXmlEntity> {
 
-    private static final long serialVersionUID = 378672149L;
+    private static final long serialVersionUID = -943434873L;
 
-    public static final QParameterBoolean parameterBoolean = new QParameterBoolean("parameterBoolean");
+    public static final QParameterXmlEntity parameterXmlEntity = new QParameterXmlEntity("parameterXmlEntity");
 
-    public final QParameter _super = new QParameter(this);
+    public final QParameterEntity _super = new QParameterEntity(this);
 
     //inherited
     public final StringPath domain = _super.domain;
@@ -35,16 +35,16 @@ public class QParameterBoolean extends EntityPathBase<ParameterBoolean> {
 
     public final SimplePath<Object> value = createSimple("value", Object.class);
 
-    public QParameterBoolean(String variable) {
-        super(ParameterBoolean.class, forVariable(variable));
+    public QParameterXmlEntity(String variable) {
+        super(ParameterXmlEntity.class, forVariable(variable));
     }
 
-    public QParameterBoolean(Path<? extends ParameterBoolean> path) {
+    public QParameterXmlEntity(Path<? extends ParameterXmlEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QParameterBoolean(PathMetadata metadata) {
-        super(ParameterBoolean.class, metadata);
+    public QParameterXmlEntity(PathMetadata metadata) {
+        super(ParameterXmlEntity.class, metadata);
     }
 
 }

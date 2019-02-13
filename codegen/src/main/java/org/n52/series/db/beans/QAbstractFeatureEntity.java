@@ -1,16 +1,13 @@
 package org.n52.series.db.beans;
 
-import static com.querydsl.core.types.PathMetadataFactory.forVariable;
+import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.querydsl.core.types.dsl.*;
 
-import com.querydsl.core.types.Path;
 import com.querydsl.core.types.PathMetadata;
-import com.querydsl.core.types.dsl.EntityPathBase;
-import com.querydsl.core.types.dsl.NumberPath;
+import javax.annotation.Generated;
+import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import com.querydsl.core.types.dsl.SetPath;
-import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -27,7 +24,7 @@ public class QAbstractFeatureEntity extends EntityPathBase<AbstractFeatureEntity
 
     public final QHierarchicalEntity _super = new QHierarchicalEntity(this);
 
-    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> children = this.<AbstractFeatureEntity<?>, QAbstractFeatureEntity>createSet("children", AbstractFeatureEntity.class, QAbstractFeatureEntity.class, PathInits.DIRECT2);
+    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> children = this.<AbstractFeatureEntity, QAbstractFeatureEntity>createSet("children", AbstractFeatureEntity.class, QAbstractFeatureEntity.class, PathInits.DIRECT2);
 
     public final StringPath description = createString("description");
 
@@ -45,9 +42,9 @@ public class QAbstractFeatureEntity extends EntityPathBase<AbstractFeatureEntity
 
     public final QCodespaceEntity nameCodespace;
 
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters = this.<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter>createSet("parameters", org.n52.series.db.beans.parameter.Parameter.class, org.n52.series.db.beans.parameter.QParameter.class, PathInits.DIRECT2);
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
-    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents = this.<AbstractFeatureEntity<?>, QAbstractFeatureEntity>createSet("parents", AbstractFeatureEntity.class, QAbstractFeatureEntity.class, PathInits.DIRECT2);
+    public final SetPath<AbstractFeatureEntity, QAbstractFeatureEntity> parents = this.<AbstractFeatureEntity, QAbstractFeatureEntity>createSet("parents", AbstractFeatureEntity.class, QAbstractFeatureEntity.class, PathInits.DIRECT2);
 
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations = this.<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nFeatureEntity.class, org.n52.series.db.beans.i18n.QI18nFeatureEntity.class, PathInits.DIRECT2);
 

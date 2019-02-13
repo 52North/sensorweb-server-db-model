@@ -10,16 +10,16 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QParameterJson is a Querydsl query type for ParameterJson
+ * QParameterJsonEntity is a Querydsl query type for ParameterJsonEntity
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QParameterJson extends EntityPathBase<ParameterJson> {
+public class QParameterJsonEntity extends EntityPathBase<ParameterJsonEntity> {
 
-    private static final long serialVersionUID = 829232155L;
+    private static final long serialVersionUID = -1197923362L;
 
-    public static final QParameterJson parameterJson = new QParameterJson("parameterJson");
+    public static final QParameterJsonEntity parameterJsonEntity = new QParameterJsonEntity("parameterJsonEntity");
 
-    public final QParameter _super = new QParameter(this);
+    public final QParameterEntity _super = new QParameterEntity(this);
 
     //inherited
     public final StringPath domain = _super.domain;
@@ -35,16 +35,16 @@ public class QParameterJson extends EntityPathBase<ParameterJson> {
 
     public final SimplePath<Object> value = createSimple("value", Object.class);
 
-    public QParameterJson(String variable) {
-        super(ParameterJson.class, forVariable(variable));
+    public QParameterJsonEntity(String variable) {
+        super(ParameterJsonEntity.class, forVariable(variable));
     }
 
-    public QParameterJson(Path<? extends ParameterJson> path) {
+    public QParameterJsonEntity(Path<? extends ParameterJsonEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QParameterJson(PathMetadata metadata) {
-        super(ParameterJson.class, metadata);
+    public QParameterJsonEntity(PathMetadata metadata) {
+        super(ParameterJsonEntity.class, metadata);
     }
 
 }

@@ -1,18 +1,13 @@
 package org.n52.series.db.beans;
 
-import static com.querydsl.core.types.PathMetadataFactory.forVariable;
+import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.querydsl.core.types.dsl.*;
 
-import com.querydsl.core.types.Path;
 import com.querydsl.core.types.PathMetadata;
-import com.querydsl.core.types.dsl.BooleanPath;
-import com.querydsl.core.types.dsl.DateTimePath;
-import com.querydsl.core.types.dsl.EntityPathBase;
-import com.querydsl.core.types.dsl.NumberPath;
+import javax.annotation.Generated;
+import com.querydsl.core.types.Path;
 import com.querydsl.core.types.dsl.PathInits;
-import com.querydsl.core.types.dsl.SetPath;
-import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -29,9 +24,6 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
 
     public final QCompositeDataEntity _super;
 
-    //inherited
-    public final BooleanPath child;
-
     // inherited
     public final QDatasetEntity dataset;
 
@@ -42,6 +34,9 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     public final StringPath description;
 
     public final StringPath encoding = createString("encoding");
+
+    // inherited
+    public final org.n52.series.db.beans.ereporting.QEReportingProfileDataEntity ereportingProfile;
 
     // inherited
     public final QGeometryEntity geometryEntity;
@@ -62,10 +57,10 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
 
     //inherited
-    public final BooleanPath parent;
+    public final NumberPath<Long> parent;
 
     //inherited
     public final SetPath<RelatedDataEntity, QRelatedDataEntity> relatedObservations;
@@ -82,12 +77,15 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     public final StringPath structure = createString("structure");
 
     //inherited
+    public final SetPath<org.n52.series.db.beans.i18n.I18nDataEntity, org.n52.series.db.beans.i18n.QI18nDataEntity> translations;
+
+    //inherited
     public final DateTimePath<java.util.Date> validTimeEnd;
 
     //inherited
     public final DateTimePath<java.util.Date> validTimeStart;
 
-    public final SetPath<DataEntity<?>, QDataEntity> value = this.<DataEntity<?>, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
+    public final SetPath<DataEntity, QDataEntity> value = this.<DataEntity, QDataEntity>createSet("value", DataEntity.class, QDataEntity.class, PathInits.DIRECT2);
 
     //inherited
     public final StringPath valueDescription;
@@ -123,10 +121,10 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     public QDataArrayDataEntity(Class<? extends DataArrayDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QCompositeDataEntity(type, metadata, inits);
-        this.child = _super.child;
         this.dataset = _super.dataset;
         this.deleted = _super.deleted;
         this.description = _super.description;
+        this.ereportingProfile = _super.ereportingProfile;
         this.geometryEntity = _super.geometryEntity;
         this.id = _super.id;
         this.identifier = _super.identifier;
@@ -139,6 +137,7 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
         this.resultTime = _super.resultTime;
         this.samplingTimeEnd = _super.samplingTimeEnd;
         this.samplingTimeStart = _super.samplingTimeStart;
+        this.translations = _super.translations;
         this.validTimeEnd = _super.validTimeEnd;
         this.validTimeStart = _super.validTimeStart;
         this.valueDescription = _super.valueDescription;

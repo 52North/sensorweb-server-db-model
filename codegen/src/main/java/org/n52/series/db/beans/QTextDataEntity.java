@@ -24,9 +24,6 @@ public class QTextDataEntity extends EntityPathBase<TextDataEntity> {
 
     public final QDataEntity _super;
 
-    //inherited
-    public final BooleanPath child;
-
     // inherited
     public final QDatasetEntity dataset;
 
@@ -35,6 +32,9 @@ public class QTextDataEntity extends EntityPathBase<TextDataEntity> {
 
     //inherited
     public final StringPath description;
+
+    // inherited
+    public final org.n52.series.db.beans.ereporting.QEReportingProfileDataEntity ereportingProfile;
 
     // inherited
     public final QGeometryEntity geometryEntity;
@@ -55,10 +55,10 @@ public class QTextDataEntity extends EntityPathBase<TextDataEntity> {
     public final QCodespaceEntity nameCodespace;
 
     //inherited
-    public final SetPath<org.n52.series.db.beans.parameter.Parameter<?>, org.n52.series.db.beans.parameter.QParameter> parameters;
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
 
     //inherited
-    public final BooleanPath parent;
+    public final NumberPath<Long> parent;
 
     //inherited
     public final SetPath<RelatedDataEntity, QRelatedDataEntity> relatedObservations;
@@ -71,6 +71,9 @@ public class QTextDataEntity extends EntityPathBase<TextDataEntity> {
 
     //inherited
     public final DateTimePath<java.util.Date> samplingTimeStart;
+
+    //inherited
+    public final SetPath<org.n52.series.db.beans.i18n.I18nDataEntity, org.n52.series.db.beans.i18n.QI18nDataEntity> translations;
 
     //inherited
     public final DateTimePath<java.util.Date> validTimeEnd;
@@ -114,10 +117,10 @@ public class QTextDataEntity extends EntityPathBase<TextDataEntity> {
     public QTextDataEntity(Class<? extends TextDataEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new QDataEntity(type, metadata, inits);
-        this.child = _super.child;
         this.dataset = _super.dataset;
         this.deleted = _super.deleted;
         this.description = _super.description;
+        this.ereportingProfile = _super.ereportingProfile;
         this.geometryEntity = _super.geometryEntity;
         this.id = _super.id;
         this.identifier = _super.identifier;
@@ -130,6 +133,7 @@ public class QTextDataEntity extends EntityPathBase<TextDataEntity> {
         this.resultTime = _super.resultTime;
         this.samplingTimeEnd = _super.samplingTimeEnd;
         this.samplingTimeStart = _super.samplingTimeStart;
+        this.translations = _super.translations;
         this.validTimeEnd = _super.validTimeEnd;
         this.validTimeStart = _super.validTimeStart;
         this.valueDescription = _super.valueDescription;

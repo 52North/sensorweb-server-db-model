@@ -10,16 +10,16 @@ import com.querydsl.core.types.Path;
 
 
 /**
- * QParameterCount is a Querydsl query type for ParameterCount
+ * QParameterTextEntity is a Querydsl query type for ParameterTextEntity
  */
 @Generated("com.querydsl.codegen.EntitySerializer")
-public class QParameterCount extends EntityPathBase<ParameterCount> {
+public class QParameterTextEntity extends EntityPathBase<ParameterTextEntity> {
 
-    private static final long serialVersionUID = -70184900L;
+    private static final long serialVersionUID = 201946211L;
 
-    public static final QParameterCount parameterCount = new QParameterCount("parameterCount");
+    public static final QParameterTextEntity parameterTextEntity = new QParameterTextEntity("parameterTextEntity");
 
-    public final QParameter _super = new QParameter(this);
+    public final QParameterEntity _super = new QParameterEntity(this);
 
     //inherited
     public final StringPath domain = _super.domain;
@@ -35,16 +35,16 @@ public class QParameterCount extends EntityPathBase<ParameterCount> {
 
     public final SimplePath<Object> value = createSimple("value", Object.class);
 
-    public QParameterCount(String variable) {
-        super(ParameterCount.class, forVariable(variable));
+    public QParameterTextEntity(String variable) {
+        super(ParameterTextEntity.class, forVariable(variable));
     }
 
-    public QParameterCount(Path<? extends ParameterCount> path) {
+    public QParameterTextEntity(Path<? extends ParameterTextEntity> path) {
         super(path.getType(), path.getMetadata());
     }
 
-    public QParameterCount(PathMetadata metadata) {
-        super(ParameterCount.class, metadata);
+    public QParameterTextEntity(PathMetadata metadata) {
+        super(ParameterTextEntity.class, metadata);
     }
 
 }

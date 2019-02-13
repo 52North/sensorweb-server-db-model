@@ -1,19 +1,19 @@
 package org.n52.series.db.beans;
 
-import static com.querydsl.core.types.PathMetadataFactory.forVariable;
+import static com.querydsl.core.types.PathMetadataFactory.*;
 
-import javax.annotation.Generated;
+import com.querydsl.core.types.dsl.*;
 
-import com.querydsl.core.types.Path;
 import com.querydsl.core.types.PathMetadata;
-import com.querydsl.core.types.dsl.EntityPathBase;
+import javax.annotation.Generated;
+import com.querydsl.core.types.Path;
 
 
 /**
  * QHierarchicalEntity is a Querydsl query type for HierarchicalEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QHierarchicalEntity extends EntityPathBase<HierarchicalEntity<?>> {
+public class QHierarchicalEntity extends EntityPathBase<HierarchicalEntity<OfferingEntity>> {
 
     private static final long serialVersionUID = -800290307L;
 
