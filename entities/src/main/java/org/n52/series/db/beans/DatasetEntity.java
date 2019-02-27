@@ -19,11 +19,8 @@ package org.n52.series.db.beans;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -116,9 +113,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     private String originTimezone;
 
-    private final Set<RelatedDatasetEntity> relatedDatasets = new LinkedHashSet<>();
+    private Set<RelatedDatasetEntity> relatedDatasets;
 
-    private List<DatasetEntity> referenceValues = new ArrayList<>();
+    private List<DatasetEntity> referenceValues;
 
     private Integer numberOfDecimals;
 
@@ -129,23 +126,26 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     private EReportingProfileDatasetEntity ereportingProfile;
 
     public DatasetEntity() {
-        this(ValueType.not_initialized);
+        this(DatasetType.not_initialized, ObservationType.not_initialized, ValueType.not_initialized);
     }
 
-    public DatasetEntity(String type) {
-        this(ValueType.valueOf(type));
+    public DatasetEntity(String datasetType, String observationType, String valueType) {
+        this(DatasetType.valueOf(datasetType), ObservationType.valueOf(observationType), ValueType.valueOf(valueType));
     }
 
-    public DatasetEntity(ValueType type) {
-        this.valueType = type;
+    public DatasetEntity(DatasetType datasetType, ObservationType observationType, ValueType valueType) {
+        this.datasetType = datasetType;
+        this.observationType = observationType;
+        this.valueType = valueType;
     }
 
     public CategoryEntity getCategory() {
         return category;
     }
 
-    public void setCategory(CategoryEntity category) {
+    public DatasetEntity setCategory(CategoryEntity category) {
         this.category = category;
+        return this;
     }
 
     public PhenomenonEntity getPhenomenon() {
@@ -191,8 +191,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return feature;
     }
 
-    public void setFeature(AbstractFeatureEntity<?> feature) {
+    public DatasetEntity setFeature(AbstractFeatureEntity<?> feature) {
         this.feature = feature;
+        return this;
     }
 
     public boolean isSetFeature() {
@@ -203,16 +204,18 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return platform;
     }
 
-    public void setPlatform(PlatformEntity platform) {
+    public DatasetEntity setPlatform(PlatformEntity platform) {
         this.platform = platform;
+        return this;
     }
 
     public Boolean isPublished() {
         return published;
     }
 
-    public void setPublished(boolean published) {
+    public DatasetEntity setPublished(boolean published) {
         this.published = published;
+        return this;
     }
 
     public boolean isDeleted() {
@@ -249,8 +252,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return Utils.createUnmutableTimestamp(firstValueAt);
     }
 
-    public void setFirstValueAt(Date firstValueAt) {
+    public DatasetEntity setFirstValueAt(Date firstValueAt) {
         this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
+        return this;
     }
 
     public boolean isSetFirstValueAt() {
@@ -261,8 +265,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return Utils.createUnmutableTimestamp(lastValueAt);
     }
 
-    public void setLastValueAt(Date lastValueAt) {
+    public DatasetEntity setLastValueAt(Date lastValueAt) {
         this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
+        return this;
     }
 
     public boolean isSetLastValueAt() {
@@ -273,56 +278,63 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return firstObservation;
     }
 
-    public void setFirstObservation(DataEntity<?> firstObservation) {
+    public DatasetEntity setFirstObservation(DataEntity<?> firstObservation) {
         this.firstObservation = firstObservation;
+        return this;
     }
 
     public DataEntity<?> getLastObservation() {
         return lastObservation;
     }
 
-    public void setLastObservation(DataEntity<?> lastObservation) {
+    public DatasetEntity setLastObservation(DataEntity<?> lastObservation) {
         this.lastObservation = lastObservation;
+        return this;
     }
 
     public BigDecimal getFirstQuantityValue() {
         return firstQuantityValue;
     }
 
-    public void setFirstQuantityValue(BigDecimal firstValue) {
+    public DatasetEntity setFirstQuantityValue(BigDecimal firstValue) {
         this.firstQuantityValue = firstValue;
+        return this;
     }
 
     public BigDecimal getLastQuantityValue() {
         return lastQuantityValue;
     }
 
-    public void setLastQuantityValue(BigDecimal lastValue) {
+    public DatasetEntity setLastQuantityValue(BigDecimal lastValue) {
         this.lastQuantityValue = lastValue;
+        return this;
     }
 
     public DatasetType getDatasetType() {
         return datasetType;
     }
 
-    public void setDatasetType(DatasetType datasetType) {
+    public DatasetEntity setDatasetType(DatasetType datasetType) {
         this.datasetType = datasetType;
+        return this;
     }
 
     public ObservationType getObservationType() {
         return observationType;
     }
 
-    public void setObservationType(ObservationType observationType) {
+    public DatasetEntity setObservationType(ObservationType observationType) {
         this.observationType = observationType;
+        return this;
     }
 
     public ValueType getValueType() {
         return valueType;
     }
 
-    public void setValueType(ValueType valueType) {
+    public DatasetEntity setValueType(ValueType valueType) {
         this.valueType = valueType;
+        return this;
     }
 
     /**
@@ -341,22 +353,18 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
      * @since 2.0.0
      */
 
-    public void setResultTimes(Set<Date> resultTimes) {
+    public DatasetEntity setResultTimes(Set<Date> resultTimes) {
         this.resultTimes = wrapToUnmutables(resultTimes);
-    }
-
-    private Set<Date> wrapToUnmutables(Set<Date> dates) {
-        return dates != null
-                ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
-                : null;
+        return this;
     }
 
     public UnitEntity getUnit() {
         return unit;
     }
 
-    public void setUnit(UnitEntity unit) {
+    public DatasetEntity setUnit(UnitEntity unit) {
         this.unit = unit;
+        return this;
     }
 
     public boolean hasUnit() {
@@ -374,11 +382,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return referenceValues;
     }
 
-    public DatasetEntity setReferenceValues(Collection<DatasetEntity> referenceValues) {
-        this.referenceValues.clear();
-        if (referenceValues != null) {
-            this.referenceValues.addAll(referenceValues);
-        }
+    public DatasetEntity setReferenceValues(List<DatasetEntity> referenceValues) {
+        this.referenceValues = referenceValues;
         return this;
     }
 
@@ -395,8 +400,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return this;
     }
 
-    public void setObservationCount(long count) {
+    public DatasetEntity setObservationCount(long count) {
         this.observationCount = count;
+        return this;
     }
 
     public long getObservationCount() {
@@ -429,24 +435,27 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return mobile;
     }
 
-    public void setMobile(boolean mobile) {
+    public DatasetEntity setMobile(boolean mobile) {
         this.mobile = mobile;
+        return this;
     }
 
     public boolean isInsitu() {
         return insitu;
     }
 
-    public void setInsitu(boolean insitu) {
+    public DatasetEntity setInsitu(boolean insitu) {
         this.insitu = insitu;
+        return this;
     }
 
     public String getOriginTimezone() {
         return originTimezone;
     }
 
-    public void setOriginTimezone(String originTimezone) {
+    public DatasetEntity setOriginTimezone(String originTimezone) {
         this.originTimezone = originTimezone;
+        return this;
     }
 
     public boolean isSetOriginTimezone() {
@@ -457,11 +466,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return relatedDatasets;
     }
 
-    public void setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
-        this.relatedDatasets.clear();
-        if (relatedDataset != null) {
-            this.relatedDatasets.addAll(relatedDataset);
-        }
+    public DatasetEntity setRelatedObservations(Set<RelatedDatasetEntity> relatedDataset) {
+        this.relatedDatasets = relatedDataset;
+        return this;
     }
 
     public boolean hasRelatedDatasets() {
@@ -472,8 +479,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return verticalMetadata;
     }
 
-    public void setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
+    public DatasetEntity setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
         this.verticalMetadata = verticalMetadata;
+        return this;
     }
 
     public boolean hasVerticalMetadata() {
@@ -484,8 +492,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return samplingProfile;
     }
 
-    public void setSamplingProfile(SamplingProfileDatasetEntity samplingProfile) {
+    public DatasetEntity setSamplingProfile(SamplingProfileDatasetEntity samplingProfile) {
         this.samplingProfile = samplingProfile;
+        return this;
     }
 
     public boolean hasSamplingProfile() {
@@ -496,8 +505,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return ereportingProfile;
     }
 
-    public void setEreportingProfile(EReportingProfileDatasetEntity ereportingProfile) {
+    public DatasetEntity setEreportingProfile(EReportingProfileDatasetEntity ereportingProfile) {
         this.ereportingProfile = ereportingProfile;
+        return this;
     }
 
     public boolean hasEreportingProfile() {
@@ -564,6 +574,12 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
             setEreportingProfile(new EReportingProfileDatasetEntity().copy(dataset.getEreportingProfile()));
         }
         setUnit(dataset.getUnit());
+    }
+
+    private Set<Date> wrapToUnmutables(Set<Date> dates) {
+        return dates != null
+                ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
+                : null;
     }
 
 }
