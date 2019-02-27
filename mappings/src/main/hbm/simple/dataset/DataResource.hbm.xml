@@ -161,7 +161,7 @@
             </property>
         </subclass>
 
-        <subclass name="BooleanDataEntity" extends="DataEntity" discriminator-value="boolean">
+        <subclass name="BooleanDataEntity" extends="DataEntity" discriminator-value="bool">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>The boolean value of an observation (Boolean/TruthObservation)</comment>
