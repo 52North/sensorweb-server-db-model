@@ -17,7 +17,6 @@
 package org.n52.series.db.beans.sampling;
 
 import java.io.Serializable;
-import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -25,19 +24,16 @@ public class SamplingProfileDatasetEntity implements Serializable {
 
     private static final long serialVersionUID = -6526107787041904177L;
 
-    private final Set<SamplingEntity> samplings = new LinkedHashSet<>();
+    private Set<SamplingEntity> samplings;
 
-    private final Set<MeasuringProgramEntity> measuringPrograms = new LinkedHashSet<>();
+    private Set<MeasuringProgramEntity> measuringPrograms;
 
     public Set<SamplingEntity> getSamplings() {
         return samplings;
     }
 
     public SamplingProfileDatasetEntity setSamplings(Set<SamplingEntity> samplings) {
-        this.samplings.clear();
-        if (samplings != null) {
-            this.samplings.addAll(samplings);
-        }
+        this.samplings = samplings;
         return this;
     }
 
@@ -50,10 +46,7 @@ public class SamplingProfileDatasetEntity implements Serializable {
     }
 
     public SamplingProfileDatasetEntity setMeasuringPrograms(Set<MeasuringProgramEntity> measuringPrograms) {
-        this.measuringPrograms.clear();
-        if (measuringPrograms != null) {
-            this.measuringPrograms.addAll(measuringPrograms);
-        }
+        this.measuringPrograms = measuringPrograms;
         return this;
     }
 

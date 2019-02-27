@@ -20,7 +20,6 @@ import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.common.Utils;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.DatasetEntity;
@@ -36,9 +35,9 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
 
     private Date measuringTimeEnd;
 
-    private final Set<SamplingEntity> samplings = new LinkedHashSet<>();
+    private Set<SamplingEntity> samplings;
 
-    private final Set<DatasetEntity> datasets = new LinkedHashSet<>();
+    private Set<DatasetEntity> datasets;
 
     /**
      * @return the producer
@@ -50,9 +49,11 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param producer
      *            the producer to set
+     * @return
      */
-    public void setProducer(String producer) {
+    public MeasuringProgramEntity setProducer(String producer) {
         this.producer = producer;
+        return this;
     }
 
     /**
@@ -65,9 +66,11 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param orderId
      *            the order id to set
+     * @return
      */
-    public void setOrderId(String orderId) {
+    public MeasuringProgramEntity setOrderId(String orderId) {
         this.setIdentifier(orderId);
+        return this;
     }
 
     /**
@@ -80,9 +83,11 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param measuringTimeStart
      *            the measuringTimeStart
+     * @return
      */
-    public void setMeasuringTimeStart(Date measuringTimeStart) {
+    public MeasuringProgramEntity setMeasuringTimeStart(Date measuringTimeStart) {
         this.measuringTimeStart = Utils.createUnmutableTimestamp(measuringTimeStart);
+        return this;
     }
 
     /**
@@ -95,20 +100,20 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param measuringTimeEnd
      *            the measuringTimeEnd
+     * @return
      */
-    public void setMeasuringTimeEnd(Date measuringTimeEnd) {
+    public MeasuringProgramEntity setMeasuringTimeEnd(Date measuringTimeEnd) {
         this.measuringTimeEnd = Utils.createUnmutableTimestamp(measuringTimeEnd);
+        return this;
     }
 
     public boolean isSetMeasuringTimeEnd() {
         return getMeasuringTimeEnd() != null;
     }
 
-    public void setSamplings(Set<SamplingEntity> samplings) {
-        this.samplings.clear();
-        if (samplings != null) {
-            this.samplings.addAll(samplings);
-        }
+    public MeasuringProgramEntity setSamplings(Set<SamplingEntity> samplings) {
+        this.samplings = samplings;
+        return this;
     }
 
     public Set<SamplingEntity> getSamplings() {
@@ -117,10 +122,7 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
 
     @Override
     public void setDatasets(Set<DatasetEntity> datasets) {
-        this.datasets.clear();
-        if (datasets != null) {
-            this.datasets.addAll(datasets);
-        }
+        this.datasets = datasets;
     }
 
     @Override
