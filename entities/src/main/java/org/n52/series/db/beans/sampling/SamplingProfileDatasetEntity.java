@@ -22,6 +22,9 @@ import java.util.stream.Collectors;
 
 public class SamplingProfileDatasetEntity implements Serializable {
 
+    public static final String PROPERTY_SAMPLINGS = "samplings";
+    public static final String PROPERTY_MEASURING_PROGRAMS = "measuringPrograms";
+
     private static final long serialVersionUID = -6526107787041904177L;
 
     private Set<SamplingEntity> samplings;

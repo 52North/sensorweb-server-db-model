@@ -27,6 +27,14 @@ import org.n52.series.db.beans.DescribableEntity;
 
 public class MeasuringProgramEntity extends DescribableEntity implements HasDatasets {
 
+    public static final String PROPERTY_DATASETS = "datasets";
+
+    public static final String PROPERTY_SAMPLINGS = "samplings";
+
+    public static final String PROPERTY_MEASURING_TIME_START = "measuringTimeStart";
+
+    public static final String PROPERTY_MEASURING_TIME_END = "measuringTimeEnd";
+
     private static final long serialVersionUID = 2525309717383048842L;
 
     private String producer;
