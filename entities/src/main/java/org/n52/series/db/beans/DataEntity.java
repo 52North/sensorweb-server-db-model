@@ -85,8 +85,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     private DatasetEntity dataset;
 
-    private Set<ParameterEntity<?>> parameters = new HashSet<>(0);
-
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
     private String valueIdentifier;
@@ -219,18 +217,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.parent = parent;
     }
 
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
-    }
-
     public DatasetEntity getDataset() {
         return dataset;
     }
@@ -335,12 +321,14 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return getEreportingProfile() != null;
     }
 
+    @Override
     public int compareTo(DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
                 .thenComparing(DataEntity<T>::getSamplingTimeStart).thenComparing(DataEntity<T>::getId)
                 .compare(this, o);
     }
 
+    @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
@@ -348,6 +336,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return result;
     }
 
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -369,6 +358,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return true;
     }
 
+    @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
