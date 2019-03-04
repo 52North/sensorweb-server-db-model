@@ -4,6 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="VerticalMetadataEntity" table="value_profile">
+        <comment>Storage of meta-information about a profile measurement. These are the orientation (height/depth) and name of the depth/height value as they should be named in the output and the unit of the depth/height value. A value_profile must be defined for each dataset containing profile data.</comment>
         <id name="id" type="long" >
              <column name="value_profile_id">
                 <comment>PK column of the table</comment>
@@ -59,7 +60,7 @@
         </many-to-one>
           <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this entry</comment>
+                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </property>
         <property name="verticalOriginName" type="string">

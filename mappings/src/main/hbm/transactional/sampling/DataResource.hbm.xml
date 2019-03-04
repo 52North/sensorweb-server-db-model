@@ -15,37 +15,37 @@
         </id>
         <discriminator force="true" type="string" not-null="true">
             <column name="value_type">
-                <comment>Indicator used by Hibernate to map value specific entities.</comment>
+                <comment>Indicator used by Hibernate to map value specific entities. Valid values are quantity (scalar values in value_quantity), count (integer values in value_count), text (textual values in value_text), category (categorical values in value_category), bool (boolean values in value_boolean), reference (references in value_reference, e.g. link to a source, photo, video)</comment>
             </column>
         </discriminator>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity">
             <column name="fk_dataset_id" not-null="true">
-                <comment>Reference to the dataset to which this data/observation belongs.</comment>
+                <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
-                <comment>The timestamp when the observation period has started.</comment>
+                <comment>The timestamp when the observation period has started or the observation took place. In the the latter, sampling_time_start and sampling_time_end are equal.</comment>
             </column>
         </property>
 
         <property name="samplingTimeEnd" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
-                <comment>The timestamp when the measurement period has finished or the observation took place.</comment>
+                <comment>The timestamp when the measurement period has finished or the observation took place. In the the latter, sampling_time_start and sampling_time_end are equal.</comment>
             </column>
         </property>
 
         <property name="resultTime" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_result_time" name="result_time" length="29" not-null="true">
-                <comment>The timestamp when the observation was published.</comment>
+                <comment>The timestamp when the observation was published. Might be identical with sampling_time_start and sampling_time_end.</comment>
             </column>
         </property>
 
         <property name="identifier" type="string" unique-key="un_observation_identifier">
             <column name="identifier">
-                <comment>Unique identifier of the data/observation which can be for used filtering, e.g. GetObservationById in the SOS</comment>
+                <comment>Unique identifier of the observation which can be for used filtering, e.g. GetObservationById in the SOS. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codespace">
@@ -56,7 +56,7 @@
 
         <property name="name" type="string">
             <column name="name">
-                <comment>The human readable name of the data/observation.</comment>
+                <comment>The human readable name of the observation.</comment>
             </column>
         </property>
 
@@ -67,25 +67,25 @@
         </many-to-one>
         <property name="description" type="string">
             <column name="description">
-                <comment>A short description of the data/observation</comment>
+                <comment>A short description of the observation</comment>
             </column>
         </property>
 
         <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
-                <comment>Flag that indicates if this data/observation is deleted</comment>
+                <comment>Flag that indicates if this observation is deleted</comment>
             </column>
         </property>
 
         <property name="validTimeStart" type="timestamp">
             <column name="valid_time_start" length="29" not-null="false" default="NULL">
-                <comment>The timestamp from when the obervation is valid, e.g. forcasting</comment>
+                <comment>The timestamp from when the obervation is valid, e.g. forcaste observations</comment>
             </column>
         </property>
 
         <property name="validTimeEnd" type="timestamp">
             <column name="valid_time_end" length="29" not-null="false" default="NULL">
-                <comment>The timestamp until when the obervation is valid, e.g. forcasting</comment>
+                <comment>The timestamp until when the obervation is valid, e.g. forcaste observations</comment>
             </column>
         </property>
 
@@ -96,7 +96,7 @@
              -->
             <property name="geometry" type="jts_geometry" not-null="false">
                 <column name="sampling_geometry">
-                    <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations where this geometry is different from the feature geometry.</comment>
+                    <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations (trajectories) where this geometry is different from the feature geometry.</comment>
                 </column>
             </property>
         </component>
@@ -142,18 +142,18 @@
 
         <property name="verticalFrom" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
             <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10">
-                <comment>The start level of a vertical observation, e.g. profiles</comment>
+                <comment>The start level of a vertical observation, required for profile observations</comment>
             </column>
         </property>
         <property name="verticalTo" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
             <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10">
-                <comment>The end level or the level of a vertical observation, e.g. profiles</comment>
+                <comment>The end level or the level of a vertical observation, required for profile observations</comment>
             </column>
         </property>
 
         <property name="parent" type="long" insert="false" update="false">
             <column name="fk_parent_observation_id" not-null="false">
-                <comment>Reference to the parent data/observation</comment>
+                <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
             </column>
         </property>
 
@@ -330,7 +330,7 @@
         </many-to-one>
         <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this entry</comment>
+                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </property>
         <property name="name" type="string">

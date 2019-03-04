@@ -16,7 +16,7 @@
 
         <property name="datasetType" index="idx_dataset_dataset_type">
             <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectroy', 'not_initialized')">
-                <comment>Indicator whether the dataset provides individual observations, timeseries, profiles or trajectories.</comment>
+                <comment>Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations).</comment>
             </column>
             <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">org.n52.series.db.beans.dataset.DatasetType</param>
@@ -26,7 +26,7 @@
 
         <property name="observationType" index="idx_dataset_observation_type">
             <column name="observation_type" scale="20" not-null="true" check="observation_type in ('simple', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
-                <comment>Indicator whether the dataset observations are of type profile, trajectories, timeseries, ... </comment>
+                <comment>Indicator whether the dataset observations are of type simple (a simple observation, e.g. a scalar value like the temperature) or profile (profile observations)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">org.n52.series.db.beans.dataset.ObservationType</param>
@@ -83,7 +83,7 @@
 
         <many-to-one class="UnitEntity" name="unit" foreign-key="fk_dataset_unit">
             <column name="fk_unit_id">
-                <comment>Reference to the unit of the data/observations that belongs to this dataset.</comment>
+                <comment>Reference to the unit of the observations that belongs to this dataset.</comment>
             </column>
         </many-to-one>
 
@@ -125,69 +125,69 @@
 
         <property name="originTimezone" type="string">
             <column name="origin_timezone" not-null="false" length="40">
-                <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin)</comment>
+                <comment>Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin). It no time zone is defined, UTC would be used as default.</comment>
             </column>
         </property>
 
         <property name="firstValueAt" type="timestamp">
             <column name="first_time">
-                <comment>The timestamp of the temporally first data/observation that belongs to this dataset.</comment>
+                <comment>The timestamp of the temporally first observation that belongs to this dataset.</comment>
             </column>
         </property>
         <property name="lastValueAt" type="timestamp">
             <column name="last_time">
-                <comment>The timestamp of the temporally last data/observation that belongs to this dataset.</comment>
+                <comment>The timestamp of the temporally last observation that belongs to this dataset.</comment>
             </column>
         </property>
         <property name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
             <column name="first_value" precision="20" scale="10">
-                <comment>The value of the temporally first data/observation that belongs to this dataset.</comment>
+                <comment>The value of the temporally first observation that belongs to this dataset.</comment>
             </column>
         </property>
         <property name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
             <column name="last_value" precision="20" scale="10">
-                <comment>The value of the temporally last quantity data/observation that belongs to this dataset.</comment>
+                <comment>The value of the temporally last quantity observation that belongs to this dataset.</comment>
             </column>
         </property>
         <many-to-one class="DataEntity" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs">
             <column name="fk_first_observation_id">
-                <comment>Reference to the temporally first data/observation in the observation table that belongs to this dataset.</comment>
+                <comment>Reference to the temporally first observation in the observation table that belongs to this dataset.</comment>
             </column>
         </many-to-one>
         <many-to-one class="DataEntity" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs">
             <column name="fk_last_observation_id">
-                <comment>Reference to the temporally last data/observation in the observation table that belongs to this dataset.</comment>
+                <comment>Reference to the temporally last observation in the observation table that belongs to this dataset.</comment>
             </column>
         </many-to-one>
 
         <property name="numberOfDecimals" type="int">
             <column name="decimals">
-                <comment>Number of decimals that should be present in the data/observation values</comment>
+                <comment>Number of decimals that should be present in the output of the observation values. If no value is set, all decimals would be present.</comment>
             </column>
         </property>
 
         <list name="referenceValues" table="dataset_reference" inverse="false">
-            <comment>Storage of referenced datasets, e.g. level zero, medium water level,etc. for water level </comment>
+            <comment>Storage of reference datasets, e.g. level zero, medium water level,etc. for water level.</comment>
             <key not-null="true" foreign-key="fk_dataset_reference_from">
                 <column name="fk_dataset_id_from">
-                    <comment>Reference to the dataset that has referenced datasets</comment>
+                    <comment>Reference to the dataset that has reference datasets</comment>
                 </column>
             </key>
             <list-index>
                 <column name="sort_order">
-                     <comment>Provides the sort order for the referenced datasets.</comment>
+                     <comment>Provides the sort order for the reference datasets.</comment>
                 </column>
             </list-index>
             <many-to-many class="DatasetEntity" foreign-key="fk_dataset_reference_to">
                 <column name="fk_dataset_id_to">
-                    <comment>Reference to the dataset that is the reference</comment>
+                    <comment>Reference to the dataset that belongs to another dataset and provides values like level zero, medium water level,etc. for water level.</comment>
                 </column>
             </many-to-many>
         </list>
 
         <property name="identifier" type="string" index="idx_dataset_identifier">
             <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
-                <comment>Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS</comment>
+                <comment>Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS and can be encoded in WaterML 2.0 oder TimeseriesML 1.0 outputs.</comment>
             </column>
         </property>
 
@@ -250,7 +250,7 @@
         </many-to-one>
          <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this entry</comment>
+                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </property>
         <property name="name" type="string">

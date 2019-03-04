@@ -4,7 +4,7 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="SamplingEntity"
         table="sampling">
-        <comment>Storage of the samplings.</comment>
+        <comment>Storage of the Description of a sampling that was performed in a measuring program.</comment>
         <id name="id" type="long">
             <column name="sampling_id">
                 <comment>PK column of the table</comment>
@@ -22,7 +22,7 @@
 
         <property name="identifier" type="string" index="idx_sampling_identifier">
             <column name="identifier" not-null="false" unique-key="un_sampling_identifier">
-                <comment>The identifier of the sampling.</comment>
+                <comment>The identifier of the sampling. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
 
@@ -40,7 +40,7 @@
 
          <property name="sampler" type="string">
             <column name="sampler">
-                <comment>The sampler who take the sample.</comment>
+                <comment>The sampler (e.g. name of a person or an organization) who take the sample.</comment>
             </column>
         </property>
 
@@ -52,32 +52,32 @@
 
          <property name="environmentalConditions" type="string">
             <column name="environmental_conditions">
-                <comment>The environmental conditions when the sample was made.</comment>
+                <comment>The environmental conditions when the sample was made, e.g. sunny, dry, hot</comment>
             </column>
         </property>
 
         <property name="samplingTimeStart" type="timestamp">
             <column index="idx_samplg_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
-                <comment>The timestamp when the observation period has started.</comment>
+                <comment>The timestamp when the sampling period has started.</comment>
             </column>
         </property>
 
         <property name="samplingTimeEnd" type="timestamp">
             <column index="idx_samplg_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
-                <comment>The timestamp when the measurement period has finished or the observation took place.</comment>
+                <comment>The timestamp when the sampling period has finished.</comment>
             </column>
         </property>
 
         <set inverse="false" name="datasets" table="sampling_dataset" >
-            <comment>Storage of relations between dataset and related samplings</comment>
+            <comment>Storage of relations between datasets and related samplings</comment>
             <key not-null="true" foreign-key="fk_sampling_dataset">
                 <column name="fk_sampling_id">
-                    <comment>The reference to the sampling in the dataset samplingThe reference to the dataset in the dataset table</comment>
+                    <comment>The reference to the sampling in the sampling table.</comment>
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_sampling">
                 <column name="fk_dataset_id">
-                    <comment>The reference to the dataset in the dataset table</comment>
+                    <comment>The reference to the dataset in the dataset table that provides observations related to the sampling.</comment>
                 </column>
             </many-to-many>
         </set>
@@ -109,7 +109,7 @@
         </many-to-one>
          <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this entry</comment>
+                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </property>
         <property name="name" type="string">
