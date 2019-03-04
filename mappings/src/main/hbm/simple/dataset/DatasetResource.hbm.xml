@@ -35,8 +35,8 @@
         </property>
 
         <property name="valueType" index="idx_dataset_value_type">
-            <column name="value_type" scale="20" not-null="true" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'referenced')">
-                <comment>Indicator of the type of the single values.</comment>
+            <column name="value_type" scale="20" not-null="true" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'reference')">
+                <comment>Indicator of the type of the single values. Valid values are quantity (scalar values), count (integer values), text (textual values), category (categorical values), bool (boolean values), reference (references, e.g. link to a source, photo, video)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
                 <param name="enumClass">org.n52.series.db.beans.dataset.ValueType</param>
