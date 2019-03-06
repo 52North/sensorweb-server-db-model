@@ -15,7 +15,7 @@
         </id>
 
         <property name="datasetType" index="idx_dataset_dataset_type">
-            <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectroy', 'not_initialized')">
+            <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectory', 'not_initialized')">
                 <comment>Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations).</comment>
             </column>
             <type name="org.hibernate.type.EnumType">
