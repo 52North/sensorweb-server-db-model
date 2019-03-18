@@ -133,7 +133,6 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
     }
 
     @Override
-    @Override
     public ServiceEntity getService() {
         return service;
     }
