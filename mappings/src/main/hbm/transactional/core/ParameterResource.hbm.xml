@@ -3,7 +3,7 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="ParameterEntity" table="parameter" check="type in ('boolean', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
+    <class name="ParameterEntity" table="parameter" check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
         <comment>Storage for additional information for features, observations or datasets</comment>
         <id name="id" type="long">
             <column name="parameter_id">
@@ -33,7 +33,7 @@
                 <comment>The domain this parameter belongs to.</comment>
             </column>
         </property>
-        <subclass discriminator-value="boolean" extends="ParameterEntity" name="ParameterBooleanEntity">
+        <subclass discriminator-value="bool" extends="ParameterEntity" name="ParameterBooleanEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>Storage of a boolean parameter value.</comment>

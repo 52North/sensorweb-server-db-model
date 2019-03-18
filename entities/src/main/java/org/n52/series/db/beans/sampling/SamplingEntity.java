@@ -28,6 +28,14 @@ import org.n52.series.db.common.Utils;
 
 public class SamplingEntity extends DescribableEntity implements HasDatasets, HasSamplingTime {
 
+    public static final String PROPERTY_DATASETS = "datasets";
+
+    public static final String PROPERTY_MEASURING_PROGRAM = "measuringProgram";
+
+    public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
+
+    public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
+
     private static final long serialVersionUID = -8840602794587590180L;
 
     private Set<DatasetEntity> datasets;
@@ -121,6 +129,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
     /**
      * @return the samplingTimeStart
      */
+    @Override
     public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -129,6 +138,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      * @param samplingTimeStart
      *            the samplingTimeStart
      */
+    @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -136,6 +146,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
     /**
      * @return the samplingTimeEnd
      */
+    @Override
     public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -144,6 +155,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      * @param samplingTimeEnd
      *            the samplingTimeEnd
      */
+    @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }

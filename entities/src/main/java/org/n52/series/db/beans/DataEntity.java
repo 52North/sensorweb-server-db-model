@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
@@ -84,8 +83,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     private Long parent;
 
     private DatasetEntity dataset;
-
-    private Set<ParameterEntity<?>> parameters = new HashSet<>(0);
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -219,21 +216,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.parent = parent;
     }
 
-    @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
-    }
-
     public DatasetEntity getDataset() {
         return dataset;
     }
@@ -339,7 +321,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     @Override
-    public int compareTo(final DataEntity<T> o) {
+    public int compareTo(DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
                 .thenComparing(DataEntity<T>::getSamplingTimeStart).thenComparing(DataEntity<T>::getId)
                 .compare(this, o);
@@ -354,7 +336,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }

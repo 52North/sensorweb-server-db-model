@@ -16,15 +16,25 @@
  */
 package org.n52.series.db.beans;
 
+import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
+import java.util.Locale.LanguageRange;
 import java.util.stream.Collectors;
 
+import org.n52.janmayen.i18n.LocaleHelper;
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 public interface Describable extends IdentifierNameDescriptionEntity, HasId {
+
+    String LOCALE_REGEX = "[-_# ]";
+
+    ServiceEntity getService();
+
+    DescribableEntity setService(ServiceEntity service);
 
     Set<I18nEntity<? extends Describable>> getTranslations();
 
@@ -42,12 +52,6 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
         return hasParameters() ? getParameters().stream().map(e -> e.toValueMap(locale)).collect(Collectors.toSet())
                 : null;
     }
-
-    ServiceEntity getService();
-
-    DescribableEntity setService(ServiceEntity service);
-
-    String getNameI18n(String locale);
 
     default String getLabelFrom(String locale) {
         if (isi18nNameAvailable(locale)) {
@@ -78,8 +82,49 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
         return getTranslations() == null || locale == null || getTranslations().isEmpty() || locale.isEmpty();
     }
 
+    default String getNameI18n(String locale) {
+        if (noTranslationAvailable(locale)) {
+            return getName();
+        }
+        I18nEntity<? extends Describable> translation = getTranslation(locale);
+        return translation != null ? translation.getName() : getName();
+    }
+
+    default String getDescriptionI18n(String locale) {
+        if (noTranslationAvailable(locale)) {
+            return getDescription();
+        }
+        I18nEntity<? extends Describable> translation = getTranslation(locale);
+        return translation != null ? translation.getDescription() : getDescription();
+    }
+
     default String getCountryCode(String locale) {
-        return locale.split("_")[0];
+        if (locale != null) {
+            return locale.split(LOCALE_REGEX).length > 1 ? locale.split(LOCALE_REGEX)[1]
+                    : locale.split(LOCALE_REGEX)[0];
+        }
+        return "";
+    }
+
+    default I18nEntity<? extends Describable> getTranslation(String locale) {
+        if (!noTranslationAvailable(locale)) {
+            String countryCode = getCountryCode(locale);
+            Locale matchingLocale = getMatchingLocale(getTranslations(), locale);
+            for (I18nEntity<? extends Describable> translation : getTranslations()) {
+                Locale translatedLocale = LocaleHelper.decode(translation.getLocale());
+                if (translatedLocale.equals(matchingLocale)
+                        || translatedLocale.getCountry().equalsIgnoreCase(countryCode)) {
+                    return translation;
+                }
+            }
+        }
+        return null;
+    }
+
+    default Locale getMatchingLocale(Set<I18nEntity<? extends Describable>> translations, String queriedLocale) {
+        List<LanguageRange> localeRange = Locale.LanguageRange.parse(queriedLocale);
+        return Locale.lookup(localeRange,
+                translations.stream().map(t -> LocaleHelper.decode(t.getLocale())).collect(Collectors.toSet()));
     }
 
 }

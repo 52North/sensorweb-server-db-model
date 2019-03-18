@@ -4,7 +4,7 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="UnitEntity" table="unit">
-        <comment>Storage of the units of measurement</comment>
+        <comment>Storage of the units of measurement of the observation values. These may be °C or m as the unit for depth/height information.</comment>
         <id name="id" type="long">
             <column name="unit_id">
                 <comment>PK column of the table</comment>
@@ -20,12 +20,12 @@
         </property>
         <property name="name" type="string">
             <column name="name" not-null="false">
-                <comment>Human readable name of the unit.</comment>
+                <comment>Human readable name of the unit, e.g degree celsius or meter</comment>
             </column>
         </property>
         <property name="link" type="string">
             <column name="link" not-null="false">
-                <comment>Reference to a description of the unit.</comment>
+                <comment>Link/reference to an external description of the unit, e.g. to a vocabulary..</comment>
             </column>
         </property>
         <!-- Comments for the translations are defined below! -->
@@ -52,7 +52,7 @@
         </many-to-one>
         <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this unit</comment>
+                <comment>Locale/language specification for this unit. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </property>
         <property name="name" type="string">
