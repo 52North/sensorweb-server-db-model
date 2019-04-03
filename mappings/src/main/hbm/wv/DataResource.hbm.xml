@@ -108,12 +108,12 @@
         </property>
 
         <property name="verticalFrom" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
-            <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10">
+            <column name="vertical_from" not-null="true" default="0" precision="20" scale="10">
                 <comment>The start level of a vertical observation, e.g. profiles</comment>
             </column>
         </property>
         <property name="verticalTo" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
-            <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10">
+            <column name="vertical_to" not-null="true" default="0" precision="20" scale="10">
                 <comment>The end level or the level of a vertical observation, e.g. profiles</comment>
             </column>
         </property>

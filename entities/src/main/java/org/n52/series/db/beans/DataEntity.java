@@ -60,7 +60,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
 
-    public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
+    public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(0);
 
     private static final long serialVersionUID = 273612846605300612L;
 
