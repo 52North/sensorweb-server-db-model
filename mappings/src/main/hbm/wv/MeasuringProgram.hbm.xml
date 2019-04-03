@@ -9,7 +9,7 @@
             <column name="measuring_program_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">measuring_program_seq</param>
             </generator>
         </id>
@@ -80,7 +80,7 @@
             <column name="measuring_program_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">measuring_program_i18n_seq</param>
             </generator>
         </id>
