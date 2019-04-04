@@ -48,6 +48,25 @@
             </property>
         </component>
 
+        <set name="parents" table="feature_hierarchy" inverse="false" fetch="select">
+            <comment>Storage of hierarchies between features</comment>
+            <key not-null="true" foreign-key="fk_feature_child">
+                <column name="fk_child_feature_id">
+                    <comment>Reference to the child feature in feature table.</comment>
+                </column>
+            </key>
+            <many-to-many class="AbstractFeatureEntity" foreign-key="fk_feature_parent">
+                <column name="fk_parent_feature_id">
+                    <comment>Reference to the parent feature in feature table.</comment>
+                </column>
+            </many-to-many>
+        </set>
+        <!-- Comments for the children are defined above for parents! -->
+        <set name="children" table="feature_hierarchy" inverse="false" fetch="select">
+            <key column="fk_parent_feature_id" not-null="true" foreign-key="fk_feature_parent" />
+            <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
+        </set>
+
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="feature_i18n" inverse="true" fetch="select">
             <key column="fk_feature_id" not-null="true" />
