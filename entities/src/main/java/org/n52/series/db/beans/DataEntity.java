@@ -272,6 +272,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return (getValueDescription() != null) && !getValueDescription().isEmpty();
     }
 
+    public boolean hasVerticalInterval() {
+        return hasVerticalFrom() && hasVerticalTo() && getVerticalFrom().compareTo(getVerticalTo()) != 0;
+    }
+
     public BigDecimal getVerticalFrom() {
         return verticalFrom;
     }
@@ -281,7 +285,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasVerticalFrom() {
-        return getVerticalFrom() != null && getVerticalFrom().compareTo(NOT_SET_VERTICAL) != 0;
+        return getVerticalFrom() != null;
     }
 
     public BigDecimal getVerticalTo() {
@@ -293,7 +297,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasVerticalTo() {
-        return getVerticalTo() != null && getVerticalTo().compareTo(NOT_SET_VERTICAL) != 0;
+        return getVerticalTo() != null;
     }
 
     public SamplingProfileDataEntity getSamplingProfile() {
