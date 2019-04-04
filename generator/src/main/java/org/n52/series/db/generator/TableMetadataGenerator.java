@@ -106,7 +106,6 @@ public class TableMetadataGenerator extends AbstractGenerator{
         printToScreen("0   simple");
         printToScreen("1   transactional");
         printToScreen("2   ereporting");
-        printToScreen("3   wupperverband");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -204,11 +203,11 @@ public class TableMetadataGenerator extends AbstractGenerator{
         for (PersistentClass entity : metadata.getEntityBindings()) {
             Table table = entity.getTable();
             TableMetadata tm = processTable(table, map, dia, metadata);
-            processJoins((Iterator<Join>) entity.getJoinClosureIterator(), map, dia, metadata);
+            processJoins(entity.getJoinClosureIterator(), map, dia, metadata);
             // from Property
             Iterator<Property> propertyIterator = entity.getPropertyIterator();
             while (propertyIterator.hasNext()) {
-                Property property = (Property) propertyIterator.next();
+                Property property = propertyIterator.next();
                 if (property.getValue() instanceof org.hibernate.mapping.Collection) {
                     processCollection((org.hibernate.mapping.Collection) property.getValue(), map, dia, metadata);
                 }

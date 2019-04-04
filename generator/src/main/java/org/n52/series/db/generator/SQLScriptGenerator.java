@@ -94,7 +94,6 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("0   simple");
         printToScreen("1   transactional");
         printToScreen("2   ereporting");
-        printToScreen("3   wupperverband");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
