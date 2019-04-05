@@ -9,12 +9,12 @@
             <column name="observation_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">observation_seq</param>
             </generator>
         </id>
         <discriminator force="true" type="string" not-null="true">
-            <column name="value_type">
+            <column name="value_type" unique-key="un_observation_identity">
                 <comment>Indicator used by Hibernate to map value specific entities. Valid values are quantity (scalar values in value_quantity), count (integer values in value_count), text (textual values in value_text), category (categorical values in value_category), bool (boolean values in value_boolean), reference (references in value_reference, e.g. link to a source, photo, video)</comment>
             </column>
         </discriminator>
@@ -108,12 +108,12 @@
         </property>
 
         <property name="verticalFrom" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
-            <column name="vertical_from" not-null="true" default="-99999.00" precision="20" scale="10">
+            <column name="vertical_from" not-null="true" default="0" precision="20" scale="10">
                 <comment>The start level of a vertical observation, required for profile observations</comment>
             </column>
         </property>
         <property name="verticalTo" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
-            <column name="vertical_to" not-null="true" default="-99999.00" precision="20" scale="10">
+            <column name="vertical_to" not-null="true" default="0" precision="20" scale="10">
                 <comment>The end level or the level of a vertical observation, required for profile observations</comment>
             </column>
         </property>
@@ -212,7 +212,7 @@
             <column name="observation_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>

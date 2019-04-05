@@ -74,11 +74,6 @@ public abstract class AbstractGenerator {
     protected void setDirectoriesForModelSelection(Concept concept, Profile profile, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
-        if (!concept.equals(Concept.WV)) {
-//        files.add(getDirectory("/hbm/core"));
-//         files.add(getDirectory("/hbm/feature"));
-//         files.add(getDirectory("/hbm/extension"));
-        }
         for (File file : files) {
             if (configuration != null) {
                 configuration.addDirectory(file);
@@ -102,9 +97,6 @@ public abstract class AbstractGenerator {
             break;
         case TRANSACTIONAL:
             paths.addAll(getProfileDirectories("/hbm/transactional", profile));
-            break;
-        case WV:
-            paths.add("/hbm/wv");
             break;
         default:
             throw new Exception("The entered value is invalid: " + concept);
@@ -176,8 +168,7 @@ public abstract class AbstractGenerator {
     enum Concept {
         SIMPLE,
         TRANSACTIONAL,
-        E_REPORTING,
-        WV;
+        E_REPORTING;
 
         @Override
         public String toString() {
