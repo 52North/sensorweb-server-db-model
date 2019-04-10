@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52.series.db</groupId>
         <artifactId>parent</artifactId>
-        <version>1.0.0-alpha.4</version>
+        <version>1.0.0-SNAPSHOT</version>
     </parent>
     <artifactId>mappings</artifactId>
     <packaging>jar</packaging>
