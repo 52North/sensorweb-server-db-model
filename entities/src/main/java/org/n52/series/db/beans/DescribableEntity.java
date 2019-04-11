@@ -17,10 +17,8 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -115,30 +113,24 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
         this.description = description;
     }
 
+    @Override
     public Set<I18nEntity<? extends Describable>> getTranslations() {
         return translations;
     }
 
+    @Override
     public void setTranslations(Set<I18nEntity<? extends Describable>> translations) {
         this.translations = translations;
     }
 
+    @Override
     public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
+    @Override
     public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
-    }
-
-    @Override
-    public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
-    }
-
-    @Override
-    public Set<Map<String, Object>> getMappedParameters(String locale) {
-        return hasParameters() ? parameters.stream().map(e -> e.toValueMap(locale)).collect(Collectors.toSet()) : null;
     }
 
     @Override
@@ -151,64 +143,6 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
         this.service = service;
         return this;
     }
-
-    @Override
-    public String getNameI18n(String locale) {
-        if (noTranslationAvailable(locale)) {
-            return name;
-        }
-        String candidate = name;
-        String countryCode = getCountryCode(locale);
-        for (I18nEntity<? extends Describable> translation : translations) {
-            String translatedLocale = translation.getLocale();
-            if (translatedLocale.equals(locale)) {
-                // locale matches exactly
-                return translation.getName();
-            }
-            if (translatedLocale.equals(countryCode)) {
-                // hold a country candidate
-                candidate = translation.getName();
-            }
-        }
-        return candidate;
-    }
-
-    @Override
-    public String getLabelFrom(String locale) {
-        if (isi18nNameAvailable(locale)) {
-            return getNameI18n(locale);
-        } else if (isNameAvailable()) {
-            return getName();
-        } else if (isDomainAvailable()) {
-            return getDomain();
-        } else {
-            // absolute fallback
-            return Long.toString(getId());
-        }
-    }
-
-    // private boolean isNameAvailable() {
-    // return getName() != null && !getName().isEmpty();
-    // }
-    //
-    // private boolean isDomainAvailable() {
-    // return getDomain() != null && !getDomain().isEmpty();
-    // }
-    //
-    // private boolean isi18nNameAvailable(String locale) {
-    // return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
-    // }
-    //
-    // private boolean noTranslationAvailable(String locale) {
-    // return translations == null
-    // || locale == null
-    // || translations.isEmpty()
-    // || locale.isEmpty();
-    // }
-    //
-    // private String getCountryCode(String locale) {
-    // return locale.split("_")[0];
-    // }
 
     @Override
     public String toString() {

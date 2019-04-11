@@ -4,18 +4,18 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="ProcedureEntity" table="`procedure`">
-        <!-- <comment>Storage of the procedure/sensors.</comment> -->
+        <!-- <comment>Storage of the procedure/sensors. The procedure can be a sensor, process/method or a system that produces observations.</comment> -->
         <id name="id" type="long">
             <column name="procedure_id">
                 <!-- <comment>PK column of the table</comment> -->
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
         <property name="identifier" type="string" index="idx_procedure_identifier">
             <column name="identifier" not-null="true" unique-key="un_procedure_identifier">
-                <!-- <comment>Unique identifier of the procedure which can be used for filtering, e.g. in the SOS.</comment> -->
+                <!-- <comment>Unique identifier of the procedure which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment> -->
             </column>
         </property>
         <property name="name" type="string">
@@ -46,7 +46,7 @@
             <column name="procedure_i18n_id">
                 <!-- <comment>PK column of the table</comment> -->
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
@@ -57,7 +57,7 @@
         </many-to-one>
         <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <!-- <comment>Locale/language specification for this entry</comment> -->
+                <!-- <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment> -->
             </column>
         </property>
         <property name="name" type="string">

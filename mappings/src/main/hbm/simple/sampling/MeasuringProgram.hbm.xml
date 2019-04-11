@@ -4,25 +4,25 @@
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="MeasuringProgramEntity"
         table="measuring_program">
-        <comment>Storage of the measuring program.</comment>
+        <comment>Storage of the measuring program which describes a measurement campaign and summarizes all sampling, time series, etc.</comment>
         <id name="id" type="long">
             <column name="measuring_program_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">measuring_program_seq</param>
             </generator>
         </id>
 
          <property name="identifier" type="string" index="idx_measure_prog_identifier">
             <column name="identifier" not-null="true" unique-key="un_measure_prog_identifier">
-                <comment>Unique identifier of the measuring program which would be the ORDER_ID.</comment>
+                <comment>Unique identifier of the measuring program which would be the ORDER_ID in the output of the REST API.</comment>
             </column>
         </property>
 
         <property name="name" type="string">
             <column name="name">
-                <comment>The human readable name or lable of the sampling.</comment>
+                <comment>The human readable name or label of the sampling.</comment>
             </column>
         </property>
 
@@ -34,7 +34,7 @@
 
          <property name="producer" type="string">
             <column name="producer">
-                <comment>The producer of the measuring program.</comment>
+                <comment>The producer of the measuring program, e.g. name of a person or an organization</comment>
             </column>
         </property>
 
@@ -59,7 +59,7 @@
             <comment>Storage of relations between dataset and related measuring programs</comment>
             <key not-null="true" foreign-key="fk_measuring_program_dataset">
                 <column name="fk_measuring_program_id">
-                    <comment>The reference to the measuring program in the dataset measuring program</comment>
+                    <comment>The reference to the measuring program.</comment>
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_measuring_program">
@@ -80,7 +80,7 @@
             <column name="measuring_program_i18n_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned">
+            <generator class="native">
                 <param name="sequence_name">measuring_program_i18n_seq</param>
             </generator>
         </id>
@@ -91,7 +91,7 @@
         </many-to-one>
          <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this entry</comment>
+                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </property>
         <property name="name" type="string">

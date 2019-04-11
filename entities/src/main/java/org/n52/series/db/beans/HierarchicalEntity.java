@@ -16,7 +16,7 @@
  */
 package org.n52.series.db.beans;
 
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 public abstract class HierarchicalEntity<T> extends DescribableEntity {
@@ -25,18 +25,19 @@ public abstract class HierarchicalEntity<T> extends DescribableEntity {
     public static final String PROPERTY_CHILDREN = "children";
     private static final long serialVersionUID = -530148269689996337L;
 
-    private Set<T> children = new HashSet<>();
+    private Set<T> children;
 
-    private Set<T> parents = new HashSet<>();
+    private Set<T> parents;
 
     public void setChildren(Set<T> children) {
         this.children = children;
     }
 
     public void addChild(T child) {
-        if (children != null) {
-            this.children.add(child);
+        if (getChildren() == null) {
+            setChildren(new LinkedHashSet<>());
         }
+        this.children.add(child);
     }
 
     public Set<T> getChildren() {
@@ -48,9 +49,10 @@ public abstract class HierarchicalEntity<T> extends DescribableEntity {
     }
 
     public void addParent(T parent) {
-        if (parents != null) {
-            this.parents.add(parent);
+        if (getParents() == null) {
+            setParents(new LinkedHashSet<>());
         }
+        this.parents.add(parent);
     }
 
     public Set<T> getParents() {

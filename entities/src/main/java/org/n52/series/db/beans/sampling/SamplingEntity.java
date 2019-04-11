@@ -28,6 +28,14 @@ import org.n52.series.db.common.Utils;
 
 public class SamplingEntity extends DescribableEntity implements HasDatasets, HasSamplingTime {
 
+    public static final String PROPERTY_DATASETS = "datasets";
+
+    public static final String PROPERTY_MEASURING_PROGRAM = "measuringProgram";
+
+    public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
+
+    public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
+
     private static final long serialVersionUID = -8840602794587590180L;
 
     private Set<DatasetEntity> datasets;

@@ -25,7 +25,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
@@ -61,7 +60,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
 
-    public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(-99999.00);
+    public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(0);
 
     private static final long serialVersionUID = 273612846605300612L;
 
@@ -84,8 +83,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     private Long parent;
 
     private DatasetEntity dataset;
-
-    private Set<ParameterEntity<?>> parameters = new HashSet<>(0);
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -219,21 +216,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.parent = parent;
     }
 
-    @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
-    }
-
     public DatasetEntity getDataset() {
         return dataset;
     }
@@ -290,6 +272,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return (getValueDescription() != null) && !getValueDescription().isEmpty();
     }
 
+    public boolean hasVerticalInterval() {
+        return hasVerticalFrom() && hasVerticalTo() && getVerticalFrom().compareTo(getVerticalTo()) != 0;
+    }
+
     public BigDecimal getVerticalFrom() {
         return verticalFrom;
     }
@@ -299,7 +285,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasVerticalFrom() {
-        return getVerticalFrom() != null && getVerticalFrom().compareTo(NOT_SET_VERTICAL) != 0;
+        return getVerticalFrom() != null;
     }
 
     public BigDecimal getVerticalTo() {
@@ -311,7 +297,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasVerticalTo() {
-        return getVerticalTo() != null && getVerticalTo().compareTo(NOT_SET_VERTICAL) != 0;
+        return getVerticalTo() != null;
     }
 
     public SamplingProfileDataEntity getSamplingProfile() {
@@ -339,7 +325,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     @Override
-    public int compareTo(final DataEntity<T> o) {
+    public int compareTo(DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
                 .thenComparing(DataEntity<T>::getSamplingTimeStart).thenComparing(DataEntity<T>::getId)
                 .compare(this, o);
@@ -354,7 +340,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     @Override
-    public boolean equals(final Object obj) {
+    public boolean equals(Object obj) {
         if (this == obj) {
             return true;
         }
