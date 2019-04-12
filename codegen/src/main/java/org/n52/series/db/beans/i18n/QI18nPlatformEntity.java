@@ -44,14 +44,5 @@ public class QI18nPlatformEntity extends EntityPathBase<I18nPlatformEntity> {
         super(I18nPlatformEntity.class, metadata);
     }
 
-    public QI18nPlatformEntity(PathMetadata metadata, PathInits inits) {
-        this(I18nPlatformEntity.class, metadata, inits);
-    }
-
-    public QI18nPlatformEntity(Class<? extends I18nPlatformEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.entity = inits.isInitialized("entity") ? new org.n52.series.db.beans.QPlatformEntity(forProperty("entity"), inits.get("entity")) : null;
-    }
-
 }
 

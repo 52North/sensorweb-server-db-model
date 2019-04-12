@@ -24,7 +24,11 @@ public class QOfferingEntity extends EntityPathBase<OfferingEntity> {
 
     public final QHierarchicalEntity _super = new QHierarchicalEntity(this);
 
+    public final SetPath<OfferingEntity, QOfferingEntity> children = this.<OfferingEntity, QOfferingEntity>createSet("children", OfferingEntity.class, QOfferingEntity.class, PathInits.DIRECT2);
+
     public final StringPath description = createString("description");
+
+    public final SetPath<FormatEntity, QFormatEntity> featureTypes = this.<FormatEntity, QFormatEntity>createSet("featureTypes", FormatEntity.class, QFormatEntity.class, PathInits.DIRECT2);
 
     public final QGeometryEntity geometryEntity;
 
@@ -32,11 +36,21 @@ public class QOfferingEntity extends EntityPathBase<OfferingEntity> {
 
     public final StringPath identifier = createString("identifier");
 
+    public final QCodespaceEntity identifierCodespace;
+
     public final StringPath name = createString("name");
+
+    public final QCodespaceEntity nameCodespace;
+
+    public final SetPath<FormatEntity, QFormatEntity> observationTypes = this.<FormatEntity, QFormatEntity>createSet("observationTypes", FormatEntity.class, QFormatEntity.class, PathInits.DIRECT2);
+
+    public final SetPath<OfferingEntity, QOfferingEntity> parents = this.<OfferingEntity, QOfferingEntity>createSet("parents", OfferingEntity.class, QOfferingEntity.class, PathInits.DIRECT2);
 
     public final DateTimePath<java.util.Date> phenomenonTimeEnd = createDateTime("phenomenonTimeEnd", java.util.Date.class);
 
     public final DateTimePath<java.util.Date> phenomenonTimeStart = createDateTime("phenomenonTimeStart", java.util.Date.class);
+
+    public final SetPath<RelatedFeatureEntity, QRelatedFeatureEntity> relatedFeatures = this.<RelatedFeatureEntity, QRelatedFeatureEntity>createSet("relatedFeatures", RelatedFeatureEntity.class, QRelatedFeatureEntity.class, PathInits.DIRECT2);
 
     public final DateTimePath<java.util.Date> resultTimeEnd = createDateTime("resultTimeEnd", java.util.Date.class);
 
@@ -67,6 +81,8 @@ public class QOfferingEntity extends EntityPathBase<OfferingEntity> {
     public QOfferingEntity(Class<? extends OfferingEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.geometryEntity = inits.isInitialized("geometryEntity") ? new QGeometryEntity(forProperty("geometryEntity")) : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new QCodespaceEntity(forProperty("identifierCodespace")) : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace") ? new QCodespaceEntity(forProperty("nameCodespace")) : null;
     }
 
 }

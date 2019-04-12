@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QAbstractRelationEntity is a Querydsl query type for AbstractRelationEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QAbstractRelationEntity extends EntityPathBase<AbstractRelationEntity<DatasetEntity>> {
+public class QAbstractRelationEntity extends EntityPathBase<AbstractRelationEntity<DataEntity<?>>> {
 
     private static final long serialVersionUID = -1318847886L;
 

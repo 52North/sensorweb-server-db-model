@@ -1,4 +1,4 @@
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.feature;
 
 import static com.querydsl.core.types.PathMetadataFactory.*;
 
@@ -11,30 +11,30 @@ import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
- * QFeatureEntity is a Querydsl query type for FeatureEntity
+ * QAbstractMonitoringFeature is a Querydsl query type for AbstractMonitoringFeature
  */
-@Generated("com.querydsl.codegen.EntitySerializer")
-public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
+@Generated("com.querydsl.codegen.SupertypeSerializer")
+public class QAbstractMonitoringFeature extends EntityPathBase<AbstractMonitoringFeature> {
 
-    private static final long serialVersionUID = 513915560L;
+    private static final long serialVersionUID = 1486478147L;
 
     private static final PathInits INITS = PathInits.DIRECT2;
 
-    public static final QFeatureEntity featureEntity = new QFeatureEntity("featureEntity");
+    public static final QAbstractMonitoringFeature abstractMonitoringFeature = new QAbstractMonitoringFeature("abstractMonitoringFeature");
 
-    public final QAbstractFeatureEntity _super;
+    public final org.n52.series.db.beans.QFeatureEntity _super;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> children;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> children;
 
     //inherited
     public final StringPath description;
 
     // inherited
-    public final QFormatEntity featureType;
+    public final org.n52.series.db.beans.QFormatEntity featureType;
 
     // inherited
-    public final QGeometryEntity geometryEntity;
+    public final org.n52.series.db.beans.QGeometryEntity geometryEntity;
 
     //inherited
     public final NumberPath<Long> id;
@@ -43,19 +43,19 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     public final StringPath identifier;
 
     // inherited
-    public final QCodespaceEntity identifierCodespace;
+    public final org.n52.series.db.beans.QCodespaceEntity identifierCodespace;
 
     //inherited
     public final StringPath name;
 
     // inherited
-    public final QCodespaceEntity nameCodespace;
+    public final org.n52.series.db.beans.QCodespaceEntity nameCodespace;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
 
     //inherited
-    public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents;
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;
@@ -66,25 +66,25 @@ public class QFeatureEntity extends EntityPathBase<FeatureEntity> {
     //inherited
     public final StringPath xml;
 
-    public QFeatureEntity(String variable) {
-        this(FeatureEntity.class, forVariable(variable), INITS);
+    public QAbstractMonitoringFeature(String variable) {
+        this(AbstractMonitoringFeature.class, forVariable(variable), INITS);
     }
 
-    public QFeatureEntity(Path<? extends FeatureEntity> path) {
+    public QAbstractMonitoringFeature(Path<? extends AbstractMonitoringFeature> path) {
         this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
     }
 
-    public QFeatureEntity(PathMetadata metadata) {
+    public QAbstractMonitoringFeature(PathMetadata metadata) {
         this(metadata, PathInits.getFor(metadata, INITS));
     }
 
-    public QFeatureEntity(PathMetadata metadata, PathInits inits) {
-        this(FeatureEntity.class, metadata, inits);
+    public QAbstractMonitoringFeature(PathMetadata metadata, PathInits inits) {
+        this(AbstractMonitoringFeature.class, metadata, inits);
     }
 
-    public QFeatureEntity(Class<? extends FeatureEntity> type, PathMetadata metadata, PathInits inits) {
+    public QAbstractMonitoringFeature(Class<? extends AbstractMonitoringFeature> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
-        this._super = new QAbstractFeatureEntity(type, metadata, inits);
+        this._super = new org.n52.series.db.beans.QFeatureEntity(type, metadata, inits);
         this.children = _super.children;
         this.description = _super.description;
         this.featureType = _super.featureType;

@@ -28,19 +28,29 @@ public class QAbstractFeatureEntity extends EntityPathBase<AbstractFeatureEntity
 
     public final StringPath description = createString("description");
 
+    public final QFormatEntity featureType;
+
     public final QGeometryEntity geometryEntity;
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
     public final StringPath identifier = createString("identifier");
 
+    public final QCodespaceEntity identifierCodespace;
+
     public final StringPath name = createString("name");
+
+    public final QCodespaceEntity nameCodespace;
 
     public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
     public final SetPath<AbstractFeatureEntity<?>, QAbstractFeatureEntity> parents = this.<AbstractFeatureEntity<?>, QAbstractFeatureEntity>createSet("parents", AbstractFeatureEntity.class, QAbstractFeatureEntity.class, PathInits.DIRECT2);
 
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations = this.<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nFeatureEntity.class, org.n52.series.db.beans.i18n.QI18nFeatureEntity.class, PathInits.DIRECT2);
+
+    public final StringPath url = createString("url");
+
+    public final StringPath xml = createString("xml");
 
     @SuppressWarnings({"all", "rawtypes", "unchecked"})
     public QAbstractFeatureEntity(String variable) {
@@ -63,7 +73,10 @@ public class QAbstractFeatureEntity extends EntityPathBase<AbstractFeatureEntity
 
     public QAbstractFeatureEntity(Class<? extends AbstractFeatureEntity<?>> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
+        this.featureType = inits.isInitialized("featureType") ? new QFormatEntity(forProperty("featureType")) : null;
         this.geometryEntity = inits.isInitialized("geometryEntity") ? new QGeometryEntity(forProperty("geometryEntity")) : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new QCodespaceEntity(forProperty("identifierCodespace")) : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace") ? new QCodespaceEntity(forProperty("nameCodespace")) : null;
     }
 
 }

@@ -52,6 +52,8 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final StringPath identifier = createString("identifier");
 
+    public final QCodespaceEntity identifierCodespace;
+
     public final BooleanPath insitu = createBoolean("insitu");
 
     // custom
@@ -65,13 +67,19 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final StringPath name = createString("name");
 
+    public final QCodespaceEntity nameCodespace;
+
     public final NumberPath<Integer> numberOfDecimals = createNumber("numberOfDecimals", Integer.class);
 
     public final EnumPath<org.n52.series.db.beans.dataset.ObservationType> observationType = createEnum("observationType", org.n52.series.db.beans.dataset.ObservationType.class);
 
     public final QOfferingEntity offering;
 
+    public final QFormatEntity omObservationType;
+
     public final StringPath originTimezone = createString("originTimezone");
+
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
     public final QPhenomenonEntity phenomenon;
 
@@ -90,8 +98,6 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
     public final QUnitEntity unit;
 
     public final EnumPath<org.n52.series.db.beans.dataset.ValueType> valueType = createEnum("valueType", org.n52.series.db.beans.dataset.ValueType.class);
-
-    public final QVerticalMetadataEntity verticalMetadata;
 
     public QDatasetEntity(String variable) {
         this(DatasetEntity.class, forVariable(variable), INITS);
@@ -113,13 +119,15 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
         super(type, metadata, inits);
         this.category = inits.isInitialized("category") ? new QCategoryEntity(forProperty("category")) : null;
         this.ereportingProfile = inits.isInitialized("ereportingProfile") ? new org.n52.series.db.beans.ereporting.QEReportingProfileDatasetEntity(forProperty("ereportingProfile"), inits.get("ereportingProfile")) : null;
+        this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new QCodespaceEntity(forProperty("identifierCodespace")) : null;
+        this.nameCodespace = inits.isInitialized("nameCodespace") ? new QCodespaceEntity(forProperty("nameCodespace")) : null;
         this.offering = inits.isInitialized("offering") ? new QOfferingEntity(forProperty("offering"), inits.get("offering")) : null;
+        this.omObservationType = inits.isInitialized("omObservationType") ? new QFormatEntity(forProperty("omObservationType")) : null;
         this.phenomenon = inits.isInitialized("phenomenon") ? new QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon")) : null;
         this.platform = inits.isInitialized("platform") ? new QPlatformEntity(forProperty("platform"), inits.get("platform")) : null;
         this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
         this.samplingProfile = inits.isInitialized("samplingProfile") ? new org.n52.series.db.beans.sampling.QSamplingProfileDatasetEntity(forProperty("samplingProfile")) : null;
         this.unit = inits.isInitialized("unit") ? new QUnitEntity(forProperty("unit")) : null;
-        this.verticalMetadata = inits.isInitialized("verticalMetadata") ? new QVerticalMetadataEntity(forProperty("verticalMetadata"), inits.get("verticalMetadata")) : null;
     }
 
 }

@@ -73,7 +73,7 @@ public class QDatastreamEntity extends EntityPathBase<DatastreamEntity> {
         this.geometryEntity = inits.isInitialized("geometryEntity") ? new org.n52.series.db.beans.QGeometryEntity(forProperty("geometryEntity")) : null;
         this.observableProperty = inits.isInitialized("observableProperty") ? new org.n52.series.db.beans.QPhenomenonEntity(forProperty("observableProperty"), inits.get("observableProperty")) : null;
         this.observationType = inits.isInitialized("observationType") ? new org.n52.series.db.beans.QFormatEntity(forProperty("observationType")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new org.n52.series.db.beans.QProcedureEntity(forProperty("procedure")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new org.n52.series.db.beans.QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
         this.thing = inits.isInitialized("thing") ? new org.n52.series.db.beans.QPlatformEntity(forProperty("thing"), inits.get("thing")) : null;
         this.unitOfMeasurement = inits.isInitialized("unitOfMeasurement") ? new org.n52.series.db.beans.QUnitEntity(forProperty("unitOfMeasurement")) : null;
     }
