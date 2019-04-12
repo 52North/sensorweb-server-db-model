@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,15 +17,14 @@ public class QI18nOfferingEntity extends EntityPathBase<I18nOfferingEntity> {
 
     private static final long serialVersionUID = 1847732422L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QI18nOfferingEntity i18nOfferingEntity = new QI18nOfferingEntity("i18nOfferingEntity");
 
     public final QI18nEntity _super = new QI18nEntity(this);
 
     public final StringPath description = createString("description");
 
-    public final org.n52.series.db.beans.QOfferingEntity entity;
+    // custom
+    public final org.n52.series.db.beans.QIdEntity entity = new org.n52.series.db.beans.QIdEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -35,24 +33,15 @@ public class QI18nOfferingEntity extends EntityPathBase<I18nOfferingEntity> {
     public final StringPath name = createString("name");
 
     public QI18nOfferingEntity(String variable) {
-        this(I18nOfferingEntity.class, forVariable(variable), INITS);
+        super(I18nOfferingEntity.class, forVariable(variable));
     }
 
     public QI18nOfferingEntity(Path<? extends I18nOfferingEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QI18nOfferingEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QI18nOfferingEntity(PathMetadata metadata, PathInits inits) {
-        this(I18nOfferingEntity.class, metadata, inits);
-    }
-
-    public QI18nOfferingEntity(Class<? extends I18nOfferingEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.entity = inits.isInitialized("entity") ? new org.n52.series.db.beans.QOfferingEntity(forProperty("entity"), inits.get("entity")) : null;
+        super(I18nOfferingEntity.class, metadata);
     }
 
 }

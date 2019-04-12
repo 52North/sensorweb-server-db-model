@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,13 +17,12 @@ public class QI18nUnitEntity extends EntityPathBase<I18nUnitEntity> {
 
     private static final long serialVersionUID = 978616900L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QI18nUnitEntity i18nUnitEntity = new QI18nUnitEntity("i18nUnitEntity");
 
     public final QI18nEntity _super = new QI18nEntity(this);
 
-    public final org.n52.series.db.beans.QUnitEntity entity;
+    // custom
+    public final org.n52.series.db.beans.QIdEntity entity = new org.n52.series.db.beans.QIdEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -33,24 +31,15 @@ public class QI18nUnitEntity extends EntityPathBase<I18nUnitEntity> {
     public final StringPath name = createString("name");
 
     public QI18nUnitEntity(String variable) {
-        this(I18nUnitEntity.class, forVariable(variable), INITS);
+        super(I18nUnitEntity.class, forVariable(variable));
     }
 
     public QI18nUnitEntity(Path<? extends I18nUnitEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QI18nUnitEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QI18nUnitEntity(PathMetadata metadata, PathInits inits) {
-        this(I18nUnitEntity.class, metadata, inits);
-    }
-
-    public QI18nUnitEntity(Class<? extends I18nUnitEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.entity = inits.isInitialized("entity") ? new org.n52.series.db.beans.QUnitEntity(forProperty("entity")) : null;
+        super(I18nUnitEntity.class, metadata);
     }
 
 }

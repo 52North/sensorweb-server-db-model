@@ -52,6 +52,8 @@ public class QDataEntity extends EntityPathBase<DataEntity<?>> {
 
     public final DateTimePath<java.util.Date> resultTime = createDateTime("resultTime", java.util.Date.class);
 
+    public final org.n52.series.db.beans.sampling.QSamplingProfileDataEntity samplingProfile;
+
     public final DateTimePath<java.util.Date> samplingTimeEnd = createDateTime("samplingTimeEnd", java.util.Date.class);
 
     public final DateTimePath<java.util.Date> samplingTimeStart = createDateTime("samplingTimeStart", java.util.Date.class);
@@ -98,6 +100,7 @@ public class QDataEntity extends EntityPathBase<DataEntity<?>> {
         this.geometryEntity = inits.isInitialized("geometryEntity") ? new QGeometryEntity(forProperty("geometryEntity")) : null;
         this.identifierCodespace = inits.isInitialized("identifierCodespace") ? new QCodespaceEntity(forProperty("identifierCodespace")) : null;
         this.nameCodespace = inits.isInitialized("nameCodespace") ? new QCodespaceEntity(forProperty("nameCodespace")) : null;
+        this.samplingProfile = inits.isInitialized("samplingProfile") ? new org.n52.series.db.beans.sampling.QSamplingProfileDataEntity(forProperty("samplingProfile"), inits.get("samplingProfile")) : null;
     }
 
 }

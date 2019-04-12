@@ -24,10 +24,16 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
 
     public final org.n52.series.db.beans.QFeatureEntity _super;
 
+    //inherited
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> children;
+
     public final StringPath currentLocation = createString("currentLocation");
 
     //inherited
     public final StringPath description;
+
+    // inherited
+    public final org.n52.series.db.beans.QFormatEntity featureType;
 
     // inherited
     public final org.n52.series.db.beans.QGeometryEntity geometryEntity;
@@ -38,10 +44,22 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
     //inherited
     public final StringPath identifier;
 
+    // inherited
+    public final org.n52.series.db.beans.QCodespaceEntity identifierCodespace;
+
     public final StringPath materialClass = createString("materialClass");
 
     //inherited
     public final StringPath name;
+
+    // inherited
+    public final org.n52.series.db.beans.QCodespaceEntity nameCodespace;
+
+    //inherited
+    public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters;
+
+    //inherited
+    public final SetPath<org.n52.series.db.beans.AbstractFeatureEntity<?>, org.n52.series.db.beans.QAbstractFeatureEntity> parents;
 
     public final StringPath samplingMethod = createString("samplingMethod");
 
@@ -57,6 +75,12 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
 
     //inherited
     public final SetPath<org.n52.series.db.beans.i18n.I18nFeatureEntity, org.n52.series.db.beans.i18n.QI18nFeatureEntity> translations;
+
+    //inherited
+    public final StringPath url;
+
+    //inherited
+    public final StringPath xml;
 
     public QSpecimenEntity(String variable) {
         this(SpecimenEntity.class, forVariable(variable), INITS);
@@ -77,13 +101,21 @@ public class QSpecimenEntity extends EntityPathBase<SpecimenEntity> {
     public QSpecimenEntity(Class<? extends SpecimenEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this._super = new org.n52.series.db.beans.QFeatureEntity(type, metadata, inits);
+        this.children = _super.children;
         this.description = _super.description;
+        this.featureType = _super.featureType;
         this.geometryEntity = _super.geometryEntity;
         this.id = _super.id;
         this.identifier = _super.identifier;
+        this.identifierCodespace = _super.identifierCodespace;
         this.name = _super.name;
+        this.nameCodespace = _super.nameCodespace;
+        this.parameters = _super.parameters;
+        this.parents = _super.parents;
         this.sizeUnit = inits.isInitialized("sizeUnit") ? new org.n52.series.db.beans.QUnitEntity(forProperty("sizeUnit")) : null;
         this.translations = _super.translations;
+        this.url = _super.url;
+        this.xml = _super.xml;
     }
 
 }

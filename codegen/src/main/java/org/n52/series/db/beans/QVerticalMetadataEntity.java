@@ -26,7 +26,7 @@ public class QVerticalMetadataEntity extends EntityPathBase<VerticalMetadataEnti
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
-    public final NumberPath<Integer> orientation = createNumber("orientation", Integer.class);
+    public final NumberPath<Short> orientation = createNumber("orientation", Short.class);
 
     public final SetPath<org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity, org.n52.series.db.beans.i18n.QI18nVerticalMetadataEntity> translations = this.<org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity, org.n52.series.db.beans.i18n.QI18nVerticalMetadataEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity.class, org.n52.series.db.beans.i18n.QI18nVerticalMetadataEntity.class, PathInits.DIRECT2);
 
