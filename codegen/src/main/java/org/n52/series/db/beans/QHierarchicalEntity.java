@@ -13,7 +13,7 @@ import com.querydsl.core.types.Path;
  * QHierarchicalEntity is a Querydsl query type for HierarchicalEntity
  */
 @Generated("com.querydsl.codegen.SupertypeSerializer")
-public class QHierarchicalEntity extends EntityPathBase<HierarchicalEntity<PhenomenonEntity>> {
+public class QHierarchicalEntity extends EntityPathBase<HierarchicalEntity<?>> {
 
     private static final long serialVersionUID = -800290307L;
 
