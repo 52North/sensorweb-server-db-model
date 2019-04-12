@@ -34,7 +34,10 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
 
     public final BooleanPath disabled = createBoolean("disabled");
 
-    public final QFeatureEntity feature;
+    public final org.n52.series.db.beans.ereporting.QEReportingProfileDatasetEntity ereportingProfile;
+
+    // custom
+    public final QAbstractFeatureEntity feature = new QAbstractFeatureEntity(forProperty("feature"));
 
     // custom
     public final QDataEntity firstObservation = new QDataEntity(forProperty("firstObservation"));
@@ -109,11 +112,11 @@ public class QDatasetEntity extends EntityPathBase<DatasetEntity> {
     public QDatasetEntity(Class<? extends DatasetEntity> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.category = inits.isInitialized("category") ? new QCategoryEntity(forProperty("category")) : null;
-        this.feature = inits.isInitialized("feature") ? new QFeatureEntity(forProperty("feature"), inits.get("feature")) : null;
+        this.ereportingProfile = inits.isInitialized("ereportingProfile") ? new org.n52.series.db.beans.ereporting.QEReportingProfileDatasetEntity(forProperty("ereportingProfile"), inits.get("ereportingProfile")) : null;
         this.offering = inits.isInitialized("offering") ? new QOfferingEntity(forProperty("offering"), inits.get("offering")) : null;
         this.phenomenon = inits.isInitialized("phenomenon") ? new QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon")) : null;
         this.platform = inits.isInitialized("platform") ? new QPlatformEntity(forProperty("platform"), inits.get("platform")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
         this.samplingProfile = inits.isInitialized("samplingProfile") ? new org.n52.series.db.beans.sampling.QSamplingProfileDatasetEntity(forProperty("samplingProfile")) : null;
         this.unit = inits.isInitialized("unit") ? new QUnitEntity(forProperty("unit")) : null;
         this.verticalMetadata = inits.isInitialized("verticalMetadata") ? new QVerticalMetadataEntity(forProperty("verticalMetadata"), inits.get("verticalMetadata")) : null;

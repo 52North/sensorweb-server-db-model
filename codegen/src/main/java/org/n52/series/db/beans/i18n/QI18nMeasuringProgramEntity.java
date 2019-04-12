@@ -7,7 +7,6 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
-import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -18,15 +17,14 @@ public class QI18nMeasuringProgramEntity extends EntityPathBase<I18nMeasuringPro
 
     private static final long serialVersionUID = -1114245911L;
 
-    private static final PathInits INITS = PathInits.DIRECT2;
-
     public static final QI18nMeasuringProgramEntity i18nMeasuringProgramEntity = new QI18nMeasuringProgramEntity("i18nMeasuringProgramEntity");
 
     public final QI18nEntity _super = new QI18nEntity(this);
 
     public final StringPath description = createString("description");
 
-    public final org.n52.series.db.beans.sampling.QMeasuringProgramEntity entity;
+    // custom
+    public final org.n52.series.db.beans.QIdEntity entity = new org.n52.series.db.beans.QIdEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 
@@ -35,24 +33,15 @@ public class QI18nMeasuringProgramEntity extends EntityPathBase<I18nMeasuringPro
     public final StringPath name = createString("name");
 
     public QI18nMeasuringProgramEntity(String variable) {
-        this(I18nMeasuringProgramEntity.class, forVariable(variable), INITS);
+        super(I18nMeasuringProgramEntity.class, forVariable(variable));
     }
 
     public QI18nMeasuringProgramEntity(Path<? extends I18nMeasuringProgramEntity> path) {
-        this(path.getType(), path.getMetadata(), PathInits.getFor(path.getMetadata(), INITS));
+        super(path.getType(), path.getMetadata());
     }
 
     public QI18nMeasuringProgramEntity(PathMetadata metadata) {
-        this(metadata, PathInits.getFor(metadata, INITS));
-    }
-
-    public QI18nMeasuringProgramEntity(PathMetadata metadata, PathInits inits) {
-        this(I18nMeasuringProgramEntity.class, metadata, inits);
-    }
-
-    public QI18nMeasuringProgramEntity(Class<? extends I18nMeasuringProgramEntity> type, PathMetadata metadata, PathInits inits) {
-        super(type, metadata, inits);
-        this.entity = inits.isInitialized("entity") ? new org.n52.series.db.beans.sampling.QMeasuringProgramEntity(forProperty("entity")) : null;
+        super(I18nMeasuringProgramEntity.class, metadata);
     }
 
 }

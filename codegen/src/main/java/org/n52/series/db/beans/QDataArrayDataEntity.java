@@ -68,6 +68,9 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
     //inherited
     public final DateTimePath<java.util.Date> resultTime;
 
+    // inherited
+    public final org.n52.series.db.beans.sampling.QSamplingProfileDataEntity samplingProfile;
+
     //inherited
     public final DateTimePath<java.util.Date> samplingTimeEnd;
 
@@ -135,6 +138,7 @@ public class QDataArrayDataEntity extends EntityPathBase<DataArrayDataEntity> {
         this.parent = _super.parent;
         this.relatedObservations = _super.relatedObservations;
         this.resultTime = _super.resultTime;
+        this.samplingProfile = _super.samplingProfile;
         this.samplingTimeEnd = _super.samplingTimeEnd;
         this.samplingTimeStart = _super.samplingTimeStart;
         this.translations = _super.translations;

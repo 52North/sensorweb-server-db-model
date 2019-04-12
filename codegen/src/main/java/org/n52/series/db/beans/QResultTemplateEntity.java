@@ -61,7 +61,7 @@ public class QResultTemplateEntity extends EntityPathBase<ResultTemplateEntity> 
         super(type, metadata, inits);
         this.offering = inits.isInitialized("offering") ? new QOfferingEntity(forProperty("offering"), inits.get("offering")) : null;
         this.phenomenon = inits.isInitialized("phenomenon") ? new QPhenomenonEntity(forProperty("phenomenon"), inits.get("phenomenon")) : null;
-        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure")) : null;
+        this.procedure = inits.isInitialized("procedure") ? new QProcedureEntity(forProperty("procedure"), inits.get("procedure")) : null;
     }
 
 }

@@ -3,3 +3,4 @@ target
 .project
 .classpath
 nbactions.xml
+codegen/console.log

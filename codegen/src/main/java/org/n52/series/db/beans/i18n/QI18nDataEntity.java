@@ -24,7 +24,7 @@ public class QI18nDataEntity extends EntityPathBase<I18nDataEntity> {
     public final StringPath description = createString("description");
 
     // custom
-    public final org.n52.series.db.beans.QDataEntity entity = new org.n52.series.db.beans.QDataEntity(forProperty("entity"));
+    public final org.n52.series.db.beans.QIdEntity entity = new org.n52.series.db.beans.QIdEntity(forProperty("entity"));
 
     public final NumberPath<Long> id = createNumber("id", Long.class);
 

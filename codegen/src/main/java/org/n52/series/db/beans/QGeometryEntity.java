@@ -19,7 +19,7 @@ public class QGeometryEntity extends BeanPath<GeometryEntity> {
 
     public static final QGeometryEntity geometryEntity = new QGeometryEntity("geometryEntity");
 
-    public final ComparablePath<org.locationtech.jts.geom.Geometry> geometry = createComparable("geometry", org.locationtech.jts.geom.Geometry.class);
+    public final com.querydsl.spatial.jts.JTSGeometryPath geometry = new com.querydsl.spatial.jts.JTSGeometryPath(forProperty("geometry"));
 
     public QGeometryEntity(String variable) {
         super(GeometryEntity.class, forVariable(variable));

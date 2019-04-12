@@ -11,20 +11,16 @@ This project includes:
   Checker Qual under The MIT License
   ClassMate under The Apache Software License, Version 2.0
   Codegen under Apache License, Version 2.0
-  com.vividsolutions:jts-core under GNU Lesser General Public License, Version 2.1
   dom4j under BSD 3-clause New License
   Eclipse ECJ under Eclipse Public License v1.0
   error-prone annotations under Apache 2.0
-  Extended StAX API under Dual license consisting of the CDDL v1.1 and GPL v2
-  fastinfoset under Apache License, Version 2.0
   FindBugs-Annotations under GNU Lesser Public License
   FindBugs-jsr305 under The Apache Software License, Version 2.0
   Guava InternalFutureFailureAccess and InternalFutures under The Apache Software License, Version 2.0
   Guava ListenableFuture only under The Apache Software License, Version 2.0
   Guava: Google Core Libraries for Java under The Apache Software License, Version 2.0
-  Hibernate Commons Annotations under GNU Library General Public License v2.1 or later
+  Hibernate Commons Annotations under GNU Lesser General Public License v2.1 or later
   Hibernate ORM - hibernate-core under GNU Library General Public License v2.1 or later
-  istack common utility code runtime under CDDL 1.1 or GPL2 w/ CPE
   J2ObjC Annotations under The Apache Software License, Version 2.0
   Jackson-annotations under The Apache Software License, Version 2.0
   Jackson-core under The Apache Software License, Version 2.0
@@ -35,8 +31,6 @@ This project includes:
   Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
   javax.inject under The Apache Software License, Version 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
-  JAXB Runtime under CDDL+GPL License
-  jaxb-api under CDDL 1.1 or GPL2 w/ CPE
   JBoss Logging 3 under Apache License, version 2.0
   Joda-Time under Apache 2
   lang under The Apache Software License, Version 2.0
@@ -68,5 +62,4 @@ This project includes:
   Spring JDBC under Apache License, Version 2.0
   Spring Object/Relational Mapping under Apache License, Version 2.0
   Spring Transaction under Apache License, Version 2.0
-  TXW2 Runtime under CDDL+GPL License
 
