@@ -25,10 +25,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime {
 
     public static final String PROPERTY_ID = "id";
 
@@ -108,6 +110,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      * @return the samplingTimeStart
      */
 
+    @Override
     public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -117,6 +120,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      *            the samplingTimeStart
      */
 
+    @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -125,6 +129,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      * @return the samplingTimeEnd
      */
 
+    @Override
     public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -134,6 +139,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      *            the samplingTimeEnd
      */
 
+    @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }

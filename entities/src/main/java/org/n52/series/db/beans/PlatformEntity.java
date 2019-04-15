@@ -29,14 +29,29 @@ import org.n52.series.db.beans.sta.StaRelations.Locations;
 public class PlatformEntity extends DescribableEntity implements AbstractStaEntity, Locations<PlatformEntity> {
 
     public static final String PROPERTY_LOCATION = "location";
+    public static final String PROPERTY_PROPERTIES = "properties";
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
 
     private static final long serialVersionUID = 3615089936334873353L;
 
+    private String properties;
     private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locationEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
     private Set<DatastreamEntity> datastreamEntities;
+
+    public PlatformEntity setProperties(String properties) {
+        this.properties = properties;
+        return this;
+    }
+
+    public String getProperties() {
+        return properties;
+    }
+
+    public boolean hasProperties() {
+        return getProperties() != null && !getProperties().isEmpty();
+    }
 
     @Override
     public Set<ParameterEntity<?>> getParameters() {

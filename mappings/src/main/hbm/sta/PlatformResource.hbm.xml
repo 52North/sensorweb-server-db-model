@@ -75,6 +75,9 @@
             </key>
             <one-to-many class="org.n52.series.db.beans.sta.DatastreamEntity" />
         </set>
+        <property name="properties" type="text">
+            <column name="properties" not-null="false"/>
+        </property>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nPlatformEntity" table="platform_i18n">

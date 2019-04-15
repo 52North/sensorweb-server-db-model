@@ -1,13 +1,23 @@
 package org.n52.series.db.beans;
 
-import static com.querydsl.core.types.PathMetadataFactory.*;
+import static com.querydsl.core.types.PathMetadataFactory.forVariable;
 
-import com.querydsl.core.types.dsl.*;
-
-import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
+
+import org.n52.series.db.beans.sta.DatastreamEntity;
+import org.n52.series.db.beans.sta.HistoricalLocationEntity;
+import org.n52.series.db.beans.sta.LocationEntity;
+import org.n52.series.db.beans.sta.QDatastreamEntity;
+import org.n52.series.db.beans.sta.QHistoricalLocationEntity;
+import org.n52.series.db.beans.sta.QLocationEntity;
+
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.PathMetadata;
+import com.querydsl.core.types.dsl.EntityPathBase;
+import com.querydsl.core.types.dsl.NumberPath;
 import com.querydsl.core.types.dsl.PathInits;
+import com.querydsl.core.types.dsl.SetPath;
+import com.querydsl.core.types.dsl.StringPath;
 
 
 /**
@@ -39,6 +49,14 @@ public class QPlatformEntity extends EntityPathBase<PlatformEntity> {
     public final SetPath<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity> parameters = this.<org.n52.series.db.beans.parameter.ParameterEntity<?>, org.n52.series.db.beans.parameter.QParameterEntity>createSet("parameters", org.n52.series.db.beans.parameter.ParameterEntity.class, org.n52.series.db.beans.parameter.QParameterEntity.class, PathInits.DIRECT2);
 
     public final SetPath<org.n52.series.db.beans.i18n.I18nPlatformEntity, org.n52.series.db.beans.i18n.QI18nPlatformEntity> translations = this.<org.n52.series.db.beans.i18n.I18nPlatformEntity, org.n52.series.db.beans.i18n.QI18nPlatformEntity>createSet("translations", org.n52.series.db.beans.i18n.I18nPlatformEntity.class, org.n52.series.db.beans.i18n.QI18nPlatformEntity.class, PathInits.DIRECT2);
+
+    public final SetPath<DatastreamEntity, QDatastreamEntity> datastreamEntities = this.<DatastreamEntity, QDatastreamEntity>createSet("datastreamEntities", DatastreamEntity.class, QDatastreamEntity.class, PathInits.DIRECT2);
+
+    public final SetPath<HistoricalLocationEntity, QHistoricalLocationEntity> historicalLocationEntities = this.<HistoricalLocationEntity, QHistoricalLocationEntity>createSet("historicalLocationEntities", HistoricalLocationEntity.class, QHistoricalLocationEntity.class, PathInits.DIRECT2);
+
+    public final SetPath<LocationEntity, QLocationEntity> locationEntities = this.<LocationEntity, QLocationEntity>createSet("locationEntities", LocationEntity.class, QLocationEntity.class, PathInits.DIRECT2);
+
+    public final StringPath properties = createString("properties");
 
     public QPlatformEntity(String variable) {
         this(PlatformEntity.class, forVariable(variable), INITS);
