@@ -192,14 +192,6 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity
         this.unitOfMeasurement = unitOfMeasurement;
     }
 
-    public ProcedureEntity getProcedureEntity() {
-        return procedure;
-    }
-
-    public void setProcedureEntity(ProcedureEntity procedure) {
-        this.procedure = procedure;
-    }
-
     @Override
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;

@@ -54,19 +54,19 @@ public interface StaRelations {
 
     interface Locations<T> {
 
-        T setLocationEntities(Set<LocationEntity> Locations);
+        T setLocations(Set<LocationEntity> Locations);
 
-        Set<LocationEntity> getLocationEntities();
+        Set<LocationEntity> getLocations();
 
         default void addLocationEntity(LocationEntity Location) {
-            if (getLocationEntities() == null) {
-                setLocationEntities(new LinkedHashSet<>());
+            if (getLocations() == null) {
+                setLocations(new LinkedHashSet<>());
             }
-            getLocationEntities().add(Location);
+            getLocations().add(Location);
         }
 
         default boolean hasLocationEntities() {
-            return getLocationEntities() != null && !getLocationEntities().isEmpty();
+            return getLocations() != null && !getLocations().isEmpty();
         }
 
     }

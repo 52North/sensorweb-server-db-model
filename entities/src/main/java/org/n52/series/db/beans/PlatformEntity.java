@@ -28,17 +28,19 @@ import org.n52.series.db.beans.sta.StaRelations.Locations;
 
 public class PlatformEntity extends DescribableEntity implements AbstractStaEntity, Locations<PlatformEntity> {
 
-    public static final String PROPERTY_LOCATION = "location";
+    public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
+    public static final String PROPERTY_DATASTREAMS = "datastreams";
 
     private static final long serialVersionUID = 3615089936334873353L;
 
     private String properties;
     private Set<ParameterEntity<?>> parameters;
-    private Set<LocationEntity> locationEntities;
-    private Set<HistoricalLocationEntity> historicalLocationEntities;
-    private Set<DatastreamEntity> datastreamEntities;
+    private Set<LocationEntity> locations;
+    private Set<HistoricalLocationEntity> historicalLocations;
+    private Set<DatastreamEntity> datastreams;
+    private boolean processed;
 
     public PlatformEntity setProperties(String properties) {
         this.properties = properties;
@@ -69,39 +71,39 @@ public class PlatformEntity extends DescribableEntity implements AbstractStaEnti
     }
 
     @Override
-    public Set<LocationEntity> getLocationEntities() {
-        return locationEntities;
+    public Set<LocationEntity> getLocations() {
+        return locations;
     }
 
     @Override
-    public PlatformEntity setLocationEntities(Set<LocationEntity> locationEntities) {
-        this.locationEntities = locationEntities;
+    public PlatformEntity setLocations(Set<LocationEntity> locations) {
+        this.locations = locations;
         return this;
     }
 
-    public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {
-        return historicalLocationEntities;
+    public Set<HistoricalLocationEntity> getHistoricalLocations() {
+        return historicalLocations;
     }
 
-    public PlatformEntity setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
-        this.historicalLocationEntities = historicalLocationEntities;
+    public PlatformEntity setHistoricalLocations(Set<HistoricalLocationEntity> historicalLocations) {
+        this.historicalLocations = historicalLocations;
         return this;
     }
 
-    public PlatformEntity addHistoricalLocation(HistoricalLocationEntity historicalLocationEntity) {
-        if (historicalLocationEntities == null) {
-            historicalLocationEntities = new LinkedHashSet<>();
+    public PlatformEntity addHistoricalLocation(HistoricalLocationEntity historicalLocation) {
+        if (historicalLocations == null) {
+            historicalLocations = new LinkedHashSet<>();
         }
-        historicalLocationEntities.add(historicalLocationEntity);
+        historicalLocations.add(historicalLocation);
         return this;
     }
 
     public Set<DatastreamEntity> getDatastreamEntities() {
-        return datastreamEntities;
+        return datastreams;
     }
 
-    public PlatformEntity setDatastreamEntities(Set<DatastreamEntity> datastreamEntities) {
-        this.datastreamEntities = datastreamEntities;
+    public PlatformEntity setDatastreamEntities(Set<DatastreamEntity> datastreams) {
+        this.datastreams = datastreams;
         return this;
     }
 
@@ -110,7 +112,18 @@ public class PlatformEntity extends DescribableEntity implements AbstractStaEnti
     }
 
     public boolean hasHistoricalLocationEntities() {
-        return getHistoricalLocationEntities() != null && !getHistoricalLocationEntities().isEmpty();
+        return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
+    }
+
+    @Override
+    public boolean isProcesssed() {
+        return processed;
+    }
+
+    @Override
+    public AbstractStaEntity setProcesssed(boolean processsed) {
+        this.processed = processsed;
+        return this;
     }
 
     @Override

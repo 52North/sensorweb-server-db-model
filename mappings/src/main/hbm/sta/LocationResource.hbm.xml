@@ -27,7 +27,7 @@
         <many-to-one name="locationEncoding" class="LocationEncodingEntity" foreign-key="fk_location_location_encoding">
             <column name="fk_location_encoding_id" not-null="true"/>
         </many-to-one>
-        <set name="thingEntities" table="thing_location" inverse="true">
+        <set name="things" table="thing_location" inverse="true">
             <key foreign-key="fk_location_thing">
                 <column name="fk_location_id" not-null="false"/>
             </key>
@@ -35,7 +35,7 @@
                 <column name="fk_thing_id" not-null="false"/>
             </many-to-many>
         </set>
-        <set name="historicalLocationEntities" table="location_historical_location" inverse="false">
+        <set name="historicalLocations" table="location_historical_location" inverse="false">
             <key foreign-key="fk_location_historical_location">
                 <column name="fk_location_id" not-null="true"/>
             </key>
@@ -64,10 +64,10 @@
                 <param name="sequence_name">historical_location_seq</param>
             </generator>
         </id>
-        <many-to-one name="thingEntity" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_thing_historical_location">
+        <many-to-one name="thing" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_thing_historical_location">
             <column name="fk_thing_id" not-null="true"/>
         </many-to-one>
-        <set name="locationEntities" table="location_historical_location" inverse="true">
+        <set name="locations" table="location_historical_location" inverse="true">
             <key foreign-key="fk_historical_location_location">
                 <column name="fk_historical_location_id" not-null="true"/>
             </key>

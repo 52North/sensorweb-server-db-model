@@ -34,6 +34,8 @@ public class HistoricalLocationEntity extends IdEntity
         implements AbstractStaEntity, Serializable, Locations<HistoricalLocationEntity> {
 
     public static final String PROPERTY_TIME = "time";
+    public static final String PROPERTY_LOCATIONS = "locations";
+    public static final String PROPERTY_THING = "thing";
 
     private static final long serialVersionUID = 5564686026419270062L;
 
@@ -42,6 +44,8 @@ public class HistoricalLocationEntity extends IdEntity
     private Set<LocationEntity> locationEntities;
 
     private PlatformEntity thingEntity;
+
+    private boolean processed;
 
     public Date getTime() {
         return Utils.createUnmutableTimestamp(time);
@@ -53,28 +57,39 @@ public class HistoricalLocationEntity extends IdEntity
     }
 
     @Override
-    public Set<LocationEntity> getLocationEntities() {
+    public Set<LocationEntity> getLocations() {
         return locationEntities;
     }
 
     @Override
-    public HistoricalLocationEntity setLocationEntities(Set<LocationEntity> locationEntities) {
+    public HistoricalLocationEntity setLocations(Set<LocationEntity> locationEntities) {
         this.locationEntities = locationEntities;
         return this;
     }
 
-    public PlatformEntity getThingEntity() {
+    public PlatformEntity getThing() {
         return thingEntity;
     }
 
-    public HistoricalLocationEntity setThingEntity(PlatformEntity thingEntity) {
+    public HistoricalLocationEntity setThing(PlatformEntity thingEntity) {
         this.thingEntity = thingEntity;
         return this;
     }
 
     @Override
+    public boolean isProcesssed() {
+        return processed;
+    }
+
+    @Override
+    public AbstractStaEntity setProcesssed(boolean processsed) {
+        this.processed = processsed;
+        return this;
+    }
+
+    @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getTime(), getThingEntity());
+        return Objects.hash(super.hashCode(), getTime(), getThing());
     }
 
     @Override
@@ -84,7 +99,7 @@ public class HistoricalLocationEntity extends IdEntity
         }
         HistoricalLocationEntity other = (HistoricalLocationEntity) obj;
         return super.equals(other) && Objects.equals(getTime(), other.getTime())
-                && Objects.equals(getThingEntity(), other.getThingEntity());
+                && Objects.equals(getThing(), other.getThing());
     }
 
 }

@@ -55,7 +55,7 @@
             <key column="fk_platform_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />
         </set>
-         <set name="locationEntities" table="thing_location" inverse="false">
+         <set name="locations" table="thing_location" inverse="false">
             <key foreign-key="fk_thing_location">
                 <column name="fk_thing_id" not-null="false"/>
             </key>
@@ -63,13 +63,13 @@
                 <column name="fk_location_id" not-null="false"/>
             </many-to-many>
         </set>
-        <set name="historicalLocationEntities" table="historical_location" inverse="false" >
+        <set name="historicalLocations" table="historical_location" inverse="false" >
             <key foreign-key="fk_thing_historical_location" update="false">
                 <column name="fk_thing_id" not-null="true"/>
             </key>
             <one-to-many class="org.n52.series.db.beans.sta.HistoricalLocationEntity" />
         </set>
-        <set name="datastreamEntities" table="datastream" inverse="true">
+        <set name="datastreams" table="datastream" inverse="true">
             <key foreign-key="fk_datastream_thing">
                 <column name="fk_thing_id" not-null="true"/>
             </key>

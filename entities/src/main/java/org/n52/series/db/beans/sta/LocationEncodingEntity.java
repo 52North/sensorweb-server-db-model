@@ -33,6 +33,7 @@ public class LocationEncodingEntity extends IdEntity implements AbstractStaEntit
     private static final long serialVersionUID = 656748116995263897L;
 
     private String encodingType;
+    private boolean processed;
 
     public String getEncodingType() {
         return encodingType;
@@ -40,6 +41,17 @@ public class LocationEncodingEntity extends IdEntity implements AbstractStaEntit
 
     public void setEncodingType(String encodingType) {
         this.encodingType = encodingType;
+    }
+
+    @Override
+    public boolean isProcesssed() {
+        return processed;
+    }
+
+    @Override
+    public AbstractStaEntity setProcesssed(boolean processsed) {
+        this.processed = processsed;
+        return this;
     }
 
     @Override

@@ -84,24 +84,24 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity implements 
         return this;
     }
 
-    public Set<PlatformEntity> getThingEntities() {
+    public Set<PlatformEntity> getThings() {
         return thingEntities;
     }
 
-    public LocationEntity setThingEntities(Set<PlatformEntity> thingEntities) {
+    public LocationEntity setThings(Set<PlatformEntity> thingEntities) {
         this.thingEntities = thingEntities;
         return this;
     }
 
     public boolean hasThings() {
-        return getThingEntities() != null && !getThingEntities().isEmpty();
+        return getThings() != null && !getThings().isEmpty();
     }
 
-    public Set<HistoricalLocationEntity> getHistoricalLocationEntities() {
+    public Set<HistoricalLocationEntity> getHistoricalLocations() {
         return historicalLocationEntities;
     }
 
-    public LocationEntity setHistoricalLocationEntities(Set<HistoricalLocationEntity> historicalLocationEntities) {
+    public LocationEntity setHistoricalLocations(Set<HistoricalLocationEntity> historicalLocationEntities) {
         this.historicalLocationEntities = historicalLocationEntities;
         return this;
     }

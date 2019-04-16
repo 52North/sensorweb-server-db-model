@@ -30,6 +30,8 @@ public class AbstractNameDescriptionStaEntity extends IdEntity implements Abstra
 
     private String description;
 
+    private boolean processed;
+
     @Override
     public String getName() {
         return name;
@@ -62,5 +64,16 @@ public class AbstractNameDescriptionStaEntity extends IdEntity implements Abstra
         }
         AbstractNameDescriptionStaEntity other = (AbstractNameDescriptionStaEntity) obj;
         return super.equals(other) && Objects.equals(getName(), other.getName());
+    }
+
+    @Override
+    public boolean isProcesssed() {
+        return processed;
+    }
+
+    @Override
+    public AbstractStaEntity setProcesssed(boolean processsed) {
+        this.processed = processsed;
+        return this;
     }
 }

@@ -22,17 +22,8 @@ package org.n52.series.db.beans.sta;
  */
 public interface AbstractStaEntity {
 
-    default boolean isProcesssed() {
-        return Extensions.processed;
-    }
+    boolean isProcesssed();
 
-    default AbstractStaEntity setProcesssed(boolean processsed) {
-        Extensions.processed = processsed;
-        return this;
-    }
-
-    class Extensions {
-        private static Boolean processed;
-    }
+    AbstractStaEntity setProcesssed(boolean processsed);
 
 }
