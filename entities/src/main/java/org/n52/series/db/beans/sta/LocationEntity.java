@@ -34,6 +34,7 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity implements 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
+    public static final String PROPERTY_LOCATION_ENCODINT = "locationEncoding";
 
     private static final long serialVersionUID = -8201429072560300649L;
 
