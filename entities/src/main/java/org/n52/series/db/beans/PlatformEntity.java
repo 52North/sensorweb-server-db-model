@@ -98,20 +98,20 @@ public class PlatformEntity extends DescribableEntity implements AbstractStaEnti
         return this;
     }
 
-    public Set<DatastreamEntity> getDatastreamEntities() {
+    public Set<DatastreamEntity> getDatastreams() {
         return datastreams;
     }
 
-    public PlatformEntity setDatastreamEntities(Set<DatastreamEntity> datastreams) {
+    public PlatformEntity setDatastreams(Set<DatastreamEntity> datastreams) {
         this.datastreams = datastreams;
         return this;
     }
 
-    public boolean hasDatastreamEntities() {
-        return getDatastreamEntities() != null && !getDatastreamEntities().isEmpty();
+    public boolean hasDatastreams() {
+        return getDatastreams() != null && !getDatastreams().isEmpty();
     }
 
-    public boolean hasHistoricalLocationEntities() {
+    public boolean hasHistoricalLocations() {
         return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
     }
 
