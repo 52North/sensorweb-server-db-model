@@ -13,7 +13,7 @@
         <property name="name" type="string">
             <column name="name" not-null="true"/>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description" not-null="true"/>
         </property>
         <property name="location" type="text">

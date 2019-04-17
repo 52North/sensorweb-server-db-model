@@ -33,7 +33,7 @@
                 <comment>The codespace of the platform name, reference to the codespace table.</comment>
             </column>
         </many-to-one>
-         <property name="description" type="string">
+         <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the platform</comment>
             </column>
@@ -104,7 +104,7 @@
                 <comment>Locale/language specific name of the platform</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>Locale/language specific description of the platform</comment>
             </column>
