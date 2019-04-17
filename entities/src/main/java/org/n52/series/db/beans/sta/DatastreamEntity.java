@@ -57,9 +57,10 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity
     public static final String PROPERTY_THING = "thing";
     public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String PROPERTY_PHENOMENON = "phenomenon";
+    public static final String PROPERTY_DATASETS = "datasets";
+    public static final String PROPERTY_OBSERVATIONS = "observations";
 
     private static final long serialVersionUID = -9067390076853876658L;
-
     private GeometryEntity geometryEntity;
     private Date samplingTimeStart;
     private Date samplingTimeEnd;
