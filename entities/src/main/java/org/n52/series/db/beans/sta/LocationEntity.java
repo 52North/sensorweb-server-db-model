@@ -29,7 +29,7 @@ import org.n52.series.db.beans.PlatformEntity;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends AbstractNameDescriptionStaEntity implements Serializable, HasGeometry {
+public class LocationEntity extends StaDescribableEntity implements Serializable, HasGeometry<LocationEntity> {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -113,6 +113,19 @@ public class LocationEntity extends AbstractNameDescriptionStaEntity implements 
         }
         historicalLocationEntities.add(historicalLocationEntity);
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof LocationEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
 }

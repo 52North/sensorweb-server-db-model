@@ -41,9 +41,9 @@ import org.n52.series.db.common.Utils;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class DatastreamEntity extends AbstractNameDescriptionStaEntity
+public class DatastreamEntity extends StaDescribableEntity
         implements Serializable, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>,
-        HasPhenomenonTime, HasUnit, HasProcedure<DatastreamEntity>, HasGeometry {
+        HasPhenomenonTime, HasUnit, HasProcedure<DatastreamEntity>, HasGeometry<DatastreamEntity> {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -233,6 +233,19 @@ public class DatastreamEntity extends AbstractNameDescriptionStaEntity
 
     public boolean hasObservations() {
         return getObservations() != null && !getObservations().isEmpty();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof DatastreamEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
 }
