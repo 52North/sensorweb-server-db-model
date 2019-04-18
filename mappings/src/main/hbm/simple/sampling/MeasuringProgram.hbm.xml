@@ -26,7 +26,7 @@
             </column>
         </property>
 
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the measuring program</comment>
             </column>
@@ -99,7 +99,7 @@
                 <comment>Locale/language specific name of the measuring program entity</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>Locale/language specific description of the measuring program entity</comment>
             </column>

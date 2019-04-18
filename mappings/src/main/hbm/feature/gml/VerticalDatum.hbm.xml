@@ -33,7 +33,7 @@
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_vd_name_codespace">
             <column name="fk_name_codespace_id"/>
         </many-to-one>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description"/>
         </property>
         <property name="remarks" column="remarks" type="string" />
