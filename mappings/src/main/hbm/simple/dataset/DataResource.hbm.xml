@@ -55,7 +55,7 @@
             </column>
         </property>
 
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the observation</comment>
             </column>
@@ -210,7 +210,7 @@
                 <comment>Locale/language specific name of the data entity</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>Locale/language specific description of the data entity</comment>
             </column>

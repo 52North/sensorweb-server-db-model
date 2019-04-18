@@ -30,7 +30,7 @@
                 <comment>The human readable name of the feature.</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the feature</comment>
             </column>
@@ -105,7 +105,7 @@
                 <comment>Locale/language specific name of the feature</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>Locale/language specific description of the feature</comment>
             </column>
