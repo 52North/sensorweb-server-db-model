@@ -55,8 +55,8 @@ public class DatastreamEntity extends StaDescribableEntity
     public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
     public static final String PROPERTY_THING = "thing";
-    public static final String PROPERTY_PROCEDURE = "procedure";
-    public static final String PROPERTY_PHENOMENON = "phenomenon";
+    public static final String PROPERTY_SENSOR = "procedure";
+    public static final String PROPERTY_OBSERVABLE_PROPERTY = "observableProperty";
     public static final String PROPERTY_DATASETS = "datasets";
     public static final String PROPERTY_OBSERVATIONS = "observations";
 
