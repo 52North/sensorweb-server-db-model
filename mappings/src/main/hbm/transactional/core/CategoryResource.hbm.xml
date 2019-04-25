@@ -23,7 +23,7 @@
                 <comment>The human readable name of the category.</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the category</comment>
             </column>
@@ -60,7 +60,7 @@
                 <comment>Locale/language specific name of the category</comment>
             </column>
         </property>
-        <property name="description" type="string">
+        <property name="description" type="text">
             <column name="description">
                 <comment>Locale/language specific description of the category</comment>
             </column>

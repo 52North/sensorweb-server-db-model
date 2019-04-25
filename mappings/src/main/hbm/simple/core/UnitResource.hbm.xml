@@ -9,7 +9,7 @@
             <column name="unit_id">
                 <comment>PK column of the table</comment>
             </column>
-            <generator class="assigned" >
+            <generator class="native" >
                 <param name="sequence_name">unit_seq</param>
             </generator>
         </id>
