@@ -38,11 +38,20 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
 
     private static final long serialVersionUID = -8201429072560300649L;
 
+    private String identifier;
     private String location;
     private GeometryEntity geometryEntity;
     private LocationEncodingEntity locationEncoding;
     private Set<PlatformEntity> thingEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
+
+    public String getIdentifier() {
+        return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public LocationEncodingEntity getLocationEncoding() {
         return locationEncoding;
