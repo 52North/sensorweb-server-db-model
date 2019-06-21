@@ -20,7 +20,7 @@
             </column>
         </property>
         <property name="staIdentifier" type="string" index="idx_staIdentifier">
-            <column name="identifier" not-null="true" unique-key="un_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="fk_phenomenon_id">
                 <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
