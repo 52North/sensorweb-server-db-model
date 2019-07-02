@@ -16,6 +16,8 @@
  */
 package org.n52.series.db.beans;
 
+import java.util.Objects;
+
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
 
     private static final long serialVersionUID = 2302654989683191424L;
@@ -31,5 +33,19 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
 
     public void setStaIdentifier(String staIdentifier) {
         this.staIdentifier = staIdentifier;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getStaIdentifier());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof PhenomenonEntity)) {
+            return false;
+        }
+        PhenomenonEntity other = (PhenomenonEntity) obj;
+        return super.equals(other) && Objects.equals(getStaIdentifier(), other.getStaIdentifier());
     }
 }

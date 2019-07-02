@@ -109,13 +109,19 @@ public abstract class AbstractGenerator {
         for (String path : paths) {
             if (Concept.STA.equals(concept)) {
                 File directory = getDirectory(path);
-                for (File file : directory.listFiles()) {
-                    if (!(file.getName().equalsIgnoreCase("PlatformResource.hbm.xml") && file.getParentFile().getPath().endsWith("core"))) {
-                        if (configuration != null) {
-                            configuration.addFile(file);
-                        }
-                        if (metadataSources != null) {
-                            metadataSources.addFile(file);
+                if (directory != null) {
+                    File[] listFiles = directory.listFiles();
+                    if (listFiles != null) {
+                        for (File file : listFiles) {
+                            if (file != null && !(file.getName().equalsIgnoreCase("PlatformResource.hbm.xml")
+                                    && file.getParentFile().getPath().endsWith("core"))) {
+                                if (configuration != null) {
+                                    configuration.addFile(file);
+                                }
+                                if (metadataSources != null) {
+                                    metadataSources.addFile(file);
+                                }
+                            }
                         }
                     }
                 }
