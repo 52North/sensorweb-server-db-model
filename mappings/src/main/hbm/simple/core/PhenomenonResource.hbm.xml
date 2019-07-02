@@ -19,6 +19,11 @@
                 <comment>Unique identifier of the phenomenon which can be used for filtering. Should be a URI (reference to a vacabulary entry), UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
+        <property name="staIdentifier" type="string" index="idx_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_phenomenon_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. http://www.example.org/123, 123-321</comment>
+            </column>
+        </property>
         <property name="name" type="string">
             <column name="name">
                 <comment>The human readable name of the phenomenon.</comment>

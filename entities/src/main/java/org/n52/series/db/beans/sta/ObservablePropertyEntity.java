@@ -35,6 +35,7 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements Datast
         this.phenomenon = phenomenon;
         setId(phenomenon.getId());
         setIdentifier(phenomenon.getIdentifier());
+        setStaIdentifier(phenomenon.getStaIdentifier());
         setName(phenomenon.getName());
         setDescription(phenomenon.getDescription());
     }
@@ -63,6 +64,7 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements Datast
     public PhenomenonEntity asPhenomenonEntity() {
         phenomenon.setId(getId());
         phenomenon.setIdentifier(getIdentifier());
+        phenomenon.setStaIdentifier(getStaIdentifier());
         phenomenon.setName(getName());
         phenomenon.setDescription(getDescription());
         return phenomenon;

@@ -33,11 +33,14 @@ import org.n52.series.db.common.Utils;
 public class HistoricalLocationEntity extends IdEntity
         implements AbstractStaEntity, Serializable, Locations<HistoricalLocationEntity> {
 
+    public static final String PROPERTY_IDENTIFIER = "identifier";
     public static final String PROPERTY_TIME = "time";
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_THING = "thing";
 
     private static final long serialVersionUID = 5564686026419270062L;
+
+    private String identifier;
 
     private Date time;
 
@@ -46,6 +49,14 @@ public class HistoricalLocationEntity extends IdEntity
     private PlatformEntity thingEntity;
 
     private boolean processed;
+
+    public String getIdentifier() {
+        return this.identifier;
+    }
+
+    public void setIdentifier(String identifier) {
+        this.identifier = identifier;
+    }
 
     public Date getTime() {
         return Utils.createUnmutableTimestamp(time);
@@ -98,8 +109,8 @@ public class HistoricalLocationEntity extends IdEntity
             return false;
         }
         HistoricalLocationEntity other = (HistoricalLocationEntity) obj;
-        return super.equals(other) && Objects.equals(getTime(), other.getTime())
-                && Objects.equals(getThing(), other.getThing());
+        return super.equals(other) && Objects.equals(identifier, other.getIdentifier())
+                && Objects.equals(getTime(), other.getTime()) && Objects.equals(getThing(), other.getThing());
     }
 
 }
