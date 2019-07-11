@@ -284,7 +284,7 @@
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
-            <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile">
+            <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile" cascade="save-update,delete">
                 <column name="fk_value_profile_id" not-null="false">
                     <comment>Reference to the vertical metadata that belongs that belongs to this profile dataset.</comment>
                 </column>
