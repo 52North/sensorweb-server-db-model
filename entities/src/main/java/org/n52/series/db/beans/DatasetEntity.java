@@ -561,6 +561,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
         setPublished(dataset.isPublished());
+        setInsitu(dataset.isInsitu());
+        setMobile(dataset.isMobile());
         if (dataset.getRelatedDatasets() != null) {
             setRelatedObservations(dataset.getRelatedDatasets().stream().collect(Collectors.toSet()));
         }
