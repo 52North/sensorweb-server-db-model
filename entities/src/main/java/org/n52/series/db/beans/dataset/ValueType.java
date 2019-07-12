@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum ValueType {
-    quantity, count, text, category, bool, geometry, blob, referenced, not_initialized;
+    quantity, count, text, category, bool, geometry, blob, referenced, complex, dataarray, not_initialized;
 
     public static final String ALL = "all";
 
