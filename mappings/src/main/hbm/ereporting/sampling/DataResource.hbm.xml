@@ -151,7 +151,7 @@
             </column>
         </property>
 
-        <property name="parent" type="long" insert="false" update="false">
+        <property name="parent" type="long">
             <column name="fk_parent_observation_id" not-null="false">
                 <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
             </column>
@@ -296,7 +296,7 @@
         </subclass>
 
         <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
-            <set name="value" table="observation" inverse="true">
+            <set name="value" table="observation">
                 <key foreign-key="fk_parent_observation">
                      <column name="fk_parent_observation_id" not-null="false">
                         <comment>Reference to the parent data/observation</comment>
@@ -327,14 +327,14 @@
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
             <!-- See above comments for DataArrayDataEntity -->
-            <set name="value" table="observation" inverse="true">
+            <set name="value" table="observation">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <set name="value" table="observation" inverse="true">
+            <set name="value" table="observation">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
