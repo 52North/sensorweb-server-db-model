@@ -44,7 +44,9 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     public AbstractFeatureEntity<E> setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
-        this.geometryEntity.setSrid(geometry.getSRID());
+        if (geometry != null) {
+            this.geometryEntity.setSrid(geometry.getSRID());
+        }
         return this;
     }
 
