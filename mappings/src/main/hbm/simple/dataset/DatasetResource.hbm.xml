@@ -197,9 +197,9 @@
             </column>
         </property>
 
-        <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile">
+        <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile" cascade="all">
             <column name="fk_value_profile_id" not-null="false">
-                <comment>Reference to the vertical metadata that belongs that belongs to this dataset it it is a profile dataset (observationType is profile).</comment>
+                <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>
             </column>
         </many-to-one>
 

@@ -23,11 +23,17 @@ import org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity;
 public class VerticalMetadataEntity extends IdEntity {
 
     private static final long serialVersionUID = 3156288491348980598L;
+
     private Short orientation;
+
     private String verticalOriginName;
+
     private String verticalfromName;
+
     private String verticaltoName;
+
     private UnitEntity verticalUnit;
+
     private Set<I18nVerticalMetadataEntity> translations;
 
     public Short getOrientation() {
@@ -58,12 +64,20 @@ public class VerticalMetadataEntity extends IdEntity {
         this.verticalOriginName = name;
     }
 
+    public boolean isSetVerticalOrigiName() {
+        return getVerticalOriginName() != null && !getVerticalOriginName().isEmpty();
+    }
+
     public String getVerticalFromName() {
         return verticalfromName;
     }
 
     public void setVerticalFromName(String name) {
         this.verticalfromName = name;
+    }
+
+    public boolean isSetVerticalFromName() {
+        return getVerticalFromName() != null && !getVerticalFromName().isEmpty();
     }
 
     public String getVerticalToName() {
@@ -74,12 +88,27 @@ public class VerticalMetadataEntity extends IdEntity {
         this.verticaltoName = name;
     }
 
+    public boolean isSetVerticalToName() {
+        return getVerticalToName() != null && !getVerticalToName().isEmpty();
+    }
+
+    public boolean areVerticalNamesEqual() {
+        return isSetVerticalFromName() && isSetVerticalToName()
+                && getVerticalFromName().equalsIgnoreCase(getVerticalToName());
+    }
+
     public UnitEntity getVerticalUnit() {
         return verticalUnit;
     }
 
+    public boolean hasVerticalUnit() {
+        return getVerticalUnit() != null;
+    }
+
     public void setVerticalUnit(UnitEntity verticalUnit) {
-        this.verticalUnit = verticalUnit;
+        if (this.verticalUnit == null && verticalUnit != null) {
+            this.verticalUnit = verticalUnit;
+        }
     }
 
     public Set<I18nVerticalMetadataEntity> getTranslations() {

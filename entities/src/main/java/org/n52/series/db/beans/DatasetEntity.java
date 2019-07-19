@@ -575,6 +575,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         if (dataset.hasEreportingProfile()) {
             setEreportingProfile(new EReportingProfileDatasetEntity().copy(dataset.getEreportingProfile()));
         }
+        if (dataset.hasVerticalMetadata()) {
+            setVerticalMetadata(dataset.getVerticalMetadata());
+        }
         setUnit(dataset.getUnit());
     }
 
