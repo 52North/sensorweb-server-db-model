@@ -95,7 +95,7 @@
             <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
         </set>
 
-        <set name="parameters" table="feature_parameter" cascade="delete-orphan" inverse="false">
+        <set inverse="false" name="parameters" table="feature_parameter" fetch="join">
             <comment>Storage of relations between feature and related parameter</comment>
             <key not-null="true" foreign-key="fk_feature_parameter">
                 <column name="fk_feature_id">

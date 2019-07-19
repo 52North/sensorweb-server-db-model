@@ -102,7 +102,7 @@
         </component>
 
         <!-- Or add only to specific subclasses -->
-        <set inverse="true" name="parameters" table="observation_parameter" cascade="all" fetch="join">
+        <set inverse="false" name="parameters" table="observation_parameter" fetch="join">
             <comment>Storage of relations between data/observation and related parameter</comment>
             <key not-null="true" foreign-key="fk_observation_parameter">
                 <column name="fk_observation_id">

@@ -38,7 +38,7 @@
                 <comment>A short description of the platform</comment>
             </column>
         </property>
-        <set inverse="true" name="parameters" table="platform_parameter" cascade="all" fetch="join">
+        <set inverse="true" name="parameters" table="platform_parameter" fetch="join">
             <comment>Storage of relations between platform and related parameter</comment>
             <key not-null="true" foreign-key="fk_platform_parameter">
                 <column name="fk_platform_id">
