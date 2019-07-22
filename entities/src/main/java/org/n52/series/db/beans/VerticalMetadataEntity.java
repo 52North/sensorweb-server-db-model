@@ -22,6 +22,11 @@ import org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity;
 
 public class VerticalMetadataEntity extends IdEntity {
 
+    public static final String PROPERTY_VERTICAL_UNIT = "verticalUnit";
+    public static final String PROPERTY_VERTICAL_ORIENTATION = "orientation";
+    public static final String PROPERTY_VERTICAL_ORIGIN_NAME = "verticalOriginName";
+    public static final String PROPERTY_VERTICAL_FROM_NAME = "verticalFromName";
+    public static final String PROPERTY_VERTICAL_TO_NAME = "verticalToName";
     private static final long serialVersionUID = 3156288491348980598L;
 
     private Short orientation;
@@ -64,7 +69,7 @@ public class VerticalMetadataEntity extends IdEntity {
         this.verticalOriginName = name;
     }
 
-    public boolean isSetVerticalOrigiName() {
+    public boolean isSetVerticalOriginName() {
         return getVerticalOriginName() != null && !getVerticalOriginName().isEmpty();
     }
 
