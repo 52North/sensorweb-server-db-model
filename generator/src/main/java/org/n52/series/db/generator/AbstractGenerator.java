@@ -98,6 +98,9 @@ public abstract class AbstractGenerator {
         case TRANSACTIONAL:
             paths.addAll(getProfileDirectories("/hbm/transactional", profile));
             break;
+        case PROXY:
+            paths.addAll(getProfileDirectories("/hbm/proxy", profile));
+            break;
         default:
             throw new Exception("The entered value is invalid: " + concept);
         }
@@ -168,7 +171,8 @@ public abstract class AbstractGenerator {
     enum Concept {
         SIMPLE,
         TRANSACTIONAL,
-        E_REPORTING;
+        E_REPORTING,
+        PROXY;
 
         @Override
         public String toString() {
