@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="ServiceEntity" table="service">
+    <comment>Storage of the service.</comment>
+        <id name="id" type="long">
+            <column name="service_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">service_seq</param>
+            </generator>
+        </id>
+        <property name="identifier" type="string" index="idx_dataset_identifier">
+            <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
+                <comment>Unique identifier of the service.</comment>
+            </column>
+        </property>
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codespace">
+            <column name="fk_identifier_codespace_id">
+                <comment>The codespace of the service identifier, reference to the codespace table. Can be null.</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>The human readable name of the service.</comment>
+            </column>
+        </property>
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
+            <column name="fk_name_codespace_id">
+                <comment>The codespace of the service name, reference to the codespace table. Can be null.</comment>
+            </column>
+        </many-to-one>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the service</comment>
+            </column>
+        </property>
+        <property name="url" type="text">
+            <column name="url">
+                <comment>The url of the service</comment>
+            </column>
+        </property>
+        <property name="type" type="string">
+            <column name="type">
+                <comment>The type of the service</comment>
+            </column>
+        </property>
+
+        <property name="version" type="string">
+            <column name="version">
+                <comment>The version of the service</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>
