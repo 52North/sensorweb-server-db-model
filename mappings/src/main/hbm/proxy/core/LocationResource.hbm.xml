@@ -54,18 +54,6 @@
         </set>
     </class>
 
-    <class name="LocationEncodingEntity" table="location_encoding">
-        <id name="id" type="long">
-            <column name="location_encoding_id"/>
-            <generator class="native">
-                <param name="sequence_name">location_encoding_seq</param>
-            </generator>
-        </id>
-        <property name="encodingType" type="string">
-            <column name="encoding_type" not-null="true" unique-key="un_encoding_type"/>
-        </property>
-    </class>
-
     <class name="HistoricalLocationEntity" table="historical_location">
         <id name="id" type="long">
             <column name="historical_location_id"/>
