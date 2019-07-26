@@ -124,10 +124,10 @@ public class SQLScriptGenerator extends AbstractGenerator{
                     // modelSelection/profile
                     for (int j = 0; j < 2; j++) {
                         // concept
-                        for (int k = 0; k < 5; k++) {
+                        for (int k = 0; k < 4; k++) {
                             try {
                                 // execute(sqlScriptGenerator, i, j, k, schema);
-                                sqlScriptGenerator.execute(sqlScriptGenerator, i, j, k, schema, true);
+                                sqlScriptGenerator.execute(sqlScriptGenerator, i, j, k, schema, true, false);
                             } catch (Exception e) {
                                 printToScreen("ERROR: " + e.getMessage());
                                 e.printStackTrace();
@@ -143,7 +143,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
                     int concept = sqlScriptGenerator.getConceptSelection();
                     String schema = sqlScriptGenerator.getSchema();
                     int modelSelection = sqlScriptGenerator.getModelSelection();
-                    sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema, addComments);
+                    sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema, addComments, true);
                 } catch (IOException ioe) {
                     printToScreen("ERROR: IO error trying to read your input!");
                     System.exit(1);
@@ -192,12 +192,14 @@ public class SQLScriptGenerator extends AbstractGenerator{
                                 int profileSelection,
                                 int conceptSelection,
                                 String schema,
-                                boolean comments)
+                                boolean comments,
+                                boolean consoleLog)
             throws Exception {
         Concept concept = Concept.values()[conceptSelection];
         Profile profile = Profile.values()[profileSelection];
         Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
         DialectSelector dialect = DialectSelector.values()[dialectSelection];
+        System.out.println(String.format("EXECUTING sql generation for %s - %s - %s!", dialect.name(), concept.name(), profile.name()));
         Dialect dia = sqlScriptGenerator.getDialect(dialect, comments);
         Properties p = new Properties();
         p.put("hibernate.dialect", dia.getClass().getName());
@@ -222,7 +224,8 @@ public class SQLScriptGenerator extends AbstractGenerator{
 
         // create script
         SchemaExport schemaExport = new SchemaExport();
-        EnumSet<TargetType> targetTypes = EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT);
+        EnumSet<TargetType> targetTypes =
+                consoleLog ? EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT) : EnumSet.of(TargetType.SCRIPT);
         schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
         schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
         printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
