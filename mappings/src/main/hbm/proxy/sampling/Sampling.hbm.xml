@@ -20,7 +20,7 @@
             </column>
         </many-to-one>
 
-        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_sampling">
+        <many-to-one class="org.n52.series.db.beans.ServiceEntity" name="service" foreign-key="fk_service_sampling">
             <column name="fk_service_id" unique-key="un_sampling_identifier">
                 <comment>Reference to the service this sampling belongs to.</comment>
             </column>

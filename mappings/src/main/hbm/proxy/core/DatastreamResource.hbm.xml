@@ -10,7 +10,7 @@
                 <param name="sequence_name">datastream_seq</param>
             </generator>
         </id>
-        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_datastream">
+        <many-to-one class="org.n52.series.db.beans.ServiceEntity" name="service" foreign-key="fk_service_datastream">
             <column name="fk_service_id" unique-key="un_datastream_identifier">
                 <comment>Reference to the service this datastream belongs to.</comment>
             </column>

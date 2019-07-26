@@ -10,7 +10,7 @@
                 <param name="sequence_name">location_seq</param>
             </generator>
         </id>
-        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_location">
+        <many-to-one class="org.n52.series.db.beans.ServiceEntity" name="service" foreign-key="fk_service_location">
             <column name="fk_service_id" unique-key="un_location_identifier">
                 <comment>Reference to the service this category belongs to.</comment>
             </column>

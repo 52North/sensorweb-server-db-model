@@ -14,39 +14,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.sta;
 
-import java.util.Objects;
+import org.n52.series.db.beans.DescribableEntity;
 
-public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
+public class StaDescribableEntity extends DescribableEntity implements AbstractStaEntity {
 
-    private static final long serialVersionUID = 2302654989683191424L;
+    private static final long serialVersionUID = 948180142611914656L;
 
-    /**
-     * Identifier used by SensorThingsAPI for addressing this entity.
-     */
-    private String staIdentifier;
+    private boolean processed;
 
-    public String getStaIdentifier() {
-        return staIdentifier;
+    @Override
+    public boolean isProcesssed() {
+        return processed;
     }
 
-    public void setStaIdentifier(String staIdentifier) {
-        this.staIdentifier = staIdentifier;
+    @Override
+    public AbstractStaEntity setProcesssed(boolean processsed) {
+        this.processed = processsed;
+        return this;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getStaIdentifier());
+        return super.hashCode();
     }
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof PhenomenonEntity)) {
+        if (obj == null || !(obj instanceof StaDescribableEntity)) {
             return false;
         }
-        PhenomenonEntity other = (PhenomenonEntity) obj;
-        return super.equals(other) && Objects.equals(getStaIdentifier(), other.getStaIdentifier());
+        return super.equals(obj);
     }
-
 }
