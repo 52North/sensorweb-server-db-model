@@ -13,6 +13,11 @@
                 <param name="sequence_name">related_feature_seq</param>
             </generator>
         </id>
+        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_related_feature">
+            <column name="fk_service_id">
+                <comment>Reference to the service this platform belongs to.</comment>
+            </column>
+        </many-to-one>
         <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="fk_related_feature">
             <column name="fk_feature_id" not-null="true">
                 <comment>Reference to the feature that is related to the offering.</comment>
