@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.charset.Charset;
-import java.nio.file.Files;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.LinkedList;
@@ -99,39 +98,18 @@ public abstract class AbstractGenerator {
         case TRANSACTIONAL:
             paths.addAll(getProfileDirectories("/hbm/transactional", profile));
             break;
-        case STA:
-            paths.addAll(getProfileDirectories("/hbm/transactional", profile));
-            paths.add("/hbm/sta");
+        case PROXY:
+            paths.addAll(getProfileDirectories("/hbm/proxy", profile));
             break;
         default:
             throw new Exception("The entered value is invalid: " + concept);
         }
         for (String path : paths) {
-            if (Concept.STA.equals(concept)) {
-                File directory = getDirectory(path);
-                if (directory != null) {
-                    File[] listFiles = directory.listFiles();
-                    if (listFiles != null) {
-                        for (File file : listFiles) {
-                            if (file != null && !(file.getName().equalsIgnoreCase("PlatformResource.hbm.xml")
-                                    && file.getParentFile().getPath().endsWith("core"))) {
-                                if (configuration != null) {
-                                    configuration.addFile(file);
-                                }
-                                if (metadataSources != null) {
-                                    metadataSources.addFile(file);
-                                }
-                            }
-                        }
-                    }
-                }
-            } else {
-                if (configuration != null) {
-                    configuration.addDirectory(getDirectory(path));
-                }
-                if (metadataSources != null) {
-                    metadataSources.addDirectory(getDirectory(path));
-                }
+            if (configuration != null) {
+                configuration.addDirectory(getDirectory(path));
+            }
+            if (metadataSources != null) {
+                metadataSources.addDirectory(getDirectory(path));
             }
         }
     }
@@ -194,7 +172,7 @@ public abstract class AbstractGenerator {
         SIMPLE,
         TRANSACTIONAL,
         E_REPORTING,
-        STA;
+        PROXY;
 
         @Override
         public String toString() {

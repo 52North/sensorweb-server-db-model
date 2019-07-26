@@ -350,6 +350,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     /**
      * @param resultTimes
      *            a list of result times
+     * @return this
      * @since 2.0.0
      */
 
@@ -561,6 +562,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
         setPublished(dataset.isPublished());
+        setInsitu(dataset.isInsitu());
+        setMobile(dataset.isMobile());
         if (dataset.getRelatedDatasets() != null) {
             setRelatedObservations(dataset.getRelatedDatasets().stream().collect(Collectors.toSet()));
         }
@@ -572,6 +575,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         }
         if (dataset.hasEreportingProfile()) {
             setEreportingProfile(new EReportingProfileDatasetEntity().copy(dataset.getEreportingProfile()));
+        }
+        if (dataset.hasVerticalMetadata()) {
+            setVerticalMetadata(dataset.getVerticalMetadata());
         }
         setUnit(dataset.getUnit());
     }

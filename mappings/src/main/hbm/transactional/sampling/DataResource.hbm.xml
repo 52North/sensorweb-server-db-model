@@ -101,7 +101,7 @@
         </component>
 
         <!-- Or add only to specific subclasses -->
-        <set inverse="true" name="parameters" table="observation_parameter" cascade="all" fetch="join">
+        <set inverse="false" name="parameters" table="observation_parameter" fetch="join">
             <comment>Storage of relations between data/observation and related parameter</comment>
             <key not-null="true" foreign-key="fk_observation_parameter">
                 <column name="fk_observation_id">
@@ -150,7 +150,7 @@
             </column>
         </property>
 
-        <property name="parent" type="long" insert="false" update="false">
+        <property name="parent" type="long">
             <column name="fk_parent_observation_id" not-null="false">
                 <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
             </column>
@@ -262,7 +262,7 @@
         </subclass>
 
         <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
-            <set name="value" table="observation" inverse="true">
+            <set name="value" table="observation">
                 <key foreign-key="fk_parent_observation">
                      <column name="fk_parent_observation_id" not-null="false">
                         <comment>Reference to the parent data/observation</comment>
@@ -293,22 +293,17 @@
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
             <!-- See above comments for DataArrayDataEntity -->
-            <set name="value" table="observation" inverse="true">
+            <set name="value" table="observation">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <set name="value" table="observation" inverse="true">
+            <set name="value" table="observation">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
-            <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile">
-                <column name="fk_value_profile_id" not-null="false">
-                    <comment>Reference to the vertical metadata that belongs that belongs to this profile dataset.</comment>
-                </column>
-            </many-to-one>
         </subclass>
 
     </class>

@@ -48,4 +48,5 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
         PhenomenonEntity other = (PhenomenonEntity) obj;
         return super.equals(other) && Objects.equals(getStaIdentifier(), other.getStaIdentifier());
     }
+
 }

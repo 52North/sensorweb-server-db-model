@@ -28,14 +28,16 @@ import org.n52.series.db.beans.HibernateRelations.HasOfferings;
  */
 public class RelatedFeatureEntity extends IdEntity
         implements Serializable, HasFeature<RelatedFeatureEntity>, HasOfferings<RelatedFeatureEntity> {
-
+    public static final String PROPERTY_SERVICE = "service";
     private static final long serialVersionUID = -8143897383050691280L;
 
     private AbstractFeatureEntity<RelatedFeatureEntity> feature;
 
     private String role;
 
-    private Set<OfferingEntity> offerings = new HashSet<OfferingEntity>(0);
+    private Set<OfferingEntity> offerings = new HashSet<>(0);
+
+    private ServiceEntity service;
 
     public RelatedFeatureEntity() {
     }
@@ -79,6 +81,15 @@ public class RelatedFeatureEntity extends IdEntity
     @Override
     public boolean isSetOfferings() {
         return getOfferings() != null && !getOfferings().isEmpty();
+    }
+
+    public ServiceEntity getService() {
+        return service;
+    }
+
+    public RelatedFeatureEntity setService(ServiceEntity service) {
+        this.service = service;
+        return this;
     }
 
 }

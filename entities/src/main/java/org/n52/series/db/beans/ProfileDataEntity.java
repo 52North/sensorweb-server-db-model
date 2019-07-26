@@ -22,27 +22,6 @@ public class ProfileDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -7431276500677067329L;
 
-    private VerticalMetadataEntity verticalMetadata;
-
-    public VerticalMetadataEntity getVerticalMetadata() {
-        if (!hasVerticalMetadataLocal() && getDataset().hasVerticalMetadata()) {
-            return getDataset().getVerticalMetadata();
-        }
-        return verticalMetadata;
-    }
-
-    public void setVerticalMetadata(VerticalMetadataEntity verticalMetadata) {
-        this.verticalMetadata = verticalMetadata;
-    }
-
-    private boolean hasVerticalMetadataLocal() {
-        return verticalMetadata != null;
-    }
-
-    public boolean hasVerticalMetadata() {
-        return hasVerticalMetadataLocal() || getDataset().hasVerticalMetadata();
-    }
-
     @Override
     public Set<DataEntity<?>> getValue() {
         return super.getValue();
@@ -51,58 +30,6 @@ public class ProfileDataEntity extends CompositeDataEntity {
     @Override
     public void setValue(Set<DataEntity<?>> value) {
         super.setValue(value);
-    }
-
-    public Short getOrientation() {
-        return hasVerticalMetadata() ? getVerticalMetadata().getOrientation() : null;
-    }
-
-    public void setOrientation(Short orientation) {
-        checkAndGetVerticalMetadata().setOrientation(orientation);
-    }
-
-    public String getVerticalOriginName() {
-        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalOriginName() : null;
-    }
-
-    public void setVerticalOriginName(String name) {
-        checkAndGetVerticalMetadata().setVerticalOriginName(name);
-    }
-
-    private VerticalMetadataEntity checkAndGetVerticalMetadata() {
-        if (hasVerticalMetadata()) {
-            setVerticalMetadata(new VerticalMetadataEntity());
-        }
-        return getVerticalMetadata();
-
-    }
-
-    public String getVerticalFromName() {
-        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalFromName() : null;
-    }
-
-    public void setVerticalFromName(String name) {
-        checkAndGetVerticalMetadata().setVerticalFromName(name);
-    }
-
-    public String getVerticalToName() {
-        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalToName() : null;
-    }
-
-    public void setVerticalToName(String name) {
-        checkAndGetVerticalMetadata().setVerticalToName(name);
-    }
-
-    public UnitEntity getVerticalUnit() {
-        return hasVerticalMetadata() ? getVerticalMetadata().getVerticalUnit() : null;
-    }
-
-    public void setVerticalUnit(UnitEntity verticalUnit) {
-        checkAndGetVerticalMetadata().setVerticalUnit(verticalUnit);
-    }
-
-    public boolean hasVerticalUnit() {
-        return getVerticalUnit() != null && getVerticalUnit().isSetIdentifier();
     }
 
 }

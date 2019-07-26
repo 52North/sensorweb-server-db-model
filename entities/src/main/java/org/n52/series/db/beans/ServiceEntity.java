@@ -39,6 +39,8 @@ public class ServiceEntity extends DescribableEntity {
 
     private boolean supportsFirstLatest = true;
 
+    private String connector;
+
     public ServiceEntity() {
         noDataValues = Collections.emptyList();
     }
@@ -93,6 +95,14 @@ public class ServiceEntity extends DescribableEntity {
 
     public void setVersion(final String version) {
         this.version = version;
+    }
+
+    public String getConnector() {
+        return connector;
+    }
+
+    public void setConnector(String connector) {
+        this.connector = connector;
     }
 
     @Override
