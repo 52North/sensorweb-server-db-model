@@ -111,7 +111,7 @@
                 </column>
             </many-to-many>
         </set>
-        
+
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="feature_i18n" inverse="true" fetch="select">
             <key column="fk_feature_id" not-null="true" />

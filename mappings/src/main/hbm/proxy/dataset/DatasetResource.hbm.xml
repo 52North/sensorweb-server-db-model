@@ -238,7 +238,7 @@
                 <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>
             </column>
         </many-to-one>
-        
+
         <set name="translations" table="dataset_i18n" inverse="true" fetch="select">
             <key column="fk_dataset_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity" />

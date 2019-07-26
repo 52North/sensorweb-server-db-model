@@ -94,6 +94,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("0   simple");
         printToScreen("1   transactional");
         printToScreen("2   ereporting");
+        printToScreen("3   proxy");
         printToScreen("");
         printToScreen("Enter your selection: ");
 
@@ -123,7 +124,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
                     // modelSelection/profile
                     for (int j = 0; j < 2; j++) {
                         // concept
-                        for (int k = 0; k < 4; k++) {
+                        for (int k = 0; k < 5; k++) {
                             try {
                                 // execute(sqlScriptGenerator, i, j, k, schema);
                                 sqlScriptGenerator.execute(sqlScriptGenerator, i, j, k, schema, true);
