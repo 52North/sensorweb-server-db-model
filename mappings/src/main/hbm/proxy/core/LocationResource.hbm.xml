@@ -33,8 +33,8 @@
                 <column name="geom" not-null="false"/>
             </property>
         </component>
-        <many-to-one name="locationEncoding" class="LocationEncodingEntity" foreign-key="fk_location_location_encoding">
-            <column name="fk_location_encoding_id" not-null="true"/>
+        <many-to-one name="locationEncoding" class="org.n52.series.db.beans.FormatEntity" foreign-key="fk_location_format">
+            <column name="fk_format_id" not-null="true"/>
         </many-to-one>
         <set name="things" table="thing_location" inverse="true">
             <key foreign-key="fk_location_thing">

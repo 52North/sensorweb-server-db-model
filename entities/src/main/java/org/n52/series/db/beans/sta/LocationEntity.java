@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.PlatformEntity;
@@ -41,23 +42,25 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
     private String identifier;
     private String location;
     private GeometryEntity geometryEntity;
-    private LocationEncodingEntity locationEncoding;
+    private FormatEntity locationEncoding;
     private Set<PlatformEntity> thingEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
 
+    @Override
     public String getIdentifier() {
         return this.identifier;
     }
 
+    @Override
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
-    public LocationEncodingEntity getLocationEncoding() {
+    public FormatEntity getLocationEncoding() {
         return locationEncoding;
     }
 
-    public LocationEntity setLocationEncoding(LocationEncodingEntity locationEncoding) {
+    public LocationEntity setLocationEncoding(FormatEntity locationEncoding) {
         this.locationEncoding = locationEncoding;
         return this;
     }

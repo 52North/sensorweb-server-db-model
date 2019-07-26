@@ -10,16 +10,15 @@
                 <param name="sequence_name">location_seq</param>
             </generator>
         </id>
-        <property name="name" type="string">
-            <column name="name" not-null="true"/>
-        </property>
-        <property name="description" type="text">
-            <column name="description" not-null="true"/>
-        </property>
         <property name="identifier" type="string" index="idx_location_identifier">
             <column name="identifier" not-null="true" unique-key="un_location_identifier">
                 <comment>Unique identifier of the location. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321.</comment>
             </column>
+        </property><property name="name" type="string">
+            <column name="name" not-null="true"/>
+        </property>
+        <property name="description" type="text">
+            <column name="description" not-null="true"/>
         </property>
         <property name="location" type="text">
             <column name="location" not-null="false"/>
