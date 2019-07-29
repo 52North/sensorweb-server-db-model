@@ -16,6 +16,7 @@
  */
 package org.n52.series.db.beans.dataset;
 
+import java.util.Collection;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -25,7 +26,7 @@ public enum ValueType {
 
     public static final String ALL = "all";
 
-    public static Set<ValueType> convert(Set<String> values) {
+    public static Set<ValueType> convert(Collection<String> values) {
         if (values != null) {
             return values.stream().map(at -> ValueType.getIgnoreCase(at)).filter(Objects::nonNull)
                     .collect(Collectors.toSet());
