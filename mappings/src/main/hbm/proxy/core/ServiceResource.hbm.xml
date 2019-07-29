@@ -13,8 +13,8 @@
                 <param name="sequence_name">service_seq</param>
             </generator>
         </id>
-        <property name="identifier" type="string" index="idx_dataset_identifier">
-            <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
+        <property name="identifier" type="string" index="idx_service_identifier">
+            <column name="identifier" not-null="false" unique-key="un_service_identifier">
                 <comment>Unique identifier of the service.</comment>
             </column>
         </property>
