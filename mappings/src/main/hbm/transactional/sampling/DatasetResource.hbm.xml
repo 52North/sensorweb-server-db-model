@@ -15,7 +15,7 @@
         </id>
 
         <property name="datasetType" index="idx_dataset_dataset_type">
-            <column name="dataset_type" scale="20" not-null="true" check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectory', 'not_initialized')">
+            <column name="dataset_type" scale="20" not-null="true" default="not_initialized" check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectory', 'not_initialized')">
                 <comment>Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations).</comment>
             </column>
             <type name="org.hibernate.type.EnumType">
@@ -25,7 +25,7 @@
         </property>
 
         <property name="observationType" index="idx_dataset_observation_type">
-            <column name="observation_type" scale="20" not-null="true" check="observation_type in ('simple', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
+            <column name="observation_type" scale="20" not-null="true" default="not_initialized" check="observation_type in ('simple', 'profile', 'timeseries', 'trajectory', 'not_initialized')">
                 <comment>Indicator whether the dataset observations are of type simple (a simple observation, e.g. a scalar value like the temperature) or profile (profile observations)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
@@ -35,7 +35,7 @@
         </property>
 
         <property name="valueType" index="idx_dataset_value_type">
-            <column name="value_type" scale="20" not-null="true" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'geometry', 'blob', 'reference', 'complex', 'dataarray', 'not_initialized')">
+            <column name="value_type" scale="20" not-null="true" default="not_initialized" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'geometry', 'blob', 'reference', 'complex', 'dataarray', 'not_initialized')">
                 <comment>Indicator of the type of the single values. Valid values are quantity (scalar values), count (integer values), text (textual values), category (categorical values), bool (boolean values), reference (references, e.g. link to a source, photo, video)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
