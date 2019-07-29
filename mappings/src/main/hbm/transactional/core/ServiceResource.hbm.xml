@@ -18,7 +18,7 @@
                 <comment>Unique identifier of the service.</comment>
             </column>
         </property>
-        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codespace">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_service_identifier_codespace">
             <column name="fk_identifier_codespace_id">
                 <comment>The codespace of the service identifier, reference to the codespace table. Can be null.</comment>
             </column>
@@ -28,7 +28,7 @@
                 <comment>The human readable name of the service.</comment>
             </column>
         </property>
-        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dataset_name_codespace">
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_service_name_codespace">
             <column name="fk_name_codespace_id">
                 <comment>The codespace of the service name, reference to the codespace table. Can be null.</comment>
             </column>
