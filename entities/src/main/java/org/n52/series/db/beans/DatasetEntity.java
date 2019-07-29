@@ -49,6 +49,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
+    public static final String PROPERTY_DISABLED = "disabled";
     public static final String HIDDEN_CHILD = "hidden";
 
     public static final String PROPERTY_MOBILE = "mobile";
