@@ -27,12 +27,24 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
      */
     private String staIdentifier;
 
+    @Override
+    public void setIdentifier(String identifier) {
+        super.setIdentifier(identifier);
+        if (!isSetStaIdentifier()) {
+            setStaIdentifier(identifier);
+        }
+    }
+
     public String getStaIdentifier() {
         return staIdentifier;
     }
 
     public void setStaIdentifier(String staIdentifier) {
         this.staIdentifier = staIdentifier;
+    }
+
+    public boolean isSetStaIdentifier() {
+        return getStaIdentifier() != null && !getStaIdentifier().isEmpty();
     }
 
     @Override
