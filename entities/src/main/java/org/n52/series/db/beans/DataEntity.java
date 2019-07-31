@@ -46,6 +46,8 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
 
+    public static final String PROPERTY_GEOMETRY = "geometry";
+
     public static final String PROPERTY_DELETED = "deleted";
 
     public static final String PROPERTY_PARENT = "parent";
