@@ -66,6 +66,10 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         return this;
     }
 
+    public boolean isSetFormat() {
+        return getFormat() != null && getFormat().isSetFormat();
+    }
+
     public boolean isDeleted() {
         return deleted;
     }

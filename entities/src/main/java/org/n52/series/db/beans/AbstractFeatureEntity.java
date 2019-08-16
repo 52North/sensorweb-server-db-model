@@ -78,7 +78,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     }
 
     public boolean isSetFeatureType() {
-        return getFeatureType() != null;
+        return getFeatureType() != null && getFeatureType().isSetFormat();
     }
 
     public String getUrl() {
