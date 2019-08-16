@@ -48,11 +48,32 @@
                 <comment>The type of the service</comment>
             </column>
         </property>
-
         <property name="version" type="string">
             <column name="version">
                 <comment>The version of the service</comment>
             </column>
         </property>
+        <property name="connector" type="string">
+            <column name="connector">
+                <comment>The connector of the service.</comment>
+            </column>
+        </property>
+        <property name="supportsFirstLast" type="org.n52.hibernate.type.SmallBooleanType">
+            <column name="is_supports_first_last" not-null="true" default="1" check="is_supports_first_last in (1,0)">
+                <comment>Flag that indicates if this service supports first/last observation queries</comment>
+            </column>
+        </property>
+        <component class="ServiceMetadataEntity" name="serviceMetadata">
+            <property name="metadata" type="text">
+                <column name="metadata">
+                    <comment>The metadata of the service</comment>
+                </column>
+            </property>
+            <property name="format" type="string">
+                <column name="format">
+                    <comment>The format of the service, e.g. application/json, application/xml</comment>
+                </column>
+            </property>
+        </component>
     </class>
 </hibernate-mapping>
