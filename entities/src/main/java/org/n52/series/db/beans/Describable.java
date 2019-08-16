@@ -48,6 +48,10 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
         return getParameters() != null && !getParameters().isEmpty();
     }
 
+    default boolean hasService() {
+        return getService() != null;
+    }
+
     default Set<Map<String, Object>> getMappedParameters(String locale) {
         return hasParameters() ? getParameters().stream().map(e -> e.toValueMap(locale)).collect(Collectors.toSet())
                 : null;

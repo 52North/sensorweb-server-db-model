@@ -37,9 +37,11 @@ public class ServiceEntity extends DescribableEntity {
 
     private String version;
 
-    private boolean supportsFirstLatest = true;
+    private boolean supportsFirstLast = true;
 
     private String connector;
+
+    private ServiceMetadataEntity serviceMetadata;
 
     public ServiceEntity() {
         noDataValues = Collections.emptyList();
@@ -81,12 +83,12 @@ public class ServiceEntity extends DescribableEntity {
         }
     }
 
-    public boolean isSupportsFirstLatest() {
-        return supportsFirstLatest;
+    public boolean isSupportsFirstLast() {
+        return supportsFirstLast;
     }
 
-    public void setSupportsFirstLatest(boolean supportsFirstLatest) {
-        this.supportsFirstLatest = supportsFirstLatest;
+    public void setSupportsFirstLast(boolean supportsFirstLast) {
+        this.supportsFirstLast = supportsFirstLast;
     }
 
     public String getVersion() {
@@ -103,6 +105,18 @@ public class ServiceEntity extends DescribableEntity {
 
     public void setConnector(String connector) {
         this.connector = connector;
+    }
+
+    public ServiceMetadataEntity getServiceMetadata() {
+        return serviceMetadata;
+    }
+
+    public void setServiceMetadata(ServiceMetadataEntity serviceMetadata) {
+        this.serviceMetadata = serviceMetadata;
+    }
+
+    public boolean isSetServiceMetadata() {
+        return getServiceMetadata() != null && getServiceMetadata().isSetMetadata();
     }
 
     @Override

@@ -13,6 +13,11 @@
                 <param name="sequence_name">procedure_seq</param>
             </generator>
         </id>
+        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_procedure">
+            <column name="fk_service_id" not-null="true" unique-key="un_procedure_identifier">
+                <!-- <comment>Reference to the service this procedure belongs to.</comment> -->
+            </column>
+        </many-to-one>
         <property name="identifier" type="string" index="idx_procedure_identifier">
             <column name="identifier" not-null="true" unique-key="un_procedure_identifier">
                 <!-- <comment>Unique identifier of the procedure which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment> -->
@@ -88,11 +93,6 @@
             </key>
             <one-to-many class="ProcedureHistoryEntity" />
         </set>
-        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_procedure">
-            <column name="fk_service_id" not-null="true" unique-key="un_procedure_identifier">
-                <comment>Reference to the service this procedure belongs to.</comment>
-            </column>
-        </many-to-one>
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="procedure_i18n" inverse="true" fetch="select">
             <key column="fk_procedure_id" not-null="true" />
