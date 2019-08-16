@@ -87,7 +87,7 @@ public class ServiceEntity extends DescribableEntity {
         return supportsFirstLast;
     }
 
-    public void setSupportsFirstLast(final boolean supportsFirstLast) {
+    public void setSupportsFirstLast(boolean supportsFirstLast) {
         this.supportsFirstLast = supportsFirstLast;
     }
 
