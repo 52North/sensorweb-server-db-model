@@ -53,7 +53,7 @@ public abstract class IdEntity implements Serializable, HasId {
             return false;
         }
         IdEntity other = (IdEntity) obj;
-        return Objects.equals(id, other.id);
+        return Objects.equals(getId(), other.getId()) && getClass() == other.getClass();
     }
 
 }
