@@ -127,6 +127,10 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
         return this;
     }
 
+    public boolean hasHistoricalLocations() {
+        return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
+    }
+
     @Override
     public int hashCode() {
         return super.hashCode();

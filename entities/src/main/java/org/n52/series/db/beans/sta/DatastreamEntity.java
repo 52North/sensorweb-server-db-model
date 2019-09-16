@@ -174,6 +174,10 @@ public class DatastreamEntity extends StaDescribableEntity
         this.thing = thing;
     }
 
+    public boolean hasThing() {
+        return thing != null;
+    }
+
     @Override
     public DatastreamEntity setProcedure(ProcedureEntity procedure) {
         this.procedure = procedure;
@@ -183,6 +187,10 @@ public class DatastreamEntity extends StaDescribableEntity
     @Override
     public ProcedureEntity getProcedure() {
         return procedure;
+    }
+
+    public boolean hasProcedure() {
+        return procedure != null;
     }
 
     public UnitEntity getUnitOfMeasurement() {
@@ -229,6 +237,10 @@ public class DatastreamEntity extends StaDescribableEntity
 
     public Set<StaDataEntity> getObservations() {
         return observations;
+    }
+
+    public boolean hasObservableProperty() {
+        return observableProperty != null;
     }
 
     public boolean hasObservations() {
