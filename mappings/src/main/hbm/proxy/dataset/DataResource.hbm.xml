@@ -24,6 +24,9 @@
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
+        <property name="datasetId" insert="false" update="false" type="long" >
+            <column name="fk_dataset_id" not-null="true" />
+        </property>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">

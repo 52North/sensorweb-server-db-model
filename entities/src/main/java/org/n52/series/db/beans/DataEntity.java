@@ -34,6 +34,8 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_DATASET = "dataset";
 
+    public static final String PROPERTY_DATASET_ID = "datasetId";
+
     public static final String PROPERTY_RESULT_TIME = "resultTime";
 
     public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
@@ -85,6 +87,8 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     private Long parent;
 
     private DatasetEntity dataset;
+
+    private Long datasetId;
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -224,6 +228,14 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public void setDataset(DatasetEntity dataset) {
         this.dataset = dataset;
+    }
+
+    public Long getDatasetId() {
+        return datasetId;
+    }
+
+    public void setDatasetId(Long datasetId) {
+        this.datasetId = datasetId;
     }
 
     public Set<RelatedDataEntity> getRelatedObservations() {
