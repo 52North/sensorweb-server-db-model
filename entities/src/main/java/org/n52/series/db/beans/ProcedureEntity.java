@@ -18,11 +18,13 @@ package org.n52.series.db.beans;
 
 import java.util.Set;
 
+import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
 
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
-        implements HasProcedureHistory, HasProcedureDescriptionFormat<ProcedureEntity> {
+        implements HasProcedureHistory, HasProcedureDescriptionFormat<ProcedureEntity>, HasGeometry<ProcedureEntity> {
 
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
@@ -45,6 +47,8 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     private boolean aggregation;
 
     private Set<ProcedureHistoryEntity> procedureHistory;
+
+    private GeometryEntity geometryEntity;
 
     public boolean isReference() {
         return reference;
@@ -121,6 +125,27 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     @Override
     public void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory) {
         this.procedureHistory = procedureHistory;
+    }
+
+    @Override
+    public GeometryEntity getGeometryEntity() {
+        return geometryEntity;
+    }
+
+    @Override
+    public ProcedureEntity setGeometry(Geometry geometry) {
+        this.geometryEntity = new GeometryEntity();
+        this.geometryEntity.setGeometry(geometry);
+        if (geometry != null) {
+            this.geometryEntity.setSrid(geometry.getSRID());
+        }
+        return this;
+    }
+
+    @Override
+    public ProcedureEntity setGeometryEntity(GeometryEntity geometryEntity) {
+        this.geometryEntity = geometryEntity;
+        return this;
     }
 
 }
