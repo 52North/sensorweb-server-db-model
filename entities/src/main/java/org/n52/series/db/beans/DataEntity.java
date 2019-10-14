@@ -222,6 +222,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         this.parent = parent;
     }
 
+    public boolean hasParent() {
+        return getParent() != null;
+    }
+
     public DatasetEntity getDataset() {
         return dataset;
     }
