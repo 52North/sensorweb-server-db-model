@@ -16,6 +16,8 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.util.Objects;
+
 import org.n52.series.db.beans.IdEntity;
 
 public abstract class AbstractI18nEntity<T extends IdEntity> extends IdEntity {
@@ -42,5 +44,19 @@ public abstract class AbstractI18nEntity<T extends IdEntity> extends IdEntity {
 
     public void setLocale(String locale) {
         this.locale = locale;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getLocale());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof AbstractI18nEntity)) {
+            return false;
+        }
+        AbstractI18nEntity<?> other = (AbstractI18nEntity<?>) obj;
+        return super.equals(obj) && Objects.equals(getLocale(), other.getLocale());
     }
 }

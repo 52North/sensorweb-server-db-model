@@ -40,6 +40,10 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
 
     void setTranslations(Set<I18nEntity<? extends Describable>> translations);
 
+    default boolean hasTranslations() {
+        return getTranslations() != null && !getTranslations().isEmpty();
+    }
+
     Set<ParameterEntity<?>> getParameters();
 
     void setParameters(Set<ParameterEntity<?>> parameters);

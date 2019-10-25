@@ -36,6 +36,8 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_DATASET = "dataset";
 
+    public static final String PROPERTY_DATASET_ID = "datasetId";
+
     public static final String PROPERTY_RESULT_TIME = "resultTime";
 
     public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
@@ -87,6 +89,8 @@ public abstract class DataEntity<T> extends DescribableEntity
     private Long parent;
 
     private DatasetEntity dataset;
+
+    private Long datasetId;
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
@@ -224,12 +228,24 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.parent = parent;
     }
 
+    public boolean hasParent() {
+        return getParent() != null;
+    }
+
     public DatasetEntity getDataset() {
         return dataset;
     }
 
     public void setDataset(final DatasetEntity dataset) {
         this.dataset = dataset;
+    }
+
+    public Long getDatasetId() {
+        return datasetId;
+    }
+
+    public void setDatasetId(Long datasetId) {
+        this.datasetId = datasetId;
     }
 
     public Set<RelatedDataEntity> getRelatedObservations() {

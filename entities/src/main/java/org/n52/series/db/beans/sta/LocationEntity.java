@@ -46,16 +46,6 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
     private Set<PlatformEntity> thingEntities;
     private Set<HistoricalLocationEntity> historicalLocationEntities;
 
-    @Override
-    public String getIdentifier() {
-        return this.identifier;
-    }
-
-    @Override
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
-
     public FormatEntity getLocationEncoding() {
         return locationEncoding;
     }

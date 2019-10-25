@@ -210,6 +210,10 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return this;
     }
 
+    public boolean isSetPlatform() {
+        return getPlatform() != null;
+    }
+
     public Boolean isPublished() {
         return published;
     }
