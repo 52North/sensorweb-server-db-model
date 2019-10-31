@@ -38,7 +38,7 @@
         <property name="samplingTimeEnd" type="timestamp">
             <column name="phenomenon_time_end" length="29" not-null="false" default="NULL"/>
         </property>
-        <many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="true" foreign-key="fk_datastream_observation_type">
+        <many-to-one name="observationType" class="org.n52.series.db.beans.FormatEntity" not-null="true" foreign-key="fk_datastream_obs_type">
             <column name="fk_format_id" not-null="true"/>
         </many-to-one>
         <many-to-one name="unitOfMeasurement" class="org.n52.series.db.beans.UnitEntity" not-null="false" foreign-key="fk_datastream_unit">

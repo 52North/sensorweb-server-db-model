@@ -75,7 +75,7 @@
             </column>
         </many-to-one>
 
-        <many-to-one name="omObservationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_om_observation_type">
+        <many-to-one name="omObservationType" class="FormatEntity" not-null="false" foreign-key="fk_dataset_om_obs_type">
             <column name="fk_format_id">
                 <comment>Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset.</comment>
             </column>
@@ -191,7 +191,7 @@
             </column>
         </property>
 
-        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codespace">
+        <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dataset_identifier_codesp">
             <column name="fk_identifier_codespace_id">
                 <comment>The codespace of the dataset identifier, reference to the codespace table. Can be null.</comment>
             </column>
