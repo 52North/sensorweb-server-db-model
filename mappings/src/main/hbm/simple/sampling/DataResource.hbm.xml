@@ -64,7 +64,7 @@
             </column>
         </property>
 
-        <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
+        <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType" index="idx_observation_is_deleted">
             <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
                 <comment>Flag that indicates if this observation is deleted</comment>
             </column>
