@@ -266,6 +266,11 @@
         </subclass>
 
         <subclass name="DataArrayDataEntity" extends="DataEntity" discriminator-value="dataarray">
+            <property name="stringValue" type="text">
+                <column name="value_array">
+                    <comment>The textual value of an observation (SweDataArrayObservation))</comment>
+                </column>
+            </property>
             <set name="value" table="observation">
                 <key foreign-key="fk_parent_observation">
                      <column name="fk_parent_observation_id" not-null="false">

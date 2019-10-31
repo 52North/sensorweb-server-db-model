@@ -26,6 +26,8 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     private String encoding;
 
+    private String stringValue;
+
     @Override
     public Set<DataEntity<?>> getValue() {
         return super.getValue();
@@ -34,6 +36,25 @@ public class DataArrayDataEntity extends CompositeDataEntity {
     @Override
     public void setValue(Set<DataEntity<?>> value) {
         super.setValue(value);
+    }
+
+    /**
+     * @return the stringValue
+     */
+    public String getStringValue() {
+        return stringValue;
+    }
+
+    /**
+     * @param stringValue
+     *            the stringValue to set
+     */
+    public void setStringValue(String stringValue) {
+        this.stringValue = stringValue;
+    }
+
+    public boolean isSetStringValue() {
+        return getStringValue() != null && !getStringValue().isEmpty();
     }
 
     /**
