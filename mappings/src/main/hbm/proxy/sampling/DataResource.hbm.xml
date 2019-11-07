@@ -105,7 +105,7 @@
         </component>
 
         <!-- Or add only to specific subclasses -->
-        <set inverse="false" name="parameters" table="observation_parameter" fetch="join">
+        <set inverse="false" name="parameters" table="observation_parameter" fetch="join" cascade="remove">
             <comment>Storage of relations between data/observation and related parameter</comment>
             <key not-null="true" foreign-key="fk_observation_parameter">
                 <column name="fk_observation_id">
@@ -168,7 +168,7 @@
             </many-to-one>
         </component>
 
-        <set name="translations" table="observation_i18n" inverse="true" fetch="select">
+        <set name="translations" table="observation_i18n" inverse="true" fetch="select" cascade="remove">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
@@ -270,7 +270,7 @@
                     <comment>The textual value of an observation (SweDataArrayObservation))</comment>
                 </column>
             </property>
-            <set name="value" table="observation">
+            <set name="value" table="observation" cascade="remove">
                 <key foreign-key="fk_parent_observation">
                      <column name="fk_parent_observation_id" not-null="false">
                         <comment>Reference to the parent data/observation</comment>
@@ -301,14 +301,14 @@
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
             <!-- See above comments for DataArrayDataEntity -->
-            <set name="value" table="observation">
+            <set name="value" table="observation" cascade="remove">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <set name="value" table="observation">
+            <set name="value" table="observation" cascade="remove">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
