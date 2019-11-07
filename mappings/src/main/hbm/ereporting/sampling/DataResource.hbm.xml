@@ -166,19 +166,6 @@
                     <comment>The id of the sampling this observation belongs to.</comment>
                 </column>
             </many-to-one>
-
-            <component class="org.n52.series.db.beans.sampling.DetectionLimitEntity" name="detectionLimit">
-                <property name="flag" type="java.lang.Short">
-                    <column name="detection_limit_flag" not-null="false" check="detection_limit_flag in (null, -1, 1)">
-                        <comment>Flag that indicates if measured value lower/higher of the detection limit.</comment>
-                    </column>
-                </property>
-                <property name="detectionLimit" type="big_decimal" precision="20" scale="10">
-                    <column name="detection_limit" not-null="false" precision="20" scale="10">
-                        <comment>The detection limit</comment>
-                    </column>
-                </property>
-            </component>
         </component>
 
         <component name="ereportingProfile" class="org.n52.series.db.beans.ereporting.EReportingProfileDataEntity">
@@ -225,6 +212,18 @@
                     <comment>The quantity value of an observation (Measurement)</comment>
                 </column>
             </property>
+            <component class="org.n52.series.db.beans.sampling.DetectionLimitEntity" name="detectionLimit">
+                <property name="flag" type="java.lang.Short">
+                    <column name="detection_limit_flag" not-null="false" check="detection_limit_flag in (null, -1, 1)">
+                        <comment>Flag that indicates if measured value lower/higher of the detection limit.</comment>
+                    </column>
+                </property>
+                <property name="detectionLimit" type="big_decimal" precision="20" scale="10">
+                    <column name="detection_limit" not-null="false" precision="20" scale="10">
+                        <comment>The detection limit</comment>
+                    </column>
+                </property>
+            </component>
         </subclass>
 
         <subclass extends="DataEntity" name="TextDataEntity" discriminator-value="text">
