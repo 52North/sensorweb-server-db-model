@@ -20,8 +20,6 @@ public class SamplingProfileDataEntity {
 
     private SamplingEntity sampling;
 
-    private DetectionLimitEntity detectionLimit;
-
     public void setSampling(SamplingEntity sampling) {
         this.sampling = sampling;
     }
@@ -30,15 +28,4 @@ public class SamplingProfileDataEntity {
         return sampling;
     }
 
-    public DetectionLimitEntity getDetectionLimit() {
-        return detectionLimit;
-    }
-
-    public void setDetectionLimit(DetectionLimitEntity detectionLimit) {
-        this.detectionLimit = detectionLimit;
-    }
-
-    public boolean hasDetectionLimit() {
-        return getDetectionLimit() != null;
-    }
 }
