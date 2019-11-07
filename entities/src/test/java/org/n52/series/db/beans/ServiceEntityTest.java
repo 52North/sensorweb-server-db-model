@@ -42,19 +42,6 @@ public class ServiceEntityTest {
     }
 
     @Test
-    public void shouldTreatNullAsNoDataValue() {
-        QuantityDataEntity entity = new QuantityDataEntity();
-        entity.setValue(null);
-        MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
-    }
-
-    @Test
-    public void shouldTreatNaNAsNoDataValue() {
-        QuantityDataEntity entity = new QuantityDataEntity();
-        MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
-    }
-
-    @Test
     public void shouldHandleDoubleValues() {
         serviceInfo.setNoDataValues("4.3,9,foo");
         QuantityDataEntity entity = new QuantityDataEntity();

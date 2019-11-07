@@ -28,33 +28,38 @@ public class CategoryDataEntity extends DataEntity<String> {
 
     private String valueDescription;
 
+    @Override
     public String getValueIdentifier() {
         return valueIdentifier;
     }
 
+    @Override
     public void setValueIdentifier(String valueIdentifier) {
         this.valueIdentifier = valueIdentifier;
     }
 
+    @Override
     public String getValueName() {
         return valueName;
     }
 
+    @Override
     public void setValueName(String valueName) {
         this.valueName = valueName;
     }
 
+    @Override
     public String getValueDescription() {
         return valueDescription;
     }
 
+    @Override
     public void setValueDescription(String valueDescription) {
         this.valueDescription = valueDescription;
     }
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null || noDataValues.contains(value);
+        return getValue() == null ? false : noDataValues.contains(getValue());
     }
 }

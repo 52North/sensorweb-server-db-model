@@ -32,8 +32,7 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> {
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        BigDecimal value = getValue();
-        return value == null || containsValue(noDataValues, value);
+        return getValue() == null ? false : containsValue(noDataValues, getValue());
     }
 
     private boolean containsValue(Collection<String> collection, BigDecimal key) {

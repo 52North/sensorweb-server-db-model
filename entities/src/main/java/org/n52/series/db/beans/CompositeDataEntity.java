@@ -25,7 +25,6 @@ public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity<?>>>
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        // TODO Auto-generated method stub
         return false;
     }
 

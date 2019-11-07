@@ -32,10 +32,12 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
 
     private boolean processsed;
 
+    @Override
     public DatastreamEntity getDatastream() {
         return datastream;
     }
 
+    @Override
     public StaDataEntity setDatastream(DatastreamEntity datastream) {
         this.datastream = datastream;
         return this;
@@ -63,8 +65,7 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return (value == null) || noDataValues.contains(value);
+        return getValue() == null ? false : noDataValues.contains(getValue());
     }
 
 }

@@ -24,7 +24,6 @@ public class BooleanDataEntity extends DataEntity<Boolean> {
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        Boolean value = getValue();
-        return value == null || noDataValues.contains(value.toString());
+        return getValue() == null ? false : noDataValues.contains(getValue().toString());
     }
 }
