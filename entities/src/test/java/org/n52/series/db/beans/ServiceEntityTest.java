@@ -22,14 +22,14 @@ import java.math.BigDecimal;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ServiceEntityTest {
 
     private ServiceEntity serviceInfo;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         serviceInfo = new ServiceEntity();
     }

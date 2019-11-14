@@ -23,7 +23,7 @@ import java.util.Collection;
 
 import org.hamcrest.MatcherAssert;
 import org.joda.time.DateTime;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DataEntityTest {
 
