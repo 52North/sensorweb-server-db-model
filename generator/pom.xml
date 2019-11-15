@@ -116,7 +116,7 @@
         </profile>
 
         <profile>
-            <id>mysql</id>
+            <id>mssql</id>
             <dependencies>
                 <dependency>
                     <groupId>com.microsoft</groupId>
@@ -124,7 +124,12 @@
                     <version>${version.sqljdbc4}</version>
                     <scope>provided</scope>
                 </dependency>
+            </dependencies>
+        </profile>
 
+        <profile>
+            <id>mysql</id>
+            <dependencies>
                 <dependency>
                     <groupId>mysql</groupId>
                     <artifactId>mysql-connector-java</artifactId>
