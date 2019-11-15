@@ -14,7 +14,7 @@
         <version.mysql>6.0.6</version.mysql>
         <version.postgis>2.3.0</version.postgis>
         <version.h2>1.4.200</version.h2>
-        <version.geodb>0.8</version.geodb>
+        <version.geodb>0.9</version.geodb>
         <version.ojdbc6>11.2.0</version.ojdbc6>
         <version.sqljdbc4>4.0</version.sqljdbc4>
     </properties>
@@ -157,7 +157,7 @@
                 <dependency>
                     <groupId>org.opengeo</groupId>
                     <artifactId>geodb</artifactId>
-                    <version>0.8</version>
+                    <version>${version.geodb}</version>
                     <scope>runtime</scope>
                     <exclusions>
                         <exclusion>
