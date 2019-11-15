@@ -11,8 +11,8 @@
     <name>Series Database Model - Generator</name>
 
     <properties>
-        <version.mysql>6.0.6</version.mysql>
         <version.postgis>2.3.0</version.postgis>
+        <version.mysql>8.0.18</version.mysql>
         <version.h2>1.4.200</version.h2>
         <version.geodb>0.9</version.geodb>
         <version.ojdbc6>11.2.0</version.ojdbc6>
