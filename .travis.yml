@@ -1,15 +1,12 @@
 language: java
-dist: bionic
+dist: xenial
 jdk:
+- openjdk8
 - openjdk10
 - openjdk11
 matrix:
   include:
     # https://www.deps.co/guides/travis-ci-latest-java/#certificate-issues
-    - jdk: openjdk8
-      before_install:
-        - rm "${JAVA_HOME}/lib/security/cacerts"
-        - ln -s /etc/ssl/certs/java/cacerts "${JAVA_HOME}/lib/security/cacerts"
     - jdk: openjdk9
       before_install:
         - rm "${JAVA_HOME}/lib/security/cacerts"
