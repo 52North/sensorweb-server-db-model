@@ -57,7 +57,7 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param producer
      *            the producer to set
-     * @return
+     * @return this MeasuringProgramEntity
      */
     public MeasuringProgramEntity setProducer(String producer) {
         this.producer = producer;
@@ -74,7 +74,7 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param orderId
      *            the order id to set
-     * @return
+     * @return this MeasuringProgramEntity
      */
     public MeasuringProgramEntity setOrderId(String orderId) {
         this.setIdentifier(orderId);
@@ -91,7 +91,7 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param measuringTimeStart
      *            the measuringTimeStart
-     * @return
+     * @return this MeasuringProgramEntity
      */
     public MeasuringProgramEntity setMeasuringTimeStart(Date measuringTimeStart) {
         this.measuringTimeStart = Utils.createUnmutableTimestamp(measuringTimeStart);
@@ -108,7 +108,7 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
     /**
      * @param measuringTimeEnd
      *            the measuringTimeEnd
-     * @return
+     * @return this MeasuringProgramEntity
      */
     public MeasuringProgramEntity setMeasuringTimeEnd(Date measuringTimeEnd) {
         this.measuringTimeEnd = Utils.createUnmutableTimestamp(measuringTimeEnd);
