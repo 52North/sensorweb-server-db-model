@@ -22,11 +22,28 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -1618516259763515255L;
 
-    private String structure;
-
-    private String encoding;
+    private ResultTemplateEntity resultTemplate;
 
     private String stringValue;
+
+    /**
+     * @return the resultTemplate
+     */
+    public ResultTemplateEntity getResultTemplate() {
+        return resultTemplate;
+    }
+
+    /**
+     * @param resultTemplate
+     *            the resultTemplate to set
+     */
+    public void setResultTemplate(ResultTemplateEntity resultTemplate) {
+        this.resultTemplate = resultTemplate;
+    }
+
+    public boolean isSetResultTemplate() {
+        return getResultTemplate() != null;
+    }
 
     @Override
     public Set<DataEntity<?>> getValue() {
@@ -55,36 +72,6 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     public boolean isSetStringValue() {
         return getStringValue() != null && !getStringValue().isEmpty();
-    }
-
-    /**
-     * @return the structure
-     */
-    public String getStructure() {
-        return structure;
-    }
-
-    /**
-     * @param structure
-     *            the structure to set
-     */
-    public void setStructure(String structure) {
-        this.structure = structure;
-    }
-
-    /**
-     * @return the encoding
-     */
-    public String getEncoding() {
-        return encoding;
-    }
-
-    /**
-     * @param encoding
-     *            the encoding to set
-     */
-    public void setEncoding(String encoding) {
-        this.encoding = encoding;
     }
 
 }

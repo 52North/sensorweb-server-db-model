@@ -270,25 +270,11 @@
                 </key>
                 <one-to-many class="DataEntity" />
             </set>
-            <join table="value_data_array">
-                <comment>Storage of the data array observation value.</comment>
-                <key foreign-key="fk_data_array_value">
-                    <column name="fk_observation_id">
-                        <comment>Reference to the data/observation</comment>
-                    </column>
-                </key>
-               <property name="structure" type="text">
-                    <column name="structure" not-null="true">
-                        <comment>The structure of the data array</comment>
-                    </column>
-                </property>
-
-                <property name="encoding" type="text">
-                    <column name="encoding" not-null="true">
-                        <comment>The encoding of the data array values</comment>
-                    </column>
-                </property>
-            </join>
+            <many-to-one name="resultTemplate" class="ResultTemplateEntity" foreign-key="fk_result_template">
+                <column name="fk_result_template_id" not-null="false">
+                    <comment>Reference to the result template which holds the structure and encoding.</comment>
+                </column>
+            </many-to-one>
         </subclass>
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
