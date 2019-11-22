@@ -30,8 +30,8 @@ import org.n52.series.db.common.Utils;
 public class ProcedureHistoryEntity extends IdEntity implements Serializable, HasProcedure<ProcedureHistoryEntity>,
         HasProcedureDescriptionFormat<ProcedureHistoryEntity>, HasXml<ProcedureHistoryEntity> {
 
+    public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String START_TIME = "startTime";
-
     public static final String END_TIME = "endTime";
 
     private static final long serialVersionUID = -3658568714438752174L;

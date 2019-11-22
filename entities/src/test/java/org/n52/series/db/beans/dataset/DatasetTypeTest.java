@@ -16,13 +16,12 @@
  */
 package org.n52.series.db.beans.dataset;
 
-import static org.junit.Assert.assertThat;
-import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DatasetTypeTest {
 
@@ -31,8 +30,8 @@ public class DatasetTypeTest {
         HashSet<String> set = new HashSet<>();
         set.add("individualObservation");
         Set<DatasetType> convert = DatasetType.convert(set);
-        assertThat(convert.size(), is(1));
-        assertThat(convert.iterator().next(), is(DatasetType.individualObservation));
+        assertEquals(1, convert.size());
+        assertEquals(DatasetType.individualObservation, convert.iterator().next());
     }
 
     @Test
@@ -40,7 +39,7 @@ public class DatasetTypeTest {
         HashSet<String> set = new HashSet<>();
         set.add("individualObervation");
         Set<DatasetType> convert = DatasetType.convert(set);
-        assertThat(convert.size(), is(0));
+        assertEquals(0, convert.size());
     }
 
 }

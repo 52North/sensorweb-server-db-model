@@ -34,6 +34,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_FEATURE = "feature";
 
+    public static final String PROPERTY_PROCEDURE = "procedure";
+
     private static final long serialVersionUID = -8847952458819368733L;
 
     private PhenomenonEntity phenomenon;

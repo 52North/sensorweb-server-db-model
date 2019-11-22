@@ -25,7 +25,7 @@ public class RecordDataEntity extends DataEntity<Map<String, Object>> {
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        return getValue() == null || getValue().isEmpty();
+        return false;
     }
 
     public int getDimension() {

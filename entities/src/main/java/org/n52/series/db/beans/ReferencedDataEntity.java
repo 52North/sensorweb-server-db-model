@@ -60,7 +60,6 @@ public class ReferencedDataEntity extends DataEntity<String> {
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
-        String value = getValue();
-        return value == null || noDataValues.contains(value);
+        return getValue() == null ? false : noDataValues.contains(getValue());
     }
 }

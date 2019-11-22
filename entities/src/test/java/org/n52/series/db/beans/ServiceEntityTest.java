@@ -22,14 +22,14 @@ import java.math.BigDecimal;
 
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.core.Is;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class ServiceEntityTest {
 
     private ServiceEntity serviceInfo;
 
-    @Before
+    @BeforeEach
     public void setUp() {
         serviceInfo = new ServiceEntity();
     }
@@ -39,19 +39,6 @@ public class ServiceEntityTest {
         serviceInfo.setNoDataValues("4.3,9,no-data");
         entity.setValue("no-data");
         MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), is(true));
-    }
-
-    @Test
-    public void shouldTreatNullAsNoDataValue() {
-        QuantityDataEntity entity = new QuantityDataEntity();
-        entity.setValue(null);
-        MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
-    }
-
-    @Test
-    public void shouldTreatNaNAsNoDataValue() {
-        QuantityDataEntity entity = new QuantityDataEntity();
-        MatcherAssert.assertThat(serviceInfo.isNoDataValue(entity), Is.is(true));
     }
 
     @Test

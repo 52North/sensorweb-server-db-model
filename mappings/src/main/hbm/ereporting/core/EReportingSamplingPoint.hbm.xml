@@ -20,7 +20,7 @@
         </property>
         <many-to-one name="identifierCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
-                     foreign-key="fk_sp_identifier_codespace">
+                     foreign-key="fk_sp_identifier_codesp">
             <column name="fk_identifier_codespace_id"/>
         </many-to-one>
         <property name="name"

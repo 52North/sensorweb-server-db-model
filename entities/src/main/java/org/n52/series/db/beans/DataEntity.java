@@ -104,6 +104,8 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private BigDecimal verticalTo = NOT_SET_VERTICAL;
 
+    private DetectionLimitEntity detectionLimit;
+
     private SamplingProfileDataEntity samplingProfile;
 
     private EReportingProfileDataEntity ereportingProfile;
@@ -322,6 +324,18 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public boolean hasVerticalTo() {
         return getVerticalTo() != null;
+    }
+
+    public DetectionLimitEntity getDetectionLimit() {
+        return detectionLimit;
+    }
+
+    public void setDetectionLimit(DetectionLimitEntity detectionLimit) {
+        this.detectionLimit = detectionLimit;
+    }
+
+    public boolean hasDetectionLimit() {
+        return getDetectionLimit() != null;
     }
 
     public SamplingProfileDataEntity getSamplingProfile() {
