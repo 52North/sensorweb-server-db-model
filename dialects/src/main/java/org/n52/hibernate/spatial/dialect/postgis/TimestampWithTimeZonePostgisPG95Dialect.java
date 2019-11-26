@@ -21,8 +21,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.hibernate.engine.jdbc.env.internal.QualifiedObjectNameFormatterStandardImpl;
-import org.hibernate.engine.jdbc.env.spi.QualifiedObjectNameFormatter;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.mapping.Column;
 import org.hibernate.mapping.Index;
@@ -41,7 +39,8 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
 
     public String buildSqlCreateSpatialIndexString(Index index, String defaultCatalog, String defaultSchema) {
         // http://postgis.net/docs/manual-2.0/using_postgis_dbmanagement.html#idp60795872
-        // CREATE INDEX [indexname] ON [tablename] USING GIST ( [geometryfield] );
+        // CREATE INDEX [indexname] ON [tablename] USING GIST ( [geometryfield]
+        // );
 
         String name = index.getName();
         Table table = index.getTable();
@@ -49,7 +48,8 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         Map<Column, String> columnOrderMap = new HashMap<>();
         StringBuilder buf = new StringBuilder("create").append(" index ")
                 .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
-                .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST").append(" (");
+                .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST")
+                .append(" (");
         while (columns.hasNext()) {
             Column column = columns.next();
             buf.append(column.getQuotedName(this));
