@@ -19,7 +19,10 @@ package org.n52.hibernate.spatial.dialect.postgis;
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
+import org.hibernate.engine.jdbc.env.internal.QualifiedObjectNameFormatterStandardImpl;
+import org.hibernate.engine.jdbc.env.spi.QualifiedObjectNameFormatter;
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.mapping.Column;
 import org.hibernate.mapping.Index;
@@ -43,8 +46,7 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         String name = index.getName();
         Table table = index.getTable();
         Iterator<Column> columns = index.getColumnIterator();
-        java.util.Map<Column, String> columnOrderMap = new HashMap<Column, String>();
-
+        Map<Column, String> columnOrderMap = new HashMap<>();
         StringBuilder buf = new StringBuilder("create").append(" index ")
                 .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
                 .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST").append(" (");
