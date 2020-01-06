@@ -60,7 +60,7 @@
         <geotools.version>22.2</geotools.version>
         <geolatte.version>1.4.0</geolatte.version>
         <hibernate.version>5.4.9.Final</hibernate.version>
-        <spring-boot.version>2.2.1.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
         <arctic-sea.version>7.3.0-SNAPSHOT</arctic-sea.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
