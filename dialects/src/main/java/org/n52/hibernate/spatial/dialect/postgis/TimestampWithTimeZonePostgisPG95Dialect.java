@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2019 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2020 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -48,8 +48,7 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         Map<Column, String> columnOrderMap = new HashMap<>();
         StringBuilder buf = new StringBuilder("create").append(" index ")
                 .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
-                .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST")
-                .append(" (");
+                .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST").append(" (");
         while (columns.hasNext()) {
             Column column = columns.next();
             buf.append(column.getQuotedName(this));
