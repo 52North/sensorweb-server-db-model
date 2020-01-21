@@ -57,7 +57,7 @@
 
         <version.junit>5.5.2</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>22.2</geotools.version>
+        <geotools.version>22.3</geotools.version>
         <geolatte.version>1.4.0</geolatte.version>
         <hibernate.version>5.4.10.Final</hibernate.version>
         <spring-boot.version>2.2.3.RELEASE</spring-boot.version>
