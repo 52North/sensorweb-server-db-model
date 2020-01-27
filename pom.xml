@@ -56,12 +56,12 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.junit>5.5.2</version.junit>
+        <version.junit>5.6.0</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>22.2</geotools.version>
+        <geotools.version>22.3</geotools.version>
         <geolatte.version>1.4.0</geolatte.version>
         <hibernate.version>5.4.10.Final</hibernate.version>
-        <spring-boot.version>2.2.2.RELEASE</spring-boot.version>
+        <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
         <arctic-sea.version>7.2.0</arctic-sea.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
