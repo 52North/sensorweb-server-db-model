@@ -23,10 +23,10 @@ import java.util.Set;
 import java.util.Locale.LanguageRange;
 import java.util.stream.Collectors;
 
-import org.n52.janmayen.i18n.LocaleHelper;
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.common.LocaleHelper;
 
 public interface Describable extends IdentifierNameDescriptionEntity, HasId {
 

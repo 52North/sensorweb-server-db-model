@@ -61,7 +61,6 @@
         <geolatte.version>1.4.0</geolatte.version>
         <hibernate.version>5.4.10.Final</hibernate.version>
         <spring-boot.version>2.2.4.RELEASE</spring-boot.version>
-        <arctic-sea.version>7.3.0</arctic-sea.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
@@ -118,11 +117,15 @@
                 <version>${project.version}</version>
             </dependency>
             
-            
             <dependency>
-                <groupId>org.n52.arctic-sea</groupId>
-                <artifactId>janmayen</artifactId>
-                <version>${arctic-sea.version}</version>
+                <groupId>com.neovisionaries</groupId>
+                <artifactId>nv-i18n</artifactId>
+                <version>1.27</version>
+            </dependency>
+            <dependency>
+                <groupId>com.google.code.findbugs</groupId>
+                <artifactId>jsr305</artifactId>
+                <version>3.0.2</version>
             </dependency>
 
             <dependency>

@@ -13,8 +13,12 @@
     <dependencies>
 
         <dependency>
-            <groupId>org.n52.arctic-sea</groupId>
-            <artifactId>janmayen</artifactId>
+            <groupId>com.neovisionaries</groupId>
+            <artifactId>nv-i18n</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
         </dependency>
 
         <dependency>
