@@ -2,19 +2,23 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>org.n52.series.db</groupId>
-        <artifactId>parent</artifactId>
+        <groupId>org.n52.sensorweb-server.db-model</groupId>
+        <artifactId>db-model-parent</artifactId>
         <version>2.0.0-SNAPSHOT</version>
     </parent>
-    <artifactId>entities</artifactId>
+    <artifactId>db-model-entities</artifactId>
     <packaging>jar</packaging>
-    <name>Series Database Model - Entities</name>
+    <name>Sensor Web Server Database Model - Entities</name>
 
     <dependencies>
 
         <dependency>
-            <groupId>org.n52.arctic-sea</groupId>
-            <artifactId>janmayen</artifactId>
+            <groupId>com.neovisionaries</groupId>
+            <artifactId>nv-i18n</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.findbugs</groupId>
+            <artifactId>jsr305</artifactId>
         </dependency>
 
         <dependency>

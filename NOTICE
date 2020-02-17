@@ -3,32 +3,21 @@ Copyright 2013 52°North Initiative for Geospatial Open Source Software GmbH
 Licensed under GNU General Public License, Version 2.0
 
 This project includes: 
-  52°North Jan Mayen under The Apache Software License, Version 2.0
   AntLR Parser Generator under BSD License
   Byte Buddy (without dependencies) under Apache License, Version 2.0
-  Checker Qual under The MIT License
   ClassMate under Apache License, Version 2.0
   dom4j under BSD 3-clause New License
-  error-prone annotations under Apache 2.0
   Extended StAX API under Eclipse Distribution License - v 1.0
   fastinfoset under Apache License, Version 2.0 or Eclipse Distribution License - v 1.0
   FindBugs-jsr305 under The Apache Software License, Version 2.0
-  Guava InternalFutureFailureAccess and InternalFutures under The Apache Software License, Version 2.0
-  Guava ListenableFuture only under The Apache Software License, Version 2.0
-  Guava: Google Core Libraries for Java under Apache License, Version 2.0
   Hibernate Commons Annotations under GNU Library General Public License v2.1 or later
   Hibernate ORM - hibernate-core under GNU Library General Public License v2.1 or later
   istack common utility code runtime under Eclipse Distribution License - v 1.0
-  J2ObjC Annotations under The Apache Software License, Version 2.0
-  Jackson-annotations under The Apache Software License, Version 2.0
-  Jackson-core under The Apache Software License, Version 2.0
-  jackson-databind under The Apache Software License, Version 2.0
   jakarta.xml.bind-api under Eclipse Distribution License - v 1.0
   Java Annotation Indexer under Apache License, Version 2.0
   Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
   JavaBeans Activation Framework API jar under CDDL/GPLv2+CE
   Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
-  javax.inject under The Apache Software License, Version 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
   JAXB Runtime under Eclipse Distribution License - v 1.0
   jaxb-api under CDDL 1.1 or GPL2 w/ CPE
@@ -38,12 +27,12 @@ This project includes:
   Neo Visionaries Internationalization Package under The Apache Software License, Version 2.0
   Old JAXB Runtime under Eclipse Distribution License - v 1.0
   org.locationtech.jts:jts-core under Eclipse Publish License, Version 1.0 or Eclipse Distribution License - v 1.0
-  Series Database Model - Entities under The Apache Software License, Version 2.0
-  Series Database Model - Generator under The Apache Software License, Version 2.0
-  Series Database Model - Hibernate Spatial Dialects under The Apache Software License, Version 2.0
-  Series Database Model - Hibernate Types under The Apache Software License, Version 2.0
-  Series Database Model - Mappings under The Apache Software License, Version 2.0
-  Series Database Model - Parent under The Apache Software License, Version 2.0
+  Sensor Web Server Database Model under The Apache Software License, Version 2.0
+  Sensor Web Server Database Model - Entities under The Apache Software License, Version 2.0
+  Sensor Web Server Database Model - Generator under The Apache Software License, Version 2.0
+  Sensor Web Server Database Model - Hibernate Spatial Dialects under The Apache Software License, Version 2.0
+  Sensor Web Server Database Model - Hibernate Types under The Apache Software License, Version 2.0
+  Sensor Web Server Database Model - Mappings under The Apache Software License, Version 2.0
   SLF4J API Module under MIT License
   TXW2 Runtime under Eclipse Distribution License - v 1.0
 

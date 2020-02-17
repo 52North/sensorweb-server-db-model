@@ -346,7 +346,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
      * @return a list of result times
      * @since 2.0.0
      */
-
     public Set<Date> getResultTimes() {
         final Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
         return unmodifiableResultTimes != null ? Collections.unmodifiableSet(unmodifiableResultTimes) : null;
@@ -355,10 +354,10 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     /**
      * @param resultTimes
      *            a list of result times
+     *
      * @return this
      * @since 2.0.0
      */
-
     public DatasetEntity setResultTimes(Set<Date> resultTimes) {
         this.resultTimes = wrapToUnmutables(resultTimes);
         return this;

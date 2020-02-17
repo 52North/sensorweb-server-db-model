@@ -1,8 +1,8 @@
-# Hibernate files for 52°North Sensor Web Suite database model
+# Hibernate files for 52°North Sensor Web Server database model
 
 ## Description
 
-**Provide Hibernate files for 52°North Sensor Web Suite database model.**
+**Provide Hibernate files for 52°North Sensor Web Server database model.**
 
 ## References
 tbd
@@ -12,8 +12,8 @@ tbd
 The module is published under the [GNU General Public License v2 (GPLv2)](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ## Changelog
-- https://github.com/52North/series-hibernate/blob/develop/CHANGELOG.md
-- for detailed infos check https://github.com/52North/series-hibernate/pulls?q=is%3Apr+is%3Aclosed
+- https://github.com/52North/sensorweb-server-db-model/blob/develop/CHANGELOG.md
+- for detailed infos check https://github.com/52North/sensorweb-server-db-model/pulls?q=is%3Apr+is%3Aclosed
 
 ## Contributing
 We try to follow [the GitFlow model](http://nvie.com/posts/a-successful-git-branching-model/), although we do not see it that strict. 
@@ -27,7 +27,7 @@ Carsten Hollmann (c.hollmann@52north.org)
 
 ## Credits
 
-The development of the 52°North REST-API DAO implementation was supported by several organizations and projects. Among other we would like to thank the following organisations and project
+The development of the 52°North Sensor Web Server database model implementation was supported by several organizations and projects. Among other we would like to thank the following organisations and project
 
 | Project/Logo | Description |
 | :-------------: | :------------- |
