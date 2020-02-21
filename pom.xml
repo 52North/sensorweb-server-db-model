@@ -19,7 +19,6 @@
         <module>types</module>
 
         <module>dialects</module>
-        <!-- <module>codegen</module> -->
     </modules>
      <organization>
          <name>52North Initiative for Geospatial Open Source Software GmbH</name>
@@ -134,54 +133,7 @@
                 <artifactId>joda-time</artifactId>
                 <version>2.10.5</version>
             </dependency>
-            <!-- 
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-codegen</artifactId>
-                <version>${querydsl.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.google.guava</groupId>
-                        <artifactId>guava</artifactId>
-                    </exclusion>
-                    <exclusion>
-                        <groupId>org.javassist</groupId>
-                        <artifactId>javassist</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-jpa-codegen</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-sql-codegen</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-sql-spring</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-sql-spatial</artifactId>
-                <version>${querydsl.version}</version>
-                <exclusions>
-                    <exclusion>
-                        <groupId>com.vividsolutions</groupId>
-                        <artifactId>jts</artifactId>
-                    </exclusion>
-                </exclusions>
-            </dependency>
-            <dependency>
-                <groupId>com.querydsl</groupId>
-                <artifactId>querydsl-spatial</artifactId>
-                <version>${querydsl.version}</version>
-            </dependency>
-            -->
+
             <dependency>
                 <groupId>xalan</groupId>
                 <artifactId>xalan</artifactId>
@@ -421,9 +373,6 @@
                         <excludes>
                             <exclude>**/logback.xml</exclude>
                             <exclude>**/logback-test.xml</exclude>
-                            <exclude>codegen/**/com/**</exclude>
-                            <exclude>codegen/**/org/geolatte/**</exclude>
-                            <exclude>codegen/**/series/db/beans/**</exclude>
                             <exclude>etc/**</exclude>
                         </excludes>
                         <strictCheck>true</strictCheck>
