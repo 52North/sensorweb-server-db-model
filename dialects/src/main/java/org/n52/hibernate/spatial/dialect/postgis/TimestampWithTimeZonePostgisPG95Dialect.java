@@ -45,16 +45,12 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         String name = index.getName();
         Table table = index.getTable();
         Iterator<Column> columns = index.getColumnIterator();
-        Map<Column, String> columnOrderMap = new HashMap<>();
         StringBuilder buf = new StringBuilder("create").append(" index ")
                 .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
                 .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST").append(" (");
         while (columns.hasNext()) {
             Column column = columns.next();
             buf.append(column.getQuotedName(this));
-            if (columnOrderMap.containsKey(column)) {
-                buf.append(" ").append(columnOrderMap.get(column));
-            }
             if (columns.hasNext()) {
                 buf.append(", ");
             }
