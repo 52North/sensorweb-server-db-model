@@ -1,4 +1,4 @@
-# Hibernate files for 52°North Sensor Web Server database model
+# Hibernate files for 52°North Sensor Web Server database model [![Build Status](https://travis-ci.org/52North/sensorweb-server-db-model.svg)](https://travis-ci.org/52North/sensorweb-server-db-model) ![Java CI](https://github.com/52North/sensorweb-server-db-model/workflows/Java%20CI/badge.svg?branch=develop) [![Maven Central](https://img.shields.io/maven-central/v/org.n52.sensorweb-server.db-model/db-model-parent.svg)](https://search.maven.org/search?q=g:org.n52.sensorweb-server.db-model) [![Total alerts](https://img.shields.io/lgtm/alerts/g/52North/sensorweb-server-db-model.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/52North/sensorweb-server-db-model/alerts/) [![Language grade: Java](https://img.shields.io/lgtm/grade/java/g/52North/sensorweb-server-db-model.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/52North/sensorweb-server-db-model/context:java)
 
 ## Description
 
