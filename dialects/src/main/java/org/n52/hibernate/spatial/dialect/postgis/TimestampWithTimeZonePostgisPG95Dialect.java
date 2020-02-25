@@ -17,9 +17,7 @@
 package org.n52.hibernate.spatial.dialect.postgis;
 
 import java.sql.Types;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import org.hibernate.internal.util.StringHelper;
 import org.hibernate.mapping.Column;
