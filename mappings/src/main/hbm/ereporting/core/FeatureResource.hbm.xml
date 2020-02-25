@@ -14,8 +14,8 @@
             </generator>
         </id>
 
-        <discriminator type="string" not-null="false">
-            <column name="discriminator" not-null="false">
+        <discriminator type="string">
+            <column name="discriminator" not-null="false" >
                 <comment>Indicator used by Hibernate to map value specific entities (e.g. of a WaterML 2.0 MonitoringPoint) which are stored in separate tables.</comment>
             </column>
         </discriminator>

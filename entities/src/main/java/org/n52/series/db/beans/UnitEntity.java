@@ -59,4 +59,17 @@ public class UnitEntity extends DescribableEntity {
     public void setSymbol(String symbol) {
         setIdentifier(symbol);
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof UnitEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

@@ -130,4 +130,17 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
     public boolean isSetVerticalDatum() {
         return getVerticalDatum() != null;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof VerticalCRSEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

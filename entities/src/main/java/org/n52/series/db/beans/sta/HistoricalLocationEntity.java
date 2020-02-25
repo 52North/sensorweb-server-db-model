@@ -87,6 +87,10 @@ public class HistoricalLocationEntity extends IdEntity
         return this;
     }
 
+    public boolean hasThing() {
+        return thingEntity != null;
+    }
+
     @Override
     public boolean isProcesssed() {
         return processed;

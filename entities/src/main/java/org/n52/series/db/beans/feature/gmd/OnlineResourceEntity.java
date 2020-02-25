@@ -118,4 +118,16 @@ public class OnlineResourceEntity extends AbstractCiEntity {
         return getFunction() != null && !getFunction().isEmpty();
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof OnlineResourceEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

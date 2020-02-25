@@ -14,7 +14,7 @@
             </generator>
         </id>
         <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_procedure">
-            <column name="fk_service_id" not-null="true" unique-key="un_procedure_identifier">
+            <column name="fk_service_id" unique-key="un_procedure_identifier">
                 <!-- <comment>Reference to the service this procedure belongs to.</comment> -->
             </column>
         </many-to-one>

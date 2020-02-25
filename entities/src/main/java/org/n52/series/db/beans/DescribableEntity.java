@@ -17,6 +17,7 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 import java.util.Set;
 
 import org.n52.series.db.beans.i18n.I18nEntity;
@@ -148,5 +149,20 @@ public class DescribableEntity extends IdEntity implements Describable, Serializ
         StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" Domain id: ").append(getDomain())
                 .append(", service: ").append(getService()).append(" ]").toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getIdentifier(), getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof DescribableEntity)) {
+            return false;
+        }
+        DescribableEntity other = (DescribableEntity) obj;
+        return super.equals(other) && Objects.equals(getIdentifier(), other.getIdentifier())
+                && Objects.equals(getName(), other.getName());
     }
 }

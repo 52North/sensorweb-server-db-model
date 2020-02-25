@@ -48,4 +48,17 @@ public class ExExtentEntity extends AbstractCiEntity {
     public boolean hasVerticalExtent() {
         return getVerticalExtent() != null && !getVerticalExtent().isEmpty();
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ExExtentEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

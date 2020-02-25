@@ -139,4 +139,17 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
     public boolean isSetRealizationEpoch() {
         return getRealizationEpoch() != null;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof VerticalDatumEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

@@ -16,7 +16,7 @@
  */
 package org.n52.series.db.beans;
 
-public class RelatedDataEntity extends AbstractRelationEntity<DataEntity> {
+public class RelatedDataEntity extends AbstractRelationEntity<DataEntity<?>> {
 
     private static final long serialVersionUID = 2436177373903826414L;
 

@@ -44,7 +44,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     private ProcedureEntity procedure;
 
-    private AbstractFeatureEntity feature;
+    private AbstractFeatureEntity<?> feature;
 
     private String identifier;
 
@@ -113,7 +113,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     /**
      * @return the featureOfInterest
      */
-    public AbstractFeatureEntity getFeature() {
+    public AbstractFeatureEntity<?> getFeature() {
         return feature;
     }
 
@@ -121,7 +121,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
      * @param featureOfInterest
      *            the featureOfInterest to set
      */
-    public void setFeature(AbstractFeatureEntity featureOfInterest) {
+    public void setFeature(AbstractFeatureEntity<?> featureOfInterest) {
         this.feature = featureOfInterest;
     }
 
@@ -134,7 +134,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     public boolean isSetIdentifier() {
-        return getIdentifier() != null && !getIdentifier().isEmpty();
+        return (getIdentifier() != null) && !getIdentifier().isEmpty();
     }
 
     @Override

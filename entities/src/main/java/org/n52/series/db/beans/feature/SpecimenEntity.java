@@ -168,4 +168,17 @@ public class SpecimenEntity extends FeatureEntity {
         return getSpecimenType() != null && !getSpecimenType().isEmpty();
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof SpecimenEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
 }

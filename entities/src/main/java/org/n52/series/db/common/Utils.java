@@ -21,7 +21,7 @@ import java.util.Date;
 
 public final class Utils {
 
-    public static Date createUnmutableTimestamp(Date value) {
+    public static Timestamp createUnmutableTimestamp(final Date value) {
         if (value == null) {
             return null;
         }

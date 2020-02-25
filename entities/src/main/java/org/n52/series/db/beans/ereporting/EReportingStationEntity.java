@@ -57,6 +57,7 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
         return geometryEntity;
     }
 
+    @Override
     public EReportingStationEntity setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
@@ -68,5 +69,18 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
     public EReportingStationEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof EReportingStationEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 }

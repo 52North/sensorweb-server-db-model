@@ -146,6 +146,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
                     sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema, addComments, true);
                 } catch (IOException ioe) {
                     printToScreen("ERROR: IO error trying to read your input!");
+                    ioe.printStackTrace();
                     System.exit(1);
                 } catch (Exception e) {
                     printToScreen("ERROR: " + e.getMessage());
@@ -156,8 +157,14 @@ public class SQLScriptGenerator extends AbstractGenerator{
 
         } catch (IOException ioe) {
             printToScreen("ERROR: IO error trying to read your input!");
+            ioe.printStackTrace();
+            System.exit(1);
+        } catch (Exception e) {
+            printToScreen("ERROR: Could not generate for unknown reasons!");
+            e.printStackTrace();
             System.exit(1);
         }
+
     }
 
     private boolean getAddComments() throws IOException {

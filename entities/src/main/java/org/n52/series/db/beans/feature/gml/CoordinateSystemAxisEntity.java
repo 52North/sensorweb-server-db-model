@@ -218,4 +218,17 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
     public void setUom(UnitEntity uom) {
         this.uom = uom;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof CoordinateSystemAxisEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

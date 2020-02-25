@@ -153,7 +153,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return phenomenon;
     }
 
-    public DatasetEntity setPhenomenon(PhenomenonEntity phenomenon) {
+    public DatasetEntity setPhenomenon(final PhenomenonEntity phenomenon) {
         this.phenomenon = phenomenon;
         return this;
     }
@@ -162,7 +162,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return getPhenomenon();
     }
 
-    public DatasetEntity setObservableProperty(PhenomenonEntity observableProperty) {
+    public DatasetEntity setObservableProperty(final PhenomenonEntity observableProperty) {
         return setPhenomenon(observableProperty);
     }
 
@@ -170,7 +170,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return procedure;
     }
 
-    public DatasetEntity setProcedure(ProcedureEntity procedure) {
+    public DatasetEntity setProcedure(final ProcedureEntity procedure) {
         this.procedure = procedure;
         return this;
     }
@@ -179,7 +179,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return offering;
     }
 
-    public DatasetEntity setOffering(OfferingEntity offering) {
+    public DatasetEntity setOffering(final OfferingEntity offering) {
         this.offering = offering;
         return this;
     }
@@ -227,7 +227,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return deleted;
     }
 
-    public DatasetEntity setDeleted(boolean deleted) {
+    public DatasetEntity setDeleted(final boolean deleted) {
         this.deleted = deleted;
         return this;
     }
@@ -236,7 +236,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return deleted;
     }
 
-    public DatasetEntity setDisabled(boolean disabled) {
+    public DatasetEntity setDisabled(final boolean disabled) {
         this.disabled = disabled;
         return this;
     }
@@ -347,7 +347,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
      * @since 2.0.0
      */
     public Set<Date> getResultTimes() {
-        Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
+        final Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
         return unmodifiableResultTimes != null ? Collections.unmodifiableSet(unmodifiableResultTimes) : null;
     }
 
@@ -376,7 +376,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return unit != null;
     }
 
-    public String getUnitI18nName(String locale) {
+    public String getUnitI18nName(final String locale) {
         return unit != null
                 // ? unit.getNameI18n(locale)
                 ? unit.getUnit()
@@ -418,7 +418,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
         return hidden;
     }
 
-    public DatasetEntity setHidden(boolean hidden) {
+    public DatasetEntity setHidden(final boolean hidden) {
         this.hidden = hidden;
         return this;
     }
@@ -520,8 +520,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     }
 
     @Override
-    public String getLabelFrom(String locale) {
-        StringBuilder sb = new StringBuilder();
+    public String getLabelFrom(final String locale) {
+        final StringBuilder sb = new StringBuilder();
         sb.append(phenomenon.getLabelFrom(locale)).append(" ");
         sb.append(procedure.getLabelFrom(locale)).append(", ");
         sb.append(feature.getLabelFrom(locale)).append(", ");
@@ -530,7 +530,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId())
                 .append(" , category: ").append(getCategory()).append(" , phenomenon: ").append(getPhenomenon())
                 .append(" , procedure: ").append(getProcedure()).append(" , offering: ").append(getOffering())
@@ -584,6 +584,19 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
             setVerticalMetadata(dataset.getVerticalMetadata());
         }
         setUnit(dataset.getUnit());
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof DatasetEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
     private Set<Date> wrapToUnmutables(Set<Date> dates) {

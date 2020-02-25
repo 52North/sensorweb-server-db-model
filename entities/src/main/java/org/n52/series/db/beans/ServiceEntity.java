@@ -51,7 +51,7 @@ public class ServiceEntity extends DescribableEntity {
         return url;
     }
 
-    public void setUrl(String url) {
+    public void setUrl(final String url) {
         this.url = url;
     }
 
@@ -59,7 +59,7 @@ public class ServiceEntity extends DescribableEntity {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(final String type) {
         this.type = type;
     }
 
@@ -73,17 +73,17 @@ public class ServiceEntity extends DescribableEntity {
         return csv.substring(1).substring(0, csv.length() - 2);
     }
 
-    public void setNoDataValues(String noDataValues) {
+    public void setNoDataValues(final String noDataValues) {
         LOGGER.debug("Set noData values: {}", noDataValues);
-        if (noDataValues == null || noDataValues.isEmpty()) {
+        if ((noDataValues == null) || noDataValues.isEmpty()) {
             this.noDataValues = Collections.emptyList();
         } else {
-            String[] values = noDataValues.split(",");
+            final String[] values = noDataValues.split(",");
             this.noDataValues = Arrays.asList(values);
         }
     }
 
-    public boolean isSupportsFirstLast() {
+    public boolean getSupportsFirstLast() {
         return supportsFirstLast;
     }
 
@@ -95,7 +95,7 @@ public class ServiceEntity extends DescribableEntity {
         return version;
     }
 
-    public void setVersion(String version) {
+    public void setVersion(final String version) {
         this.version = version;
     }
 
@@ -121,10 +121,23 @@ public class ServiceEntity extends DescribableEntity {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" url: ").append(getUrl()).append(", type: ")
                 .append(getType()).append(", version: ").append(getVersion()).append(", noDataValues: ")
                 .append(getNoDataValues()).append(" ]").toString();
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ServiceEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
 }

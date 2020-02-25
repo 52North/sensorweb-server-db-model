@@ -85,4 +85,17 @@ public class EReportingSamplingPointEntity extends DescribableEntity
         return getStation() != null;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof EReportingSamplingPointEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
 }

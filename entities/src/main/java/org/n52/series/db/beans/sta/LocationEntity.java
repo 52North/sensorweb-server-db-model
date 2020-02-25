@@ -43,8 +43,8 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
     private String location;
     private GeometryEntity geometryEntity;
     private FormatEntity locationEncoding;
-    private Set<PlatformEntity> thingEntities;
-    private Set<HistoricalLocationEntity> historicalLocationEntities;
+    private Set<PlatformEntity> things;
+    private Set<HistoricalLocationEntity> historicalLocations;
 
     public FormatEntity getLocationEncoding() {
         return locationEncoding;
@@ -88,11 +88,11 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
     }
 
     public Set<PlatformEntity> getThings() {
-        return thingEntities;
+        return things;
     }
 
     public LocationEntity setThings(Set<PlatformEntity> thingEntities) {
-        this.thingEntities = thingEntities;
+        this.things = thingEntities;
         return this;
     }
 
@@ -101,20 +101,24 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocations() {
-        return historicalLocationEntities;
+        return historicalLocations;
     }
 
     public LocationEntity setHistoricalLocations(Set<HistoricalLocationEntity> historicalLocationEntities) {
-        this.historicalLocationEntities = historicalLocationEntities;
+        this.historicalLocations = historicalLocationEntities;
         return this;
     }
 
     public LocationEntity addHistoricalLocation(HistoricalLocationEntity historicalLocationEntity) {
-        if (historicalLocationEntities == null) {
-            historicalLocationEntities = new LinkedHashSet<>();
+        if (historicalLocations == null) {
+            historicalLocations = new LinkedHashSet<>();
         }
-        historicalLocationEntities.add(historicalLocationEntity);
+        historicalLocations.add(historicalLocationEntity);
         return this;
+    }
+
+    public boolean hasHistoricalLocations() {
+        return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
     }
 
     @Override

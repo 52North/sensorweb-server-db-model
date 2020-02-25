@@ -17,9 +17,9 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
+
         <module>dialects</module>
     </modules>
-
      <organization>
          <name>52North Initiative for Geospatial Open Source Software GmbH</name>
          <url>https://52north.org</url>
@@ -81,7 +81,7 @@
                 <artifactId>hibernate-spatial</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
-
+            
             <dependency>
                 <!-- Import dependency management from Spring Boot -->
                 <groupId>org.springframework.boot</groupId>
@@ -146,7 +146,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-
+            
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-main</artifactId>
@@ -227,6 +227,13 @@
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
                 <version>1.16.1</version>
+                <exclusions>
+                    <exclusion>
+                        <!-- old version dependency causes conclicts -->
+                        <groupId>xerces</groupId>
+                        <artifactId>xercesImpl</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
             <dependency>
                 <groupId>org.geolatte</groupId>
@@ -435,6 +442,7 @@
                         </includes>
                         <excludes>
                             <exclude>**/generator/**</exclude>
+                            <exclude>**/codegen/**</exclude>
                         </excludes>
                     </configuration>
                 </plugin>

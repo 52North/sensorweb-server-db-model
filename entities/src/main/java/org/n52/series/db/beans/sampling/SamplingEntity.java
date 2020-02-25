@@ -187,4 +187,14 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
         return getObservations() != null && !getObservations().isEmpty();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
 }

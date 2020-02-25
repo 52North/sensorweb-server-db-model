@@ -53,7 +53,7 @@
                 <comment>The version of the service</comment>
             </column>
         </property>
-                <property name="connector" type="string">
+        <property name="connector" type="string">
             <column name="connector">
                 <comment>The connector of the service.</comment>
             </column>

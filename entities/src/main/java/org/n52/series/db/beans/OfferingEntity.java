@@ -226,4 +226,17 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
         return this;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof OfferingEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
 }

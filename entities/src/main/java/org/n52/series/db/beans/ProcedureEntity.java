@@ -29,6 +29,7 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "format";
+    public static final String PROPERTY_DESCRIPTION_FILE = "descriptionFile";
 
     private static final long serialVersionUID = 4028002933920185756L;
 
@@ -89,6 +90,10 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
         this.descriptionFile = descriptionFile;
     }
 
+    public boolean isSetDescriptionFile() {
+        return getDescriptionFile() != null && !getDescriptionFile().isEmpty();
+    }
+
     public ProcedureEntity getTypeOf() {
         return typeOf;
     }
@@ -146,6 +151,19 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     public ProcedureEntity setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
         return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ProcedureEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
 }

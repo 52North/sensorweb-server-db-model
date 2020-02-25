@@ -73,4 +73,17 @@ public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
         this.mobile = mobile;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof EnvironmentalMonitoringFacilityEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
+
 }

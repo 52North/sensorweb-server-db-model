@@ -129,4 +129,16 @@ public class ExVerticalExtentEntity extends AbstractCiEntity {
         return getVerticalCRS() != null;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ExVerticalExtentEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

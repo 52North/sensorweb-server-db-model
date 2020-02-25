@@ -148,4 +148,17 @@ public class AddressEntity extends AbstractCiEntity {
     public boolean hasElectronicMailAddress() {
         return getElectronicMailAddress() != null && !getElectronicMailAddress().isEmpty();
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof AddressEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

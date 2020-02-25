@@ -32,6 +32,8 @@ public class GeometryEntity implements Serializable {
 
     private static final long serialVersionUID = -1411829809704409439L;
 
+    private static final int DEFAULT_SRID = 4326;
+
     private GeometryFactory geometryFactory;
 
     private Geometry geometry;
@@ -48,7 +50,7 @@ public class GeometryEntity implements Serializable {
         return (geometry != null) && !geometry.isEmpty();
     }
 
-    public void setGeometry(Geometry geometry) {
+    public void setGeometry(final Geometry geometry) {
         this.geometry = geometry;
     }
 
@@ -66,7 +68,7 @@ public class GeometryEntity implements Serializable {
     private Geometry createPoint() {
         Coordinate coordinate = (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt)
                 : new Coordinate(lon, lat);
-        return geometryFactory.createPoint(coordinate);
+        return getGeometryFactory().createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
@@ -77,7 +79,7 @@ public class GeometryEntity implements Serializable {
         return lon;
     }
 
-    public void setLon(Double lon) {
+    public void setLon(final Double lon) {
         this.lon = lon;
     }
 
@@ -85,7 +87,7 @@ public class GeometryEntity implements Serializable {
         return lat;
     }
 
-    public void setLat(Double lat) {
+    public void setLat(final Double lat) {
         this.lat = lat;
     }
 
@@ -93,7 +95,7 @@ public class GeometryEntity implements Serializable {
         return alt;
     }
 
-    public void setAlt(Double alt) {
+    public void setAlt(final Double alt) {
         this.alt = alt;
     }
 
@@ -120,7 +122,7 @@ public class GeometryEntity implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" latitude: ").append(getLat())
                 .append(", longitude: ").append(getLon()).append(" ]").toString();
     }

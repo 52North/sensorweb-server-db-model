@@ -25,10 +25,12 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime {
 
     public static final String PROPERTY_ID = "id";
 
@@ -116,6 +118,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      * @return the samplingTimeStart
      */
 
+    @Override
     public Date getSamplingTimeStart() {
         return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -125,6 +128,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      *            the samplingTimeStart
      */
 
+    @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
@@ -133,6 +137,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      * @return the samplingTimeEnd
      */
 
+    @Override
     public Date getSamplingTimeEnd() {
         return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -142,6 +147,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      *            the samplingTimeEnd
      */
 
+    @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
@@ -150,7 +156,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return value;
     }
 
-    public void setValue(T value) {
+    public void setValue(final T value) {
         this.value = value;
     }
 
@@ -164,7 +170,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return geometryEntity;
     }
 
-    public void setGeometryEntity(GeometryEntity geometryEntity) {
+    public void setGeometryEntity(final GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
     }
 
@@ -176,7 +182,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return deleted;
     }
 
-    public void setDeleted(boolean deleted) {
+    public void setDeleted(final boolean deleted) {
         this.deleted = deleted;
     }
 
@@ -184,7 +190,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
-    public void setValidTimeStart(Date validTimeStart) {
+    public void setValidTimeStart(final Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
     }
 
@@ -192,7 +198,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
-    public void setValidTimeEnd(Date validTimeEnd) {
+    public void setValidTimeEnd(final Date validTimeEnd) {
         this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
@@ -212,7 +218,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return Utils.createUnmutableTimestamp(resultTime);
     }
 
-    public void setResultTime(Date resultTime) {
+    public void setResultTime(final Date resultTime) {
         this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
@@ -232,7 +238,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return dataset;
     }
 
-    public void setDataset(DatasetEntity dataset) {
+    public void setDataset(final DatasetEntity dataset) {
         this.dataset = dataset;
     }
 
@@ -248,7 +254,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return relatedObservations;
     }
 
-    public void setRelatedObservations(Set<RelatedDataEntity> relatedObservations) {
+    public void setRelatedObservations(final Set<RelatedDataEntity> relatedObservations) {
         this.relatedObservations = relatedObservations;
     }
 
@@ -260,7 +266,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return valueIdentifier;
     }
 
-    public void setValueIdentifier(String valueIdentifier) {
+    public void setValueIdentifier(final String valueIdentifier) {
         this.valueIdentifier = valueIdentifier;
     }
 
@@ -272,7 +278,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return valueName;
     }
 
-    public void setValueName(String valueName) {
+    public void setValueName(final String valueName) {
         this.valueName = valueName;
     }
 
@@ -284,7 +290,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return valueDescription;
     }
 
-    public void setValueDescription(String valueDescription) {
+    public void setValueDescription(final String valueDescription) {
         this.valueDescription = valueDescription;
     }
 
@@ -300,7 +306,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return verticalFrom;
     }
 
-    public void setVerticalFrom(BigDecimal verticalFrom) {
+    public void setVerticalFrom(final BigDecimal verticalFrom) {
         this.verticalFrom = verticalFrom;
     }
 
@@ -312,7 +318,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return verticalTo;
     }
 
-    public void setVerticalTo(BigDecimal verticalTo) {
+    public void setVerticalTo(final BigDecimal verticalTo) {
         this.verticalTo = verticalTo;
     }
 
@@ -395,7 +401,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
+        final StringBuilder sb = new StringBuilder();
         return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
                 .toString();
     }

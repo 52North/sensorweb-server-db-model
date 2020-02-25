@@ -49,4 +49,17 @@ public class DomainOfValidityEntity extends ReferenceEntity {
     public boolean isSetExExtent() {
         return getExExtent() != null;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof DomainOfValidityEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }

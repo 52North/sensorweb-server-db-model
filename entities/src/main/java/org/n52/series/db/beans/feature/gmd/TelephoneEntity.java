@@ -68,4 +68,17 @@ public class TelephoneEntity extends AbstractCiEntity {
     public boolean hasFacsimile() {
         return getFacsimile() != null && !getFacsimile().isEmpty();
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof TelephoneEntity)) {
+            return false;
+        }
+        return super.equals(obj);
+    }
 }
