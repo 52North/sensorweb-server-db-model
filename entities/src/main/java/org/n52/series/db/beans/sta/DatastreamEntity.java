@@ -100,8 +100,9 @@ public class DatastreamEntity extends StaDescribableEntity
         return Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
-    public void setResultTimeStart(Date resultTimeStart) {
+    public DatastreamEntity setResultTimeStart(Date resultTimeStart) {
         this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
+        return this;
     }
 
     public boolean hasResultTimeStart() {
@@ -112,8 +113,9 @@ public class DatastreamEntity extends StaDescribableEntity
         return Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
-    public void setResultTimeEnd(Date resultTimeEnd) {
+    public DatastreamEntity setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
+        return this;
     }
 
     public boolean hasResultTimeEnd() {
@@ -170,8 +172,9 @@ public class DatastreamEntity extends StaDescribableEntity
         return thing;
     }
 
-    public void setThing(PlatformEntity thing) {
+    public DatastreamEntity setThing(PlatformEntity thing) {
         this.thing = thing;
+        return this;
     }
 
     public boolean hasThing() {
@@ -197,8 +200,9 @@ public class DatastreamEntity extends StaDescribableEntity
         return unitOfMeasurement;
     }
 
-    public void setUnitOfMeasurement(UnitEntity unitOfMeasurement) {
+    public DatastreamEntity setUnitOfMeasurement(UnitEntity unitOfMeasurement) {
         this.unitOfMeasurement = unitOfMeasurement;
+        return this;
     }
 
     @Override
@@ -231,8 +235,9 @@ public class DatastreamEntity extends StaDescribableEntity
         return observableProperty;
     }
 
-    public void setObservations(Set<StaDataEntity> observations) {
+    public DatastreamEntity setObservations(Set<StaDataEntity> observations) {
         this.observations = observations;
+        return this;
     }
 
     public Set<StaDataEntity> getObservations() {
