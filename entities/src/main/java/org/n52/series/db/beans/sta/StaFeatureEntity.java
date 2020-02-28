@@ -14,10 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -51,5 +53,16 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
     public Set<StaDataEntity<?>> getObservations() {
         return observations;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), observations.hashCode());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return (obj instanceof StaFeatureEntity) && super.equals(obj)
+                && Objects.hash(observations) == Objects.hash(((StaFeatureEntity) obj).getObservations());
     }
 }
