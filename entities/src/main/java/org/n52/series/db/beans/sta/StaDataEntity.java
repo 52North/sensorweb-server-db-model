@@ -14,13 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.sta;
 
-import java.util.Collection;
+package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.sta.StaRelations.Datastream;
+
+import java.util.Collection;
 
 public class StaDataEntity<T> extends DataEntity<T> implements Datastream<StaDataEntity> {
 
@@ -31,6 +32,9 @@ public class StaDataEntity<T> extends DataEntity<T> implements Datastream<StaDat
     private AbstractFeatureEntity<?> featureOfInterest;
 
     private boolean processed;
+
+    public StaDataEntity() {
+    }
 
     public StaDataEntity(DataEntity<T> entity) {
         super();
