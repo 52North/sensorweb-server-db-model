@@ -43,6 +43,9 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
     public StaFeatureEntity(AbstractFeatureEntity<T> afe) {
         super();
         this.setIdentifier(afe.getIdentifier());
+        this.setName(afe.getName());
+        this.setDescription(afe.getDescription());
+        this.setParameters(afe.getParameters());
 
         this.setGeometry(afe.getGeometry());
         this.setGeometryEntity(afe.getGeometryEntity());
@@ -52,7 +55,6 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
         this.setChildren(afe.getChildren());
         this.setParents(afe.getParents());
         this.setIdentifier(afe.getIdentifier());
-        this.setParameters(afe.getParameters());
     }
 
     public StaFeatureEntity<T> setObservations(Set<StaDataEntity<?>> observations) {

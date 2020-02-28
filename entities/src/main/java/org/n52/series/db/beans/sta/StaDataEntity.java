@@ -40,6 +40,9 @@ public class StaDataEntity<T> extends DataEntity<T> implements Datastream<StaDat
         super();
 
         this.setIdentifier(entity.getIdentifier());
+        this.setName(entity.getName());
+        this.setDescription(entity.getDescription());
+        this.setParameters(entity.getParameters());
         this.setId(entity.getId());
 
         this.setSamplingTimeStart(entity.getSamplingTimeStart());
