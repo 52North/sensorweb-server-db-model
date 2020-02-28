@@ -41,7 +41,7 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements Datast
     }
 
     @Override
-    public PhenomenonEntity setDatastreams(Set<DatastreamEntity> datastreams) {
+    public ObservablePropertyEntity setDatastreams(Set<DatastreamEntity> datastreams) {
         this.datastreams = datastreams;
         return this;
     }
