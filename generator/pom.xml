@@ -15,7 +15,7 @@
         <version.mysql>8.0.19</version.mysql>
         <version.h2>1.4.200</version.h2>
         <version.geodb>0.9</version.geodb>
-        <version.ojdbc6>11.2.0</version.ojdbc6>
+        <version.ojdbc8>12.2.0.1</version.ojdbc8>
         <version.sqljdbc4>4.0</version.sqljdbc4>
     </properties>
 
@@ -113,9 +113,9 @@
             <id>oracle</id>
             <dependencies>
                 <dependency>
-                    <groupId>com.oracle</groupId>
-                    <artifactId>ojdbc6</artifactId>
-                    <version>${version.ojdbc6}</version>
+                    <groupId>com.oracle.database.jdbc</groupId>
+                    <artifactId>ojdbc8</artifactId>
+                    <version>${version.ojdbc8}</version>
                     <scope>provided</scope>
                 </dependency>
             </dependencies>
