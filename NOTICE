@@ -13,6 +13,7 @@ This project includes:
   Hibernate Commons Annotations under GNU Library General Public License v2.1 or later
   Hibernate ORM - hibernate-core under GNU Library General Public License v2.1 or later
   istack common utility code runtime under Eclipse Distribution License - v 1.0
+  Jakarta Activation API jar under EDL 1.0
   jakarta.xml.bind-api under Eclipse Distribution License - v 1.0
   Java Annotation Indexer under Apache License, Version 2.0
   Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
