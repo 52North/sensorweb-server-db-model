@@ -14,15 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.sta;
 
-import java.util.Collection;
+package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.sta.StaRelations.Datastream;
 
-public class StaDataEntity extends DataEntity<String> implements Datastream<StaDataEntity> {
+import java.util.Collection;
+
+public class StaDataEntity<T> extends DataEntity<T> implements Datastream<StaDataEntity> {
 
     private static final long serialVersionUID = -4720091385202877301L;
 
@@ -30,7 +31,40 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
 
     private AbstractFeatureEntity<?> featureOfInterest;
 
-    private boolean processsed;
+    private boolean processed;
+
+    public StaDataEntity() {
+    }
+
+    public StaDataEntity(DataEntity<T> entity) {
+        super();
+
+        this.setIdentifier(entity.getIdentifier());
+        this.setName(entity.getName());
+        this.setDescription(entity.getDescription());
+        this.setParameters(entity.getParameters());
+        this.setId(entity.getId());
+
+        this.setSamplingTimeStart(entity.getSamplingTimeStart());
+        this.setSamplingTimeEnd(entity.getSamplingTimeEnd());
+        this.setValue(entity.getValue());
+        this.setGeometryEntity(entity.getGeometryEntity());
+        this.setDeleted(entity.getDeleted());
+        this.setValidTimeStart(entity.getValidTimeStart());
+        this.setValidTimeEnd(entity.getValidTimeEnd());
+        this.setResultTime(entity.getResultTime());
+        this.setParent(entity.getParent());
+        this.setDataset(entity.getDataset());
+        this.setRelatedObservations(entity.getRelatedObservations());
+        this.setValueIdentifier(entity.getValueIdentifier());
+        this.setValueName(entity.getValueName());
+        this.setValueDescription(entity.getValueDescription());
+        this.setVerticalFrom(entity.getVerticalFrom());
+        this.setVerticalTo(entity.getVerticalTo());
+        this.setDetectionLimit(entity.getDetectionLimit());
+        this.setSamplingProfile(entity.getSamplingProfile());
+        this.setEreportingProfile(entity.getEreportingProfile());
+    }
 
     @Override
     public DatastreamEntity getDatastream() {
@@ -55,12 +89,12 @@ public class StaDataEntity extends DataEntity<String> implements Datastream<StaD
         return getFeatureOfInterest() != null;
     }
 
-    public boolean isProcesssed() {
-        return processsed;
+    public boolean isProcessed() {
+        return processed;
     }
 
-    public void setProcesssed(boolean processsed) {
-        this.processsed = processsed;
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 
     @Override
