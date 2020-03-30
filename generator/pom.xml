@@ -11,7 +11,7 @@
     <name>Sensor Web Server Database Model - Generator</name>
 
     <properties>
-        <version.postgis>2.4.0</version.postgis>
+        <version.postgis>2.5.0</version.postgis>
         <version.mysql>8.0.19</version.mysql>
         <version.h2>1.4.200</version.h2>
         <version.geodb>0.9</version.geodb>
