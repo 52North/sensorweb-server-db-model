@@ -379,24 +379,10 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     @Override
     public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
+        if (obj == null || !(obj instanceof DataEntity)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        DataEntity<?> other = (DataEntity<?>) obj;
-        if (getId() == null) {
-            if (other.getId() != null) {
-                return false;
-            }
-        } else if (!getId().equals(other.getId())) {
-            return false;
-        }
-        return true;
+        return super.equals(obj);
     }
 
     @Override
