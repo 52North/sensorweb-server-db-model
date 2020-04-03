@@ -22,6 +22,7 @@ import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
@@ -371,10 +372,8 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     @Override
     public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = (prime * result) + ((getId() == null) ? 0 : getId().hashCode());
-        return result;
+        return Objects.hash(super.hashCode(), getDataset(), getSamplingTimeStart(), getSamplingTimeEnd(),
+                getResultTime(), getValue());
     }
 
     @Override
@@ -382,7 +381,13 @@ public abstract class DataEntity<T> extends DescribableEntity
         if (obj == null || !(obj instanceof DataEntity)) {
             return false;
         }
-        return super.equals(obj);
+        DataEntity other = (DataEntity) obj;
+        return super.equals(obj) && Objects.equals(getDataset(), other.getDataset())
+                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
+                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
+                && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
+                && Objects.equals(getResultTime(), other.getResultTime())
+                && Objects.equals(getValue(), other.getValue());
     }
 
     @Override

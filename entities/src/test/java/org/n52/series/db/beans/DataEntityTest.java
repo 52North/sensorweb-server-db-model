@@ -17,6 +17,10 @@
 package org.n52.series.db.beans;
 
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.Timestamp;
 import java.util.Collection;
@@ -75,6 +79,36 @@ public class DataEntityTest {
         dataEntity.setValidTimeEnd(timestamp);
         Timestamp validTimeend = (Timestamp) dataEntity.getValidTimeEnd();
         MatcherAssert.assertThat(validTimeend.getNanos(), is(timestamp.getNanos()));
+    }
+
+    @Test
+    public void when_empty_then_equal() {
+        DataEntity<Object> dataEntity = createDataDummy();
+        DataEntity<Object> other = createDataDummy();
+        assertTrue(dataEntity.equals(other));
+    }
+
+    @Test
+    public void when_empty_then_hascodeIsEqual() {
+        DataEntity<Object> dataEntity = createDataDummy();
+        DataEntity<Object> other = createDataDummy();
+        assertEquals(dataEntity.hashCode(), other.hashCode());
+    }
+
+    @Test
+    public void when_identifierNotNull_then_notEqual() {
+        DataEntity<Object> dataEntity = createDataDummy();
+        dataEntity.setIdentifier("test");
+        DataEntity<Object> other = createDataDummy();
+        assertFalse(dataEntity.equals(other));
+    }
+
+    @Test
+    public void when_identifierNotNull_then_hascodeIsnotEqual() {
+        DataEntity<Object> dataEntity = createDataDummy();
+        dataEntity.setIdentifier("test");
+        DataEntity<Object> other = createDataDummy();
+        assertNotEquals(dataEntity.hashCode(), other.hashCode());
     }
 
     private DataEntity<Object> createDataDummy() {
