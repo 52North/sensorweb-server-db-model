@@ -577,25 +577,12 @@
         <repository>
             <id>geotools</id>
             <name>Open Source Geospatial Foundation Repository</name>
-            <url>https://download.osgeo.org/webdav/geotools/</url>
-            <!--<url>https://boundless.artifactoryonline.com/boundless/main</url> -->
-            <!--<url>https://repo.boundlessgeo.com/main/</url> -->
+            <url>https://repo.osgeo.org/repository/release/</url>
             <releases>
                 <enabled>true</enabled>
             </releases>
             <snapshots>
                 <enabled>false</enabled>
-            </snapshots>
-        </repository>
-        <repository>
-            <id>n52-snapshots</id>
-            <name>n52-snapshots</name>
-            <url>https://52north.org/maven/repo/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
             </snapshots>
         </repository>
         <repository>
