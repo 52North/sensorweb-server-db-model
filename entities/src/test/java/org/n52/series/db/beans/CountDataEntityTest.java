@@ -22,7 +22,6 @@ import java.util.Arrays;
 import java.util.Collection;
 
 import org.junit.jupiter.api.Test;
-import org.n52.series.db.beans.CountDataEntity;
 
 public class CountDataEntityTest {
 

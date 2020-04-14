@@ -113,6 +113,8 @@ public class DataEntityTest {
 
     private DataEntity<Object> createDataDummy() {
         DataEntity<Object> dataEntity = new DataEntity<Object>() {
+            private static final long serialVersionUID = 410887669441410239L;
+
             @Override
             public boolean isNoDataValue(Collection<String> noDataValues) {
                 // TODO Auto-generated method stub
