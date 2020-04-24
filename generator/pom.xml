@@ -15,7 +15,7 @@
         <version.mysql>8.0.19</version.mysql>
         <version.h2>1.4.200</version.h2>
         <version.geodb>0.9</version.geodb>
-        <version.ojdbc8>19.3.0.0</version.ojdbc8>
+        <version.ojdbc8>19.6.0.0</version.ojdbc8>
         <version.sqljdbc4>4.0</version.sqljdbc4>
     </properties>
 
