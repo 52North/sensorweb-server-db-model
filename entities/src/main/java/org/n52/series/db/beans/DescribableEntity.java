@@ -178,7 +178,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getIdentifier(), (this instanceof IsStaEntity ? getStaIdentifier() : ""),
+        return Objects.hash(super.hashCode(), getIdentifier(), this instanceof IsStaEntity ? getStaIdentifier() : "",
                 getName());
     }
 
