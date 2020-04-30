@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
+import java.util.UUID;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -81,8 +82,6 @@ public interface HibernateRelations {
 
         String STA_IDENTIFIER = "staIdentifier";
 
-        String STA_DUMMY_ID = "dummyId";
-
         String getStaIdentifier();
 
         void setStaIdentifier(String staIdentifier);
@@ -90,6 +89,14 @@ public interface HibernateRelations {
         default boolean isSetStaIdentifier() {
             return (getStaIdentifier() != null) && !getStaIdentifier().isEmpty();
         }
+
+        default String generateUUID() {
+            return UUID.randomUUID().toString();
+        }
+
+    }
+
+    interface IsStaEntity {
 
     }
 

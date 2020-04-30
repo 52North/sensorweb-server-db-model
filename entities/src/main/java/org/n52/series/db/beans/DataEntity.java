@@ -27,11 +27,12 @@ import java.util.Set;
 
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
 public abstract class DataEntity<T> extends DescribableEntity
-        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime {
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity {
 
     public static final String PROPERTY_ID = "id";
 

@@ -22,9 +22,10 @@ import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
-public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
-        implements HasProcedureHistory, HasProcedureDescriptionFormat<ProcedureEntity>, HasGeometry<ProcedureEntity> {
+public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> implements HasProcedureHistory,
+        HasProcedureDescriptionFormat<ProcedureEntity>, HasGeometry<ProcedureEntity>, IsStaEntity {
 
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";

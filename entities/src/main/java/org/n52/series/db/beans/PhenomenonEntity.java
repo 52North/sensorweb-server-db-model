@@ -18,7 +18,9 @@ package org.n52.series.db.beans;
 
 import java.util.Objects;
 
-public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+
+public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> implements IsStaEntity {
 
     private static final long serialVersionUID = 2302654989683191424L;
 
@@ -34,6 +36,7 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
         }
     }
 
+    @Override
     public boolean isSetStaIdentifier() {
         return getStaIdentifier() != null && !getStaIdentifier().isEmpty();
     }

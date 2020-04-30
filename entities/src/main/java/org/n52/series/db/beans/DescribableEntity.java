@@ -25,6 +25,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Pattern;
 
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -177,7 +178,8 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getIdentifier(), getStaIdentifier(), getName());
+        return Objects.hash(super.hashCode(), getIdentifier(), (this instanceof IsStaEntity ? getStaIdentifier() : ""),
+                getName());
     }
 
     @Override
@@ -187,13 +189,13 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
         }
         DescribableEntity other = (DescribableEntity) obj;
         return super.equals(other) && Objects.equals(getIdentifier(), other.getIdentifier())
-                && Objects.equals(getStaIdentifier(), other.getStaIdentifier())
+                && (this instanceof IsStaEntity ? Objects.equals(getStaIdentifier(), other.getStaIdentifier()) : true)
                 && Objects.equals(getName(), other.getName());
     }
 
     protected String processIdentifierForSta(String identifier) {
         if (identifier == null || identifier.isEmpty()) {
-            return UUID.randomUUID().toString();
+            return generateUUID();
         } else {
             if (identifier.contains("/")) {
                 try {
@@ -208,7 +210,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
                     try {
                         return UUID.nameUUIDFromBytes(identifier.trim().getBytes("UTF8")).toString();
                     } catch (UnsupportedEncodingException e1) {
-                        return UUID.randomUUID().toString();
+                        return generateUUID();
                     }
                 }
             }

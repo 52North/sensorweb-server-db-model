@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.AbstractStaEntity;
 import org.n52.series.db.beans.sta.DatastreamEntity;
@@ -26,7 +27,8 @@ import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
 
-public class PlatformEntity extends DescribableEntity implements AbstractStaEntity, Locations<PlatformEntity> {
+public class PlatformEntity extends DescribableEntity
+        implements AbstractStaEntity, Locations<PlatformEntity>, IsStaEntity {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";

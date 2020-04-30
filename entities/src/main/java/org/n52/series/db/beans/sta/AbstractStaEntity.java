@@ -16,11 +16,13 @@
  */
 package org.n52.series.db.beans.sta;
 
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public interface AbstractStaEntity {
+public interface AbstractStaEntity extends IsStaEntity {
 
     boolean isProcesssed();
 
