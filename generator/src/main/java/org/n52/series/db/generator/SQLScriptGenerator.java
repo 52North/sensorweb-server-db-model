@@ -37,8 +37,8 @@ import org.n52.hibernate.type.SmallBooleanType;
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
 
 /**
- * Class to generate the create and drop scripts for different databases. Currently supported spatial
- * databases to create scripts
+ * Class to generate the create and drop scripts for different databases.
+ * Currently supported spatial databases to create scripts
  * <ul>
  * <li>PostgreSQL/PostGIS</li>
  * <li>Oracle</li>
@@ -50,10 +50,13 @@ import org.n52.hibernate.type.SmallBooleanType;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class SQLScriptGenerator extends AbstractGenerator{
+@SuppressWarnings("uncommentedmain")
+public final class SQLScriptGenerator extends AbstractGenerator {
 
-    private SQLScriptGenerator() {
+    private static final String PUBLIC = "public";
 
+    private SQLScriptGenerator(boolean print) {
+        super(print);
     }
 
     private int getSelection() throws IOException {
@@ -61,7 +64,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("0   Select script");
         printToScreen("1   all");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -74,7 +77,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("3   MySQL");
         printToScreen("4   SQL Server");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -84,7 +87,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("0 default");
         printToScreen("1 sampling");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -96,7 +99,7 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("2   ereporting");
         printToScreen("3   proxy");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -105,82 +108,17 @@ public class SQLScriptGenerator extends AbstractGenerator{
         printToScreen("For which schema should the database model be created?");
         printToScreen("No schema is also valid!");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in, Charset.forName("UTF-8")));
         String selection = null;
         selection = br.readLine();
         return selection;
     }
 
-    public static void main(String[] args) {
-        try {
-            SQLScriptGenerator sqlScriptGenerator = new SQLScriptGenerator();
-            int select = sqlScriptGenerator.getSelection();
-            if (select == 1) {
-                String schema = "public";
-                // dialectSelection
-                for (int i = 0; i < 5; i++) {
-                    schema = sqlScriptGenerator.getSchema(i);
-                    // modelSelection/profile
-                    for (int j = 0; j < 2; j++) {
-                        // concept
-                        for (int k = 0; k < 4; k++) {
-                            try {
-                                // execute(sqlScriptGenerator, i, j, k, schema);
-                                sqlScriptGenerator.execute(sqlScriptGenerator, i, j, k, schema, true, false);
-                            } catch (Exception e) {
-                                printToScreen("ERROR: " + e.getMessage());
-                                e.printStackTrace();
-                                System.exit(1);
-                            }
-                        }
-                    }
-                }
-            } else {
-                try {
-                    boolean addComments = sqlScriptGenerator.getAddComments();
-                    int dialectSelection = sqlScriptGenerator.getDialectSelection();
-                    int concept = sqlScriptGenerator.getConceptSelection();
-                    String schema = sqlScriptGenerator.getSchema();
-                    int modelSelection = sqlScriptGenerator.getModelSelection();
-                    sqlScriptGenerator.execute(sqlScriptGenerator, dialectSelection, modelSelection, concept, schema, addComments, true);
-                } catch (IOException ioe) {
-                    printToScreen("ERROR: IO error trying to read your input!");
-                    ioe.printStackTrace();
-                    System.exit(1);
-                } catch (Exception e) {
-                    printToScreen("ERROR: " + e.getMessage());
-                    e.printStackTrace();
-                    System.exit(1);
-                }
-            }
-
-        } catch (IOException ioe) {
-            printToScreen("ERROR: IO error trying to read your input!");
-            ioe.printStackTrace();
-            System.exit(1);
-        } catch (Exception e) {
-            printToScreen("ERROR: Could not generate for unknown reasons!");
-            e.printStackTrace();
-            System.exit(1);
-        }
-
-    }
-
-    private boolean getAddComments() throws IOException {
-        printToScreen("Should comments be added to the script (default=true):");
-        printToScreen("0   false");
-        printToScreen("1   true");
-        printToScreen("");
-        printToScreen("Enter your selection: ");
-
-        return readSelectionFromStdIoWithDefault(1) == 1 ? true : false;
-    }
-
     private String getSchema(int i) {
         switch (i) {
         case 1:
-            return "public";
+            return PUBLIC;
         case 2:
             return "oracle";
         case 3:
@@ -194,52 +132,112 @@ public class SQLScriptGenerator extends AbstractGenerator{
         }
     }
 
-    private void execute(SQLScriptGenerator sqlScriptGenerator,
-                                int dialectSelection,
-                                int profileSelection,
-                                int conceptSelection,
-                                String schema,
-                                boolean comments,
-                                boolean consoleLog)
-            throws Exception {
+    private boolean getAddComments() throws IOException {
+        printToScreen("Should comments be added to the script (default=true):");
+        printToScreen("0   false");
+        printToScreen("1   true");
+        printToScreen("");
+        printEnterYourSelection();
+
+        return readSelectionFromStdIoWithDefault(1) == 1 ? true : false;
+    }
+
+    private String createFileName(DialectSelector dialect, Concept concept, Profile profile, String ending) {
+        return "target/" + dialect + "_" + concept + "_" + profile + ending;
+    }
+
+    private void printFinished(String fileName) {
+        printToSysout("Finished! Check for file: " + fileName + NEW_LINE);
+    }
+
+    private void execute(int dialectSelection, int profileSelection, int conceptSelection, String schema,
+            boolean comments, boolean consoleLog) throws Exception {
         Concept concept = Concept.values()[conceptSelection];
         Profile profile = Profile.values()[profileSelection];
         Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
         DialectSelector dialect = DialectSelector.values()[dialectSelection];
-        System.out.println(String.format("EXECUTING sql generation for %s - %s - %s!", dialect.name(), concept.name(), profile.name()));
-        Dialect dia = sqlScriptGenerator.getDialect(dialect, comments);
+        System.out.println(String.format("EXECUTING sql generation for %s - %s - %s!", dialect.name(), concept.name(),
+                profile.name()));
+        Dialect dia = getDialect(dialect, comments);
         Properties p = new Properties();
         p.put("hibernate.dialect", dia.getClass().getName());
-        String fileNameCreate = "target/" + dialect + "_" + concept + "_" + profile + "_create.sql";
-        String fileNameDrop = "target/" + dialect + "_" + concept + "_" + profile + "_drop.sql";
+        String fileNameCreate = createFileName(dialect, concept, profile, "_create.sql");
+        String fileNameDrop = createFileName(dialect, concept, profile, "_drop.sql");
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {
             p.put("hibernate.default_schema", schema);
         }
         configuration.addProperties(p);
-        sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, configuration, null);
+        setDirectoriesForModelSelection(concept, profile, configuration, null);
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
         configuration.buildSessionFactory();
-        StandardServiceRegistry serviceRegistry =
-                configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
+        StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
 
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-        sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, null, metadataSources);
+        setDirectoriesForModelSelection(concept, profile, null, metadataSources);
         Metadata metadata = metadataSources.buildMetadata();
 
         // create script
         SchemaExport schemaExport = new SchemaExport();
-        EnumSet<TargetType> targetTypes =
-                consoleLog ? EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT) : EnumSet.of(TargetType.SCRIPT);
+        EnumSet<TargetType> targetTypes = consoleLog ? EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT)
+                : EnumSet.of(TargetType.SCRIPT);
         schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
         schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
-        printToScreen("Finished! Check for file: " + fileNameCreate + "\n");
+        printFinished(fileNameCreate);
         // create drop
         schemaExport.setOutputFile(fileNameDrop);
         schemaExport.execute(targetTypes, SchemaExport.Action.DROP, metadata);
-        printToScreen("Finished! Check for file: " + fileNameDrop + "\n");
+        printFinished(fileNameDrop);
+    }
+
+    protected boolean execute(Integer selection) throws Exception {
+        int select = selection != null ? selection : getSelection();
+        if (select == 1) {
+            String schema = PUBLIC;
+            // dialectSelection
+            for (int i = 0; i < 5; i++) {
+                schema = getSchema(i);
+                // modelSelection/profile
+                for (int j = 0; j < 2; j++) {
+                    // concept
+                    for (int k = 0; k < 4; k++) {
+                        // execute(sqlScriptGenerator, i, j, k, schema);
+                        execute(i, j, k, schema, true, false);
+                    }
+                }
+            }
+            return true;
+        } else {
+            boolean addComments = getAddComments();
+            int dialectSelection = getDialectSelection();
+            int concept = getConceptSelection();
+            String schema = getSchema();
+            int modelSelection = getModelSelection();
+            execute(dialectSelection, modelSelection, concept, schema, addComments, true);
+            return true;
+        }
+    }
+
+    protected static SQLScriptGenerator getInstance(boolean print) {
+        return new SQLScriptGenerator(print);
+    }
+
+    public static void main(String[] args) {
+        try {
+            getInstance(true).execute(args != null && args.length == 1 ? Integer.parseInt(args[0]) : null);
+        } catch (IOException ioe) {
+            printToScreen("ERROR: IO error trying to read your input!");
+            ioe.printStackTrace();
+            System.exit(1);
+        } catch (Exception e) {
+            printToScreen("ERROR: Could not generate for unknown reasons!");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
     }
 
 }

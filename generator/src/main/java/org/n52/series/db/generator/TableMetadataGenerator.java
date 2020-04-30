@@ -43,11 +43,9 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.n52.hibernate.type.SmallBooleanType;
 
-//import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
-
 /**
- * Class to generate the create and drop scripts for different databases. Currently supported spatial
- * databases to create scripts
+ * Class to generate the create and drop scripts for different databases.
+ * Currently supported spatial databases to create scripts
  * <ul>
  * <li>PostgreSQL/PostGIS</li>
  * <li>Oracle</li>
@@ -59,10 +57,11 @@ import org.n52.hibernate.type.SmallBooleanType;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class TableMetadataGenerator extends AbstractGenerator{
+@SuppressWarnings("uncommentedmain")
+public final class TableMetadataGenerator extends AbstractGenerator {
 
     private TableMetadataGenerator() {
-
+        super();
     }
 
     private int getSelection() throws IOException {
@@ -70,7 +69,7 @@ public class TableMetadataGenerator extends AbstractGenerator{
         printToScreen("0   Select table metadata");
         printToScreen("1   all");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -83,7 +82,7 @@ public class TableMetadataGenerator extends AbstractGenerator{
         printToScreen("3   MySQL");
         printToScreen("4   SQL Server");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -93,7 +92,7 @@ public class TableMetadataGenerator extends AbstractGenerator{
         printToScreen("0 default");
         printToScreen("1 sampling");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -104,7 +103,7 @@ public class TableMetadataGenerator extends AbstractGenerator{
         printToScreen("1   transactional");
         printToScreen("2   ereporting");
         printToScreen("");
-        printToScreen("Enter your selection: ");
+        printEnterYourSelection();
 
         return readSelectionFromStdIo();
     }
@@ -120,35 +119,24 @@ public class TableMetadataGenerator extends AbstractGenerator{
                     for (int j = 0; j < 2; j++) {
                         // concept
                         for (int k = 0; k < 4; k++) {
-                            try {
-                                // execute(sqlScriptGenerator, i, j, k, schema);
-                                tableMetadataGenerator.execute(tableMetadataGenerator, i, j, k);
-                            } catch (Exception e) {
-                                printToScreen("ERROR: " + e.getMessage());
-                                e.printStackTrace();
-                                System.exit(1);
-                            }
+                            // execute(sqlScriptGenerator, i, j, k, schema);
+                            tableMetadataGenerator.execute(tableMetadataGenerator, i, j, k);
                         }
                     }
                 }
             } else {
-                try {
-                    int dialectSelection = tableMetadataGenerator.getDialectSelection();
-                    int concept = tableMetadataGenerator.getConceptSelection();
-                    int modelSelection = tableMetadataGenerator.getModelSelection();
-                    tableMetadataGenerator.execute(tableMetadataGenerator, dialectSelection, modelSelection, concept);
-                } catch (IOException ioe) {
-                    printToScreen("ERROR: IO error trying to read your input!");
-                    System.exit(1);
-                } catch (Exception e) {
-                    printToScreen("ERROR: " + e.getMessage());
-                    e.printStackTrace();
-                    System.exit(1);
-                }
+                int dialectSelection = tableMetadataGenerator.getDialectSelection();
+                int concept = tableMetadataGenerator.getConceptSelection();
+                int modelSelection = tableMetadataGenerator.getModelSelection();
+                tableMetadataGenerator.execute(tableMetadataGenerator, dialectSelection, modelSelection, concept);
             }
 
         } catch (IOException ioe) {
             printToScreen("ERROR: IO error trying to read your input!");
+            System.exit(1);
+        } catch (Exception e) {
+            printToScreen("ERROR: " + e.getMessage());
+            e.printStackTrace();
             System.exit(1);
         }
     }
@@ -184,15 +172,17 @@ public class TableMetadataGenerator extends AbstractGenerator{
         List<String> result = new LinkedList<>();
         result.add("# Database table/column description");
         result.add("This page describes the tables and columns in the database.");
-        result.add("The *SQL type* column in the tables is generated for Hibernate dialect: *" + dia.getClass().getSimpleName() + "*");
+        result.add("The *SQL type* column in the tables is generated for Hibernate dialect: *"
+                + dia.getClass().getSimpleName() + "*");
         result.add("");
         result.add("## Tables");
         map.keySet().forEach(k -> result.add("- [" + k + "](#" + k + ")"));
         result.add("");
         result.addAll(map.values().stream().map(v -> v.toMarkdown()).collect(Collectors.toList()));
         result.add("");
-        result.add("*Creation date: " +  DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
-        System.out.println("The generated file was written to: " + Files.write(path,result).toAbsolutePath());
+        result.add(
+                "*Creation date: " + DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
+        System.out.println("The generated file was written to: " + Files.write(path, result).toAbsolutePath());
     }
 
     private SortedMap<String, TableMetadata> extractTableMetadata(Metadata metadata, Dialect dia) {
@@ -225,7 +215,8 @@ public class TableMetadataGenerator extends AbstractGenerator{
         }
     }
 
-    private void processCollection(org.hibernate.mapping.Collection collection, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+    private void processCollection(org.hibernate.mapping.Collection collection, SortedMap<String, TableMetadata> map,
+            Dialect dia, Metadata metadata) {
         Table table = collection.getCollectionTable();
         if (table != null) {
             if (!map.containsKey(table.getName())) {
@@ -238,7 +229,8 @@ public class TableMetadataGenerator extends AbstractGenerator{
         }
     }
 
-    private TableMetadata processTable(Table table, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+    private TableMetadata processTable(Table table, SortedMap<String, TableMetadata> map, Dialect dia,
+            Metadata metadata) {
         if (!map.containsKey(table.getName())) {
             map.put(table.getName(), new TableMetadata(table.getName(), table.getComment()));
         }
