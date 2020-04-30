@@ -14,7 +14,13 @@
             <column name="identifier" not-null="true" unique-key="un_location_identifier">
                 <comment>Unique identifier of the location. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321.</comment>
             </column>
-        </property><property name="name" type="string">
+        </property>
+        <property name="staIdentifier" type="string" index="idx_location_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_location_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
             <column name="name" not-null="true"/>
         </property>
         <property name="description" type="text">
@@ -59,6 +65,11 @@
         <property name="identifier" type="string" index="idx_historicallocation_identifier">
             <column name="identifier" not-null="true" unique-key="un_historicallocation_identifier">
                 <comment>Unique identifier of the HistoricalLocation. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321.</comment>
+            </column>
+        </property>
+        <property name="staIdentifier" type="string" index="idx_historicalLocation_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_historicalLocation_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
             </column>
         </property>
         <many-to-one name="thing" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_thing_historical_location">

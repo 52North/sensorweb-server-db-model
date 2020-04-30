@@ -51,6 +51,11 @@
                 <comment>Unique identifier of the observation which can be for used filtering, e.g. GetObservationById in the SOS. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
+        <property name="staIdentifier" type="string" index="idx_observation_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_observation_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codesp">
             <column name="fk_identifier_codespace_id">
                 <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be null.</comment>
@@ -94,9 +99,9 @@
 
         <component class="GeometryEntity" name="geometryEntity">
             <!--
-            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
-            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
-             -->
+                <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
+                <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
+            -->
             <property name="geometry" type="jts_geometry" not-null="false">
                 <column name="sampling_geometry">
                     <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations (trajectories) where this geometry is different from the feature geometry.</comment>
@@ -236,8 +241,8 @@
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
             <component class="GeometryEntity" name="geometryEntity">
                 <!--
-                <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
-                <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
+                    <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
+                    <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
                 <property name="geometry" type="geolatte_geometry">
                 <column name="value_geometry">

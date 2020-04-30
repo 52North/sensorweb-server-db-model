@@ -25,7 +25,6 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
     /**
      * Identifier used by SensorThingsAPI for addressing this entity.
      */
-    private String staIdentifier;
 
     @Override
     public void setIdentifier(String identifier) {
@@ -33,14 +32,6 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
         if (!isSetStaIdentifier()) {
             setStaIdentifier(identifier);
         }
-    }
-
-    public String getStaIdentifier() {
-        return staIdentifier;
-    }
-
-    public void setStaIdentifier(String staIdentifier) {
-        this.staIdentifier = staIdentifier;
     }
 
     public boolean isSetStaIdentifier() {
@@ -57,8 +48,7 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> {
         if (obj == null || !(obj instanceof PhenomenonEntity)) {
             return false;
         }
-        PhenomenonEntity other = (PhenomenonEntity) obj;
-        return super.equals(other) && Objects.equals(getStaIdentifier(), other.getStaIdentifier());
+        return super.equals(obj);
     }
 
 }

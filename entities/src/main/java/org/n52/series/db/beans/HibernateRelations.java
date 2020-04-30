@@ -77,6 +77,22 @@ public interface HibernateRelations {
         }
     }
 
+    interface HasStaIdentifier {
+
+        String STA_IDENTIFIER = "staIdentifier";
+
+        String STA_DUMMY_ID = "dummyId";
+
+        String getStaIdentifier();
+
+        void setStaIdentifier(String staIdentifier);
+
+        default boolean isSetStaIdentifier() {
+            return (getStaIdentifier() != null) && !getStaIdentifier().isEmpty();
+        }
+
+    }
+
     interface HasDomainId {
         String IDENTIFIER = HasIdentifier.IDENTIFIER;
 

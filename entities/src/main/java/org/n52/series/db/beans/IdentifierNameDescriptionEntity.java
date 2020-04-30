@@ -18,6 +18,7 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasIdentifier;
+import org.n52.series.db.beans.HibernateRelations.HasStaIdentifier;
 import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
 import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasNameCodespace;
@@ -26,6 +27,6 @@ import org.n52.series.db.beans.HibernateRelations.HasNameCodespace;
  * @author Christian Autermann
  */
 public interface IdentifierNameDescriptionEntity
-        extends HasIdentifier, HasIdentifierCodespace, HasName, HasNameCodespace, HasDescription {
+        extends HasIdentifier, HasStaIdentifier, HasIdentifierCodespace, HasName, HasNameCodespace, HasDescription {
 
 }

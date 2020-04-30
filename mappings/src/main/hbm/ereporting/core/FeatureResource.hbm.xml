@@ -14,8 +14,8 @@
             </generator>
         </id>
 
-        <discriminator type="string">
-            <column name="discriminator" not-null="false" >
+        <discriminator type="string" not-null="false">
+            <column name="discriminator" not-null="false">
                 <comment>Indicator used by Hibernate to map value specific entities (e.g. of a WaterML 2.0 MonitoringPoint) which are stored in separate tables.</comment>
             </column>
         </discriminator>
@@ -29,6 +29,11 @@
         <property name="identifier" type="string" index="idx_feature_identifier">
             <column name="identifier" not-null="true" unique-key="un_feature_identifier">
                 <comment>Unique identifier of the feature which is used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
+            </column>
+        </property>
+        <property name="staIdentifier" type="string" index="idx_feature_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_feature_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_feature_identifier_codesp">

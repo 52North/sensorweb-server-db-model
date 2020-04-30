@@ -345,6 +345,15 @@
             <plugins>
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <configuration>
+                        <!-- <useSystemClassLoader>false</useSystemClassLoader> -->
+                        <!-- see: https://stackoverflow.com/questions/53010200/maven-surefire-could-not-find-forkedbooter-class -->
+                        <argLine>-Djdk.net.URLClassPath.disableClassPathURLCheck=true</argLine>
+                    </configuration>
+                </plugin>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-jar-plugin</artifactId>
                     <configuration>
                         <archive>
@@ -441,18 +450,8 @@
                             <include>**/src/**/*.java</include>
                         </includes>
                         <excludes>
-                            <exclude>**/generator/**</exclude>
                             <exclude>**/codegen/**</exclude>
                         </excludes>
-                    </configuration>
-                </plugin>
-
-                <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-checkstyle-plugin</artifactId>
-                    <configuration>
-                        <!-- exclude SQL Generator + Config -->
-                        <excludes>org/n52/series/db/generator/**</excludes>
                     </configuration>
                 </plugin>
 

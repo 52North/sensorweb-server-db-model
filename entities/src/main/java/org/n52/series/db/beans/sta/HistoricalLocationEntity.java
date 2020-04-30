@@ -21,6 +21,7 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
@@ -30,7 +31,7 @@ import org.n52.series.db.common.Utils;
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class HistoricalLocationEntity extends IdEntity
+public class HistoricalLocationEntity extends DescribableEntity
         implements AbstractStaEntity, Serializable, Locations<HistoricalLocationEntity> {
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
@@ -40,8 +41,6 @@ public class HistoricalLocationEntity extends IdEntity
 
     private static final long serialVersionUID = 5564686026419270062L;
 
-    private String identifier;
-
     private Date time;
 
     private Set<LocationEntity> locationEntities;
@@ -49,14 +48,6 @@ public class HistoricalLocationEntity extends IdEntity
     private PlatformEntity thingEntity;
 
     private boolean processed;
-
-    public String getIdentifier() {
-        return this.identifier;
-    }
-
-    public void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
 
     public Date getTime() {
         return Utils.createUnmutableTimestamp(time);
@@ -113,8 +104,8 @@ public class HistoricalLocationEntity extends IdEntity
             return false;
         }
         HistoricalLocationEntity other = (HistoricalLocationEntity) obj;
-        return super.equals(other) && Objects.equals(identifier, other.getIdentifier())
-                && Objects.equals(getTime(), other.getTime()) && Objects.equals(getThing(), other.getThing());
+        return super.equals(other) && Objects.equals(getTime(), other.getTime())
+                && Objects.equals(getThing(), other.getThing());
     }
 
 }

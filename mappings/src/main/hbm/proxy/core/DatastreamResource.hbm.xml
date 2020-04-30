@@ -19,13 +19,18 @@
             <column name="identifier" not-null="true" unique-key="un_datastream_identifier">
                 <comment>Unique identifier of the datastream. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321.</comment>
             </column>
-        </property><property name="name" type="string">
+        </property>
+        <property name="staIdentifier" type="string" index="idx_datastream_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_datastream_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
             <column name="name" not-null="true"/>
         </property>
         <property name="description" type="text">
             <column name="description" not-null="true"/>
         </property>
-
         <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
             <property name="geometry" type="jts_geometry">
                 <column name="observed_area" not-null="false"/>

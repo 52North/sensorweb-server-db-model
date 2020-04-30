@@ -50,6 +50,11 @@
                 <comment>Unique identifier of the observation which can be for used filtering, e.g. GetObservationById in the SOS. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
+        <property name="staIdentifier" type="string" index="idx_observation_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_observation_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codesp">
             <column name="fk_identifier_codespace_id">
                 <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be null.</comment>
