@@ -25,7 +25,7 @@
         </property>
         <property name="staIdentifier" type="string" index="idx_procedure_staIdentifier">
             <column name="sta_identifier" not-null="true" unique-key="un_procedure_staIdentifier">
-                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment>
+                <!-- <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321</comment> -->
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_procedure_identifier_codesp">
