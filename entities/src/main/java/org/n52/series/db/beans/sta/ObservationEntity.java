@@ -21,12 +21,15 @@ import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.StaRelations.Datastream;
 
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
@@ -40,7 +43,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.TableGenerator;
+import javax.persistence.TableGenerators;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
@@ -64,9 +70,22 @@ import java.util.Set;
                         @Index(name = "idx_result_time", columnList = "result_time") })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, Serializable,
+public class ObservationEntity<T> extends IdEntity implements Comparable<ObservationEntity<T>>, Serializable,
         HibernateRelations.HasPhenomenonTime, HibernateRelations.IsStaEntity, Datastream<ObservationEntity>,
         HibernateRelations.HasId, HibernateRelations.HasIdentifier {
+
+    public static final String PROPERTY_ID = "id";
+    public static final String PROPERTY_IDENTIFIER = "identifier";
+    public static final String PROPERTY_STA_IDENTIFIER = "staIdentifier";
+    public static final String PROPERTY_RESULT_TIME = "resultTime";
+    public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
+    public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
+    public static final String PROPERTY_VALID_TIME_START = "validTimeStart";
+    public static final String PROPERTY_VALID_TIME_END = "validTimeEnd";
+    public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
+    public static final String PROPERTY_DATASET = "dataset";
+    public static final String PROPERTY_VALUE = "value";
+    public static final String PROPERTY_PARAMETERS = "parameters";
 
     private static final long serialVersionUID = -4720091385202877301L;
 
@@ -74,8 +93,9 @@ public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, S
      * Identification of the entity without special chars.
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "observation_seq")
-    @Column(nullable = false, name = "observation_id")
+    // @SequenceGenerator(name = "sequence_name", sequenceName = "observation_seq")
+    @Column(nullable = false, name = "observation_id", unique = true)
+    @GeneratedValue
     private Long id;
 
     /**
@@ -112,8 +132,11 @@ public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, S
     // datasetId is only used as a dummy
     private T value;
 
-    @Column(name = "sampling_geometry", columnDefinition = "jts_geometry")
-    private GeometryEntity geometryEntity;
+    // TODO: integrate samplingGeometry
+    /*
+     * @Column(name = "sampling_geometry", columnDefinition = "geometry", nullable =
+     * true) private GeometryEntity geometryEntity;
+     */
 
     @Column(name = "valid_time_start", length = 29, columnDefinition = "timestamp default NULL")
     private Date validTimeStart;
@@ -128,6 +151,9 @@ public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, S
     @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_dataset")
     private DatasetEntity dataset;
+
+    @Column(name = "fk_dataset_id", updatable = false, insertable = false, nullable = false)
+    private Long datasetId;
 
     @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"), joinColumns = {
@@ -192,13 +218,12 @@ public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, S
         this.samplingTimeEnd = samplingTimeEnd;
     }
 
-    public GeometryEntity getGeometryEntity() {
-        return geometryEntity;
-    }
-
-    public void setGeometryEntity(GeometryEntity geometryEntity) {
-        this.geometryEntity = geometryEntity;
-    }
+    /*
+     * public GeometryEntity getGeometryEntity() { return geometryEntity; }
+     *
+     * public void setGeometryEntity(GeometryEntity geometryEntity) {
+     * this.geometryEntity = geometryEntity; }
+     */
 
     public Date getValidTimeStart() {
         return validTimeStart;
@@ -293,6 +318,10 @@ public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, S
 
     private boolean isSetValidEndTime() {
         return validTimeEnd != null;
+    }
+
+    public boolean hasValue() {
+        return getValue() != null;
     }
 
     public T getValue() {

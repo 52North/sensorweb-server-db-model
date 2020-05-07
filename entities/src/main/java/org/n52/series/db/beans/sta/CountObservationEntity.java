@@ -26,13 +26,13 @@ import java.math.BigDecimal;
 /**
  * Represents an STA Observation with ValueType Quantity. For more information
  *
- * @see org.n52.series.db.beans.sta.ObservationEntity
+ * @see ObservationEntity
  *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@AttributeOverride(name = "value", column = @Column(name = "value_quantity"))
-@DiscriminatorValue("quantity")
-public class QuantityObservationEntity extends ObservationEntity<BigDecimal> {
+@AttributeOverride(name = "value", column = @Column(name = "value_count"))
+@DiscriminatorValue("count")
+public class CountObservationEntity extends ObservationEntity<Integer> {
 
 }
