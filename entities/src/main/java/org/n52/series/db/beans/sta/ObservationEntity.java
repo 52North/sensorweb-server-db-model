@@ -63,7 +63,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "observation", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end", "result_time", "fk_dataset",
+        @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end", "result_time", "fk_dataset_id",
                 "value_type" }, name = "un_observation_identity") }, indexes = {
                         @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
                         @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
@@ -149,7 +149,7 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
 
     // TODO(specki): Check that lazy fetching can be used here
     @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_dataset")
+    @JoinColumn(name = "fk_dataset_id", foreignKey = @ForeignKey(name = "fk_dataset"))
     private DatasetEntity dataset;
 
     @Column(name = "fk_dataset_id", updatable = false, insertable = false, nullable = false)
