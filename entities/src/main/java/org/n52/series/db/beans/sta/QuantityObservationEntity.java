@@ -23,8 +23,9 @@ import javax.persistence.Entity;
 import java.math.BigDecimal;
 
 /**
- * Represents an STA Observation with ValueType Quantity.
- * For more information {@see org.n52.series.db.beans.sta.ObservationEntity}
+ * Represents an STA Observation with ValueType Quantity. For more information
+ *
+ * @see org.n52.series.db.beans.sta.ObservationEntity
  *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */

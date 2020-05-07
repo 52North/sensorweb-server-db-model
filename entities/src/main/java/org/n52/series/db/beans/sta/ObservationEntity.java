@@ -50,41 +50,23 @@ import java.util.Set;
 
 /**
  * Represents a SensorThingsAPI Observation.
- * 
+ *
  * Uses Javax Annotations to use @AttributeOverride
  *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@Table(name = "observation",
-       uniqueConstraints = {
-               @UniqueConstraint(
-                       columnNames = {
-                               "sampling_time_start",
-                               "sampling_time_end",
-                               "result_time",
-                               "fk_dataset",
-                               "value_type"
-                       },
-                       name = "un_observation_identity"
-               )
-       },
-       indexes = {
-               @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
-               @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
-               @Index(name = "idx_result_time", columnList = "result_time")
-       }
-)
+@Table(name = "observation", uniqueConstraints = {
+        @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end", "result_time", "fk_dataset",
+                "value_type" }, name = "un_observation_identity") }, indexes = {
+                        @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
+                        @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
+                        @Index(name = "idx_result_time", columnList = "result_time") })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class ObservationEntity<T>
-        implements Comparable<ObservationEntity<T>>,
-        Serializable,
-        HibernateRelations.HasPhenomenonTime,
-        HibernateRelations.IsStaEntity,
-        Datastream<ObservationEntity>,
-        HibernateRelations.HasId,
-        HibernateRelations.HasIdentifier {
+public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, Serializable,
+        HibernateRelations.HasPhenomenonTime, HibernateRelations.IsStaEntity, Datastream<ObservationEntity>,
+        HibernateRelations.HasId, HibernateRelations.HasIdentifier {
 
     private static final long serialVersionUID = -4720091385202877301L;
 
@@ -142,18 +124,15 @@ public class ObservationEntity<T>
     @Column(name = "result_time", nullable = false, length = 29, columnDefinition = "timestamp")
     private Date resultTime;
 
-    //TODO(specki): Check that lazy fetching can be used here
+    // TODO(specki): Check that lazy fetching can be used here
     @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_dataset")
     private DatasetEntity dataset;
 
     @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "observation_parameters",
-               inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
-               joinColumns = {@JoinColumn(name = "fk_observation_id")},
-               foreignKey = @ForeignKey(name = "fk_parameter_observation"),
-               inverseJoinColumns = {@JoinColumn(name = "fk_parameter_id")}
-    )
+    @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"), joinColumns = {
+            @JoinColumn(name = "fk_observation_id") }, foreignKey = @ForeignKey(name = "fk_parameter_observation"), inverseJoinColumns = {
+                    @JoinColumn(name = "fk_parameter_id") })
     private Set<ParameterEntity> parameters;
 
     @Transient
@@ -293,11 +272,11 @@ public class ObservationEntity<T>
         this.dataset = dataset;
     }
 
-    @Override public int compareTo(ObservationEntity<T> other) {
+    @Override
+    public int compareTo(ObservationEntity<T> other) {
         return Comparator.comparing(ObservationEntity<T>::getSamplingTimeEnd)
-                         .thenComparing(ObservationEntity::getSamplingTimeStart)
-                         .thenComparing(ObservationEntity<T>::getId)
-                         .compare(this, other);
+                .thenComparing(ObservationEntity::getSamplingTimeStart).thenComparing(ObservationEntity<T>::getId)
+                .compare(this, other);
     }
 
     public boolean isSetValidTime() {
@@ -320,11 +299,13 @@ public class ObservationEntity<T>
         this.value = value;
     }
 
-    @Override public String getIdentifier() {
+    @Override
+    public String getIdentifier() {
         return identifier;
     }
 
-    @Override public void setIdentifier(String identifier) {
+    @Override
+    public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 }
