@@ -240,6 +240,10 @@ public class ObservationEntity<T> implements Comparable<ObservationEntity<T>>, S
         this.staIdentifier = staIdentifier;
     }
 
+    public boolean hasParameters() {
+        return getParameters() != null && !getParameters().isEmpty();
+    }
+
     public Set<ParameterEntity> getParameters() {
         return parameters;
     }
