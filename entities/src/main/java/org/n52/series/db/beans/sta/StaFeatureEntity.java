@@ -27,7 +27,7 @@ import java.util.Set;
  */
 public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
-    private Set<StaDataEntity<?>> observations;
+    private Set<ObservationEntity<?>> observations;
 
     public StaFeatureEntity(AbstractFeatureEntity<T> afe) {
         super();
@@ -46,12 +46,12 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
         this.setIdentifier(afe.getIdentifier());
     }
 
-    public StaFeatureEntity<T> setObservations(Set<StaDataEntity<?>> observations) {
+    public StaFeatureEntity<T> setObservations(Set<ObservationEntity<?>> observations) {
         this.observations = observations;
         return this;
     }
 
-    public Set<StaDataEntity<?>> getObservations() {
+    public Set<ObservationEntity<?>> getObservations() {
         return observations;
     }
 
