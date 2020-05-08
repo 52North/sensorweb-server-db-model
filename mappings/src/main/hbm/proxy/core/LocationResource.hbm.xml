@@ -44,10 +44,10 @@
         </many-to-one>
         <set name="things" table="thing_location" inverse="true">
             <key foreign-key="fk_location_thing">
-                <column name="fk_location_id" not-null="false"/>
+                <column name="fk_location_id" not-null="true"/>
             </key>
             <many-to-many class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_thing_location">
-                <column name="fk_thing_id" not-null="false"/>
+                <column name="fk_thing_id" not-null="true"/>
             </many-to-many>
         </set>
         <set name="historicalLocations" table="location_historical_location" inverse="false">
