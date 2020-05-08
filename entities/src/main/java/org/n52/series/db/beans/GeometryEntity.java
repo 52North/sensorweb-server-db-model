@@ -55,8 +55,8 @@ public class GeometryEntity implements Serializable {
     }
 
     /**
-     * Returns the {@link Geometry} or creates a {@link Geometry} with the given
-     * srid in case of geometry has been set via lat/lon.
+     * Returns the {@link Geometry} or creates a {@link Geometry} with the given srid in case of geometry has
+     * been set via lat/lon.
      *
      * @return the geometry or a created geometry (with given srid)
      */
@@ -66,8 +66,8 @@ public class GeometryEntity implements Serializable {
     }
 
     private Geometry createPoint() {
-        Coordinate coordinate = (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt)
-                : new Coordinate(lon, lat);
+        Coordinate coordinate =
+                (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt) : new Coordinate(lon, lat);
         return getGeometryFactory().createPoint(coordinate);
     }
 

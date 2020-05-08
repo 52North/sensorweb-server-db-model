@@ -456,9 +456,6 @@
                         <includes>
                             <include>**/src/**/*.java</include>
                         </includes>
-                        <excludes>
-                            <exclude>**/codegen/**</exclude>
-                        </excludes>
                     </configuration>
                 </plugin>
 

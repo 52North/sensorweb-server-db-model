@@ -57,12 +57,12 @@ import org.n52.series.db.common.Utils;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@Table(name = "observation", uniqueConstraints = {
-        @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end", "result_time", "fk_dataset_id",
-                "value_type" }, name = "un_observation_identity") }, indexes = {
-                        @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
-                        @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
-                        @Index(name = "idx_result_time", columnList = "result_time") })
+@Table(name = "observation",
+        uniqueConstraints = { @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end",
+                "result_time", "fk_dataset_id", "value_type" }, name = "un_observation_identity") },
+        indexes = { @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
+                @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
+                @Index(name = "idx_result_time", columnList = "result_time") })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ObservationEntity<T> extends IdEntity implements Comparable<ObservationEntity<T>>, Serializable,
@@ -129,8 +129,8 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
 
     // TODO: integrate samplingGeometry
     /*
-     * @Column(name = "sampling_geometry", columnDefinition = "geometry", nullable =
-     * true) private GeometryEntity geometryEntity;
+     * @Column(name = "sampling_geometry", columnDefinition = "geometry", nullable = true) private
+     * GeometryEntity geometryEntity;
      */
 
     @Column(name = "valid_time_start", length = 29, columnDefinition = "timestamp default NULL")
@@ -151,9 +151,10 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     private Long datasetId;
 
     @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"), joinColumns = {
-            @JoinColumn(name = "fk_observation_id") }, foreignKey = @ForeignKey(name = "fk_parameter_observation"), inverseJoinColumns = {
-                    @JoinColumn(name = "fk_parameter_id") })
+    @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
+            joinColumns = { @JoinColumn(name = "fk_observation_id") },
+            foreignKey = @ForeignKey(name = "fk_parameter_observation"),
+            inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
     private Set<ParameterEntity> parameters;
 
     @Transient
@@ -222,8 +223,7 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     /*
      * public GeometryEntity getGeometryEntity() { return geometryEntity; }
      *
-     * public void setGeometryEntity(GeometryEntity geometryEntity) {
-     * this.geometryEntity = geometryEntity; }
+     * public void setGeometryEntity(GeometryEntity geometryEntity) { this.geometryEntity = geometryEntity; }
      */
 
     public Date getValidTimeStart() {
