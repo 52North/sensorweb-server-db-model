@@ -18,7 +18,10 @@ This project includes:
   Jakarta XML Binding API under Eclipse Distribution License - v 1.0
   Java Annotation Indexer under Apache License, Version 2.0
   Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
+  JavaBeans Activation Framework (JAF) under Common Development and Distribution License (CDDL) v1.0
   JavaBeans Activation Framework API jar under CDDL/GPLv2+CE
+  javaee-api under CDDL + GPLv2 with classpath exception
+  JavaMail API under CDDL/GPLv2+CE
   Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
   JAXB Runtime under Eclipse Distribution License - v 1.0

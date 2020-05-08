@@ -21,7 +21,6 @@ import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.math.BigDecimal;
 
 /**
  * Represents an STA Observation with ValueType Quantity. For more information

@@ -17,24 +17,18 @@
 
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.AbstractFeatureEntity;
-import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.GeometryEntity;
-import org.n52.series.db.beans.HibernateRelations;
-import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.StaRelations.Datastream;
+import java.io.Serializable;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Set;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Inheritance;
@@ -43,16 +37,17 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import javax.persistence.TableGenerator;
-import javax.persistence.TableGenerators;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-import java.io.Serializable;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Set;
+
+import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sta.StaRelations.Datastream;
+import org.n52.series.db.common.Utils;
 
 /**
  * Represents a SensorThingsAPI Observation.
@@ -173,10 +168,12 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     public ObservationEntity() {
     }
 
+    @Override
     public DatastreamEntity getDatastream() {
         return datastream;
     }
 
+    @Override
     public ObservationEntity setDatastream(DatastreamEntity datastream) {
         this.datastream = datastream;
         return this;
@@ -202,20 +199,24 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         this.processed = processed;
     }
 
+    @Override
     public Date getSamplingTimeStart() {
-        return samplingTimeStart;
+        return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
+    @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
-        this.samplingTimeStart = samplingTimeStart;
+        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
+    @Override
     public Date getSamplingTimeEnd() {
-        return samplingTimeEnd;
+        return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
+    @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        this.samplingTimeEnd = samplingTimeEnd;
+        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     /*
@@ -226,33 +227,35 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
      */
 
     public Date getValidTimeStart() {
-        return validTimeStart;
+        return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public void setValidTimeStart(Date validTimeStart) {
-        this.validTimeStart = validTimeStart;
+        this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public Date getValidTimeEnd() {
-        return validTimeEnd;
+        return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public void setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = validTimeEnd;
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public Date getResultTime() {
-        return resultTime;
+        return Utils.createUnmutableTimestamp(resultTime);
     }
 
     public void setResultTime(Date resultTime) {
-        this.resultTime = resultTime;
+        this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

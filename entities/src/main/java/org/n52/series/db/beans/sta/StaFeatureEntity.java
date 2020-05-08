@@ -17,10 +17,10 @@
 
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.AbstractFeatureEntity;
-
 import java.util.Objects;
 import java.util.Set;
+
+import org.n52.series.db.beans.AbstractFeatureEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
