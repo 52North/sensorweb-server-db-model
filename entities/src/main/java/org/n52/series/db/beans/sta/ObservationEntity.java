@@ -47,11 +47,11 @@ import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Objects;
 import java.util.Set;
 
 /**
- * Represents a SensorThingsAPI Observation.
- * Uses Javax Annotations to use @AttributeOverride
+ * Represents a SensorThingsAPI Observation. Uses Javax Annotations to use @AttributeOverride
  *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -348,5 +348,32 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
 
     public void setSamplingGeometry(Geometry samplingGeometry) {
         this.samplingGeometry = samplingGeometry;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(),
+                            getStaIdentifier(),
+                            getDataset(),
+                            getSamplingTimeStart(),
+                            getSamplingTimeEnd(),
+                            getResultTime(),
+                            getValue());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ObservationEntity)) {
+            return false;
+        }
+        ObservationEntity other = (ObservationEntity) obj;
+        return super.equals(obj)
+                && Objects.equals(getDataset(), other.getDataset())
+                && Objects.equals(getStaIdentifier(), other.getStaIdentifier())
+                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
+                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
+                && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
+                && Objects.equals(getResultTime(), other.getResultTime())
+                && Objects.equals(getValue(), other.getValue());
     }
 }
