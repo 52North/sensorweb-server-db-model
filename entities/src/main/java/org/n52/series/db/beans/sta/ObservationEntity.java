@@ -72,7 +72,7 @@ import java.util.Set;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ObservationEntity<T> extends IdEntity implements Comparable<ObservationEntity<T>>, Serializable,
         HibernateRelations.HasPhenomenonTime, HibernateRelations.IsStaEntity, Datastream<ObservationEntity>,
-        HibernateRelations.HasId, HibernateRelations.HasIdentifier {
+        HibernateRelations.HasId, HibernateRelations.HasIdentifier, HibernateRelations.HasStaIdentifier {
 
     public static final String PROPERTY_ID = "id";
     public static final String PROPERTY_IDENTIFIER = "identifier";
