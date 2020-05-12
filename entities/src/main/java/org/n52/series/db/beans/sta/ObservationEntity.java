@@ -24,6 +24,7 @@ import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.StaRelations.Datastream;
+import org.n52.series.db.common.Utils;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -55,16 +56,18 @@ import java.util.Set;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@Table(name = "observation", uniqueConstraints = {
-        @UniqueConstraint(columnNames = {
-                "sampling_time_start", "sampling_time_end", "result_time", "fk_dataset_id",
-                "value_type"
-        }, name = "un_observation_identity")
-}, indexes = {
-        @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
-        @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
-        @Index(name = "idx_result_time", columnList = "result_time")
-})
+@Table(name = "observation",
+       uniqueConstraints = {
+               @UniqueConstraint(columnNames = {
+                       "sampling_time_start", "sampling_time_end",
+                       "result_time", "fk_dataset_id", "value_type"
+               }, name = "un_observation_identity")
+       },
+       indexes = {
+               @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
+               @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
+               @Index(name = "idx_result_time", columnList = "result_time")
+       })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ObservationEntity<T> extends IdEntity implements Comparable<ObservationEntity<T>>, Serializable,
@@ -150,15 +153,10 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     private Long datasetId;
 
     @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "observation_parameters",
-               inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
-               joinColumns = {
-                       @JoinColumn(name = "fk_observation_id")
-               },
+    @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
+               joinColumns = {@JoinColumn(name = "fk_observation_id")},
                foreignKey = @ForeignKey(name = "fk_parameter_observation"),
-               inverseJoinColumns = {
-                       @JoinColumn(name = "fk_parameter_id")
-               })
+               inverseJoinColumns = {@JoinColumn(name = "fk_parameter_id")})
     private Set<ParameterEntity> parameters;
 
     @Transient
@@ -173,10 +171,12 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     public ObservationEntity() {
     }
 
+    @Override
     public DatastreamEntity getDatastream() {
         return datastream;
     }
 
+    @Override
     public ObservationEntity setDatastream(DatastreamEntity datastream) {
         this.datastream = datastream;
         return this;
@@ -202,50 +202,56 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         this.processed = processed;
     }
 
+    @Override
     public Date getSamplingTimeStart() {
-        return samplingTimeStart;
+        return Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
+    @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
-        this.samplingTimeStart = samplingTimeStart;
+        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
     }
 
+    @Override
     public Date getSamplingTimeEnd() {
-        return samplingTimeEnd;
+        return Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
+    @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        this.samplingTimeEnd = samplingTimeEnd;
+        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
     public Date getValidTimeStart() {
-        return validTimeStart;
+        return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public void setValidTimeStart(Date validTimeStart) {
-        this.validTimeStart = validTimeStart;
+        this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
     }
 
     public Date getValidTimeEnd() {
-        return validTimeEnd;
+        return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public void setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = validTimeEnd;
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     public Date getResultTime() {
-        return resultTime;
+        return Utils.createUnmutableTimestamp(resultTime);
     }
 
     public void setResultTime(Date resultTime) {
-        this.resultTime = resultTime;
+        this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
 
+    @Override
     public Long getId() {
         return id;
     }
 
+    @Override
     public void setId(Long id) {
         this.id = id;
     }

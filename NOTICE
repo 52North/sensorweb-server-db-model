@@ -7,18 +7,18 @@ This project includes:
   Byte Buddy (without dependencies) under Apache License, Version 2.0
   ClassMate under Apache License, Version 2.0
   dom4j under BSD 3-clause New License
-  Extended StAX API under Eclipse Distribution License - v 1.0
-  fastinfoset under Apache License, Version 2.0 or Eclipse Distribution License - v 1.0
   FindBugs-jsr305 under The Apache Software License, Version 2.0
   Hibernate Commons Annotations under GNU Library General Public License v2.1 or later
   Hibernate ORM - hibernate-core under GNU Library General Public License v2.1 or later
   istack common utility code runtime under Eclipse Distribution License - v 1.0
   Jakarta Activation under EDL 1.0
-  Jakarta Activation API jar under EDL 1.0
   Jakarta XML Binding API under Eclipse Distribution License - v 1.0
   Java Annotation Indexer under Apache License, Version 2.0
   Java Transaction API under Common Development and Distribution License or GNU General Public License, Version 2 with the Classpath Exception
+  JavaBeans Activation Framework (JAF) under Common Development and Distribution License (CDDL) v1.0
   JavaBeans Activation Framework API jar under CDDL/GPLv2+CE
+  javaee-api under CDDL + GPLv2 with classpath exception
+  JavaMail API under CDDL/GPLv2+CE
   Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
   JAXB Runtime under Eclipse Distribution License - v 1.0

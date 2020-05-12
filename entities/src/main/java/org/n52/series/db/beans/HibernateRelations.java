@@ -25,9 +25,8 @@ import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
- * Interfaces that entities can implement to share constants and to make clear
- * which entities have which relations. Allows to throw compile time errors for
- * non existing relations.
+ * Interfaces that entities can implement to share constants and to make clear which entities have which
+ * relations. Allows to throw compile time errors for non existing relations.
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @since 1.0.0
