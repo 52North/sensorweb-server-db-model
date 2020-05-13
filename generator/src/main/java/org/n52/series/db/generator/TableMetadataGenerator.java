@@ -108,65 +108,13 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         return readSelectionFromStdIo();
     }
 
-    public static void main(String[] args) {
-        try {
-            TableMetadataGenerator tableMetadataGenerator = new TableMetadataGenerator();
-            int select = tableMetadataGenerator.getSelection();
-            if (select == 1) {
-                // dialectSelection
-                for (int i = 0; i < 5; i++) {
-                    // modelSelection/profile
-                    for (int j = 0; j < 2; j++) {
-                        // concept
-                        for (int k = 0; k < 4; k++) {
-                            // execute(sqlScriptGenerator, i, j, k, schema);
-                            tableMetadataGenerator.execute(tableMetadataGenerator, i, j, k);
-                        }
-                    }
-                }
-            } else {
-                int dialectSelection = tableMetadataGenerator.getDialectSelection();
-                int concept = tableMetadataGenerator.getConceptSelection();
-                int modelSelection = tableMetadataGenerator.getModelSelection();
-                tableMetadataGenerator.execute(tableMetadataGenerator, dialectSelection, modelSelection, concept);
-            }
-
-        } catch (IOException ioe) {
-            printToScreen("ERROR: IO error trying to read your input!");
-            System.exit(1);
-        } catch (Exception e) {
-            printToScreen("ERROR: " + e.getMessage());
-            e.printStackTrace();
-            System.exit(1);
-        }
+    private String createFileName(Enum... values) {
+        return createFileName("metadata/TableMetadata_", ".md", values);
     }
 
-    private void execute(TableMetadataGenerator sqlScriptGenerator, int dialectSelection, int profileSelection,
-            int conceptSelection) throws Exception {
-        Concept concept = Concept.values()[conceptSelection];
-        Profile profile = Profile.values()[profileSelection];
-        Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
-        DialectSelector dialect = DialectSelector.values()[dialectSelection];
-        Dialect dia = sqlScriptGenerator.getDialect(dialect, true);
-        Properties p = new Properties();
-        p.put("hibernate.dialect", dia.getClass().getName());
-        configuration.addProperties(p);
-        sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, configuration, null);
-        configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
-
-        configuration.buildSessionFactory();
-        StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
-
-        MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-        sqlScriptGenerator.setDirectoriesForModelSelection(concept, profile, null, metadataSources);
-        Metadata metadata = metadataSources.buildMetadata();
-
-        sqlScriptGenerator.exportTableColumnMetadata(metadata, dia);
-    }
-
-    private void exportTableColumnMetadata(Metadata metadata, Dialect dia) throws IOException {
-        Path path = Paths.get("target/TableMetadata.md");
+    private void exportTableColumnMetadata(Metadata metadata, Dialect dia, DialectSelector dialect, Concept concept,
+            Profile profile) throws IOException {
+        Path path = Paths.get(createFileName(dialect, concept, profile));
         Files.deleteIfExists(path);
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
         List<String> result = new LinkedList<>();
@@ -258,5 +206,105 @@ public final class TableMetadataGenerator extends AbstractGenerator {
             }
         }
     }
+
+    private void execute(int dialectSelection, int profileSelection, int conceptSelection) throws Exception {
+        Concept concept = Concept.values()[conceptSelection];
+        Profile profile = Profile.values()[profileSelection];
+        Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
+        DialectSelector dialect = DialectSelector.values()[dialectSelection];
+        Dialect dia = getDialect(dialect, true);
+        Properties p = new Properties();
+        p.put("hibernate.dialect", dia.getClass().getName());
+        configuration.addProperties(p);
+        setDirectoriesForModelSelection(concept, profile, configuration, null);
+        configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
+
+        configuration.buildSessionFactory();
+        StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder()
+                .applySettings(configuration.getProperties()).build();
+
+        MetadataSources metadataSources = new MetadataSources(serviceRegistry);
+        setDirectoriesForModelSelection(concept, profile, null, metadataSources);
+        Metadata metadata = metadataSources.buildMetadata();
+
+        exportTableColumnMetadata(metadata, dia, dialect, concept, profile);
+    }
+
+    protected boolean execute(Integer selection) throws Exception {
+        int select = selection != null ? selection : getSelection();
+        if (select == 1) {
+            // dialectSelection
+            for (int i = 0; i < 5; i++) {
+                // modelSelection/profile
+                for (int j = 0; j < 2; j++) {
+                    // concept
+                    for (int k = 0; k < 4; k++) {
+                        // execute(sqlScriptGenerator, i, j, k, schema);
+                        execute(i, j, k);
+                    }
+                }
+            }
+            return true;
+        } else {
+            int dialectSelection = getDialectSelection();
+            int concept = getConceptSelection();
+            int modelSelection = getModelSelection();
+            execute(dialectSelection, modelSelection, concept);
+            return true;
+        }
+    }
+
+    protected static TableMetadataGenerator getInstance() {
+        return new TableMetadataGenerator();
+    }
+
+    public static void main(String[] args) {
+        try {
+            getInstance().execute(args != null && args.length == 1 ? Integer.parseInt(args[0]) : null);
+        } catch (IOException ioe) {
+            printToScreen("ERROR: IO error trying to read your input!");
+            ioe.printStackTrace();
+            System.exit(1);
+        } catch (Exception e) {
+            printToScreen("ERROR: Could not generate for unknown reasons!");
+            e.printStackTrace();
+            System.exit(1);
+        }
+
+    }
+
+    // public static void main(String[] args) {
+    // try {
+    // TableMetadataGenerator tableMetadataGenerator = new TableMetadataGenerator();
+    // int select = tableMetadataGenerator.getSelection();
+    // if (select == 1) {
+    // // dialectSelection
+    // for (int i = 0; i < 5; i++) {
+    // // modelSelection/profile
+    // for (int j = 0; j < 2; j++) {
+    // // concept
+    // for (int k = 0; k < 4; k++) {
+    // // execute(sqlScriptGenerator, i, j, k, schema);
+    // tableMetadataGenerator.execute(tableMetadataGenerator, i, j, k);
+    // }
+    // }
+    // }
+    // } else {
+    // int dialectSelection = tableMetadataGenerator.getDialectSelection();
+    // int concept = tableMetadataGenerator.getConceptSelection();
+    // int modelSelection = tableMetadataGenerator.getModelSelection();
+    // tableMetadataGenerator.execute(tableMetadataGenerator, dialectSelection,
+    // modelSelection, concept);
+    // }
+    //
+    // } catch (IOException ioe) {
+    // printToScreen("ERROR: IO error trying to read your input!");
+    // System.exit(1);
+    // } catch (Exception e) {
+    // printToScreen("ERROR: " + e.getMessage());
+    // e.printStackTrace();
+    // System.exit(1);
+    // }
+    // }
 
 }
