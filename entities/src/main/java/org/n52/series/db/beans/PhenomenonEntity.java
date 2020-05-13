@@ -24,23 +24,6 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> imple
 
     private static final long serialVersionUID = 2302654989683191424L;
 
-    /**
-     * Identifier used by SensorThingsAPI for addressing this entity.
-     */
-
-    @Override
-    public void setIdentifier(String identifier) {
-        super.setIdentifier(identifier);
-        if (!isSetStaIdentifier()) {
-            setStaIdentifier(identifier);
-        }
-    }
-
-    @Override
-    public boolean isSetStaIdentifier() {
-        return getStaIdentifier() != null && !getStaIdentifier().isEmpty();
-    }
-
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getStaIdentifier());
