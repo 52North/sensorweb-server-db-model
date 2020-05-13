@@ -54,7 +54,11 @@ public interface HibernateRelations {
 
         String getIdentifier();
 
-        void setIdentifier(String identifier);
+        default void setIdentifier(String identifier) {
+            setIdentifier(identifier, false);
+        }
+
+        void setIdentifier(String identifier, boolean staSupportsUrls);
 
         default boolean isSetIdentifier() {
             return (getIdentifier() != null) && !getIdentifier().isEmpty();

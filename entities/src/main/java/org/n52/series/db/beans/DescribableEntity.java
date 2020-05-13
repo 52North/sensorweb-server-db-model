@@ -81,10 +81,10 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     }
 
     @Override
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(String identifier, boolean staSupportsUrls) {
         this.identifier = identifier;
         if (!isSetStaIdentifier()) {
-            setStaIdentifier(processIdentifierForSta(identifier));
+            setStaIdentifier(staSupportsUrls ? identifier : processIdentifierForSta(identifier));
         }
     }
 
