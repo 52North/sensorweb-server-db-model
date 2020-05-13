@@ -32,6 +32,7 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
     public StaFeatureEntity(AbstractFeatureEntity<T> afe) {
         super();
         this.setIdentifier(afe.getIdentifier());
+        this.setStaIdentifier(afe.getStaIdentifier());
         this.setName(afe.getName());
         this.setDescription(afe.getDescription());
         this.setParameters(afe.getParameters());
