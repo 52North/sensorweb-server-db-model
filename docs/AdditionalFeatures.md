@@ -143,3 +143,16 @@ With the translations feature the data model can provide internationalized value
 - [phenomenon_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#phenomenon_i18n)
 - [procedure_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#procedure_i18n)
 - [unit_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#unit_i18n)
+
+### Sampling and MeasuringProgram
+
+With the sampling and measuringProgram feature the data model can provide sampling and measuring program informations.
+
+#### Sampling and MeasuringProgram tables
+
+- [measuring_program](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#measuring_program)
+- [measuring_program_dataset](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#measuring_program_dataset)
+- [measuring_program_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#measuring_program_i18n)
+- [sampling](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#sampling)
+- [sampling_dataset](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#sampling_dataset)
+- [sampling_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#sampling_i18n)
