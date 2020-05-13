@@ -4,7 +4,7 @@ Additional features are modeled to extend the core data model but the core data 
 
 ## Features
 
-- [SOS Transactional](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#sos-transactional)
+- [SOS Transactional](#sos-transactional)
 - [Datatype](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#datatype)
 - [Feature types](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#feature-types)
 - [Metadata](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#metadata)
@@ -15,6 +15,7 @@ Additional features are modeled to extend the core data model but the core data 
 - [Result templates](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#result-templates)
 - [Parameter](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#parameter)
 - [Translations](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#translations)
+- [Samplings and MeasuringPrograms](https://github.com/52North/series-hibernate/blob/develop/docs/AdditionalFeatures.md#samplings-and-measuringPrograms)
 
 
 ### SOS Transactional
@@ -144,7 +145,7 @@ With the translations feature the data model can provide internationalized value
 - [procedure_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#procedure_i18n)
 - [unit_i18n](https://github.com/52North/series-hibernate/blob/develop/docs/TableMetadata.md#unit_i18n)
 
-### Sampling and MeasuringProgram
+### Samplings and MeasuringPrograms
 
 With the sampling and measuringProgram feature the data model can provide sampling and measuring program informations.
 
