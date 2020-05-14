@@ -365,7 +365,7 @@ public interface HibernateRelations {
         default boolean hasSamplingTimeEnd() {
             return getSamplingTimeStart() != null;
         }
-        
+
         default boolean isSamplingTimePeriod() {
             return hasSamplingTimeStart() && hasSamplingTimeEnd()
                     && !getSamplingTimeStart().equals(getSamplingTimeEnd());
