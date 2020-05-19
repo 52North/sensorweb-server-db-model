@@ -17,23 +17,29 @@
 
 package org.n52.series.db.beans.sta;
 
-import java.math.BigDecimal;
-
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import java.math.BigDecimal;
 
 /**
  * Represents an STA Observation with ValueType Quantity. For more information
  *
- * @see org.n52.series.db.beans.sta.ObservationEntity
- *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ * @see org.n52.series.db.beans.sta.ObservationEntity
  */
 @Entity
-@AttributeOverride(name = "value", column = @Column(name = "value_quantity"))
 @DiscriminatorValue("quantity")
 public class QuantityObservationEntity extends ObservationEntity<BigDecimal> {
 
+    @Column(name = "value_quantity")
+    private BigDecimal value;
+
+    @Override public void setValue(BigDecimal value) {
+        this.value = value;
+    }
+
+    @Override public BigDecimal getValue() {
+        return value;
+    }
 }

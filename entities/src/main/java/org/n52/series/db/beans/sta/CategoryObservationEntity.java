@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.sta;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -25,13 +24,21 @@ import javax.persistence.Entity;
 /**
  * Represents an STA Observation with ValueType Quantity. For more information
  *
- * @see ObservationEntity
- *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ * @see ObservationEntity
  */
 @Entity
-@AttributeOverride(name = "value", column = @Column(name = "value_category"))
 @DiscriminatorValue("category")
 public class CategoryObservationEntity extends ObservationEntity<String> {
 
+    @Column(name = "value_category")
+    private String value;
+
+    @Override public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override public String getValue() {
+        return value;
+    }
 }

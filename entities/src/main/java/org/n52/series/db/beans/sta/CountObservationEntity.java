@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.sta;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -30,8 +29,18 @@ import javax.persistence.Entity;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@AttributeOverride(name = "value", column = @Column(name = "value_count"))
 @DiscriminatorValue("count")
 public class CountObservationEntity extends ObservationEntity<Integer> {
+
+    @Column(name = "value_count")
+    private Integer value;
+
+    @Override public void setValue(Integer value) {
+        this.value = value;
+    }
+
+    @Override public Integer getValue() {
+        return value;
+    }
 
 }

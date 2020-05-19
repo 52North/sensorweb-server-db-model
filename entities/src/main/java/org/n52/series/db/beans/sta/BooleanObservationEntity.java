@@ -17,7 +17,6 @@
 
 package org.n52.series.db.beans.sta;
 
-import javax.persistence.AttributeOverride;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
@@ -30,8 +29,17 @@ import javax.persistence.Entity;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@AttributeOverride(name = "value", column = @Column(name = "value_boolean"))
 @DiscriminatorValue("bool")
 public class BooleanObservationEntity extends ObservationEntity<Boolean> {
 
+    @Column(name = "value_boolean")
+    private Boolean value;
+
+    @Override public void setValue(Boolean value) {
+        this.value = value;
+    }
+
+    @Override public Boolean getValue() {
+        return value;
+    }
 }
