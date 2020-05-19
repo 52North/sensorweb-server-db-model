@@ -17,11 +17,10 @@
 package org.n52.series.db.generator;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class TableMetadataGeneratorTest {
 
-    @Test
+    // @Test
     public void test_generation() throws Exception {
         Assertions.assertTrue(TableMetadataGenerator.getInstance().execute(1));
     }
