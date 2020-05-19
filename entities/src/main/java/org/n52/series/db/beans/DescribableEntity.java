@@ -205,6 +205,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
                     addHost(buffer, uri.getHost());
                     addPort(buffer, uri.getPort());
                     addPath(buffer, uri.getPath());
+                    addFragment(buffer, uri.getFragment());
                     return buffer.toString();
                 } catch (Exception e) {
                     try {
@@ -243,6 +244,12 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     private void addPath(StringBuffer buffer, String value) {
         if (value != null) {
             addValues(value, "/", buffer);
+        }
+    }
+
+    private void addFragment(StringBuffer buffer, String value) {
+        if (value != null) {
+            buffer.append("#").append(value);
         }
     }
 
