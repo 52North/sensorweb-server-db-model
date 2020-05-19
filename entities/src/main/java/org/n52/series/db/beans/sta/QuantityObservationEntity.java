@@ -44,4 +44,14 @@ public class QuantityObservationEntity extends ObservationEntity<BigDecimal> {
     public BigDecimal getValue() {
         return value;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

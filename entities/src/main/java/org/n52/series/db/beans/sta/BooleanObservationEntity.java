@@ -44,4 +44,14 @@ public class BooleanObservationEntity extends ObservationEntity<Boolean> {
     public Boolean getValue() {
         return value;
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }

@@ -44,4 +44,13 @@ public class TextObservationEntity extends ObservationEntity<String> {
         return value;
     }
 
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return super.equals(obj);
+    }
 }
