@@ -35,11 +35,13 @@ public class CountObservationEntity extends ObservationEntity<Integer> {
     @Column(name = "value_count")
     private Integer value;
 
-    @Override public void setValue(Integer value) {
+    @Override
+    public void setValue(Integer value) {
         this.value = value;
     }
 
-    @Override public Integer getValue() {
+    @Override
+    public Integer getValue() {
         return value;
     }
 

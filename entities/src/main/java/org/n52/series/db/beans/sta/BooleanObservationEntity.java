@@ -35,11 +35,13 @@ public class BooleanObservationEntity extends ObservationEntity<Boolean> {
     @Column(name = "value_boolean")
     private Boolean value;
 
-    @Override public void setValue(Boolean value) {
+    @Override
+    public void setValue(Boolean value) {
         this.value = value;
     }
 
-    @Override public Boolean getValue() {
+    @Override
+    public Boolean getValue() {
         return value;
     }
 }

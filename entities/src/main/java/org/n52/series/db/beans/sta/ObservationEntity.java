@@ -57,17 +57,11 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "observation",
-       uniqueConstraints = {
-               @UniqueConstraint(columnNames = {
-                       "sampling_time_start", "sampling_time_end",
-                       "result_time", "fk_dataset_id", "value_type"
-               }, name = "un_observation_identity")
-       },
-       indexes = {
-               @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
-               @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
-               @Index(name = "idx_result_time", columnList = "result_time")
-       })
+        uniqueConstraints = { @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end",
+                "result_time", "fk_dataset_id", "value_type" }, name = "un_observation_identity") },
+        indexes = { @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
+                @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
+                @Index(name = "idx_result_time", columnList = "result_time") })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class ObservationEntity<T> extends IdEntity implements Comparable<ObservationEntity<T>>, Serializable,
@@ -130,6 +124,7 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
 
     // This is overwritten by all subclasses
     // datasetId is only used as a dummy
+    @Transient
     private T value;
 
     @Column(name = "sampling_geometry", columnDefinition = "geometry")
@@ -154,9 +149,9 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
 
     @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
-               joinColumns = {@JoinColumn(name = "fk_observation_id")},
-               foreignKey = @ForeignKey(name = "fk_parameter_observation"),
-               inverseJoinColumns = {@JoinColumn(name = "fk_parameter_id")})
+            joinColumns = { @JoinColumn(name = "fk_observation_id") },
+            foreignKey = @ForeignKey(name = "fk_parameter_observation"),
+            inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
     private Set<ParameterEntity> parameters;
 
     @Transient
@@ -303,9 +298,8 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     @Override
     public int compareTo(ObservationEntity<T> other) {
         return Comparator.comparing(ObservationEntity<T>::getSamplingTimeEnd)
-                         .thenComparing(ObservationEntity::getSamplingTimeStart)
-                         .thenComparing(ObservationEntity<T>::getId)
-                         .compare(this, other);
+                .thenComparing(ObservationEntity::getSamplingTimeStart).thenComparing(ObservationEntity<T>::getId)
+                .compare(this, other);
     }
 
     public boolean isSetValidTime() {
@@ -352,13 +346,8 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(),
-                            getStaIdentifier(),
-                            getDataset(),
-                            getSamplingTimeStart(),
-                            getSamplingTimeEnd(),
-                            getResultTime(),
-                            getValue());
+        return Objects.hash(super.hashCode(), getStaIdentifier(), getDataset(), getSamplingTimeStart(),
+                getSamplingTimeEnd(), getResultTime(), getValue());
     }
 
     @Override
@@ -367,8 +356,7 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
             return false;
         }
         ObservationEntity other = (ObservationEntity) obj;
-        return super.equals(obj)
-                && Objects.equals(getDataset(), other.getDataset())
+        return super.equals(obj) && Objects.equals(getDataset(), other.getDataset())
                 && Objects.equals(getStaIdentifier(), other.getStaIdentifier())
                 && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
                 && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())

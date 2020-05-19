@@ -35,11 +35,13 @@ public class QuantityObservationEntity extends ObservationEntity<BigDecimal> {
     @Column(name = "value_quantity")
     private BigDecimal value;
 
-    @Override public void setValue(BigDecimal value) {
+    @Override
+    public void setValue(BigDecimal value) {
         this.value = value;
     }
 
-    @Override public BigDecimal getValue() {
+    @Override
+    public BigDecimal getValue() {
         return value;
     }
 }

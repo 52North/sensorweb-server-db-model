@@ -34,11 +34,13 @@ public class CategoryObservationEntity extends ObservationEntity<String> {
     @Column(name = "value_category")
     private String value;
 
-    @Override public void setValue(String value) {
+    @Override
+    public void setValue(String value) {
         this.value = value;
     }
 
-    @Override public String getValue() {
+    @Override
+    public String getValue() {
         return value;
     }
 }
