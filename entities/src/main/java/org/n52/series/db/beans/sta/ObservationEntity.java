@@ -45,6 +45,7 @@ import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Objects;
@@ -79,6 +80,11 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
     public static final String PROPERTY_DATASET = "dataset";
     public static final String PROPERTY_VALUE = "value";
+    public static final String PROPERTY_VALUE_BOOLEAN = "valueBoolean";
+    public static final String PROPERTY_VALUE_TEXT = "valueText";
+    public static final String PROPERTY_VALUE_QUANTITY = "valueQuantity";
+    public static final String PROPERTY_VALUE_CATEGORY = "valueCategory";
+    public static final String PROPERTY_VALUE_COUNT = "valueCount";
     public static final String PROPERTY_PARAMETERS = "parameters";
 
     private static final long serialVersionUID = -4720091385202877301L;
@@ -126,6 +132,21 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     // datasetId is only used as a dummy
     @Transient
     private T value;
+
+    @Column(name = "value_boolean", nullable = true, insertable = false, updatable = false)
+    protected Boolean valueBoolean;
+
+    @Column(name = "value_text", nullable = true, insertable = false, updatable = false)
+    protected String valueText;
+
+    @Column(name = "value_quantity", nullable = true, insertable = false, updatable = false)
+    protected BigDecimal valueQuantity;
+
+    @Column(name = "value_category", nullable = true, insertable = false, updatable = false)
+    protected String valueCategory;
+
+    @Column(name = "value_count", nullable = true, insertable = false, updatable = false)
+    protected Integer valueCount;
 
     @Column(name = "sampling_geometry", columnDefinition = "geometry")
     private Geometry samplingGeometry;
