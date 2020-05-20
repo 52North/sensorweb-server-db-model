@@ -142,12 +142,12 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         return readSelectionFromStdIoWithDefault(1) == 1 ? true : false;
     }
 
-    private String createFileName(DialectSelector dialect, Concept concept, Profile profile, String ending) {
-        return "target/" + dialect + "_" + concept + "_" + profile + ending;
-    }
-
     private void printFinished(String fileName) {
         printToSysout("Finished! Check for file: " + fileName + NEW_LINE);
+    }
+
+    private String createFileName(String ending, Enum... values) {
+        return createFileName("sql/", ending, values);
     }
 
     private void execute(int dialectSelection, int profileSelection, int conceptSelection, String schema,
@@ -161,8 +161,8 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         Dialect dia = getDialect(dialect, comments);
         Properties p = new Properties();
         p.put("hibernate.dialect", dia.getClass().getName());
-        String fileNameCreate = createFileName(dialect, concept, profile, "_create.sql");
-        String fileNameDrop = createFileName(dialect, concept, profile, "_drop.sql");
+        String fileNameCreate = createFileName("_create.sql", dialect, concept, profile);
+        String fileNameDrop = createFileName("_drop.sql", dialect, concept, profile);
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {

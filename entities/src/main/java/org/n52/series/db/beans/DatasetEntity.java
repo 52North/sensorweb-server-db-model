@@ -542,6 +542,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     public void copy(DatasetEntity dataset) {
         setIdentifier(dataset.getIdentifier());
         setIdentifierCodespace(dataset.getIdentifierCodespace());
+        setStaIdentifier(dataset.getStaIdentifier());
         setName(dataset.getName());
         setNameCodespace(dataset.getNameCodespace());
         setDescription(dataset.getDescription());

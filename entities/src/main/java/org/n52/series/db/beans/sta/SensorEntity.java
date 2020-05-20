@@ -35,6 +35,7 @@ public class SensorEntity extends ProcedureEntity implements Datastreams<SensorE
         this.procedure = procedure;
         setId(procedure.getId());
         setIdentifier(procedure.getIdentifier());
+        setStaIdentifier(procedure.getStaIdentifier());
         setName(procedure.getName());
         setDescription(procedure.getDescription());
         setDescriptionFile(procedure.getDescriptionFile());
@@ -66,6 +67,7 @@ public class SensorEntity extends ProcedureEntity implements Datastreams<SensorE
     public ProcedureEntity asProcedureEntity() {
         procedure.setId(getId());
         procedure.setIdentifier(getIdentifier());
+        procedure.setStaIdentifier(getStaIdentifier());
         procedure.setName(getName());
         procedure.setDescription(getDescription());
         procedure.setFormat(getFormat());

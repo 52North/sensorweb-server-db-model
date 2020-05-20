@@ -14,23 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
+package org.n52.series.db.generator;
 
-import java.util.Set;
-import java.util.TreeSet;
+import org.junit.jupiter.api.Assertions;
 
-public class ComplexDataEntity extends CompositeDataEntity {
+public class TableMetadataGeneratorTest {
 
-    private static final long serialVersionUID = 2206385928964743369L;
-
-    @Override
-    public Set<DataEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
-    }
-
-    @Override
-    public void setValue(Set<DataEntity<?>> value) {
-        super.setValue(value);
+    // @Test
+    public void test_generation() throws Exception {
+        Assertions.assertTrue(TableMetadataGenerator.getInstance().execute(1));
     }
 
 }

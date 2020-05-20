@@ -53,7 +53,11 @@ public interface HibernateRelations {
 
         String getIdentifier();
 
-        void setIdentifier(String identifier);
+        default void setIdentifier(String identifier) {
+            setIdentifier(identifier, false);
+        }
+
+        void setIdentifier(String identifier, boolean staSupportsUrls);
 
         default boolean isSetIdentifier() {
             return (getIdentifier() != null) && !getIdentifier().isEmpty();
@@ -359,6 +363,11 @@ public interface HibernateRelations {
 
         default boolean hasSamplingTimeEnd() {
             return getSamplingTimeStart() != null;
+        }
+
+        default boolean isSamplingTimePeriod() {
+            return hasSamplingTimeStart() && hasSamplingTimeEnd()
+                    && !getSamplingTimeStart().equals(getSamplingTimeEnd());
         }
     }
 

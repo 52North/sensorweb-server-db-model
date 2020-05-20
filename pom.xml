@@ -60,7 +60,7 @@
         <geotools.version>23.0</geotools.version>
         <geolatte.version>1.5.1</geolatte.version>
         <hibernate.version>5.4.15.Final</hibernate.version>
-        <spring-boot.version>2.2.7.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.0.RELEASE</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -466,9 +466,8 @@
                         <rules>
                             <requireNoRepositories>
                                 <allowedRepositories>
+                                    <id>central</id>
                                     <id>geotools</id>
-                                    <id>n52-releases</id>
-                                    <id>n52-snapshots</id>
                                     <id>sonatype-nexus-snapshots</id>
                                 </allowedRepositories>
                             </requireNoRepositories>
@@ -547,46 +546,18 @@
                 </plugins>
             </build>
         </profile>
-
-        <profile>
-            <id>snapshot-dist</id>
-            <distributionManagement>
-                <repository>
-                    <id>n52-releases-dist</id>
-                    <name>repository for 52North releases</name>
-                    <url>dav:https://52north.org/maven/repo/releases</url>
-                </repository>
-                <snapshotRepository>
-                    <id>n52-snapshots-dist</id>
-                    <name>repository for 52North snapshots</name>
-                    <url>dav:https://52north.org/maven/repo/snapshots</url>
-                </snapshotRepository>
-            </distributionManagement>
-        </profile>
     </profiles>
 
     <repositories>
         <repository>
-            <id>n52-releases</id>
-            <name>52n Releases</name>
-            <url>https://52north.org/maven/repo/releases/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+            <id>central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2</url>
         </repository>
         <repository>
             <id>geotools</id>
             <name>Open Source Geospatial Foundation Repository</name>
             <url>https://repo.osgeo.org/repository/release/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
         </repository>
         <repository>
             <id>sonatype-nexus-snapshots</id>
@@ -600,17 +571,4 @@
         </repository>
     </repositories>
 
-    <pluginRepositories>
-        <pluginRepository>
-            <id>sonatype-nexus-snapshots</id>
-            <name>Sonatype Nexus Snaphots</name>
-            <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </pluginRepository>
-    </pluginRepositories>
 </project>

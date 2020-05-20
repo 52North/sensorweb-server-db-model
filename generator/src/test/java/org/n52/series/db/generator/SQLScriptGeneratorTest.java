@@ -17,11 +17,10 @@
 package org.n52.series.db.generator;
 
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 public class SQLScriptGeneratorTest {
 
-    @Test
+    // @Test
     public void test_generation() throws Exception {
         Assertions.assertTrue(SQLScriptGenerator.getInstance(false).execute(1));
     }

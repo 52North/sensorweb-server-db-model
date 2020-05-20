@@ -17,6 +17,7 @@
 package org.n52.series.db.beans;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 public class DataArrayDataEntity extends CompositeDataEntity {
 
@@ -47,7 +48,7 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     @Override
     public Set<DataEntity<?>> getValue() {
-        return super.getValue();
+        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
     }
 
     @Override

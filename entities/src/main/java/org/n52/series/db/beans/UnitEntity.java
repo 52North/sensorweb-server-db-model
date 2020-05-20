@@ -49,7 +49,11 @@ public class UnitEntity extends DescribableEntity {
     }
 
     public void setUnit(String unit) {
-        setIdentifier(unit);
+        setIdentifier(unit, false);
+    }
+
+    public void setUnit(String unit, boolean staSupportsUrls) {
+        setIdentifier(unit, staSupportsUrls);
     }
 
     public String getSymbol() {
@@ -57,7 +61,11 @@ public class UnitEntity extends DescribableEntity {
     }
 
     public void setSymbol(String symbol) {
-        setIdentifier(symbol);
+        setIdentifier(symbol, false);
+    }
+
+    public void setSymbol(String symbol, boolean staSupportsUrls) {
+        setIdentifier(symbol, staSupportsUrls);
     }
 
     @Override

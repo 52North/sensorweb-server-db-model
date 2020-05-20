@@ -27,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.cfg.Configuration;
@@ -161,8 +162,16 @@ public abstract class AbstractGenerator {
         return (selection != null && !selection.isEmpty()) ? Integer.parseInt(selection) : defaultValue;
     }
 
+    protected String createFileName(String prefix, String ending, Enum... values) {
+        StringJoiner joiner = new StringJoiner("_", "target/" + prefix, ending);
+        for (Enum value : values) {
+            joiner.add(value.name().toLowerCase());
+        }
+        return joiner.toString();
+    }
+
     enum DialectSelector {
-        POSTGIS, ORACLE, GEODB, MY_SQL_SPATIAL_5, SQL_SERVER_2008;
+        POSTGIS, ORACLE, GEODB_H2, MYSQL, SQL_SERVER;
 
         @Override
         public String toString() {
