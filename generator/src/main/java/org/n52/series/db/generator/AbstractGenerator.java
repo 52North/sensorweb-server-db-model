@@ -57,23 +57,22 @@ public abstract class AbstractGenerator {
 
     protected Dialect getDialect(DialectSelector selection, boolean comments) throws Exception {
         switch (selection) {
-
-        case ORACLE:
-            return comments ? new TimestampWithTimeZoneOracleSpatial10gDialect()
-                    : new TimestampWithTimeZoneOracleSpatial10gDialectNoComments();
-        case GEODB_H2:
-            return comments ? new TimestampWithTimeZoneGeoDBDialect()
-                    : new TimestampWithTimeZoneGeoDBDialectNoComments();
-        case MYSQL:
-            return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
-                    : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
-        case SQL_SERVER:
-            return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
-                    : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
-        case POSTGIS:
-        default:
-            return comments ? new TimestampWithTimeZonePostgisPG95Dialect()
-                    : new TimestampWithTimeZonePostgisPG95DialectNoComments();
+            case ORACLE:
+                return comments ? new TimestampWithTimeZoneOracleSpatial10gDialect()
+                        : new TimestampWithTimeZoneOracleSpatial10gDialectNoComments();
+            case GEODB_H2:
+                return comments ? new TimestampWithTimeZoneGeoDBDialect()
+                        : new TimestampWithTimeZoneGeoDBDialectNoComments();
+            case MYSQL:
+                return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
+                        : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
+            case SQL_SERVER:
+                return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
+                        : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
+            case POSTGIS:
+            default:
+                return comments ? new TimestampWithTimeZonePostgisPG95Dialect()
+                        : new TimestampWithTimeZonePostgisPG95DialectNoComments();
         }
     }
 
@@ -95,18 +94,18 @@ public abstract class AbstractGenerator {
             MetadataSources metadataSources) throws Exception {
         List<String> paths = new LinkedList<>();
         switch (concept) {
-        case SIMPLE:
-            paths.addAll(getProfileDirectories("/hbm/simple", profile));
-            break;
-        case E_REPORTING:
-            paths.addAll(getProfileDirectories("/hbm/ereporting", Profile.DEFAULT));
-            break;
-        case PROXY:
-            paths.addAll(getProfileDirectories("/hbm/proxy", profile));
-            break;
-        case TRANSACTIONAL:
-        default:
-            paths.addAll(getProfileDirectories("/hbm/transactional", profile));
+            case SIMPLE:
+                paths.addAll(getProfileDirectories("/hbm/simple", profile));
+                break;
+            case E_REPORTING:
+                paths.addAll(getProfileDirectories("/hbm/ereporting", Profile.DEFAULT));
+                break;
+            case PROXY:
+                paths.addAll(getProfileDirectories("/hbm/proxy", profile));
+                break;
+            case TRANSACTIONAL:
+            default:
+                paths.addAll(getProfileDirectories("/hbm/transactional", profile));
         }
         for (String path : paths) {
             if (configuration != null) {
@@ -122,14 +121,14 @@ public abstract class AbstractGenerator {
         List<String> paths = new LinkedList<>();
         paths.add(p + "/core");
         switch (profile) {
-        case DEFAULT:
-            paths.add(p + "/dataset");
-            break;
-        case SAMPLING:
-            paths.add(p + "/sampling");
-            break;
-        default:
-            break;
+            case DEFAULT:
+                paths.add(p + "/dataset");
+                break;
+            case SAMPLING:
+                paths.add(p + "/sampling");
+                break;
+            default:
+                break;
         }
         return paths;
     }

@@ -44,6 +44,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
+    public static final String PROPERTY_OM_OBSERVATION_TYPE = "omObservationType";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";

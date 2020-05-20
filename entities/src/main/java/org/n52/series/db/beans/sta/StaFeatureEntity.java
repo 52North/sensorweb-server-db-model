@@ -17,17 +17,17 @@
 
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.AbstractFeatureEntity;
-
 import java.util.Objects;
 import java.util.Set;
+
+import org.n52.series.db.beans.AbstractFeatureEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
-    private Set<StaDataEntity<?>> observations;
+    private Set<ObservationEntity<?>> observations;
 
     public StaFeatureEntity(AbstractFeatureEntity<T> afe) {
         super();
@@ -47,12 +47,12 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
         this.setIdentifier(afe.getIdentifier());
     }
 
-    public StaFeatureEntity<T> setObservations(Set<StaDataEntity<?>> observations) {
+    public StaFeatureEntity<T> setObservations(Set<ObservationEntity<?>> observations) {
         this.observations = observations;
         return this;
     }
 
-    public Set<StaDataEntity<?>> getObservations() {
+    public Set<ObservationEntity<?>> getObservations() {
         return observations;
     }
 

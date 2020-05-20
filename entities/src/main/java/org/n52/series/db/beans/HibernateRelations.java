@@ -16,18 +16,21 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
- * Interfaces that entities can implement to share constants and to make clear
- * which entities have which relations. Allows to throw compile time errors for
- * non existing relations.
+ * Interfaces that entities can implement to share constants and to make clear which entities have which
+ * relations. Allows to throw compile time errors for non existing relations.
  *
  * @author <a href="mailto:c.autermann@52north.org">Christian Autermann</a>
  * @since 1.0.0
@@ -82,7 +85,7 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasStaIdentifier {
+    interface HasStaIdentifier extends HasIdentifier {
 
         String STA_IDENTIFIER = "staIdentifier";
 
@@ -96,6 +99,74 @@ public interface HibernateRelations {
 
         default String generateUUID() {
             return UUID.randomUUID().toString();
+        }
+
+        default String processIdentifierForSta(String identifier) {
+            if (identifier == null || identifier.isEmpty()) {
+                return generateUUID();
+            } else {
+                if (identifier.contains("/")) {
+                    try {
+                        URI uri = URI.create(identifier.trim());
+                        StringBuffer buffer = new StringBuffer("urn");
+                        addValue(buffer, uri.getScheme());
+                        addHost(buffer, uri.getHost());
+                        addPort(buffer, uri.getPort());
+                        addPath(buffer, uri.getPath());
+                        addFragment(buffer, uri.getFragment());
+                        return buffer.toString();
+                    } catch (Exception e) {
+                        try {
+                            return UUID.nameUUIDFromBytes(identifier.trim().getBytes("UTF8")).toString();
+                        } catch (UnsupportedEncodingException e1) {
+                            return generateUUID();
+                        }
+                    }
+                }
+            }
+            return identifier.trim();
+        }
+
+        default void addValue(StringBuffer buffer, String value) {
+            addValue(buffer, value, true);
+        }
+
+        default void addValue(StringBuffer buffer, String value, boolean addEmpty) {
+            if (value != null && ((addEmpty && value.isEmpty()) || !value.isEmpty())) {
+                buffer.append(":").append(value);
+            }
+        }
+
+        default void addHost(StringBuffer buffer, String value) {
+            if (value != null) {
+                addValues(value, ".", buffer);
+            }
+        }
+
+        default void addPort(StringBuffer buffer, int value) {
+            if (value >= 0) {
+                addValue(buffer, Integer.toString(value));
+            }
+        }
+
+        default void addPath(StringBuffer buffer, String value) {
+            if (value != null) {
+                addValues(value, "/", buffer);
+            }
+        }
+
+        default void addFragment(StringBuffer buffer, String value) {
+            if (value != null) {
+                buffer.append("#").append(value);
+            }
+        }
+
+        default void addValues(String value, String splitChar, StringBuffer buffer) {
+            if (!value.contains(splitChar)) {
+                addValue(buffer, value);
+            } else {
+                Arrays.asList(value.split(Pattern.quote(splitChar))).stream().forEach(v -> addValue(buffer, v, false));
+            }
         }
 
     }

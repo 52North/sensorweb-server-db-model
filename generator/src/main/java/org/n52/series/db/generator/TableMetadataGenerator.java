@@ -44,8 +44,8 @@ import org.joda.time.format.DateTimeFormat;
 import org.n52.hibernate.type.SmallBooleanType;
 
 /**
- * Class to generate the create and drop scripts for different databases.
- * Currently supported spatial databases to create scripts
+ * Class to generate the create and drop scripts for different databases. Currently supported spatial
+ * databases to create scripts
  * <ul>
  * <li>PostgreSQL/PostGIS</li>
  * <li>Oracle</li>
@@ -155,7 +155,8 @@ public final class TableMetadataGenerator extends AbstractGenerator {
 
     }
 
-    private void processJoins(Iterator<Join> ji, SortedMap<String, TableMetadata> map, Dialect dia, Metadata metadata) {
+    private void processJoins(Iterator<Join> ji, SortedMap<String, TableMetadata> map, Dialect dia,
+            Metadata metadata) {
         if (ji != null) {
             while (ji.hasNext()) {
                 processTable(ji.next().getTable(), map, dia, metadata);
@@ -220,8 +221,8 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
         configuration.buildSessionFactory();
-        StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
+        StandardServiceRegistry serviceRegistry =
+                configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
         setDirectoriesForModelSelection(concept, profile, null, metadataSources);

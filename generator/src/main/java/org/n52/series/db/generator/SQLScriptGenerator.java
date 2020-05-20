@@ -37,8 +37,8 @@ import org.n52.hibernate.type.SmallBooleanType;
 //import hibernate.spatial.dialect.oracle.OracleSpatial10gDoubleFloatDialect;
 
 /**
- * Class to generate the create and drop scripts for different databases.
- * Currently supported spatial databases to create scripts
+ * Class to generate the create and drop scripts for different databases. Currently supported spatial
+ * databases to create scripts
  * <ul>
  * <li>PostgreSQL/PostGIS</li>
  * <li>Oracle</li>
@@ -117,18 +117,18 @@ public final class SQLScriptGenerator extends AbstractGenerator {
 
     private String getSchema(int i) {
         switch (i) {
-        case 1:
-            return PUBLIC;
-        case 2:
-            return "oracle";
-        case 3:
-            return null;
-        case 4:
-            return "sos";
-        case 5:
-            return "dbo";
-        default:
-            return null;
+            case 1:
+                return PUBLIC;
+            case 2:
+                return "oracle";
+            case 3:
+                return null;
+            case 4:
+                return "sos";
+            case 5:
+                return "dbo";
+            default:
+                return null;
         }
     }
 
@@ -173,8 +173,8 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
         configuration.buildSessionFactory();
-        StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
+        StandardServiceRegistry serviceRegistry =
+                configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
         setDirectoriesForModelSelection(concept, profile, null, metadataSources);
@@ -182,8 +182,8 @@ public final class SQLScriptGenerator extends AbstractGenerator {
 
         // create script
         SchemaExport schemaExport = new SchemaExport();
-        EnumSet<TargetType> targetTypes = consoleLog ? EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT)
-                : EnumSet.of(TargetType.SCRIPT);
+        EnumSet<TargetType> targetTypes =
+                consoleLog ? EnumSet.of(TargetType.SCRIPT, TargetType.STDOUT) : EnumSet.of(TargetType.SCRIPT);
         schemaExport.setDelimiter(";").setFormat(true).setOutputFile(fileNameCreate).setHaltOnError(false);
         schemaExport.execute(targetTypes, SchemaExport.Action.CREATE, metadata);
         printFinished(fileNameCreate);
