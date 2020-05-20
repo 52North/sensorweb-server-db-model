@@ -24,8 +24,8 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
  */
 public interface AbstractStaEntity extends IsStaEntity {
 
-    boolean isProcesssed();
+    boolean isProcessed();
 
-    AbstractStaEntity setProcesssed(boolean processsed);
+    AbstractStaEntity setProcessed(boolean processsed);
 
 }

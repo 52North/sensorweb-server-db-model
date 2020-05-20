@@ -25,14 +25,18 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.HibernateRelations.HasDataset;
+import org.n52.series.db.beans.HibernateRelations.HasParameters;
 import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
+import org.n52.series.db.beans.HibernateRelations.HasResultTime;
+import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity
-        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
+        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime<DataEntity<T>>, HasParameters, HasDataset {
 
     public static final String PROPERTY_ID = "id";
 
@@ -188,38 +192,49 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.deleted = deleted;
     }
 
+    @Override
     public Date getValidTimeStart() {
         return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
-    public void setValidTimeStart(final Date validTimeStart) {
+    @Override
+    public DataEntity<T> setValidTimeStart(final Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
+        return this;
     }
 
+    @Override
     public Date getValidTimeEnd() {
         return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
-    public void setValidTimeEnd(final Date validTimeEnd) {
+    @Override
+    public DataEntity<T> setValidTimeEnd(final Date validTimeEnd) {
         this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
+        return this;
     }
 
+    @Override
     public boolean isSetValidTime() {
         return isSetValidStartTime() && isSetValidEndTime();
     }
 
+    @Override
     public boolean isSetValidStartTime() {
         return validTimeStart != null;
     }
 
+    @Override
     public boolean isSetValidEndTime() {
         return validTimeEnd != null;
     }
 
+    @Override
     public Date getResultTime() {
         return Utils.createUnmutableTimestamp(resultTime);
     }
 
+    @Override
     public void setResultTime(final Date resultTime) {
         this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
@@ -236,10 +251,12 @@ public abstract class DataEntity<T> extends DescribableEntity
         return getParent() != null;
     }
 
+    @Override
     public DatasetEntity getDataset() {
         return dataset;
     }
 
+    @Override
     public void setDataset(final DatasetEntity dataset) {
         this.dataset = dataset;
     }

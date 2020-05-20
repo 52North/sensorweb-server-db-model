@@ -32,12 +32,15 @@ import java.math.BigDecimal;
 @DiscriminatorValue("quantity")
 public class QuantityObservationEntity extends ObservationEntity<BigDecimal> {
 
+    private static final long serialVersionUID = -8508643177021481959L;
+
     @Column(name = "value_quantity")
     private BigDecimal value;
 
     @Override
-    public void setValue(BigDecimal value) {
+    public QuantityObservationEntity setValue(BigDecimal value) {
         this.value = value;
+        return this;
     }
 
     @Override

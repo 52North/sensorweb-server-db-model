@@ -17,14 +17,11 @@
 
 package org.n52.series.db.beans.sta;
 
-import org.locationtech.jts.geom.Geometry;
-import org.n52.series.db.beans.AbstractFeatureEntity;
-import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.HibernateRelations;
-import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.StaRelations.Datastream;
-import org.n52.series.db.common.Utils;
+import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -44,12 +41,12 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Set;
+
+import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.common.Utils;
 
 /**
  * Represents a SensorThingsAPI Observation. Uses Javax Annotations to use @AttributeOverride
@@ -65,9 +62,7 @@ import java.util.Set;
                 @Index(name = "idx_result_time", columnList = "result_time") })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-public class ObservationEntity<T> extends IdEntity implements Comparable<ObservationEntity<T>>, Serializable,
-        HibernateRelations.HasPhenomenonTime, HibernateRelations.IsStaEntity, Datastream<ObservationEntity>,
-        HibernateRelations.HasId, HibernateRelations.HasIdentifier, HibernateRelations.HasStaIdentifier {
+public class ObservationEntity<T> extends AbstractObservationEntity<T> implements Comparable<ObservationEntity<T>> {
 
     public static final String PROPERTY_ID = "id";
     public static final String PROPERTY_IDENTIFIER = "identifier";
@@ -173,16 +168,13 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
             joinColumns = { @JoinColumn(name = "fk_observation_id") },
             foreignKey = @ForeignKey(name = "fk_parameter_observation"),
             inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
-    private Set<ParameterEntity> parameters;
+    private Set<ParameterEntity<?>> parameters;
 
     @Transient
     private DatastreamEntity datastream;
 
     @Transient
     private AbstractFeatureEntity<?> featureOfInterest;
-
-    @Transient
-    private boolean processed;
 
     public ObservationEntity() {
     }
@@ -198,24 +190,15 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         return this;
     }
 
-    public AbstractFeatureEntity<?> getFeatureOfInterest() {
+    @Override
+    public AbstractFeatureEntity<?> getFeature() {
         return featureOfInterest;
     }
 
-    public void setFeatureOfInterest(AbstractFeatureEntity<?> featureOfInterest) {
+    @Override
+    public ObservationEntity<T> setFeature(AbstractFeatureEntity<?> featureOfInterest) {
         this.featureOfInterest = featureOfInterest;
-    }
-
-    public boolean hasFeatureOfInterest() {
-        return getFeatureOfInterest() != null;
-    }
-
-    public boolean isProcessed() {
-        return processed;
-    }
-
-    public void setProcessed(boolean processed) {
-        this.processed = processed;
+        return this;
     }
 
     @Override
@@ -238,26 +221,34 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
+    @Override
     public Date getValidTimeStart() {
         return Utils.createUnmutableTimestamp(validTimeStart);
     }
 
-    public void setValidTimeStart(Date validTimeStart) {
+    @Override
+    public ObservationEntity<T> setValidTimeStart(Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
+        return this;
     }
 
+    @Override
     public Date getValidTimeEnd() {
         return Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
-    public void setValidTimeEnd(Date validTimeEnd) {
+    @Override
+    public ObservationEntity<T> setValidTimeEnd(Date validTimeEnd) {
         this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
+        return this;
     }
 
+    @Override
     public Date getResultTime() {
         return Utils.createUnmutableTimestamp(resultTime);
     }
 
+    @Override
     public void setResultTime(Date resultTime) {
         this.resultTime = Utils.createUnmutableTimestamp(resultTime);
     }
@@ -282,38 +273,42 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         this.staIdentifier = staIdentifier;
     }
 
-    public boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
-    }
-
-    public Set<ParameterEntity> getParameters() {
+    @Override
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
-    public void setParameters(Set<ParameterEntity> parameters) {
+    @Override
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 
+    @Override
     public String getDescription() {
         return description;
     }
 
+    @Override
     public void setDescription(String description) {
         this.description = description;
     }
 
+    @Override
     public String getName() {
         return name;
     }
 
+    @Override
     public void setName(String name) {
         this.name = name;
     }
 
+    @Override
     public DatasetEntity getDataset() {
         return dataset;
     }
 
+    @Override
     public void setDataset(DatasetEntity dataset) {
         this.dataset = dataset;
     }
@@ -325,28 +320,15 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
                 .compare(this, other);
     }
 
-    public boolean isSetValidTime() {
-        return isSetValidStartTime() && isSetValidEndTime();
-    }
-
-    private boolean isSetValidStartTime() {
-        return validTimeStart != null;
-    }
-
-    private boolean isSetValidEndTime() {
-        return validTimeEnd != null;
-    }
-
-    public boolean hasValue() {
-        return getValue() != null;
-    }
-
+    @Override
     public T getValue() {
         return value;
     }
 
-    public void setValue(T value) {
+    @Override
+    public ObservationEntity<T> setValue(T value) {
         this.value = value;
+        return this;
     }
 
     @Override
@@ -362,10 +344,12 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         }
     }
 
+    @Override
     public Geometry getSamplingGeometry() {
         return samplingGeometry;
     }
 
+    @Override
     public void setSamplingGeometry(Geometry samplingGeometry) {
         this.samplingGeometry = samplingGeometry;
     }
@@ -390,4 +374,5 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
                 && Objects.equals(getResultTime(), other.getResultTime())
                 && Objects.equals(getValue(), other.getValue());
     }
+
 }

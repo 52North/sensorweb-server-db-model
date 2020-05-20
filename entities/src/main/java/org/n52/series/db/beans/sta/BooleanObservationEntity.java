@@ -32,12 +32,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue("bool")
 public class BooleanObservationEntity extends ObservationEntity<Boolean> {
 
+    private static final long serialVersionUID = 1088410258057753144L;
+
     @Column(name = "value_boolean")
     private Boolean value;
 
     @Override
-    public void setValue(Boolean value) {
+    public BooleanObservationEntity setValue(Boolean value) {
         this.value = value;
+        return this;
     }
 
     @Override

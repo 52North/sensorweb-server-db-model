@@ -25,12 +25,12 @@ public class StaDescribableEntity extends DescribableEntity implements AbstractS
     private boolean processed;
 
     @Override
-    public boolean isProcesssed() {
+    public boolean isProcessed() {
         return processed;
     }
 
     @Override
-    public AbstractStaEntity setProcesssed(boolean processsed) {
+    public AbstractStaEntity setProcessed(boolean processsed) {
         this.processed = processsed;
         return this;
     }

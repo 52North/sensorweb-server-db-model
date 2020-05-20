@@ -83,12 +83,12 @@ public class HistoricalLocationEntity extends DescribableEntity
     }
 
     @Override
-    public boolean isProcesssed() {
+    public boolean isProcessed() {
         return processed;
     }
 
     @Override
-    public AbstractStaEntity setProcesssed(boolean processsed) {
+    public AbstractStaEntity setProcessed(boolean processsed) {
         this.processed = processsed;
         return this;
     }

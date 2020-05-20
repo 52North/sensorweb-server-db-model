@@ -31,12 +31,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue("category")
 public class CategoryObservationEntity extends ObservationEntity<String> {
 
+    private static final long serialVersionUID = 2262988532197101957L;
+
     @Column(name = "value_category")
     private String value;
 
     @Override
-    public void setValue(String value) {
+    public CategoryObservationEntity setValue(String value) {
         this.value = value;
+        return this;
     }
 
     @Override

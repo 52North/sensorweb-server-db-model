@@ -24,11 +24,11 @@ import java.util.Locale.LanguageRange;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.HibernateRelations.HasId;
+import org.n52.series.db.beans.HibernateRelations.HasParameters;
 import org.n52.series.db.beans.i18n.I18nEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.common.LocaleHelper;
 
-public interface Describable extends IdentifierNameDescriptionEntity, HasId {
+public interface Describable extends IdentifierNameDescriptionEntity, HasId, HasParameters {
 
     String LOCALE_REGEX = "[-_# ]";
 
@@ -42,14 +42,6 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId {
 
     default boolean hasTranslations() {
         return getTranslations() != null && !getTranslations().isEmpty();
-    }
-
-    Set<ParameterEntity<?>> getParameters();
-
-    void setParameters(Set<ParameterEntity<?>> parameters);
-
-    default boolean hasParameters() {
-        return getParameters() != null && !getParameters().isEmpty();
     }
 
     default boolean hasService() {

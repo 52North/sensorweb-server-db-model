@@ -288,7 +288,11 @@ public interface HibernateRelations {
 
     interface HasFeature<T> extends HasFeatureGetter {
 
-        T setFeature(AbstractFeatureEntity<T> feature);
+        T setFeature(AbstractFeatureEntity<?> feature);
+
+        default boolean hasFeature() {
+            return getFeature() != null;
+        }
     }
 
     interface HasReadableObservationContext extends HasObservablePropertyGetter, HasProcedureGetter, HasFeatureGetter {
@@ -504,9 +508,9 @@ public interface HibernateRelations {
 
     interface HasResultTimes<T> {
 
-        String PHENOMENON_TIME_START = "resultTimeStart";
+        String RESULT_TIME_START = "resultTimeStart";
 
-        String PHENOMENON_TIME_END = "resultTimeEnd";
+        String RESULT_TIME_END = "resultTimeEnd";
 
         /**
          * Get the start result time
@@ -547,6 +551,26 @@ public interface HibernateRelations {
         default boolean hasResultTimeEnd() {
             return getResultTimeEnd() != null;
         }
+    }
+
+    interface HasResultTime {
+
+        String RESULT_TIME = "resultTime";
+
+        /**
+         * Get the result time
+         *
+         * @return Result time
+         */
+        Date getResultTime();
+
+        /**
+         * Set the result time
+         *
+         * @param resultTime
+         *            Result tiem to set
+         */
+        void setResultTime(Date resultTime);
     }
 
     interface HasProcedureGetter {
@@ -604,26 +628,6 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasResultTime {
-
-        String RESULT_TIME = "resultTime";
-
-        /**
-         * Get the result time
-         *
-         * @return Result time
-         */
-        Date getResultTime();
-
-        /**
-         * Set the result time
-         *
-         * @param resultTime
-         *            Result tiem to set
-         */
-        void setResultTime(Date resultTime);
-    }
-
     interface HasUnit {
         String UNIT = "unit";
 
@@ -677,7 +681,17 @@ public interface HibernateRelations {
          */
         T setValidTimeEnd(Date validTimeEnd);
 
-        boolean isSetValidTime();
+        default boolean isSetValidTime() {
+            return isSetValidStartTime() && isSetValidEndTime();
+        }
+
+        default boolean isSetValidStartTime() {
+            return getValidTimeStart() != null;
+        }
+
+        default boolean isSetValidEndTime() {
+            return getValidTimeEnd() != null;
+        }
     }
 
     interface HasUrl {
@@ -733,7 +747,7 @@ public interface HibernateRelations {
 
         Set<ParameterEntity<?>> getParameters();
 
-        void setParameters(Object parameters);
+        void setParameters(Set<ParameterEntity<?>> parameters);
 
         default boolean hasParameters() {
             return (getParameters() != null) && !getParameters().isEmpty();

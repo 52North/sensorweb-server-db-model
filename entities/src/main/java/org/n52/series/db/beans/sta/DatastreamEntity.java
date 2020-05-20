@@ -74,7 +74,7 @@ public class DatastreamEntity extends StaDescribableEntity
     private PhenomenonEntity observableProperty;
 
     private Set<DatasetEntity> datasets;
-    private Set<ObservationEntity> observations;
+    private Set<AbstractObservationEntity> observations;
 
     @Override
     public Date getSamplingTimeStart() {
@@ -235,12 +235,12 @@ public class DatastreamEntity extends StaDescribableEntity
         return observableProperty;
     }
 
-    public DatastreamEntity setObservations(Set<ObservationEntity> observations) {
+    public DatastreamEntity setObservations(Set<AbstractObservationEntity> observations) {
         this.observations = observations;
         return this;
     }
 
-    public Set<ObservationEntity> getObservations() {
+    public Set<AbstractObservationEntity> getObservations() {
         return observations;
     }
 

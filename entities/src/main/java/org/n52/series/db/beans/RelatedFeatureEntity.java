@@ -31,7 +31,7 @@ public class RelatedFeatureEntity extends IdEntity
     public static final String PROPERTY_SERVICE = "service";
     private static final long serialVersionUID = -8143897383050691280L;
 
-    private AbstractFeatureEntity<RelatedFeatureEntity> feature;
+    private AbstractFeatureEntity<?> feature;
 
     private String role;
 
@@ -43,12 +43,12 @@ public class RelatedFeatureEntity extends IdEntity
     }
 
     @Override
-    public AbstractFeatureEntity<RelatedFeatureEntity> getFeature() {
+    public AbstractFeatureEntity<?> getFeature() {
         return this.feature;
     }
 
     @Override
-    public RelatedFeatureEntity setFeature(AbstractFeatureEntity<RelatedFeatureEntity> feature) {
+    public RelatedFeatureEntity setFeature(AbstractFeatureEntity<?> feature) {
         this.feature = feature;
         return this;
     }

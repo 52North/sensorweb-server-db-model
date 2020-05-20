@@ -32,12 +32,15 @@ import javax.persistence.Entity;
 @DiscriminatorValue("count")
 public class CountObservationEntity extends ObservationEntity<Integer> {
 
+    private static final long serialVersionUID = -5135462531107840141L;
+
     @Column(name = "value_count")
     private Integer value;
 
     @Override
-    public void setValue(Integer value) {
+    public CountObservationEntity setValue(Integer value) {
         this.value = value;
+        return this;
     }
 
     @Override
