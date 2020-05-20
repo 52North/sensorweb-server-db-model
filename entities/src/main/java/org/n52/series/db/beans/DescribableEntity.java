@@ -17,13 +17,8 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.Set;
-import java.util.UUID;
-import java.util.regex.Pattern;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.i18n.I18nEntity;
@@ -191,73 +186,5 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
         return super.equals(other) && Objects.equals(getIdentifier(), other.getIdentifier())
                 && (this instanceof IsStaEntity ? Objects.equals(getStaIdentifier(), other.getStaIdentifier()) : true)
                 && Objects.equals(getName(), other.getName());
-    }
-
-    protected String processIdentifierForSta(String identifier) {
-        if (identifier == null || identifier.isEmpty()) {
-            return generateUUID();
-        } else {
-            if (identifier.contains("/")) {
-                try {
-                    URI uri = URI.create(identifier.trim());
-                    StringBuffer buffer = new StringBuffer("urn");
-                    addValue(buffer, uri.getScheme());
-                    addHost(buffer, uri.getHost());
-                    addPort(buffer, uri.getPort());
-                    addPath(buffer, uri.getPath());
-                    addFragment(buffer, uri.getFragment());
-                    return buffer.toString();
-                } catch (Exception e) {
-                    try {
-                        return UUID.nameUUIDFromBytes(identifier.trim().getBytes("UTF8")).toString();
-                    } catch (UnsupportedEncodingException e1) {
-                        return generateUUID();
-                    }
-                }
-            }
-        }
-        return identifier.trim();
-    }
-
-    private void addValue(StringBuffer buffer, String value) {
-        addValue(buffer, value, true);
-    }
-
-    private void addValue(StringBuffer buffer, String value, boolean addEmpty) {
-        if (value != null && ((addEmpty && value.isEmpty()) || !value.isEmpty())) {
-            buffer.append(":").append(value);
-        }
-    }
-
-    private void addHost(StringBuffer buffer, String value) {
-        if (value != null) {
-            addValues(value, ".", buffer);
-        }
-    }
-
-    private void addPort(StringBuffer buffer, int value) {
-        if (value >= 0) {
-            addValue(buffer, Integer.toString(value));
-        }
-    }
-
-    private void addPath(StringBuffer buffer, String value) {
-        if (value != null) {
-            addValues(value, "/", buffer);
-        }
-    }
-
-    private void addFragment(StringBuffer buffer, String value) {
-        if (value != null) {
-            buffer.append("#").append(value);
-        }
-    }
-
-    private void addValues(String value, String splitChar, StringBuffer buffer) {
-        if (!value.contains(splitChar)) {
-            addValue(buffer, value);
-        } else {
-            Arrays.asList(value.split(Pattern.quote(splitChar))).stream().forEach(v -> addValue(buffer, v, false));
-        }
     }
 }

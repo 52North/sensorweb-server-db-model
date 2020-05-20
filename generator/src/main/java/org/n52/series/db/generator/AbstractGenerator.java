@@ -57,17 +57,16 @@ public abstract class AbstractGenerator {
 
     protected Dialect getDialect(DialectSelector selection, boolean comments) throws Exception {
         switch (selection) {
-
             case ORACLE:
                 return comments ? new TimestampWithTimeZoneOracleSpatial10gDialect()
                         : new TimestampWithTimeZoneOracleSpatial10gDialectNoComments();
-            case GEODB:
+            case GEODB_H2:
                 return comments ? new TimestampWithTimeZoneGeoDBDialect()
                         : new TimestampWithTimeZoneGeoDBDialectNoComments();
-            case MY_SQL_SPATIAL_5:
+            case MYSQL:
                 return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
                         : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
-            case SQL_SERVER_2008:
+            case SQL_SERVER:
                 return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
                         : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
             case POSTGIS:

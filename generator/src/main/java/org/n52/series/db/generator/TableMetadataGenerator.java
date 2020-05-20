@@ -221,8 +221,8 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
         configuration.buildSessionFactory();
-        StandardServiceRegistry serviceRegistry = configuration.getStandardServiceRegistryBuilder()
-                .applySettings(configuration.getProperties()).build();
+        StandardServiceRegistry serviceRegistry =
+                configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
         setDirectoriesForModelSelection(concept, profile, null, metadataSources);

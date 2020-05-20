@@ -272,10 +272,12 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
         this.id = id;
     }
 
+    @Override
     public String getStaIdentifier() {
         return staIdentifier;
     }
 
+    @Override
     public void setStaIdentifier(String staIdentifier) {
         this.staIdentifier = staIdentifier;
     }
@@ -353,8 +355,11 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     }
 
     @Override
-    public void setIdentifier(String identifier) {
+    public void setIdentifier(String identifier, boolean staSupportsUrls) {
         this.identifier = identifier;
+        if (!isSetStaIdentifier()) {
+            setStaIdentifier(staSupportsUrls ? identifier : processIdentifierForSta(identifier));
+        }
     }
 
     public Geometry getSamplingGeometry() {
