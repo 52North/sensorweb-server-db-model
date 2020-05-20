@@ -14,14 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
+
+import org.n52.series.db.beans.IdEntity;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.n52.series.db.beans.IdEntity;
+import java.util.Objects;
 
 public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T, ParameterEntity<T>> {
 
@@ -96,4 +98,19 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
         return getValue() != null;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getValueAsString(), getDomain(), getName());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ParameterEntity)) {
+            return false;
+        }
+        return super.equals(obj) && Objects.equals(getValueAsString(), ((ParameterEntity) obj).getValueAsString())
+                && Objects.equals(getDomain(), ((ParameterEntity) obj).getDomain())
+                && Objects.equals(getName(), ((ParameterEntity) obj).getName())
+                && Objects.equals(getValueAsString(), ((ParameterEntity) obj).getValueAsString());
+    }
 }
