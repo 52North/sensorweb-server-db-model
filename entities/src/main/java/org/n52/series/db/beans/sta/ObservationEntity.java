@@ -134,19 +134,19 @@ public class ObservationEntity<T> extends IdEntity implements Comparable<Observa
     private T value;
 
     @Column(name = "value_boolean", nullable = true, insertable = false, updatable = false)
-    protected Boolean valueBoolean;
+    private Boolean valueBoolean;
 
     @Column(name = "value_text", nullable = true, insertable = false, updatable = false)
-    protected String valueText;
+    private String valueText;
 
     @Column(name = "value_quantity", nullable = true, insertable = false, updatable = false)
-    protected BigDecimal valueQuantity;
+    private BigDecimal valueQuantity;
 
     @Column(name = "value_category", nullable = true, insertable = false, updatable = false)
-    protected String valueCategory;
+    private String valueCategory;
 
     @Column(name = "value_count", nullable = true, insertable = false, updatable = false)
-    protected Integer valueCount;
+    private Integer valueCount;
 
     @Column(name = "sampling_geometry", columnDefinition = "geometry")
     private Geometry samplingGeometry;
