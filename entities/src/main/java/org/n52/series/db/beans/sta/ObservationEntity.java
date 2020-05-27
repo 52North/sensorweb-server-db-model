@@ -30,6 +30,7 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.Inheritance;
@@ -38,6 +39,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
@@ -54,6 +56,7 @@ import org.n52.series.db.common.Utils;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
+@SequenceGenerator(name = "observation_seq", allocationSize = 1)
 @Table(name = "observation",
         uniqueConstraints = { @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end",
                 "result_time", "fk_dataset_id", "value_type" }, name = "un_observation_identity") },
@@ -88,9 +91,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
      * Identification of the entity without special chars.
      */
     @Id
-    // @SequenceGenerator(name = "sequence_name", sequenceName = "observation_seq")
     @Column(nullable = false, name = "observation_id", unique = true)
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observation_seq")
     private Long id;
 
     /**
