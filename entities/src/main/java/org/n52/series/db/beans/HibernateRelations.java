@@ -571,6 +571,10 @@ public interface HibernateRelations {
          *            Result tiem to set
          */
         void setResultTime(Date resultTime);
+
+        default boolean hasResultTime() {
+            return getResultTime() != null;
+        }
     }
 
     interface HasProcedureGetter {
