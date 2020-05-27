@@ -41,7 +41,7 @@
         </property>
 
         <property name="resultTime" type="timestamp" unique-key="un_observation_identity">
-            <column index="idx_result_time" name="result_time" length="29" not-null="true">
+            <column index="idx_result_time" name="result_time" length="29" not-null="false">
                 <comment>The timestamp when the observation was published. Might be identical with sampling_time_start and sampling_time_end.</comment>
             </column>
         </property>
