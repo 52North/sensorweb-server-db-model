@@ -22,6 +22,7 @@ alter table public.historical_location alter column sta_identifier set not null;
 alter table public.observation add column sta_identifier varchar(255);
 update public.observation set sta_identifier = observation_id;
 alter table public.observation alter column sta_identifier set not null;
+alter table public.observation alter column result_time drop not NULL;
 
 -- update platform table
 alter table public.platform add column sta_identifier varchar(255);
