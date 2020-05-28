@@ -154,7 +154,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Column(name = "valid_time_end", length = 29, columnDefinition = "timestamp default NULL")
     private Date validTimeEnd;
 
-    @Column(name = "result_time", nullable = false, length = 29, columnDefinition = "timestamp")
+    @Column(name = "result_time", nullable = true, length = 29, columnDefinition = "timestamp")
     private Date resultTime;
 
     // TODO(specki): Check if lazy fetching can be used here
