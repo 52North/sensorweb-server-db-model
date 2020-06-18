@@ -358,8 +358,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getStaIdentifier(), getDataset(), getSamplingTimeStart(),
-                getSamplingTimeEnd(), getResultTime(), getValue());
+        return Objects.hash(super.hashCode(), getStaIdentifier(), getSamplingTimeStart(), getSamplingTimeEnd(),
+                getResultTime(), getValue());
     }
 
     @Override
