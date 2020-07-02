@@ -70,11 +70,11 @@
             </key>
             <one-to-many class="org.n52.series.db.beans.sta.HistoricalLocationEntity" />
         </set>
-        <set name="datastreams" table="datastream" inverse="true">
-            <key foreign-key="fk_datastream_thing">
-                <column name="fk_thing_id" not-null="true"/>
+        <set name="datasets" table="dataset" inverse="true">
+            <key foreign-key="fk_dataset_thing">
+                <column name="fk_platform_id" not-null="true"/>
             </key>
-            <one-to-many class="org.n52.series.db.beans.sta.DatastreamEntity" />
+            <one-to-many class="DatasetEntity" />
         </set>
         <property name="properties" type="text">
             <column name="properties" not-null="false"/>

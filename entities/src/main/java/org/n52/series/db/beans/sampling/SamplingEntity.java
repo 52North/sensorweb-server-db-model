@@ -26,7 +26,7 @@ import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.beans.HibernateRelations.HasSamplingTime;
 import org.n52.series.db.common.Utils;
 
-public class SamplingEntity extends DescribableEntity implements HasDatasets, HasSamplingTime {
+public class SamplingEntity extends DescribableEntity implements HasDatasets, HasSamplingTime<SamplingEntity> {
 
     public static final String PROPERTY_DATASETS = "datasets";
 
@@ -139,8 +139,9 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      *            the samplingTimeStart
      */
     @Override
-    public void setSamplingTimeStart(Date samplingTimeStart) {
+    public SamplingEntity setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
+        return this;
     }
 
     /**
@@ -156,8 +157,9 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
      *            the samplingTimeEnd
      */
     @Override
-    public void setSamplingTimeEnd(Date samplingTimeEnd) {
+    public SamplingEntity setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
+        return this;
     }
 
     @Override

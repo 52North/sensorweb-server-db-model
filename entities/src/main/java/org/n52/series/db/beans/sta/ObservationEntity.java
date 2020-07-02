@@ -173,7 +173,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     private Set<ParameterEntity<?>> parameters;
 
     @Transient
-    private DatastreamEntity datastream;
+    private DatasetAggregationEntity datastream;
 
     @Transient
     private AbstractFeatureEntity<?> featureOfInterest;
@@ -182,12 +182,12 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public DatastreamEntity getDatastream() {
+    public DatasetAggregationEntity getDatastream() {
         return datastream;
     }
 
     @Override
-    public ObservationEntity setDatastream(DatastreamEntity datastream) {
+    public ObservationEntity setDatastream(DatasetAggregationEntity datastream) {
         this.datastream = datastream;
         return this;
     }
@@ -209,8 +209,9 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public void setSamplingTimeStart(Date samplingTimeStart) {
+    public ObservationEntity<T> setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
+        return this;
     }
 
     @Override
@@ -219,8 +220,9 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public void setSamplingTimeEnd(Date samplingTimeEnd) {
+    public ObservationEntity<T> setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
+        return this;
     }
 
     @Override

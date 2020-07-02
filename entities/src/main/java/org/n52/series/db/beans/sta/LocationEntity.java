@@ -39,7 +39,6 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
 
     private static final long serialVersionUID = -8201429072560300649L;
 
-    private String identifier;
     private String location;
     private GeometryEntity geometryEntity;
     private FormatEntity locationEncoding;

@@ -17,6 +17,7 @@
 package org.n52.series.db.generator;
 
 import org.junit.jupiter.api.Assertions;
+//import org.junit.jupiter.api.Test;
 
 public class SQLScriptGeneratorTest {
 

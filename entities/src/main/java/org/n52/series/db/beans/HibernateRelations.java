@@ -410,7 +410,7 @@ public interface HibernateRelations {
         boolean isSetOffering();
     }
 
-    interface HasSamplingTime {
+    interface HasSamplingTime<T> {
         /**
          * @return the samplingTimeStart
          */
@@ -420,7 +420,7 @@ public interface HibernateRelations {
          * @param samplingTimeStart
          *            the samplingTimeStart
          */
-        void setSamplingTimeStart(Date samplingTimeStart);
+        T setSamplingTimeStart(Date samplingTimeStart);
 
         /**
          * @return the samplingTimeEnd
@@ -431,7 +431,7 @@ public interface HibernateRelations {
          * @param samplingTimeEnd
          *            the samplingTimeEnd
          */
-        void setSamplingTimeEnd(Date samplingTimeEnd);
+        T setSamplingTimeEnd(Date samplingTimeEnd);
 
         default boolean hasSamplingTimeStart() {
             return getSamplingTimeStart() != null;
@@ -447,7 +447,7 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasPhenomenonTime extends HasSamplingTime {
+    interface HasPhenomenonTime<T> extends HasSamplingTime<T> {
 
         /**
          * Get the start phenomenon time
@@ -468,8 +468,8 @@ public interface HibernateRelations {
          * @deprecated use {@link HasPhenomenonTime#setSamplingTimeStart(Date)}
          */
         @Deprecated
-        default void setPhenomenonTimeStart(Date phenomenonTimeStart) {
-            setSamplingTimeStart(phenomenonTimeStart);
+        default T setPhenomenonTimeStart(Date phenomenonTimeStart) {
+            return setSamplingTimeStart(phenomenonTimeStart);
         }
 
         @Deprecated
@@ -496,8 +496,8 @@ public interface HibernateRelations {
          * @deprecated use {@link HasPhenomenonTime#setSamplingTimeEnd(Date)}
          */
         @Deprecated
-        default void setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
-            setSamplingTimeEnd(phenomenonTimeEnd);
+        default T setPhenomenonTimeEnd(Date phenomenonTimeEnd) {
+            return setSamplingTimeEnd(phenomenonTimeEnd);
         }
 
         @Deprecated
@@ -632,12 +632,12 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasUnit {
+    interface HasUnit<T> {
         String UNIT = "unit";
 
         UnitEntity getUnit();
 
-        void setUnit(UnitEntity unit);
+        T setUnit(UnitEntity unit);
 
         /**
          * Is unit set
@@ -725,7 +725,7 @@ public interface HibernateRelations {
 
     }
 
-    interface HasUnitValue<T> extends HasUnit, HasValue<T> {
+    interface HasUnitValue<T> extends HasUnit<T>, HasValue<T> {
     }
 
     interface HasOfferings<T> {

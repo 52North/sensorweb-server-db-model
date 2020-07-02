@@ -25,14 +25,16 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
 import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
+import org.n52.series.db.beans.sta.DatasetAggregationEntity;
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity extends DescribableEntity implements Serializable {
+public class DatasetEntity extends DescribableEntity implements Serializable, IsStaEntity {
 
     public static final String ENTITY_ALIAS = "dataset";
 
@@ -100,6 +102,12 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     private BigDecimal firstQuantityValue;
 
     private BigDecimal lastQuantityValue;
+
+    private Date resultTimeStart;
+
+    private Date resultTimeEnd;
+
+    private DatasetAggregationEntity datasetAggregation;
 
     private UnitEntity unit;
 
@@ -314,6 +322,45 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     public DatasetEntity setLastQuantityValue(BigDecimal lastValue) {
         this.lastQuantityValue = lastValue;
         return this;
+    }
+
+    public Date getResultTimeStart() {
+        return Utils.createUnmutableTimestamp(resultTimeStart);
+    }
+
+    public DatasetEntity setResultTimeStart(Date resultTimeStart) {
+        this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
+        return this;
+    }
+
+    public boolean isSetResultTimeStart() {
+        return getResultTimeStart() != null;
+    }
+
+    public Date getResultTimeEnd() {
+        return Utils.createUnmutableTimestamp(resultTimeEnd);
+    }
+
+    public DatasetEntity setResultTimeEnd(Date resultTimeEnd) {
+        this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
+        return this;
+    }
+
+    public boolean isSetResultTimeEnd() {
+        return getResultTimeEnd() != null;
+    }
+
+    public DatasetAggregationEntity getDatasetAggregation() {
+        return datasetAggregation;
+    }
+
+    public DatasetEntity setDatasetAggregation(DatasetAggregationEntity datastream) {
+        this.datasetAggregation = datastream;
+        return this;
+    }
+
+    public boolean isSetDatasetAggregation() {
+        return getDatasetAggregation() != null;
     }
 
     public DatasetType getDatasetType() {

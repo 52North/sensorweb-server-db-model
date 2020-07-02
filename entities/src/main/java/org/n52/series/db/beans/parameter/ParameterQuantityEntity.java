@@ -22,7 +22,7 @@ import java.util.Map;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.HibernateRelations.HasUnit;
 
-public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> implements HasUnit {
+public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> implements HasUnit<ParameterQuantityEntity> {
 
     private static final long serialVersionUID = 7528516075676290716L;
 
@@ -43,8 +43,9 @@ public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> impleme
     }
 
     @Override
-    public void setUnit(final UnitEntity unit) {
+    public ParameterQuantityEntity setUnit(final UnitEntity unit) {
         this.unit = unit;
+        return this;
     }
 
     @Override

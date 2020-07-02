@@ -27,6 +27,7 @@ import org.n52.series.db.beans.AbstractFeatureEntity;
  */
 public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
+    private static final long serialVersionUID = 5874244749263160611L;
     private Set<ObservationEntity<?>> observations;
 
     public StaFeatureEntity(AbstractFeatureEntity<T> afe) {

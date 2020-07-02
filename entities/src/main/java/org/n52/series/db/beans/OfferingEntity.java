@@ -29,7 +29,7 @@ import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes<OfferingEntity>,
-        HasFeatureTypes<OfferingEntity>, HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime,
+        HasFeatureTypes<OfferingEntity>, HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>,
         HasResultTimes<OfferingEntity>, HasValidTime<OfferingEntity> {
 
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
@@ -124,8 +124,9 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     }
 
     @Override
-    public void setSamplingTimeStart(Date time) {
+    public OfferingEntity setSamplingTimeStart(Date time) {
         this.phenomenonTimeStart = Utils.createUnmutableTimestamp(time);
+        return this;
     }
 
     @Override
@@ -134,8 +135,9 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     }
 
     @Override
-    public void setSamplingTimeEnd(Date time) {
+    public OfferingEntity setSamplingTimeEnd(Date time) {
         this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(time);
+        return this;
     }
 
     /**

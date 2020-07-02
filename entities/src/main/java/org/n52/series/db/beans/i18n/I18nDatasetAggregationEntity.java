@@ -16,9 +16,9 @@
  */
 package org.n52.series.db.beans.i18n;
 
-import org.n52.series.db.beans.sta.DatastreamEntity;
+import org.n52.series.db.beans.sta.DatasetAggregationEntity;
 
-public class I18nDatastreamEntity extends I18nEntity<DatastreamEntity> {
+public class I18nDatasetAggregationEntity extends I18nEntity<DatasetAggregationEntity> {
 
     private static final long serialVersionUID = 7240711294542056022L;
 

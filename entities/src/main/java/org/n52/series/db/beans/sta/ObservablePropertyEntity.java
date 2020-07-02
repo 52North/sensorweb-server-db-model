@@ -25,7 +25,7 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements Datast
 
     private static final long serialVersionUID = -1903162304158931533L;
     private final PhenomenonEntity phenomenon;
-    private Set<DatastreamEntity> datastreams;
+    private Set<DatasetAggregationEntity> datastreams;
 
     public ObservablePropertyEntity() {
         this.phenomenon = new PhenomenonEntity();
@@ -41,13 +41,13 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements Datast
     }
 
     @Override
-    public ObservablePropertyEntity setDatastreams(Set<DatastreamEntity> datastreams) {
+    public ObservablePropertyEntity setDatastreams(Set<DatasetAggregationEntity> datastreams) {
         this.datastreams = datastreams;
         return this;
     }
 
     @Override
-    public Set<DatastreamEntity> getDatastreams() {
+    public Set<DatasetAggregationEntity> getDatastreams() {
         return datastreams;
     }
 

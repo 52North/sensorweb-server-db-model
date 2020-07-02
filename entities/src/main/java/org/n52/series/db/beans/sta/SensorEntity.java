@@ -25,7 +25,7 @@ public class SensorEntity extends ProcedureEntity implements Datastreams<SensorE
 
     private static final long serialVersionUID = -8010667038475754604L;
     private final ProcedureEntity procedure;
-    private Set<DatastreamEntity> datastreams;
+    private Set<DatasetAggregationEntity> datastreams;
 
     public SensorEntity() {
         this.procedure = new ProcedureEntity();
@@ -44,13 +44,13 @@ public class SensorEntity extends ProcedureEntity implements Datastreams<SensorE
     }
 
     @Override
-    public SensorEntity setDatastreams(Set<DatastreamEntity> datastreams) {
+    public SensorEntity setDatastreams(Set<DatasetAggregationEntity> datastreams) {
         this.datastreams = datastreams;
         return this;
     }
 
     @Override
-    public Set<DatastreamEntity> getDatastreams() {
+    public Set<DatasetAggregationEntity> getDatastreams() {
         return datastreams;
     }
 

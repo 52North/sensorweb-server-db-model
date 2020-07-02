@@ -23,11 +23,11 @@ public interface StaRelations {
 
     interface Datastreams<T> {
 
-        T setDatastreams(Set<DatastreamEntity> datastreams);
+        T setDatastreams(Set<DatasetAggregationEntity> datastreams);
 
-        Set<DatastreamEntity> getDatastreams();
+        Set<DatasetAggregationEntity> getDatastreams();
 
-        default void addDatastream(DatastreamEntity datastream) {
+        default void addDatastream(DatasetAggregationEntity datastream) {
             if (getDatastreams() == null) {
                 setDatastreams(new LinkedHashSet<>());
             }
@@ -42,9 +42,9 @@ public interface StaRelations {
 
     interface Datastream<T> {
 
-        T setDatastream(DatastreamEntity datastreams);
+        T setDatastream(DatasetAggregationEntity datastreams);
 
-        DatastreamEntity getDatastream();
+        DatasetAggregationEntity getDatastream();
 
         default boolean hasDatastream() {
             return getDatastream() != null;

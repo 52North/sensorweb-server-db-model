@@ -35,8 +35,9 @@ import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
-        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime<DataEntity<T>>, HasParameters, HasDataset {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime<DataEntity<?>>, IsStaEntity,
+        HasResultTime, HasValidTime<DataEntity<T>>, HasParameters, HasDataset {
 
     public static final String PROPERTY_ID = "id";
 
@@ -132,11 +133,13 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     /**
      * @param samplingTimeStart
      *            the samplingTimeStart
+     * @return
      */
 
     @Override
-    public void setSamplingTimeStart(Date samplingTimeStart) {
+    public DataEntity<T> setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
+        return this;
     }
 
     /**
@@ -154,8 +157,9 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
      */
 
     @Override
-    public void setSamplingTimeEnd(Date samplingTimeEnd) {
+    public DataEntity<T> setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
+        return this;
     }
 
     public T getValue() {

@@ -22,7 +22,6 @@ import java.util.Set;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.AbstractStaEntity;
-import org.n52.series.db.beans.sta.DatastreamEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
@@ -41,7 +40,7 @@ public class PlatformEntity extends DescribableEntity
     private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
-    private Set<DatastreamEntity> datastreams;
+    private Set<DatasetEntity> datasets;
     private boolean processed;
 
     public PlatformEntity setProperties(String properties) {
@@ -100,17 +99,17 @@ public class PlatformEntity extends DescribableEntity
         return this;
     }
 
-    public Set<DatastreamEntity> getDatastreams() {
-        return datastreams;
+    public Set<DatasetEntity> getDatasets() {
+        return datasets;
     }
 
-    public PlatformEntity setDatastreams(Set<DatastreamEntity> datastreams) {
-        this.datastreams = datastreams;
+    public PlatformEntity setDatasets(Set<DatasetEntity> datasets) {
+        this.datasets = datasets;
         return this;
     }
 
-    public boolean hasDatastreams() {
-        return getDatastreams() != null && !getDatastreams().isEmpty();
+    public boolean hasDatasets() {
+        return getDatasets() != null && !getDatasets().isEmpty();
     }
 
     public boolean hasHistoricalLocations() {

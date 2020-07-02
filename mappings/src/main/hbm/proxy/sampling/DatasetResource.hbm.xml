@@ -165,6 +165,22 @@
             </column>
         </many-to-one>
 
+         <property name="resultTimeStart" type="timestamp">
+            <column name="result_time_start" not-null="false">
+                <comment>The timestamp of the earliest result time of the observations that belong to this dataset.</comment>
+            </column>
+        </property>
+        <property name="resultTimeEnd" type="timestamp">
+            <column name="result_time_end" not-null="false">
+                <comment>The timestamp of the latest result time of the observations that belong to this dataset.</comment>
+            </column>
+        </property>
+        <many-to-one class="org.n52.series.db.beans.sta.DatasetAggregationEntity" name="datasetAggregation" foreign-key="fk_dataset_dataset_aggregation">
+            <column name="fk_dataset_aggregation_id" not-null="false">
+                <comment>Reference to the dataset aggregation this dataset belongs to.</comment>
+            </column>
+        </many-to-one>
+
         <property name="numberOfDecimals" type="int">
             <column name="decimals">
                 <comment>Number of decimals that should be present in the output of the observation values. If no value is set, all decimals would be present.</comment>
@@ -193,6 +209,12 @@
         <property name="identifier" type="string" index="idx_dataset_identifier">
             <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
                 <comment>Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS and can be encoded in WaterML 2.0 oder TimeseriesML 1.0 outputs.</comment>
+            </column>
+        </property>
+
+        <property name="staIdentifier" type="string" index="idx_dataset_staIdentifier">
+            <column name="sta_identifier" not-null="false" unique-key="un_dataset_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321</comment>
             </column>
         </property>
 

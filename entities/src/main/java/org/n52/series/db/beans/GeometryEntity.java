@@ -32,8 +32,6 @@ public class GeometryEntity implements Serializable {
 
     private static final long serialVersionUID = -1411829809704409439L;
 
-    private static final int DEFAULT_SRID = 4326;
-
     private GeometryFactory geometryFactory;
 
     private Geometry geometry;

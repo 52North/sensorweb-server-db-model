@@ -108,9 +108,9 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
         if (obj == null || !(obj instanceof ParameterEntity)) {
             return false;
         }
-        return super.equals(obj) && Objects.equals(getValueAsString(), ((ParameterEntity) obj).getValueAsString())
-                && Objects.equals(getDomain(), ((ParameterEntity) obj).getDomain())
-                && Objects.equals(getName(), ((ParameterEntity) obj).getName())
-                && Objects.equals(getValueAsString(), ((ParameterEntity) obj).getValueAsString());
+        return super.equals(obj) && Objects.equals(getValueAsString(), ((ParameterEntity<?>) obj).getValueAsString())
+                && Objects.equals(getDomain(), ((ParameterEntity<?>) obj).getDomain())
+                && Objects.equals(getName(), ((ParameterEntity<?>) obj).getName())
+                && Objects.equals(getValueAsString(), ((ParameterEntity<?>) obj).getValueAsString());
     }
 }
