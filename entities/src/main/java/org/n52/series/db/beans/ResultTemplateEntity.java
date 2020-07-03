@@ -165,6 +165,10 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
         return observationStructure;
     }
 
+    public boolean isSetObservationStructure() {
+        return (getObservationStructure() != null) && !getObservationStructure().isEmpty();
+    }
+
     public void setObservationStructure(String observationStructure) {
         this.observationStructure = observationStructure;
     }
@@ -175,6 +179,10 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public void setObservationEncoding(String observationsEncoding) {
         this.observationsEncoding = observationsEncoding;
+    }
+
+    public boolean isSetObservationEncoding() {
+        return (getObservationEncoding() != null) && !getObservationEncoding().isEmpty();
     }
 
     public boolean isSetProcedure() {
