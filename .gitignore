@@ -4,3 +4,4 @@ target
 .classpath
 nbactions.xml
 codegen/console.log
+.cache/formatter-maven-cache.properties
