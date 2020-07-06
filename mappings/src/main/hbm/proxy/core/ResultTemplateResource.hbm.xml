@@ -40,14 +40,24 @@
         </property>
 
         <property name="structure" type="text">
-            <column name="structure" not-null="true">
+            <column name="structure" not-null="false">
                 <comment>The structure of the result template, should be a XML encoded swe:DataRecord</comment>
             </column>
         </property>
-
         <property name="encoding" type="text">
-            <column name="encoding" not-null="true">
+            <column name="encoding" not-null="false">
                 <comment>The encding of the result template, should be a XML encoded swe:TextEncoding</comment>
+            </column>
+        </property>
+
+        <property name="observationStructure" type="text">
+            <column name="observation_structure" not-null="false">
+                <comment>The structure of the result template used for observations, should be a XML encoded swe:DataRecord</comment>
+            </column>
+        </property>
+        <property name="observationEncoding" type="text">
+            <column name="observation_encoding" not-null="false">
+                <comment>The encding of the result template used for observations, should be a XML encoded swe:TextEncoding</comment>
             </column>
         </property>
     </class>
