@@ -25,6 +25,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.n52.series.db.beans.HibernateRelations.HasTags;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
@@ -34,7 +35,7 @@ import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 import org.n52.series.db.beans.sta.DatasetAggregationEntity;
 import org.n52.series.db.common.Utils;
 
-public class DatasetEntity extends DescribableEntity implements Serializable, IsStaEntity {
+public class DatasetEntity extends DescribableEntity implements Serializable, IsStaEntity, HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
 
@@ -134,6 +135,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
     private SamplingProfileDatasetEntity samplingProfile;
 
     private EReportingProfileDatasetEntity ereportingProfile;
+
+    private Set<TagEntity> tags;
 
     public DatasetEntity() {
         this(DatasetType.not_initialized, ObservationType.not_initialized, ValueType.not_initialized);
@@ -652,6 +655,16 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
         return dates != null
                 ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
                 : null;
+    }
+
+    @Override
+    public void setTags(Set<TagEntity> tags) {
+        this.tags = tags;
+    }
+
+    @Override
+    public Set<TagEntity> getTags() {
+        return tags;
     }
 
 }

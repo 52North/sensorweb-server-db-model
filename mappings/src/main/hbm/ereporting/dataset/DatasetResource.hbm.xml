@@ -263,6 +263,19 @@
                 <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>
             </column>
         </many-to-one>
+        <set inverse="true" name="tags" table="tag_dataset">
+            <comment>Storage of relations between dataset and related tagss</comment>
+            <key not-null="true" foreign-key="fk_dataset_tag">
+                <column name="fk_dataset_id">
+                    <comment>The reference to the dataset in the dataset table</comment>
+                </column>
+            </key>
+            <many-to-many class="TagEntity" foreign-key="fk_tag_dataset">
+                <column name="fk_tag_id">
+                    <comment>The reference to the tags in the tag dataset table</comment>
+                </column>
+            </many-to-many>
+        </set>
         <set name="translations" table="dataset_i18n" inverse="true" fetch="select" cascade="remove">
             <key column="fk_dataset_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity" />

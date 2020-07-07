@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="TagEntity" table="tag">
+        <comment>Storage of the tags which should be used to tag the data.</comment>
+        <id name="id" type="long">
+            <column name="tag_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">tag_seq</param>
+            </generator>
+        </id>
+         <property name="identifier" type="string">
+            <column name="identifier">
+                <comment>Unique identifier/name of the tag which can be used for filtering.</comment>
+            </column>
+        </property>
+        <property name="name" column="identifier" type="string" insert="false" update="false" />
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the tag</comment>
+            </column>
+        </property>
+        <set name="datasets" table="tag_dataset" inverse="false">
+            <key foreign-key="fk_tag_dataset">
+                <column name="fk_tag_id" not-null="true"/>
+            </key>
+            <many-to-many class="DatasetEntity" foreign-key="fk_dataset_tag">
+                <column name="fk_dataset_id" not-null="true"/>
+            </many-to-many>
+        </set>
+        <!-- Comments for the translations are defined below! -->
+        <set name="translations" table="tag_i18n" inverse="true" fetch="select">
+            <key column="fk_tag_id" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nTagEntity" />
+        </set>
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nTagEntity" table="tag_i18n">
+        <comment>Storage for internationalizations of tags.</comment>
+        <id name="id" type="long">
+            <column name="tag_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">tag_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="org.n52.series.db.beans.TagEntity" foreign-key="fk_tag">
+            <column name="fk_tag_id" not-null="true">
+                <comment>Reference to the tag table this internationalization belongs to. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
+            </column>
+        </many-to-one>
+        <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the tag</comment>
+            </column>
+        </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>Locale/language specific description of the tag</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

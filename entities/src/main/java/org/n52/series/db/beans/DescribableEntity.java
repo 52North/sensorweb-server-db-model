@@ -29,14 +29,11 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
     public static final String PROPERTY_STA_IDENTIFIER = STA_IDENTIFIER;
     public static final String PROPERTY_IDENTIFIER_CODESPACE = IDENTIFIER_CODESPACE;
-    public static final String PROPERTY_NAME = NAME;
-    public static final String PROPERTY_NAME_CODESPACE = NAME_CODESPACE;
-    public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
+
     public static final String PROPERTY_SERVICE = "service";
 
     public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
-    public static final String PROPERTY_CODESPACE_NAME = PROPERTY_NAME_CODESPACE;
 
     private static final long serialVersionUID = -4448231483118864847L;
 

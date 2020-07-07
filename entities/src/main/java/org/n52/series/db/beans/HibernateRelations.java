@@ -20,13 +20,18 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.Locale.LanguageRange;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.common.LocaleHelper;
 
 /**
  * Interfaces that entities can implement to share constants and to make clear which entities have which
@@ -193,6 +198,8 @@ public interface HibernateRelations {
     interface HasDescription {
         String DESCRIPTION = "description";
 
+        String PROPERTY_DESCRIPTION = DESCRIPTION;
+
         String getDescription();
 
         void setDescription(String description);
@@ -220,7 +227,12 @@ public interface HibernateRelations {
     }
 
     interface HasNameCodespace {
+
         String NAME_CODESPACE = "nameCodespace";
+
+        String PROPERTY_NAME_CODESPACE = NAME_CODESPACE;
+
+        String PROPERTY_CODESPACE_NAME = PROPERTY_NAME_CODESPACE;
 
         CodespaceEntity getNameCodespace();
 
@@ -345,7 +357,9 @@ public interface HibernateRelations {
     }
 
     interface HasName {
+
         String NAME = "name";
+        String PROPERTY_NAME = NAME;
 
         String getName();
 
@@ -1011,12 +1025,107 @@ public interface HibernateRelations {
 
     interface HasDatasets {
 
-        void setDatasets(Set<DatasetEntity> dataset);
+        String DATASETS = "datasets";
+
+        String PROPERTY_DATASETS = DATASETS;
+
+        void setDatasets(Set<DatasetEntity> datasets);
 
         Set<DatasetEntity> getDatasets();
 
         default boolean hasDatasets() {
-            return getDatasets() != null;
+            return getDatasets() != null && !getDatasets().isEmpty();
+        }
+
+    }
+
+    interface HasTranslations {
+
+        String TRANSLATIONS = "translations";
+
+        String PROPERTY_TRANSLATIONS = TRANSLATIONS;
+
+        String LOCALE_REGEX = "[-_# ]";
+
+        Set<I18nEntity<? extends Describable>> getTranslations();
+
+        void setTranslations(Set<I18nEntity<? extends Describable>> translations);
+
+        default boolean hasTranslations() {
+            return getTranslations() != null && !getTranslations().isEmpty();
+        }
+
+        default boolean noTranslationAvailable(String locale) {
+            return getTranslations() == null || locale == null || getTranslations().isEmpty() || locale.isEmpty();
+        }
+
+        default String getCountryCode(String locale) {
+            if (locale != null) {
+                return locale.split(LOCALE_REGEX).length > 1 ? locale.split(LOCALE_REGEX)[1]
+                        : locale.split(LOCALE_REGEX)[0];
+            }
+            return "";
+        }
+
+        default I18nEntity<? extends Describable> getTranslation(String locale) {
+            if (!noTranslationAvailable(locale)) {
+                String countryCode = getCountryCode(locale);
+                Locale matchingLocale = getMatchingLocale(getTranslations(), locale);
+                for (I18nEntity<? extends Describable> translation : getTranslations()) {
+                    Locale translatedLocale = LocaleHelper.decode(translation.getLocale());
+                    if (translatedLocale.equals(matchingLocale)
+                            || translatedLocale.getCountry().equalsIgnoreCase(countryCode)) {
+                        return translation;
+                    }
+                }
+            }
+            return null;
+        }
+
+        default Locale getMatchingLocale(Set<I18nEntity<? extends Describable>> translations, String queriedLocale) {
+            List<LanguageRange> localeRange = Locale.LanguageRange.parse(queriedLocale);
+            return Locale.lookup(localeRange,
+                    translations.stream().map(t -> LocaleHelper.decode(t.getLocale())).collect(Collectors.toSet()));
+        }
+    }
+
+    public interface HasNameTranslation extends HasName, HasTranslations {
+        default boolean isi18nNameAvailable(String locale) {
+            return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
+        }
+
+        default String getNameI18n(String locale) {
+            if (noTranslationAvailable(locale)) {
+                return getName();
+            }
+            I18nEntity<? extends Describable> translation = getTranslation(locale);
+            return translation != null ? translation.getName() : getName();
+        }
+    }
+
+    public interface hasDescriptionTranslation extends HasDescription, HasTranslations {
+
+        default String getDescriptionI18n(String locale) {
+            if (noTranslationAvailable(locale)) {
+                return getDescription();
+            }
+            I18nEntity<? extends Describable> translation = getTranslation(locale);
+            return translation != null ? translation.getDescription() : getDescription();
+        }
+    }
+
+    interface HasTags {
+
+        String TAGS = "tags";
+
+        String PROPERTY_TAGS = TAGS;
+
+        void setTags(Set<TagEntity> tags);
+
+        Set<TagEntity> getTags();
+
+        default boolean hasTagss() {
+            return getTags() != null && !getTags().isEmpty();
         }
 
     }
