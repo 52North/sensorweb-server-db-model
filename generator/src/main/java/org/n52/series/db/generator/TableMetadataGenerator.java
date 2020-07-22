@@ -74,40 +74,6 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         return readSelectionFromStdIo();
     }
 
-    private int getDialectSelection() throws IOException {
-        printToScreen("This table metadata generator supports:");
-        printToScreen("0   PostgreSQL/PostGIS");
-        printToScreen("1   Oracle");
-        printToScreen("2   H2/GeoDB");
-        printToScreen("3   MySQL");
-        printToScreen("4   SQL Server");
-        printToScreen("");
-        printEnterYourSelection();
-
-        return readSelectionFromStdIo();
-    }
-
-    private int getModelSelection() throws IOException {
-        printToScreen("Which database model should be used:");
-        printToScreen("0 default");
-        printToScreen("1 sampling");
-        printToScreen("");
-        printEnterYourSelection();
-
-        return readSelectionFromStdIo();
-    }
-
-    private int getConceptSelection() throws IOException {
-        printToScreen("Which observation concept should be used:");
-        printToScreen("0   simple");
-        printToScreen("1   transactional");
-        printToScreen("2   ereporting");
-        printToScreen("");
-        printEnterYourSelection();
-
-        return readSelectionFromStdIo();
-    }
-
     private String createFileName(Enum... values) {
         return createFileName("metadata/TableMetadata_", ".md", values);
     }
@@ -273,39 +239,5 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         }
 
     }
-
-    // public static void main(String[] args) {
-    // try {
-    // TableMetadataGenerator tableMetadataGenerator = new TableMetadataGenerator();
-    // int select = tableMetadataGenerator.getSelection();
-    // if (select == 1) {
-    // // dialectSelection
-    // for (int i = 0; i < 5; i++) {
-    // // modelSelection/profile
-    // for (int j = 0; j < 2; j++) {
-    // // concept
-    // for (int k = 0; k < 4; k++) {
-    // // execute(sqlScriptGenerator, i, j, k, schema);
-    // tableMetadataGenerator.execute(tableMetadataGenerator, i, j, k);
-    // }
-    // }
-    // }
-    // } else {
-    // int dialectSelection = tableMetadataGenerator.getDialectSelection();
-    // int concept = tableMetadataGenerator.getConceptSelection();
-    // int modelSelection = tableMetadataGenerator.getModelSelection();
-    // tableMetadataGenerator.execute(tableMetadataGenerator, dialectSelection,
-    // modelSelection, concept);
-    // }
-    //
-    // } catch (IOException ioe) {
-    // printToScreen("ERROR: IO error trying to read your input!");
-    // System.exit(1);
-    // } catch (Exception e) {
-    // printToScreen("ERROR: " + e.getMessage());
-    // e.printStackTrace();
-    // System.exit(1);
-    // }
-    // }
 
 }

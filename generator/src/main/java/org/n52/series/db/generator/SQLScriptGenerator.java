@@ -69,41 +69,6 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         return readSelectionFromStdIo();
     }
 
-    private int getDialectSelection() throws IOException {
-        printToScreen("This SQL script generator supports:");
-        printToScreen("0   PostgreSQL/PostGIS");
-        printToScreen("1   Oracle");
-        printToScreen("2   H2/GeoDB");
-        printToScreen("3   MySQL");
-        printToScreen("4   SQL Server");
-        printToScreen("");
-        printEnterYourSelection();
-
-        return readSelectionFromStdIo();
-    }
-
-    private int getModelSelection() throws IOException {
-        printToScreen("Which database model should be created:");
-        printToScreen("0 default");
-        printToScreen("1 sampling");
-        printToScreen("");
-        printEnterYourSelection();
-
-        return readSelectionFromStdIo();
-    }
-
-    private int getConceptSelection() throws IOException {
-        printToScreen("Which observation concept should be created:");
-        printToScreen("0   simple");
-        printToScreen("1   transactional");
-        printToScreen("2   ereporting");
-        printToScreen("3   proxy");
-        printToScreen("");
-        printEnterYourSelection();
-
-        return readSelectionFromStdIo();
-    }
-
     private String getSchema() throws IOException {
         printToScreen("For which schema should the database model be created?");
         printToScreen("No schema is also valid!");
