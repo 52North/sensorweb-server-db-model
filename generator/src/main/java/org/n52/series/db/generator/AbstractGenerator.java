@@ -75,7 +75,7 @@ public abstract class AbstractGenerator {
                         : new TimestampWithTimeZonePostgisPG95DialectNoComments();
         }
     }
-    
+
     protected int getDialectSelection() throws IOException {
         printToScreen("This SQL script generator supports:");
         printToScreen("0   PostgreSQL/PostGIS");
