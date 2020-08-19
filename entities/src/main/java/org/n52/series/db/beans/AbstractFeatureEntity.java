@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import org.locationtech.jts.geom.Geometry;
@@ -22,7 +23,7 @@ import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
-        implements HasXml<AbstractFeatureEntity<E>>, HasGeometry<AbstractFeatureEntity<E>>, IsStaEntity {
+        implements HasXml, HasGeometry, IsStaEntity {
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
     public static final String PROPERTY_GEOMETRY = "geometry";
@@ -43,19 +44,17 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     }
 
     @Override
-    public AbstractFeatureEntity<E> setGeometry(Geometry geometry) {
+    public void setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
         if (geometry != null) {
             this.geometryEntity.setSrid(geometry.getSRID());
         }
-        return this;
     }
 
     @Override
-    public AbstractFeatureEntity<E> setGeometryEntity(GeometryEntity geometryEntity) {
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
-        return this;
     }
 
     @Override
@@ -64,18 +63,16 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     }
 
     @Override
-    public AbstractFeatureEntity<E> setXml(String xml) {
+    public void setXml(String xml) {
         this.xml = xml;
-        return this;
     }
 
     public FormatEntity getFeatureType() {
         return featureType;
     }
 
-    public AbstractFeatureEntity<E> setFeatureType(FormatEntity featureType) {
+    public void setFeatureType(FormatEntity featureType) {
         this.featureType = featureType;
-        return this;
     }
 
     public boolean isSetFeatureType() {
@@ -86,9 +83,8 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return url;
     }
 
-    public AbstractFeatureEntity<E> setUrl(String url) {
+    public void setUrl(String url) {
         this.url = url;
-        return this;
     }
 
     public boolean isSetUrl() {

@@ -14,12 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.feature.gml;
 
-import java.util.Set;
+package org.n52.series.db.beans.feature.gml;
 
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
+
+import java.util.Set;
 
 /**
  * Hibernate entiity for the verticalCRS
@@ -27,7 +28,7 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<VerticalCRSEntity> {
+public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks {
 
     private static final long serialVersionUID = 2282402634799023149L;
 
@@ -50,9 +51,8 @@ public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<Ver
      *            the remarks to set
      */
     @Override
-    public VerticalCRSEntity setRemarks(String remarks) {
+    public void setRemarks(String remarks) {
         this.remarks = remarks;
-        return this;
     }
 
     /**

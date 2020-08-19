@@ -27,7 +27,7 @@ import org.n52.series.db.beans.HibernateRelations.HasGeometry;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class EReportingStationEntity extends DescribableEntity implements HasGeometry<EReportingStationEntity> {
+public class EReportingStationEntity extends DescribableEntity implements HasGeometry {
 
     private static final long serialVersionUID = 743675189477493870L;
 
@@ -58,17 +58,15 @@ public class EReportingStationEntity extends DescribableEntity implements HasGeo
     }
 
     @Override
-    public EReportingStationEntity setGeometry(Geometry geometry) {
+    public void setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
         this.geometryEntity.setSrid(geometry.getSRID());
-        return this;
     }
 
     @Override
-    public EReportingStationEntity setGeometryEntity(GeometryEntity geometryEntity) {
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
-        return this;
     }
 
     @Override

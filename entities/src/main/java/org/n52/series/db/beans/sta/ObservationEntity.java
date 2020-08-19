@@ -17,11 +17,12 @@
 
 package org.n52.series.db.beans.sta;
 
-import java.math.BigDecimal;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.Objects;
-import java.util.Set;
+import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.common.Utils;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -43,12 +44,11 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import javax.persistence.UniqueConstraint;
-
-import org.locationtech.jts.geom.Geometry;
-import org.n52.series.db.beans.AbstractFeatureEntity;
-import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.common.Utils;
+import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.Objects;
+import java.util.Set;
 
 /**
  * Represents a SensorThingsAPI Observation. Uses Javax Annotations to use @AttributeOverride
@@ -126,7 +126,6 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     private Date samplingTimeEnd;
 
     // This is overwritten by all subclasses
-    // datasetId is only used as a dummy
     @Transient
     private T value;
 
@@ -173,7 +172,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     private Set<ParameterEntity<?>> parameters;
 
     @Transient
-    private DatasetAggregationEntity datastream;
+    private AbstractDatasetEntity datastream;
 
     @Transient
     private AbstractFeatureEntity<?> featureOfInterest;
@@ -182,14 +181,13 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public DatasetAggregationEntity getDatastream() {
+    public AbstractDatasetEntity getDatastream() {
         return datastream;
     }
 
     @Override
-    public ObservationEntity setDatastream(DatasetAggregationEntity datastream) {
+    public void setDatastream(AbstractDatasetEntity datastream) {
         this.datastream = datastream;
-        return this;
     }
 
     @Override
@@ -198,9 +196,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public ObservationEntity<T> setFeature(AbstractFeatureEntity<?> featureOfInterest) {
+    public void setFeature(AbstractFeatureEntity<?> featureOfInterest) {
         this.featureOfInterest = featureOfInterest;
-        return this;
     }
 
     @Override
@@ -209,9 +206,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public ObservationEntity<T> setSamplingTimeStart(Date samplingTimeStart) {
+    public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
-        return this;
     }
 
     @Override
@@ -220,9 +216,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public ObservationEntity<T> setSamplingTimeEnd(Date samplingTimeEnd) {
+    public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
-        return this;
     }
 
     @Override
@@ -231,9 +226,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public ObservationEntity<T> setValidTimeStart(Date validTimeStart) {
+    public void setValidTimeStart(Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
-        return this;
     }
 
     @Override
@@ -242,9 +236,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public ObservationEntity<T> setValidTimeEnd(Date validTimeEnd) {
-        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
-        return this;
+    public void setValidTimeEnd(Date validTimeEnd) {
     }
 
     @Override

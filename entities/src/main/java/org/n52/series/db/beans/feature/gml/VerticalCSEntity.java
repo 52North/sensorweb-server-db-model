@@ -27,7 +27,7 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<VerticalCSEntity> {
+public class VerticalCSEntity extends ReferenceEntity implements HasRemarks {
 
     private static final long serialVersionUID = 8459136724611955821L;
 
@@ -48,9 +48,8 @@ public class VerticalCSEntity extends ReferenceEntity implements HasRemarks<Vert
      *            the remarks to set
      */
     @Override
-    public VerticalCSEntity setRemarks(String remarks) {
+    public void setRemarks(String remarks) {
         this.remarks = remarks;
-        return this;
     }
 
     /**

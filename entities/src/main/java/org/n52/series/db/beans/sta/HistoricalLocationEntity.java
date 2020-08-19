@@ -14,25 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
+
+import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.PlatformEntity;
+import org.n52.series.db.beans.sta.StaRelations.HasLocations;
+import org.n52.series.db.common.Utils;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
-import org.n52.series.db.beans.DescribableEntity;
-import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.PlatformEntity;
-import org.n52.series.db.beans.sta.StaRelations.Locations;
-import org.n52.series.db.common.Utils;
-
 /**
- *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
 public class HistoricalLocationEntity extends DescribableEntity
-        implements AbstractStaEntity, Serializable, Locations<HistoricalLocationEntity> {
+        implements Serializable, HasLocations, HibernateRelations.IsProcessed, HibernateRelations.HasThing {
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
     public static final String PROPERTY_TIME = "time";
@@ -64,18 +65,16 @@ public class HistoricalLocationEntity extends DescribableEntity
     }
 
     @Override
-    public HistoricalLocationEntity setLocations(Set<LocationEntity> locationEntities) {
+    public void setLocations(Set<LocationEntity> locationEntities) {
         this.locationEntities = locationEntities;
-        return this;
     }
 
     public PlatformEntity getThing() {
         return thingEntity;
     }
 
-    public HistoricalLocationEntity setThing(PlatformEntity thingEntity) {
+    public void setThing(PlatformEntity thingEntity) {
         this.thingEntity = thingEntity;
-        return this;
     }
 
     public boolean hasThing() {
@@ -88,9 +87,8 @@ public class HistoricalLocationEntity extends DescribableEntity
     }
 
     @Override
-    public AbstractStaEntity setProcessed(boolean processsed) {
-        this.processed = processsed;
-        return this;
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 
     @Override

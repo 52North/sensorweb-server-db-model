@@ -30,7 +30,7 @@ import org.n52.series.db.common.Utils;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<VerticalDatumEntity> {
+public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks {
 
     private static final long serialVersionUID = -2829473090233745827L;
 
@@ -47,9 +47,8 @@ public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<V
     }
 
     @Override
-    public VerticalDatumEntity setRemarks(String remarks) {
+    public void setRemarks(String remarks) {
         this.remarks = remarks;
-        return this;
     }
 
     /**

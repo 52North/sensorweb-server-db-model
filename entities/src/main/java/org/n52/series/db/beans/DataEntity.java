@@ -35,9 +35,8 @@ import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity
-        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime<DataEntity<?>>, IsStaEntity,
-        HasResultTime, HasValidTime<DataEntity<T>>, HasParameters, HasDataset {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
+        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime, HasParameters, HasDataset {
 
     public static final String PROPERTY_ID = "id";
 
@@ -133,13 +132,11 @@ public abstract class DataEntity<T> extends DescribableEntity
     /**
      * @param samplingTimeStart
      *            the samplingTimeStart
-     * @return
      */
 
     @Override
-    public DataEntity<T> setSamplingTimeStart(Date samplingTimeStart) {
+    public void setSamplingTimeStart(Date samplingTimeStart) {
         this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
-        return this;
     }
 
     /**
@@ -157,9 +154,8 @@ public abstract class DataEntity<T> extends DescribableEntity
      */
 
     @Override
-    public DataEntity<T> setSamplingTimeEnd(Date samplingTimeEnd) {
+    public void setSamplingTimeEnd(Date samplingTimeEnd) {
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
-        return this;
     }
 
     public T getValue() {
@@ -202,9 +198,8 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     @Override
-    public DataEntity<T> setValidTimeStart(final Date validTimeStart) {
+    public void setValidTimeStart(final Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
-        return this;
     }
 
     @Override
@@ -213,9 +208,8 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     @Override
-    public DataEntity<T> setValidTimeEnd(final Date validTimeEnd) {
+    public void setValidTimeEnd(final Date validTimeEnd) {
         this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
-        return this;
     }
 
     @Override

@@ -14,9 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
 
-import java.util.Set;
+package org.n52.series.db.beans;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
@@ -24,8 +23,10 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
-public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> implements HasProcedureHistory,
-        HasProcedureDescriptionFormat<ProcedureEntity>, HasGeometry<ProcedureEntity>, IsStaEntity {
+import java.util.Set;
+
+public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
+        implements HasProcedureHistory, HasProcedureDescriptionFormat, HasGeometry, IsStaEntity {
 
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
@@ -66,9 +67,8 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
     }
 
     @Override
-    public ProcedureEntity setFormat(FormatEntity format) {
+    public void setFormat(FormatEntity format) {
         this.format = format;
-        return this;
     }
 
     public boolean isSetFormat() {
@@ -139,19 +139,17 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
     }
 
     @Override
-    public ProcedureEntity setGeometry(Geometry geometry) {
+    public void setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
         if (geometry != null) {
             this.geometryEntity.setSrid(geometry.getSRID());
         }
-        return this;
     }
 
     @Override
-    public ProcedureEntity setGeometryEntity(GeometryEntity geometryEntity) {
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
-        return this;
     }
 
     @Override

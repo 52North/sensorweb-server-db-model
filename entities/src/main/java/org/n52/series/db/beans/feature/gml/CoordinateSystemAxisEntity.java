@@ -27,7 +27,7 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks<CoordinateSystemAxisEntity> {
+public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks {
 
     private static final long serialVersionUID = 1841614376918978967L;
 
@@ -55,9 +55,8 @@ public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRe
      *            the remarks to set
      */
     @Override
-    public CoordinateSystemAxisEntity setRemarks(String remarks) {
+    public void setRemarks(String remarks) {
         this.remarks = remarks;
-        return this;
     }
 
     /**

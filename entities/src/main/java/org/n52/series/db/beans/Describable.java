@@ -14,19 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import org.n52.series.db.beans.HibernateRelations.HasDescriptionTranslation;
+import org.n52.series.db.beans.HibernateRelations.HasId;
+import org.n52.series.db.beans.HibernateRelations.HasNameTranslation;
+import org.n52.series.db.beans.HibernateRelations.HasParameters;
 
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import org.n52.series.db.beans.HibernateRelations.HasId;
-import org.n52.series.db.beans.HibernateRelations.HasNameTranslation;
-import org.n52.series.db.beans.HibernateRelations.HasParameters;
-import org.n52.series.db.beans.HibernateRelations.hasDescriptionTranslation;
-
-public interface Describable
-        extends IdentifierNameDescriptionEntity, HasId, HasParameters, HasNameTranslation, hasDescriptionTranslation {
+public interface Describable<T>
+        extends IdentifierNameDescriptionEntity, HasId, HasParameters, HasNameTranslation, HasDescriptionTranslation {
 
     ServiceEntity getService();
 

@@ -27,8 +27,8 @@ import org.n52.series.db.common.Utils;
 /**
  * @since 1.0.0
  */
-public class ProcedureHistoryEntity extends IdEntity implements Serializable, HasProcedure<ProcedureHistoryEntity>,
-        HasProcedureDescriptionFormat<ProcedureHistoryEntity>, HasXml<ProcedureHistoryEntity> {
+public class ProcedureHistoryEntity extends IdEntity
+        implements Serializable, HasProcedure, HasProcedureDescriptionFormat, HasXml {
 
     public static final String PROPERTY_PROCEDURE = "procedure";
     public static final String START_TIME = "startTime";
@@ -52,9 +52,8 @@ public class ProcedureHistoryEntity extends IdEntity implements Serializable, Ha
     }
 
     @Override
-    public ProcedureHistoryEntity setProcedure(ProcedureEntity procedure) {
+    public void setProcedure(ProcedureEntity procedure) {
         this.procedure = procedure;
-        return this;
     }
 
     @Override
@@ -63,9 +62,8 @@ public class ProcedureHistoryEntity extends IdEntity implements Serializable, Ha
     }
 
     @Override
-    public ProcedureHistoryEntity setFormat(FormatEntity format) {
+    public void setFormat(FormatEntity format) {
         this.format = format;
-        return this;
     }
 
     public Date getStartTime() {
@@ -92,8 +90,7 @@ public class ProcedureHistoryEntity extends IdEntity implements Serializable, Ha
     }
 
     @Override
-    public ProcedureHistoryEntity setXml(String xml) {
+    public void setXml(String xml) {
         this.xml = xml;
-        return this;
     }
 }

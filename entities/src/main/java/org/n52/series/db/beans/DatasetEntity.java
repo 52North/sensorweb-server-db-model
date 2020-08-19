@@ -14,43 +14,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
-
 import org.n52.series.db.beans.HibernateRelations.HasTags;
-import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
 import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
-import org.n52.series.db.beans.sta.DatasetAggregationEntity;
-import org.n52.series.db.common.Utils;
 
-public class DatasetEntity extends DescribableEntity implements Serializable, IsStaEntity, HasTags {
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
 
-    public static final String PROPERTY_OFFERING = "offering";
-    public static final String PROPERTY_PROCEDURE = "procedure";
-    public static final String PROPERTY_PLATFORM = "platform";
-    public static final String PROPERTY_PHENOMENON = "phenomenon";
     public static final String PROPERTY_CATEGORY = "category";
-    public static final String PROPERTY_FEATURE = "feature";
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
-    public static final String PROPERTY_OM_OBSERVATION_TYPE = "omObservationType";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
-    public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
-    public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_PUBLISHED = "published";
     public static final String PROPERTY_DELETED = "deleted";
     public static final String PROPERTY_DISABLED = "disabled";
@@ -59,24 +44,14 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
     public static final String PROPERTY_MOBILE = "mobile";
     public static final String PROPERTY_INSITU = "insitu";
 
-    public static final String PROPERTY_UNIT = "unit";
-
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
 
     private static final long serialVersionUID = -7491530543976690237L;
 
-    private PhenomenonEntity phenomenon;
-
-    private ProcedureEntity procedure;
-
     private OfferingEntity offering;
 
-    private AbstractFeatureEntity<?> feature;
-
     private CategoryEntity category;
-
-    private PlatformEntity platform;
 
     private boolean published = true;
 
@@ -90,33 +65,9 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
 
     private ValueType valueType;
 
-    private Set<Date> resultTimes;
-
-    private Date firstValueAt;
-
-    private Date lastValueAt;
-
-    private DataEntity<?> firstObservation;
-
-    private DataEntity<?> lastObservation;
-
-    private BigDecimal firstQuantityValue;
-
-    private BigDecimal lastQuantityValue;
-
-    private Date resultTimeStart;
-
-    private Date resultTimeEnd;
-
-    private DatasetAggregationEntity datasetAggregation;
-
-    private UnitEntity unit;
-
     private long observationCount = -1;
 
     private boolean hidden;
-
-    private FormatEntity omObservationType;
 
     private boolean mobile;
 
@@ -161,32 +112,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
         return this;
     }
 
-    public PhenomenonEntity getPhenomenon() {
-        return phenomenon;
-    }
-
-    public DatasetEntity setPhenomenon(final PhenomenonEntity phenomenon) {
-        this.phenomenon = phenomenon;
-        return this;
-    }
-
-    public PhenomenonEntity getObservableProperty() {
-        return getPhenomenon();
-    }
-
-    public DatasetEntity setObservableProperty(final PhenomenonEntity observableProperty) {
-        return setPhenomenon(observableProperty);
-    }
-
-    public ProcedureEntity getProcedure() {
-        return procedure;
-    }
-
-    public DatasetEntity setProcedure(final ProcedureEntity procedure) {
-        this.procedure = procedure;
-        return this;
-    }
-
     public OfferingEntity getOffering() {
         return offering;
     }
@@ -198,32 +123,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
 
     public boolean isSetOffering() {
         return getOffering() != null;
-    }
-
-    public AbstractFeatureEntity<?> getFeature() {
-        return feature;
-    }
-
-    public DatasetEntity setFeature(AbstractFeatureEntity<?> feature) {
-        this.feature = feature;
-        return this;
-    }
-
-    public boolean isSetFeature() {
-        return getFeature() != null;
-    }
-
-    public PlatformEntity getPlatform() {
-        return platform;
-    }
-
-    public DatasetEntity setPlatform(PlatformEntity platform) {
-        this.platform = platform;
-        return this;
-    }
-
-    public boolean isSetPlatform() {
-        return getPlatform() != null;
     }
 
     public Boolean isPublished() {
@@ -261,111 +160,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
         return disabled;
     }
 
-    public boolean isSetOmObservationType() {
-        return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
-    }
-
-    public Date getFirstValueAt() {
-        return Utils.createUnmutableTimestamp(firstValueAt);
-    }
-
-    public DatasetEntity setFirstValueAt(Date firstValueAt) {
-        this.firstValueAt = Utils.createUnmutableTimestamp(firstValueAt);
-        return this;
-    }
-
-    public boolean isSetFirstValueAt() {
-        return getFirstValueAt() != null;
-    }
-
-    public Date getLastValueAt() {
-        return Utils.createUnmutableTimestamp(lastValueAt);
-    }
-
-    public DatasetEntity setLastValueAt(Date lastValueAt) {
-        this.lastValueAt = Utils.createUnmutableTimestamp(lastValueAt);
-        return this;
-    }
-
-    public boolean isSetLastValueAt() {
-        return getLastValueAt() != null;
-    }
-
-    public DataEntity<?> getFirstObservation() {
-        return firstObservation;
-    }
-
-    public DatasetEntity setFirstObservation(DataEntity<?> firstObservation) {
-        this.firstObservation = firstObservation;
-        return this;
-    }
-
-    public DataEntity<?> getLastObservation() {
-        return lastObservation;
-    }
-
-    public DatasetEntity setLastObservation(DataEntity<?> lastObservation) {
-        this.lastObservation = lastObservation;
-        return this;
-    }
-
-    public BigDecimal getFirstQuantityValue() {
-        return firstQuantityValue;
-    }
-
-    public DatasetEntity setFirstQuantityValue(BigDecimal firstValue) {
-        this.firstQuantityValue = firstValue;
-        return this;
-    }
-
-    public BigDecimal getLastQuantityValue() {
-        return lastQuantityValue;
-    }
-
-    public DatasetEntity setLastQuantityValue(BigDecimal lastValue) {
-        this.lastQuantityValue = lastValue;
-        return this;
-    }
-
-    public Date getResultTimeStart() {
-        return Utils.createUnmutableTimestamp(resultTimeStart);
-    }
-
-    public DatasetEntity setResultTimeStart(Date resultTimeStart) {
-        this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
-        return this;
-    }
-
-    public boolean isSetResultTimeStart() {
-        return getResultTimeStart() != null;
-    }
-
-    public Date getResultTimeEnd() {
-        return Utils.createUnmutableTimestamp(resultTimeEnd);
-    }
-
-    public DatasetEntity setResultTimeEnd(Date resultTimeEnd) {
-        this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
-        return this;
-    }
-
-    public boolean isSetResultTimeEnd() {
-        return getResultTimeEnd() != null;
-    }
-
-    public DatasetAggregationEntity getDatasetAggregation() {
-        return datasetAggregation;
-    }
-
-    public DatasetEntity setDatasetAggregation(DatasetAggregationEntity datastream) {
-        this.datasetAggregation = datastream;
-        return this;
-    }
-
-    public boolean isSetDatasetAggregation() {
-        return getDatasetAggregation() != null;
-    }
-
     public DatasetType getDatasetType() {
         return datasetType;
     }
@@ -379,9 +173,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
         return observationType;
     }
 
-    public DatasetEntity setObservationType(ObservationType observationType) {
+    public void setObservationType(ObservationType observationType) {
         this.observationType = observationType;
-        return this;
     }
 
     public ValueType getValueType() {
@@ -391,40 +184,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
     public DatasetEntity setValueType(ValueType valueType) {
         this.valueType = valueType;
         return this;
-    }
-
-    /**
-     * @return a list of result times
-     * @since 2.0.0
-     */
-    public Set<Date> getResultTimes() {
-        final Set<Date> unmodifiableResultTimes = wrapToUnmutables(resultTimes);
-        return unmodifiableResultTimes != null ? Collections.unmodifiableSet(unmodifiableResultTimes) : null;
-    }
-
-    /**
-     * @param resultTimes
-     *            a list of result times
-     *
-     * @return this
-     * @since 2.0.0
-     */
-    public DatasetEntity setResultTimes(Set<Date> resultTimes) {
-        this.resultTimes = wrapToUnmutables(resultTimes);
-        return this;
-    }
-
-    public UnitEntity getUnit() {
-        return unit;
-    }
-
-    public DatasetEntity setUnit(UnitEntity unit) {
-        this.unit = unit;
-        return this;
-    }
-
-    public boolean hasUnit() {
-        return unit != null;
     }
 
     public String getUnitI18nName(final String locale) {
@@ -472,19 +231,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
     public DatasetEntity setHidden(final boolean hidden) {
         this.hidden = hidden;
         return this;
-    }
-
-    public FormatEntity getOmObservationType() {
-        return omObservationType;
-    }
-
-    public DatasetEntity setOmObservationType(FormatEntity omObservationType) {
-        this.omObservationType = omObservationType;
-        return this;
-    }
-
-    public boolean isSetOmObservationtype() {
-        return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
     }
 
     public boolean isMobile() {
@@ -571,22 +317,13 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
     }
 
     @Override
-    public String getLabelFrom(final String locale) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(phenomenon.getLabelFrom(locale)).append(" ");
-        sb.append(procedure.getLabelFrom(locale)).append(", ");
-        sb.append(feature.getLabelFrom(locale)).append(", ");
-        return sb.append(offering.getLabelFrom(locale)).toString();
+    public void setTags(Set<TagEntity> tags) {
+        this.tags = tags;
     }
 
     @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId())
-                .append(" , category: ").append(getCategory()).append(" , phenomenon: ").append(getPhenomenon())
-                .append(" , procedure: ").append(getProcedure()).append(" , offering: ").append(getOffering())
-                .append(" , feature: ").append(getFeature()).append(" , service: ").append(getService()).append(" ]")
-                .toString();
+    public Set<TagEntity> getTags() {
+        return tags;
     }
 
     public void copy(DatasetEntity dataset) {
@@ -601,7 +338,6 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
         }
         setCategory(dataset.getCategory());
         setDeleted(dataset.isDeleted());
-        setDeleted(dataset.isDeleted());
         setDisabled(dataset.isDisabled());
         setFeature(dataset.getFeature());
         setFirstObservation(dataset.getFirstObservation());
@@ -612,12 +348,16 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
         setLastQuantityValue(dataset.getLastQuantityValue());
         setLastValueAt(dataset.getLastValueAt());
         setObservationCount(dataset.getObservationCount());
-        setOmObservationType(dataset.getOmObservationType());
+        setOMObservationType(dataset.getOMObservationType());
         setOffering(dataset.getOffering());
         setPhenomenon(dataset.getPhenomenon());
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
         setPublished(dataset.isPublished());
+        setProcessed(dataset.isProcessed());
+        setSamplingTimeStart(dataset.getSamplingTimeStart());
+        setSamplingTimeEnd(dataset.getSamplingTimeEnd());
+        setGeometryEntity(dataset.getGeometryEntity());
         setInsitu(dataset.isInsitu());
         setMobile(dataset.isMobile());
         if (dataset.getRelatedDatasets() != null) {
@@ -639,32 +379,22 @@ public class DatasetEntity extends DescribableEntity implements Serializable, Is
     }
 
     @Override
-    public int hashCode() {
-        return super.hashCode();
+    public String getLabelFrom(final String locale) {
+        final StringBuilder sb = new StringBuilder();
+        sb.append(phenomenon.getLabelFrom(locale)).append(" ");
+        sb.append(procedure.getLabelFrom(locale)).append(", ");
+        sb.append(feature.getLabelFrom(locale)).append(", ");
+        return sb.append(offering.getLabelFrom(locale)).toString();
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof DatasetEntity)) {
-            return false;
-        }
-        return super.equals(obj);
-    }
-
-    private Set<Date> wrapToUnmutables(Set<Date> dates) {
-        return dates != null
-                ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
-                : null;
-    }
-
-    @Override
-    public void setTags(Set<TagEntity> tags) {
-        this.tags = tags;
-    }
-
-    @Override
-    public Set<TagEntity> getTags() {
-        return tags;
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId())
+                .append(" , category: ").append(getCategory()).append(" , phenomenon: ").append(getPhenomenon())
+                .append(" , procedure: ").append(getProcedure()).append(" , offering: ").append(getOffering())
+                .append(" , feature: ").append(getFeature()).append(" , service: ").append(getService()).append(" ]")
+                .toString();
     }
 
 }

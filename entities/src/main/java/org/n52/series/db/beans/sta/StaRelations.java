@@ -14,20 +14,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
+
+import org.n52.series.db.beans.AbstractDatasetEntity;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public interface StaRelations {
 
-    interface Datastreams<T> {
+    interface HasDatastreams {
 
-        T setDatastreams(Set<DatasetAggregationEntity> datastreams);
+        void setDatastreams(Set<AbstractDatasetEntity> datastreams);
 
-        Set<DatasetAggregationEntity> getDatastreams();
+        Set<AbstractDatasetEntity> getDatastreams();
 
-        default void addDatastream(DatasetAggregationEntity datastream) {
+        default void addDatastream(AbstractDatasetEntity datastream) {
             if (getDatastreams() == null) {
                 setDatastreams(new LinkedHashSet<>());
             }
@@ -40,11 +43,11 @@ public interface StaRelations {
 
     }
 
-    interface Datastream<T> {
+    interface HasDatastream {
 
-        T setDatastream(DatasetAggregationEntity datastreams);
+        void setDatastream(AbstractDatasetEntity datastreams);
 
-        DatasetAggregationEntity getDatastream();
+        AbstractDatasetEntity getDatastream();
 
         default boolean hasDatastream() {
             return getDatastream() != null;
@@ -52,9 +55,9 @@ public interface StaRelations {
 
     }
 
-    interface Locations<T> {
+    interface HasLocations {
 
-        T setLocations(Set<LocationEntity> Locations);
+        void setLocations(Set<LocationEntity> Locations);
 
         Set<LocationEntity> getLocations();
 

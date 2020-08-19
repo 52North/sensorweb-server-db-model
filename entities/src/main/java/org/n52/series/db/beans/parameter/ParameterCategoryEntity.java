@@ -21,7 +21,7 @@ import java.util.Map;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.HibernateRelations.HasUnit;
 
-public class ParameterCategoryEntity extends ParameterEntity<String> implements HasUnit<ParameterCategoryEntity> {
+public class ParameterCategoryEntity extends ParameterEntity<String> implements HasUnit {
 
     private static final long serialVersionUID = -6262887605542676492L;
 
@@ -42,9 +42,8 @@ public class ParameterCategoryEntity extends ParameterEntity<String> implements 
     }
 
     @Override
-    public ParameterCategoryEntity setUnit(final UnitEntity unit) {
+    public void setUnit(final UnitEntity unit) {
         this.unit = unit;
-        return this;
     }
 
     @Override

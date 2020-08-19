@@ -14,18 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
+
+import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.PhenomenonEntity;
+import org.n52.series.db.beans.sta.StaRelations.HasDatastreams;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.PhenomenonEntity;
-import org.n52.series.db.beans.sta.StaRelations.Datastreams;
-
-public class ObservablePropertyEntity extends PhenomenonEntity implements Datastreams<PhenomenonEntity> {
+public class ObservablePropertyEntity extends PhenomenonEntity implements HasDatastreams {
 
     private static final long serialVersionUID = -1903162304158931533L;
     private final PhenomenonEntity phenomenon;
-    private Set<DatasetAggregationEntity> datastreams;
+    private Set<AbstractDatasetEntity> datastreams;
 
     public ObservablePropertyEntity() {
         this.phenomenon = new PhenomenonEntity();
@@ -41,13 +43,12 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements Datast
     }
 
     @Override
-    public ObservablePropertyEntity setDatastreams(Set<DatasetAggregationEntity> datastreams) {
+    public void setDatastreams(Set<AbstractDatasetEntity> datastreams) {
         this.datastreams = datastreams;
-        return this;
     }
 
     @Override
-    public Set<DatasetAggregationEntity> getDatastreams() {
+    public Set<AbstractDatasetEntity> getDatastreams() {
         return datastreams;
     }
 

@@ -14,23 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
+
+import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.FormatEntity;
+import org.n52.series.db.beans.GeometryEntity;
+import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.HibernateRelations.HasGeometry;
+import org.n52.series.db.beans.PlatformEntity;
 
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.locationtech.jts.geom.Geometry;
-import org.n52.series.db.beans.FormatEntity;
-import org.n52.series.db.beans.GeometryEntity;
-import org.n52.series.db.beans.HibernateRelations.HasGeometry;
-import org.n52.series.db.beans.PlatformEntity;
-
 /**
- *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends StaDescribableEntity implements Serializable, HasGeometry<LocationEntity> {
+public class LocationEntity extends DescribableEntity
+        implements Serializable, HasGeometry, HibernateRelations.HasName, HibernateRelations.HasDescription {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -73,17 +76,15 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
     }
 
     @Override
-    public LocationEntity setGeometry(Geometry geometry) {
+    public void setGeometry(Geometry geometry) {
         this.geometryEntity = new GeometryEntity();
         this.geometryEntity.setGeometry(geometry);
         this.geometryEntity.setSrid(geometry.getSRID());
-        return this;
     }
 
     @Override
-    public LocationEntity setGeometryEntity(GeometryEntity geometryEntity) {
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
-        return this;
     }
 
     public Set<PlatformEntity> getThings() {
@@ -132,5 +133,4 @@ public class LocationEntity extends StaDescribableEntity implements Serializable
         }
         return super.equals(obj);
     }
-
 }

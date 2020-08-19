@@ -14,10 +14,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
 
-import java.util.Date;
-import java.util.Set;
+package org.n52.series.db.beans;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasFeatureTypes;
@@ -28,9 +26,11 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
-public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes<OfferingEntity>,
-        HasFeatureTypes<OfferingEntity>, HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime<OfferingEntity>,
-        HasResultTimes<OfferingEntity>, HasValidTime<OfferingEntity> {
+import java.util.Date;
+import java.util.Set;
+
+public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes, HasFeatureTypes,
+        HasRelatedFeatures, HasPhenomenonTime, HasResultTimes, HasValidTime {
 
     public static final String PROPERTY_PHENOMENON_TIME_START = "phenomenonTimeStart";
     public static final String PROPERTY_PHENOMENON_TIME_END = "phenomenonTimeEnd";
@@ -95,9 +95,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
      *            the observationTypes to set
      */
     @Override
-    public OfferingEntity setObservationTypes(Set<FormatEntity> observationTypes) {
+    public void setObservationTypes(Set<FormatEntity> observationTypes) {
         this.observationTypes = observationTypes;
-        return this;
     }
 
     /**
@@ -113,9 +112,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
      *            the featureTypes to set
      */
     @Override
-    public OfferingEntity setFeatureTypes(Set<FormatEntity> featureTypes) {
+    public void setFeatureTypes(Set<FormatEntity> featureTypes) {
         this.featureTypes = featureTypes;
-        return this;
     }
 
     @Override
@@ -124,9 +122,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     }
 
     @Override
-    public OfferingEntity setSamplingTimeStart(Date time) {
+    public void setSamplingTimeStart(Date time) {
         this.phenomenonTimeStart = Utils.createUnmutableTimestamp(time);
-        return this;
     }
 
     @Override
@@ -135,9 +132,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     }
 
     @Override
-    public OfferingEntity setSamplingTimeEnd(Date time) {
+    public void setSamplingTimeEnd(Date time) {
         this.phenomenonTimeEnd = Utils.createUnmutableTimestamp(time);
-        return this;
     }
 
     /**
@@ -153,9 +149,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
      *            the resultTimeStart to set
      */
     @Override
-    public OfferingEntity setResultTimeStart(Date resultTimeStart) {
+    public void setResultTimeStart(Date resultTimeStart) {
         this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
-        return this;
     }
 
     /**
@@ -171,9 +166,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
      *            the resultTimeEnd to set
      */
     @Override
-    public OfferingEntity setResultTimeEnd(Date resultTimeEnd) {
+    public void setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
-        return this;
     }
 
     /**
@@ -189,9 +183,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
      *            the validTimeStart to set
      */
     @Override
-    public OfferingEntity setValidTimeStart(Date validTimeStart) {
+    public void setValidTimeStart(Date validTimeStart) {
         this.validTimeStart = Utils.createUnmutableTimestamp(validTimeStart);
-        return this;
     }
 
     /**
@@ -207,9 +200,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
      *            the validTimeEnd to set
      */
     @Override
-    public OfferingEntity setValidTimeEnd(Date validTimeEnd) {
+    public void setValidTimeEnd(Date validTimeEnd) {
         this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
-        return this;
     }
 
     @Override
@@ -223,9 +215,8 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     }
 
     @Override
-    public OfferingEntity setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
+    public void setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures) {
         this.relatedFeatures = relatedFeatures;
-        return this;
     }
 
     @Override

@@ -14,23 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
-
-import java.io.Serializable;
-
-import javax.persistence.Transient;
 
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.sta.StaRelations.Datastream;
 
-public abstract class AbstractObservationEntity<T> extends IdEntity
-        implements Serializable, AbstractStaEntity, HibernateRelations.HasPhenomenonTime<AbstractObservationEntity<T>>,
-        Datastream<AbstractObservationEntity<T>>, HibernateRelations.HasId, HibernateRelations.HasIdentifier,
-        HibernateRelations.HasStaIdentifier, HibernateRelations.HasResultTime,
-        HibernateRelations.HasValidTime<AbstractObservationEntity<T>>, HibernateRelations.HasParameters,
-        HibernateRelations.HasName, HibernateRelations.HasDescription, HibernateRelations.HasSamplingGeometry,
-        HibernateRelations.HasFeature<AbstractObservationEntity<T>>, HibernateRelations.HasDataset {
+import javax.persistence.Transient;
+import java.io.Serializable;
+
+public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable,
+        HibernateRelations.HasPhenomenonTime, StaRelations.HasDatastream, HibernateRelations.HasId,
+        HibernateRelations.HasIdentifier, HibernateRelations.HasStaIdentifier, HibernateRelations.HasResultTime,
+        HibernateRelations.HasValidTime, HibernateRelations.HasParameters, HibernateRelations.HasName,
+        HibernateRelations.HasDescription, HibernateRelations.HasSamplingGeometry, HibernateRelations.HasFeature,
+        HibernateRelations.HasDataset, HibernateRelations.IsProcessed, HibernateRelations.IsStaEntity {
 
     private static final long serialVersionUID = -5478132580391608848L;
 
@@ -43,9 +41,8 @@ public abstract class AbstractObservationEntity<T> extends IdEntity
     }
 
     @Override
-    public AbstractObservationEntity<T> setProcessed(boolean processed) {
+    public void setProcessed(boolean processed) {
         this.processed = processed;
-        return this;
     }
 
     public abstract T getValue();

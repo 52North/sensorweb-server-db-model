@@ -14,14 +14,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasIdentifier;
-import org.n52.series.db.beans.HibernateRelations.HasStaIdentifier;
 import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
 import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasNameCodespace;
+import org.n52.series.db.beans.HibernateRelations.HasStaIdentifier;
 
 /**
  * @author Christian Autermann

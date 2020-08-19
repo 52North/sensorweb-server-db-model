@@ -14,18 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
+
+import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.ProcedureEntity;
+import org.n52.series.db.beans.sta.StaRelations.HasDatastreams;
 
 import java.util.Set;
 
-import org.n52.series.db.beans.ProcedureEntity;
-import org.n52.series.db.beans.sta.StaRelations.Datastreams;
-
-public class SensorEntity extends ProcedureEntity implements Datastreams<SensorEntity> {
+public class SensorEntity extends ProcedureEntity implements HasDatastreams {
 
     private static final long serialVersionUID = -8010667038475754604L;
     private final ProcedureEntity procedure;
-    private Set<DatasetAggregationEntity> datastreams;
+    private Set<AbstractDatasetEntity> datastreams;
 
     public SensorEntity() {
         this.procedure = new ProcedureEntity();
@@ -44,13 +46,12 @@ public class SensorEntity extends ProcedureEntity implements Datastreams<SensorE
     }
 
     @Override
-    public SensorEntity setDatastreams(Set<DatasetAggregationEntity> datastreams) {
+    public void setDatastreams(Set<AbstractDatasetEntity> datastreams) {
         this.datastreams = datastreams;
-        return this;
     }
 
     @Override
-    public Set<DatasetAggregationEntity> getDatastreams() {
+    public Set<AbstractDatasetEntity> getDatastreams() {
         return datastreams;
     }
 

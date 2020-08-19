@@ -14,20 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sta.HistoricalLocationEntity;
+import org.n52.series.db.beans.sta.LocationEntity;
+import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.AbstractStaEntity;
-import org.n52.series.db.beans.sta.HistoricalLocationEntity;
-import org.n52.series.db.beans.sta.LocationEntity;
-import org.n52.series.db.beans.sta.StaRelations.Locations;
-
-public class PlatformEntity extends DescribableEntity
-        implements AbstractStaEntity, Locations<PlatformEntity>, IsStaEntity {
+public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
+        HibernateRelations.HasDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
@@ -77,9 +77,8 @@ public class PlatformEntity extends DescribableEntity
     }
 
     @Override
-    public PlatformEntity setLocations(Set<LocationEntity> locations) {
+    public void setLocations(Set<LocationEntity> locations) {
         this.locations = locations;
-        return this;
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocations() {
@@ -103,9 +102,8 @@ public class PlatformEntity extends DescribableEntity
         return datasets;
     }
 
-    public PlatformEntity setDatasets(Set<DatasetEntity> datasets) {
+    public void setDatasets(Set<DatasetEntity> datasets) {
         this.datasets = datasets;
-        return this;
     }
 
     public boolean hasDatasets() {
@@ -122,9 +120,8 @@ public class PlatformEntity extends DescribableEntity
     }
 
     @Override
-    public AbstractStaEntity setProcessed(boolean processsed) {
+    public void setProcessed(boolean processsed) {
         this.processed = processsed;
-        return this;
     }
 
     @Override
