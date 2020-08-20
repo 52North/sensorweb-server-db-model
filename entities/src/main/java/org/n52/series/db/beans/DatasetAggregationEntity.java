@@ -16,6 +16,9 @@
  */
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
+import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
+
 import java.util.stream.Collectors;
 
 /**
@@ -33,6 +36,7 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
         if (dataset.getParameters() != null) {
             setParameters(dataset.getParameters().stream().collect(Collectors.toSet()));
         }
+        setCategory(dataset.getCategory());
         setFeature(dataset.getFeature());
         setFirstObservation(dataset.getFirstObservation());
         setFirstQuantityValue(dataset.getFirstQuantityValue());
@@ -41,6 +45,7 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
         setLastQuantityValue(dataset.getLastQuantityValue());
         setLastValueAt(dataset.getLastValueAt());
         setOMObservationType(dataset.getOMObservationType());
+        setOffering(dataset.getOffering());
         setPhenomenon(dataset.getPhenomenon());
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
