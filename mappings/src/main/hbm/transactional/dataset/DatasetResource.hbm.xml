@@ -157,11 +157,11 @@
             </column>
         </many-to-one>
 
-        <subclass extends="AbstractDatasetEntity" name="DatasetEntity" discriminator-value="aggregation">
+        <subclass extends="AbstractDatasetEntity" name="org.n52.series.db.beans.DatasetAggregationEntity" discriminator-value="aggregation">
             <!-- All neede properties are already included in the AbstractDatasetEntity-->
         </subclass>
 
-        <subclass extends="AbstractDatasetEntity" name="DatasetEntity" discriminator-value="null">
+        <subclass extends="AbstractDatasetEntity" name="org.n52.series.db.beans.DatasetEntity" discriminator-value="null">
             <property name="datasetType" index="idx_dataset_dataset_type">
                 <column name="dataset_type" scale="20" not-null="true" default="'not_initialized'"
                         check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectory', 'not_initialized')">

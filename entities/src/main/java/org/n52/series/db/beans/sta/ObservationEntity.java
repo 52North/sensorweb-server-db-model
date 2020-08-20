@@ -20,7 +20,6 @@ package org.n52.series.db.beans.sta;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.AbstractFeatureEntity;
-import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.common.Utils;
 
@@ -59,7 +58,8 @@ import java.util.Set;
 @SequenceGenerator(name = "observation_seq", allocationSize = 1)
 @Table(name = "observation",
         uniqueConstraints = { @UniqueConstraint(columnNames = { "sampling_time_start", "sampling_time_end",
-                "result_time", "fk_dataset_id", "value_type" }, name = "un_observation_identity") },
+                "result_time", "fk_dataset_id", "value_type", "vertical_to", "vertical_from" },
+                name = "un_observation_identity") },
         indexes = { @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
                 @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
                 @Index(name = "idx_result_time", columnList = "result_time") })
@@ -83,6 +83,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     public static final String PROPERTY_VALUE_QUANTITY = "valueQuantity";
     public static final String PROPERTY_VALUE_CATEGORY = "valueCategory";
     public static final String PROPERTY_VALUE_COUNT = "valueCount";
+    public static final String PROPERTY_VERTICAL_FROM = "verticalFrom";
+    public static final String PROPERTY_VERTICAL_TO = "verticalTo";
     public static final String PROPERTY_PARAMETERS = "parameters";
 
     private static final long serialVersionUID = -4720091385202877301L;
@@ -156,10 +158,15 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Column(name = "result_time", nullable = true, length = 29, columnDefinition = "timestamp")
     private Date resultTime;
 
-    // TODO(specki): Check if lazy fetching can be used here
-    @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
+    @Column(name = "vertical_to", precision = 20, scale = 10, nullable = false)
+    private BigDecimal verticalTo = BigDecimal.ZERO;
+
+    @Column(name = "vertical_from", precision = 20, scale = 10, nullable = false)
+    private BigDecimal verticalFrom = BigDecimal.ZERO;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_dataset_id", foreignKey = @ForeignKey(name = "fk_dataset"))
-    private DatasetEntity dataset;
+    private AbstractDatasetEntity dataset;
 
     @Column(name = "fk_dataset_id", updatable = false, insertable = false, nullable = false)
     private Long datasetId;
@@ -178,16 +185,6 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     private AbstractFeatureEntity<?> featureOfInterest;
 
     public ObservationEntity() {
-    }
-
-    @Override
-    public AbstractDatasetEntity getDatastream() {
-        return datastream;
-    }
-
-    @Override
-    public void setDatastream(AbstractDatasetEntity datastream) {
-        this.datastream = datastream;
     }
 
     @Override
@@ -300,12 +297,12 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public DatasetEntity getDataset() {
+    public AbstractDatasetEntity getDataset() {
         return dataset;
     }
 
     @Override
-    public void setDataset(DatasetEntity dataset) {
+    public void setDataset(AbstractDatasetEntity dataset) {
         this.dataset = dataset;
     }
 
@@ -350,6 +347,22 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
         this.samplingGeometry = samplingGeometry;
     }
 
+    public BigDecimal getVerticalTo() {
+        return verticalTo;
+    }
+
+    public void setVerticalTo(BigDecimal verticalTo) {
+        this.verticalTo = verticalTo;
+    }
+
+    public BigDecimal getVerticalFrom() {
+        return verticalFrom;
+    }
+
+    public void setVerticalFrom(BigDecimal verticalFrom) {
+        this.verticalFrom = verticalFrom;
+    }
+
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getStaIdentifier(), getSamplingTimeStart(), getSamplingTimeEnd(),
@@ -370,5 +383,4 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
                 && Objects.equals(getResultTime(), other.getResultTime())
                 && Objects.equals(getValue(), other.getValue());
     }
-
 }

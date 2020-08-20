@@ -32,8 +32,8 @@ import java.util.Set;
 /**
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends DescribableEntity
-        implements Serializable, HasGeometry, HibernateRelations.HasName, HibernateRelations.HasDescription {
+public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
+        HibernateRelations.HasDescription, HibernateRelations.IsProcessed {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -47,6 +47,7 @@ public class LocationEntity extends DescribableEntity
     private FormatEntity locationEncoding;
     private Set<PlatformEntity> things;
     private Set<HistoricalLocationEntity> historicalLocations;
+    private boolean processed;
 
     public FormatEntity getLocationEncoding() {
         return locationEncoding;
@@ -132,5 +133,15 @@ public class LocationEntity extends DescribableEntity
             return false;
         }
         return super.equals(obj);
+    }
+
+    @Override
+    public boolean isProcessed() {
+        return this.processed;
+    }
+
+    @Override
+    public void setProcessed(boolean processsed) {
+        this.processed = processsed;
     }
 }

@@ -27,7 +27,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
-        HibernateRelations.HasDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
@@ -40,7 +40,7 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
-    private Set<DatasetEntity> datasets;
+    private Set<AbstractDatasetEntity> datasets;
     private boolean processed;
 
     public PlatformEntity setProperties(String properties) {
@@ -98,11 +98,11 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         return this;
     }
 
-    public Set<DatasetEntity> getDatasets() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(Set<DatasetEntity> datasets) {
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
     }
 

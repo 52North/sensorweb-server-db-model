@@ -18,12 +18,12 @@
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.PhenomenonEntity;
-import org.n52.series.db.beans.sta.StaRelations.HasDatastreams;
 
 import java.util.Set;
 
-public class ObservablePropertyEntity extends PhenomenonEntity implements HasDatastreams {
+public class ObservablePropertyEntity extends PhenomenonEntity implements HibernateRelations.HasAbstractDatasets {
 
     private static final long serialVersionUID = -1903162304158931533L;
     private final PhenomenonEntity phenomenon;
@@ -43,12 +43,12 @@ public class ObservablePropertyEntity extends PhenomenonEntity implements HasDat
     }
 
     @Override
-    public void setDatastreams(Set<AbstractDatasetEntity> datastreams) {
+    public void setDatasets(Set<AbstractDatasetEntity> datastreams) {
         this.datastreams = datastreams;
     }
 
     @Override
-    public Set<AbstractDatasetEntity> getDatastreams() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datastreams;
     }
 

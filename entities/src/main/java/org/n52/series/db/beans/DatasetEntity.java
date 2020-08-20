@@ -32,7 +32,6 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
 
-    public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_DATASET_TYPE = "datasetType";
     public static final String PROPERTY_OBSERVATION_TYPE = "observationType";
     public static final String PROPERTY_VALUE_TYPE = "valueType";
@@ -48,10 +47,6 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
 
     private static final long serialVersionUID = -7491530543976690237L;
-
-    private OfferingEntity offering;
-
-    private CategoryEntity category;
 
     private boolean published = true;
 
@@ -101,28 +96,6 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
         this.datasetType = datasetType;
         this.observationType = observationType;
         this.valueType = valueType;
-    }
-
-    public CategoryEntity getCategory() {
-        return category;
-    }
-
-    public DatasetEntity setCategory(CategoryEntity category) {
-        this.category = category;
-        return this;
-    }
-
-    public OfferingEntity getOffering() {
-        return offering;
-    }
-
-    public DatasetEntity setOffering(final OfferingEntity offering) {
-        this.offering = offering;
-        return this;
-    }
-
-    public boolean isSetOffering() {
-        return getOffering() != null;
     }
 
     public Boolean isPublished() {
@@ -184,13 +157,6 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     public DatasetEntity setValueType(ValueType valueType) {
         this.valueType = valueType;
         return this;
-    }
-
-    public String getUnitI18nName(final String locale) {
-        return unit != null
-                // ? unit.getNameI18n(locale)
-                ? unit.getUnit()
-                : "";
     }
 
     public List<DatasetEntity> getReferenceValues() {
@@ -376,15 +342,6 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
             setVerticalMetadata(dataset.getVerticalMetadata());
         }
         setUnit(dataset.getUnit());
-    }
-
-    @Override
-    public String getLabelFrom(final String locale) {
-        final StringBuilder sb = new StringBuilder();
-        sb.append(phenomenon.getLabelFrom(locale)).append(" ");
-        sb.append(procedure.getLabelFrom(locale)).append(", ");
-        sb.append(feature.getLabelFrom(locale)).append(", ");
-        return sb.append(offering.getLabelFrom(locale)).toString();
     }
 
     @Override

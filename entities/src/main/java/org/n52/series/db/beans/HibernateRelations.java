@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Locale.LanguageRange;
@@ -392,6 +393,10 @@ public interface HibernateRelations {
     interface HasObservableProperty extends HasObservablePropertyGetter {
 
         void setObservableProperty(PhenomenonEntity observableProperty);
+
+        default boolean hasObservableProperty() {
+            return getObservableProperty() != null;
+        }
     }
 
     interface HasOMObservationType {
@@ -600,6 +605,10 @@ public interface HibernateRelations {
     interface HasProcedure extends HasProcedureGetter {
 
         void setProcedure(ProcedureEntity procedure);
+
+        default boolean hasProcedure() {
+            return getProcedure() != null;
+        }
     }
 
     interface HasProcedureDescriptionFormat {
@@ -658,7 +667,9 @@ public interface HibernateRelations {
          *
          * @return <code>true</code>, if unit is set
          */
-        boolean isSetUnit();
+        default boolean isSetUnit() {
+            return getUnit() != null;
+        }
     }
 
     interface HasValidTime {
@@ -1032,6 +1043,37 @@ public interface HibernateRelations {
 
         default boolean hasDatasets() {
             return getDatasets() != null && !getDatasets().isEmpty();
+        }
+
+    }
+
+    interface HasAbstractDatasets {
+
+        void setDatasets(Set<AbstractDatasetEntity> datastreams);
+
+        Set<AbstractDatasetEntity> getDatasets();
+
+        default void addDatastream(AbstractDatasetEntity datastream) {
+            if (getDatasets() == null) {
+                setDatasets(new LinkedHashSet<>());
+            }
+            getDatasets().add(datastream);
+        }
+
+        default boolean hasDatastreams() {
+            return getDatasets() != null && !getDatasets().isEmpty();
+        }
+
+    }
+
+    interface HasAbstractDataset {
+
+        void setDataset(AbstractDatasetEntity datastreams);
+
+        AbstractDatasetEntity getDataset();
+
+        default boolean hasDataset() {
+            return getDataset() != null;
         }
 
     }

@@ -17,43 +17,10 @@
 
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.AbstractDatasetEntity;
-
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 public interface StaRelations {
-
-    interface HasDatastreams {
-
-        void setDatastreams(Set<AbstractDatasetEntity> datastreams);
-
-        Set<AbstractDatasetEntity> getDatastreams();
-
-        default void addDatastream(AbstractDatasetEntity datastream) {
-            if (getDatastreams() == null) {
-                setDatastreams(new LinkedHashSet<>());
-            }
-            getDatastreams().add(datastream);
-        }
-
-        default boolean hasDatastreams() {
-            return getDatastreams() != null && !getDatastreams().isEmpty();
-        }
-
-    }
-
-    interface HasDatastream {
-
-        void setDatastream(AbstractDatasetEntity datastreams);
-
-        AbstractDatasetEntity getDatastream();
-
-        default boolean hasDatastream() {
-            return getDatastream() != null;
-        }
-
-    }
 
     interface HasLocations {
 

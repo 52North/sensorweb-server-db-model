@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.HibernateRelations;
@@ -23,10 +24,11 @@ import java.io.Serializable;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public interface AbstractDatastreamEntity extends Serializable, HibernateRelations.HasOMObservationType,
-        HibernateRelations.HasObservableProperty, HibernateRelations.HasPhenomenonTime, HibernateRelations.HasUnit,
-        HibernateRelations.HasProcedure, HibernateRelations.HasGeometry, HibernateRelations.HasId,
-        HibernateRelations.HasName, HibernateRelations.HasDescription, HibernateRelations.HasIdentifier,
-        HibernateRelations.HasStaIdentifier, HibernateRelations.IsProcessed, HibernateRelations.HasResultTimes,
-        HibernateRelations.HasThing, HibernateRelations.HasObservations {
+public interface AbstractDatastreamEntity
+        extends Serializable, HibernateRelations.HasOMObservationType, HibernateRelations.HasObservableProperty,
+        HibernateRelations.HasPhenomenonTime, HibernateRelations.HasUnit, HibernateRelations.HasProcedure,
+        HibernateRelations.HasGeometry, HibernateRelations.HasId, HibernateRelations.HasName,
+        HibernateRelations.HasDescription, HibernateRelations.HasIdentifier, HibernateRelations.HasStaIdentifier,
+        HibernateRelations.IsProcessed, HibernateRelations.HasResultTimes, HibernateRelations.HasThing,
+        HibernateRelations.HasObservations, HibernateRelations.HasFeature, HibernateRelations.HasOffering {
 }

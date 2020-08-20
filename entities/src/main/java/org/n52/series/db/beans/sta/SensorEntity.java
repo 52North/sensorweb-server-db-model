@@ -18,12 +18,12 @@
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.ProcedureEntity;
-import org.n52.series.db.beans.sta.StaRelations.HasDatastreams;
 
 import java.util.Set;
 
-public class SensorEntity extends ProcedureEntity implements HasDatastreams {
+public class SensorEntity extends ProcedureEntity implements HibernateRelations.HasAbstractDatasets {
 
     private static final long serialVersionUID = -8010667038475754604L;
     private final ProcedureEntity procedure;
@@ -46,12 +46,12 @@ public class SensorEntity extends ProcedureEntity implements HasDatastreams {
     }
 
     @Override
-    public void setDatastreams(Set<AbstractDatasetEntity> datastreams) {
+    public void setDatasets(Set<AbstractDatasetEntity> datastreams) {
         this.datastreams = datastreams;
     }
 
     @Override
-    public Set<AbstractDatasetEntity> getDatastreams() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datastreams;
     }
 
