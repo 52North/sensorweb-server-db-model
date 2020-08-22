@@ -47,6 +47,7 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
     public static final String PROPERTY_UNIT = "unit";
     public static final String PROPERTY_AGGREGATION = "aggregation";
+    private static final long serialVersionUID = 4178505006632345142L;
 
     private AbstractFeatureEntity<?> feature;
     private PhenomenonEntity phenomenon;
@@ -82,26 +83,32 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.phenomenon = phenomenon;
     }
 
+    @Override
     public PhenomenonEntity getObservableProperty() {
         return getPhenomenon();
     }
 
+    @Override
     public void setObservableProperty(final PhenomenonEntity observableProperty) {
         setPhenomenon(observableProperty);
     }
 
+    @Override
     public ProcedureEntity getProcedure() {
         return procedure;
     }
 
+    @Override
     public void setProcedure(final ProcedureEntity procedure) {
         this.procedure = procedure;
     }
 
+    @Override
     public AbstractFeatureEntity<?> getFeature() {
         return feature;
     }
 
+    @Override
     public void setFeature(AbstractFeatureEntity<?> feature) {
         this.feature = feature;
     }
@@ -110,10 +117,12 @@ public class AbstractDatasetEntity extends DescribableEntity
         return getFeature() != null;
     }
 
+    @Override
     public OfferingEntity getOffering() {
         return offering;
     }
 
+    @Override
     public void setOffering(final OfferingEntity offering) {
         this.offering = offering;
     }
@@ -126,6 +135,7 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.category = category;
     }
 
+    @Override
     public boolean isSetOffering() {
         return getOffering() != null;
     }
@@ -198,10 +208,12 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.lastQuantityValue = lastValue;
     }
 
+    @Override
     public Date getResultTimeStart() {
         return Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
+    @Override
     public void setResultTimeStart(Date resultTimeStart) {
         this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
     }
@@ -210,10 +222,12 @@ public class AbstractDatasetEntity extends DescribableEntity
         return getResultTimeStart() != null;
     }
 
+    @Override
     public Date getResultTimeEnd() {
         return Utils.createUnmutableTimestamp(resultTimeEnd);
     }
 
+    @Override
     public void setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
     }
@@ -240,10 +254,12 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.resultTimes = wrapToUnmutables(resultTimes);
     }
 
+    @Override
     public UnitEntity getUnit() {
         return unit;
     }
 
+    @Override
     public void setUnit(UnitEntity unit) {
         this.unit = unit;
     }
@@ -255,14 +271,17 @@ public class AbstractDatasetEntity extends DescribableEntity
                 : "";
     }
 
+    @Override
     public FormatEntity getOMObservationType() {
         return omObservationType;
     }
 
+    @Override
     public void setOMObservationType(FormatEntity omObservationType) {
         this.omObservationType = omObservationType;
     }
 
+    @Override
     public boolean isSetOMObservationType() {
         return (getOMObservationType() != null) && getOMObservationType().isSetFormat();
     }
@@ -294,7 +313,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public Date getSamplingTimeStart() {
-        return this.samplingTimeStart;
+        return Utils.createUnmutableTimestamp(this.samplingTimeStart);
     }
 
     @Override
@@ -304,7 +323,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public Date getSamplingTimeEnd() {
-        return this.samplingTimeEnd;
+        return Utils.createUnmutableTimestamp(this.samplingTimeEnd);
     }
 
     @Override
@@ -348,6 +367,10 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     public void setAggregation(AbstractDatasetEntity aggregation) {
         this.aggregation = aggregation;
+    }
+    
+    public boolean isSetAggregation() {
+        return getAggregation() != null;
     }
 
     @Override
