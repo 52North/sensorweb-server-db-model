@@ -234,6 +234,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
 
     @Override
     public void setValidTimeEnd(Date validTimeEnd) {
+        this.validTimeEnd = Utils.createUnmutableTimestamp(validTimeEnd);
     }
 
     @Override
