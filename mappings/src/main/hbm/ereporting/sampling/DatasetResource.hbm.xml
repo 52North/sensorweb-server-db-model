@@ -67,6 +67,11 @@
                 <comment>The timestamp of the temporally last observation that belongs to this dataset.</comment>
             </column>
         </property>
+        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
+            <property name="geometry" type="jts_geometry">
+                <column name="observed_area" not-null="false"/>
+            </property>
+        </component>
 
         <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity"
                      foreign-key="fk_dataset_procedure">
