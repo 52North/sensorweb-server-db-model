@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import java.util.Set;
@@ -45,6 +46,7 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
         if (dataset.getParameters() != null) {
             setParameters(dataset.getParameters().stream().collect(Collectors.toSet()));
         }
+        setCategory(dataset.getCategory());
         setFeature(dataset.getFeature());
         setFirstObservation(dataset.getFirstObservation());
         setFirstQuantityValue(dataset.getFirstQuantityValue());
@@ -53,6 +55,7 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
         setLastQuantityValue(dataset.getLastQuantityValue());
         setLastValueAt(dataset.getLastValueAt());
         setOMObservationType(dataset.getOMObservationType());
+        setOffering(dataset.getOffering());
         setPhenomenon(dataset.getPhenomenon());
         setPlatform(dataset.getPlatform());
         setProcedure(dataset.getProcedure());
