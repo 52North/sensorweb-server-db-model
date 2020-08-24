@@ -157,7 +157,7 @@
         <subclass extends="AbstractDatasetEntity" name="org.n52.series.db.beans.DatasetAggregationEntity" discriminator-value="aggregation">
             <!-- All neede properties are already included in the AbstractDatasetEntity-->
             <set name="datasets" table="dataset">
-                <key column="fk_aggragation_id" not-null="false" foreign-key="fk_aggregation_id"/>
+                <key column="fk_aggregation_id" not-null="false"/>
                 <one-to-many class="AbstractDatasetEntity" />
             </set>
         </subclass>
