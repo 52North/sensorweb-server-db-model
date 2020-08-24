@@ -16,12 +16,24 @@
  */
 package org.n52.series.db.beans;
 
+import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class DatasetAggregationEntity extends AbstractDatasetEntity {
+
+    private static final long serialVersionUID = 4214347342270609845L;
+    private Set<AbstractDatasetEntity> datasets;
+
+    public Set<AbstractDatasetEntity> getDatasets() {
+        return datasets;
+    }
+
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+        this.datasets = datasets;
+    }
 
     public void copy(AbstractDatasetEntity dataset) {
         setIdentifier(dataset.getIdentifier());
@@ -52,6 +64,9 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
             setResultTimes(dataset.getResultTimes().stream().collect(Collectors.toSet()));
         }
         setUnit(dataset.getUnit());
+        if (dataset instanceof DatasetAggregationEntity) {
+            setDatasets(((DatasetAggregationEntity) dataset).getDatasets());
+        }
     }
 
 }

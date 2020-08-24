@@ -368,7 +368,7 @@ public class AbstractDatasetEntity extends DescribableEntity
     public void setAggregation(AbstractDatasetEntity aggregation) {
         this.aggregation = aggregation;
     }
-    
+
     public boolean isSetAggregation() {
         return getAggregation() != null;
     }
