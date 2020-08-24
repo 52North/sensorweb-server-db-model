@@ -45,14 +45,12 @@
 
         <property name="resultTimeStart" type="timestamp">
             <column name="result_time_start" not-null="false">
-                <comment>The timestamp of the earliest result time of the observations that belong to this dataset.
-                </comment>
+                <comment>The timestamp of the earliest result time of the observations that belong to this dataset.</comment>
             </column>
         </property>
         <property name="resultTimeEnd" type="timestamp">
             <column name="result_time_end" not-null="false">
-                <comment>The timestamp of the latest result time of the observations that belong to this dataset.
-                </comment>
+                <comment>The timestamp of the latest result time of the observations that belong to this dataset.</comment>
             </column>
         </property>
 
