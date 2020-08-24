@@ -36,6 +36,10 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
         this.datasets = datasets;
     }
 
+    public boolean isSetDatasets() {
+        return getDatasets() != null && !getDatasets().isEmpty();
+    }
+
     public void copy(AbstractDatasetEntity dataset) {
         setIdentifier(dataset.getIdentifier());
         setIdentifierCodespace(dataset.getIdentifierCodespace());
