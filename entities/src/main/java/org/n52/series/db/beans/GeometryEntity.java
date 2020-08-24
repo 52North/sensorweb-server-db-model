@@ -17,6 +17,7 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.util.StringJoiner;
 
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
@@ -118,11 +119,43 @@ public class GeometryEntity implements Serializable {
         this.geometryFactory = geometryFactory;
     }
 
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName()).append(" [").append(" latitude: ").append(getLat())
-                .append(", longitude: ").append(getLon()).append(" ]").toString();
+    public void union(GeometryEntity entity) {
+        if (entity != null && entity.getGeometry() != null) {
+            if (getGeometry() != null) {
+                setGeometry(getGeometry().union(entity.getGeometry()));
+            } else {
+                setGeometry(entity.getGeometry());
+                setSrid(entity.getSrid());
+            }
+        }
     }
 
+    public GeometryEntity copy(GeometryEntity entity) {
+        setGeometry(entity.getGeometry().copy());
+        setGeometryFactory(entity.getGeometryFactory());
+        setLon(entity.getLon());
+        setLat(entity.getLat());
+        setAlt(entity.getAlt());
+        setSrid(entity.getSrid());
+        return entity;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer().append(getClass().getSimpleName()).append(" [");
+        return (isSetGeometry() ? appendGeometry(sb) : appendLatLong(sb)).append(" ]").toString();
+    }
+
+    private StringBuffer appendGeometry(StringBuffer sb) {
+        StringJoiner s = new StringJoiner(";");
+        for (Coordinate coordinate : getGeometry().getCoordinates()) {
+            s.add(new StringBuffer().append(" x: ").append(coordinate.getX()).append(", y: ")
+                    .append(coordinate.getY()));
+        }
+        return sb.append(s.toString());
+    }
+
+    private StringBuffer appendLatLong(StringBuffer sb) {
+        return sb.append(" latitude: ").append(getLat()).append(", longitude: ").append(getLon());
+    }
 }
