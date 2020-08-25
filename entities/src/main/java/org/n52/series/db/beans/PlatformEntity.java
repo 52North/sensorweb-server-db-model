@@ -32,7 +32,7 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
-    public static final String PROPERTY_DATASTREAMS = "datastreams";
+    public static final String PROPERTY_DATASETS = "datasets";
 
     private static final long serialVersionUID = 3615089936334873353L;
 
