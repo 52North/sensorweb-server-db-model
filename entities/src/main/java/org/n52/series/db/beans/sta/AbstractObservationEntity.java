@@ -14,22 +14,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
-
-import java.io.Serializable;
-
-import javax.persistence.Transient;
 
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.sta.StaRelations.Datastream;
 
-public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable, AbstractStaEntity,
-        HibernateRelations.HasPhenomenonTime, Datastream<AbstractObservationEntity<T>>, HibernateRelations.HasId,
-        HibernateRelations.HasIdentifier, HibernateRelations.HasStaIdentifier, HibernateRelations.HasResultTime,
-        HibernateRelations.HasValidTime<AbstractObservationEntity<T>>, HibernateRelations.HasParameters,
-        HibernateRelations.HasName, HibernateRelations.HasDescription, HibernateRelations.HasSamplingGeometry,
-        HibernateRelations.HasFeature<AbstractObservationEntity<T>>, HibernateRelations.HasDataset {
+import javax.persistence.Transient;
+import java.io.Serializable;
+
+public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable,
+        AbstractStaEntity,
+        HibernateRelations.HasPhenomenonTime,
+        Datastream<AbstractObservationEntity<T>>,
+        HibernateRelations.HasId,
+        HibernateRelations.HasIdentifier,
+        HibernateRelations.HasStaIdentifier,
+        HibernateRelations.HasResultTime,
+        HibernateRelations.HasValidTime<AbstractObservationEntity<T>>,
+        HibernateRelations.HasParameters,
+        HibernateRelations.HasName,
+        HibernateRelations.HasDescription,
+        HibernateRelations.HasSamplingGeometry,
+        HibernateRelations.HasFeature<AbstractObservationEntity<T>>,
+        HibernateRelations.HasDataset,
+        HibernateRelations.HasVerticalFromTo {
 
     private static final long serialVersionUID = -5478132580391608848L;
 
