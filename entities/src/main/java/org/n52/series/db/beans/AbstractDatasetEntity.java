@@ -328,7 +328,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        setFirstValueAt(samplingTimeEnd);
+        setLastValueAt(samplingTimeEnd);
     }
 
     @Override
