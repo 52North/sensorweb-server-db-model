@@ -68,8 +68,6 @@ public class AbstractDatasetEntity extends DescribableEntity
     private BigDecimal lastQuantityValue;
     private Date resultTimeStart;
     private Date resultTimeEnd;
-    private Date samplingTimeStart;
-    private Date samplingTimeEnd;
 
     private FormatEntity omObservationType;
 
@@ -315,22 +313,22 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public Date getSamplingTimeStart() {
-        return Utils.createUnmutableTimestamp(this.samplingTimeStart);
+        return getFirstValueAt();
     }
 
     @Override
     public void setSamplingTimeStart(Date samplingTimeStart) {
-        this.samplingTimeStart = Utils.createUnmutableTimestamp(samplingTimeStart);
+        setFirstValueAt(samplingTimeStart);
     }
 
     @Override
     public Date getSamplingTimeEnd() {
-        return Utils.createUnmutableTimestamp(this.samplingTimeEnd);
+        return getLastValueAt();
     }
 
     @Override
     public void setSamplingTimeEnd(Date samplingTimeEnd) {
-        this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
+        setFirstValueAt(samplingTimeEnd);
     }
 
     @Override
