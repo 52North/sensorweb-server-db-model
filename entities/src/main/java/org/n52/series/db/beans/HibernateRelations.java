@@ -24,6 +24,7 @@ import org.n52.series.db.beans.sta.AbstractObservationEntity;
 import org.n52.series.db.common.LocaleHelper;
 
 import java.io.UnsupportedEncodingException;
+import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
 import java.util.Date;
@@ -1198,5 +1199,28 @@ public interface HibernateRelations {
             return getObservations() != null;
         }
 
+    }
+
+    interface HasVerticalFromTo {
+
+        BigDecimal getVerticalFrom();
+
+        void setVerticalFrom(BigDecimal validTimeStart);
+
+        BigDecimal getVerticalTo();
+
+        void setVerticalTo(BigDecimal validTimeEnd);
+
+        default boolean isSetVerticalFromTo() {
+            return isSetVerticalFrom() && isSetVerticalTo();
+        }
+
+        default boolean isSetVerticalFrom() {
+            return getVerticalFrom() != null;
+        }
+
+        default boolean isSetVerticalTo() {
+            return getVerticalTo() != null;
+        }
     }
 }
