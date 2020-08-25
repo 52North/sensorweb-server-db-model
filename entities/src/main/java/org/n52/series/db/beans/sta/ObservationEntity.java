@@ -77,6 +77,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     public static final String PROPERTY_VALID_TIME_END = "validTimeEnd";
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
     public static final String PROPERTY_DATASET = "dataset";
+    public static final String PROPERTY_DATASET_ID = "datasetId";
     public static final String PROPERTY_VALUE = "value";
     public static final String PROPERTY_VALUE_BOOLEAN = "valueBoolean";
     public static final String PROPERTY_VALUE_TEXT = "valueText";
@@ -307,11 +308,12 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
         this.dataset = dataset;
     }
 
-    @Override
-    public int compareTo(ObservationEntity<T> other) {
-        return Comparator.comparing(ObservationEntity<T>::getSamplingTimeEnd)
-                .thenComparing(ObservationEntity::getSamplingTimeStart).thenComparing(ObservationEntity<T>::getId)
-                .compare(this, other);
+    public Long getDatasetId() {
+        return datasetId;
+    }
+
+    public void setDatasetId(Long datasetId) {
+        this.datasetId = datasetId;
     }
 
     @Override
@@ -362,6 +364,13 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
 
     public void setVerticalFrom(BigDecimal verticalFrom) {
         this.verticalFrom = verticalFrom;
+    }
+
+    @Override
+    public int compareTo(ObservationEntity<T> other) {
+        return Comparator.comparing(ObservationEntity<T>::getSamplingTimeEnd)
+                .thenComparing(ObservationEntity::getSamplingTimeStart).thenComparing(ObservationEntity<T>::getId)
+                .compare(this, other);
     }
 
     @Override
