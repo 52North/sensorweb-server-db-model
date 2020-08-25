@@ -172,7 +172,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     private Long datasetId;
 
     @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "observation_parameters", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
+    @JoinTable(name = "observation_parameter", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
             joinColumns = { @JoinColumn(name = "fk_observation_id") },
             foreignKey = @ForeignKey(name = "fk_parameter_observation"),
             inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
