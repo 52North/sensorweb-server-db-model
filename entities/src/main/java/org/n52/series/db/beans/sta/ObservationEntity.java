@@ -157,6 +157,13 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Column(name = "result_time", nullable = true, length = 29, columnDefinition = "timestamp")
     private Date resultTime;
 
+    @Column(name = "vertical_to", precision = 20, scale = 10, nullable = false)
+    @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
+    private BigDecimal verticalTo = BigDecimal.ZERO;
+
+    @Column(name = "vertical_from", precision = 20, scale = 10, nullable = false)
+    private BigDecimal verticalFrom = BigDecimal.ZERO;
+
     // TODO(specki): Check if lazy fetching can be used here
     @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_dataset_id", foreignKey = @ForeignKey(name = "fk_dataset"))
@@ -354,6 +361,22 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Override
     public void setSamplingGeometry(Geometry samplingGeometry) {
         this.samplingGeometry = samplingGeometry;
+    }
+
+    public BigDecimal getVerticalTo() {
+        return verticalTo;
+    }
+
+    public void setVerticalTo(BigDecimal verticalTo) {
+        this.verticalTo = verticalTo;
+    }
+
+    public BigDecimal getVerticalFrom() {
+        return verticalFrom;
+    }
+
+    public void setVerticalFrom(BigDecimal verticalFrom) {
+        this.verticalFrom = verticalFrom;
     }
 
     @Override
