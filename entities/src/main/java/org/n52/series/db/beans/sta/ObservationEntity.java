@@ -158,7 +158,6 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     private Date resultTime;
 
     @Column(name = "vertical_to", precision = 20, scale = 10, nullable = false)
-    @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
     private BigDecimal verticalTo = BigDecimal.ZERO;
 
     @Column(name = "vertical_from", precision = 20, scale = 10, nullable = false)
