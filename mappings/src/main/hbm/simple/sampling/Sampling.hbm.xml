@@ -15,13 +15,13 @@
         </id>
 
         <many-to-one name="measuringProgram" class="MeasuringProgramEntity" foreign-key="fk_measuring_program">
-            <column name="fk_measuring_program_id" not-null="true">
+            <column name="fk_measuring_program_id" not-null="true" index="idx_sampling_measuring_program">
                 <comment>Reference to the measuring program to which this sampling belongs.</comment>
             </column>
         </many-to-one>
 
         <property name="identifier" type="string" index="idx_sampling_identifier">
-            <column name="identifier" not-null="false" unique-key="un_sampling_identifier">
+            <column name="identifier" not-null="false" unique-key="un_sampling_identity">
                 <comment>The identifier of the sampling. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
             </column>
         </property>
@@ -76,7 +76,7 @@
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_sampling">
-                <column name="fk_dataset_id">
+                <column name="fk_dataset_id" index="idx_sampling_dataset">
                     <comment>The reference to the dataset in the dataset table that provides observations related to the sampling.</comment>
                 </column>
             </many-to-many>
@@ -103,7 +103,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="SamplingEntity" foreign-key="fk_sampling_i18n">
-            <column name="fk_sampling_id" not-null="true">
+            <column name="fk_sampling_id" not-null="true" index="idx_sampling_i18n_sampling">
                 <comment>Reference to the sampling table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

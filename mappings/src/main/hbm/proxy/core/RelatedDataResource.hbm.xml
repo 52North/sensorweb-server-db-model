@@ -12,7 +12,7 @@
                 </column>
             </key-many-to-one>
             <key-many-to-one name="relatedItem" class="DataEntity" foreign-key="fk_rel_obs_related">
-                <column name="fk_related_observation_id" not-null="true">
+                <column name="fk_related_observation_id" not-null="true" index="idx_related_observation_related_observation">
                     <comment>The reference to the related data/observation</comment>
                 </column>
             </key-many-to-one>

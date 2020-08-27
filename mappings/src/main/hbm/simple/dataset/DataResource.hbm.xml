@@ -20,7 +20,7 @@
         </discriminator>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity">
-            <column name="fk_dataset_id" not-null="true">
+            <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
@@ -122,7 +122,7 @@
         </property>
 
         <property name="parent" type="long">
-            <column name="fk_parent_observation_id" not-null="false">
+            <column name="fk_parent_observation_id" not-null="false" index="idx_observation_parent">
                 <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
             </column>
         </property>
@@ -211,7 +211,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
-            <column name="fk_observation_id" not-null="true">
+            <column name="fk_observation_id" not-null="true" index="idx_observation_i18n_observation">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

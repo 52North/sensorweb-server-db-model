@@ -29,7 +29,7 @@
                 <column name="fk_tag_id" not-null="true"/>
             </key>
             <many-to-many class="DatasetEntity" foreign-key="fk_dataset_tag">
-                <column name="fk_dataset_id" not-null="true"/>
+                <column name="fk_dataset_id" not-null="true" index="idx_tag_dataset_dataset"/>
             </many-to-many>
         </set>
         <!-- Comments for the translations are defined below! -->
@@ -50,7 +50,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="org.n52.series.db.beans.TagEntity" foreign-key="fk_tag">
-            <column name="fk_tag_id" not-null="true">
+            <column name="fk_tag_id" not-null="true" index="idx_tag_i18n_tag">
                 <comment>Reference to the tag table this internationalization belongs to. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>
         </many-to-one>

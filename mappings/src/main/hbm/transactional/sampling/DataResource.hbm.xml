@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-    xmlns="http://www.hibernate.org/xsd/hibernate-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'reference')">
         <comment>Storage of the observation values with the timestamp and additional metadata. The metadata are height/depth values for profile observation and sampling geometries for trajectory observations. In each observation entry only one value_... column should be filled with a value!</comment>
@@ -19,7 +20,7 @@
         </discriminator>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity">
-            <column name="fk_dataset_id" not-null="true">
+            <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
@@ -56,7 +57,7 @@
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codesp">
-            <column name="fk_identifier_codespace_id">
+            <column name="fk_identifier_codespace_id" index="idx_observation_identifier_codespace">
                 <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
@@ -68,7 +69,7 @@
         </property>
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_data_name_codespace">
-            <column name="fk_name_codespace_id">
+            <column name="fk_name_codespace_id" index="idx_observation_name_codespace">
                 <comment>The codespace of the data/observation name, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
@@ -98,9 +99,9 @@
 
         <component class="GeometryEntity" name="geometryEntity">
             <!--
-                <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
-                <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
-            -->
+            <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
+            <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
+             -->
             <property name="geometry" type="jts_geometry" not-null="false">
                 <column name="sampling_geometry">
                     <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations (trajectories) where this geometry is different from the feature geometry.</comment>
@@ -117,7 +118,7 @@
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_parameter_observation">
-                <column name="fk_parameter_id">
+                <column name="fk_parameter_id" index="idx_parameter_observation">
                     <comment>The reference to the parameter in the data/observation parameter</comment>
                 </column>
             </many-to-many>
@@ -159,20 +160,20 @@
         </property>
 
         <property name="parent" type="long">
-            <column name="fk_parent_observation_id" not-null="false">
+            <column name="fk_parent_observation_id" not-null="false" index="idx_observation_parent">
                 <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
             </column>
         </property>
 
         <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDataEntity">
             <many-to-one name="sampling" class="org.n52.series.db.beans.sampling.SamplingEntity" foreign-key="fk_sampling">
-                <column name="fk_sampling_id" not-null="false">
+                <column name="fk_sampling_id" not-null="false" index="idx_observation_sampling">
                     <comment>The id of the sampling this observation belongs to.</comment>
                 </column>
             </many-to-one>
         </component>
 
-        <set name="translations" table="observation_i18n" inverse="true" fetch="select" cascade="remove">
+        <set name="translations" table="observation_i18n" inverse="true" fetch="select">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
@@ -240,8 +241,8 @@
         <subclass name="GeometryDataEntity" extends="DataEntity" discriminator-value="geometry">
             <component class="GeometryEntity" name="geometryEntity">
                 <!--
-                    <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
-                    <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
+                <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
+                <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
                 <property name="geometry" type="geolatte_geometry">
                 <column name="value_geometry">
@@ -283,7 +284,7 @@
                 <one-to-many class="DataEntity" />
             </set>
             <many-to-one name="resultTemplate" class="ResultTemplateEntity" foreign-key="fk_result_template">
-                <column name="fk_result_template_id" not-null="false">
+                <column name="fk_result_template_id" not-null="false" index="idx_observation_result_template">
                     <comment>Reference to the result template which holds the structure and encoding.</comment>
                 </column>
             </many-to-one>
@@ -316,7 +317,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
-            <column name="fk_observation_id" not-null="true">
+            <column name="fk_observation_id" not-null="true" index="idx_observation_i18n_observation">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

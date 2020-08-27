@@ -34,7 +34,7 @@
             </column>
         </property>
         <many-to-one name="verticalUnit" class="UnitEntity" foreign-key="fk_profile_unit">
-            <column name="fk_vertical_unit_id" not-null="true">
+            <column name="fk_vertical_unit_id" not-null="true" index="idx_profile_vertical_unit">
                 <comment>The unit of the vertical value, e.g. m</comment>
             </column>
         </many-to-one>
@@ -54,7 +54,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_i18n_value_profile">
-            <column name="fk_value_profile_id" not-null="true">
+            <column name="fk_value_profile_id" not-null="true" index="idx_value_profile_i18n_value_profile">
                 <comment>Reference to the value_profile table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

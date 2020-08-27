@@ -25,13 +25,13 @@
             <column name="identifier" unique-key="un_domain_of_validity_identifier"/>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_dov_codespace">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_dav_identifier_codespace"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_dov_name_codespace">
-            <column name="fk_name_codespace_id"/>
+            <column name="fk_name_codespace_id" index="idx_dov_name_codespace"/>
         </many-to-one>
         <property name="description" type="text">
             <column name="description"/>
@@ -39,6 +39,7 @@
         <many-to-one name="exExtent"
                      column="fk_ex_extent_id"
                      class="org.n52.series.db.beans.feature.gmd.ExExtentEntity"
-                     foreign-key="fk_dov_ex_extent" />
+                     foreign-key="fk_dov_ex_extent"
+                     index="idx_dov_ex_extent"/>
     </class>
 </hibernate-mapping>

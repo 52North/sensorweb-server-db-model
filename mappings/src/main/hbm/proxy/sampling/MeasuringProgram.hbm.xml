@@ -15,12 +15,12 @@
         </id>
 
          <many-to-one class="org.n52.series.db.beans.ServiceEntity" name="service" foreign-key="fk_service_measuring_program">
-            <column name="fk_service_id" unique-key="un_measure_prog_identifier">
+            <column name="fk_service_id" unique-key="un_measure_prog_identity">
                 <comment>Reference to the service this measuring program belongs to.</comment>
             </column>
         </many-to-one>
         <property name="identifier" type="string" index="idx_measure_prog_identifier" unique-key="un_measure_prog_identifier">
-            <column name="identifier" not-null="true">
+            <column name="identifier" not-null="true" unique-key="un_measure_prog_identity">
                 <comment>Unique identifier of the measuring program which would be the ORDER_ID in the output of the REST API.</comment>
             </column>
         </property>
@@ -68,7 +68,7 @@
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.DatasetEntity" foreign-key="fk_dataset_measuring_program">
-                <column name="fk_dataset_id">
+                <column name="fk_dataset_id" index="idx_meassuring_program_dataset">
                     <comment>The reference to the dataset in the dataset table</comment>
                 </column>
             </many-to-many>
@@ -90,7 +90,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="MeasuringProgramEntity" foreign-key="fk_measuring_program_i18n">
-            <column name="fk_measuring_program_id" not-null="true">
+            <column name="fk_measuring_program_id" not-null="true" index="idx_measuring_program_i18n_measuring_program">
                 <comment>Reference to the measuring program table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

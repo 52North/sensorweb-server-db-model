@@ -25,25 +25,27 @@
             <column name="identifier" unique-key="un_vertical_cs_identifier"/>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_codespace">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_vertical_cs_codespace"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
-        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_name">
-            <column name="fk_name_codespace_id"/>
+        <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_vertical_cs_name_codespace">
+            <column name="fk_name_codespace_id" index="idx_vertical_cs_name_codespace"/>
         </many-to-one>
         <property name="description" type="text">
             <column name="description"/>
         </property>
         <property name="remarks" column="remarks" type="string" />
         <set name="coordinateSystemAxis" table="vertical_cs_axis">
-          <key column="fk_vertical_cs_id"
-               not-null="true"
-               foreign-key="fk_vertical_cs_axis"/>
-          <many-to-many column="fk_coordinate_system_axis_id"
-                        class="org.n52.series.db.beans.feature.gml.CoordinateSystemAxisEntity"
-                        foreign-key="fk_axis_vertical_cs"/>
+            <key column="fk_vertical_cs_id" not-null="true"
+                foreign-key="fk_vertical_cs_axis" />
+            <many-to-many
+                class="org.n52.series.db.beans.feature.gml.CoordinateSystemAxisEntity"
+                foreign-key="fk_axis_vertical_cs">
+                <column name="fk_coordinate_system_axis_id"
+                    index="idx_axis_vertical_cs" />
+            </many-to-many>
         </set>
         <property name="aggregation" column="aggregation" type="string" />
     </class>

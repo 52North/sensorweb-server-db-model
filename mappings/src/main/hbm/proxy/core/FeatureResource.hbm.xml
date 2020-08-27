@@ -21,7 +21,7 @@
         </discriminator>
 
         <many-to-one name="featureType" class="FormatEntity" foreign-key="fk_feature_format">
-            <column name="fk_format_id" not-null="true">
+            <column name="fk_format_id" not-null="true" index="idx_feature_format">
                 <comment>Reference to the featureType in the format table. Required by the SOS to identify the typ of the feature, e.g. http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint.</comment>
             </column>
         </many-to-one>
@@ -41,7 +41,7 @@
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_feature_identifier_codesp">
-            <column name="fk_identifier_codespace_id">
+            <column name="fk_identifier_codespace_id" index="idx_feature_identifier_codespace">
                 <comment>The codespace of the feature identifier, reference to the codespace table.</comment>
             </column>
         </many-to-one>
@@ -51,7 +51,7 @@
             </column>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_feature_name_codespace">
-            <column name="fk_name_codespace_id">
+            <column name="fk_name_codespace_id" index="idx_feature_name_codespace">
                 <comment>The codespace of the feature name, reference to the codespace table.</comment>
             </column>
         </many-to-one>
@@ -88,7 +88,7 @@
         <set name="parents" table="feature_hierarchy" inverse="false" fetch="select">
             <comment>Storage of hierarchies between features</comment>
             <key not-null="true" foreign-key="fk_feature_child">
-                <column name="fk_child_feature_id">
+                <column name="fk_child_feature_id" index="idx_feature_child">
                     <comment>Reference to the child feature in feature table.</comment>
                 </column>
             </key>
@@ -112,12 +112,11 @@
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_parameter_feature">
-                <column name="fk_parameter_id">
+                <column name="fk_parameter_id" index="idx_feature_parameter">
                     <comment>The reference to the parameter in the feature parameter</comment>
                 </column>
             </many-to-many>
         </set>
-
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="feature_i18n" inverse="true" fetch="select">
             <key column="fk_feature_id" not-null="true" />
@@ -142,7 +141,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature">
-            <column name="fk_feature_id" not-null="true">
+            <column name="fk_feature_id" not-null="true" index="idx_feature_i18n_feature">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

@@ -26,13 +26,14 @@
         <property name="individualName" column="individual_name" type="string" />
         <property name="organizationName" column="organization_name" type="string" />
         <property name="positionName" column="position_name" type="string" />
-        <many-to-one name="contactInfo"
-                     column="fk_contact_info_id"
-                     class="ContactEntity"
-                     foreign-key="fk_contact_info" />
-        <many-to-one name="ciRole"
-                     column="fk_ci_role_id"
-                     class="RoleEntity"
-                     foreign-key="fk_ci_role" />
+        <many-to-one name="contactInfo" class="ContactEntity"
+            foreign-key="fk_contact_info">
+            <column name="fk_contact_info_id"
+                index="idx_contact_info" />
+        </many-to-one>
+        <many-to-one name="ciRole" class="RoleEntity"
+            foreign-key="fk_ci_role">
+            <column name="fk_ci_role_id" index="idx_ci_role" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

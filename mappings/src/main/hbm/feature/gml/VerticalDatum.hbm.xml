@@ -25,13 +25,13 @@
             <column name="identifier" unique-key="un_vertical_datum_identifier"/>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_vertical_datum_codespace">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_vertical_datum_codespace"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_vd_name_codespace">
-            <column name="fk_name_codespace_id"/>
+            <column name="fk_name_codespace_id" index="idx_vd_name_codespace"/>
         </many-to-one>
         <property name="description" type="text">
             <column name="description"/>
@@ -53,9 +53,11 @@
 
         <property name="anchorDefinition" column="anchor_definition" type="string" />
 
-        <many-to-one name="codespaceAnchorDefinition" column="fk_codespace_anchor_def_id"
+        <many-to-one name="codespaceAnchorDefinition"
                      class="CodespaceEntity"
-                     foreign-key="fk_vd_codespace_anchor_def" />
+                     foreign-key="fk_vd_codespace_anchor_def">
+                     <column name="fk_codespace_anchor_def_id" index="idx_vd_codespace_anchor_def"/>
+        </many-to-one>
 
         <property name="realizationEpoch"
                   type="timestamp">

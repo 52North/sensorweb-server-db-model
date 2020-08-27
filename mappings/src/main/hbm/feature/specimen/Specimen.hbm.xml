@@ -36,7 +36,8 @@
                          class="UnitEntity"
                          foreign-key="fk_specimen_unit">
                 <column name="fk_size_unit_id"
-                        not-null="false"/>
+                        not-null="false"
+                        index="idx_specimen_unit"/>
             </many-to-one>
             <property name="currentLocation" type="string">
                 <column name="current_location"/>

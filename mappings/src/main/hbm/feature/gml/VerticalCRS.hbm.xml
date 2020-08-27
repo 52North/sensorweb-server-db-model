@@ -27,13 +27,13 @@
         <many-to-one name="identifierCodespace"
                      class="CodespaceEntity"
                      foreign-key="fk_vertical_crs_codespace">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_vertical_crs_codespace"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_verti_crs_name_codespace">
-            <column name="fk_name_codespace_id"/>
+            <column name="fk_name_codespace_id" index="idx_verti_crs_name_codespace"/>
         </many-to-one>
         <property name="description" type="text">
             <column name="description"/>
@@ -44,9 +44,10 @@
           <key column="fk_vertical_crs_id"
                not-null="true"
                foreign-key="fk_vcrs_vertical_crs"/>
-          <many-to-many column="fk_domain_of_validity_id"
-                        class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
-                        foreign-key="fk_vcrs_domain_of_validity"/>
+          <many-to-many class="org.n52.series.db.beans.feature.gml.DomainOfValidityEntity"
+                        foreign-key="fk_vcrs_domain_of_validity">
+                        <column name="fk_domain_of_validity_id" index="idx_vcrs_domain_of_validity"/>
+                        </many-to-many>
         </set>
         <set name="scope"
              table="vertical_crs_scope">
@@ -58,12 +59,14 @@
                    not-null="true" />
         </set>
         <many-to-one name="verticalCS"
-                     column="fk_vertical_cs_id"
                      class="org.n52.series.db.beans.feature.gml.VerticalCSEntity"
-                     foreign-key="fk_vcrs_vertical_cs"/>
+                     foreign-key="fk_vcrs_vertical_cs">
+                     <column name="fk_vertical_cs_id" index="idx_vcrs_vertical_cs"/>
+                     </many-to-one>
         <many-to-one name="verticalDatum"
-                     column="fk_vertical_datum_id"
                      class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity"
-                     foreign-key="fk_vcrs_vertical_datum"/>
+                     foreign-key="fk_vcrs_vertical_datum">
+                     <column name="fk_vertical_datum_id" index="idx_vcrs_vertical_datum"/>
+                     </many-to-one>
     </class>
 </hibernate-mapping>

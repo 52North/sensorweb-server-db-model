@@ -25,30 +25,37 @@
             <column name="identifier" unique-key="un_coordinate_system_axis"/>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_csa_codespace">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_csa_identifier_codespace"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_csa_name_codespace">
-            <column name="fk_name_codespace_id"/>
+            <column name="fk_name_codespace_id" index="idx_csa_name_codespace"/>
         </many-to-one>
         <property name="description" type="text">
             <column name="description"/>
         </property>
         <property name="remarks" column="remarks" type="string" />
         <property name="axisAbbrev" column="axis_abbrev"  type="string" />
-        <many-to-one name="codespaceAxisAbbrev" column="fk_codespace_axis_abbrev_id" class="CodespaceEntity" foreign-key="fk_codespace_axis_abbrev" />
+        <many-to-one name="codespaceAxisAbbrev" class="CodespaceEntity" foreign-key="fk_codespace_axis_abbrev">
+          <column name="fk_codespace_axis_abbrev_id" index="idx_codespace_axis_abbrev"/>
+        </many-to-one>
         <property name="axisDirection" column="axis_direction" type="string" />
-        <many-to-one name="codespaceAxisDirection" column="codespace_axis_direction" class="CodespaceEntity" foreign-key="fk_codespace_axis_direction" />
+        <many-to-one name="codespaceAxisDirection" class="CodespaceEntity" foreign-key="fk_codespace_axis_direction">
+          <column name="fk_codespace_axis_direction_id" index="idx_codespace_axis_direction"/>
+        </many-to-one>
         <property name="minimumValue" column="minimum_value" type="big_decimal" precision="20" scale="10" />
         <property name="maximumValue" column="maximum_value" type="big_decimal" precision="20" scale="10"  />
         <property name="rangeMeaning" column="range_meaning" type="string" />
-        <many-to-one name="codespaceRangeMeaning" column="fk_codespace_range_meaning_id" class="CodespaceEntity" foreign-key="fk_codespace_range_meaning" />
+        <many-to-one name="codespaceRangeMeaning" class="CodespaceEntity" foreign-key="fk_codespace_range_meaning">
+          <column name="fk_codespace_range_meaning_id" index="idx_codespace_range_meaning"/>
+        </many-to-one>
         <many-to-one name="uom"
                      column="fk_unit_id"
                      class="UnitEntity"
                      not-null="true"
-                     foreign-key="fk_coordinate_system_axis_unit" />
+                     foreign-key="fk_coordinate_system_axis_unit"
+                     index="idx_csa_unit"/>
     </class>
 </hibernate-mapping>

@@ -14,12 +14,12 @@
             </generator>
         </id>
         <many-to-one name="procedure" class="ProcedureEntity" foreign-key="fk_ph_procedure_id">
-            <column name="fk_procedure_id" not-null="true">
+            <column name="fk_procedure_id" not-null="true" index="idx_procedure_history_procedure">
                 <comment>Reference to the procedure this entry belongs to.</comment>
             </column>
         </many-to-one>
         <many-to-one name="format" class="FormatEntity" foreign-key="fk_pdf_id" >
-            <column name="fk_format_id" not-null="true">
+            <column name="fk_format_id" not-null="true" index="idx_procedure_history_format">
                 <comment>Reference to the format of the procedure description, e.g. SensorML 2.0</comment>
             </column>
         </many-to-one>

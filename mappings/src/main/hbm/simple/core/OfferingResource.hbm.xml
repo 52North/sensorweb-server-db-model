@@ -95,7 +95,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="OfferingEntity" foreign-key="fk_offering">
-            <column name="fk_offering_id" not-null="true">
+            <column name="fk_offering_id" not-null="true" index="idx_offering_i18n_offering">
                 <comment>Reference to the offering table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

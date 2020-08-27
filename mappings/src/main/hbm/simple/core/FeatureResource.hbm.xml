@@ -51,7 +51,7 @@
         <set name="parents" table="feature_hierarchy" inverse="false" fetch="select">
             <comment>Storage of hierarchies between features</comment>
             <key not-null="true" foreign-key="fk_feature_child">
-                <column name="fk_child_feature_id">
+                <column name="fk_child_feature_id" index="idx_feature_child">
                     <comment>Reference to the child feature in feature table.</comment>
                 </column>
             </key>
@@ -91,7 +91,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature">
-            <column name="fk_feature_id" not-null="true">
+            <column name="fk_feature_id" not-null="true" index="idx_feature_i18n_feature">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

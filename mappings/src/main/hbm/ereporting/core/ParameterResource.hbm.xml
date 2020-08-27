@@ -47,7 +47,7 @@
                 </column>
             </property>
             <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_param_unit">
-                <column name="fk_unit_id">
+                <column name="fk_unit_id" index="idx_parameter_unit">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
             </many-to-one>
@@ -66,7 +66,7 @@
                 </column>
             </property>
             <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_param_unit">
-                <column name="fk_unit_id">
+                <column name="fk_unit_id" index="idx_parameter_unit">
                     <!-- Comment is defined above for category! -->
                 </column>
             </many-to-one>

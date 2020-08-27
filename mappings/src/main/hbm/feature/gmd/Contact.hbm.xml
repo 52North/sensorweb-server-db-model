@@ -26,15 +26,18 @@
         <many-to-one name="phone"
                      column="fk_phone_id"
                      class="TelephoneEntity"
-                     foreign-key="fk_contact_phone" />
+                     foreign-key="fk_contact_phone"
+                     index="idx_contact_phone"/>
         <many-to-one name="address"
                      column="fk_address_id"
                      class="AddressEntity"
-                     foreign-key="fk_contact_address" />
+                     foreign-key="fk_contact_address"
+                     index="idx_contact_address"/>
         <many-to-one name="onlineResource"
                      column="fk_online_resource_id"
                      class="OnlineResourceEntity"
-                     foreign-key="fk_contact_online_resource" />
+                     foreign-key="fk_contact_online_resource"
+                     index="idx_contact_online_resource"/>
         <property name="hoursOfService" column="hours_of_service" type="string" />
         <property name="contactInstructions" column="contact_instructions" type="string" />
     </class>

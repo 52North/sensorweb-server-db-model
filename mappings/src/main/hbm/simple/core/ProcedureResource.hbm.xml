@@ -51,7 +51,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="ProcedureEntity" foreign-key="fk_i18n_procedure">
-            <column name="fk_procedure_id" not-null="true">
+            <column name="fk_procedure_id" not-null="true" index="idx_procedure_i18n_procedure">
                 <!-- <comment>Reference to the procedure table this internationalization belongs to.</comment> -->
             </column>
         </many-to-one>

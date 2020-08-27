@@ -29,7 +29,7 @@
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_phenomenon_identifier_codesp">
-            <column name="fk_identifier_codespace_id">
+            <column name="fk_identifier_codespace_id" index="idx_phenomenon_identifier_codespace">
                 <comment>The codespace of the phenomenon identifier, reference to the codespace table.</comment>
             </column>
         </many-to-one>
@@ -39,7 +39,7 @@
             </column>
         </property>
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_phenomenon_name_codespace">
-            <column name="fk_name_codespace_id">
+            <column name="fk_name_codespace_id" index="idx_phenomenon_name_codespace">
                 <comment>The codespace of the phenomenon name, reference to the codespace table.</comment>
             </column>
         </many-to-one>
@@ -68,7 +68,7 @@
                 <column name="fk_parent_phenomenon_id" not-null="true"/>
             </key>
             <many-to-many class="PhenomenonEntity" foreign-key="fk_phenomenon_child">
-                <column name="fk_child_phenomenon_id" not-null="true"/>
+                <column name="fk_child_phenomenon_id" not-null="true" index="idx_phenomenon_child_phenomenon"/>
             </many-to-many>
         </set>
         <!-- Comments for the translations are defined below! -->
@@ -90,7 +90,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="PhenomenonEntity" foreign-key="fk_phenomenon">
-            <column name="fk_phenomenon_id" not-null="true">
+            <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_i18n_phenomenon">
                 <comment>Reference to the phenomenon table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

@@ -17,15 +17,15 @@
                     </key>
                     <many-to-many class="org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity"
                         foreign-key="fk_wml_related_party_mp">
-                        <column name="fk_responsible_party_id" not-null="true" />
+                        <column name="fk_responsible_party_id" not-null="true" index="idx_wml_related_party_mp"/>
                     </many-to-many>
                 </set>
                 <set name="verticalDatum" table="wml_mp_vertical_datum">
                     <key foreign-key="fk_wml_mp_vertical_datum">
                         <column name="fk_feature_id"/>
                     </key>
-                    <many-to-many class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity" foreign-key="wml_vertical_datum__mpfk">
-                        <column name="fk_vertical_datum_id" not-null="true" />
+                    <many-to-many class="org.n52.series.db.beans.feature.gml.VerticalDatumEntity" foreign-key="fk_wml_vertical_datum_mp">
+                        <column name="fk_vertical_datum_id" not-null="true" index="idx_wml_vertical_datum__mp"/>
                     </many-to-many>
                 </set>
             </component>

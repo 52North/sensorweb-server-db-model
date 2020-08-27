@@ -44,7 +44,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="PlatformEntity" foreign-key="fk_platform">
-            <column name="fk_platform_id" not-null="true">
+            <column name="fk_platform_id" not-null="true" index="idx_platform_i18n_platform">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

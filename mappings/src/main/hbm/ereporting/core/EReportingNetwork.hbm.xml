@@ -14,13 +14,13 @@
             <column name="identifier" not-null="true" unique-key="un_network_identifier"/>
         </property>
         <many-to-one name="identifierCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_network_codespace">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_network_identifier_codespace"/>
         </many-to-one>
         <property name="name" type="string">
             <column name="name"/>
         </property>
         <many-to-one name="nameCodespace" class="org.n52.series.db.beans.CodespaceEntity" foreign-key="fk_network_name_codespace">
-            <column name="fk_name_codespace_id"/>
+            <column name="fk_name_codespace_id" index="idx_network_name_codespace"/>
         </many-to-one>
         <property name="description" type="text">
             <column name="description"/>

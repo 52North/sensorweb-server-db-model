@@ -29,7 +29,7 @@
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_procedure_identifier_codesp">
-            <column name="fk_identifier_codespace_id">
+            <column name="fk_identifier_codespace_id" index="idx_procedure_identifier_codespace">
                 <!-- <comment>The codespace of the procedure identifier, reference to the codespace table.</comment> -->
             </column>
         </many-to-one>
@@ -39,7 +39,7 @@
             </column>
         </property>
          <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_procedure_name_codespace">
-            <column name="fk_name_codespace_id">
+            <column name="fk_name_codespace_id" index="idx_procedure_name_codespace">
                 <!-- <comment>The codespace of the procedure name, reference to the codespace table.</comment> -->
             </column>
         </many-to-one>
@@ -59,7 +59,7 @@
             </column>
         </property>
         <many-to-one name="typeOf" class="ProcedureEntity" not-null="false" foreign-key="fk_type_of">
-            <column name="fk_type_of_procedure_id" not-null="false">
+            <column name="fk_type_of_procedure_id" not-null="false" index="idx_procedure_type_of">
                 <!-- <comment>Reference to a procedure this entry is a typeOf.</comment> -->
             </column>
         </many-to-one>
@@ -84,10 +84,12 @@
         <!-- Comments for the children are defined above for parents! -->
         <set name="children" table="procedure_hierarchy" inverse="false" fetch="select">
             <key column="fk_parent_procedure_id" not-null="true" foreign-key="fk_procedure_parent" />
-            <many-to-many class="ProcedureEntity" column="fk_child_procedure_id" foreign-key="fk_procedure_child" />
+            <many-to-many class="ProcedureEntity" foreign-key="fk_procedure_child">
+                <column name="fk_child_procedure_id" index="idx_procedure_child"/>
+            </many-to-many>
         </set>
         <many-to-one name="format" class="FormatEntity" foreign-key="fk_procedure_format">
-            <column name="fk_format_id" not-null="true">
+            <column name="fk_format_id" not-null="true" index="idx_procedure_format">
                 <!-- <comment>Reference to the format of the procedure description, e.g. SensorML 2.0</comment> -->
             </column>
         </many-to-one>
@@ -116,7 +118,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="ProcedureEntity" foreign-key="fk_i18n_procedure">
-            <column name="fk_procedure_id" not-null="true">
+            <column name="fk_procedure_id" not-null="true" index="idx_procedure_i18n_procedure">
                 <!-- <comment>Reference to the procedure table this internationalization belongs to.</comment> -->
             </column>
         </many-to-one>

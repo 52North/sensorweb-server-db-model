@@ -20,7 +20,7 @@
         </discriminator>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity">
-            <column name="fk_dataset_id" not-null="true">
+            <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
@@ -57,7 +57,7 @@
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codesp">
-            <column name="fk_identifier_codespace_id">
+            <column name="fk_identifier_codespace_id" index="idx_observation_identifier_codespace">
                 <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
@@ -69,7 +69,7 @@
         </property>
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_data_name_codespace">
-            <column name="fk_name_codespace_id">
+            <column name="fk_name_codespace_id" index="idx_observation_name_codespace">
                 <comment>The codespace of the data/observation name, reference to the codespace table. Can be null.</comment>
             </column>
         </many-to-one>
@@ -118,7 +118,7 @@
                 </column>
             </key>
             <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_parameter_observation">
-                <column name="fk_parameter_id">
+                <column name="fk_parameter_id" index="idx_parameter_observation">
                     <comment>The reference to the parameter in the data/observation parameter</comment>
                 </column>
             </many-to-many>
@@ -160,12 +160,12 @@
         </property>
 
         <property name="parent" type="long">
-            <column name="fk_parent_observation_id" not-null="false">
+            <column name="fk_parent_observation_id" not-null="false" index="idx_observation_parent">
                 <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
             </column>
         </property>
 
-        <set name="translations" table="observation_i18n" inverse="true" fetch="select" cascade="remove">
+        <set name="translations" table="observation_i18n" inverse="true" fetch="select">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
@@ -276,7 +276,7 @@
                 <one-to-many class="DataEntity" />
             </set>
             <many-to-one name="resultTemplate" class="ResultTemplateEntity" foreign-key="fk_result_template">
-                <column name="fk_result_template_id" not-null="false">
+                <column name="fk_result_template_id" not-null="false" index="idx_observation_result_template">
                     <comment>Reference to the result template which holds the structure and encoding.</comment>
                 </column>
             </many-to-one>
@@ -309,7 +309,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
-            <column name="fk_observation_id" not-null="true">
+            <column name="fk_observation_id" not-null="true" index="idx_observation_i18n_observation">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
         </many-to-one>

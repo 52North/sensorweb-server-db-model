@@ -21,7 +21,7 @@
         <many-to-one name="identifierCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
                      foreign-key="fk_sp_identifier_codesp">
-            <column name="fk_identifier_codespace_id"/>
+            <column name="fk_identifier_codespace_id" index="idx_sampling_point_identifier_codespace"/>
         </many-to-one>
         <property name="name"
                   type="string">
@@ -30,7 +30,7 @@
         <many-to-one name="nameCodespace"
                      class="org.n52.series.db.beans.CodespaceEntity"
                      foreign-key="fk_sp_name_codespace">
-            <column name="fk_name_codespace_id"/>
+            <column name="fk_name_codespace_id"  index="idx_sampling_point_name_codespace"/>
         </many-to-one>
         <property name="description"
                   type="string">
@@ -39,13 +39,13 @@
         <many-to-one name="assessmentType"
                      class="EReportingAssessmentTypeEntity"
                      foreign-key="fk_sp_assessment_type">
-            <column name="fk_assessment_type_id"/>
+            <column name="fk_assessment_type_id" index="idx_sampling_point_assessment_type"/>
         </many-to-one>
         <many-to-one name="station" class="EReportingStationEntity" foreign-key="fk_sp_station">
-            <column name="fk_station_id"/>
+            <column name="fk_station_id" index="idx_sampling_point_station"/>
         </many-to-one>
         <many-to-one name="network" class="EReportingNetworkEntity" foreign-key="fk_sp_network">
-            <column name="fk_network_id"/>
+            <column name="fk_network_id" index="idx_sampling_point_network"/>
         </many-to-one>
     </class>
 </hibernate-mapping>

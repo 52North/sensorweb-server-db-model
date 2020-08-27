@@ -14,7 +14,7 @@
             </generator>
         </id>
         <many-to-one name="feature" class="AbstractFeatureEntity" foreign-key="fk_related_feature">
-            <column name="fk_feature_id" not-null="true">
+            <column name="fk_feature_id" not-null="true" index="idx_related_feature_feature">
                 <comment>Reference to the feature that is related to the offering.</comment>
             </column>
         </many-to-one>

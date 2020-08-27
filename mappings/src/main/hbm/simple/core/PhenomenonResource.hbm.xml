@@ -49,7 +49,7 @@
             </generator>
         </id>
         <many-to-one name="entity" class="PhenomenonEntity" foreign-key="fk_phenomenon">
-            <column name="fk_phenomenon_id" not-null="true">
+            <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_i18n_phenomenon">
                 <comment>Reference to the phenomenon table this internationalization belongs to.</comment>
             </column>
         </many-to-one>
