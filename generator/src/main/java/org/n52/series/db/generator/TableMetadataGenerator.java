@@ -174,16 +174,18 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         }
     }
 
-    private void execute(int dialectSelection, int profileSelection, int conceptSelection) throws Exception {
+    private void execute(int dialectSelection, int profileSelection, int conceptSelection, int featureSelection)
+            throws Exception {
         Concept concept = Concept.values()[conceptSelection];
         Profile profile = Profile.values()[profileSelection];
+        Feature feature = Feature.values()[featureSelection];
         Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
         DialectSelector dialect = DialectSelector.values()[dialectSelection];
         Dialect dia = getDialect(dialect, true);
         Properties p = new Properties();
         p.put("hibernate.dialect", dia.getClass().getName());
         configuration.addProperties(p);
-        setDirectoriesForModelSelection(concept, profile, configuration, null);
+        setDirectoriesForModelSelection(concept, profile, feature, configuration, null);
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
         configuration.buildSessionFactory();
@@ -191,7 +193,7 @@ public final class TableMetadataGenerator extends AbstractGenerator {
                 configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-        setDirectoriesForModelSelection(concept, profile, null, metadataSources);
+        setDirectoriesForModelSelection(concept, profile, feature, null, metadataSources);
         Metadata metadata = metadataSources.buildMetadata();
 
         exportTableColumnMetadata(metadata, dia, dialect, concept, profile);
@@ -206,8 +208,12 @@ public final class TableMetadataGenerator extends AbstractGenerator {
                 for (int j = 0; j < 2; j++) {
                     // concept
                     for (int k = 0; k < 4; k++) {
-                        // execute(sqlScriptGenerator, i, j, k, schema);
-                        execute(i, j, k);
+                        // feature
+                        for (int l = 0; l < 2; l++) {
+                            // execute(i, j, k, l);
+                            execute(i, j, k, l);
+                        }
+
                     }
                 }
             }
@@ -216,7 +222,8 @@ public final class TableMetadataGenerator extends AbstractGenerator {
             int dialectSelection = getDialectSelection();
             int concept = getConceptSelection();
             int modelSelection = getModelSelection();
-            execute(dialectSelection, modelSelection, concept);
+            int feature = getFeatureConceptSelection();
+            execute(dialectSelection, modelSelection, concept, feature);
             return true;
         }
     }

@@ -111,8 +111,18 @@ public abstract class AbstractGenerator {
         return readSelectionFromStdIo();
     }
 
-    protected void setDirectoriesForModelSelection(Concept concept, Profile profile, Configuration configuration,
-            MetadataSources metadataSources) throws Exception {
+    protected int getFeatureConceptSelection() throws IOException {
+        printToScreen("Which feature concept should be created:");
+        printToScreen("0   default");
+        printToScreen("1   extended");
+        printToScreen("");
+        printEnterYourSelection();
+
+        return readSelectionFromStdIo();
+    }
+
+    protected void setDirectoriesForModelSelection(Concept concept, Profile profile, Feature feature,
+            Configuration configuration, MetadataSources metadataSources) throws Exception {
         List<File> files = new LinkedList<>();
         for (File file : files) {
             if (configuration != null) {
@@ -122,11 +132,11 @@ public abstract class AbstractGenerator {
                 metadataSources.addDirectory(file);
             }
         }
-        addConceptDirectories(concept, profile, configuration, metadataSources);
+        addConceptDirectories(concept, profile, feature, configuration, metadataSources);
     }
 
-    protected void addConceptDirectories(Concept concept, Profile profile, Configuration configuration,
-            MetadataSources metadataSources) throws Exception {
+    protected void addConceptDirectories(Concept concept, Profile profile, Feature feature,
+            Configuration configuration, MetadataSources metadataSources) throws Exception {
         List<String> paths = new LinkedList<>();
         switch (concept) {
             case SIMPLE:
@@ -134,13 +144,16 @@ public abstract class AbstractGenerator {
                 break;
             case E_REPORTING:
                 paths.addAll(getProfileDirectories("/hbm/ereporting", Profile.DEFAULT));
+                paths.addAll(getFeatureConceptDirectories(feature, configuration, metadataSources));
                 break;
             case PROXY:
                 paths.addAll(getProfileDirectories("/hbm/proxy", profile));
+                paths.addAll(getFeatureConceptDirectories(feature, configuration, metadataSources));
                 break;
             case TRANSACTIONAL:
             default:
                 paths.addAll(getProfileDirectories("/hbm/transactional", profile));
+                paths.addAll(getFeatureConceptDirectories(feature, configuration, metadataSources));
         }
         for (String path : paths) {
             if (configuration != null) {
@@ -150,6 +163,20 @@ public abstract class AbstractGenerator {
                 metadataSources.addDirectory(getDirectory(path));
             }
         }
+    }
+
+    protected List<String> getFeatureConceptDirectories(Feature concept, Configuration configuration,
+            MetadataSources metadataSources) throws Exception {
+        List<String> paths = new LinkedList<>();
+        switch (concept) {
+            case EXTENDED:
+                paths.add("/hbm/feature");
+                break;
+            case DEFAULT:
+            default:
+                // nothing to add
+        }
+        return paths;
     }
 
     protected Collection<String> getProfileDirectories(String p, Profile profile) {
@@ -215,6 +242,15 @@ public abstract class AbstractGenerator {
 
     enum Concept {
         SIMPLE, TRANSACTIONAL, E_REPORTING, PROXY;
+
+        @Override
+        public String toString() {
+            return name().replaceAll("_", "-").toLowerCase();
+        }
+    }
+
+    enum Feature {
+        DEFAULT, EXTENDED;
 
         @Override
         public String toString() {

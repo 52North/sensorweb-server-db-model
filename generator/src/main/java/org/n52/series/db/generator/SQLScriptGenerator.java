@@ -115,26 +115,27 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         return createFileName("sql/", ending, values);
     }
 
-    private void execute(int dialectSelection, int profileSelection, int conceptSelection, String schema,
-            boolean comments, boolean consoleLog) throws Exception {
+    private void execute(int dialectSelection, int profileSelection, int conceptSelection, int featureSelection,
+            String schema, boolean comments, boolean consoleLog) throws Exception {
         Concept concept = Concept.values()[conceptSelection];
         Profile profile = Profile.values()[profileSelection];
+        Feature feature = Feature.values()[featureSelection];
         Configuration configuration = new Configuration().configure("/hibernate.cfg.xml");
         DialectSelector dialect = DialectSelector.values()[dialectSelection];
-        System.out.println(String.format("EXECUTING sql generation for %s - %s - %s!", dialect.name(), concept.name(),
-                profile.name()));
+        System.out.println(String.format("EXECUTING sql generation for %s - %s - %s - %s!", dialect.name(),
+                concept.name(), profile.name(), feature.name()));
         Dialect dia = getDialect(dialect, comments);
         Properties p = new Properties();
         p.put("hibernate.dialect", dia.getClass().getName());
-        String fileNameCreate = createFileName("_create.sql", dialect, concept, profile);
-        String fileNameDrop = createFileName("_drop.sql", dialect, concept, profile);
+        String fileNameCreate = createFileName("_create.sql", dialect, concept, profile, feature);
+        String fileNameDrop = createFileName("_drop.sql", dialect, concept, profile, feature);
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {
             p.put("hibernate.default_schema", schema);
         }
         configuration.addProperties(p);
-        setDirectoriesForModelSelection(concept, profile, configuration, null);
+        setDirectoriesForModelSelection(concept, profile, feature, configuration, null);
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);
 
         configuration.buildSessionFactory();
@@ -142,7 +143,7 @@ public final class SQLScriptGenerator extends AbstractGenerator {
                 configuration.getStandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
 
         MetadataSources metadataSources = new MetadataSources(serviceRegistry);
-        setDirectoriesForModelSelection(concept, profile, null, metadataSources);
+        setDirectoriesForModelSelection(concept, profile, feature, null, metadataSources);
         Metadata metadata = metadataSources.buildMetadata();
 
         // create script
@@ -169,8 +170,11 @@ public final class SQLScriptGenerator extends AbstractGenerator {
                 for (int j = 0; j < 2; j++) {
                     // concept
                     for (int k = 0; k < 4; k++) {
-                        // execute(sqlScriptGenerator, i, j, k, schema);
-                        execute(i, j, k, schema, true, false);
+                        // feature
+                        for (int l = 0; l < 2; l++) {
+                            // execute(sqlScriptGenerator, i, j, k, l, schema);
+                            execute(i, j, k, l, schema, true, false);
+                        }
                     }
                 }
             }
@@ -179,9 +183,10 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             boolean addComments = getAddComments();
             int dialectSelection = getDialectSelection();
             int concept = getConceptSelection();
+            int feature = getFeatureConceptSelection();
             String schema = getSchema();
             int modelSelection = getModelSelection();
-            execute(dialectSelection, modelSelection, concept, schema, addComments, true);
+            execute(dialectSelection, modelSelection, concept, feature, schema, addComments, true);
             return true;
         }
     }
