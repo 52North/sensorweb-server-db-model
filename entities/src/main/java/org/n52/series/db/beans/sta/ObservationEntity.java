@@ -20,6 +20,7 @@ package org.n52.series.db.beans.sta;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.common.Utils;
 
@@ -165,7 +166,8 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Column(name = "vertical_from", precision = 20, scale = 10, nullable = false)
     private BigDecimal verticalFrom = BigDecimal.ZERO;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    // TODO(specki): Check if lazy fetching can be used here
+    @ManyToOne(targetEntity = DatasetEntity.class, fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_dataset_id", foreignKey = @ForeignKey(name = "fk_dataset"))
     private AbstractDatasetEntity dataset;
 
@@ -350,18 +352,22 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
         this.samplingGeometry = samplingGeometry;
     }
 
+    @Override
     public BigDecimal getVerticalTo() {
         return verticalTo;
     }
 
+    @Override
     public void setVerticalTo(BigDecimal verticalTo) {
         this.verticalTo = verticalTo;
     }
 
+    @Override
     public BigDecimal getVerticalFrom() {
         return verticalFrom;
     }
 
+    @Override
     public void setVerticalFrom(BigDecimal verticalFrom) {
         this.verticalFrom = verticalFrom;
     }
