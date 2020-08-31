@@ -24,21 +24,12 @@ import org.n52.series.db.beans.sta.StaRelations.Datastream;
 import javax.persistence.Transient;
 import java.io.Serializable;
 
-public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable,
-        AbstractStaEntity,
-        HibernateRelations.HasPhenomenonTime,
-        Datastream<AbstractObservationEntity<T>>,
-        HibernateRelations.HasId,
-        HibernateRelations.HasIdentifier,
-        HibernateRelations.HasStaIdentifier,
-        HibernateRelations.HasResultTime,
-        HibernateRelations.HasValidTime<AbstractObservationEntity<T>>,
-        HibernateRelations.HasParameters,
-        HibernateRelations.HasName,
-        HibernateRelations.HasDescription,
-        HibernateRelations.HasSamplingGeometry,
-        HibernateRelations.HasFeature<AbstractObservationEntity<T>>,
-        HibernateRelations.HasDataset,
+public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable, AbstractStaEntity,
+        HibernateRelations.HasPhenomenonTime, Datastream<AbstractObservationEntity<T>>, HibernateRelations.HasId,
+        HibernateRelations.HasIdentifier, HibernateRelations.HasStaIdentifier, HibernateRelations.HasResultTime,
+        HibernateRelations.HasValidTime<AbstractObservationEntity<T>>, HibernateRelations.HasParameters,
+        HibernateRelations.HasName, HibernateRelations.HasDescription, HibernateRelations.HasSamplingGeometry,
+        HibernateRelations.HasFeature<AbstractObservationEntity<T>>, HibernateRelations.HasDataset,
         HibernateRelations.HasVerticalFromTo {
 
     private static final long serialVersionUID = -5478132580391608848L;

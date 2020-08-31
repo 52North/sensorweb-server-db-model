@@ -32,11 +32,13 @@ import java.util.StringJoiner;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
+import org.n52.hibernate.spatial.dialect.TimestampMySQL8SpatialDialectNoComments;
 import org.n52.hibernate.spatial.dialect.TimestampWithTimeZoneGeoDBDialectNoComments;
 import org.n52.hibernate.spatial.dialect.TimestampWithTimeZoneOracleSpatial10gDialectNoComments;
 import org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments;
-import org.n52.hibernate.spatial.dialect.TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments;
+import org.n52.hibernate.spatial.dialect.TimestampWithTimeZoneSqlServer2012SpatialDialectNoComments;
 import org.n52.hibernate.spatial.dialect.h2geodb.TimestampWithTimeZoneGeoDBDialect;
+import org.n52.hibernate.spatial.dialect.mysql.TimestampMySQL8SpatialDialect;
 import org.n52.hibernate.spatial.dialect.oracle.TimestampWithTimeZoneOracleSpatial10gDialect;
 import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
 import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
@@ -64,11 +66,10 @@ public abstract class AbstractGenerator {
                 return comments ? new TimestampWithTimeZoneGeoDBDialect()
                         : new TimestampWithTimeZoneGeoDBDialectNoComments();
             case MYSQL:
-                return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
-                        : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
+                return comments ? new TimestampMySQL8SpatialDialect() : new TimestampMySQL8SpatialDialectNoComments();
             case SQL_SERVER:
                 return comments ? new TimestampWithTimeZoneSqlServer2008SpatialDialect()
-                        : new TimestampWithTimeZoneSqlServer2008SpatialDialectNoComments();
+                        : new TimestampWithTimeZoneSqlServer2012SpatialDialectNoComments();
             case POSTGIS:
             default:
                 return comments ? new TimestampWithTimeZonePostgisPG95Dialect()
