@@ -67,6 +67,19 @@
                 <column name="fk_child_phenomenon_id" not-null="true" index="idx_phenomenon_child_phenomenon"/>
             </many-to-many>
         </set>
+       <set inverse="false" name="parameters" table="phenomenon_parameter" fetch="join">
+            <comment>Storage of relations between phenomenon and related parameter</comment>
+            <key not-null="true" foreign-key="fk_phenomenon_parameter_phenomenon">
+                <column name="fk_phenomenon_id"  index="idx_phenomenon_parameter_phenomenon">
+                    <comment>The reference to the phenomenon in the phenomenon table</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_phenomenon_parameter_parameter">
+                <column name="fk_parameter_id" index="idx_phenomenon_parameter_phenomenon_parameter">
+                    <comment>The reference to the parameter in the phenomenon parameter</comment>
+                </column>
+            </many-to-many>
+        </set>
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="phenomenon_i18n" inverse="true" fetch="select">
              <key column="fk_phenomenon_id" not-null="true" />

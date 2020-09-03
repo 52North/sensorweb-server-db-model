@@ -128,6 +128,19 @@
                 <comment>Reference to the temporally last observation in the observation table that belongs to this dataset.</comment>
             </column>
         </many-to-one>
+        <set inverse="false" name="parameters" table="dataset_parameter" fetch="join">
+            <comment>Storage of relations between dataset and related parameter</comment>
+            <key not-null="true" foreign-key="fk_dataset_parameter_dataset">
+                <column name="fk_dataset_id"  index="idx_dataset_parameter_dataset">
+                    <comment>The reference to the dataset in the dataset table</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_dataset_parameter_parameter">
+                <column name="fk_parameter_id" index="idx_dataset_parameter_dataset_parameter">
+                    <comment>The reference to the parameter in the dataset parameter</comment>
+                </column>
+            </many-to-many>
+        </set>
 
         <subclass extends="AbstractDatasetEntity" name="org.n52.series.db.beans.DatasetAggregationEntity" discriminator-value="aggregation">
             <!-- All neede properties are already included in the AbstractDatasetEntity-->
@@ -236,20 +249,6 @@
                     <comment>The codespace of the dataset name, reference to the codespace table. Can be null.</comment>
                 </column>
             </many-to-one>
-            <set inverse="false" name="parameters" table="dataset_parameter" cascade="remove">
-                <comment>Storage of relations between dataset and related parameter</comment>
-                <key not-null="true" foreign-key="fk_dataset_parameter">
-                    <column name="fk_dataset_id">
-                        <comment>The reference to the dataset in the dataset table</comment>
-                    </column>
-                </key>
-                <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity"
-                              foreign-key="fk_parameter_dataset">
-                    <column name="fk_parameter_id" index="idx_parameter_dataset">
-                        <comment>The reference to the parameter in the dataset parameter</comment>
-                    </column>
-                </many-to-many>
-            </set>
             <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile">
                 <column name="fk_value_profile_id" not-null="false" index="idx_dataset_value_profile">
                     <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>

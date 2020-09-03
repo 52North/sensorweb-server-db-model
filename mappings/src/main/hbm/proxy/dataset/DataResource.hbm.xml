@@ -108,22 +108,20 @@
                 </column>
             </property>
         </component>
-
         <!-- Or add only to specific subclasses -->
-        <set inverse="false" name="parameters" table="observation_parameter" fetch="join" cascade="remove">
-            <comment>Storage of relations between data/observation and related parameter</comment>
-            <key not-null="true" foreign-key="fk_observation_parameter">
-                <column name="fk_observation_id">
-                    <comment>The reference to the data/observation in the observation table</comment>
+        <set inverse="false" name="parameters" table="observation_parameter" fetch="join">
+            <comment>Storage of relations between observation and related parameter</comment>
+            <key not-null="true" foreign-key="fk_observation_parameter_observation">
+                <column name="fk_observation_id"  index="idx_observation_parameter_observation">
+                    <comment>The reference to the observation in the observation table</comment>
                 </column>
             </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_parameter_observation">
-                <column name="fk_parameter_id" index="idx_parameter_observation">
-                    <comment>The reference to the parameter in the data/observation parameter</comment>
+            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_observation_parameter_parameter">
+                <column name="fk_parameter_id" index="idx_observation_parameter_observation_parameter">
+                    <comment>The reference to the parameter in the observation parameter</comment>
                 </column>
             </many-to-many>
         </set>
-
         <!-- Comments are defined in the RelatedDataResource.hbm.xml -->
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
