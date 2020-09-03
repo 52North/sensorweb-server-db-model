@@ -45,7 +45,7 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
     private String location;
     private GeometryEntity geometryEntity;
     private FormatEntity locationEncoding;
-    private Set<PlatformEntity> things;
+    private Set<PlatformEntity> platforms;
     private Set<HistoricalLocationEntity> historicalLocations;
     private boolean processed;
 
@@ -88,17 +88,32 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
         this.geometryEntity = geometryEntity;
     }
 
-    public Set<PlatformEntity> getThings() {
-        return things;
+    public Set<PlatformEntity> getPlatforms() {
+        return platforms;
     }
 
-    public LocationEntity setThings(Set<PlatformEntity> thingEntities) {
-        this.things = thingEntities;
+    public LocationEntity setPlatforms(Set<PlatformEntity> platformEntities) {
+        this.platforms = platformEntities;
         return this;
     }
 
+    public boolean hasPlatforms() {
+        return getPlatforms() != null && !getPlatforms().isEmpty();
+    }
+
+    @Deprecated
+    public Set<PlatformEntity> getThings() {
+        return getPlatforms();
+    }
+
+    @Deprecated
+    public LocationEntity setThings(Set<PlatformEntity> platformEntities) {
+        return setPlatforms(platformEntities);
+    }
+
+    @Deprecated
     public boolean hasThings() {
-        return getThings() != null && !getThings().isEmpty();
+        return hasPlatforms();
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocations() {

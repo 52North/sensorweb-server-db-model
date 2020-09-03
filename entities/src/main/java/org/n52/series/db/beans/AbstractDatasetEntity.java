@@ -140,10 +140,12 @@ public class AbstractDatasetEntity extends DescribableEntity
         return getOffering() != null;
     }
 
+    @Override
     public PlatformEntity getPlatform() {
         return platform;
     }
 
+    @Override
     public void setPlatform(PlatformEntity platform) {
         this.platform = platform;
     }
@@ -339,16 +341,6 @@ public class AbstractDatasetEntity extends DescribableEntity
     @Override
     public void setProcessed(boolean processsed) {
         this.processed = processsed;
-    }
-
-    @Override
-    public void setThing(PlatformEntity thing) {
-        setPlatform(thing);
-    }
-
-    @Override
-    public PlatformEntity getThing() {
-        return getPlatform();
     }
 
     @Override

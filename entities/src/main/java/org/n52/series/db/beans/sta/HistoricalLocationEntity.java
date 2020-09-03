@@ -38,7 +38,8 @@ public class HistoricalLocationEntity extends DescribableEntity
     public static final String PROPERTY_IDENTIFIER = "identifier";
     public static final String PROPERTY_TIME = "time";
     public static final String PROPERTY_LOCATIONS = "locations";
-    public static final String PROPERTY_THING = "thing";
+    public static final String PROPERTY_PLATFORM = "platform";
+    public static final String PROPERTY_THING = PROPERTY_PLATFORM;
 
     private static final long serialVersionUID = 5564686026419270062L;
 
@@ -46,7 +47,7 @@ public class HistoricalLocationEntity extends DescribableEntity
 
     private Set<LocationEntity> locationEntities;
 
-    private PlatformEntity thingEntity;
+    private PlatformEntity platformEntity;
 
     private boolean processed;
 
@@ -69,16 +70,14 @@ public class HistoricalLocationEntity extends DescribableEntity
         this.locationEntities = locationEntities;
     }
 
-    public PlatformEntity getThing() {
-        return thingEntity;
+    @Override
+    public PlatformEntity getPlatform() {
+        return platformEntity;
     }
 
-    public void setThing(PlatformEntity thingEntity) {
-        this.thingEntity = thingEntity;
-    }
-
-    public boolean hasThing() {
-        return thingEntity != null;
+    @Override
+    public void setPlatform(PlatformEntity platformEntity) {
+        this.platformEntity = platformEntity;
     }
 
     @Override
@@ -93,7 +92,7 @@ public class HistoricalLocationEntity extends DescribableEntity
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getTime(), getThing());
+        return Objects.hash(super.hashCode(), getTime(), getPlatform());
     }
 
     @Override
@@ -103,7 +102,7 @@ public class HistoricalLocationEntity extends DescribableEntity
         }
         HistoricalLocationEntity other = (HistoricalLocationEntity) obj;
         return super.equals(other) && Objects.equals(getTime(), other.getTime())
-                && Objects.equals(getThing(), other.getThing());
+                && Objects.equals(getPlatform(), other.getPlatform());
     }
 
 }

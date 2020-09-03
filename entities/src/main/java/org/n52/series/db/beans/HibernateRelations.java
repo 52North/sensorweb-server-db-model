@@ -1177,14 +1177,31 @@ public interface HibernateRelations {
         void setProcessed(boolean processsed);
     }
 
-    interface HasThing {
+    interface HasPlatform {
 
-        void setThing(PlatformEntity thing);
+        void setPlatform(PlatformEntity platform);
 
-        PlatformEntity getThing();
+        PlatformEntity getPlatform();
+
+        default boolean hasPlatform() {
+            return getPlatform() != null;
+        }
+
+    }
+
+    @Deprecated
+    interface HasThing extends HasPlatform {
+
+        default void setThing(PlatformEntity thing) {
+            setPlatform(thing);
+        }
+
+        default PlatformEntity getThing() {
+            return getPlatform();
+        }
 
         default boolean hasThing() {
-            return getThing() != null;
+            return hasPlatform();
         }
 
     }
