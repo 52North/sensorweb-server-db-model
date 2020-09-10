@@ -19,7 +19,7 @@
             </column>
         </discriminator>
 
-        <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity">
+        <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity" lazy="proxy">
             <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>

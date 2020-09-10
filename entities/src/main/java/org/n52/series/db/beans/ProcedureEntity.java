@@ -25,8 +25,8 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
 import java.util.Set;
 
-public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
-        implements HasProcedureHistory, HasProcedureDescriptionFormat, HasGeometry, IsStaEntity {
+public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> implements HasProcedureHistory,
+        HasProcedureDescriptionFormat, HasGeometry, HibernateRelations.HasAbstractDatasets, IsStaEntity {
 
     public static final String PROPERTY_REFERENCE = "reference";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
@@ -52,6 +52,8 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     private Set<ProcedureHistoryEntity> procedureHistory;
 
     private GeometryEntity geometryEntity;
+
+    private Set<AbstractDatasetEntity> datasets;
 
     public boolean isReference() {
         return reference;
@@ -150,6 +152,16 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity>
     @Override
     public void setGeometryEntity(GeometryEntity geometryEntity) {
         this.geometryEntity = geometryEntity;
+    }
+
+    @Override
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+        this.datasets = datasets;
+    }
+
+    @Override
+    public Set<AbstractDatasetEntity> getDatasets() {
+        return datasets;
     }
 
     @Override
