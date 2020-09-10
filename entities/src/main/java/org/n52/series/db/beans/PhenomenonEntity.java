@@ -14,15 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
 
-import java.util.Objects;
+package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
-public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity> implements IsStaEntity {
+import java.util.Objects;
+import java.util.Set;
+
+public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity>
+        implements HibernateRelations.HasAbstractDatasets, IsStaEntity {
 
     private static final long serialVersionUID = 2302654989683191424L;
+
+    private Set<AbstractDatasetEntity> datasets;
+
+    @Override
+    public void setDatasets(Set<AbstractDatasetEntity> datastreams) {
+        this.datasets = datastreams;
+    }
+
+    @Override
+    public Set<AbstractDatasetEntity> getDatasets() {
+        return datasets;
+    }
 
     @Override
     public int hashCode() {

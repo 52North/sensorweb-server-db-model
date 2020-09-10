@@ -44,7 +44,12 @@
                 <comment>A short description of the phenomenon</comment>
             </column>
         </property>
-
+        <set name="datasets" table="dataset" inverse="true" lazy="true">
+            <key foreign-key="fk_dataset_phenomenon">
+                <column name="fk_phenomenon_id" not-null="true"/>
+            </key>
+            <one-to-many class="DatasetEntity" />
+        </set>
         <set name="parents" table="composite_phenomenon" inverse="false">
             <comment>Storage of hierarchies between phenomenon, e.g. for composite phenomenon like weather with temperature, windspeed, ...</comment>
             <key foreign-key="fk_phenomenon_child">
