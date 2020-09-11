@@ -20,6 +20,9 @@ package org.n52.series.db.beans;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
 import org.n52.series.db.beans.sta.AbstractObservationEntity;
+import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.PartyEntity;
+import org.n52.series.db.beans.sta.ProjectEntity;
 import org.n52.series.db.common.Utils;
 
 import java.io.Serializable;
@@ -49,6 +52,10 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
     public static final String PROPERTY_UNIT = "unit";
     public static final String PROPERTY_AGGREGATION = "aggregation";
+
+    public static final String PROPERTY_LICENSE = "license";
+    public static final String PROPERTY_PARTY = "party";
+    public static final String PROPERTY_PROJECT = "project";
     private static final long serialVersionUID = 4178505006632345142L;
 
     private AbstractFeatureEntity<?> feature;
@@ -73,6 +80,14 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     private Set<AbstractObservationEntity> observations;
     private AbstractDatasetEntity aggregation;
+
+    /**
+     * STA CitSci Extension Relations
+     */
+    private LicenseEntity license;
+
+    private PartyEntity party;
+    private ProjectEntity project;
     private boolean processed;
 
     public PhenomenonEntity getPhenomenon() {
@@ -363,6 +378,30 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     public boolean isSetAggregation() {
         return getAggregation() != null;
+    }
+
+    public LicenseEntity getLicense() {
+        return license;
+    }
+
+    public void setLicense(LicenseEntity license) {
+        this.license = license;
+    }
+
+    public PartyEntity getParty() {
+        return party;
+    }
+
+    public void setParty(PartyEntity party) {
+        this.party = party;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
     }
 
     @Override

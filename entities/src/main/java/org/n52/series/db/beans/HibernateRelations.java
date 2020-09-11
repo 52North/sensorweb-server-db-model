@@ -55,6 +55,9 @@ public interface HibernateRelations {
     String C = "children";
 
     interface HasId {
+
+        String ID = "id";
+
         Long getId();
 
         void setId(Long id);
@@ -94,7 +97,7 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasStaIdentifier extends HasIdentifier {
+    interface HasStaIdentifier {
 
         String STA_IDENTIFIER = "staIdentifier";
 
