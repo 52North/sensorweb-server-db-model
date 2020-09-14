@@ -85,7 +85,6 @@ public class AbstractDatasetEntity extends DescribableEntity
      * STA CitSci Extension Relations
      */
     private LicenseEntity license;
-
     private PartyEntity party;
     private ProjectEntity project;
     private boolean processed;
