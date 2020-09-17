@@ -777,6 +777,10 @@ public interface HibernateRelations {
 
         void setParameters(Set<ParameterEntity<?>> parameters);
 
+        void addParameters(Set<ParameterEntity<?>> parameters);
+
+        void addParameter(ParameterEntity<?> parameter);
+
         default boolean hasParameters() {
             return (getParameters() != null) && !getParameters().isEmpty();
         }
