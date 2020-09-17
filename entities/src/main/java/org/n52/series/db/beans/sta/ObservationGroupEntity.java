@@ -18,12 +18,19 @@
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
@@ -36,10 +43,12 @@ import java.util.Set;
 @Entity
 @Table(name = "observationgroup")
 @SequenceGenerator(name = "observation_group_seq", allocationSize = 1)
-public class ObservationGroupEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
-        HibernateRelations.HasStaIdentifier, HibernateRelations.HasDescription, HibernateRelations.IsProcessed {
+public class ObservationGroupEntity
+        implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasStaIdentifier,
+        HibernateRelations.HasDescription, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROP_ENTITIES = "entities";
+    public static final String PROP_PARENT = "parent";
 
     @Id
     @Column(nullable = false, unique = true)
@@ -63,6 +72,14 @@ public class ObservationGroupEntity implements HibernateRelations.HasId, Hiberna
 
     @OneToMany(mappedBy = ObservationRelationEntity.PROPERTY_GROUP)
     private Set<ObservationRelationEntity> entities;
+
+    @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinTable(name = "observationgroup_parameter",
+            inverseForeignKey = @ForeignKey(name = "fk_observationgroup_parameter"),
+            joinColumns = { @JoinColumn(name = "fk_observationgroup_id") },
+            foreignKey = @ForeignKey(name = "fk_parameter_observationgroup"),
+            inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
+    private Set<ParameterEntity<?>> parameters;
 
     @Transient
     private boolean processed;
@@ -119,5 +136,15 @@ public class ObservationGroupEntity implements HibernateRelations.HasId, Hiberna
     @Override
     public void setProcessed(boolean processed) {
         this.processed = processed;
+    }
+
+    @Override
+    public Set<ParameterEntity<?>> getParameters() {
+        return this.parameters;
+    }
+
+    @Override
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
+        this.parameters = parameters;
     }
 }
