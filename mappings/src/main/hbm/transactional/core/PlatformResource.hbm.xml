@@ -76,9 +76,6 @@
             </key>
             <one-to-many class="DatasetEntity" />
         </set>
-        <property name="properties" type="text">
-            <column name="properties" not-null="false"/>
-        </property>
         <set name="translations" table="platform_i18n" inverse="true" fetch="select">
             <key column="fk_platform_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />

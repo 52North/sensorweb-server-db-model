@@ -18,7 +18,6 @@
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
@@ -30,46 +29,13 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_LOCATIONS = "locations";
-    public static final String PROPERTY_PROPERTIES = "properties";
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
     public static final String PROPERTY_DATASETS = "datasets";
-
     private static final long serialVersionUID = 3615089936334873353L;
-
-    private String properties;
-    private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<AbstractDatasetEntity> datasets;
     private boolean processed;
-
-    public PlatformEntity setProperties(String properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    public String getProperties() {
-        return properties;
-    }
-
-    public boolean hasProperties() {
-        return getProperties() != null && !getProperties().isEmpty();
-    }
-
-    @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
-    }
 
     @Override
     public Set<LocationEntity> getLocations() {
