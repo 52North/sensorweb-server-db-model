@@ -35,6 +35,8 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
 
     public static final String PROPERTY_MEASURING_TIME_END = "measuringTimeEnd";
 
+    public static final String PROPERTY_PRODUCER = "producer";
+
     private static final long serialVersionUID = 2525309717383048842L;
 
     private String producer;
