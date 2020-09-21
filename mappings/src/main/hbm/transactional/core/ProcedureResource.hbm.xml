@@ -63,6 +63,12 @@
                <!-- <comment>Flag that indicates if the procedure is an aggregated process or a system.</comment> -->
             </column>
         </property>
+        <set name="datasets" table="dataset" inverse="true" lazy="true">
+            <key foreign-key="fk_dataset_procedure">
+                <column name="fk_procedure_id" not-null="true"/>
+            </key>
+            <one-to-many class="DatasetEntity" />
+        </set>
         <set name="parents" table="procedure_hierarchy" inverse="false" fetch="select">
             <!-- <comment>Storage of hierarchies between procedures</comment> -->
             <key not-null="true" foreign-key="fk_procedure_child">
