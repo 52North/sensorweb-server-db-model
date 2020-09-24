@@ -24,8 +24,7 @@ import org.n52.series.db.beans.parameter.ParameterFactory;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class PlatformParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<PlatformParameterEntity<?>> {
+public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PLATFORM = "platform";
     public static final String PROP_PLATFORM_ID = "platformId";
@@ -48,28 +47,6 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T>
 
     public void setPlatformId(long platformId) {
         this.platformId = platformId;
-    }
-
-    @Override
-    public PlatformParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new PlatformJsonParameterEntity();
-            case XML:
-                return new PlatformXmlParameterEntity();
-            case TEXT:
-                return new PlatformTextParameterEntity();
-            case BOOLEAN:
-                return new PlatformBooleanParameterEntity();
-            case CATEGORY:
-                return new PlatformCategoryParameterEntity();
-            case COUNT:
-                return new PlatformCountParameterEntity();
-            case QUANTITY:
-                return new PlatformQuantityParameterEntity();
-            default:
-                return null;
-        }
     }
 
 }

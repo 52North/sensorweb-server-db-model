@@ -23,35 +23,13 @@ import org.n52.series.db.beans.sta.LocationEntity;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class LocationParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<LocationParameterEntity<?>> {
+public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_LOCATION = "location";
     public static final String PROP_LOCATION_ID = "locationId";
 
     private LocationEntity location;
     private long locationId;
-
-    public LocationParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new LocationJsonParameterEntity();
-            case XML:
-                return new LocationXmlParameterEntity();
-            case TEXT:
-                return new LocationTextParameterEntity();
-            case BOOLEAN:
-                return new LocationBooleanParameterEntity();
-            case CATEGORY:
-                return new LocationCategoryParameterEntity();
-            case COUNT:
-                return new LocationCountParameterEntity();
-            case QUANTITY:
-                return new LocationQuantityParameterEntity();
-            default:
-                return null;
-        }
-    }
 
     public LocationEntity getLocation() {
         return location;

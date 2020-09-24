@@ -24,35 +24,13 @@ import org.n52.series.db.beans.parameter.ParameterFactory;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<PhenomenonParameterEntity<?>> {
+public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T>{
 
     public static final String PROP_PHENOMENON = "phenomenon";
     public static final String PROP_PHENOMENON_ID = "phenomenonId";
 
     private PhenomenonEntity phenomenon;
     private long phenomenonId;
-
-    public PhenomenonParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new PhenomenonJsonParameterEntity();
-            case XML:
-                return new PhenomenonXmlParameterEntity();
-            case TEXT:
-                return new PhenomenonTextParameterEntity();
-            case BOOLEAN:
-                return new PhenomenonBooleanParameterEntity();
-            case CATEGORY:
-                return new PhenomenonCategoryParameterEntity();
-            case COUNT:
-                return new PhenomenonCountParameterEntity();
-            case QUANTITY:
-                return new PhenomenonQuantityParameterEntity();
-            default:
-                return null;
-        }
-    }
 
     public PhenomenonEntity getPhenomenon() {
         return phenomenon;

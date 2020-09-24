@@ -23,35 +23,13 @@ import org.n52.series.db.beans.parameter.ParameterFactory;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<ProcedureParameterEntity<?>> {
+public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PROCEDURE = "procedure";
     public static final String PROP_PROCEDURE_ID = "procedureId";
 
     private ProcedureEntity procedure;
     private long procedureId;
-
-    public ProcedureParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new ProcedureJsonParameterEntity();
-            case XML:
-                return new ProcedureXmlParameterEntity();
-            case TEXT:
-                return new ProcedureTextParameterEntity();
-            case BOOLEAN:
-                return new ProcedureBooleanParameterEntity();
-            case CATEGORY:
-                return new ProcedureCategoryParameterEntity();
-            case COUNT:
-                return new ProcedureCountParameterEntity();
-            case QUANTITY:
-                return new ProcedureQuantityParameterEntity();
-            default:
-                return null;
-        }
-    }
 
     public ProcedureEntity getProcedure() {
         return procedure;

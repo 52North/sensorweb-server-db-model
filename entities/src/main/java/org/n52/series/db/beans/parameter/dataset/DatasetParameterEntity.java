@@ -23,35 +23,13 @@ import org.n52.series.db.beans.parameter.ParameterFactory;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class DatasetParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<DatasetParameterEntity<?>> {
+public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_DATASET = "observation";
     public static final String PROP_DATASET_ID = "observationId";
 
     private AbstractDatasetEntity dataset;
     private long datasetId;
-
-    public DatasetParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new DatasetJsonParameterEntity();
-            case XML:
-                return new DatasetXmlParameterEntity();
-            case TEXT:
-                return new DatasetTextParameterEntity();
-            case BOOLEAN:
-                return new DatasetBooleanParameterEntity();
-            case CATEGORY:
-                return new DatasetCategoryParameterEntity();
-            case COUNT:
-                return new DatasetCountParameterEntity();
-            case QUANTITY:
-                return new DatasetQuantityParameterEntity();
-            default:
-                return null;
-        }
-    }
 
     public AbstractDatasetEntity getDataset() {
         return dataset;

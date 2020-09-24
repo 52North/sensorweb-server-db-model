@@ -14,44 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter.observation;
 
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.parameter.ParameterFactory;
 import org.n52.series.db.beans.sta.ObservationEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class ObservationParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<ObservationParameterEntity<?>> {
+public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_OBSERVATION = "observation";
     public static final String PROP_OBSERVATION_ID = "observationId";
 
     private ObservationEntity observation;
     private long observationId;
-
-    public ObservationParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new ObservationJsonParameterEntity();
-            case XML:
-                return new ObservationXmlParameterEntity();
-            case TEXT:
-                return new ObservationTextParameterEntity();
-            case BOOLEAN:
-                return new ObservationBooleanParameterEntity();
-            case CATEGORY:
-                return new ObservationCategoryParameterEntity();
-            case COUNT:
-                return new ObservationCountParameterEntity();
-            case QUANTITY:
-                return new ObservationQuantityParameterEntity();
-            default:
-                return null;
-        }
-    }
 
     public ObservationEntity getObservation() {
         return observation;

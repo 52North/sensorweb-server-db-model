@@ -23,35 +23,13 @@ import org.n52.series.db.beans.parameter.ParameterFactory;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class FeatureParameterEntity<T> extends ParameterEntity<T>
-    implements ParameterFactory<FeatureParameterEntity<?>> {
+public abstract class FeatureParameterEntity<T> extends ParameterEntity<T>  {
 
     public static final String PROP_FEATURE = "feature";
     public static final String PROP_FEATURE_ID = "featureId";
 
     private AbstractFeatureEntity feature;
     private long featureId;
-
-    public FeatureParameterEntity<?> from(ParameterType type) {
-        switch (type) {
-            case JSON:
-                return new FeatureJsonParameterEntity();
-            case XML:
-                return new FeatureXmlParameterEntity();
-            case TEXT:
-                return new FeatureTextParameterEntity();
-            case BOOLEAN:
-                return new FeatureBooleanParameterEntity();
-            case CATEGORY:
-                return new FeatureCategoryParameterEntity();
-            case COUNT:
-                return new FeatureCountParameterEntity();
-            case QUANTITY:
-                return new FeatureQuantityParameterEntity();
-            default:
-                return null;
-        }
-    }
 
     public AbstractFeatureEntity getFeature() {
         return feature;
