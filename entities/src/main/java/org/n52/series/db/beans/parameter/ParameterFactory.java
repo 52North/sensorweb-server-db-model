@@ -220,12 +220,12 @@ public class ParameterFactory {
         return null;
     }
 
-    enum EntityType {
+    public enum EntityType {
         PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION
     }
 
 
-    enum ValueType {
+    public enum ValueType {
         BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY
     }
 
