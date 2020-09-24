@@ -16,13 +16,9 @@
  */
 package org.n52.series.db.beans.parameter;
 
-public class ParameterJsonEntity extends ParameterEntity<String> {
-
-    private static final long serialVersionUID = 3300965770609382377L;
-
-    @Override
-    public String getValueAsString() {
-        return getValue();
-    }
+/**
+ * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ */
+public interface CountParameterEntity {
 
 }

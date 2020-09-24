@@ -43,18 +43,12 @@
                 <comment>A short description of the platform</comment>
             </column>
         </property>
-        <set inverse="false" name="parameters" table="platform_parameter" fetch="join">
-            <comment>Storage of relations between platform and related parameter</comment>
-            <key not-null="true" foreign-key="fk_platform_parameter_platform">
-                <column name="fk_platform_id"  index="idx_platform_parameter_platform">
-                    <comment>The reference to the platform in the platform table</comment>
-                </column>
+
+        <set name="parameters" table="platform_parameter" inverse="true" lazy="true">
+            <key foreign-key="fk_platform_parameter">
+                <column name="fk_platform_id" not-null="true"/>
             </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_platform_parameter_parameter">
-                <column name="fk_parameter_id" index="idx_platform_parameter_platform_parameter">
-                    <comment>The reference to the parameter in the platform parameter</comment>
-                </column>
-            </many-to-many>
+            <one-to-many class="org.n52.series.db.beans.parameter.platform.PlatformParameterEntity" />
         </set>
         <set name="locations" table="platform_location" inverse="false">
             <key foreign-key="fk_platform_location">
@@ -76,9 +70,6 @@
             </key>
             <one-to-many class="DatasetEntity" />
         </set>
-        <property name="properties" type="text">
-            <column name="properties" not-null="false"/>
-        </property>
         <set name="translations" table="platform_i18n" inverse="true" fetch="select">
             <key column="fk_platform_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />

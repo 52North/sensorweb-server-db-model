@@ -23,6 +23,7 @@ import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
+import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -36,49 +37,23 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
 
     private static final long serialVersionUID = 3615089936334873353L;
 
-    private String properties;
     private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<AbstractDatasetEntity> datasets;
     private boolean processed;
 
-    public PlatformEntity setProperties(String properties) {
-        this.properties = properties;
-        return this;
-    }
-
-    public String getProperties() {
-        return properties;
-    }
-
-    public boolean hasProperties() {
-        return getProperties() != null && !getProperties().isEmpty();
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
 
     @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
-    }
-
-    @Override
-    public Set<LocationEntity> getLocations() {
-        return locations;
-    }
-
-    @Override
-    public void setLocations(Set<LocationEntity> locations) {
-        this.locations = locations;
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof PlatformEntity)) {
+            return false;
+        }
+        return super.equals(obj);
     }
 
     public Set<HistoricalLocationEntity> getHistoricalLocations() {
@@ -96,14 +71,6 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         }
         historicalLocations.add(historicalLocation);
         return this;
-    }
-
-    public Set<AbstractDatasetEntity> getDatasets() {
-        return datasets;
-    }
-
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
     }
 
     public boolean hasDatasets() {
@@ -124,16 +91,48 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         this.processed = processsed;
     }
 
-    @Override
-    public int hashCode() {
-        return super.hashCode();
+    public Set<AbstractDatasetEntity> getDatasets() {
+        return datasets;
+    }
+
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+        this.datasets = datasets;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof PlatformEntity)) {
-            return false;
-        }
-        return super.equals(obj);
+    public Set<ParameterEntity<?>> getParameters() {
+        return parameters;
     }
+
+    @Override
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
+        this.parameters = parameters;
+    }
+
+    @Override
+    public void addParameters(Set<ParameterEntity<?>> parameters) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.addAll(parameters);
+    }
+
+    @Override
+    public void addParameter(ParameterEntity<?> parameter) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.add(parameter);
+    }
+
+    @Override
+    public Set<LocationEntity> getLocations() {
+        return locations;
+    }
+
+    @Override
+    public void setLocations(Set<LocationEntity> locations) {
+        this.locations = locations;
+    }
+
 }

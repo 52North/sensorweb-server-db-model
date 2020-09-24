@@ -37,18 +37,11 @@
         <many-to-one name="locationEncoding" class="org.n52.series.db.beans.FormatEntity" foreign-key="fk_location_format">
             <column name="fk_format_id" not-null="true" index="idx_location_format"/>
         </many-to-one>
-        <set inverse="false" name="parameters" table="location_parameter" fetch="join">
-            <comment>Storage of relations between location and related parameter</comment>
-            <key not-null="true" foreign-key="fk_location_parameter_location">
-                <column name="fk_location_id"  index="idx_location_parameter_location">
-                    <comment>The reference to the location in the location table</comment>
-                </column>
+        <set name="parameters" table="location_parameter" inverse="true" lazy="true">
+            <key foreign-key="fk_location_parameter">
+                <column name="fk_location_id" not-null="true"/>
             </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_location_parameter_parameter">
-                <column name="fk_parameter_id" index="idx_location_parameter_location_parameter">
-                    <comment>The reference to the parameter in the location parameter</comment>
-                </column>
-            </many-to-many>
+            <one-to-many class="org.n52.series.db.beans.parameter.location.LocationParameterEntity" />
         </set>
         <set name="platforms" table="platform_location" inverse="true">
             <key foreign-key="fk_location_platform">

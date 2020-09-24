@@ -14,15 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.parameter;
+package org.n52.series.db.beans.parameter.dataset;
 
-public class ParameterTextEntity extends ParameterEntity<String> {
+import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 
-    private static final long serialVersionUID = 3300965770609382377L;
+/**
+ * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ */
+public class DatasetBooleanParameterEntity extends DatasetParameterEntity<Boolean>
+    implements BooleanParameterEntity {
+
+    private static final long serialVersionUID = -1280123654095577480L;
 
     @Override
     public String getValueAsString() {
-        return getValue();
+        return getValue().toString();
     }
 
 }

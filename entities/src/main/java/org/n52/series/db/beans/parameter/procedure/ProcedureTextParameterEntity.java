@@ -14,15 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.parameter;
+package org.n52.series.db.beans.parameter.procedure;
 
-public class ParameterCountEntity extends ParameterEntity<Integer> {
+import org.n52.series.db.beans.parameter.TextParameterEntity;
 
-    private static final long serialVersionUID = -7778025481981408886L;
+/**
+ * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ */
+public class ProcedureTextParameterEntity extends ProcedureParameterEntity<String> implements TextParameterEntity {
+
+    private static final long serialVersionUID = 3300965770609382377L;
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return getValue();
     }
 
 }

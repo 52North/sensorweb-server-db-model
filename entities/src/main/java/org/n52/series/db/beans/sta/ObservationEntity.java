@@ -21,10 +21,10 @@ import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.parameter.observation.ObservationParameterEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.common.Utils;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
@@ -37,9 +37,8 @@ import javax.persistence.Index;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -175,11 +174,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Column(name = "fk_dataset_id", updatable = false, insertable = false, nullable = false)
     private Long datasetId;
 
-    @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "observation_parameter", inverseForeignKey = @ForeignKey(name = "fk_observation_parameter"),
-            joinColumns = { @JoinColumn(name = "fk_observation_id") },
-            foreignKey = @ForeignKey(name = "fk_parameter_observation"),
-            inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
+    @OneToMany(mappedBy = "observation", targetEntity = ObservationParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
     @Transient
