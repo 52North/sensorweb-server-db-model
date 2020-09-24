@@ -252,7 +252,7 @@
                     <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>
                 </column>
             </many-to-one>
-            <set inverse="true" name="tags" table="tag_dataset">
+            <set name="tags" table="tag_dataset">
                 <comment>Storage of relations between dataset and related tags</comment>
                 <key not-null="true" foreign-key="fk_dataset_tag">
                     <column name="fk_dataset_id">

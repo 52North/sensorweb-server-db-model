@@ -254,7 +254,7 @@
                     </column>
                 </many-to-one>
             </component>
-            <set inverse="true" name="tags" table="tag_dataset">
+            <set name="tags" table="tag_dataset">
                 <comment>Storage of relations between dataset and related tags</comment>
                 <key not-null="true" foreign-key="fk_dataset_tag">
                     <column name="fk_dataset_id">

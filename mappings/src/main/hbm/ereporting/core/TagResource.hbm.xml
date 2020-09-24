@@ -24,7 +24,7 @@
                 <comment>A short description of the tag</comment>
             </column>
         </property>
-        <set name="datasets" table="tag_dataset" inverse="false">
+        <set name="datasets" table="tag_dataset">
             <key foreign-key="fk_tag_dataset">
                 <column name="fk_tag_id" not-null="true"/>
             </key>

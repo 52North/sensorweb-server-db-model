@@ -55,12 +55,12 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.junit>5.6.2</version.junit>
+        <version.junit>5.7.0</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>23.2</geotools.version>
+        <geotools.version>24.0</geotools.version>
         <geolatte.version>1.6.0</geolatte.version>
         <hibernate.version>5.4.20.Final</hibernate.version>
-        <spring-boot.version>2.3.3.RELEASE</spring-boot.version>
+        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -250,21 +250,10 @@
 
             <!-- Testing -->
             <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-api</artifactId>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
                 <version>${version.junit}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-engine</artifactId>
-                <version>${version.junit}</version>
-                <scope>test</scope>
-            </dependency>
-            <dependency>
-                <groupId>org.junit.jupiter</groupId>
-                <artifactId>junit-jupiter-params</artifactId>
-                <version>${version.junit}</version>
+                <type>pom</type>
                 <scope>test</scope>
             </dependency>
             <dependency>
