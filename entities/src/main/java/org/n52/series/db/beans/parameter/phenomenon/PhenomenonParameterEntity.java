@@ -19,12 +19,11 @@ package org.n52.series.db.beans.parameter.phenomenon;
 
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.parameter.ParameterFactory;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T>{
+public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PHENOMENON = "phenomenon";
     public static final String PROP_PHENOMENON_ID = "phenomenonId";

@@ -19,7 +19,6 @@ package org.n52.series.db.beans.parameter.platform;
 
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.parameter.ParameterFactory;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>

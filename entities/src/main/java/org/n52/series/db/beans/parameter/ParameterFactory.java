@@ -216,8 +216,9 @@ public class ParameterFactory {
                     default:
                         return null;
                 }
+            default:
+                return null;
         }
-        return null;
     }
 
     public enum EntityType {
