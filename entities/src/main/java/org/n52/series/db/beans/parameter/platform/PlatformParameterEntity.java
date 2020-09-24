@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter.platform;
 
 import org.n52.series.db.beans.PlatformEntity;
@@ -23,7 +24,8 @@ import org.n52.series.db.beans.parameter.ParameterFactory;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
+public abstract class PlatformParameterEntity<T> extends ParameterEntity<T>
+    implements ParameterFactory<PlatformParameterEntity<?>> {
 
     public static final String PROP_PLATFORM = "platform";
     public static final String PROP_PLATFORM_ID = "platformId";
@@ -48,30 +50,26 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
         this.platformId = platformId;
     }
 
-    public static class PlatformParameterEntityFactory implements ParameterFactory<PlatformParameterEntity<?>> {
-
-        @Override
-        public PlatformParameterEntity<?> from(ParameterType type) {
-            switch (type) {
-                case JSON:
-                    return new PlatformJsonParameterEntity();
-                case XML:
-                    return new PlatformXmlParameterEntity();
-                case TEXT:
-                    return new PlatformTextParameterEntity();
-                case BOOLEAN:
-                    return new PlatformBooleanParameterEntity();
-                case CATEGORY:
-                    return new PlatformCategoryParameterEntity();
-                case COUNT:
-                    return new PlatformCountParameterEntity();
-                case QUANTITY:
-                    return new PlatformQuantityParameterEntity();
-                default:
-                    return null;
-            }
+    @Override
+    public PlatformParameterEntity<?> from(ParameterType type) {
+        switch (type) {
+            case JSON:
+                return new PlatformJsonParameterEntity();
+            case XML:
+                return new PlatformXmlParameterEntity();
+            case TEXT:
+                return new PlatformTextParameterEntity();
+            case BOOLEAN:
+                return new PlatformBooleanParameterEntity();
+            case CATEGORY:
+                return new PlatformCategoryParameterEntity();
+            case COUNT:
+                return new PlatformCountParameterEntity();
+            case QUANTITY:
+                return new PlatformQuantityParameterEntity();
+            default:
+                return null;
         }
-
     }
 
 }
