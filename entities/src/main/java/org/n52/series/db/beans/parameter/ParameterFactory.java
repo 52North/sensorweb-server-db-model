@@ -17,6 +17,13 @@
 
 package org.n52.series.db.beans.parameter;
 
+import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.PhenomenonEntity;
+import org.n52.series.db.beans.PlatformEntity;
+import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetCategoryParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetComplexParameterEntity;
@@ -73,6 +80,7 @@ import org.n52.series.db.beans.parameter.procedure.ProcedureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureTextParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureXmlParameterEntity;
+import org.n52.series.db.beans.sta.LocationEntity;
 
 /**
  * Denotes Classes that can create concrete parameter entities.
@@ -80,6 +88,35 @@ import org.n52.series.db.beans.parameter.procedure.ProcedureXmlParameterEntity;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class ParameterFactory {
+
+    /**
+     * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter
+     *
+     * @param valueType
+     *            type of the value
+     * @param entity
+     *            the entity
+     * @return concrete class
+     */
+    public static ParameterEntity<?> from(DescribableEntity entity, ValueType valueType) {
+        EntityType entityType = null;
+        if (entity instanceof PhenomenonEntity) {
+            entityType = EntityType.PHENOMENON;
+        } else if (entity instanceof ProcedureEntity) {
+            entityType = EntityType.PROCEDURE;
+        } else if (entity instanceof AbstractDatasetEntity) {
+            entityType = EntityType.DATASET;
+        } else if (entity instanceof AbstractFeatureEntity) {
+            entityType = EntityType.FEATURE;
+        } else if (entity instanceof DataEntity) {
+            entityType = EntityType.OBSERVATION;
+        } else if (entity instanceof LocationEntity) {
+            entityType = EntityType.LOCATION;
+        } else if (entity instanceof PlatformEntity) {
+            entityType = EntityType.PLATFORM;
+        }
+        return entityType != null ? from(entityType, valueType) : null;
+    }
 
     /**
      * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter

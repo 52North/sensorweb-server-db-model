@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
 public class FeatureComplexParameterEntity extends FeatureParameterEntity<Set<FeatureParameterEntity<?>>>
-        implements ComplexParameterEntity {
+        implements ComplexParameterEntity<Set<FeatureParameterEntity<?>>> {
 
     private static final long serialVersionUID = -5166758396873257962L;
 

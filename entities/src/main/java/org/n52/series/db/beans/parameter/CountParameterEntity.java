@@ -19,6 +19,6 @@ package org.n52.series.db.beans.parameter;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public interface CountParameterEntity {
+public interface CountParameterEntity extends ValuedParameter<Integer> {
 
 }

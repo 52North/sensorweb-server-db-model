@@ -19,6 +19,6 @@ package org.n52.series.db.beans.parameter;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public interface ComplexParameterEntity {
+public interface ComplexParameterEntity<T> extends ValuedParameter<T> {
 
 }
