@@ -17,13 +17,13 @@
 
 package org.n52.series.db.beans.parameter;
 
-import org.n52.series.db.beans.IdEntity;
-
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+
+import org.n52.series.db.beans.IdEntity;
 
 public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T, ParameterEntity<T>> {
 

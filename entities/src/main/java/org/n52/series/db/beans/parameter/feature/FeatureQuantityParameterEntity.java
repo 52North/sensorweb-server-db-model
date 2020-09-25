@@ -16,17 +16,17 @@
  */
 package org.n52.series.db.beans.parameter.feature;
 
-import org.n52.series.db.beans.UnitEntity;
-import org.n52.series.db.beans.parameter.QuantityParameterEntity;
-
 import java.math.BigDecimal;
 import java.util.Map;
+
+import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class FeatureQuantityParameterEntity extends FeatureParameterEntity<BigDecimal>
-    implements QuantityParameterEntity {
+        implements QuantityParameterEntity {
 
     private static final long serialVersionUID = 7528516075676290716L;
 

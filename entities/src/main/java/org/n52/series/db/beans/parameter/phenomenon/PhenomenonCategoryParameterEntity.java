@@ -17,16 +17,16 @@
 
 package org.n52.series.db.beans.parameter.phenomenon;
 
+import java.util.Map;
+
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.CategoryParameterEntity;
-
-import java.util.Map;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class PhenomenonCategoryParameterEntity extends PhenomenonParameterEntity<String>
-    implements CategoryParameterEntity {
+        implements CategoryParameterEntity {
 
     private static final long serialVersionUID = -6262887605542676492L;
 

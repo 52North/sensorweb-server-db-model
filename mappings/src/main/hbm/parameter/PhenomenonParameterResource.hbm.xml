@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hibernate-mapping package="org.n52.series.db.beans.parameter"
+<hibernate-mapping package="org.n52.series.db.beans.parameter.phenomenon"
                    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonParameterEntity" abstract="true"
+    <class name="PhenomenonParameterEntity" abstract="true"
            table="phenomenon_parameter"
            check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
         <comment>Storage for additional information for platforms</comment>
@@ -47,7 +47,7 @@
         </property>
 
         <subclass discriminator-value="bool" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonBooleanParameterEntity">
+                  name="PhenomenonBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>Storage of a boolean parameter value.</comment>
@@ -56,7 +56,7 @@
         </subclass>
 
         <subclass discriminator-value="category" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonCategoryParameterEntity">
+                  name="PhenomenonCategoryParameterEntity">
             <property name="value" type="string">
                 <column name="value_category">
                     <comment>Storage of a categorical parameter value.</comment>
@@ -71,7 +71,7 @@
         </subclass>
 
         <subclass discriminator-value="count" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonCountParameterEntity">
+                  name="PhenomenonCountParameterEntity">
             <property name="value" type="integer">
                 <column name="value_count">
                     <comment>Storage of a count parameter value.</comment>
@@ -80,7 +80,7 @@
         </subclass>
 
         <subclass discriminator-value="quantity" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonQuantityParameterEntity">
+                  name="PhenomenonQuantityParameterEntity">
             <property name="value" type="big_decimal" precision="20" scale="10">
                 <column name="value_quantity">
                     <comment>Storage of a quantity parameter value.</comment>
@@ -94,7 +94,7 @@
             </many-to-one>
         </subclass>
         <subclass discriminator-value="text" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonTextParameterEntity">
+                  name="PhenomenonTextParameterEntity">
             <property name="value" type="string">
                 <column name="value_text">
                     <comment>Storage of a textual parameter value.</comment>
@@ -102,7 +102,7 @@
             </property>
         </subclass>
         <subclass discriminator-value="xml" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonXmlParameterEntity">
+                  name="PhenomenonXmlParameterEntity">
             <property name="value" type="text">
                 <column name="value_xml">
                     <comment>Storage of a XML encoded parameter value.</comment>
@@ -110,7 +110,7 @@
             </property>
         </subclass>
         <subclass discriminator-value="json" extends="PhenomenonParameterEntity"
-                  name="org.n52.series.db.beans.parameter.phenomenon.PhenomenonJsonParameterEntity">
+                  name="PhenomenonJsonParameterEntity">
             <property name="value" type="text">
                 <column name="value_json">
                     <comment>Storage of a JSON encoded parameter value.</comment>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hibernate-mapping package="org.n52.series.db.beans.parameter"
+<hibernate-mapping package="org.n52.series.db.beans.parameter.platform"
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="org.n52.series.db.beans.parameter.platform.PlatformParameterEntity" abstract="true" table="platform_parameter" check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
+    <class name="PlatformParameterEntity" abstract="true" table="platform_parameter" check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
         <comment>Storage for additional information for platforms</comment>
         <id name="id" type="long">
             <column name="parameter_id">
@@ -43,7 +43,7 @@
             <column name="fk_platform_id" not-null="true" />
         </property>
 
-        <subclass discriminator-value="category" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformCategoryParameterEntity">
+        <subclass discriminator-value="category" extends="PlatformParameterEntity" name="PlatformCategoryParameterEntity">
             <property name="value" type="string">
                 <column name="value_category">
                     <comment>Storage of a categorical parameter value.</comment>
@@ -56,7 +56,7 @@
             </many-to-one>
         </subclass>
 
-        <subclass discriminator-value="bool" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformBooleanParameterEntity">
+        <subclass discriminator-value="bool" extends="PlatformParameterEntity" name="PlatformBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>Storage of a boolean parameter value.</comment>
@@ -64,7 +64,7 @@
             </property>
         </subclass>
 
-        <subclass discriminator-value="count" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformCountParameterEntity">
+        <subclass discriminator-value="count" extends="PlatformParameterEntity" name="PlatformCountParameterEntity">
             <property name="value" type="integer">
                 <column name="value_count">
                     <comment>Storage of a count parameter value.</comment>
@@ -72,7 +72,7 @@
             </property>
         </subclass>
 
-        <subclass discriminator-value="quantity" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformQuantityParameterEntity">
+        <subclass discriminator-value="quantity" extends="PlatformParameterEntity" name="PlatformQuantityParameterEntity">
             <property name="value" type="big_decimal" precision="20" scale="10">
                 <column name="value_quantity">
                     <comment>Storage of a quantity parameter value.</comment>
@@ -84,21 +84,21 @@
                 </column>
             </many-to-one>
         </subclass>
-        <subclass discriminator-value="text" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformTextParameterEntity">
+        <subclass discriminator-value="text" extends="PlatformParameterEntity" name="PlatformTextParameterEntity">
             <property name="value" type="string">
                 <column name="value_text">
                     <comment>Storage of a textual parameter value.</comment>
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="xml" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformXmlParameterEntity">
+        <subclass discriminator-value="xml" extends="PlatformParameterEntity" name="PlatformXmlParameterEntity">
             <property name="value" type="text">
                 <column name="value_xml">
                     <comment>Storage of a XML encoded parameter value.</comment>
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="json" extends="PlatformParameterEntity" name="org.n52.series.db.beans.parameter.platform.PlatformJsonParameterEntity">
+        <subclass discriminator-value="json" extends="PlatformParameterEntity" name="PlatformJsonParameterEntity">
             <property name="value" type="text">
                 <column name="value_json">
                     <comment>Storage of a JSON encoded parameter value.</comment>
