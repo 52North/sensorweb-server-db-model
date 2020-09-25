@@ -116,5 +116,16 @@
                 </column>
             </property>
         </subclass>
+        <subclass discriminator-value="complex" extends="ProcedureParameterEntity"
+                  name="ProcedureComplexParameterEntity">
+            <set name="value" table="procedure_parameter" cascade="remove">
+                <key foreign-key="fk_parent_parameter">
+                    <column name="fk_parent_parameter_id" not-null="false">
+                        <comment>Reference to the parent parameter</comment>
+                    </column>
+                </key>
+                <one-to-many class="ProcedureParameterEntity" />
+            </set>
+        </subclass>
     </class>
 </hibernate-mapping>

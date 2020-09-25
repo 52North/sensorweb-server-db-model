@@ -117,5 +117,16 @@
                 </column>
             </property>
         </subclass>
+        <subclass discriminator-value="complex" extends="PhenomenonParameterEntity"
+                  name="PhenomenonComplexParameterEntity">
+            <set name="value" table="phenomenon_parameter" cascade="remove">
+                <key foreign-key="fk_parent_parameter">
+                    <column name="fk_parent_parameter_id" not-null="false">
+                        <comment>Reference to the parent parameter</comment>
+                    </column>
+                </key>
+                <one-to-many class="PhenomenonParameterEntity" />
+            </set>
+        </subclass>
     </class>
 </hibernate-mapping>

@@ -17,6 +17,7 @@
 package org.n52.series.db.beans.parameter.platform;
 
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
@@ -25,6 +26,16 @@ public class PlatformComplexParameterEntity extends PlatformParameterEntity<Set<
         implements ComplexParameterEntity {
 
     private static final long serialVersionUID = -5166758396873257962L;
+
+    @Override
+    public Set<PlatformParameterEntity<?>> getValue() {
+        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
+    }
+
+    @Override
+    public void setValue(Set<PlatformParameterEntity<?>> value) {
+        super.setValue(value);
+    }
 
     @Override
     public String getValueAsString() {
