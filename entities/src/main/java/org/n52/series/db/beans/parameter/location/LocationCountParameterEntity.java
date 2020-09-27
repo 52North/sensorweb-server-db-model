@@ -14,11 +14,17 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.parameter;
+package org.n52.series.db.beans.parameter.location;
 
-public class ParameterBooleanEntity extends ParameterEntity<Boolean> {
+import org.n52.series.db.beans.parameter.CountParameterEntity;
 
-    private static final long serialVersionUID = -1280123654095577480L;
+/**
+ * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ */
+public class LocationCountParameterEntity extends LocationParameterEntity<Integer>
+    implements CountParameterEntity {
+
+    private static final long serialVersionUID = -7778025481981408886L;
 
     @Override
     public String getValueAsString() {

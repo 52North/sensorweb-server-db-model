@@ -100,18 +100,11 @@
             </key>
             <one-to-many class="ProcedureHistoryEntity" />
         </set>
-        <set inverse="false" name="parameters" table="procedure_parameter" fetch="join">
-            <comment>Storage of relations between procedure and related parameter</comment>
-            <key not-null="true" foreign-key="fk_procedure_parameter_procedure">
-                <column name="fk_procedure_id"  index="idx_procedure_parameter_procedure">
-                    <comment>The reference to the procedure in the procedure table</comment>
-                </column>
+        <set name="parameters" table="procedure_parameter" inverse="true" lazy="true">
+            <key foreign-key="fk_procedure_parameter">
+                <column name="fk_procedure_id" not-null="true"/>
             </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_procedure_parameter_parameter">
-                <column name="fk_parameter_id" index="idx_procedure_parameter_procedure_parameter">
-                    <comment>The reference to the parameter in the procedure parameter</comment>
-                </column>
-            </many-to-many>
+            <one-to-many class="org.n52.series.db.beans.parameter.procedure.ProcedureParameterEntity" />
         </set>
         <!-- Comments for the translations are defined below! -->
         <set name="translations" table="procedure_i18n" inverse="true" fetch="select">

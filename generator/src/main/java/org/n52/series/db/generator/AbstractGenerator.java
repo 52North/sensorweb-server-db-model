@@ -139,21 +139,25 @@ public abstract class AbstractGenerator {
     protected void addConceptDirectories(Concept concept, Profile profile, Feature feature,
             Configuration configuration, MetadataSources metadataSources) throws Exception {
         List<String> paths = new LinkedList<>();
+        final String parameterMappingDir = "/hbm/parameter";
         switch (concept) {
             case SIMPLE:
                 paths.addAll(getProfileDirectories("/hbm/simple", profile));
                 break;
             case E_REPORTING:
                 paths.addAll(getProfileDirectories("/hbm/ereporting", Profile.DEFAULT));
+                paths.add(parameterMappingDir);
                 paths.addAll(getFeatureConceptDirectories(feature, configuration, metadataSources));
                 break;
             case PROXY:
                 paths.addAll(getProfileDirectories("/hbm/proxy", profile));
+                paths.add(parameterMappingDir);
                 paths.addAll(getFeatureConceptDirectories(feature, configuration, metadataSources));
                 break;
             case TRANSACTIONAL:
             default:
                 paths.addAll(getProfileDirectories("/hbm/transactional", profile));
+                paths.add(parameterMappingDir);
                 paths.addAll(getFeatureConceptDirectories(feature, configuration, metadataSources));
         }
         for (String path : paths) {

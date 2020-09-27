@@ -188,6 +188,7 @@ public interface HibernateRelations {
     }
 
     interface HasDomainId {
+
         String IDENTIFIER = HasIdentifier.IDENTIFIER;
 
         String getIdentifier();
@@ -203,6 +204,7 @@ public interface HibernateRelations {
     }
 
     interface HasDescription {
+
         String DESCRIPTION = "description";
 
         String PROPERTY_DESCRIPTION = DESCRIPTION;
@@ -222,6 +224,7 @@ public interface HibernateRelations {
     }
 
     interface HasIdentifierCodespace {
+
         String IDENTIFIER_CODESPACE = "identifierCodespace";
 
         CodespaceEntity getIdentifierCodespace();
@@ -251,34 +254,38 @@ public interface HibernateRelations {
     }
 
     interface HasDisabledFlag {
-        String DIABLED = "disabled";
 
-        void setDisabled(boolean disabled);
+        String DIABLED = "disabled";
 
         boolean getDisabled();
 
         boolean isDisabled();
+
+        void setDisabled(boolean disabled);
     }
 
     interface HasDeletedFlag {
-        String DELETED = "deleted";
 
-        void setDeleted(boolean deleted);
+        String DELETED = "deleted";
 
         boolean getDeleted();
 
         boolean isDeleted();
+
+        void setDeleted(boolean deleted);
     }
 
     interface HasPublishedFlag {
+
         String PUBLISHED = "published";
 
-        HasPublishedFlag setPublished(boolean published);
-
         boolean isPublished();
+
+        HasPublishedFlag setPublished(boolean published);
     }
 
     interface HasFeatureType {
+
         String FEATURE_OF_INTEREST_TYPE = "featureType";
 
         FormatEntity getFeatureType();
@@ -287,6 +294,7 @@ public interface HibernateRelations {
     }
 
     interface HasFeatureTypes {
+
         String FEATURE__TYPES = "featureTypes";
 
         Set<FormatEntity> getFeatureTypes();
@@ -300,6 +308,7 @@ public interface HibernateRelations {
     }
 
     interface HasFeatureGetter {
+
         String FEATURE_OF_INTEREST = "feature";
 
         AbstractFeatureEntity<?> getFeature();
@@ -315,18 +324,19 @@ public interface HibernateRelations {
     }
 
     interface HasReadableObservationContext extends HasObservablePropertyGetter, HasProcedureGetter, HasFeatureGetter {
+
     }
 
     interface HasWriteableObservationContext
             extends HasReadableObservationContext, HasObservableProperty, HasProcedure, HasFeature, HasOffering {
+
     }
 
     interface HasGeometry {
+
         String GEOMETRY = GEOMETRY_ENTITY;
 
         GeometryEntity getGeometryEntity();
-
-        void setGeometry(Geometry geometry);
 
         void setGeometryEntity(GeometryEntity geometryEntity);
 
@@ -334,33 +344,38 @@ public interface HibernateRelations {
             return getGeometryEntity() != null ? getGeometryEntity().getGeometry() : null;
         }
 
+        void setGeometry(Geometry geometry);
+
         default boolean isSetGeometry() {
             return getGeometryEntity() != null;
         }
     }
 
     interface HasHiddenChildFlag {
+
         String HIDDEN_CHILD = "hiddenChild";
 
-        void setHiddenChild(boolean hiddenChild);
-
         boolean isHiddenChild();
+
+        void setHiddenChild(boolean hiddenChild);
     }
 
     interface HasChildFlag {
+
         String CHILD = C;
 
-        void setChild(boolean child);
-
         boolean isChild();
+
+        void setChild(boolean child);
     }
 
     interface HasParentFlag {
+
         String PARENT = P;
 
-        void setParent(boolean parent);
-
         boolean isParent();
+
+        void setParent(boolean parent);
     }
 
     interface HasName {
@@ -380,6 +395,7 @@ public interface HibernateRelations {
 
     @Deprecated
     interface HasObservation {
+
         String OBSERVATION = "observation";
 
         DataEntity<?> getObservation();
@@ -404,6 +420,7 @@ public interface HibernateRelations {
     }
 
     interface HasOMObservationType {
+
         String OBSERVATION_TYPE = "omObservationType";
 
         FormatEntity getOMObservationType();
@@ -414,6 +431,7 @@ public interface HibernateRelations {
     }
 
     interface HasObservationTypes {
+
         String OBSERVATION_TYPES = "omObservationTypes";
 
         Set<FormatEntity> getObservationTypes();
@@ -426,16 +444,18 @@ public interface HibernateRelations {
     }
 
     interface HasOffering {
+
         String OFFERING = "offering";
 
-        void setOffering(OfferingEntity offering);
-
         OfferingEntity getOffering();
+
+        void setOffering(OfferingEntity offering);
 
         boolean isSetOffering();
     }
 
     interface HasSamplingTime {
+
         /**
          * @return the samplingTimeStart
          */
@@ -601,6 +621,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureGetter {
+
         String PROCEDURE = "procedure";
 
         ProcedureEntity getProcedure();
@@ -616,6 +637,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureDescriptionFormat {
+
         String PROCEDURE_DESCRIPTION_FORMAT = "format";
 
         FormatEntity getFormat();
@@ -624,6 +646,7 @@ public interface HibernateRelations {
     }
 
     interface HasRelatedFeatures {
+
         String RELATED_FEATURES = "relatedFeatures";
 
         Set<RelatedFeatureEntity> getRelatedFeatures();
@@ -636,6 +659,7 @@ public interface HibernateRelations {
     }
 
     interface HasResultEncoding {
+
         String RESULT_ENCODING = "encoding";
 
         String getEncoding();
@@ -648,6 +672,7 @@ public interface HibernateRelations {
     }
 
     interface HasResultStructure {
+
         String RESULT_STRUCTURE = "structure";
 
         String getStructure();
@@ -660,6 +685,7 @@ public interface HibernateRelations {
     }
 
     interface HasUnit {
+
         String UNIT = "unit";
 
         UnitEntity getUnit();
@@ -726,6 +752,7 @@ public interface HibernateRelations {
     }
 
     interface HasUrl {
+
         String URL = "url";
 
         String getUrl();
@@ -744,6 +771,7 @@ public interface HibernateRelations {
     }
 
     interface HasValue<T> extends GetStringValue {
+
         String VALUE = "value";
 
         T getValue();
@@ -753,9 +781,11 @@ public interface HibernateRelations {
     }
 
     interface HasUnitValue<T> extends HasUnit, HasValue<T> {
+
     }
 
     interface HasOfferings {
+
         String OFFERINGS = "offerings";
 
         Set<OfferingEntity> getOfferings();
@@ -780,6 +810,10 @@ public interface HibernateRelations {
 
         void setParameters(Set<ParameterEntity<?>> parameters);
 
+        void addParameters(Set<ParameterEntity<?>> parameters);
+
+        void addParameter(ParameterEntity<?> parameter);
+
         default boolean hasParameters() {
             return (getParameters() != null) && !getParameters().isEmpty();
         }
@@ -787,6 +821,7 @@ public interface HibernateRelations {
     }
 
     interface HasRelatedObservations {
+
         String RELATED_OBSERVATIONS = "related_observations";
 
         Set<RelatedDataEntity> getRelatedObservations();
@@ -800,6 +835,7 @@ public interface HibernateRelations {
     }
 
     interface HasObservableProperties {
+
         String OBSERVABLE_PROPERTIES = "observableProperties";
 
         Set<PhenomenonEntity> getObservableProperties();
@@ -808,6 +844,7 @@ public interface HibernateRelations {
     }
 
     interface GeoColumnsId {
+
         String COORD_DIMENSION = "coordDimension";
 
         String SRID = HibernateRelations.SRID;
@@ -846,6 +883,7 @@ public interface HibernateRelations {
     }
 
     interface HasSrid {
+
         String SRID = HibernateRelations.SRID;
 
         int getSrid();
@@ -861,6 +899,7 @@ public interface HibernateRelations {
     }
 
     interface HasCoordinate extends HasSrid {
+
         String LONGITUDE = "longitude";
 
         String LATITUDE = "latitude";
@@ -901,6 +940,7 @@ public interface HibernateRelations {
     }
 
     interface HasProcedureHistory {
+
         String VALID_PROCEDURE_TIMES = "procedureGistory";
 
         Set<ProcedureHistoryEntity> getProcedureHistory();
@@ -913,6 +953,7 @@ public interface HibernateRelations {
     }
 
     interface HasParentChildren<T> {
+
         String PARENTS = P;
 
         String CHILDREN = C;
@@ -939,6 +980,7 @@ public interface HibernateRelations {
     }
 
     interface HasObservationId {
+
         String OBS_ID = "id";
 
         /**
@@ -958,6 +1000,7 @@ public interface HibernateRelations {
     }
 
     interface HasLocale {
+
         String LOCALE = "locale";
 
         Locale getLocale();
@@ -995,6 +1038,7 @@ public interface HibernateRelations {
     }
 
     interface HasRemarks {
+
         /**
          * @return the remarks
          */
@@ -1013,9 +1057,9 @@ public interface HibernateRelations {
 
     interface HasDatasetType {
 
-        void setDatasetType(String datasetType);
-
         String getDatasetType();
+
+        void setDatasetType(String datasetType);
 
         default boolean isSetDatasetType() {
             return (getDatasetType() != null) && !getDatasetType().isEmpty();
@@ -1025,9 +1069,9 @@ public interface HibernateRelations {
 
     interface HasDataset {
 
-        void setDataset(DatasetEntity dataset);
-
         DatasetEntity getDataset();
+
+        void setDataset(DatasetEntity dataset);
 
         default boolean isSetDataset() {
             return getDataset() != null;
@@ -1041,9 +1085,9 @@ public interface HibernateRelations {
 
         String PROPERTY_DATASETS = DATASETS;
 
-        void setDatasets(Set<DatasetEntity> datasets);
-
         Set<DatasetEntity> getDatasets();
+
+        void setDatasets(Set<DatasetEntity> datasets);
 
         default boolean hasDatasets() {
             return getDatasets() != null && !getDatasets().isEmpty();
@@ -1053,9 +1097,9 @@ public interface HibernateRelations {
 
     interface HasAbstractDatasets {
 
-        void setDatasets(Set<AbstractDatasetEntity> datastreams);
-
         Set<AbstractDatasetEntity> getDatasets();
+
+        void setDatasets(Set<AbstractDatasetEntity> datastreams);
 
         default void addDatastream(AbstractDatasetEntity datastream) {
             if (getDatasets() == null) {
@@ -1072,9 +1116,9 @@ public interface HibernateRelations {
 
     interface HasAbstractDataset {
 
-        void setDataset(AbstractDatasetEntity datastreams);
-
         AbstractDatasetEntity getDataset();
+
+        void setDataset(AbstractDatasetEntity datastreams);
 
         default boolean hasDataset() {
             return getDataset() != null;
@@ -1133,6 +1177,7 @@ public interface HibernateRelations {
     }
 
     public interface HasNameTranslation extends HasName, HasTranslations {
+
         default boolean isi18nNameAvailable(String locale) {
             return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
         }
@@ -1163,9 +1208,9 @@ public interface HibernateRelations {
 
         String PROPERTY_TAGS = TAGS;
 
-        void setTags(Set<TagEntity> tags);
-
         Set<TagEntity> getTags();
+
+        void setTags(Set<TagEntity> tags);
 
         default boolean hasTagss() {
             return getTags() != null && !getTags().isEmpty();
@@ -1182,9 +1227,9 @@ public interface HibernateRelations {
 
     interface HasPlatform {
 
-        void setPlatform(PlatformEntity platform);
-
         PlatformEntity getPlatform();
+
+        void setPlatform(PlatformEntity platform);
 
         default boolean hasPlatform() {
             return getPlatform() != null;
@@ -1195,12 +1240,12 @@ public interface HibernateRelations {
     @Deprecated
     interface HasThing extends HasPlatform {
 
-        default void setThing(PlatformEntity thing) {
-            setPlatform(thing);
-        }
-
         default PlatformEntity getThing() {
             return getPlatform();
+        }
+
+        default void setThing(PlatformEntity thing) {
+            setPlatform(thing);
         }
 
         default boolean hasThing() {
@@ -1211,9 +1256,9 @@ public interface HibernateRelations {
 
     interface HasObservations {
 
-        void setObservations(Set<AbstractObservationEntity> observations);
-
         Set<AbstractObservationEntity> getObservations();
+
+        void setObservations(Set<AbstractObservationEntity> observations);
 
         default boolean hasObservations() {
             return getObservations() != null;

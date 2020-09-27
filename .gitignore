@@ -5,3 +5,8 @@ target
 nbactions.xml
 codegen/console.log
 .cache/formatter-maven-cache.properties
+
+## IntelliJ IDE Files
+.idea/*
+*.iml
+*.checkstyle

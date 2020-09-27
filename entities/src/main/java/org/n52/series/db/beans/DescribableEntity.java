@@ -17,6 +17,7 @@
 package org.n52.series.db.beans;
 
 import java.io.Serializable;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -148,6 +149,22 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     @Override
     public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    public void addParameters(Set<ParameterEntity<?>> parameters) {
+        if (getParameters() == null) {
+            setParameters(new LinkedHashSet<>());
+        }
+        this.parameters.addAll(parameters);
+    }
+
+    @Override
+    public void addParameter(ParameterEntity<?> parameter) {
+        if (getParameters() == null) {
+            setParameters(new LinkedHashSet<>());
+        }
+        this.parameters.add(parameter);
     }
 
     @Override

@@ -14,15 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.parameter;
+package org.n52.series.db.beans.parameter.procedure;
+
+import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.n52.series.db.beans.UnitEntity;
-import org.n52.series.db.beans.HibernateRelations.HasUnit;
-
-public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> implements HasUnit {
+/**
+ * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ */
+public class ProcedureQuantityParameterEntity extends ProcedureParameterEntity<BigDecimal>
+    implements QuantityParameterEntity {
 
     private static final long serialVersionUID = 7528516075676290716L;
 
@@ -56,5 +60,4 @@ public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> impleme
     public String getValueAsString() {
         return getValue().toPlainString();
     }
-
 }

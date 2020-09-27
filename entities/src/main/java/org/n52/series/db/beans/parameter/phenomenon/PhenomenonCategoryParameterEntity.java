@@ -14,14 +14,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.parameter;
+
+package org.n52.series.db.beans.parameter.phenomenon;
+
+import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.parameter.CategoryParameterEntity;
 
 import java.util.Map;
 
-import org.n52.series.db.beans.UnitEntity;
-import org.n52.series.db.beans.HibernateRelations.HasUnit;
-
-public class ParameterCategoryEntity extends ParameterEntity<String> implements HasUnit {
+/**
+ * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ */
+public class PhenomenonCategoryParameterEntity extends PhenomenonParameterEntity<String>
+    implements CategoryParameterEntity {
 
     private static final long serialVersionUID = -6262887605542676492L;
 

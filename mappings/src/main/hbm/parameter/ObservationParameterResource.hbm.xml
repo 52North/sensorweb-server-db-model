@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans.parameter"
-    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="ParameterEntity" table="parameter" check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
-        <comment>Storage for additional information for features, observations or datasets</comment>
+                   xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="org.n52.series.db.beans.parameter.observation.ObservationParameterEntity" abstract="true" table="observation_parameter"
+           check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
+        <comment>Storage for additional information for observations</comment>
         <id name="id" type="long">
             <column name="parameter_id">
                 <comment>PK column of the table</comment>
@@ -25,67 +26,90 @@
         </property>
         <property name="lastUpdate" not-null="false" type="timestamp">
             <column name="last_update">
-            <comment>Timestamp that provides the time of the last modification of this entry</comment>
+                <comment>Timestamp that provides the time of the last modification of this entry</comment>
             </column>
         </property>
-          <property name="domain" not-null="false" type="string">
+        <property name="domain" not-null="false" type="string">
             <column name="domain">
                 <comment>The domain this parameter belongs to.</comment>
             </column>
         </property>
-        <subclass discriminator-value="bool" extends="ParameterEntity" name="ParameterBooleanEntity">
+
+        <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity"
+                     foreign-key="fk_observation_id">
+            <column name="fk_observation_id" not-null="true" index="idx_observation_parameter">
+                <comment>Reference to the Observation this Parameter describes.</comment>
+            </column>
+        </many-to-one>
+        <property name="observationId" insert="false" update="false" type="long" >
+            <column name="fk_observation_id" not-null="true" />
+        </property>
+
+        <subclass discriminator-value="bool" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>Storage of a boolean parameter value.</comment>
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="category" extends="ParameterEntity" name="ParameterCategoryEntity">
+
+        <subclass discriminator-value="category" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationCategoryParameterEntity">
             <property name="value" type="string">
                 <column name="value_category">
                     <comment>Storage of a categorical parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_param_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
+                         foreign-key="fk_param_unit">
                 <column name="fk_unit_id" index="idx_parameter_unit">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
             </many-to-one>
         </subclass>
-        <subclass discriminator-value="count" extends="ParameterEntity" name="ParameterCountEntity">
+
+        <subclass discriminator-value="count" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationCountParameterEntity">
             <property name="value" type="integer">
                 <column name="value_count">
                     <comment>Storage of a count parameter value.</comment>
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="quantity" extends="ParameterEntity" name="ParameterQuantityEntity">
+
+        <subclass discriminator-value="quantity" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationQuantityParameterEntity">
             <property name="value" type="big_decimal" precision="20" scale="10">
                 <column name="value_quantity">
                     <comment>Storage of a quantity parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_param_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
+                         foreign-key="fk_param_unit">
                 <column name="fk_unit_id" index="idx_parameter_unit">
                     <!-- Comment is defined above for category! -->
                 </column>
             </many-to-one>
         </subclass>
-        <subclass discriminator-value="text" extends="ParameterEntity" name="ParameterTextEntity">
+        <subclass discriminator-value="text" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationTextParameterEntity">
             <property name="value" type="string">
                 <column name="value_text">
                     <comment>Storage of a textual parameter value.</comment>
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="xml" extends="ParameterEntity" name="ParameterXmlEntity">
+        <subclass discriminator-value="xml" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationXmlParameterEntity">
             <property name="value" type="text">
                 <column name="value_xml">
                     <comment>Storage of a XML encoded parameter value.</comment>
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="json" extends="ParameterEntity" name="ParameterJsonEntity">
+        <subclass discriminator-value="json" extends="ObservationParameterEntity"
+                  name="org.n52.series.db.beans.parameter.observation.ObservationJsonParameterEntity">
             <property name="value" type="text">
                 <column name="value_json">
                     <comment>Storage of a JSON encoded parameter value.</comment>
