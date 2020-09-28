@@ -31,6 +31,13 @@ import org.n52.series.db.beans.parameter.feature.FeatureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureTextParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureXmlParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseCountParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseJsonParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseTextParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseXmlParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationCategoryParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationCountParameterEntity;
@@ -45,6 +52,13 @@ import org.n52.series.db.beans.parameter.observation.ObservationJsonParameterEnt
 import org.n52.series.db.beans.parameter.observation.ObservationQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationTextParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationXmlParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupCountParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupJsonParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupTextParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupXmlParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonCategoryParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonCountParameterEntity;
@@ -66,6 +80,13 @@ import org.n52.series.db.beans.parameter.procedure.ProcedureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureTextParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureXmlParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectCountParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectJsonParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectTextParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectXmlParameterEntity;
 
 /**
  * Denotes Classes that can create concrete parameter entities.
@@ -77,8 +98,10 @@ public class ParameterFactory {
     /**
      * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter
      *
-     * @param valueType  type of the value
-     * @param entityType type of the entity
+     * @param valueType
+     *            type of the value
+     * @param entityType
+     *            type of the entity
      * @return concrete class
      */
     public static ParameterEntity<?> from(EntityType entityType, ValueType valueType) {
@@ -216,15 +239,71 @@ public class ParameterFactory {
                     default:
                         return null;
                 }
+            case LICENSE:
+                switch (valueType) {
+                    case JSON:
+                        return new LicenseJsonParameterEntity();
+                    case XML:
+                        return new LicenseXmlParameterEntity();
+                    case TEXT:
+                        return new LicenseTextParameterEntity();
+                    case BOOLEAN:
+                        return new LicenseBooleanParameterEntity();
+                    case CATEGORY:
+                        return new LicenseCategoryParameterEntity();
+                    case COUNT:
+                        return new LicenseCountParameterEntity();
+                    case QUANTITY:
+                        return new LicenseQuantityParameterEntity();
+                    default:
+                        return null;
+                }
+            case OBS_GROUP:
+                switch (valueType) {
+                    case JSON:
+                        return new ObservationGroupJsonParameterEntity();
+                    case XML:
+                        return new ObservationGroupXmlParameterEntity();
+                    case TEXT:
+                        return new ObservationGroupTextParameterEntity();
+                    case BOOLEAN:
+                        return new ObservationGroupBooleanParameterEntity();
+                    case CATEGORY:
+                        return new ObservationGroupCategoryParameterEntity();
+                    case COUNT:
+                        return new ObservationGroupCountParameterEntity();
+                    case QUANTITY:
+                        return new ObservationGroupQuantityParameterEntity();
+                    default:
+                        return null;
+                }
+            case PROJECT:
+                switch (valueType) {
+                    case JSON:
+                        return new ProjectJsonParameterEntity();
+                    case XML:
+                        return new ProjectXmlParameterEntity();
+                    case TEXT:
+                        return new ProjectTextParameterEntity();
+                    case BOOLEAN:
+                        return new ProjectBooleanParameterEntity();
+                    case CATEGORY:
+                        return new ProjectCategoryParameterEntity();
+                    case COUNT:
+                        return new ProjectCountParameterEntity();
+                    case QUANTITY:
+                        return new ProjectQuantityParameterEntity();
+                    default:
+                        return null;
+                }
             default:
                 return null;
         }
     }
 
     public enum EntityType {
-        PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION
+        PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION, LICENSE, OBS_GROUP, PROJECT
     }
-
 
     public enum ValueType {
         BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY

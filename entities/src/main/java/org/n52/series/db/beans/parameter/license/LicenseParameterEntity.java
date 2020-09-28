@@ -15,21 +15,35 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.parameter.phenomenon;
+package org.n52.series.db.beans.parameter.license;
 
-import org.n52.series.db.beans.parameter.CountParameterEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sta.LicenseEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class PhenomenonCountParameterEntity extends PhenomenonParameterEntity<Integer>
-        implements CountParameterEntity {
+public abstract class LicenseParameterEntity<T> extends ParameterEntity<T> {
 
-    private static final long serialVersionUID = -7778025481981408886L;
+    public static final String PROP_LICENSE = "license";
+    public static final String PROP_LICENSE_ID = "licenseId";
 
-    @Override
-    public String getValueAsString() {
-        return getValue().toString();
+    private LicenseEntity license;
+    private long licenseId;
+
+    public LicenseEntity getLicense() {
+        return license;
     }
 
+    public void setLicense(LicenseEntity license) {
+        this.license = license;
+    }
+
+    public long getLicenseId() {
+        return licenseId;
+    }
+
+    public void setLicenseId(long licenseId) {
+        this.licenseId = licenseId;
+    }
 }

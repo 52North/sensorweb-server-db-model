@@ -21,8 +21,7 @@ import org.n52.series.db.beans.parameter.CountParameterEntity;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class FeatureCountParameterEntity extends FeatureParameterEntity<Integer>
-    implements CountParameterEntity {
+public class FeatureCountParameterEntity extends FeatureParameterEntity<Integer> implements CountParameterEntity {
 
     private static final long serialVersionUID = -7778025481981408886L;
 

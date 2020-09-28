@@ -15,21 +15,35 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.parameter.phenomenon;
+package org.n52.series.db.beans.parameter.project;
 
-import org.n52.series.db.beans.parameter.CountParameterEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sta.ProjectEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class PhenomenonCountParameterEntity extends PhenomenonParameterEntity<Integer>
-        implements CountParameterEntity {
+public abstract class ProjectParameterEntity<T> extends ParameterEntity<T> {
 
-    private static final long serialVersionUID = -7778025481981408886L;
+    public static final String PROP_PROJECT = "project";
+    public static final String PROP_PROJECT_ID = "projectId";
 
-    @Override
-    public String getValueAsString() {
-        return getValue().toString();
+    private ProjectEntity project;
+    private long projectId;
+
+    public ProjectEntity getProject() {
+        return project;
     }
 
+    public void setProject(ProjectEntity project) {
+        this.project = project;
+    }
+
+    public long getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
 }

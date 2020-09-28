@@ -26,7 +26,7 @@ import java.util.Map;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class LocationQuantityParameterEntity extends LocationParameterEntity<BigDecimal>
-    implements QuantityParameterEntity {
+        implements QuantityParameterEntity {
 
     private static final long serialVersionUID = 7528516075676290716L;
 

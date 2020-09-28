@@ -14,16 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.n52.series.db.beans.parameter.phenomenon;
+package org.n52.series.db.beans.parameter.license;
 
 import org.n52.series.db.beans.parameter.CountParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class PhenomenonCountParameterEntity extends PhenomenonParameterEntity<Integer>
-        implements CountParameterEntity {
+public class LicenseCountParameterEntity extends LicenseParameterEntity<Integer> implements CountParameterEntity {
 
     private static final long serialVersionUID = -7778025481981408886L;
 

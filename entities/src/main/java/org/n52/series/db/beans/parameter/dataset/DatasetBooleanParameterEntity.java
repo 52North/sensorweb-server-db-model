@@ -21,8 +21,7 @@ import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class DatasetBooleanParameterEntity extends DatasetParameterEntity<Boolean>
-    implements BooleanParameterEntity {
+public class DatasetBooleanParameterEntity extends DatasetParameterEntity<Boolean> implements BooleanParameterEntity {
 
     private static final long serialVersionUID = -1280123654095577480L;
 

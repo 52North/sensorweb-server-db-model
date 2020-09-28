@@ -24,8 +24,7 @@ import java.util.Map;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class FeatureCategoryParameterEntity extends FeatureParameterEntity<String>
-    implements CategoryParameterEntity {
+public class FeatureCategoryParameterEntity extends FeatureParameterEntity<String> implements CategoryParameterEntity {
 
     private static final long serialVersionUID = -6262887605542676492L;
 

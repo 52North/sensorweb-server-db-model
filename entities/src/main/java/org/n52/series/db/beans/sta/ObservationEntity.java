@@ -21,8 +21,8 @@ import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DatasetEntity;
-import org.n52.series.db.beans.parameter.observation.ObservationParameterEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.observation.ObservationParameterEntity;
 import org.n52.series.db.common.Utils;
 
 import javax.persistence.Column;
@@ -174,7 +174,7 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Column(name = "fk_dataset_id", updatable = false, insertable = false, nullable = false)
     private Long datasetId;
 
-    @OneToMany(mappedBy = "observation", targetEntity = ObservationParameterEntity.class)
+    @OneToMany(mappedBy = ObservationParameterEntity.PROP_OBSERVATION, targetEntity = ObservationParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
     @OneToMany(mappedBy = ObservationRelationEntity.PROPERTY_OBSERVATION)
@@ -254,6 +254,27 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Override
     public void setId(Long id) {
         this.id = id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), getStaIdentifier(), getSamplingTimeStart(), getSamplingTimeEnd(),
+                getResultTime(), getValue());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof ObservationEntity)) {
+            return false;
+        }
+        ObservationEntity other = (ObservationEntity) obj;
+        return super.equals(obj) && Objects.equals(getDataset(), other.getDataset())
+                && Objects.equals(getStaIdentifier(), other.getStaIdentifier())
+                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
+                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
+                && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
+                && Objects.equals(getResultTime(), other.getResultTime())
+                && Objects.equals(getValue(), other.getValue());
     }
 
     @Override
@@ -365,16 +386,6 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     }
 
     @Override
-    public BigDecimal getVerticalTo() {
-        return verticalTo;
-    }
-
-    @Override
-    public void setVerticalTo(BigDecimal verticalTo) {
-        this.verticalTo = verticalTo;
-    }
-
-    @Override
     public BigDecimal getVerticalFrom() {
         return verticalFrom;
     }
@@ -382,6 +393,16 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
     @Override
     public void setVerticalFrom(BigDecimal verticalFrom) {
         this.verticalFrom = verticalFrom;
+    }
+
+    @Override
+    public BigDecimal getVerticalTo() {
+        return verticalTo;
+    }
+
+    @Override
+    public void setVerticalTo(BigDecimal verticalTo) {
+        this.verticalTo = verticalTo;
     }
 
     public Set<ObservationRelationEntity> getRelations() {
@@ -397,26 +418,5 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
         return Comparator.comparing(ObservationEntity<T>::getSamplingTimeEnd)
                 .thenComparing(ObservationEntity::getSamplingTimeStart).thenComparing(ObservationEntity<T>::getId)
                 .compare(this, other);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), getStaIdentifier(), getSamplingTimeStart(), getSamplingTimeEnd(),
-                getResultTime(), getValue());
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (!(obj instanceof ObservationEntity)) {
-            return false;
-        }
-        ObservationEntity other = (ObservationEntity) obj;
-        return super.equals(obj) && Objects.equals(getDataset(), other.getDataset())
-                && Objects.equals(getStaIdentifier(), other.getStaIdentifier())
-                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
-                && Objects.equals(getSamplingTimeStart(), other.getSamplingTimeStart())
-                && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
-                && Objects.equals(getResultTime(), other.getResultTime())
-                && Objects.equals(getValue(), other.getValue());
     }
 }

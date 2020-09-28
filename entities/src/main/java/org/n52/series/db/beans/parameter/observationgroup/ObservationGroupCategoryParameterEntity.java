@@ -14,22 +14,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-package org.n52.series.db.beans.parameter.phenomenon;
+package org.n52.series.db.beans.parameter.observationgroup;
 
 import org.n52.series.db.beans.UnitEntity;
-import org.n52.series.db.beans.parameter.QuantityParameterEntity;
+import org.n52.series.db.beans.parameter.CategoryParameterEntity;
 
-import java.math.BigDecimal;
 import java.util.Map;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class PhenomenonQuantityParameterEntity extends PhenomenonParameterEntity<BigDecimal>
-        implements QuantityParameterEntity {
+public class ObservationGroupCategoryParameterEntity extends ObservationGroupParameterEntity<String>
+        implements CategoryParameterEntity {
 
-    private static final long serialVersionUID = 7528516075676290716L;
+    private static final long serialVersionUID = -6262887605542676492L;
 
     private UnitEntity unit;
 
@@ -53,7 +51,12 @@ public class PhenomenonQuantityParameterEntity extends PhenomenonParameterEntity
     }
 
     @Override
+    public boolean isSetUnit() {
+        return getUnit() != null;
+    }
+
+    @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return getValue();
     }
 }

@@ -14,18 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.n52.series.db.beans.parameter.project;
 
-package org.n52.series.db.beans.parameter.phenomenon;
-
-import org.n52.series.db.beans.parameter.CountParameterEntity;
+import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public class PhenomenonCountParameterEntity extends PhenomenonParameterEntity<Integer>
-        implements CountParameterEntity {
+public class ProjectBooleanParameterEntity extends ProjectParameterEntity<Boolean> implements BooleanParameterEntity {
 
-    private static final long serialVersionUID = -7778025481981408886L;
+    private static final long serialVersionUID = -1280123654095577480L;
 
     @Override
     public String getValueAsString() {

@@ -19,22 +19,18 @@ package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupParameterEntity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -48,7 +44,6 @@ public class ObservationGroupEntity
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROP_ENTITIES = "entities";
-    public static final String PROP_PARENT = "parent";
 
     @Id
     @Column(nullable = false, unique = true)
@@ -73,12 +68,8 @@ public class ObservationGroupEntity
     @OneToMany(mappedBy = ObservationRelationEntity.PROPERTY_GROUP)
     private Set<ObservationRelationEntity> entities;
 
-    @ManyToMany(targetEntity = ParameterEntity.class, fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinTable(name = "observationgroup_parameter",
-            inverseForeignKey = @ForeignKey(name = "fk_observationgroup_parameter"),
-            joinColumns = { @JoinColumn(name = "fk_observationgroup_id") },
-            foreignKey = @ForeignKey(name = "fk_parameter_observationgroup"),
-            inverseJoinColumns = { @JoinColumn(name = "fk_parameter_id") })
+    @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
+            targetEntity = ObservationGroupParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
     @Transient
@@ -140,11 +131,27 @@ public class ObservationGroupEntity
 
     @Override
     public Set<ParameterEntity<?>> getParameters() {
-        return this.parameters;
+        return parameters;
     }
 
     @Override
     public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
+    }
+
+    @Override
+    public void addParameters(Set<ParameterEntity<?>> parameters) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.addAll(parameters);
+    }
+
+    @Override
+    public void addParameter(ParameterEntity<?> parameter) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.add(parameter);
     }
 }

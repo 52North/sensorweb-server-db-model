@@ -1,36 +1,25 @@
 /*
- * Copyright (C) 2018-2020 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2020 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
- * This program is free software; you can redistribute it and/or modify it
- * under the terms of the GNU General Public License version 2 as published
- * by the Free Software Foundation.
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
  *
- * If the program is linked with libraries which are licensed under one of
- * the following licenses, the combination of the program with the linked
- * library is not considered a "derivative work" of the program:
+ *    http://www.apache.org/licenses/LICENSE-2.0
  *
- *     - Apache License, version 2.0
- *     - Apache Software License, version 1.0
- *     - GNU Lesser General Public License, version 3
- *     - Mozilla Public License, versions 1.0, 1.1 and 2.0
- *     - Common Development and Distribution License (CDDL), version 1.0
- *
- * Therefore the distribution of the program linked with libraries licensed
- * under the aforementioned licenses, is permitted by the copyright holders
- * if the distribution is compliant with both the GNU General Public
- * License version 2 and the aforementioned licenses.
- *
- * This program is distributed in the hope that it will be useful, but
- * WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General
- * Public License for more details.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,6 +30,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -51,12 +41,15 @@ import java.util.Set;
 @Table(name = "project")
 public class ProjectEntity
         implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasDescription,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier {
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_URL = "url";
     public static final String PROPERTY_RUNTIME_START = "runtimeStart";
     public static final String PROPERTY_RUNTIME_END = "runtimeEnd";
+    public static final String PROPERTY_PRIVACY_POLICY = "privacyPolicy";
+    public static final String PROPERTY_TERMS_OF_USE = "termsOfUse";
+    public static final String PROPERTY_CLASSIFICATION = "classification";
 
     @Id
     @Column(nullable = false, name = "project_id", unique = true)
@@ -81,11 +74,23 @@ public class ProjectEntity
     @Column(name = PROPERTY_RUNTIME_END, length = 29, nullable = false)
     private Date runtimeEnd;
 
+    @Column(name = PROPERTY_PRIVACY_POLICY)
+    private String privacyPolicy;
+
+    @Column(name = PROPERTY_TERMS_OF_USE)
+    private String termsOfUse;
+
+    @Column(name = PROPERTY_CLASSIFICATION)
+    private String classification;
+
     @Column(name = PROPERTY_URL)
     private String url;
 
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PROJECT)
     private Set<AbstractDatasetEntity> datasets;
+
+    @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
+    private Set<ParameterEntity<?>> parameters;
 
     public Long getId() {
         return id;
@@ -151,5 +156,55 @@ public class ProjectEntity
     @Override
     public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
+    }
+
+    public String getPrivacyPolicy() {
+        return privacyPolicy;
+    }
+
+    public void setPrivacyPolicy(String privacyPolicy) {
+        this.privacyPolicy = privacyPolicy;
+    }
+
+    public String getTermsOfUse() {
+        return termsOfUse;
+    }
+
+    public void setTermsOfUse(String termsOfUse) {
+        this.termsOfUse = termsOfUse;
+    }
+
+    public String getClassification() {
+        return classification;
+    }
+
+    public void setClassification(String classification) {
+        this.classification = classification;
+    }
+
+    @Override
+    public Set<ParameterEntity<?>> getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
+        this.parameters = parameters;
+    }
+
+    @Override
+    public void addParameters(Set<ParameterEntity<?>> parameters) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.addAll(parameters);
+    }
+
+    @Override
+    public void addParameter(ParameterEntity<?> parameter) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.add(parameter);
     }
 }

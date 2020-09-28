@@ -27,11 +27,8 @@ import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class PlatformEntity extends DescribableEntity implements HasLocations,
-                                                                 IsStaEntity,
-                                                                 HibernateRelations.HasAbstractDatasets,
-                                                                 HibernateRelations.IsProcessed,
-                                                                 HibernateRelations.HasParameters {
+public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
