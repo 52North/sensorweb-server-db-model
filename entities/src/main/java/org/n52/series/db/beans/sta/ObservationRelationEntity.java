@@ -37,9 +37,9 @@ import javax.persistence.Table;
 @SequenceGenerator(name = "observation_rel_seq", allocationSize = 1)
 public class ObservationRelationEntity implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier {
 
-    public final static String PROPERTY_GROUP = "group";
-    public final static String PROPERTY_OBSERVATION = "observation";
-    public final static String PROPERTY_TYPE = "type";
+    public static final String PROPERTY_GROUP = "group";
+    public static final String PROPERTY_OBSERVATION = "observation";
+    public static final String PROPERTY_TYPE = "type";
 
     @Id
     @Column(nullable = false, unique = true)

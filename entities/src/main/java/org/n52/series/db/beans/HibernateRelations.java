@@ -54,9 +54,11 @@ public interface HibernateRelations {
 
     String C = "children";
 
+    String I = "id";
+
     interface HasId {
 
-        String ID = "id";
+        String ID = I;
 
         Long getId();
 
@@ -981,7 +983,7 @@ public interface HibernateRelations {
 
     interface HasObservationId {
 
-        String OBS_ID = "id";
+        String OBS_ID = I;
 
         /**
          * Get the observation id

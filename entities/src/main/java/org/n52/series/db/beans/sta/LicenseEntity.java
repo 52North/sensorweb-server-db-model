@@ -14,13 +14,13 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.license.LicenseParameterEntity;
-import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -39,8 +39,11 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "license_seq", allocationSize = 1)
 @Table(name = "license")
-public class LicenseEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
+public class LicenseEntity implements HibernateRelations.HasId,
+                                      HibernateRelations.HasName,
+                                      HibernateRelations.HasAbstractDatasets,
+                                      HibernateRelations.HasStaIdentifier,
+                                      HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASETS = "datasets";
     public static final String PROPERTY_DEFINITION = "definition";
