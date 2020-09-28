@@ -27,10 +27,13 @@ import org.n52.series.db.beans.IdEntity;
 
 public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
 
+    public static final String PROPERTY_PARENT = "parent";
+
     private static final long serialVersionUID = -1489503368673412638L;
     private String name;
     private Date lastUpdate;
     private String domain;
+    private Long parent;
     private T value;
 
     public Map<String, Object> toValueMap(String locale) {
@@ -77,6 +80,18 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
 
     public boolean isSetDomain() {
         return getDomain() != null && !getDomain().isEmpty();
+    }
+
+    public Long getParent() {
+        return parent;
+    }
+
+    public void setParent(Long parent) {
+        this.parent = parent;
+    }
+
+    public boolean hasParent() {
+        return getParent() != null;
     }
 
     @Override
