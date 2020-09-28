@@ -21,7 +21,7 @@
             </column>
         </discriminator>
         <property name="name" type="string">
-            <column name="name" not-null="true" index="idx_param_name">
+            <column name="name" not-null="true" index="idx_feature_param_name">
                 <comment>The name of the parameter</comment>
             </column>
         </property>
@@ -37,7 +37,7 @@
         </property>
 
         <many-to-one name="feature" class="org.n52.series.db.beans.AbstractFeatureEntity"
-                     foreign-key="fk_feature_id">
+                     foreign-key="fk_param_feature_id">
             <column name="fk_feature_id" not-null="true" index="idx_feature_parameter">
                 <comment>Reference to the Dataset this Parameter describes.</comment>
             </column>
@@ -63,8 +63,8 @@
                 </column>
             </property>
             <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
-                         foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+                         foreign-key="fk_feature_param_unit">
+                <column name="fk_unit_id" index="idx_feature_parameter_unit">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
             </many-to-one>
@@ -86,9 +86,8 @@
                     <comment>Storage of a quantity parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
-                         foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false">
+                <column name="fk_unit_id">
                     <!-- Comment is defined above for category! -->
                 </column>
             </many-to-one>
@@ -120,7 +119,7 @@
         <subclass discriminator-value="complex" extends="FeatureParameterEntity"
                   name="FeatureComplexParameterEntity">
             <set name="value" table="feature_parameter" cascade="remove">
-                <key foreign-key="fk_parent_parameter">
+                <key foreign-key="fk_feature_parent_parameter">
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>
                     </column>

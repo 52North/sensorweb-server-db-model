@@ -19,7 +19,7 @@
             </column>
         </discriminator>
         <property name="name" type="string">
-            <column name="name" not-null="true" index="idx_param_name">
+            <column name="name" not-null="true" index="idx_platform_param_name">
                 <comment>The name of the parameter</comment>
             </column>
         </property>
@@ -34,7 +34,7 @@
             </column>
         </property>
 
-        <many-to-one name="platform" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_platform_id" lazy="proxy">
+        <many-to-one name="platform" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_param_platform_id" lazy="proxy">
             <column name="fk_platform_id" not-null="true" index="idx_platform_parameter">
                 <comment>Reference to the Platform this Parameter describes.</comment>
             </column>
@@ -49,8 +49,8 @@
                     <comment>Storage of a categorical parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_platform_param_unit">
+                <column name="fk_unit_id" index="idx_platform_parameter_unit">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
             </many-to-one>
@@ -78,8 +78,8 @@
                     <comment>Storage of a quantity parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false">
+                <column name="fk_unit_id">
                     <!-- Comment is defined above for category! -->
                 </column>
             </many-to-one>
@@ -108,7 +108,7 @@
         <subclass discriminator-value="complex" extends="PlatformParameterEntity"
                   name="PlatformComplexParameterEntity">
             <set name="value" table="platform_parameter" cascade="remove">
-                <key foreign-key="fk_parent_parameter">
+                <key foreign-key="fk_platform_parent_parameter">
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>
                     </column>
