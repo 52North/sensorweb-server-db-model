@@ -16,11 +16,13 @@
  */
 package org.n52.series.db.beans.parameter;
 
-import org.n52.series.db.beans.HibernateRelations;
+import java.math.BigDecimal;
+
+import org.n52.series.db.beans.HibernateRelations.HasUnit;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public interface QuantityParameterEntity extends HibernateRelations.HasUnit {
+public interface QuantityParameterEntity extends ValuedParameter<BigDecimal>, HasUnit {
 
 }

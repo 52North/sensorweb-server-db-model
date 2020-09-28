@@ -17,8 +17,16 @@
 
 package org.n52.series.db.beans.parameter;
 
+import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.PhenomenonEntity;
+import org.n52.series.db.beans.PlatformEntity;
+import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.dataset.DatasetComplexParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetCountParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetJsonParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetQuantityParameterEntity;
@@ -26,6 +34,7 @@ import org.n52.series.db.beans.parameter.dataset.DatasetTextParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetXmlParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.feature.FeatureComplexParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureCountParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureQuantityParameterEntity;
@@ -40,6 +49,7 @@ import org.n52.series.db.beans.parameter.license.LicenseTextParameterEntity;
 import org.n52.series.db.beans.parameter.license.LicenseXmlParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.location.LocationComplexParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationCountParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationJsonParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationQuantityParameterEntity;
@@ -47,6 +57,7 @@ import org.n52.series.db.beans.parameter.location.LocationTextParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationXmlParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.observation.ObservationComplexParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationCountParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationJsonParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationQuantityParameterEntity;
@@ -61,6 +72,7 @@ import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupTextPa
 import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupXmlParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.phenomenon.PhenomenonComplexParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonCountParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonJsonParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonQuantityParameterEntity;
@@ -68,6 +80,7 @@ import org.n52.series.db.beans.parameter.phenomenon.PhenomenonTextParameterEntit
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonXmlParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.platform.PlatformComplexParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformCountParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformJsonParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformQuantityParameterEntity;
@@ -75,6 +88,7 @@ import org.n52.series.db.beans.parameter.platform.PlatformTextParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformXmlParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.procedure.ProcedureComplexParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureCountParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureQuantityParameterEntity;
@@ -87,6 +101,10 @@ import org.n52.series.db.beans.parameter.project.ProjectJsonParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectTextParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectXmlParameterEntity;
+import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.LocationEntity;
+import org.n52.series.db.beans.sta.ObservationGroupEntity;
+import org.n52.series.db.beans.sta.ProjectEntity;
 
 /**
  * Denotes Classes that can create concrete parameter entities.
@@ -98,10 +116,41 @@ public class ParameterFactory {
     /**
      * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter
      *
-     * @param valueType
-     *            type of the value
-     * @param entityType
-     *            type of the entity
+     * @param valueType type of the value
+     * @param entity    the entity
+     * @return concrete class
+     */
+    public static ParameterEntity<?> from(Object entity, ValueType valueType) {
+        EntityType entityType = null;
+        if (entity instanceof PhenomenonEntity) {
+            entityType = EntityType.PHENOMENON;
+        } else if (entity instanceof ProcedureEntity) {
+            entityType = EntityType.PROCEDURE;
+        } else if (entity instanceof AbstractDatasetEntity) {
+            entityType = EntityType.DATASET;
+        } else if (entity instanceof AbstractFeatureEntity) {
+            entityType = EntityType.FEATURE;
+        } else if (entity instanceof DataEntity) {
+            entityType = EntityType.OBSERVATION;
+        } else if (entity instanceof LocationEntity) {
+            entityType = EntityType.LOCATION;
+        } else if (entity instanceof PlatformEntity) {
+            entityType = EntityType.PLATFORM;
+        } else if (entity instanceof LicenseEntity) {
+            entityType = EntityType.LICENSE;
+        } else if (entity instanceof ProjectEntity) {
+            entityType = EntityType.PROJECT;
+        } else if (entity instanceof ObservationGroupEntity) {
+            entityType = EntityType.OBS_GROUP;
+        }
+        return entityType != null ? from(entityType, valueType) : null;
+    }
+
+    /**
+     * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter
+     *
+     * @param valueType  type of the value
+     * @param entityType type of the entity
      * @return concrete class
      */
     public static ParameterEntity<?> from(EntityType entityType, ValueType valueType) {
@@ -122,6 +171,8 @@ public class ParameterFactory {
                         return new PhenomenonCountParameterEntity();
                     case QUANTITY:
                         return new PhenomenonQuantityParameterEntity();
+                    case COMPLEX:
+                        return new PhenomenonComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -141,6 +192,8 @@ public class ParameterFactory {
                         return new ProcedureCountParameterEntity();
                     case QUANTITY:
                         return new ProcedureQuantityParameterEntity();
+                    case COMPLEX:
+                        return new ProcedureComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -160,6 +213,8 @@ public class ParameterFactory {
                         return new PlatformCountParameterEntity();
                     case QUANTITY:
                         return new PlatformQuantityParameterEntity();
+                    case COMPLEX:
+                        return new PlatformComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -179,6 +234,8 @@ public class ParameterFactory {
                         return new DatasetCountParameterEntity();
                     case QUANTITY:
                         return new DatasetQuantityParameterEntity();
+                    case COMPLEX:
+                        return new DatasetComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -198,6 +255,8 @@ public class ParameterFactory {
                         return new FeatureCountParameterEntity();
                     case QUANTITY:
                         return new FeatureQuantityParameterEntity();
+                    case COMPLEX:
+                        return new FeatureComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -217,6 +276,8 @@ public class ParameterFactory {
                         return new ObservationCountParameterEntity();
                     case QUANTITY:
                         return new ObservationQuantityParameterEntity();
+                    case COMPLEX:
+                        return new ObservationComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -236,6 +297,8 @@ public class ParameterFactory {
                         return new LocationCountParameterEntity();
                     case QUANTITY:
                         return new LocationQuantityParameterEntity();
+                    case COMPLEX:
+                        return new LocationComplexParameterEntity();
                     default:
                         return null;
                 }
@@ -305,8 +368,9 @@ public class ParameterFactory {
         PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION, LICENSE, OBS_GROUP, PROJECT
     }
 
+
     public enum ValueType {
-        BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY
+        BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY, COMPLEX
     }
 
 }

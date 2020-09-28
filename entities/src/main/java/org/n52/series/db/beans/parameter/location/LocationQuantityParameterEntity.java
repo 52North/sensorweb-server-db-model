@@ -16,11 +16,11 @@
  */
 package org.n52.series.db.beans.parameter.location;
 
-import org.n52.series.db.beans.UnitEntity;
-import org.n52.series.db.beans.parameter.QuantityParameterEntity;
-
 import java.math.BigDecimal;
 import java.util.Map;
+
+import org.n52.series.db.beans.UnitEntity;
+import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>

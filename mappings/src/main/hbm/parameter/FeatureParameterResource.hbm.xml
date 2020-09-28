@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<hibernate-mapping package="org.n52.series.db.beans.parameter"
+<hibernate-mapping package="org.n52.series.db.beans.parameter.feature"
                    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="org.n52.series.db.beans.parameter.feature.FeatureParameterEntity" abstract="true"
+    <class name="FeatureParameterEntity" abstract="true"
            table="feature_parameter"
-           check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
+           check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json', 'complex')">
         <comment>Storage for additional information for platforms</comment>
         <id name="id" type="long">
             <column name="parameter_id">
@@ -21,7 +21,7 @@
             </column>
         </discriminator>
         <property name="name" type="string">
-            <column name="name" not-null="true" index="idx_param_name">
+            <column name="name" not-null="true" index="idx_feature_param_name">
                 <comment>The name of the parameter</comment>
             </column>
         </property>
@@ -37,7 +37,7 @@
         </property>
 
         <many-to-one name="feature" class="org.n52.series.db.beans.AbstractFeatureEntity"
-                     foreign-key="fk_feature_id">
+                     foreign-key="fk_param_feature_id">
             <column name="fk_feature_id" not-null="true" index="idx_feature_parameter">
                 <comment>Reference to the Dataset this Parameter describes.</comment>
             </column>
@@ -47,7 +47,7 @@
         </property>
 
         <subclass discriminator-value="bool" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureBooleanParameterEntity">
+                  name="FeatureBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
                 <column name="value_boolean">
                     <comment>Storage of a boolean parameter value.</comment>
@@ -56,22 +56,22 @@
         </subclass>
 
         <subclass discriminator-value="category" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureCategoryParameterEntity">
+                  name="FeatureCategoryParameterEntity">
             <property name="value" type="string">
                 <column name="value_category">
                     <comment>Storage of a categorical parameter value.</comment>
                 </column>
             </property>
             <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
-                         foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+                         foreign-key="fk_feature_param_unit">
+                <column name="fk_unit_id" index="idx_feature_parameter_unit">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
             </many-to-one>
         </subclass>
 
         <subclass discriminator-value="count" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureCountParameterEntity">
+                  name="FeatureCountParameterEntity">
             <property name="value" type="integer">
                 <column name="value_count">
                     <comment>Storage of a count parameter value.</comment>
@@ -80,21 +80,20 @@
         </subclass>
 
         <subclass discriminator-value="quantity" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureQuantityParameterEntity">
+                  name="FeatureQuantityParameterEntity">
             <property name="value" type="big_decimal" precision="20" scale="10">
                 <column name="value_quantity">
                     <comment>Storage of a quantity parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
-                         foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false">
+                <column name="fk_unit_id">
                     <!-- Comment is defined above for category! -->
                 </column>
             </many-to-one>
         </subclass>
         <subclass discriminator-value="text" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureTextParameterEntity">
+                  name="FeatureTextParameterEntity">
             <property name="value" type="string">
                 <column name="value_text">
                     <comment>Storage of a textual parameter value.</comment>
@@ -102,7 +101,7 @@
             </property>
         </subclass>
         <subclass discriminator-value="xml" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureXmlParameterEntity">
+                  name="FeatureXmlParameterEntity">
             <property name="value" type="text">
                 <column name="value_xml">
                     <comment>Storage of a XML encoded parameter value.</comment>
@@ -110,12 +109,23 @@
             </property>
         </subclass>
         <subclass discriminator-value="json" extends="FeatureParameterEntity"
-                  name="org.n52.series.db.beans.parameter.feature.FeatureJsonParameterEntity">
+                  name="FeatureJsonParameterEntity">
             <property name="value" type="text">
                 <column name="value_json">
                     <comment>Storage of a JSON encoded parameter value.</comment>
                 </column>
             </property>
+        </subclass>
+        <subclass discriminator-value="complex" extends="FeatureParameterEntity"
+                  name="FeatureComplexParameterEntity">
+            <set name="value" table="feature_parameter" cascade="remove">
+                <key foreign-key="fk_feature_parent_parameter">
+                    <column name="fk_parent_parameter_id" not-null="false">
+                        <comment>Reference to the parent parameter</comment>
+                    </column>
+                </key>
+                <one-to-many class="FeatureParameterEntity" />
+            </set>
         </subclass>
     </class>
 </hibernate-mapping>

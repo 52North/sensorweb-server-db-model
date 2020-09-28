@@ -16,9 +16,11 @@
  */
 package org.n52.series.db.beans.parameter;
 
+import java.util.Set;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
-public interface JsonParameterEntity extends ValuedParameter<String> {
+public interface ComplexParameterEntity<T extends Set<?>> extends ValuedParameter<T> {
 
 }

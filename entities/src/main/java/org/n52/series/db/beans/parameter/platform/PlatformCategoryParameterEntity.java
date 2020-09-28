@@ -17,10 +17,10 @@
 
 package org.n52.series.db.beans.parameter.platform;
 
+import java.util.Map;
+
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.CategoryParameterEntity;
-
-import java.util.Map;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
