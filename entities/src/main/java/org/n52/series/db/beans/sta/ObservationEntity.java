@@ -55,7 +55,7 @@ import java.util.Set;
  * Represents a SensorThingsAPI Observation. Uses Javax Annotations to use @AttributeOverride
  *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
- * 
+ *
  * @deprecated use {@link DataEntity}
  */
 @Deprecated

@@ -138,7 +138,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     private String valueCategory;
 
     private Integer valueCount;
-    
+
     private AbstractFeatureEntity<?> feature;
 
     private boolean processed;
@@ -445,7 +445,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     public void setValueCount(Integer valueCount) {
         this.valueCount = valueCount;
     }
-    
+
     @Override
     public AbstractFeatureEntity<?> getFeature() {
         return feature;
@@ -455,7 +455,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     public void setFeature(AbstractFeatureEntity<?> feature) {
         this.feature = feature;
     }
-    
+
     @Override
     public boolean isProcessed() {
         return processed;
