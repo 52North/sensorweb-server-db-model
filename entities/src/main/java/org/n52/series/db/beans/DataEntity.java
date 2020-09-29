@@ -31,12 +31,15 @@ import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasResultTime;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+import org.n52.series.db.beans.HibernateRelations.HasFeature;
+import org.n52.series.db.beans.HibernateRelations.IsProcessed;
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
-        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime, HasParameters, HasDataset {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
+        HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed {
 
     public static final String PROPERTY_ID = "id";
 
@@ -135,6 +138,10 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     private String valueCategory;
 
     private Integer valueCount;
+    
+    private AbstractFeatureEntity<?> feature;
+
+    private boolean processed;
 
     protected DataEntity() {
 
@@ -437,6 +444,26 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public void setValueCount(Integer valueCount) {
         this.valueCount = valueCount;
+    }
+    
+    @Override
+    public AbstractFeatureEntity<?> getFeature() {
+        return feature;
+    }
+
+    @Override
+    public void setFeature(AbstractFeatureEntity<?> feature) {
+        this.feature = feature;
+    }
+    
+    @Override
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    @Override
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
     }
 
     @Override
