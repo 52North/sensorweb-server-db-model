@@ -72,6 +72,16 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
 
+    public static final String PROPERTY_VALUE_BOOLEAN = "valueBoolean";
+
+    public static final String PROPERTY_VALUE_TEXT = "valueText";
+
+    public static final String PROPERTY_VALUE_QUANTITY = "valueQuantity";
+
+    public static final String PROPERTY_VALUE_CATEGORY = "valueCategory";
+
+    public static final String PROPERTY_VALUE_COUNT = "valueCount";
+
     public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(0);
 
     private static final long serialVersionUID = 273612846605300612L;
@@ -115,6 +125,16 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     private SamplingProfileDataEntity samplingProfile;
 
     private EReportingProfileDataEntity ereportingProfile;
+
+    private Boolean valueBoolean;
+
+    private String valueText;
+
+    private BigDecimal valueQuantity;
+
+    private String valueCategory;
+
+    private Integer valueCount;
 
     protected DataEntity() {
 
@@ -377,6 +397,46 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public boolean hasEreportingProfile() {
         return getEreportingProfile() != null;
+    }
+
+    public Boolean getValueBoolean() {
+        return valueBoolean;
+    }
+
+    public void setValueBoolean(Boolean valueBoolean) {
+        this.valueBoolean = valueBoolean;
+    }
+
+    public String getValueText() {
+        return valueText;
+    }
+
+    public void setValueText(String valueText) {
+        this.valueText = valueText;
+    }
+
+    public BigDecimal getValueQuantity() {
+        return valueQuantity;
+    }
+
+    public void setValueQuantity(BigDecimal valueQuantity) {
+        this.valueQuantity = valueQuantity;
+    }
+
+    public String getValueCategory() {
+        return valueCategory;
+    }
+
+    public void setValueCategory(String valueCategory) {
+        this.valueCategory = valueCategory;
+    }
+
+    public Integer getValueCount() {
+        return valueCount;
+    }
+
+    public void setValueCount(Integer valueCount) {
+        this.valueCount = valueCount;
     }
 
     @Override

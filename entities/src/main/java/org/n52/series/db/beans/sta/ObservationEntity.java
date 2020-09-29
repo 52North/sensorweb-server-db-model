@@ -20,6 +20,7 @@ package org.n52.series.db.beans.sta;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationParameterEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -54,7 +55,10 @@ import java.util.Set;
  * Represents a SensorThingsAPI Observation. Uses Javax Annotations to use @AttributeOverride
  *
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
+ * 
+ * @deprecated use {@link DataEntity}
  */
+@Deprecated
 @Entity
 @SequenceGenerator(name = "observation_seq", allocationSize = 1)
 @Table(name = "observation",

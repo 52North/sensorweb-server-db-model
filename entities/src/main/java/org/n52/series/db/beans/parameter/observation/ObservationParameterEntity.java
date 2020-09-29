@@ -17,8 +17,8 @@
 
 package org.n52.series.db.beans.parameter.observation;
 
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.ObservationEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
@@ -28,14 +28,14 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_OBSERVATION = "observation";
     public static final String PROP_OBSERVATION_ID = "observationId";
 
-    private ObservationEntity observation;
+    private DataEntity observation;
     private long observationId;
 
-    public ObservationEntity getObservation() {
+    public DataEntity getObservation() {
         return observation;
     }
 
-    public void setObservation(ObservationEntity observation) {
+    public void setObservation(DataEntity observation) {
         this.observation = observation;
     }
 

@@ -45,6 +45,8 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_OM_OBSERVATION_TYPE = "omObservationType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
+    public static final String PROPERTY_FIRST_OBSERVATION = "firstObservation";
+    public static final String PROPERTY_LAST_OBSERVATION = "lastObservation";
     public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
     public static final String PROPERTY_UNIT = "unit";

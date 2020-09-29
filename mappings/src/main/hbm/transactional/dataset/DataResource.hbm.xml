@@ -115,7 +115,6 @@
             </key>
             <one-to-many class="org.n52.series.db.beans.parameter.observation.ObservationParameterEntity" />
         </set>
-
         <!-- Comments are defined in the RelatedDataResource.hbm.xml -->
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
@@ -161,6 +160,11 @@
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
+        <property name="valueQuantity" column="value_quantity" not-null="false" type="big_decimal" precision="20" scale="10" insert="false" update="false" />
+        <property name="valueText" column="value_text" not-null="false" type="string" insert="false" update="false" />
+        <property name="valueCount" column="value_count" not-null="false" type="integer" insert="false" update="false" />
+        <property name="valueCategory" column="value_category" not-null="false" type="string" insert="false" update="false" />
+        <property name="valueBoolean" column="value_boolean" not-null="false" type="org.n52.hibernate.type.SmallBooleanType" insert="false" update="false" />
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
             <property name="value" type="big_decimal" precision="20" scale="10">
