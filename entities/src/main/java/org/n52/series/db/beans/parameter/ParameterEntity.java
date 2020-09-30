@@ -24,9 +24,8 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.HibernateRelations.HasDescription;
 
-public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T>, HasDescription {
+public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
 
     public static final String PROPERTY_PARENT = "parent";
 
