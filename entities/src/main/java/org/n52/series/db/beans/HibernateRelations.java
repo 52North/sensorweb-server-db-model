@@ -20,7 +20,6 @@ package org.n52.series.db.beans;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.AbstractObservationEntity;
 import org.n52.series.db.common.LocaleHelper;
 
 import java.io.UnsupportedEncodingException;

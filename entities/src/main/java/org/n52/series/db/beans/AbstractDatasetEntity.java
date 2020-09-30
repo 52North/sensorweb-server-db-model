@@ -19,7 +19,6 @@ package org.n52.series.db.beans;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
-import org.n52.series.db.beans.sta.AbstractObservationEntity;
 import org.n52.series.db.common.Utils;
 
 import java.io.Serializable;
