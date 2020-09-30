@@ -30,6 +30,7 @@ import org.n52.series.db.beans.parameter.dataset.DatasetComplexParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetCountParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetJsonParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.dataset.DatasetTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetTextParameterEntity;
 import org.n52.series.db.beans.parameter.dataset.DatasetXmlParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureBooleanParameterEntity;
@@ -38,6 +39,7 @@ import org.n52.series.db.beans.parameter.feature.FeatureComplexParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureCountParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.feature.FeatureTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureTextParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureXmlParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationBooleanParameterEntity;
@@ -46,6 +48,7 @@ import org.n52.series.db.beans.parameter.location.LocationComplexParameterEntity
 import org.n52.series.db.beans.parameter.location.LocationCountParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationJsonParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.location.LocationTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationTextParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationXmlParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationBooleanParameterEntity;
@@ -54,6 +57,7 @@ import org.n52.series.db.beans.parameter.observation.ObservationComplexParameter
 import org.n52.series.db.beans.parameter.observation.ObservationCountParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationJsonParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.observation.ObservationTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationTextParameterEntity;
 import org.n52.series.db.beans.parameter.observation.ObservationXmlParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonBooleanParameterEntity;
@@ -62,6 +66,7 @@ import org.n52.series.db.beans.parameter.phenomenon.PhenomenonComplexParameterEn
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonCountParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonJsonParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.phenomenon.PhenomenonTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonTextParameterEntity;
 import org.n52.series.db.beans.parameter.phenomenon.PhenomenonXmlParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformBooleanParameterEntity;
@@ -70,6 +75,7 @@ import org.n52.series.db.beans.parameter.platform.PlatformComplexParameterEntity
 import org.n52.series.db.beans.parameter.platform.PlatformCountParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformJsonParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.platform.PlatformTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformTextParameterEntity;
 import org.n52.series.db.beans.parameter.platform.PlatformXmlParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureBooleanParameterEntity;
@@ -78,6 +84,7 @@ import org.n52.series.db.beans.parameter.procedure.ProcedureComplexParameterEnti
 import org.n52.series.db.beans.parameter.procedure.ProcedureCountParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureJsonParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.procedure.ProcedureTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureTextParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureXmlParameterEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
@@ -147,6 +154,8 @@ public class ParameterFactory {
                         return new PhenomenonQuantityParameterEntity();
                     case COMPLEX:
                         return new PhenomenonComplexParameterEntity();
+                    case TEMPORAL:
+                        return new PhenomenonTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -168,6 +177,8 @@ public class ParameterFactory {
                         return new ProcedureQuantityParameterEntity();
                     case COMPLEX:
                         return new ProcedureComplexParameterEntity();
+                    case TEMPORAL:
+                        return new ProcedureTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -189,6 +200,8 @@ public class ParameterFactory {
                         return new PlatformQuantityParameterEntity();
                     case COMPLEX:
                         return new PlatformComplexParameterEntity();
+                    case TEMPORAL:
+                        return new PlatformTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -210,6 +223,8 @@ public class ParameterFactory {
                         return new DatasetQuantityParameterEntity();
                     case COMPLEX:
                         return new DatasetComplexParameterEntity();
+                    case TEMPORAL:
+                        return new DatasetTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -231,6 +246,8 @@ public class ParameterFactory {
                         return new FeatureQuantityParameterEntity();
                     case COMPLEX:
                         return new FeatureComplexParameterEntity();
+                    case TEMPORAL:
+                        return new FeatureTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -252,6 +269,8 @@ public class ParameterFactory {
                         return new ObservationQuantityParameterEntity();
                     case COMPLEX:
                         return new ObservationComplexParameterEntity();
+                    case TEMPORAL:
+                        return new ObservationTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -273,6 +292,8 @@ public class ParameterFactory {
                         return new LocationQuantityParameterEntity();
                     case COMPLEX:
                         return new LocationComplexParameterEntity();
+                    case TEMPORAL:
+                        return new LocationTemporalParameterEntity();
                     default:
                         return null;
                 }
@@ -286,7 +307,7 @@ public class ParameterFactory {
     }
 
     public enum ValueType {
-        BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY, COMPLEX
+        BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY, COMPLEX, TEMPORAL
     }
 
 }
