@@ -24,6 +24,11 @@
                 <comment>The name of the parameter</comment>
             </column>
         </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the parameter</comment>
+            </column>
+        </property>
         <property name="lastUpdate" not-null="false" type="timestamp">
             <column name="last_update">
             <comment>Timestamp that provides the time of the last modification of this entry</comment>

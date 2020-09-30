@@ -24,13 +24,15 @@ import java.util.Map;
 import java.util.Objects;
 
 import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.HibernateRelations.HasDescription;
 
-public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
+public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T>, HasDescription {
 
     public static final String PROPERTY_PARENT = "parent";
 
     private static final long serialVersionUID = -1489503368673412638L;
     private String name;
+    private String description;
     private Date lastUpdate;
     private String domain;
     private Long parent;
@@ -51,6 +53,16 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

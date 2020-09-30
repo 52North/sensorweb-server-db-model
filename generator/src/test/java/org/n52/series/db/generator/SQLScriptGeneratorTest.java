@@ -21,7 +21,7 @@ import org.junit.jupiter.api.Assertions;
 
 public class SQLScriptGeneratorTest {
 
-//    @Test
+    // @Test
     public void test_generation() throws Exception {
         Assertions.assertTrue(SQLScriptGenerator.getInstance(false).execute(1));
     }
