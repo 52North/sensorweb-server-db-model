@@ -73,7 +73,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     private FormatEntity omObservationType;
 
-    private Set<AbstractObservationEntity> observations;
+    private Set<DataEntity<?>> observations;
     private AbstractDatasetEntity aggregation;
     private boolean processed;
 
@@ -346,12 +346,12 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     @Override
-    public void setObservations(Set<AbstractObservationEntity> observations) {
+    public void setObservations(Set<DataEntity<?>> observations) {
         this.observations = observations;
     }
 
     @Override
-    public Set<AbstractObservationEntity> getObservations() {
+    public Set<DataEntity<?>> getObservations() {
         return this.observations;
     }
 

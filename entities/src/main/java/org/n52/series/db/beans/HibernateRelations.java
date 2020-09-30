@@ -27,6 +27,7 @@ import java.io.UnsupportedEncodingException;
 import java.math.BigDecimal;
 import java.net.URI;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -802,6 +803,7 @@ public interface HibernateRelations {
     }
 
     interface HasParameters {
+
         String PARAMETERS = "parameters";
 
         Set<ParameterEntity<?>> getParameters();
@@ -1223,6 +1225,11 @@ public interface HibernateRelations {
         void setProcessed(boolean processsed);
     }
 
+    interface IsNoDataValue {
+
+        boolean isNoDataValue(Collection<String> noDataValues);
+    }
+
     interface HasPlatform {
 
         PlatformEntity getPlatform();
@@ -1254,9 +1261,9 @@ public interface HibernateRelations {
 
     interface HasObservations {
 
-        Set<AbstractObservationEntity> getObservations();
+        Set<DataEntity<?>> getObservations();
 
-        void setObservations(Set<AbstractObservationEntity> observations);
+        void setObservations(Set<DataEntity<?>> observations);
 
         default boolean hasObservations() {
             return getObservations() != null;

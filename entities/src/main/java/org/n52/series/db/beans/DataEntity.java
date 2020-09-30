@@ -14,32 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import org.n52.series.db.beans.HibernateRelations.HasDataset;
+import org.n52.series.db.beans.HibernateRelations.HasFeature;
+import org.n52.series.db.beans.HibernateRelations.HasParameters;
+import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
+import org.n52.series.db.beans.HibernateRelations.HasResultTime;
+import org.n52.series.db.beans.HibernateRelations.HasValidTime;
+import org.n52.series.db.beans.HibernateRelations.IsNoDataValue;
+import org.n52.series.db.beans.HibernateRelations.IsProcessed;
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
+import org.n52.series.db.common.Utils;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.n52.series.db.beans.HibernateRelations.HasDataset;
-import org.n52.series.db.beans.HibernateRelations.HasParameters;
-import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
-import org.n52.series.db.beans.HibernateRelations.HasResultTime;
-import org.n52.series.db.beans.HibernateRelations.HasValidTime;
-import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.HibernateRelations.HasFeature;
-import org.n52.series.db.beans.HibernateRelations.IsProcessed;
-import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
-import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
-import org.n52.series.db.common.Utils;
-
 public abstract class DataEntity<T> extends DescribableEntity
         implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
-        HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed {
+        HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed, IsNoDataValue {
 
     public static final String PROPERTY_ID = "id";
 
@@ -143,10 +144,6 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private boolean processed;
 
-    protected DataEntity() {
-
-    }
-
     /**
      * @return the samplingTimeStart
      */
@@ -196,8 +193,6 @@ public abstract class DataEntity<T> extends DescribableEntity
     public boolean hasValue() {
         return getValue() != null;
     }
-
-    public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -474,6 +469,13 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
+                .toString();
+    }
+
+    @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), getDataset(), getSamplingTimeStart(), getSamplingTimeEnd(),
                 getResultTime(), getValue());
@@ -491,12 +493,5 @@ public abstract class DataEntity<T> extends DescribableEntity
                 && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
                 && Objects.equals(getResultTime(), other.getResultTime())
                 && Objects.equals(getValue(), other.getValue());
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
-                .toString();
     }
 }
