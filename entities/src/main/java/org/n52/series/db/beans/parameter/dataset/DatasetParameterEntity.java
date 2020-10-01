@@ -25,8 +25,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
  */
 public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
-    public static final String PROP_DATASET = "observation";
-    public static final String PROP_DATASET_ID = "observationId";
+    public static final String PROP_DATASET = "dataset";
+    public static final String PROP_DATASET_ID = "datasetId";
 
     private AbstractDatasetEntity dataset;
     private long datasetId;
