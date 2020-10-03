@@ -116,8 +116,10 @@ public class ParameterFactory {
     /**
      * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter
      *
-     * @param valueType type of the value
-     * @param entity    the entity
+     * @param valueType
+     *            type of the value
+     * @param entity
+     *            the entity
      * @return concrete class
      */
     public static ParameterEntity<?> from(Object entity, ValueType valueType) {
@@ -149,8 +151,10 @@ public class ParameterFactory {
     /**
      * Creates a concrete ParameterEntity based on the type of the Entity and the Parameter
      *
-     * @param valueType  type of the value
-     * @param entityType type of the entity
+     * @param valueType
+     *            type of the value
+     * @param entityType
+     *            type of the entity
      * @return concrete class
      */
     public static ParameterEntity<?> from(EntityType entityType, ValueType valueType) {
@@ -367,7 +371,6 @@ public class ParameterFactory {
     public enum EntityType {
         PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION, LICENSE, OBS_GROUP, PROJECT
     }
-
 
     public enum ValueType {
         BOOLEAN, TEXT, JSON, XML, COUNT, CATEGORY, QUANTITY, COMPLEX

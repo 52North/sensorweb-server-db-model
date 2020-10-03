@@ -18,6 +18,7 @@ package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
 
@@ -39,7 +40,7 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "project_seq", allocationSize = 1)
 @Table(name = "project")
-public class ProjectEntity
+public class ProjectEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasDescription,
         HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
 
@@ -50,6 +51,7 @@ public class ProjectEntity
     public static final String PROPERTY_PRIVACY_POLICY = "privacyPolicy";
     public static final String PROPERTY_TERMS_OF_USE = "termsOfUse";
     public static final String PROPERTY_CLASSIFICATION = "classification";
+    private static final long serialVersionUID = 1050625647937315126L;
 
     @Id
     @Column(nullable = false, name = "project_id", unique = true)
@@ -92,14 +94,6 @@ public class ProjectEntity
     @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public String getStaIdentifier() {
         return staIdentifier;
     }
@@ -125,19 +119,27 @@ public class ProjectEntity
     }
 
     public Date getRuntimeStart() {
-        return runtimeStart;
+        return runtimeStart != null
+        		? new Date(runtimeStart.getTime())
+				: null;
     }
 
     public void setRuntimeStart(Date runtimeStart) {
-        this.runtimeStart = runtimeStart;
+        this.runtimeStart = runtimeStart != null
+        		? new Date(runtimeStart.getTime())
+				: null;
     }
 
     public Date getRuntimeEnd() {
-        return runtimeEnd;
+        return runtimeEnd != null
+        		? new Date(runtimeEnd.getTime())
+				: null;
     }
 
     public void setRuntimeEnd(Date runtimeEnd) {
-        this.runtimeEnd = runtimeEnd;
+        this.runtimeEnd = runtimeEnd != null
+        		? new Date(runtimeEnd.getTime())
+        		: null;
     }
 
     public String getUrl() {

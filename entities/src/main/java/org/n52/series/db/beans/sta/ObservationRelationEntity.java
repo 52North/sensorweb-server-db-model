@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,11 +36,13 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "observationrelation")
 @SequenceGenerator(name = "observation_rel_seq", allocationSize = 1)
-public class ObservationRelationEntity implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier {
+public class ObservationRelationEntity extends IdEntity
+        implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier {
 
     public static final String PROPERTY_GROUP = "group";
     public static final String PROPERTY_OBSERVATION = "observation";
     public static final String PROPERTY_TYPE = "type";
+    private static final long serialVersionUID = -5523688573276493324L;
 
     @Id
     @Column(nullable = false, unique = true)
@@ -64,14 +67,6 @@ public class ObservationRelationEntity implements HibernateRelations.HasId, Hibe
 
     @ManyToOne(targetEntity = ObservationGroupEntity.class, optional = false)
     private ObservationGroupEntity group;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public String getStaIdentifier() {
