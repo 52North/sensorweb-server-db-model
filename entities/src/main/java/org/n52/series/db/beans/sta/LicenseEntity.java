@@ -19,6 +19,7 @@ package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.license.LicenseParameterEntity;
 
@@ -39,15 +40,13 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "license_seq", allocationSize = 1)
 @Table(name = "license")
-public class LicenseEntity implements HibernateRelations.HasId,
-                                      HibernateRelations.HasName,
-                                      HibernateRelations.HasAbstractDatasets,
-                                      HibernateRelations.HasStaIdentifier,
-                                      HibernateRelations.HasParameters {
+public class LicenseEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASETS = "datasets";
     public static final String PROPERTY_DEFINITION = "definition";
     public static final String PROPERTY_LOGO = "logo";
+    private static final long serialVersionUID = 6159174609682812188L;
 
     @Id
     @Column(nullable = false, name = "license_id", unique = true)
@@ -74,14 +73,6 @@ public class LicenseEntity implements HibernateRelations.HasId,
 
     @OneToMany(mappedBy = LicenseParameterEntity.PROP_LICENSE, targetEntity = LicenseParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getStaIdentifier() {
         return staIdentifier;

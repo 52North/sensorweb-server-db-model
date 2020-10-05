@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupParameterEntity;
 
@@ -39,11 +40,12 @@ import java.util.Set;
 @Entity
 @Table(name = "observationgroup")
 @SequenceGenerator(name = "observation_group_seq", allocationSize = 1)
-public class ObservationGroupEntity
+public class ObservationGroupEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasStaIdentifier,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROP_ENTITIES = "entities";
+    private static final long serialVersionUID = 3611419770138299218L;
 
     @Id
     @Column(nullable = false, unique = true)
@@ -74,16 +76,6 @@ public class ObservationGroupEntity
 
     @Transient
     private boolean processed;
-
-    @Override
-    public Long getId() {
-        return id;
-    }
-
-    @Override
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     @Override
     public String getName() {

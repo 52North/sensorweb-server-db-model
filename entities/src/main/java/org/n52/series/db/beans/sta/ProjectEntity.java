@@ -14,10 +14,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
 
@@ -39,9 +41,14 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "project_seq", allocationSize = 1)
 @Table(name = "project")
-public class ProjectEntity
-        implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasDescription,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
+public class ProjectEntity extends IdEntity
+        implements
+        HibernateRelations.HasId,
+        HibernateRelations.HasName,
+        HibernateRelations.HasDescription,
+        HibernateRelations.HasAbstractDatasets,
+        HibernateRelations.HasStaIdentifier,
+        HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_URL = "url";
@@ -50,6 +57,7 @@ public class ProjectEntity
     public static final String PROPERTY_PRIVACY_POLICY = "privacyPolicy";
     public static final String PROPERTY_TERMS_OF_USE = "termsOfUse";
     public static final String PROPERTY_CLASSIFICATION = "classification";
+    private static final long serialVersionUID = 1050625647937315126L;
 
     @Id
     @Column(nullable = false, name = "project_id", unique = true)
@@ -90,15 +98,7 @@ public class ProjectEntity
     private Set<AbstractDatasetEntity> datasets;
 
     @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
-    private Set<ParameterEntity<?>> parameters;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
+    private Set<ParameterEntity< ? >> parameters;
 
     public String getStaIdentifier() {
         return staIdentifier;
@@ -125,19 +125,27 @@ public class ProjectEntity
     }
 
     public Date getRuntimeStart() {
-        return runtimeStart;
+        return runtimeStart != null
+                ? new Date(runtimeStart.getTime())
+                : null;
     }
 
     public void setRuntimeStart(Date runtimeStart) {
-        this.runtimeStart = runtimeStart;
+        this.runtimeStart = runtimeStart != null
+                ? new Date(runtimeStart.getTime())
+                : null;
     }
 
     public Date getRuntimeEnd() {
-        return runtimeEnd;
+        return runtimeEnd != null
+                ? new Date(runtimeEnd.getTime())
+                : null;
     }
 
     public void setRuntimeEnd(Date runtimeEnd) {
-        this.runtimeEnd = runtimeEnd;
+        this.runtimeEnd = runtimeEnd != null
+                ? new Date(runtimeEnd.getTime())
+                : null;
     }
 
     public String getUrl() {
@@ -183,17 +191,17 @@ public class ProjectEntity
     }
 
     @Override
-    public Set<ParameterEntity<?>> getParameters() {
+    public Set<ParameterEntity< ? >> getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
+    public void setParameters(Set<ParameterEntity< ? >> parameters) {
         this.parameters = parameters;
     }
 
     @Override
-    public void addParameters(Set<ParameterEntity<?>> parameters) {
+    public void addParameters(Set<ParameterEntity< ? >> parameters) {
         if (this.parameters == null) {
             this.parameters = new HashSet<>();
         }
@@ -201,7 +209,7 @@ public class ProjectEntity
     }
 
     @Override
-    public void addParameter(ParameterEntity<?> parameter) {
+    public void addParameter(ParameterEntity< ? > parameter) {
         if (this.parameters == null) {
             this.parameters = new HashSet<>();
         }

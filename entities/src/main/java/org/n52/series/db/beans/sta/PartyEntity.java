@@ -48,6 +48,7 @@ package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -67,7 +68,7 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
 @Table(name = "party")
-public class PartyEntity implements HibernateRelations.HasId, HibernateRelations.HasAbstractDatasets,
+public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasAbstractDatasets,
         HibernateRelations.HasStaIdentifier {
 
     public enum Role {
@@ -77,6 +78,7 @@ public class PartyEntity implements HibernateRelations.HasId, HibernateRelations
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_NICKNAME = "nickname";
     public static final String PROPERTY_ROLE = "role";
+    private static final long serialVersionUID = 5875256537419920242L;
 
     @Id
     @Column(nullable = false, name = "party_id", unique = true)
