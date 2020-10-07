@@ -21,7 +21,7 @@
             </column>
         </discriminator>
         <property name="name" type="string">
-            <column name="name" not-null="true" index="idx_param_name">
+            <column name="name" not-null="true" index="idx_project_param_name">
                 <comment>The name of the parameter</comment>
             </column>
         </property>
@@ -88,7 +88,7 @@
             </property>
             <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
                          foreign-key="fk_param_unit">
-                <column name="fk_unit_id" index="idx_parameter_unit">
+                <column name="fk_unit_id">
                     <!-- Comment is defined above for category! -->
                 </column>
             </many-to-one>
