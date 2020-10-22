@@ -107,7 +107,7 @@
             <one-to-many class="org.n52.series.db.beans.i18n.I18nProcedureEntity" />
         </set>
 
-        <set name="parameters" table="procedure_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="procedure_parameter" inverse="true" lazy="true" cascade="delete-orphan">
             <key foreign-key="fk_procedure_parameter">
                 <column name="fk_procedure_id" not-null="true"/>
             </key>

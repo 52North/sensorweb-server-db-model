@@ -72,7 +72,7 @@
                 <column name="fk_child_phenomenon_id" not-null="true" index="idx_phenomenon_child_phenomenon"/>
             </many-to-many>
         </set>
-        <set name="parameters" table="phenomenon_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="phenomenon_parameter" inverse="true" lazy="true" cascade="delete-orphan">
             <key foreign-key="fk_phenomenon_parameter">
                 <column name="fk_phenomenon_id" not-null="true"/>
             </key>

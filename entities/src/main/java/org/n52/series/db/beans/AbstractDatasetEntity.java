@@ -19,7 +19,6 @@ package org.n52.series.db.beans;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
-import org.n52.series.db.beans.sta.AbstractObservationEntity;
 import org.n52.series.db.beans.sta.LicenseEntity;
 import org.n52.series.db.beans.sta.PartyEntity;
 import org.n52.series.db.beans.sta.ProjectEntity;
@@ -37,7 +36,7 @@ import java.util.stream.Collectors;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class AbstractDatasetEntity extends DescribableEntity
-        implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
+    implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
 
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_OFFERING = "offering";
@@ -48,6 +47,8 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_OM_OBSERVATION_TYPE = "omObservationType";
     public static final String PROPERTY_FIRST_VALUE_AT = "firstValueAt";
     public static final String PROPERTY_LAST_VALUE_AT = "lastValueAt";
+    public static final String PROPERTY_FIRST_OBSERVATION = "firstObservation";
+    public static final String PROPERTY_LAST_OBSERVATION = "lastObservation";
     public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
     public static final String PROPERTY_UNIT = "unit";
@@ -78,7 +79,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     private FormatEntity omObservationType;
 
-    private Set<AbstractObservationEntity> observations;
+    private Set<DataEntity<?>> observations;
     private AbstractDatasetEntity aggregation;
 
     /**
@@ -141,17 +142,17 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.offering = offering;
     }
 
+    @Override
+    public boolean isSetOffering() {
+        return getOffering() != null;
+    }
+
     public CategoryEntity getCategory() {
         return category;
     }
 
     public void setCategory(CategoryEntity category) {
         this.category = category;
-    }
-
-    @Override
-    public boolean isSetOffering() {
-        return getOffering() != null;
     }
 
     @Override
@@ -234,10 +235,6 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
-    public boolean isSetResultTimeStart() {
-        return getResultTimeStart() != null;
-    }
-
     @Override
     public Date getResultTimeEnd() {
         return Utils.createUnmutableTimestamp(resultTimeEnd);
@@ -246,6 +243,10 @@ public class AbstractDatasetEntity extends DescribableEntity
     @Override
     public void setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
+    }
+
+    public boolean isSetResultTimeStart() {
+        return getResultTimeStart() != null;
     }
 
     public boolean isSetResultTimeEnd() {
@@ -262,8 +263,7 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     /**
-     * @param resultTimes
-     *            a list of result times
+     * @param resultTimes a list of result times
      * @since 2.0.0
      */
     public void setResultTimes(Set<Date> resultTimes) {
@@ -282,9 +282,9 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     public String getUnitI18nName(final String locale) {
         return unit != null
-                // ? unit.getNameI18n(locale)
-                ? unit.getUnit()
-                : "";
+            // ? unit.getNameI18n(locale)
+            ? unit.getUnit()
+            : "";
     }
 
     @Override
@@ -316,15 +316,15 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     @Override
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
+        this.observedArea = geometryEntity;
+    }
+
+    @Override
     public void setGeometry(Geometry geometry) {
         this.observedArea = new GeometryEntity();
         this.observedArea.setGeometry(geometry);
         this.observedArea.setSrid(geometry.getSRID());
-    }
-
-    @Override
-    public void setGeometryEntity(GeometryEntity geometryEntity) {
-        this.observedArea = geometryEntity;
     }
 
     @Override
@@ -358,13 +358,13 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     @Override
-    public void setObservations(Set<AbstractObservationEntity> observations) {
-        this.observations = observations;
+    public Set<DataEntity<?>> getObservations() {
+        return this.observations;
     }
 
     @Override
-    public Set<AbstractObservationEntity> getObservations() {
-        return this.observations;
+    public void setObservations(Set<DataEntity<?>> observations) {
+        this.observations = observations;
     }
 
     public AbstractDatasetEntity getAggregation() {
@@ -427,7 +427,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     private Set<Date> wrapToUnmutables(Set<Date> dates) {
         return dates != null
-                ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
-                : null;
+            ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
+            : null;
     }
 }

@@ -37,7 +37,7 @@
         <many-to-one name="locationEncoding" class="org.n52.series.db.beans.FormatEntity" foreign-key="fk_location_format">
             <column name="fk_format_id" not-null="true" index="idx_location_format"/>
         </many-to-one>
-        <set name="parameters" table="location_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="location_parameter" inverse="true" lazy="true" cascade="delete-orphan">
             <key foreign-key="fk_location_parameter">
                 <column name="fk_location_id" not-null="true"/>
             </key>

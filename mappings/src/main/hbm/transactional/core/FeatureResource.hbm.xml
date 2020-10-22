@@ -100,7 +100,7 @@
             <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
         </set>
 
-        <set name="parameters" table="feature_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="feature_parameter" inverse="true" lazy="true" cascade="delete-orphan">
             <key foreign-key="fk_feature_parameter">
                 <column name="fk_feature_id" not-null="true"/>
             </key>

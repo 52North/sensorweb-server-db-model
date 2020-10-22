@@ -44,7 +44,7 @@
             </column>
         </property>
 
-        <set name="parameters" table="platform_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="platform_parameter" inverse="true" lazy="true" cascade="delete-orphan">
             <key foreign-key="fk_platform_parameter">
                 <column name="fk_platform_id" not-null="true"/>
             </key>

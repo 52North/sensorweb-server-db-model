@@ -18,9 +18,10 @@ package org.n52.series.db.beans.parameter;
 
 import java.io.Serializable;
 
+import org.n52.series.db.beans.HibernateRelations.HasDescription;
 import org.n52.series.db.beans.HibernateRelations.HasName;
 import org.n52.series.db.beans.HibernateRelations.HasValue;
 
-public interface ValuedParameter<T> extends HasValue<T>, HasName, Serializable {
+public interface ValuedParameter<T> extends HasValue<T>, HasName, HasDescription, Serializable {
 
 }

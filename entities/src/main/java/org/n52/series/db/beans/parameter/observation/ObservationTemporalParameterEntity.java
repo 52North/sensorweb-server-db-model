@@ -14,17 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.n52.series.db.beans.parameter.observation;
 
-package org.n52.series.db.generator;
+import org.n52.series.db.beans.parameter.TemporalParameterEntity;
+import org.n52.series.db.beans.parameter.TimeRange;
 
-import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.Test;
+public class ObservationTemporalParameterEntity extends ObservationParameterEntity<TimeRange>
+        implements TemporalParameterEntity {
 
-public class SQLScriptGeneratorTest {
-
-    // @Test
-    public void test_generation() throws Exception {
-        Assertions.assertTrue(SQLScriptGenerator.getInstance(false).execute(1));
-    }
+    private static final long serialVersionUID = 668796579118721620L;
 
 }

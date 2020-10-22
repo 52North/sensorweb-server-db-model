@@ -31,6 +31,7 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
 
     private static final long serialVersionUID = -1489503368673412638L;
     private String name;
+    private String description;
     private Date lastUpdate;
     private String domain;
     private Long parent;
@@ -51,6 +52,16 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
     @Override
     public void setName(String name) {
         this.name = name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

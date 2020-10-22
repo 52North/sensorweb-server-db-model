@@ -14,29 +14,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import org.n52.series.db.beans.HibernateRelations.HasDataset;
+import org.n52.series.db.beans.HibernateRelations.HasFeature;
+import org.n52.series.db.beans.HibernateRelations.HasParameters;
+import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
+import org.n52.series.db.beans.HibernateRelations.HasResultTime;
+import org.n52.series.db.beans.HibernateRelations.HasValidTime;
+import org.n52.series.db.beans.HibernateRelations.IsNoDataValue;
+import org.n52.series.db.beans.HibernateRelations.IsProcessed;
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
+import org.n52.series.db.common.Utils;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.n52.series.db.beans.HibernateRelations.HasDataset;
-import org.n52.series.db.beans.HibernateRelations.HasParameters;
-import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
-import org.n52.series.db.beans.HibernateRelations.HasResultTime;
-import org.n52.series.db.beans.HibernateRelations.HasValidTime;
-import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
-import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
-import org.n52.series.db.common.Utils;
-
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
-        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime, HasParameters, HasDataset {
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
+        HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed, IsNoDataValue {
 
     public static final String PROPERTY_ID = "id";
 
@@ -71,6 +75,16 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
 
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
+
+    public static final String PROPERTY_VALUE_BOOLEAN = "valueBoolean";
+
+    public static final String PROPERTY_VALUE_TEXT = "valueText";
+
+    public static final String PROPERTY_VALUE_QUANTITY = "valueQuantity";
+
+    public static final String PROPERTY_VALUE_CATEGORY = "valueCategory";
+
+    public static final String PROPERTY_VALUE_COUNT = "valueCount";
 
     public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(0);
 
@@ -116,9 +130,19 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     private EReportingProfileDataEntity ereportingProfile;
 
-    protected DataEntity() {
+    private Boolean valueBoolean;
 
-    }
+    private String valueText;
+
+    private BigDecimal valueQuantity;
+
+    private String valueCategory;
+
+    private Integer valueCount;
+
+    private AbstractFeatureEntity<?> feature;
+
+    private boolean processed;
 
     /**
      * @return the samplingTimeStart
@@ -169,8 +193,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     public boolean hasValue() {
         return getValue() != null;
     }
-
-    public abstract boolean isNoDataValue(Collection<String> noDataValues);
 
     public GeometryEntity getGeometryEntity() {
         return geometryEntity;
@@ -379,11 +401,78 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return getEreportingProfile() != null;
     }
 
+    public Boolean getValueBoolean() {
+        return valueBoolean;
+    }
+
+    public void setValueBoolean(Boolean valueBoolean) {
+        this.valueBoolean = valueBoolean;
+    }
+
+    public String getValueText() {
+        return valueText;
+    }
+
+    public void setValueText(String valueText) {
+        this.valueText = valueText;
+    }
+
+    public BigDecimal getValueQuantity() {
+        return valueQuantity;
+    }
+
+    public void setValueQuantity(BigDecimal valueQuantity) {
+        this.valueQuantity = valueQuantity;
+    }
+
+    public String getValueCategory() {
+        return valueCategory;
+    }
+
+    public void setValueCategory(String valueCategory) {
+        this.valueCategory = valueCategory;
+    }
+
+    public Integer getValueCount() {
+        return valueCount;
+    }
+
+    public void setValueCount(Integer valueCount) {
+        this.valueCount = valueCount;
+    }
+
+    @Override
+    public AbstractFeatureEntity<?> getFeature() {
+        return feature;
+    }
+
+    @Override
+    public void setFeature(AbstractFeatureEntity<?> feature) {
+        this.feature = feature;
+    }
+
+    @Override
+    public boolean isProcessed() {
+        return processed;
+    }
+
+    @Override
+    public void setProcessed(boolean processed) {
+        this.processed = processed;
+    }
+
     @Override
     public int compareTo(DataEntity<T> o) {
         return Comparator.comparing(DataEntity<T>::getSamplingTimeEnd)
                 .thenComparing(DataEntity<T>::getSamplingTimeStart).thenComparing(DataEntity<T>::getId)
                 .compare(this, o);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder();
+        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
+                .toString();
     }
 
     @Override
@@ -404,12 +493,5 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
                 && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
                 && Objects.equals(getResultTime(), other.getResultTime())
                 && Objects.equals(getValue(), other.getValue());
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder();
-        return sb.append(getClass().getSimpleName()).append(" [").append(" id: ").append(getId()).append(" ]")
-                .toString();
     }
 }

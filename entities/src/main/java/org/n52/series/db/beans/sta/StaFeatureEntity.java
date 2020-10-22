@@ -17,10 +17,11 @@
 
 package org.n52.series.db.beans.sta;
 
+import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DataEntity;
+
 import java.util.Objects;
 import java.util.Set;
-
-import org.n52.series.db.beans.AbstractFeatureEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
@@ -28,7 +29,7 @@ import org.n52.series.db.beans.AbstractFeatureEntity;
 public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
     private static final long serialVersionUID = 5874244749263160611L;
-    private Set<ObservationEntity<?>> observations;
+    private Set<DataEntity<?>> observations;
 
     public StaFeatureEntity(AbstractFeatureEntity<T> afe) {
         super();
@@ -48,13 +49,13 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
         this.setIdentifier(afe.getIdentifier());
     }
 
-    public StaFeatureEntity<T> setObservations(Set<ObservationEntity<?>> observations) {
-        this.observations = observations;
-        return this;
+    public Set<DataEntity<?>> getObservations() {
+        return observations;
     }
 
-    public Set<ObservationEntity<?>> getObservations() {
-        return observations;
+    public StaFeatureEntity<T> setObservations(Set<DataEntity<?>> observations) {
+        this.observations = observations;
+        return this;
     }
 
     @Override

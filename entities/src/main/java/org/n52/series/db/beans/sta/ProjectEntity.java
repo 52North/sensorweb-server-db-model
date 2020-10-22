@@ -42,13 +42,8 @@ import java.util.Set;
 @SequenceGenerator(name = "project_seq", allocationSize = 1)
 @Table(name = "project")
 public class ProjectEntity extends IdEntity
-        implements
-        HibernateRelations.HasId,
-        HibernateRelations.HasName,
-        HibernateRelations.HasDescription,
-        HibernateRelations.HasAbstractDatasets,
-        HibernateRelations.HasStaIdentifier,
-        HibernateRelations.HasParameters {
+        implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasDescription,
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_URL = "url";
@@ -98,7 +93,7 @@ public class ProjectEntity extends IdEntity
     private Set<AbstractDatasetEntity> datasets;
 
     @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
-    private Set<ParameterEntity< ? >> parameters;
+    private Set<ParameterEntity<?>> parameters;
 
     public String getStaIdentifier() {
         return staIdentifier;
@@ -125,27 +120,19 @@ public class ProjectEntity extends IdEntity
     }
 
     public Date getRuntimeStart() {
-        return runtimeStart != null
-                ? new Date(runtimeStart.getTime())
-                : null;
+        return runtimeStart != null ? new Date(runtimeStart.getTime()) : null;
     }
 
     public void setRuntimeStart(Date runtimeStart) {
-        this.runtimeStart = runtimeStart != null
-                ? new Date(runtimeStart.getTime())
-                : null;
+        this.runtimeStart = runtimeStart != null ? new Date(runtimeStart.getTime()) : null;
     }
 
     public Date getRuntimeEnd() {
-        return runtimeEnd != null
-                ? new Date(runtimeEnd.getTime())
-                : null;
+        return runtimeEnd != null ? new Date(runtimeEnd.getTime()) : null;
     }
 
     public void setRuntimeEnd(Date runtimeEnd) {
-        this.runtimeEnd = runtimeEnd != null
-                ? new Date(runtimeEnd.getTime())
-                : null;
+        this.runtimeEnd = runtimeEnd != null ? new Date(runtimeEnd.getTime()) : null;
     }
 
     public String getUrl() {
@@ -191,17 +178,17 @@ public class ProjectEntity extends IdEntity
     }
 
     @Override
-    public Set<ParameterEntity< ? >> getParameters() {
+    public Set<ParameterEntity<?>> getParameters() {
         return parameters;
     }
 
     @Override
-    public void setParameters(Set<ParameterEntity< ? >> parameters) {
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
         this.parameters = parameters;
     }
 
     @Override
-    public void addParameters(Set<ParameterEntity< ? >> parameters) {
+    public void addParameters(Set<ParameterEntity<?>> parameters) {
         if (this.parameters == null) {
             this.parameters = new HashSet<>();
         }
@@ -209,7 +196,7 @@ public class ProjectEntity extends IdEntity
     }
 
     @Override
-    public void addParameter(ParameterEntity< ? > parameter) {
+    public void addParameter(ParameterEntity<?> parameter) {
         if (this.parameters == null) {
             this.parameters = new HashSet<>();
         }

@@ -5,7 +5,7 @@
                    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
     <class name="PhenomenonParameterEntity" abstract="true"
            table="phenomenon_parameter"
-           check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json')">
+           check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json', 'complex', 'temporal')">
         <comment>Storage for additional information for platforms</comment>
         <id name="id" type="long">
             <column name="parameter_id">
@@ -25,6 +25,11 @@
                 <comment>The name of the parameter</comment>
             </column>
         </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the parameter</comment>
+            </column>
+        </property>
         <property name="lastUpdate" not-null="false" type="timestamp">
             <column name="last_update">
                 <comment>Timestamp that provides the time of the last modification of this entry</comment>
@@ -39,7 +44,7 @@
         <many-to-one name="phenomenon" class="org.n52.series.db.beans.PhenomenonEntity"
                      foreign-key="fk_param_phenomenon_id">
             <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_parameter">
-                <comment>Reference to the Dataset this Parameter describes.</comment>
+                <comment>Reference to the Phenomenon this Parameter describes.</comment>
             </column>
         </many-to-one>
         <property name="phenomenonId" insert="false" update="false" type="long">
@@ -126,6 +131,21 @@
                 </key>
                 <one-to-many class="PhenomenonParameterEntity" />
             </set>
+        </subclass>
+        <subclass discriminator-value="temporal" extends="PhenomenonParameterEntity"
+                  name="PhenomenonTemporalParameterEntity">
+            <component class="org.n52.series.db.beans.parameter.TimeRange" name="value">
+                <property name="from" type="timestamp">
+                    <column name="value_temporal_from" length="29">
+                        <comment>Storage of a temporal from parameter value.</comment>
+                    </column>
+                </property>
+                <property name="to" type="timestamp">
+                    <column name="value_temporal_to" length="29">
+                        <comment>Storage of a temporal to parameter value.</comment>
+                    </column>
+                </property>
+            </component>
         </subclass>
     </class>
 </hibernate-mapping>

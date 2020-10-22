@@ -128,7 +128,7 @@
                 <comment>Reference to the temporally last observation in the observation table that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <set name="parameters" table="dataset_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="dataset_parameter" inverse="true" lazy="true" cascade="delete-orphan">
             <key foreign-key="fk_dataset_parameter">
                 <column name="fk_dataset_id" not-null="true"/>
             </key>

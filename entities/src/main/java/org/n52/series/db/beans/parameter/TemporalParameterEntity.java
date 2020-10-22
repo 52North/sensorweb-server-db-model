@@ -14,17 +14,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package org.n52.series.db.beans.parameter;
 
-package org.n52.series.db.generator;
+import java.util.Date;
 
-import org.junit.jupiter.api.Assertions;
-//import org.junit.jupiter.api.Test;
+import org.joda.time.DateTime;
 
-public class SQLScriptGeneratorTest {
+public interface TemporalParameterEntity extends ValuedParameter<TimeRange> {
 
-    // @Test
-    public void test_generation() throws Exception {
-        Assertions.assertTrue(SQLScriptGenerator.getInstance(false).execute(1));
+    default String asString(Date value) {
+        return new DateTime(value).toString();
     }
 
+    @Override
+    default String getValueAsString() {
+        return getValue().isInstant() ? asString(getValue().getFrom())
+                : asString(getValue().getFrom()) + "/" + asString(getValue().getTo());
+    }
 }
