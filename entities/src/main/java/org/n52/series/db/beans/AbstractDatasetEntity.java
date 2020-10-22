@@ -36,7 +36,7 @@ import java.util.stream.Collectors;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 public class AbstractDatasetEntity extends DescribableEntity
-    implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
+        implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
 
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_OFFERING = "offering";
@@ -263,7 +263,8 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     /**
-     * @param resultTimes a list of result times
+     * @param resultTimes
+     *            a list of result times
      * @since 2.0.0
      */
     public void setResultTimes(Set<Date> resultTimes) {
@@ -282,9 +283,9 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     public String getUnitI18nName(final String locale) {
         return unit != null
-            // ? unit.getNameI18n(locale)
-            ? unit.getUnit()
-            : "";
+                // ? unit.getNameI18n(locale)
+                ? unit.getUnit()
+                : "";
     }
 
     @Override
@@ -427,7 +428,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     private Set<Date> wrapToUnmutables(Set<Date> dates) {
         return dates != null
-            ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
-            : null;
+                ? dates.stream().map(d -> d != null ? new Timestamp(d.getTime()) : null).collect(Collectors.toSet())
+                : null;
     }
 }

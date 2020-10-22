@@ -28,6 +28,7 @@ import org.n52.series.db.beans.HibernateRelations.IsProcessed;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
+import org.n52.series.db.beans.sta.ObservationRelationEntity;
 import org.n52.series.db.common.Utils;
 
 import java.io.Serializable;
@@ -143,6 +144,8 @@ public abstract class DataEntity<T> extends DescribableEntity
     private AbstractFeatureEntity<?> feature;
 
     private boolean processed;
+
+    private Set<ObservationRelationEntity> relations;
 
     /**
      * @return the samplingTimeStart
@@ -459,6 +462,14 @@ public abstract class DataEntity<T> extends DescribableEntity
     @Override
     public void setProcessed(boolean processed) {
         this.processed = processed;
+    }
+
+    public Set<ObservationRelationEntity> getRelations() {
+        return relations;
+    }
+
+    public void setRelations(Set<ObservationRelationEntity> relations) {
+        this.relations = relations;
     }
 
     @Override

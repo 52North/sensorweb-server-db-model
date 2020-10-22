@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.sta;
 
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 
@@ -25,6 +26,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
@@ -34,7 +36,7 @@ import javax.persistence.Table;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@Table(name = "observationrelation")
+@Table(name = "observationrelation", indexes = { @Index(name = "idx_obsrel_obs", columnList = "observation") })
 @SequenceGenerator(name = "observation_rel_seq", allocationSize = 1)
 public class ObservationRelationEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier {
@@ -61,9 +63,9 @@ public class ObservationRelationEntity extends IdEntity
     @Column(name = PROPERTY_TYPE, nullable = false)
     private String type;
 
-    @ManyToOne(targetEntity = ObservationEntity.class, optional = false)
+    @ManyToOne(targetEntity = DataEntity.class, optional = false)
     @JoinColumn(name = PROPERTY_OBSERVATION, referencedColumnName = "observation_id")
-    private ObservationEntity observation;
+    private DataEntity<?> observation;
 
     @ManyToOne(targetEntity = ObservationGroupEntity.class, optional = false)
     private ObservationGroupEntity group;
@@ -86,11 +88,11 @@ public class ObservationRelationEntity extends IdEntity
         this.type = type;
     }
 
-    public ObservationEntity getObservation() {
+    public DataEntity<?> getObservation() {
         return observation;
     }
 
-    public void setObservation(ObservationEntity entity) {
+    public void setObservation(DataEntity<?> entity) {
         this.observation = entity;
     }
 

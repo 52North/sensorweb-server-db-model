@@ -49,7 +49,7 @@ public class ObservationGroupEntity extends IdEntity
 
     @Id
     @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observation_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observation_group_seq")
     private Long id;
 
     /**
