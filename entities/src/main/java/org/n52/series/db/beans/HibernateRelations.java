@@ -1012,6 +1012,8 @@ public interface HibernateRelations {
 
     interface HasDatasets {
 
+        String PROPERTY_DATASETS = "datasets";
+
         void setDatasets(Set<DatasetEntity> dataset);
 
         Set<DatasetEntity> getDatasets();

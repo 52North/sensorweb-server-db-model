@@ -16,13 +16,16 @@
  */
 package org.n52.series.db.beans;
 
+import java.util.Set;
+
 import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
-        implements HasXml<AbstractFeatureEntity<E>>, HasGeometry<AbstractFeatureEntity<E>>, IsStaEntity {
+        implements HasXml<AbstractFeatureEntity<E>>, HasGeometry<AbstractFeatureEntity<E>>, HasDatasets, IsStaEntity {
 
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
     public static final String PROPERTY_GEOMETRY = "geometry";
@@ -36,6 +39,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private FormatEntity featureType;
     private String url;
     private String xml;
+    private Set<DatasetEntity> datasets;
 
     @Override
     public GeometryEntity getGeometryEntity() {
@@ -95,4 +99,13 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         return (getUrl() != null) && !getUrl().isEmpty();
     }
 
+    @Override
+    public Set<DatasetEntity> getDatasets() {
+        return datasets;
+    }
+
+    @Override
+    public void setDatasets(Set<DatasetEntity> datasets) {
+        this.datasets = datasets;
+    }
 }
