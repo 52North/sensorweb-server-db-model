@@ -72,14 +72,15 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
         HibernateRelations.HasStaIdentifier {
 
     public enum Role {
-        individual, institution
+        individual, institution;
     }
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
+
     public static final String PROPERTY_NICKNAME = "nickname";
     public static final String PROPERTY_ROLE = "role";
+    public static final String PROPERTY_AUTH_ID = "authId";
     private static final long serialVersionUID = 5875256537419920242L;
-
     @Id
     @Column(nullable = false, name = "party_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "party_seq")
@@ -100,6 +101,9 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
     @Enumerated(EnumType.STRING)
     @Column(name = PROPERTY_ROLE, nullable = false)
     private Role role;
+
+    @Column(name = PROPERTY_AUTH_ID)
+    private String authId;
 
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PARTY)
     private Set<AbstractDatasetEntity> datasets;
@@ -134,6 +138,14 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
 
     public void setRole(Role role) {
         this.role = role;
+    }
+
+    public String getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(String authId) {
+        this.authId = authId;
     }
 
     @Override
