@@ -76,6 +76,10 @@
             </key>
             <one-to-many class="org.n52.series.db.beans.sta.DatastreamEntity" />
         </set>
+        <set name="datasets" table="datasets" inverse="true" fetch="select">
+            <key column="fk_feature_id" />
+            <one-to-many class="DatasetEntity" />
+        </set>
         <property name="properties" type="text">
             <column name="properties" not-null="false"/>
         </property>

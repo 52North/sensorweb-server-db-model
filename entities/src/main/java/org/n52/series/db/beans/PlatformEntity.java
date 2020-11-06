@@ -19,6 +19,7 @@ package org.n52.series.db.beans;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.AbstractStaEntity;
@@ -28,7 +29,7 @@ import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
 
 public class PlatformEntity extends DescribableEntity
-        implements AbstractStaEntity, Locations<PlatformEntity>, IsStaEntity {
+        implements AbstractStaEntity, Locations<PlatformEntity>, HasDatasets, IsStaEntity {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
@@ -42,6 +43,7 @@ public class PlatformEntity extends DescribableEntity
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<DatastreamEntity> datastreams;
+    private Set<DatasetEntity> datasets;
     private boolean processed;
 
     public PlatformEntity setProperties(String properties) {
@@ -115,6 +117,16 @@ public class PlatformEntity extends DescribableEntity
 
     public boolean hasHistoricalLocations() {
         return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
+    }
+
+    @Override
+    public Set<DatasetEntity> getDatasets() {
+        return datasets;
+    }
+
+    @Override
+    public void setDatasets(Set<DatasetEntity> datasets) {
+        this.datasets = datasets;
     }
 
     @Override

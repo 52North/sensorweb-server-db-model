@@ -13,6 +13,11 @@
                 <param name="sequence_name">platform_seq</param>
             </generator>
         </id>
+        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_platform">
+            <column name="fk_service_id" unique-key="un_platform_identifier">
+                <comment>Reference to the service this platform belongs to.</comment>
+            </column>
+        </many-to-one>
         <property name="identifier" type="string" index="idx_platform_identifier">
             <column name="identifier" not-null="true" unique-key="un_platform_identifier">
                 <comment>Unique identifier of the platform which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
@@ -43,38 +48,9 @@
                 <comment>A short description of the platform</comment>
             </column>
         </property>
-        <set inverse="true" name="parameters" table="platform_parameter" fetch="join">
-            <comment>Storage of relations between platform and related parameter</comment>
-            <key not-null="true" foreign-key="fk_platform_parameter">
-                <column name="fk_platform_id">
-                    <comment>The reference to the platform in the observation table</comment>
-                </column>
-            </key>
-            <many-to-many class="org.n52.series.db.beans.parameter.ParameterEntity" foreign-key="fk_parameter_platform">
-                <column name="fk_parameter_id">
-                    <comment>The reference to the parameter in the platform parameter</comment>
-                </column>
-            </many-to-many>
-        </set>
-        <set name="locations" table="thing_location" inverse="false">
-            <key foreign-key="fk_thing_location">
-                <column name="fk_thing_id" not-null="true"/>
-            </key>
-            <many-to-many class="org.n52.series.db.beans.sta.LocationEntity" foreign-key="fk_location_thing">
-                <column name="fk_location_id" not-null="true"/>
-            </many-to-many>
-        </set>
-        <set name="historicalLocations" table="historical_location" inverse="false" >
-            <key foreign-key="fk_thing_historical_location" update="false">
-                <column name="fk_thing_id" not-null="true"/>
-            </key>
-            <one-to-many class="org.n52.series.db.beans.sta.HistoricalLocationEntity" />
-        </set>
-        <set name="datastreams" table="datastream" inverse="true">
-            <key foreign-key="fk_datastream_thing">
-                <column name="fk_thing_id" not-null="true"/>
-            </key>
-            <one-to-many class="org.n52.series.db.beans.sta.DatastreamEntity" />
+        <set name="datasets" table="datasets" inverse="true" fetch="select">
+            <key column="fk_feature_id" />
+            <one-to-many class="DatasetEntity" />
         </set>
         <property name="properties" type="text">
             <column name="properties" not-null="false"/>
