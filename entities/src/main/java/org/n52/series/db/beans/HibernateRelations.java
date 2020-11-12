@@ -1108,6 +1108,10 @@ public interface HibernateRelations {
         }
 
         default boolean hasDatastreams() {
+            return hasDatasets();
+        }
+
+        default boolean hasDatasets() {
             return getDatasets() != null && !getDatasets().isEmpty();
         }
 
