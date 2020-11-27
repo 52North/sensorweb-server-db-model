@@ -57,10 +57,10 @@
 
         <version.junit>5.7.0</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>24.0</geotools.version>
+        <geotools.version>24.1</geotools.version>
         <geolatte.version>1.6.0</geolatte.version>
         <hibernate.version>5.4.23.Final</hibernate.version>
-        <spring-boot.version>2.3.5.RELEASE</spring-boot.version>
+        <spring-boot.version>2.4.0</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
