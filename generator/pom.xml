@@ -13,7 +13,7 @@
     <properties>
         <version.postgresql>42.2.12</version.postgresql>
         <version.postgis>2.5.0</version.postgis>
-        <version.ojdbc8>19.7.0.0</version.ojdbc8>
+        <version.ojdbc8>19.8.0.0</version.ojdbc8>
         <version.sqljdbc>8.2.2.jre8</version.sqljdbc>
         <version.mysql>8.0.20</version.mysql>
         <version.h2>1.4.200</version.h2>
@@ -71,7 +71,7 @@
         <dependency>
             <groupId>com.sun.xml.bind</groupId>
             <artifactId>jaxb-impl</artifactId>
-            <version>2.3.3</version>
+            <version>3.0.0</version>
             <scope>runtime</scope>
         </dependency>
          <dependency>

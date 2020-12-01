@@ -73,10 +73,6 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         return this;
     }
 
-    public boolean hasDatasets() {
-        return getDatasets() != null && !getDatasets().isEmpty();
-    }
-
     public boolean hasHistoricalLocations() {
         return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
     }
@@ -91,12 +87,9 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         this.processed = processsed;
     }
 
+    @Override
     public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
-    }
-
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
     }
 
     @Override
@@ -133,6 +126,11 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     @Override
     public void setLocations(Set<LocationEntity> locations) {
         this.locations = locations;
+    }
+
+    @Override
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+        this.datasets = datasets;
     }
 
 }
