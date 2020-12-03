@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
 public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
@@ -119,6 +120,8 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
     public boolean isSetValue() {
         return getValue() != null;
     }
+
+    public abstract void setDescribeableEntity(DescribableEntity entity);
 
     @Override
     public int hashCode() {

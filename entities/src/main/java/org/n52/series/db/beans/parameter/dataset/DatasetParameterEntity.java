@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.parameter.dataset;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
@@ -27,7 +28,7 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_DATASET = "dataset";
     public static final String PROP_DATASET_ID = "datasetId";
-
+    private static final long serialVersionUID = 8580995030975785255L;
     private AbstractDatasetEntity dataset;
     private long datasetId;
 
@@ -35,8 +36,8 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
         return dataset;
     }
 
-    public void setDataset(AbstractDatasetEntity observation) {
-        this.dataset = observation;
+    public void setDataset(AbstractDatasetEntity dataset) {
+        this.dataset = dataset;
     }
 
     public long getDatasetId() {
@@ -45,5 +46,10 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
     public void setDatasetId(long observationId) {
         this.datasetId = observationId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setDataset((AbstractDatasetEntity) entity);
     }
 }

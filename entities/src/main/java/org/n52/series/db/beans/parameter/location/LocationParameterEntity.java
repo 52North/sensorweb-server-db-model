@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.parameter.location;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 
@@ -27,7 +28,7 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_LOCATION = "location";
     public static final String PROP_LOCATION_ID = "locationId";
-
+    private static final long serialVersionUID = 8449960591522592006L;
     private LocationEntity location;
     private long locationId;
 
@@ -35,8 +36,8 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
         return location;
     }
 
-    public void setLocation(LocationEntity observation) {
-        this.location = observation;
+    public void setLocation(LocationEntity location) {
+        this.location = location;
     }
 
     public long getLocationId() {
@@ -45,5 +46,10 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
 
     public void setLocationId(long observationId) {
         this.locationId = observationId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setLocation((LocationEntity) entity);
     }
 }

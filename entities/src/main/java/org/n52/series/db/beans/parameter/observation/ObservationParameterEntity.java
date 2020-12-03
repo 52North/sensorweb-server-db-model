@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.parameter.observation;
 
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
@@ -27,7 +28,7 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_OBSERVATION = "observation";
     public static final String PROP_OBSERVATION_ID = "observationId";
-
+    private static final long serialVersionUID = -3170715124801725482L;
     private DataEntity observation;
     private long observationId;
 
@@ -45,5 +46,10 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
 
     public void setObservationId(long observationId) {
         this.observationId = observationId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setObservation((DataEntity) entity);
     }
 }

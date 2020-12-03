@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.parameter.procedure;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -27,7 +28,7 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PROCEDURE = "procedure";
     public static final String PROP_PROCEDURE_ID = "procedureId";
-
+    private static final long serialVersionUID = -3203271103169023133L;
     private ProcedureEntity procedure;
     private long procedureId;
 
@@ -45,5 +46,10 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
 
     public void setProcedureId(long procedureId) {
         this.procedureId = procedureId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setProcedure((ProcedureEntity) entity);
     }
 }

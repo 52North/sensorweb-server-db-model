@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.parameter.phenomenon;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -27,7 +28,7 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PHENOMENON = "phenomenon";
     public static final String PROP_PHENOMENON_ID = "phenomenonId";
-
+    private static final long serialVersionUID = 5234864540316301294L;
     private PhenomenonEntity phenomenon;
     private long phenomenonId;
 
@@ -35,8 +36,8 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
         return phenomenon;
     }
 
-    public void setPhenomenon(PhenomenonEntity observation) {
-        this.phenomenon = observation;
+    public void setPhenomenon(PhenomenonEntity phenomenon) {
+        this.phenomenon = phenomenon;
     }
 
     public long getPhenomenonId() {
@@ -45,5 +46,10 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
 
     public void setPhenomenonId(long observationId) {
         this.phenomenonId = observationId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setPhenomenon((PhenomenonEntity) entity);
     }
 }

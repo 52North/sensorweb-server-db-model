@@ -18,6 +18,7 @@
 package org.n52.series.db.beans.parameter.feature;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
@@ -27,7 +28,7 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_FEATURE = "feature";
     public static final String PROP_FEATURE_ID = "featureId";
-
+    private static final long serialVersionUID = 1123453212836718013L;
     private AbstractFeatureEntity feature;
     private long featureId;
 
@@ -35,8 +36,8 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
         return feature;
     }
 
-    public void setFeature(AbstractFeatureEntity observation) {
-        this.feature = observation;
+    public void setFeature(AbstractFeatureEntity feature) {
+        this.feature = feature;
     }
 
     public long getFeatureId() {
@@ -45,5 +46,10 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
 
     public void setFeatureId(long observationId) {
         this.featureId = observationId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setFeature((AbstractFeatureEntity) entity);
     }
 }

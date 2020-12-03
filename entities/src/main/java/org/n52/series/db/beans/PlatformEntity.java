@@ -18,12 +18,10 @@
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -37,7 +35,6 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
 
     private static final long serialVersionUID = 3615089936334873353L;
 
-    private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<AbstractDatasetEntity> datasets;
@@ -90,32 +87,6 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     @Override
     public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
-    }
-
-    @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public void addParameters(Set<ParameterEntity<?>> parameters) {
-        if (this.parameters == null) {
-            this.parameters = new HashSet<>();
-        }
-        this.parameters.addAll(parameters);
-    }
-
-    @Override
-    public void addParameter(ParameterEntity<?> parameter) {
-        if (this.parameters == null) {
-            this.parameters = new HashSet<>();
-        }
-        this.parameters.add(parameter);
     }
 
     @Override
