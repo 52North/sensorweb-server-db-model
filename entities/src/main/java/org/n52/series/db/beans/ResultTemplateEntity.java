@@ -36,6 +36,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_PROCEDURE = "procedure";
 
+    public static final String PROPERTY_CATEGORY = "category";
+
     private static final long serialVersionUID = -8847952458819368733L;
 
     private PhenomenonEntity phenomenon;
@@ -45,6 +47,8 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     private ProcedureEntity procedure;
 
     private AbstractFeatureEntity<?> feature;
+
+    private CategoryEntity category;
 
     private String identifier;
 
@@ -127,6 +131,18 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
      */
     public void setFeature(AbstractFeatureEntity<?> featureOfInterest) {
         this.feature = featureOfInterest;
+    }
+
+    public CategoryEntity getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
+
+    public boolean isSetCategory() {
+        return getCategory() != null;
     }
 
     public String getIdentifier() {
