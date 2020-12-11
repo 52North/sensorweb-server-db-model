@@ -64,7 +64,7 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     public boolean isNoDataValue(DataEntity<?> observation) {
-        return observation.isNoDataValue(noDataValues) && !observation.hasDetectionLimit();
+        return observation == null || observation.isNoDataValue(noDataValues) && !observation.hasDetectionLimit();
     }
 
     public String getNoDataValues() {
