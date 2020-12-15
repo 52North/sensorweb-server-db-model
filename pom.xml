@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>20</version>
+        <version>21</version>
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
@@ -60,7 +60,7 @@
         <geotools.version>24.1</geotools.version>
         <geolatte.version>1.6.0</geolatte.version>
         <hibernate.version>5.4.25.Final</hibernate.version>
-        <spring-boot.version>2.4.0</spring-boot.version>
+        <spring-boot.version>2.4.1</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
