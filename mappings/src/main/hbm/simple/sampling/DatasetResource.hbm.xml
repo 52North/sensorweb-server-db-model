@@ -15,7 +15,7 @@
         </id>
 
         <property name="datasetType" index="idx_dataset_dataset_type">
-            <column name="dataset_type" scale="20" not-null="true" default="'not_initialized'" check="dataset_type in ('individualObservation', 'timeseries', 'trajectory')">
+            <column name="dataset_type" scale="20" not-null="true" default="'not_initialized'" check="dataset_type in ('individualObservation', 'timeseries', 'trajectory', 'not_initialized')">
                 <comment>Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations).</comment>
             </column>
             <type name="org.hibernate.type.EnumType">
@@ -25,7 +25,7 @@
         </property>
 
         <property name="observationType" index="idx_dataset_observation_type">
-            <column name="observation_type" scale="20" not-null="true" default="'not_initialized'" check="observation_type in ('simple', 'profile')">
+            <column name="observation_type" scale="20" not-null="true" default="'not_initialized'" check="observation_type in ('simple', 'profile', 'not_initialized')">
                 <comment>Indicator whether the dataset observations are of type simple (a simple observation, e.g. a scalar value like the temperature) or profile (profile observations)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
@@ -35,7 +35,7 @@
         </property>
 
         <property name="valueType" index="idx_dataset_value_type">
-            <column name="value_type" scale="20" not-null="true" default="'not_initialized'" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'reference')">
+            <column name="value_type" scale="20" not-null="true" default="'not_initialized'" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'reference', 'not_initialized')">
                 <comment>Indicator of the type of the single values. Valid values are quantity (scalar values), count (integer values), text (textual values), category (categorical values), bool (boolean values), reference (references, e.g. link to a source, photo, video)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
@@ -44,38 +44,38 @@
             </type>
         </property>
 
-        <many-to-one class="ProcedureEntity" name="procedure" foreign-key="fk_dataset_procedure">
+        <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
             <column name="fk_procedure_id"  not-null="true">
                 <comment>Reference to the procedure that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="PhenomenonEntity" name="phenomenon" foreign-key="fk_dataset_phenomenon">
+        <many-to-one class="PhenomenonEntity" name="phenomenon" unique-key="un_dataset_identity" foreign-key="fk_dataset_phenomenon">
             <column name="fk_phenomenon_id"  not-null="true">
                 <comment>Reference to the phenomenon that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="OfferingEntity" name="offering" foreign-key="fk_dataset_offering">
+        <many-to-one class="OfferingEntity" name="offering" unique-key="un_dataset_identity" foreign-key="fk_dataset_offering">
             <column name="fk_offering_id" not-null="true">
                 <comment>Reference to the offering that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="CategoryEntity" name="category" foreign-key="fk_dataset_category">
+        <many-to-one class="CategoryEntity" name="category" unique-key="un_dataset_identity" foreign-key="fk_dataset_category">
             <column name="fk_category_id" not-null="true">
                 <comment>Reference to the category that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="FeatureEntity" name="feature" foreign-key="fk_dataset_feature">
+        <many-to-one class="FeatureEntity" name="feature" unique-key="un_dataset_identity" foreign-key="fk_dataset_feature">
             <column name="fk_feature_id" not-null="true">
                 <comment>Reference to the feature that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="PlatformEntity" name="platform" foreign-key="fk_dataset_platform">
+        <many-to-one class="PlatformEntity" name="platform" unique-key="un_dataset_identity" foreign-key="fk_dataset_platform">
             <column name="fk_platform_id" not-null="true">
                 <comment>Reference to the platform that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
 
-        <many-to-one class="UnitEntity" name="unit" foreign-key="fk_dataset_unit">
+        <many-to-one class="UnitEntity" name="unit" unique-key="un_dataset_identity" foreign-key="fk_dataset_unit">
             <column name="fk_unit_id">
                 <comment>Reference to the unit of the observations that belongs to this dataset.</comment>
             </column>

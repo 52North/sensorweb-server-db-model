@@ -15,7 +15,7 @@
         </id>
 
         <property name="datasetType" index="idx_dataset_dataset_type">
-            <column name="dataset_type" scale="20" not-null="true" default="'not_initialized'" check="dataset_type in ('individualObservation', 'timeseries', 'trajectory')">
+            <column name="dataset_type" scale="20" not-null="true" default="'not_initialized'" check="dataset_type in ('individualObservation', 'timeseries', 'trajectory', 'not_initialized')">
                 <comment>Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations).</comment>
             </column>
             <type name="org.hibernate.type.EnumType">
@@ -25,7 +25,7 @@
         </property>
 
         <property name="observationType" index="idx_dataset_observation_type">
-            <column name="observation_type" scale="20" not-null="true" default="'not_initialized'" check="observation_type in ('simple', 'profile')">
+            <column name="observation_type" scale="20" not-null="true" default="'not_initialized'" check="observation_type in ('simple', 'profile', 'not_initialized')">
                 <comment>Indicator whether the dataset observations are of type simple (a simple observation, e.g. a scalar value like the temperature) or profile (profile observations)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
@@ -35,7 +35,7 @@
         </property>
 
         <property name="valueType" index="idx_dataset_value_type">
-            <column name="value_type" scale="20" not-null="true" default="'not_initialized'" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'reference')">
+            <column name="value_type" scale="20" not-null="true" default="'not_initialized'" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'reference', 'not_initialized')">
                 <comment>Indicator of the type of the single values. Valid values are quantity (scalar values), count (integer values), text (textual values), category (categorical values), bool (boolean values), reference (references, e.g. link to a source, photo, video)</comment>
             </column>
              <type name="org.hibernate.type.EnumType">
@@ -178,31 +178,26 @@
                 </column>
             </many-to-many>
         </list>
-
         <property name="identifier" type="string" index="idx_dataset_identifier">
             <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
                 <comment>Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS and can be encoded in WaterML 2.0 oder TimeseriesML 1.0 outputs.</comment>
             </column>
         </property>
-
         <property name="name" type="string">
             <column name="name">
                 <comment>The human readable name of the dataset.</comment>
             </column>
         </property>
-
         <property name="description" type="text">
             <column name="description">
                 <comment>A short description of the dataset</comment>
             </column>
         </property>
-
         <many-to-one class="VerticalMetadataEntity" name="verticalMetadata" foreign-key="fk_value_profile">
             <column name="fk_value_profile_id" not-null="false">
                 <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>
             </column>
         </many-to-one>
-
         <set name="translations" table="dataset_i18n" inverse="true" fetch="select">
             <key column="fk_dataset_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity" />
