@@ -146,8 +146,9 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
         return observationType;
     }
 
-    public void setObservationType(ObservationType observationType) {
+    public DatasetEntity setObservationType(ObservationType observationType) {
         this.observationType = observationType;
+        return this;
     }
 
     public ValueType getValueType() {
