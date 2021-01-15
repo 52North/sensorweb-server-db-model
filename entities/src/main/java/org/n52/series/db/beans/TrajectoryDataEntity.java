@@ -16,16 +16,20 @@
  */
 package org.n52.series.db.beans;
 
-import java.util.Collection;
 import java.util.Set;
+import java.util.TreeSet;
 
-public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity<?>>> {
+public class TrajectoryDataEntity extends CompositeDataEntity {
 
-    private static final long serialVersionUID = -2942122854792122664L;
+    private static final long serialVersionUID = 2863299911063106407L;
 
     @Override
-    public boolean isNoDataValue(Collection<String> noDataValues) {
-        return false;
+    public Set<DataEntity<?>> getValue() {
+        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
     }
 
+    @Override
+    public void setValue(Set<DataEntity<?>> value) {
+        super.setValue(value);
+    }
 }

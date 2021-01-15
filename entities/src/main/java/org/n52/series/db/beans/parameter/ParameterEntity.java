@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,7 +14,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.parameter;
 
 import java.sql.Timestamp;
@@ -23,6 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
 public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
@@ -119,6 +119,8 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
     public boolean isSetValue() {
         return getValue() != null;
     }
+
+    public abstract void setDescribeableEntity(DescribableEntity entity);
 
     @Override
     public int hashCode() {

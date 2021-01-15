@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -14,10 +14,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.parameter.dataset;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 /**
@@ -27,7 +27,7 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_DATASET = "dataset";
     public static final String PROP_DATASET_ID = "datasetId";
-
+    private static final long serialVersionUID = 8580995030975785255L;
     private AbstractDatasetEntity dataset;
     private long datasetId;
 
@@ -35,8 +35,8 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
         return dataset;
     }
 
-    public void setDataset(AbstractDatasetEntity observation) {
-        this.dataset = observation;
+    public void setDataset(AbstractDatasetEntity dataset) {
+        this.dataset = dataset;
     }
 
     public long getDatasetId() {
@@ -45,5 +45,10 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
     public void setDatasetId(long observationId) {
         this.datasetId = observationId;
+    }
+
+    @Override
+    public void setDescribeableEntity(DescribableEntity entity) {
+        setDataset((AbstractDatasetEntity) entity);
     }
 }

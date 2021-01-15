@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>19</version>
+        <version>21</version>
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
@@ -57,10 +57,10 @@
 
         <version.junit>5.7.0</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>24.0</geotools.version>
+        <geotools.version>24.1</geotools.version>
         <geolatte.version>1.6.0</geolatte.version>
-        <hibernate.version>5.4.20.Final</hibernate.version>
-        <spring-boot.version>2.3.4.RELEASE</spring-boot.version>
+        <hibernate.version>5.4.27.Final</hibernate.version>
+        <spring-boot.version>2.4.1</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -138,7 +138,7 @@
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.10.6</version>
+                <version>2.10.9</version>
             </dependency>
 
             <dependency>
@@ -233,7 +233,7 @@
             <dependency>
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.17.1</version>
+                <version>1.18.0</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->
@@ -437,7 +437,7 @@
                 <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>2.12.2</version>
+                    <version>2.13.0</version>
                     <configuration>
                         <configFile>${project.basedir}/etc/eclipse_formatter.xml</configFile>
                         <lineEnding>LF</lineEnding>

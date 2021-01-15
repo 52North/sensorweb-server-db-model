@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -18,12 +18,10 @@
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -35,7 +33,6 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     public static final String PROPERTY_DATASETS = "datasets";
     private static final long serialVersionUID = 3615089936334873353L;
 
-    private Set<ParameterEntity<?>> parameters;
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<AbstractDatasetEntity> datasets;
@@ -58,10 +55,6 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         return this;
     }
 
-    public boolean hasDatasets() {
-        return getDatasets() != null && !getDatasets().isEmpty();
-    }
-
     public boolean hasHistoricalLocations() {
         return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
     }
@@ -76,38 +69,9 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         this.processed = processsed;
     }
 
+    @Override
     public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
-    }
-
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
-    }
-
-    @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public void addParameters(Set<ParameterEntity<?>> parameters) {
-        if (this.parameters == null) {
-            this.parameters = new HashSet<>();
-        }
-        this.parameters.addAll(parameters);
-    }
-
-    @Override
-    public void addParameter(ParameterEntity<?> parameter) {
-        if (this.parameters == null) {
-            this.parameters = new HashSet<>();
-        }
-        this.parameters.add(parameter);
     }
 
     @Override
@@ -131,6 +95,11 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     @Override
     public void setLocations(Set<LocationEntity> locations) {
         this.locations = locations;
+    }
+
+    @Override
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+        this.datasets = datasets;
     }
 
 }

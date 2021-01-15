@@ -3,7 +3,7 @@
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'reference')">
+    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'reference', 'trajectory')">
         <comment>Storage of the observation values with the timestamp and additional metadata. The metadata are height/depth values for profile observation and sampling geometries for trajectory observations. In each observation entry only one value_... column should be filled with a value!</comment>
         <id name="id" type="long">
             <column name="observation_id">
@@ -326,6 +326,12 @@
             </set>
         </subclass>
 
+        <subclass name="TrajectoryDataEntity" extends="DataEntity" discriminator-value="trajectory">
+            <set name="value" table="observation" cascade="remove">
+                <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
+                <one-to-many class="DataEntity" />
+            </set>
+        </subclass>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
