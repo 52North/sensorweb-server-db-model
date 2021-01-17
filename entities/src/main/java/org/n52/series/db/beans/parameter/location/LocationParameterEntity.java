@@ -48,7 +48,7 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setLocation((LocationEntity) entity);
     }
 }

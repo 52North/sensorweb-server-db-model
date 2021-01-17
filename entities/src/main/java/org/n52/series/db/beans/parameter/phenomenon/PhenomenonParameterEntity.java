@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter.phenomenon;
 
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -48,7 +48,7 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setPhenomenon((PhenomenonEntity) entity);
     }
 }

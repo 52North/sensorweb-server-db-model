@@ -48,7 +48,7 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setProcedure((ProcedureEntity) entity);
     }
 }

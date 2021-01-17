@@ -46,4 +46,9 @@ public abstract class ObservationGroupParameterEntity<T> extends ParameterEntity
     public void setObsGroupId(long obsGroupId) {
         this.obsGroupId = obsGroupId;
     }
+
+    @Override
+    public void setEntity(Object entity) {
+        setObsGroup((ObservationGroupEntity) entity);
+    }
 }

@@ -19,6 +19,7 @@ package org.n52.series.db.beans.parameter.license;
 
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.LocationEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
@@ -45,5 +46,10 @@ public abstract class LicenseParameterEntity<T> extends ParameterEntity<T> {
 
     public void setLicenseId(long licenseId) {
         this.licenseId = licenseId;
+    }
+
+    @Override
+    public void setEntity(Object entity) {
+        setLicense((LicenseEntity) entity);
     }
 }

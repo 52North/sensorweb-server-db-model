@@ -48,7 +48,7 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setFeature((AbstractFeatureEntity) entity);
     }
 }

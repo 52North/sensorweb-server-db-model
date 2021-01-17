@@ -14,9 +14,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter.platform;
 
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -49,7 +49,7 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setPlatform((PlatformEntity) entity);
     }
 

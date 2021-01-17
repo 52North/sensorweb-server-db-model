@@ -46,4 +46,9 @@ public abstract class ProjectParameterEntity<T> extends ParameterEntity<T> {
     public void setProjectId(long projectId) {
         this.projectId = projectId;
     }
+
+    @Override
+    public void setEntity(Object entity) {
+        setProject((ProjectEntity) entity);
+    }
 }

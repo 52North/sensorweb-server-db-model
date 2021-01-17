@@ -120,7 +120,7 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
         return getValue() != null;
     }
 
-    public abstract void setDescribeableEntity(DescribableEntity entity);
+    public abstract void setEntity(Object entity);
 
     @Override
     public int hashCode() {

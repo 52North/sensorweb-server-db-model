@@ -48,7 +48,7 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setObservation((DataEntity) entity);
     }
 }
