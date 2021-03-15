@@ -28,7 +28,7 @@
                 <!-- <comment>A short description of the procedure</comment> -->
             </column>
         </property>
-        <property name="reference" type="org.n52.hibernate.type.SmallBooleanType">
+        <property name="reference" type="org.n52.hibernate.type.SmallBooleanType" index="idx_procedure_is_reference">
             <column name="is_reference" default="0" check="is_reference in (1,0)">
                 <!-- <comment>Flag that indicates if the procedure is a reference.</comment> -->
             </column>

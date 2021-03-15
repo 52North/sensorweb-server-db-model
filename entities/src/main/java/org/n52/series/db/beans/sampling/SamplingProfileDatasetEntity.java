@@ -23,11 +23,14 @@ import java.util.stream.Collectors;
 public class SamplingProfileDatasetEntity implements Serializable {
 
     public static final String PROPERTY_SAMPLINGS = "samplings";
-    public static final String PROPERTY_MEASURING_PROGRAMS = "measuringPrograms";
+    public static final String PROPERTY_SAMPLING_IDS = "samplingIds";
+    public static final String PROPERTY_MEASURING_PROGRAMS = "IdmeasuringPrograms";
 
     private static final long serialVersionUID = -6526107787041904177L;
 
     private Set<SamplingEntity> samplings;
+
+    private Set<Integer> samplingIds;
 
     private Set<MeasuringProgramEntity> measuringPrograms;
 
@@ -40,8 +43,17 @@ public class SamplingProfileDatasetEntity implements Serializable {
         return this;
     }
 
+    public Set<Integer> getSamplingIds() {
+        return samplingIds;
+    }
+
+    public SamplingProfileDatasetEntity setSamplingIds(Set<Integer> samplingIds) {
+        this.samplingIds = samplingIds;
+        return this;
+    }
+
     public boolean hasSamplings() {
-        return getSamplings() != null && !getSamplings().isEmpty();
+        return getSamplingIds() != null && !getSamplingIds().isEmpty();
     }
 
     public Set<MeasuringProgramEntity> getMeasuringPrograms() {
