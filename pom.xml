@@ -55,12 +55,12 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.junit>5.7.0</version.junit>
+        <version.junit>5.7.1</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
         <geotools.version>24.2</geotools.version>
-        <geolatte.version>1.6.0</geolatte.version>
+        <geolatte.version>1.8.0</geolatte.version>
         <hibernate.version>5.4.27.Final</hibernate.version>
-        <spring-boot.version>2.4.2</spring-boot.version>
+        <spring-boot.version>2.4.3</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -138,7 +138,7 @@
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.10.9</version>
+                <version>2.10.10</version>
             </dependency>
 
             <dependency>
@@ -233,7 +233,7 @@
             <dependency>
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.18.0</version>
+                <version>1.18.1</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->
@@ -437,7 +437,7 @@
                 <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>2.13.0</version>
+                    <version>2.14.0</version>
                     <configuration>
                         <configFile>${project.basedir}/etc/eclipse_formatter.xml</configFile>
                         <lineEnding>LF</lineEnding>

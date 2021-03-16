@@ -21,7 +21,6 @@ import org.n52.series.db.beans.HibernateRelations.HasTags;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
-import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 
 import java.util.List;
@@ -80,7 +79,7 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     private SamplingProfileDatasetEntity samplingProfile;
 
-    private EReportingProfileDatasetEntity ereportingProfile;
+    private boolean ereportingProfile;
 
     private Set<TagEntity> tags;
 
@@ -270,17 +269,17 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
         return getSamplingProfile() != null;
     }
 
-    public EReportingProfileDatasetEntity getEreportingProfile() {
+    public boolean getEreportingProfile() {
         return ereportingProfile;
     }
 
-    public DatasetEntity setEreportingProfile(EReportingProfileDatasetEntity ereportingProfile) {
+    public DatasetEntity setEreportingProfile(boolean ereportingProfile) {
         this.ereportingProfile = ereportingProfile;
         return this;
     }
 
     public boolean hasEreportingProfile() {
-        return getEreportingProfile() != null;
+        return getEreportingProfile();
     }
 
     @Override
@@ -327,6 +326,7 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
         setGeometryEntity(dataset.getGeometryEntity());
         setInsitu(dataset.isInsitu());
         setMobile(dataset.isMobile());
+        setEreportingProfile(dataset.getEreportingProfile());
         if (dataset.getRelatedDatasets() != null) {
             setRelatedObservations(dataset.getRelatedDatasets().stream().collect(Collectors.toSet()));
         }
@@ -335,9 +335,6 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
         }
         if (dataset.hasSamplingProfile()) {
             setSamplingProfile(new SamplingProfileDatasetEntity().copy(dataset.getSamplingProfile()));
-        }
-        if (dataset.hasEreportingProfile()) {
-            setEreportingProfile(new EReportingProfileDatasetEntity().copy(dataset.getEreportingProfile()));
         }
         if (dataset.hasVerticalMetadata()) {
             setVerticalMetadata(dataset.getVerticalMetadata());

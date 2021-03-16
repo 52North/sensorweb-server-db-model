@@ -1296,4 +1296,49 @@ public interface HibernateRelations {
             return getVerticalTo() != null;
         }
     }
+
+    interface HasAssessmentType {
+        String PROPERTY_ASSESSMENT_TYPE = "assessmentType";
+
+        /**
+         * @return the assessmentType
+         */
+        AssessmentTypeEntity getAssessmentType();
+
+        /**
+         * @param assessmentType
+         *            the assessmentType to set
+         */
+        HasAssessmentType setAssessmentType(AssessmentTypeEntity assessmentType);
+
+        default boolean isSetAssessmentType() {
+            return (getAssessmentType() != null) && getAssessmentType().isSetAssessmentType();
+        }
+    }
+
+    /**
+     * Interface for AQD EReporting Network elements
+     */
+    interface HasNetwork {
+        String PROPERTY_NETWORK = "network";
+
+        /**
+         * @return the network
+         */
+        NetworkEntity getNetwork();
+
+        /**
+         * @param network
+         *            the network to set
+         * @return this
+         */
+        HasNetwork setNetwork(NetworkEntity network);
+
+        /**
+         * @return <code>true</code>, if network is not null
+         */
+        default boolean isSetNetwork() {
+            return getNetwork() != null;
+        }
+    }
 }

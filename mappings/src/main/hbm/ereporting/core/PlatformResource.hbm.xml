@@ -73,6 +73,12 @@
             <key column="fk_platform_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPlatformEntity" />
         </set>
+         <many-to-one name="assessmentType" class="AssessmentTypeEntity" foreign-key="fk_sp_assessment_type">
+            <column name="fk_assessment_type_id" index="idx_platfomr_assessment_type"/>
+        </many-to-one>
+        <many-to-one name="network" class="NetworkEntity" foreign-key="fk_sp_network">
+            <column name="fk_network_id" index="idx_platform_network"/>
+        </many-to-one>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nPlatformEntity" table="platform_i18n">

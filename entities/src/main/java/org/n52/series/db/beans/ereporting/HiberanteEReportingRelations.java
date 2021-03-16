@@ -20,18 +20,6 @@ import org.n52.series.db.beans.HibernateRelations;
 
 public interface HiberanteEReportingRelations extends HibernateRelations {
 
-    interface HasEReportingSamplingPoint {
-        String SAMPLING_POINT = "samplingPoint";
-
-        EReportingSamplingPointEntity getSamplingPoint();
-
-        void setSamplingPoint(EReportingSamplingPointEntity samplingPoint);
-
-        default boolean hasSamplingPoint() {
-            return getSamplingPoint() != null;
-        }
-    }
-
     interface HasInspireId {
         String INSPIRE_ID = "inspireId";
 
@@ -141,74 +129,4 @@ public interface HiberanteEReportingRelations extends HibernateRelations {
 
     }
 
-    interface HasAssessmentType {
-        String ASSESSMENTTYPE = "assessmentType";
-
-        /**
-         * @return the assessmentType
-         */
-        EReportingAssessmentTypeEntity getAssessmentType();
-
-        /**
-         * @param assessmentType
-         *            the assessmentType to set
-         */
-        void setAssessmentType(EReportingAssessmentTypeEntity assessmentType);
-
-        default boolean isSetAssessmentType() {
-            return (getAssessmentType() != null) && getAssessmentType().isSetAssessmentType();
-        }
-    }
-
-    /**
-     * Interface for AQD EReporting Station elements
-     */
-    interface HasStation {
-        String STATION = "station";
-
-        /**
-         * @return the station
-         */
-        EReportingStationEntity getStation();
-
-        /**
-         * @param station
-         *            the station to set
-         * @return this
-         */
-        HasStation setStation(EReportingStationEntity station);
-
-        /**
-         * @return <code>true</code>, if station is not null
-         */
-        default boolean isSetStation() {
-            return getStation() != null;
-        }
-    }
-
-    /**
-     * Interface for AQD EReporting Network elements
-     */
-    interface HasNetwork {
-        String NETWORK = "network";
-
-        /**
-         * @return the network
-         */
-        EReportingNetworkEntity getNetwork();
-
-        /**
-         * @param network
-         *            the network to set
-         * @return this
-         */
-        HasNetwork setNetwork(EReportingNetworkEntity network);
-
-        /**
-         * @return <code>true</code>, if network is not null
-         */
-        default boolean isSetNetwork() {
-            return getNetwork() != null;
-        }
-    }
 }
