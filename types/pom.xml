@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52.sensorweb-server.db-model</groupId>
         <artifactId>db-model-parent</artifactId>
-        <version>4.0.0-SNAPSHOT</version>
+        <version>4.0.0-PR.2</version>
     </parent>
     <artifactId>db-model-types</artifactId>
     <packaging>jar</packaging>
