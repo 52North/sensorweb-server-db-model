@@ -80,8 +80,7 @@ public final class TableMetadataGenerator extends AbstractGenerator {
 
     private void exportTableColumnMetadata(Metadata metadata, Dialect dia, DialectSelector dialect, Concept concept,
             Profile profile) throws IOException {
-        Path path = Paths.get(createFileName(dialect, concept, profile));
-        Files.deleteIfExists(path);
+        Path path = createFile(Paths.get(createFileName(dialect, concept, profile)));
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
         List<String> result = new LinkedList<>();
         result.add("# Database table/column description");
@@ -97,6 +96,12 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         result.add(
                 "*Creation date: " + DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
         System.out.println("The generated file was written to: " + Files.write(path, result).toAbsolutePath());
+    }
+
+    private Path createFile(Path path) throws IOException {
+        Files.deleteIfExists(path);
+        Files.createDirectories(path);
+        return Files.createFile(path);
     }
 
     private SortedMap<String, TableMetadata> extractTableMetadata(Metadata metadata, Dialect dia) {
