@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2020 52°North Initiative for Geospatial Open Source
+ * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
  * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -64,7 +64,7 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     public boolean isNoDataValue(DataEntity<?> observation) {
-        return observation.isNoDataValue(noDataValues) && !observation.hasDetectionLimit();
+        return observation == null || observation.isNoDataValue(noDataValues) && !observation.hasDetectionLimit();
     }
 
     public String getNoDataValues() {

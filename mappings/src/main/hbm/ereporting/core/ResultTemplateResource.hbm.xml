@@ -33,6 +33,11 @@
                 <comment>The feature that is associated with the result template. Can be null if the feature is defined in the structure.</comment>
             </column>
         </many-to-one>
+         <many-to-one name="category" class="CategoryEntity" foreign-key="fk_result_template_category">
+            <column index="idx_result_template_category" name="fk_category_id" not-null="true">
+                <comment>The category that is associated with the result template</comment>
+            </column>
+        </many-to-one>
         <property name="identifier" type="string">
             <column index="idx_result_template_identifier" name="identifier" not-null="true">
                 <comment>Unique identifier of the result template used for insertion operation</comment>
@@ -44,7 +49,6 @@
                 <comment>The structure of the result template, should be a XML encoded swe:DataRecord</comment>
             </column>
         </property>
-
         <property name="encoding" type="text">
             <column name="encoding" not-null="false">
                 <comment>The encding of the result template, should be a XML encoded swe:TextEncoding</comment>

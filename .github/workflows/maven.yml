@@ -6,7 +6,7 @@ jobs:
   build:
     strategy:
       matrix:
-        java: [ 8, 9, 10, 11, 12, 13 ]
+        java: [ 8, 9, 11, 15 ]
     runs-on: ubuntu-latest
     name: Java ${{ matrix.java }} compile
     
