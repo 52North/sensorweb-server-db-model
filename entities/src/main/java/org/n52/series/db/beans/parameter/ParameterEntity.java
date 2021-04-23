@@ -14,16 +14,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
+
+import org.n52.series.db.beans.IdEntity;
 
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
-
-import org.n52.series.db.beans.DescribableEntity;
-import org.n52.series.db.beans.IdEntity;
 
 public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
 
@@ -55,6 +55,11 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
     }
 
     @Override
+    public boolean isSetName() {
+        return getName() != null && !getName().isEmpty();
+    }
+
+    @Override
     public String getDescription() {
         return description;
     }
@@ -62,11 +67,6 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
     @Override
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    @Override
-    public boolean isSetName() {
-        return getName() != null && !getName().isEmpty();
     }
 
     public Date getLastUpdate() {
