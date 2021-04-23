@@ -33,6 +33,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -201,5 +202,18 @@ public class ProjectEntity extends IdEntity
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ProjectEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }

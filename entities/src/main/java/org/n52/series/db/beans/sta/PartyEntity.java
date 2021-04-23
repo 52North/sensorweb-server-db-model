@@ -60,6 +60,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -157,4 +158,16 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
         return datasets;
     }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, role);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof PartyEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
+    }
 }

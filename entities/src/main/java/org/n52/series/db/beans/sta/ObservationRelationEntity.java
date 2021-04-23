@@ -31,6 +31,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.Objects;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
@@ -102,5 +103,18 @@ public class ObservationRelationEntity extends IdEntity
 
     public void setGroup(ObservationGroupEntity group) {
         this.group = group;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, type);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ObservationRelationEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }

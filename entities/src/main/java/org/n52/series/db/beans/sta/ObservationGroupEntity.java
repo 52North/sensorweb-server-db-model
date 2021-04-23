@@ -32,6 +32,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -145,5 +146,18 @@ public class ObservationGroupEntity extends IdEntity
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ObservationGroupEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }
