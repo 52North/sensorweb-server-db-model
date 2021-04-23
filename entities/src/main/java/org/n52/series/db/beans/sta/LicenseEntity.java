@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
@@ -47,32 +48,43 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
     public static final String PROPERTY_DEFINITION = "definition";
     public static final String PROPERTY_LOGO = "logo";
     private static final long serialVersionUID = 6159174609682812188L;
-
     @Id
     @Column(nullable = false, name = "license_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_seq")
     private Long id;
-
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
-
     @Column(name = NAME, nullable = false)
     private String name;
-
     @Column(name = PROPERTY_DEFINITION, nullable = false)
     private String definition;
-
     @Column(name = PROPERTY_LOGO)
     private String logo;
-
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_LICENSE)
     private Set<AbstractDatasetEntity> datasets;
-
     @OneToMany(mappedBy = LicenseParameterEntity.PROP_LICENSE, targetEntity = LicenseParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof LicenseEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
+    }
 
     public String getStaIdentifier() {
         return staIdentifier;
@@ -138,18 +150,5 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, staIdentifier, name);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof LicenseEntity)) {
-            return false;
-        }
-        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }

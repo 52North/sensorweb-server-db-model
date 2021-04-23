@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.HibernateRelations;
@@ -46,36 +47,47 @@ public class ObservationGroupEntity extends IdEntity
 
     public static final String PROP_ENTITIES = "entities";
     private static final long serialVersionUID = 3611419770138299218L;
-
     @Id
     @Column(nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observation_group_seq")
     private Long id;
-
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
     @Column(nullable = false, name = "sta_identifier", unique = true)
     private String staIdentifier;
-
     /**
      * Name of the entity.
      */
     @Column
     private String name;
-
     @Column
     private String description;
-
     @OneToMany(mappedBy = ObservationRelationEntity.PROPERTY_GROUP)
     private Set<ObservationRelationEntity> entities;
-
     @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
             targetEntity = ObservationGroupParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
-
     @Transient
     private boolean processed;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ObservationGroupEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
+    }
 
     @Override
     public String getName() {
@@ -145,18 +157,5 @@ public class ObservationGroupEntity extends IdEntity
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, staIdentifier);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof ObservationGroupEntity)) {
-            return false;
-        }
-        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }

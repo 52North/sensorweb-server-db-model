@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.DataEntity;
@@ -45,30 +46,43 @@ public class ObservationRelationEntity extends IdEntity
     public static final String PROPERTY_OBSERVATION = "observation";
     public static final String PROPERTY_TYPE = "type";
     private static final long serialVersionUID = -5523688573276493324L;
-
     @Id
     @Column(nullable = false, unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observation_rel_seq")
     private Long id;
-
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
     @Column(nullable = false, name = "sta_identifier", unique = true)
     private String staIdentifier;
-
     /**
      * Type of the relation.
      */
     @Column(name = PROPERTY_TYPE, nullable = false)
     private String type;
-
     @ManyToOne(targetEntity = DataEntity.class, optional = false)
     @JoinColumn(name = PROPERTY_OBSERVATION, referencedColumnName = "observation_id")
     private DataEntity<?> observation;
-
     @ManyToOne(targetEntity = ObservationGroupEntity.class, optional = false)
     private ObservationGroupEntity group;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, type);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ObservationRelationEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
+    }
 
     @Override
     public String getStaIdentifier() {
@@ -102,18 +116,5 @@ public class ObservationRelationEntity extends IdEntity
 
     public void setGroup(ObservationGroupEntity group) {
         this.group = group;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, staIdentifier, type);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof ObservationRelationEntity)) {
-            return false;
-        }
-        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }

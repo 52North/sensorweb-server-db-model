@@ -71,12 +71,7 @@ import java.util.Set;
 public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasAbstractDatasets,
         HibernateRelations.HasStaIdentifier {
 
-    public enum Role {
-        individual, institution;
-    }
-
     public static final String PROPERTY_DATASTREAMS = "datasets";
-
     public static final String PROPERTY_NICKNAME = "nickname";
     public static final String PROPERTY_ROLE = "role";
     public static final String PROPERTY_AUTH_ID = "authId";
@@ -85,35 +80,40 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
     @Column(nullable = false, name = "party_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "party_seq")
     private Long id;
-
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
-
     /**
      * Nickname of the entity.
      */
     @Column(name = PROPERTY_NICKNAME)
     private String nickname;
-
     @Enumerated(EnumType.STRING)
     @Column(name = PROPERTY_ROLE, nullable = false)
     private Role role;
-
     @Column(name = PROPERTY_AUTH_ID)
     private String authId;
-
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PARTY)
     private Set<AbstractDatasetEntity> datasets;
 
+    @Override
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, role);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof PartyEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 
     public String getStaIdentifier() {
@@ -148,25 +148,16 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
         this.authId = authId;
     }
 
-    @Override
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
-    }
-
     public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hash(id, staIdentifier, role);
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+        this.datasets = datasets;
     }
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof PartyEntity)) {
-            return false;
-        }
-        return Objects.equals(this.hashCode(), obj.hashCode());
+    public enum Role {
+        individual, institution;
     }
 }

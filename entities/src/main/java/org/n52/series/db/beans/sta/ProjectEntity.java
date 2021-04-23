@@ -14,6 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
@@ -53,47 +54,53 @@ public class ProjectEntity extends IdEntity
     public static final String PROPERTY_TERMS_OF_USE = "termsOfUse";
     public static final String PROPERTY_CLASSIFICATION = "classification";
     private static final long serialVersionUID = 1050625647937315126L;
-
     @Id
     @Column(nullable = false, name = "project_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
     private Long id;
-
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
-
     @Column(name = NAME, nullable = false)
     private String name;
-
     @Column(name = DESCRIPTION, nullable = false)
     private String description;
-
     @Column(name = PROPERTY_RUNTIME_START, length = 29, nullable = false)
     private Date runtimeStart;
-
     @Column(name = PROPERTY_RUNTIME_END, length = 29, nullable = false)
     private Date runtimeEnd;
-
     @Column(name = PROPERTY_PRIVACY_POLICY)
     private String privacyPolicy;
-
     @Column(name = PROPERTY_TERMS_OF_USE)
     private String termsOfUse;
-
     @Column(name = PROPERTY_CLASSIFICATION)
     private String classification;
-
     @Column(name = PROPERTY_URL)
     private String url;
-
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PROJECT)
     private Set<AbstractDatasetEntity> datasets;
-
     @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof ProjectEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
+    }
 
     public String getStaIdentifier() {
         return staIdentifier;
@@ -201,18 +208,5 @@ public class ProjectEntity extends IdEntity
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, staIdentifier, name);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof ProjectEntity)) {
-            return false;
-        }
-        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }
