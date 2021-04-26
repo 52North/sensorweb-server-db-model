@@ -162,4 +162,11 @@
             </column>
         </property>
     </class>
+    <database-object>
+        <create>CREATE INDEX idx_feature_geom ON ${schema}.feature USING gist (geom)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
 </hibernate-mapping>

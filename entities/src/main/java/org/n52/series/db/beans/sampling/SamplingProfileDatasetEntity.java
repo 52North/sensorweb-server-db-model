@@ -28,6 +28,8 @@ public class SamplingProfileDatasetEntity implements Serializable {
 
     private static final long serialVersionUID = -6526107787041904177L;
 
+    private boolean hasSamplings;
+
     private Set<SamplingEntity> samplings;
 
     private Set<Integer> samplingIds;
@@ -52,8 +54,16 @@ public class SamplingProfileDatasetEntity implements Serializable {
         return this;
     }
 
+    public boolean getHasSamplings() {
+        return hasSamplings;
+    }
+
+    public void setHasSamplings(boolean hasSamplings) {
+        this.hasSamplings = hasSamplings;
+    }
+
     public boolean hasSamplings() {
-        return getSamplingIds() != null && !getSamplingIds().isEmpty();
+        return getHasSamplings();
     }
 
     public Set<MeasuringProgramEntity> getMeasuringPrograms() {
