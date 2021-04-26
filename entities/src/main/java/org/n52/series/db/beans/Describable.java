@@ -79,7 +79,7 @@ public interface Describable extends IdentifierNameDescriptionEntity, HasId, Has
     }
 
     default boolean noTranslationAvailable(String locale) {
-        return getTranslations() == null || locale == null || getTranslations().isEmpty() || locale.isEmpty();
+        return locale == null || locale.isEmpty() || getTranslations() == null || getTranslations().isEmpty();
     }
 
     default String getNameI18n(String locale) {
