@@ -30,6 +30,8 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
 
     public static final String PROPERTY_DATASETS = "datasets";
 
+    public static final String PROPERTY_OBSERVATIONS = "observations";
+
     public static final String PROPERTY_MEASURING_PROGRAM = "measuringProgram";
 
     public static final String PROPERTY_SAMPLING_TIME_START = "samplingTimeStart";
