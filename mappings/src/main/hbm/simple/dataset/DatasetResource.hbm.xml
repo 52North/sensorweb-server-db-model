@@ -235,16 +235,7 @@
         </property>
     </class>
     <database-object>
-        <create>
-            CREATE INDEX idx_dataset_ts_s_cq ON ${schema}.dataset USING btree (dataset_type, observation_type, value_type, is_deleted, is_published, first_time, last_time)
-             WHERE (is_deleted = 0
-              AND is_published = 1)
-              AND first_time IS NOT NULL
-              AND last_time IS NOT NULL
-              AND dataset_type = 'timeseries'
-              AND observation_type = 'simple'
-              AND value_type IN ('count', 'quantity'))
-        </create>
+        <create> CREATE INDEX idx_dataset_ts_s_cq ON ${schema}.dataset USING btree (dataset_type, observation_type, value_type, is_deleted, is_published, first_time, last_time) WHERE is_deleted = 0 AND is_published = 1 AND first_time IS NOT NULL  AND last_time IS NOT NULL AND dataset_type = 'timeseries' AND observation_type = 'simple' AND value_type IN ('count', 'quantity')</create>
         <drop></drop>
         <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
         <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
