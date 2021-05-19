@@ -146,12 +146,12 @@
                 </column>
             </property>
             <property name="mobile" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_mobile">
-                <column name="is_mobile" not-null="false" default="0" check="is_mobile in (1,0)">
+                <column name="is_mobile" not-null="true" default="0" check="is_mobile in (1,0)">
                     <comment>Flag that indicates if the procedure is mobile (1/true) or stationary (0/false).</comment>
                 </column>
             </property>
             <property name="insitu" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_insitu">
-                <column name="is_insitu" not-null="false" default="1" check="is_insitu in (1,0)">
+                <column name="is_insitu" not-null="true" default="1" check="is_insitu in (1,0)">
                     <comment>Flag that indicates if the procedure is insitu (1/true) or remote (0/false).</comment>
                 </column>
             </property>
@@ -194,6 +194,11 @@
                 </column>
             </many-to-one>
             <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity">
+                <property name="hasSamplings" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_samplings">
+                    <column name="is_samplings" not-null="true" default="0" check="is_samplings in (1,0)">
+                        <comment>Flag that indicates if this dataset has samplings</comment>
+                    </column>
+                </property>
                 <set inverse="true" name="samplings" table="sampling_dataset" >
                     <comment>Storage of relations between dataset and related samplings</comment>
                     <key not-null="true" foreign-key="fk_dataset_sampling">

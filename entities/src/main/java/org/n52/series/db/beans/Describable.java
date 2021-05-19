@@ -55,4 +55,65 @@ public interface Describable<T>
         }
     }
 
+    default boolean isNameAvailable() {
+        return getName() != null && !getName().isEmpty();
+    }
+
+    default boolean isDomainAvailable() {
+        return getDomain() != null && !getDomain().isEmpty();
+    }
+
+    default boolean isi18nNameAvailable(String locale) {
+        return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
+    }
+
+    default boolean noTranslationAvailable(String locale) {
+        return locale == null || locale.isEmpty() || getTranslations() == null || getTranslations().isEmpty();
+    }
+
+    default String getNameI18n(String locale) {
+        if (noTranslationAvailable(locale)) {
+            return getName();
+        }
+        I18nEntity<? extends Describable> translation = getTranslation(locale);
+        return translation != null ? translation.getName() : getName();
+    }
+
+    default String getDescriptionI18n(String locale) {
+        if (noTranslationAvailable(locale)) {
+            return getDescription();
+        }
+        I18nEntity<? extends Describable> translation = getTranslation(locale);
+        return translation != null ? translation.getDescription() : getDescription();
+    }
+
+    default String getCountryCode(String locale) {
+        if (locale != null) {
+            return locale.split(LOCALE_REGEX).length > 1 ? locale.split(LOCALE_REGEX)[1]
+                    : locale.split(LOCALE_REGEX)[0];
+        }
+        return "";
+    }
+
+    default I18nEntity<? extends Describable> getTranslation(String locale) {
+        if (!noTranslationAvailable(locale)) {
+            String countryCode = getCountryCode(locale);
+            Locale matchingLocale = getMatchingLocale(getTranslations(), locale);
+            for (I18nEntity<? extends Describable> translation : getTranslations()) {
+                Locale translatedLocale = LocaleHelper.decode(translation.getLocale());
+                if (translatedLocale.equals(matchingLocale)
+                        || translatedLocale.getCountry().equalsIgnoreCase(countryCode)) {
+                    return translation;
+                }
+            }
+        }
+        return null;
+    }
+
+    default Locale getMatchingLocale(Set<I18nEntity<? extends Describable>> translations, String queriedLocale) {
+        List<LanguageRange> localeRange = Locale.LanguageRange.parse(queriedLocale);
+        return Locale.lookup(localeRange,
+                translations.stream().map(t -> LocaleHelper.decode(t.getLocale())).collect(Collectors.toSet()));
+    }
+
 }

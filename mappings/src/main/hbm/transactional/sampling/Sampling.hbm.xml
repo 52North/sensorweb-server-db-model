@@ -15,7 +15,7 @@
         </id>
 
         <many-to-one name="measuringProgram" class="MeasuringProgramEntity" foreign-key="fk_measuring_program">
-            <column name="fk_measuring_program_id" not-null="true" index="idx_sampling_measuring_program">
+            <column name="fk_measuring_program_id" not-null="true" index="idx_samplg_sampling_measuring_program">
                 <comment>Reference to the measuring program to which this sampling belongs.</comment>
             </column>
         </many-to-one>
@@ -133,4 +133,32 @@
             </column>
         </property>
     </class>
+    <database-object>
+        <create>CREATE or REPLACE FUNCTION insert_dataset_sampling_flag() RETURNS TRIGGER AS $$ BEGIN UPDATE ${schema}.dataset SET is_sampling = 1 WHERE dataset_id = NEW.fk_dataset_id; RETURN NEW; END  $$ LANGUAGE plpgsql</create>
+        <drop>DROP FUNCTION IF EXISTS insert_dataset_sampling_flag()</drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE or REPLACE FUNCTION delete_dataset_sampling_flag() RETURNS TRIGGER AS $$ DECLARE dataset_count SMALLINT; BEGIN SELECT count(fk_dataset_id) INTO dataset_count FROM ${schema}.sampling_dataset WHERE fk_dataset_id = OLD.fk_dataset_id; IF dataset_count = 0 THEN UPDATE ${schema}.dataset SET is_sampling = 0 WHERE dataset_id = OLD.fk_dataset_id; END IF; RETURN OLD; END $$ LANGUAGE plpgsql</create>
+        <drop>DROP FUNCTION IF EXISTS delete_dataset_sampling_flag()</drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE TRIGGER insert_dataset_sampling_flag AFTER INSERT ON ${schema}.sampling_dataset FOR EACH ROW EXECUTE PROCEDURE insert_dataset_sampling_flag()</create>
+        <drop>DROP TRIGGER IF EXISTS insert_dataset_sampling_flag ON ${schema}.sampling_dataset</drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE TRIGGER delete_dataset_sampling_flag AFTER DELETE ON ${schema}.sampling_dataset FOR EACH ROW EXECUTE PROCEDURE delete_dataset_sampling_flag()</create>
+        <drop>DROP TRIGGER IF EXISTS delete_dataset_sampling_flag ON ${schema}.sampling_dataset</drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
 </hibernate-mapping>
