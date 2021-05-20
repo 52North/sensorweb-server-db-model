@@ -21,7 +21,12 @@ import org.n52.series.db.beans.HibernateRelations.HasDescriptionTranslation;
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.HibernateRelations.HasNameTranslation;
 import org.n52.series.db.beans.HibernateRelations.HasParameters;
+import org.n52.series.db.beans.i18n.I18nEntity;
+import org.n52.series.db.common.LocaleHelper;
 
+import java.util.List;
+import java.util.Locale;
+import java.util.Locale.LanguageRange;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -63,14 +68,17 @@ public interface Describable<T>
         return getDomain() != null && !getDomain().isEmpty();
     }
 
+    @Override
     default boolean isi18nNameAvailable(String locale) {
         return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
     }
 
+    @Override
     default boolean noTranslationAvailable(String locale) {
         return locale == null || locale.isEmpty() || getTranslations() == null || getTranslations().isEmpty();
     }
 
+    @Override
     default String getNameI18n(String locale) {
         if (noTranslationAvailable(locale)) {
             return getName();
@@ -79,6 +87,7 @@ public interface Describable<T>
         return translation != null ? translation.getName() : getName();
     }
 
+    @Override
     default String getDescriptionI18n(String locale) {
         if (noTranslationAvailable(locale)) {
             return getDescription();
@@ -87,6 +96,7 @@ public interface Describable<T>
         return translation != null ? translation.getDescription() : getDescription();
     }
 
+    @Override
     default String getCountryCode(String locale) {
         if (locale != null) {
             return locale.split(LOCALE_REGEX).length > 1 ? locale.split(LOCALE_REGEX)[1]
@@ -95,6 +105,7 @@ public interface Describable<T>
         return "";
     }
 
+    @Override
     default I18nEntity<? extends Describable> getTranslation(String locale) {
         if (!noTranslationAvailable(locale)) {
             String countryCode = getCountryCode(locale);
@@ -110,6 +121,7 @@ public interface Describable<T>
         return null;
     }
 
+    @Override
     default Locale getMatchingLocale(Set<I18nEntity<? extends Describable>> translations, String queriedLocale) {
         List<LanguageRange> localeRange = Locale.LanguageRange.parse(queriedLocale);
         return Locale.lookup(localeRange,
