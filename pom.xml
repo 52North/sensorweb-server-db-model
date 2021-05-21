@@ -60,7 +60,7 @@
         <geotools.version>25.0</geotools.version>
         <geolatte.version>1.8.1</geolatte.version>
         <hibernate.version>5.4.27.Final</hibernate.version>
-        <spring-boot.version>2.4.5</spring-boot.version>
+        <spring-boot.version>2.5.0</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
