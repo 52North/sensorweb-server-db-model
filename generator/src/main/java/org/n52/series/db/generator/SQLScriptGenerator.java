@@ -92,7 +92,7 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             case 5:
                 return "dbo";
             default:
-                return null;
+                return PUBLIC;
         }
     }
 
