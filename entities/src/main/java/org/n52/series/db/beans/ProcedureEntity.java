@@ -155,8 +155,8 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
     }
 
     @Override
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
+    public void setDatasets(Set<AbstractDatasetEntity> observations) {
+        this.datasets = observations;
     }
 
     @Override

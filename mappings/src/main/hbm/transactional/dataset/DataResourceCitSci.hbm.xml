@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <hibernate-mapping package="org.n52.series.db.beans"
-    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="DataEntity" table="observation" check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'reference')">
-        <comment>Storage of the observation values with the timestamp and additional metadata. The metadata are height/depth values for profile observation and sampling geometries for trajectory observations. In each observation entry only one value_... column should be filled with a value!</comment>
+                   xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="DataEntity" table="observation"
+           check="value_type in ('quantity', 'count', 'text', 'category', 'bool', 'profile', 'complex', 'dataarray', 'geometry', 'blob', 'reference')">
+        <comment>Storage of the observation values with the timestamp and additional metadata. The metadata are
+            height/depth values for profile observation and sampling geometries for trajectory observations. In each
+            observation entry only one value_... column should be filled with a value!
+        </comment>
         <id name="id" type="long">
             <column name="observation_id">
                 <comment>PK column of the table</comment>
@@ -15,50 +19,67 @@
         </id>
         <discriminator force="true" type="string" not-null="true">
             <column name="value_type" unique-key="un_observation_identity">
-                <comment>Indicator used by Hibernate to map value specific entities. Valid values are quantity (scalar values in value_quantity), count (integer values in value_count), text (textual values in value_text), category (categorical values in value_category), bool (boolean values in value_boolean), reference (references in value_reference, e.g. link to a source, photo, video)</comment>
+                <comment>Indicator used by Hibernate to map value specific entities. Valid values are quantity (scalar
+                    values in value_quantity), count (integer values in value_count), text (textual values in
+                    value_text), category (categorical values in value_category), bool (boolean values in
+                    value_boolean), reference (references in value_reference, e.g. link to a source, photo, video)
+                </comment>
             </column>
         </discriminator>
 
-        <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity" lazy="proxy">
+        <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity"
+                     lazy="proxy">
             <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
-        <property name="datasetId" insert="false" update="false" type="long" >
-            <column name="fk_dataset_id" not-null="true" />
+        <property name="datasetId" insert="false" update="false" type="long">
+            <column name="fk_dataset_id" not-null="true"/>
         </property>
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
-                <comment>The timestamp when the observation period has started or the observation took place. In the the latter, sampling_time_start and sampling_time_end are equal.</comment>
+                <comment>The timestamp when the observation period has started or the observation took place. In the the
+                    latter, sampling_time_start and sampling_time_end are equal.
+                </comment>
             </column>
         </property>
 
         <property name="samplingTimeEnd" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_end" name="sampling_time_end" length="29" not-null="true">
-                <comment>The timestamp when the measurement period has finished or the observation took place. In the the latter, sampling_time_start and sampling_time_end are equal.</comment>
+                <comment>The timestamp when the measurement period has finished or the observation took place. In the
+                    the latter, sampling_time_start and sampling_time_end are equal.
+                </comment>
             </column>
         </property>
 
         <property name="resultTime" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_result_time" name="result_time" length="29" not-null="false">
-                <comment>The timestamp when the observation was published. Might be identical with sampling_time_start and sampling_time_end.</comment>
+                <comment>The timestamp when the observation was published. Might be identical with sampling_time_start
+                    and sampling_time_end.
+                </comment>
             </column>
         </property>
 
         <property name="identifier" type="string" unique-key="un_observation_identifier">
             <column name="identifier">
-                <comment>Unique identifier of the observation which can be for used filtering, e.g. GetObservationById in the SOS. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
+                <comment>Unique identifier of the observation which can be for used filtering, e.g. GetObservationById
+                    in the SOS. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321
+                </comment>
             </column>
         </property>
         <property name="staIdentifier" type="string" index="idx_observation_staIdentifier">
             <column name="sta_identifier" not-null="true" unique-key="un_observation_staIdentifier">
-                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321</comment>
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference
+                    to a vocabulary entry), UUID. E.g. 123, 123-321
+                </comment>
             </column>
         </property>
         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_data_identifier_codesp">
             <column name="fk_identifier_codespace_id" index="idx_observation_identifier_codespace">
-                <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be null.</comment>
+                <comment>The codespace of the data/observation identifier, reference to the codespace table. Can be
+                    null.
+                </comment>
             </column>
         </many-to-one>
 
@@ -70,7 +91,8 @@
 
         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_data_name_codespace">
             <column name="fk_name_codespace_id" index="idx_observation_name_codespace">
-                <comment>The codespace of the data/observation name, reference to the codespace table. Can be null.</comment>
+                <comment>The codespace of the data/observation name, reference to the codespace table. Can be null.
+                </comment>
             </column>
         </many-to-one>
         <property name="description" type="text">
@@ -97,6 +119,22 @@
             </column>
         </property>
 
+        <many-to-one class="org.n52.series.db.beans.sta.LicenseEntity" name="license">
+            <column name="fk_license_id" not-null="false">
+                <comment>Reference to the License of this Observation.</comment>
+            </column>
+        </many-to-one>
+
+        <set name="observationGroups" table="observationgroup_observation">
+            <key foreign-key="fk_observations_observation_id">
+                <column name="observations_observation_id" not-null="true"/>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.sta.ObservationGroupEntity"
+                          foreign-key="fk_observationgroupentity_id">
+                <column name="observationgroupentity_id" not-null="true" index="idx_observationgroup_observation"/>
+            </many-to-many>
+        </set>
+
         <component class="GeometryEntity" name="geometryEntity">
             <!--
             <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
@@ -104,7 +142,9 @@
              -->
             <property name="geometry" type="jts_geometry" not-null="false">
                 <column name="sampling_geometry">
-                    <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations (trajectories) where this geometry is different from the feature geometry.</comment>
+                    <comment>The geometry that represents the location where the observation was observed, e.g. mobile
+                        observations (trajectories) where this geometry is different from the feature geometry.
+                    </comment>
                 </column>
             </property>
         </component>
@@ -113,21 +153,28 @@
             <key foreign-key="fk_observation_parameter">
                 <column name="fk_observation_id" not-null="true"/>
             </key>
-            <one-to-many class="org.n52.series.db.beans.parameter.observation.ObservationParameterEntity" />
+            <one-to-many class="org.n52.series.db.beans.parameter.observation.ObservationParameterEntity"/>
         </set>
         <!-- Comments are defined in the RelatedDataResource.hbm.xml -->
         <set name="relatedObservations" table="related_observations" fetch="join" access="field" cascade="all">
             <key foreign-key="fk_related_observation">
-                <column name="fk_observation_id" not-null="true" index="idx_related_observation" />
+                <column name="fk_observation_id" not-null="true" index="idx_related_observation"/>
             </key>
-            <one-to-many class="RelatedDataEntity" />
+            <one-to-many class="RelatedDataEntity"/>
         </set>
 
-        <set name="relations" table="observationrelation" inverse="true" lazy="true">
-            <key foreign-key="fk_obsrel_obs">
-                <column name="observation" not-null="true" index="idx_obsrel_obs" />
+        <set name="subjects" table="observationrelation" inverse="false" lazy="true">
+            <key foreign-key="fk_subject">
+                <column name="subject_observation_id" not-null="true" index="idx_obsrel_subject"/>
             </key>
-            <one-to-many class="org.n52.series.db.beans.sta.ObservationRelationEntity" />
+            <one-to-many class="org.n52.series.db.beans.sta.ObservationRelationEntity"/>
+        </set>
+
+        <set name="objects" table="observationrelation" inverse="false" lazy="true">
+            <key foreign-key="fk_object">
+                <column name="object_observation_id" not-null="true" index="idx_obsrel_object"/>
+            </key>
+            <one-to-many class="org.n52.series.db.beans.sta.ObservationRelationEntity"/>
         </set>
 
         <property name="valueIdentifier" type="string">
@@ -153,25 +200,31 @@
         </property>
         <property name="verticalTo" type="big_decimal" unique-key="un_observation_identity" precision="20" scale="10">
             <column name="vertical_to" not-null="true" default="0" precision="20" scale="10">
-                <comment>The end level or the level of a vertical observation, required for profile observations</comment>
+                <comment>The end level or the level of a vertical observation, required for profile observations
+                </comment>
             </column>
         </property>
 
         <property name="parent" type="long">
             <column name="fk_parent_observation_id" not-null="false" index="idx_observation_parent">
-                <comment>Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations.</comment>
+                <comment>Reference to the parent observation in the case of complex observations like profiles, complex
+                    or swedataarray observations.
+                </comment>
             </column>
         </property>
 
         <set name="translations" table="observation_i18n" inverse="true" fetch="select">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
-            <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity"/>
         </set>
-        <property name="valueQuantity" column="value_quantity" not-null="false" type="big_decimal" precision="20" scale="10" insert="false" update="false" />
-        <property name="valueText" column="value_text" not-null="false" type="string" insert="false" update="false" />
-        <property name="valueCount" column="value_count" not-null="false" type="integer" insert="false" update="false" />
-        <property name="valueCategory" column="value_category" not-null="false" type="string" insert="false" update="false" />
-        <property name="valueBoolean" column="value_boolean" not-null="false" type="org.n52.hibernate.type.SmallBooleanType" insert="false" update="false" />
+        <property name="valueQuantity" column="value_quantity" not-null="false" type="big_decimal" precision="20"
+                  scale="10" insert="false" update="false"/>
+        <property name="valueText" column="value_text" not-null="false" type="string" insert="false" update="false"/>
+        <property name="valueCount" column="value_count" not-null="false" type="integer" insert="false" update="false"/>
+        <property name="valueCategory" column="value_category" not-null="false" type="string" insert="false"
+                  update="false"/>
+        <property name="valueBoolean" column="value_boolean" not-null="false"
+                  type="org.n52.hibernate.type.SmallBooleanType" insert="false" update="false"/>
 
         <subclass extends="DataEntity" name="QuantityDataEntity" discriminator-value="quantity">
             <property name="value" type="big_decimal" precision="20" scale="10">
@@ -240,26 +293,28 @@
                 <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
                 <property name="geometry" type="geolatte_geometry">
-                <column name="value_geometry">
-                    <comment>The geometry value of an observation (GeometryObservation)</comment>
-                </column>
-            </property>
+                    <column name="value_geometry">
+                        <comment>The geometry value of an observation (GeometryObservation)</comment>
+                    </column>
+                </property>
             </component>
         </subclass>
 
         <subclass name="BlobDataEntity" extends="DataEntity" discriminator-value="blob">
             <join table="value_blob">
-                <comment>Storage of the blog observation value. Separate table because the size of a blob value can be huge.</comment>
+                <comment>Storage of the blog observation value. Separate table because the size of a blob value can be
+                    huge.
+                </comment>
                 <key foreign-key="fk_blob_value">
                     <column name="fk_observation_id">
                         <comment>Reference to the data/observation in the observation table</comment>
                     </column>
                 </key>
-               <property name="value"
-                       type="blob">
-                 <column name="value">
-                     <comment>The blob value of an observation</comment>
-                 </column>
+                <property name="value"
+                          type="blob">
+                    <column name="value">
+                        <comment>The blob value of an observation</comment>
+                    </column>
                 </property>
             </join>
         </subclass>
@@ -272,11 +327,11 @@
             </property>
             <set name="value" table="observation" cascade="remove">
                 <key foreign-key="fk_parent_observation">
-                     <column name="fk_parent_observation_id" not-null="false">
+                    <column name="fk_parent_observation_id" not-null="false">
                         <comment>Reference to the parent data/observation</comment>
                     </column>
                 </key>
-                <one-to-many class="DataEntity" />
+                <one-to-many class="DataEntity"/>
             </set>
             <many-to-one name="resultTemplate" class="ResultTemplateEntity" foreign-key="fk_result_template">
                 <column name="fk_result_template_id" not-null="false" index="idx_observation_result_template">
@@ -289,14 +344,14 @@
             <!-- See above comments for DataArrayDataEntity -->
             <set name="value" table="observation" cascade="remove">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
-                <one-to-many class="DataEntity" />
+                <one-to-many class="DataEntity"/>
             </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
             <set name="value" table="observation" cascade="remove">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
-                <one-to-many class="DataEntity" />
+                <one-to-many class="DataEntity"/>
             </set>
         </subclass>
 
@@ -318,7 +373,9 @@
         </many-to-one>
         <property name="locale" not-null="true" type="string">
             <column name="locale">
-                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
+                <comment>Locale/language specification for this entry. ISO 639 Codes
+                    (http://www.loc.gov/standards/iso639-2/php/code_list.php)
+                </comment>
             </column>
         </property>
         <property name="name" type="string">
@@ -331,7 +388,7 @@
                 <comment>Locale/language specific description of the data entity</comment>
             </column>
         </property>
-         <property name="valueName" type="string">
+        <property name="valueName" type="string">
             <column name="value_name">
                 <comment>Locale/language specific name of the data entity</comment>
             </column>

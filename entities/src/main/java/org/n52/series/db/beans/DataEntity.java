@@ -28,6 +28,8 @@ import org.n52.series.db.beans.HibernateRelations.IsProcessed;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
+import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.ObservationGroupEntity;
 import org.n52.series.db.beans.sta.ObservationRelationEntity;
 import org.n52.series.db.common.Utils;
 
@@ -87,6 +89,14 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public static final String PROPERTY_VALUE_COUNT = "valueCount";
 
+    public static final String PROPERTY_SUBJECTS = "subjects";
+
+    public static final String PROPERTY_OBJECTS = "objects";
+
+    public static final String PROPERTY_LICENSE = "license";
+
+    public static final String PROPERTY_OBSERVATION_GROUPS = "observationGroups";
+
     public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(0);
 
     private static final long serialVersionUID = 273612846605300612L;
@@ -145,7 +155,13 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private boolean processed;
 
-    private Set<ObservationRelationEntity> relations;
+    private LicenseEntity license;
+
+    private Set<ObservationGroupEntity> observationGroups;
+
+    private Set<ObservationRelationEntity> subjects;
+
+    private Set<ObservationRelationEntity> objects;
 
     /**
      * @return the samplingTimeStart
@@ -464,12 +480,28 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.processed = processed;
     }
 
-    public Set<ObservationRelationEntity> getRelations() {
-        return relations;
+    public Set<ObservationRelationEntity> getSubjects() {
+        return subjects;
     }
 
-    public void setRelations(Set<ObservationRelationEntity> relations) {
-        this.relations = relations;
+    public void setSubjects(Set<ObservationRelationEntity> subjects) {
+        this.subjects = subjects;
+    }
+
+    public Set<ObservationRelationEntity> getObjects() {
+        return objects;
+    }
+
+    public void setObjects(Set<ObservationRelationEntity> objects) {
+        this.objects = objects;
+    }
+
+    public LicenseEntity getLicense() {
+        return license;
+    }
+
+    public void setLicense(LicenseEntity license) {
+        this.license = license;
     }
 
     @Override
@@ -504,5 +536,13 @@ public abstract class DataEntity<T> extends DescribableEntity
                 && Objects.equals(getSamplingTimeEnd(), other.getSamplingTimeEnd())
                 && Objects.equals(getResultTime(), other.getResultTime())
                 && Objects.equals(getValue(), other.getValue());
+    }
+
+    public Set<ObservationGroupEntity> getObservationGroups() {
+        return observationGroups;
+    }
+
+    public void setObservationGroups(Set<ObservationGroupEntity> observationGroups) {
+        this.observationGroups = observationGroups;
     }
 }

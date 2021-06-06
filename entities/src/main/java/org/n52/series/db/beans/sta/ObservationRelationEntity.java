@@ -26,25 +26,30 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Index;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@Table(name = "observationrelation", indexes = { @Index(name = "idx_obsrel_obs", columnList = "observation") })
+@Table(name = "observationrelation", indexes = {
+        // @Index(name = "idx_obsrel_subject", columnList = "subject"),
+        // @Index(name = "idx_obsrel_object", columnList = "object"),
+})
 @SequenceGenerator(name = "observation_rel_seq", allocationSize = 1)
-public class ObservationRelationEntity extends IdEntity
-        implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier {
+public class ObservationRelationEntity extends IdEntity implements HibernateRelations.HasId,
+        HibernateRelations.HasStaIdentifier, HibernateRelations.HasName, HibernateRelations.HasDescription {
 
-    public static final String PROPERTY_GROUP = "group";
-    public static final String PROPERTY_OBSERVATION = "observation";
-    public static final String PROPERTY_TYPE = "type";
+    public static final String PROPERTY_GROUP = "observationGroups";
+    public static final String PROPERTY_ROLE = "role";
+    public static final String PROPERTY_NAMESPACE = "namespace";
+    public static final String PROPERTY_SUBJECT = "subject";
+    public static final String PROPERTY_OBJECT = "object";
     private static final long serialVersionUID = -5523688573276493324L;
     @Id
     @Column(nullable = false, unique = true)
@@ -55,16 +60,27 @@ public class ObservationRelationEntity extends IdEntity
      */
     @Column(nullable = false, name = "sta_identifier", unique = true)
     private String staIdentifier;
-    /**
-     * Type of the relation.
-     */
-    @Column(name = PROPERTY_TYPE, nullable = false)
-    private String type;
-    @ManyToOne(targetEntity = DataEntity.class, optional = false)
-    @JoinColumn(name = PROPERTY_OBSERVATION, referencedColumnName = "observation_id")
-    private DataEntity<?> observation;
-    @ManyToOne(targetEntity = ObservationGroupEntity.class, optional = false)
-    private ObservationGroupEntity group;
+
+    @Column(name = PROPERTY_NAME)
+    private String name;
+
+    @Column(name = PROPERTY_DESCRIPTION)
+    private String description;
+
+    @Column(name = PROPERTY_ROLE, nullable = false)
+    private String role;
+
+    @Column(name = PROPERTY_NAMESPACE, nullable = false)
+    private String namespace;
+
+    @ManyToMany(mappedBy = "observationRelations")
+    private Set<ObservationGroupEntity> observationGroups;
+
+    @ManyToOne
+    private DataEntity subject;
+
+    @ManyToOne
+    private DataEntity object;
 
     @Override
     public Long getId() {
@@ -73,7 +89,7 @@ public class ObservationRelationEntity extends IdEntity
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, staIdentifier, type);
+        return Objects.hash(id, staIdentifier, role);
     }
 
     @Override
@@ -94,27 +110,63 @@ public class ObservationRelationEntity extends IdEntity
         this.staIdentifier = staIdentifier;
     }
 
-    public String getType() {
-        return type;
+    public String getRole() {
+        return role;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public DataEntity<?> getObservation() {
-        return observation;
+    public Set<ObservationGroupEntity> getObservationGroups() {
+        return observationGroups;
     }
 
-    public void setObservation(DataEntity<?> entity) {
-        this.observation = entity;
+    public void setObservationGroups(Set<ObservationGroupEntity> observationGroups) {
+        this.observationGroups = observationGroups;
     }
 
-    public ObservationGroupEntity getGroup() {
-        return group;
+    public DataEntity getSubject() {
+        return subject;
     }
 
-    public void setGroup(ObservationGroupEntity group) {
-        this.group = group;
+    public void setSubject(DataEntity subject) {
+        this.subject = subject;
+    }
+
+    public DataEntity getObject() {
+        return object;
+    }
+
+    public void setObject(DataEntity object) {
+        this.object = object;
+    }
+
+    @Override
+    public String getName() {
+        return name;
+    }
+
+    @Override
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getNamespace() {
+        return namespace;
+    }
+
+    public void setNamespace(String namespace) {
+        this.namespace = namespace;
     }
 }

@@ -17,6 +17,7 @@
 
 package org.n52.series.db.beans.sta;
 
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -27,10 +28,15 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -45,7 +51,9 @@ public class ObservationGroupEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasStaIdentifier,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
-    public static final String PROP_ENTITIES = "entities";
+    public static final String PROP_OBSERVATIONRELATIONS = "observationRelations";
+    public static final String PROPERTY_LICENSE = "license";
+
     private static final long serialVersionUID = 3611419770138299218L;
     @Id
     @Column(nullable = false, unique = true)
@@ -61,15 +69,81 @@ public class ObservationGroupEntity extends IdEntity
      */
     @Column
     private String name;
+
     @Column
     private String description;
-    @OneToMany(mappedBy = ObservationRelationEntity.PROPERTY_GROUP)
-    private Set<ObservationRelationEntity> entities;
+    @Column
+    private String purpose;
+    @Column
+    private Date runtimeStart;
+    @Column
+    private Date runtimeEnd;
+    @Column
+    private Date createdStart;
+    @Column
+    private Date createdEnd;
+
+    @ManyToOne(targetEntity = LicenseEntity.class)
+    private LicenseEntity license;
+
+    @ManyToMany
+    private Set<DataEntity> observations;
+
+    @ManyToMany
+    @JoinTable(name = "observationgroup_observationrelation",
+            joinColumns = { @JoinColumn(name = "fk_observationgroup", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "fk_observationrelation", referencedColumnName = "id") })
+    private Set<ObservationRelationEntity> observationRelations;
+
     @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
             targetEntity = ObservationGroupParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
+
     @Transient
     private boolean processed;
+
+    public ObservationGroupEntity() {
+    }
+
+    public String getPurpose() {
+        return purpose;
+    }
+
+    public void setPurpose(String purpose) {
+        this.purpose = purpose;
+    }
+
+    public Date getRuntimeStart() {
+        return runtimeStart;
+    }
+
+    public void setRuntimeStart(Date runtimeStart) {
+        this.runtimeStart = runtimeStart;
+    }
+
+    public Date getRuntimeEnd() {
+        return runtimeEnd;
+    }
+
+    public void setRuntimeEnd(Date runtimeEnd) {
+        this.runtimeEnd = runtimeEnd;
+    }
+
+    public Date getCreatedStart() {
+        return createdStart;
+    }
+
+    public void setCreatedStart(Date createdStart) {
+        this.createdStart = createdStart;
+    }
+
+    public Date getCreatedEnd() {
+        return createdEnd;
+    }
+
+    public void setCreatedEnd(Date createdEnd) {
+        this.createdEnd = createdEnd;
+    }
 
     @Override
     public Long getId() {
@@ -115,12 +189,12 @@ public class ObservationGroupEntity extends IdEntity
         this.staIdentifier = staIdentifier;
     }
 
-    public Set<ObservationRelationEntity> getEntities() {
-        return entities;
+    public Set<ObservationRelationEntity> getObservationRelations() {
+        return observationRelations;
     }
 
-    public void setEntities(Set<ObservationRelationEntity> entities) {
-        this.entities = entities;
+    public void setObservationRelations(Set<ObservationRelationEntity> observationRelations) {
+        this.observationRelations = observationRelations;
     }
 
     @Override
@@ -157,5 +231,21 @@ public class ObservationGroupEntity extends IdEntity
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
+    }
+
+    public LicenseEntity getLicense() {
+        return license;
+    }
+
+    public void setLicense(LicenseEntity license) {
+        this.license = license;
+    }
+
+    public Set<DataEntity> getObservations() {
+        return observations;
+    }
+
+    public void setObservations(Set<DataEntity> observations) {
+        this.observations = observations;
     }
 }

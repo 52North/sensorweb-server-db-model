@@ -48,6 +48,8 @@ package org.n52.series.db.beans.sta;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.party.PartyParameterEntity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -59,6 +61,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -69,7 +72,7 @@ import java.util.Set;
 @SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
 @Table(name = "party")
 public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasAbstractDatasets,
-        HibernateRelations.HasStaIdentifier {
+        HibernateRelations.HasStaIdentifier, HibernateRelations.HasDescription, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_NICKNAME = "nickname";
@@ -85,16 +88,23 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
      */
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
-    /**
-     * Nickname of the entity.
-     */
+
+    @Column(name = PROPERTY_AUTH_ID)
+    private String authId;
+
     @Column(name = PROPERTY_NICKNAME)
     private String nickname;
+
+    @Column(name = PROPERTY_DESCRIPTION)
+    private String description;
+
     @Enumerated(EnumType.STRING)
     @Column(name = PROPERTY_ROLE, nullable = false)
     private Role role;
-    @Column(name = PROPERTY_AUTH_ID)
-    private String authId;
+
+    @OneToMany(mappedBy = PartyParameterEntity.PROP_PARTY, targetEntity = PartyParameterEntity.class)
+    private Set<ParameterEntity<?>> parameters;
+
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PARTY)
     private Set<AbstractDatasetEntity> datasets;
 
@@ -153,8 +163,44 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
     }
 
     @Override
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
+    public void setDatasets(Set<AbstractDatasetEntity> observations) {
+        this.datasets = observations;
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public Set<ParameterEntity<?>> getParameters() {
+        return parameters;
+    }
+
+    @Override
+    public void setParameters(Set<ParameterEntity<?>> parameters) {
+        this.parameters = parameters;
+    }
+
+    @Override
+    public void addParameters(Set<ParameterEntity<?>> parameters) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.addAll(parameters);
+    }
+
+    @Override
+    public void addParameter(ParameterEntity<?> parameter) {
+        if (this.parameters == null) {
+            this.parameters = new HashSet<>();
+        }
+        this.parameters.add(parameter);
     }
 
     public enum Role {

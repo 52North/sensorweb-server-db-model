@@ -17,7 +17,7 @@
 
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -42,9 +42,8 @@ import java.util.Set;
 @SequenceGenerator(name = "license_seq", allocationSize = 1)
 @Table(name = "license")
 public class LicenseEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
+        HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters, HibernateRelations.HasDescription {
 
-    public static final String PROPERTY_DATASETS = "datasets";
     public static final String PROPERTY_DEFINITION = "definition";
     public static final String PROPERTY_LOGO = "logo";
     private static final long serialVersionUID = 6159174609682812188L;
@@ -59,12 +58,19 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
     private String staIdentifier;
     @Column(name = NAME, nullable = false)
     private String name;
+    @Column(name = DESCRIPTION)
+    private String description;
     @Column(name = PROPERTY_DEFINITION, nullable = false)
     private String definition;
     @Column(name = PROPERTY_LOGO)
     private String logo;
-    @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_LICENSE)
-    private Set<AbstractDatasetEntity> datasets;
+
+    @OneToMany(mappedBy = DataEntity.PROPERTY_LICENSE)
+    private Set<DataEntity> observations;
+
+    @OneToMany(mappedBy = ObservationGroupEntity.PROPERTY_LICENSE)
+    private Set<ObservationGroupEntity> observationGroups;
+
     @OneToMany(mappedBy = LicenseParameterEntity.PROP_LICENSE, targetEntity = LicenseParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
@@ -118,12 +124,12 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
         this.logo = logo;
     }
 
-    public Set<AbstractDatasetEntity> getDatasets() {
-        return datasets;
+    public Set<DataEntity> getObservations() {
+        return observations;
     }
 
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
-        this.datasets = datasets;
+    public void setObservations(Set<DataEntity> observations) {
+        this.observations = observations;
     }
 
     @Override
@@ -150,5 +156,23 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
+    }
+
+    @Override
+    public String getDescription() {
+        return description;
+    }
+
+    @Override
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Set<ObservationGroupEntity> getObservationGroups() {
+        return observationGroups;
+    }
+
+    public void setObservationGroups(Set<ObservationGroupEntity> observationGroups) {
+        this.observationGroups = observationGroups;
     }
 }
