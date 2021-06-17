@@ -344,7 +344,7 @@ public interface HibernateRelations {
         void setGeometry(Geometry geometry);
 
         default boolean isSetGeometry() {
-            return getGeometryEntity() != null;
+            return getGeometryEntity() != null && !getGeometryEntity().isEmpty();
         }
     }
 
