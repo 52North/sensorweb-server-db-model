@@ -24,7 +24,8 @@ import java.util.Objects;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
-public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
+public abstract class ParameterEntity<T> extends IdEntity
+        implements ValuedParameter<T>, Comparable<ParameterEntity<T>> {
 
     public static final String PROPERTY_PARENT = "parent";
 
@@ -135,5 +136,15 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
                 && Objects.equals(getDomain(), ((ParameterEntity<?>) obj).getDomain())
                 && Objects.equals(getName(), ((ParameterEntity<?>) obj).getName())
                 && Objects.equals(getValueAsString(), ((ParameterEntity<?>) obj).getValueAsString());
+    }
+
+    public int compareTo(ParameterEntity<T> o) {
+        if (getId() != null && o.getId() != null) {
+            return Long.compare(getId(), o.getId());
+        }
+        if (getId() == null && o.getId() == null) {
+            return 0;
+        }
+        return getId() == null ? -1 : 1;
     }
 }
