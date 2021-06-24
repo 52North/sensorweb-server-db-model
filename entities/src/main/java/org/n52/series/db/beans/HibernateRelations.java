@@ -1214,7 +1214,7 @@ public interface HibernateRelations {
 
         void setTags(Set<TagEntity> tags);
 
-        default boolean hasTagss() {
+        default boolean hasTags() {
             return getTags() != null && !getTags().isEmpty();
         }
 
