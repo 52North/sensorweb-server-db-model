@@ -26,7 +26,7 @@ public class FeatureCountParameterEntity extends FeatureParameterEntity<Integer>
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

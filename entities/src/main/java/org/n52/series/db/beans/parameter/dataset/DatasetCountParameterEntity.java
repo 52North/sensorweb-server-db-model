@@ -26,7 +26,7 @@ public class DatasetCountParameterEntity extends DatasetParameterEntity<Integer>
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

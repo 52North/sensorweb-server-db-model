@@ -52,6 +52,6 @@ public class ObservationQuantityParameterEntity extends ObservationParameterEnti
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

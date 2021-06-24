@@ -26,7 +26,7 @@ public class FeatureBooleanParameterEntity extends FeatureParameterEntity<Boolea
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

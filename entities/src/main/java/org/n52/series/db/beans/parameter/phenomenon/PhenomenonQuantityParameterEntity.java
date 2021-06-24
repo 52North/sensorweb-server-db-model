@@ -52,6 +52,6 @@ public class PhenomenonQuantityParameterEntity extends PhenomenonParameterEntity
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

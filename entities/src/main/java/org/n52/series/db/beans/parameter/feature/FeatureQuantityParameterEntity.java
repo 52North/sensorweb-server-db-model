@@ -52,6 +52,6 @@ public class FeatureQuantityParameterEntity extends FeatureParameterEntity<BigDe
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

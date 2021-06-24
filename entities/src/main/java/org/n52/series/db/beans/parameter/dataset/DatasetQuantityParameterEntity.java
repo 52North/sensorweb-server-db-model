@@ -52,6 +52,6 @@ public class DatasetQuantityParameterEntity extends DatasetParameterEntity<BigDe
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

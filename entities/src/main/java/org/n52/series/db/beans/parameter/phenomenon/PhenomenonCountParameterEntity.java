@@ -27,7 +27,7 @@ public class PhenomenonCountParameterEntity extends PhenomenonParameterEntity<In
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

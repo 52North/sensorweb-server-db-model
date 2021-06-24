@@ -26,7 +26,7 @@ public class DatasetBooleanParameterEntity extends DatasetParameterEntity<Boolea
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

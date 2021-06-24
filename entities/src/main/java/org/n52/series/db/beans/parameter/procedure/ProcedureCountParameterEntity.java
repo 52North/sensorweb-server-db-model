@@ -26,7 +26,7 @@ public class ProcedureCountParameterEntity extends ProcedureParameterEntity<Inte
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

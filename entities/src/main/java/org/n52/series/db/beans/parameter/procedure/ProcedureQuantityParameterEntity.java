@@ -57,6 +57,6 @@ public class ProcedureQuantityParameterEntity extends ProcedureParameterEntity<B
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

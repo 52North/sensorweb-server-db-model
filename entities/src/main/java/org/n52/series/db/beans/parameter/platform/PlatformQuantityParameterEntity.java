@@ -57,6 +57,6 @@ public class PlatformQuantityParameterEntity extends PlatformParameterEntity<Big
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

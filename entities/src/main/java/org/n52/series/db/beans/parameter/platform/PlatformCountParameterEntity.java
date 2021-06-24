@@ -26,7 +26,7 @@ public class PlatformCountParameterEntity extends PlatformParameterEntity<Intege
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

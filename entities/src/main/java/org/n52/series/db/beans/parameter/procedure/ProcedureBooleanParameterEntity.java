@@ -27,7 +27,7 @@ public class ProcedureBooleanParameterEntity extends ProcedureParameterEntity<Bo
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

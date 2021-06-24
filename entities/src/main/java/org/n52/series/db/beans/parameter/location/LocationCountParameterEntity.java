@@ -26,7 +26,7 @@ public class LocationCountParameterEntity extends LocationParameterEntity<Intege
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

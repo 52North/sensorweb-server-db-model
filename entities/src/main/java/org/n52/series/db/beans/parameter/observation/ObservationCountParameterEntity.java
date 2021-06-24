@@ -27,7 +27,7 @@ public class ObservationCountParameterEntity extends ObservationParameterEntity<
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

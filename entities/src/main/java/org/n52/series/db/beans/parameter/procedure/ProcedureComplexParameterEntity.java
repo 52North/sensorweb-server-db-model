@@ -16,7 +16,6 @@
 package org.n52.series.db.beans.parameter.procedure;
 
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
@@ -28,7 +27,7 @@ public class ProcedureComplexParameterEntity extends ProcedureParameterEntity<Se
 
     @Override
     public Set<ProcedureParameterEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
+        return super.getValue();
     }
 
     @Override

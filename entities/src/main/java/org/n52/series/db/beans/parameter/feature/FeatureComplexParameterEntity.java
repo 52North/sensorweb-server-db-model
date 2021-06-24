@@ -16,7 +16,6 @@
 package org.n52.series.db.beans.parameter.feature;
 
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
@@ -28,7 +27,7 @@ public class FeatureComplexParameterEntity extends FeatureParameterEntity<Set<Fe
 
     @Override
     public Set<FeatureParameterEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
+        return super.getValue();
     }
 
     @Override

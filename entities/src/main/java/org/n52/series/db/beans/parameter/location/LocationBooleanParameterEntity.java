@@ -27,7 +27,7 @@ public class LocationBooleanParameterEntity extends LocationParameterEntity<Bool
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }

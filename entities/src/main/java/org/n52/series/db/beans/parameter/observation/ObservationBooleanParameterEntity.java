@@ -27,7 +27,7 @@ public class ObservationBooleanParameterEntity extends ObservationParameterEntit
 
     @Override
     public String getValueAsString() {
-        return getValue().toString();
+        return isSetValue() ? getValue().toString() : null;
     }
 
 }
