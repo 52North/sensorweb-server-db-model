@@ -366,6 +366,9 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public String getLabelFrom(final String locale) {
+        if (isSetName()) {
+            super.getLabelFrom(locale);
+        }
         final StringBuilder sb = new StringBuilder();
         sb.append(phenomenon.getLabelFrom(locale)).append(" ");
         sb.append(procedure.getLabelFrom(locale)).append(", ");
