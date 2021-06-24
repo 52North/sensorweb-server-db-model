@@ -48,7 +48,12 @@
                 <comment>A short description of the phenomenon</comment>
             </column>
         </property>
-
+        <set name="datasets" table="dataset" inverse="true" lazy="true">
+            <key foreign-key="fk_dataset_phenomenon">
+                <column name="fk_phenomenon_id" not-null="true"/>
+            </key>
+            <one-to-many class="DatasetEntity" />
+        </set>
         <set name="parents" table="composite_phenomenon" inverse="false">
             <comment>Storage of hierarchies between phenomenon, e.g. for composite phenomenon like weather with temperature, windspeed, ...</comment>
             <key foreign-key="fk_phenomenon_child">
@@ -71,14 +76,14 @@
                 <column name="fk_child_phenomenon_id" not-null="true" index="idx_phenomenon_child_phenomenon"/>
             </many-to-many>
         </set>
-        <set name="parameters" table="phenomenon_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="phenomenon_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
             <key foreign-key="fk_phenomenon_parameter">
                 <column name="fk_phenomenon_id" not-null="true"/>
             </key>
             <one-to-many class="org.n52.series.db.beans.parameter.phenomenon.PhenomenonParameterEntity" />
         </set>
         <!-- Comments for the translations are defined below! -->
-        <set name="translations" table="phenomenon_i18n" inverse="true" fetch="select">
+        <set name="translations" table="phenomenon_i18n" inverse="false" fetch="select" cascade="all">
              <key column="fk_phenomenon_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nPhenomenonEntity" />
         </set>
@@ -95,7 +100,7 @@
                 <param name="sequence_name">phenomenon_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="PhenomenonEntity" foreign-key="fk_phenomenon">
+        <many-to-one name="entity" class="PhenomenonEntity" foreign-key="fk_phenomenon" insert="false" update="false">
             <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_i18n_phenomenon">
                 <comment>Reference to the phenomenon table this internationalization belongs to.</comment>
             </column>

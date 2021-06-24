@@ -99,16 +99,14 @@
             <key column="fk_parent_feature_id" not-null="true" foreign-key="fk_feature_parent" />
             <many-to-many class="AbstractFeatureEntity" column="fk_child_feature_id" foreign-key="fk_feature_child"/>
         </set>
-
-        <set name="parameters" table="feature_parameter" inverse="true" lazy="true" cascade="delete-orphan">
+        <set name="parameters" table="feature_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
             <key foreign-key="fk_feature_parameter">
                 <column name="fk_feature_id" not-null="true"/>
             </key>
             <one-to-many class="org.n52.series.db.beans.parameter.feature.FeatureParameterEntity" />
         </set>
-
         <!-- Comments for the translations are defined below! -->
-        <set name="translations" table="feature_i18n" inverse="true" fetch="select">
+        <set name="translations" table="feature_i18n" inverse="false" fetch="select" cascade="all">
             <key column="fk_feature_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nFeatureEntity" />
         </set>
@@ -135,7 +133,7 @@
                 <param name="sequence_name">feature_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature">
+        <many-to-one name="entity" class="FeatureEntity" foreign-key="fk_feature" insert="false" update="false">
             <column name="fk_feature_id" not-null="true" index="idx_feature_i18n_feature">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>

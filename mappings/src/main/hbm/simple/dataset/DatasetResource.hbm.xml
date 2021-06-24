@@ -206,7 +206,7 @@
                     </column>
                 </many-to-many>
             </set>
-            <set name="translations" table="dataset_i18n" inverse="true" fetch="select" cascade="remove">
+            <set name="translations" table="dataset_i18n" inverse="false" fetch="select" cascade="all">
                 <key column="fk_dataset_id" not-null="true"/>
                 <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity"/>
             </set>
@@ -222,7 +222,7 @@
                 <param name="sequence_name">dataset_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="AbstractDatasetEntity" foreign-key="fk_dataset_i18n">
+        <many-to-one name="entity" class="AbstractDatasetEntity" foreign-key="fk_dataset_i18n" insert="false" update="false">
             <column name="fk_dataset_id" not-null="true" index="idx_dataset_i18n_dataset">
                 <comment>Reference to the dataset table this internationalization belongs to.</comment>
             </column>
