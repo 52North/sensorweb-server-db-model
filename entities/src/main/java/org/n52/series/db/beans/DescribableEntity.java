@@ -152,18 +152,22 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
 
     @Override
     public void addParameters(Set<ParameterEntity<?>> parameters) {
-        if (getParameters() == null) {
-            setParameters(new LinkedHashSet<>());
+        if (parameters != null) {
+            if (this.getParameters() == null) {
+                setParameters(new LinkedHashSet<>());
+            }
+            this.getParameters().addAll(parameters);
         }
-        this.parameters.addAll(parameters);
     }
 
     @Override
     public void addParameter(ParameterEntity<?> parameter) {
-        if (getParameters() == null) {
-            setParameters(new LinkedHashSet<>());
+        if (parameter != null) {
+            if (this.getParameters() == null) {
+                setParameters(new LinkedHashSet<>());
+            }
+            this.getParameters().add(parameter);
         }
-        this.parameters.add(parameter);
     }
 
     @Override
