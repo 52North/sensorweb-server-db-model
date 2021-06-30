@@ -28,12 +28,12 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
         HasProcedureDescriptionFormat, HasGeometry, HibernateRelations.HasAbstractDatasets, IsStaEntity {
 
     public static final String PROPERTY_REFERENCE = "reference";
+    public static final String PROPERTY_AGGRAGATION = "aggregation";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "format";
     public static final String PROPERTY_DESCRIPTION_FILE = "descriptionFile";
 
     private static final long serialVersionUID = 4028002933920185756L;
-
     private boolean reference;
 
     private FormatEntity format;
