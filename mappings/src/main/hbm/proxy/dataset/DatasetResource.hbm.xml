@@ -67,7 +67,7 @@
                 <comment>Reference to the service this dataset belongs to.</comment>
             </column>
         </many-to-one>
-		    <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
+		<many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
             <column name="fk_procedure_id"  not-null="true" index="idx_dataset_procedure">
                 <comment>Reference to the procedure that belongs that belongs to this dataset.</comment>
             </column>
@@ -219,7 +219,7 @@
                     <comment>Number of decimals that should be present in the output of the observation values. If no value is set, all decimals would be present.</comment>
                 </column>
             </property>
-            <list name="referenceValues" table="dataset_reference" inverse="false">
+            <list name="referenceValues" table="dataset_reference" inverse="false" lazy="true" cascade="all">
                 <comment>Storage of reference datasets, e.g. level zero, medium water level,etc. for water level.</comment>
                 <key not-null="true" foreign-key="fk_dataset_reference_from">
                     <column name="fk_dataset_id_from">

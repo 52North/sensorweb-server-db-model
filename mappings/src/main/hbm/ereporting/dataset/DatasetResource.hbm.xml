@@ -214,7 +214,7 @@
                     <comment>Number of decimals that should be present in the output of the observation values. If no value is set, all decimals would be present.</comment>
                 </column>
             </property>
-            <list name="referenceValues" table="dataset_reference" inverse="false">
+            <list name="referenceValues" table="dataset_reference" inverse="false" lazy="true" cascade="all">
                 <comment>Storage of reference datasets, e.g. level zero, medium water level,etc. for water level.</comment>
                 <key not-null="true" foreign-key="fk_dataset_reference_from">
                     <column name="fk_dataset_id_from">
