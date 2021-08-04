@@ -348,4 +348,32 @@
             </column>
         </property>
     </class>
+    <database-object>
+        <create>CREATE INDEX idx_observation_ds_sts ON ${schema}.observation USING btree (fk_dataset_id, sampling_time_start)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE INDEX idx_observation_sts_ds ON ${schema}.observation USING btree (sampling_time_start, fk_dataset_id)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE INDEX idx_observation_ds_ste ON ${schema}.observation USING btree (fk_dataset_id, sampling_time_end)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE INDEX idx_observation_ste_ds ON ${schema}.observation USING btree (sampling_time_end, fk_dataset_id)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
 </hibernate-mapping>
