@@ -17,6 +17,9 @@ package org.n52.series.db.beans;
 
 import java.math.BigDecimal;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DetectionLimitEntity {
 
     private Short flag;

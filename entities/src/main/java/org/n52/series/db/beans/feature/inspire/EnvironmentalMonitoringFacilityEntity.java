@@ -17,6 +17,9 @@ package org.n52.series.db.beans.feature.inspire;
 
 import org.n52.series.db.beans.FeatureEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class EnvironmentalMonitoringFacilityEntity extends FeatureEntity {
 
     private static final long serialVersionUID = -6086090544397897675L;

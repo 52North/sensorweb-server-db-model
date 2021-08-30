@@ -21,6 +21,9 @@ import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class SpecimenEntity extends FeatureEntity {
 
     private static final long serialVersionUID = -1128862083434595324L;

@@ -21,6 +21,9 @@ import java.util.Collection;
 import org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity;
 import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class MonitoringPointContent {
 
     /* 0..* */

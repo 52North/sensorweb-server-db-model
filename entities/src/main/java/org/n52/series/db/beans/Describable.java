@@ -17,9 +17,9 @@ package org.n52.series.db.beans;
 
 import java.util.List;
 import java.util.Locale;
+import java.util.Locale.LanguageRange;
 import java.util.Map;
 import java.util.Set;
-import java.util.Locale.LanguageRange;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.HibernateRelations.HasId;

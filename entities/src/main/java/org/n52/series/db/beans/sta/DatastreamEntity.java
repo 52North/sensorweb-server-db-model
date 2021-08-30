@@ -36,10 +36,13 @@ import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatastreamEntity extends StaDescribableEntity
         implements Serializable, HasObservationType<DatastreamEntity>, HasObservableProperty<DatastreamEntity>,
         HasPhenomenonTime, HasUnit, HasProcedure<DatastreamEntity>, HasGeometry<DatastreamEntity> {

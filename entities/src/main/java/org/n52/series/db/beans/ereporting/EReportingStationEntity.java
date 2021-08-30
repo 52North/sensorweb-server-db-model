@@ -20,12 +20,15 @@ import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Entity for AQD e-Reporting Station
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class EReportingStationEntity extends DescribableEntity implements HasGeometry<EReportingStationEntity> {
 
     private static final long serialVersionUID = 743675189477493870L;

@@ -42,6 +42,9 @@ import org.n52.hibernate.spatial.dialect.oracle.TimestampWithTimeZoneOracleSpati
 import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
 import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractGenerator {
 
     protected static final String NEW_LINE = "\n";

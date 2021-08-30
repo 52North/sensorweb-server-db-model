@@ -19,6 +19,9 @@ import java.util.Set;
 
 import org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalMetadataEntity extends IdEntity {
 
     public static final String PROPERTY_VERTICAL_UNIT = "verticalUnit";

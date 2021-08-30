@@ -19,6 +19,9 @@ import java.util.Objects;
 
 import org.n52.series.db.beans.IdEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractI18nEntity<T extends IdEntity> extends IdEntity {
 
     public static final String PROPERTY_LOCALE = "locale";

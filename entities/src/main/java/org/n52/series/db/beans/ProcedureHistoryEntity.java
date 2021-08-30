@@ -23,9 +23,12 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProcedureHistoryEntity extends IdEntity implements Serializable, HasProcedure<ProcedureHistoryEntity>,
         HasProcedureDescriptionFormat<ProcedureHistoryEntity>, HasXml<ProcedureHistoryEntity> {
 

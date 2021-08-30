@@ -31,6 +31,9 @@ import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatasetEntity extends DescribableEntity implements Serializable {
 
     public static final String ENTITY_ALIAS = "dataset";
@@ -250,7 +253,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     }
 
     public boolean isSetOmObservationType() {
-        return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
+        return getOmObservationType() != null && getOmObservationType().isSetFormat();
     }
 
     public Date getFirstValueAt() {
@@ -433,7 +436,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     }
 
     public boolean isSetOmObservationtype() {
-        return (getOmObservationType() != null) && getOmObservationType().isSetFormat();
+        return getOmObservationType() != null && getOmObservationType().isSetFormat();
     }
 
     public boolean isMobile() {
@@ -477,7 +480,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     }
 
     public boolean hasRelatedDatasets() {
-        return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
+        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
     }
 
     public VerticalMetadataEntity getVerticalMetadata() {

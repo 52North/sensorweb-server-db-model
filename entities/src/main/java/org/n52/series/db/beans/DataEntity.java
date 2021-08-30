@@ -34,6 +34,9 @@ import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
         HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime<DataEntity<T>>, HasParameters, HasDataset {
 
@@ -180,7 +183,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean isSetGeometryEntity() {
-        return (geometryEntity != null) && !geometryEntity.isEmpty();
+        return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
@@ -277,7 +280,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasRelatedObservations() {
-        return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
+        return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
     }
 
     public String getValueIdentifier() {
@@ -289,7 +292,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasValueIdentifier() {
-        return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
+        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
     }
 
     public String getValueName() {
@@ -301,7 +304,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasValueName() {
-        return (getValueName() != null) && !getValueName().isEmpty();
+        return getValueName() != null && !getValueName().isEmpty();
     }
 
     public String getValueDescription() {
@@ -313,7 +316,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     public boolean hasValueDescription() {
-        return (getValueDescription() != null) && !getValueDescription().isEmpty();
+        return getValueDescription() != null && !getValueDescription().isEmpty();
     }
 
     public boolean hasVerticalInterval() {

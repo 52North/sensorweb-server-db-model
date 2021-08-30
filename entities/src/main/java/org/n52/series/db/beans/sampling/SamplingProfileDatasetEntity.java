@@ -19,6 +19,9 @@ import java.io.Serializable;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class SamplingProfileDatasetEntity implements Serializable {
 
     public static final String PROPERTY_SAMPLINGS = "samplings";

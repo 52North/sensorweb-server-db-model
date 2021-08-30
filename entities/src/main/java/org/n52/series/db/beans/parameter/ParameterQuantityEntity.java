@@ -18,9 +18,12 @@ package org.n52.series.db.beans.parameter;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.HibernateRelations.HasUnit;
+import org.n52.series.db.beans.UnitEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ParameterQuantityEntity extends ParameterEntity<BigDecimal> implements HasUnit {
 
     private static final long serialVersionUID = 7528516075676290716L;
