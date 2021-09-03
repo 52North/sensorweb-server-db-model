@@ -59,8 +59,8 @@
         <hamcrest.version>2.2</hamcrest.version>
         <geotools.version>25.2</geotools.version>
         <geolatte.version>1.8.2</geolatte.version>
-        <hibernate.version>5.4.32.Final</hibernate.version>
-        <spring-boot.version>2.5.3</spring-boot.version>
+        <hibernate.version>5.5.7.Final</hibernate.version>
+        <spring-boot.version>2.5.4</spring-boot.version>
         <javax.version>8.0.1</javax.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -127,7 +127,7 @@
             <dependency>
                 <groupId>com.neovisionaries</groupId>
                 <artifactId>nv-i18n</artifactId>
-                <version>1.28</version>
+                <version>1.29</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
@@ -233,7 +233,7 @@
             <dependency>
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.18.1</version>
+                <version>1.18.2</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->
