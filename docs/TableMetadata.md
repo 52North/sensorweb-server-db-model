@@ -11,9 +11,6 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 - [dataset_i18n](#dataset_i18n)
 - [dataset_parameter](#dataset_parameter)
 - [dataset_reference](#dataset_reference)
-- [datastream](#datastream)
-- [datastream_dataset](#datastream_dataset)
-- [datastream_i18n](#datastream_i18n)
 - [feature](#feature)
 - [feature_hierarchy](#feature_hierarchy)
 - [feature_i18n](#feature_i18n)
@@ -23,6 +20,7 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 - [location](#location)
 - [location_historical_location](#location_historical_location)
 - [location_i18n](#location_i18n)
+- [location_parameter](#location_parameter)
 - [measuring_program](#measuring_program)
 - [measuring_program_dataset](#measuring_program_dataset)
 - [measuring_program_i18n](#measuring_program_i18n)
@@ -35,16 +33,18 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 - [offering_i18n](#offering_i18n)
 - [offering_observation_type](#offering_observation_type)
 - [offering_related_feature](#offering_related_feature)
-- [parameter](#parameter)
 - [phenomenon](#phenomenon)
 - [phenomenon_i18n](#phenomenon_i18n)
+- [phenomenon_parameter](#phenomenon_parameter)
 - [platform](#platform)
 - [platform_i18n](#platform_i18n)
+- [platform_location](#platform_location)
 - [platform_parameter](#platform_parameter)
 - [procedure](#procedure)
 - [procedure_hierarchy](#procedure_hierarchy)
 - [procedure_history](#procedure_history)
 - [procedure_i18n](#procedure_i18n)
+- [procedure_parameter](#procedure_parameter)
 - [related_dataset](#related_dataset)
 - [related_feature](#related_feature)
 - [related_observation](#related_observation)
@@ -52,7 +52,9 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 - [sampling](#sampling)
 - [sampling_dataset](#sampling_dataset)
 - [sampling_i18n](#sampling_i18n)
-- [thing_location](#thing_location)
+- [tag](#tag)
+- [tag_dataset](#tag_dataset)
+- [tag_i18n](#tag_i18n)
 - [unit](#unit)
 - [unit_i18n](#unit_i18n)
 - [value_blob](#value_blob)
@@ -110,37 +112,44 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
 | dataset_id | PK column of the table | true | - | int8 | long | 
-| dataset_type | Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations). | true | 'not_initialized' | varchar(255) | org.hibernate.type.EnumType | 
-| observation_type | Indicator whether the dataset observations are of type simple (a simple observation, e.g. a scalar value like the temperature) or profile (profile observations) | true | 'not_initialized' | varchar(255) | org.hibernate.type.EnumType | 
-| value_type | Indicator of the type of the single values. Valid values are quantity (scalar values), count (integer values), text (textual values), category (categorical values), bool (boolean values), reference (references, e.g. link to a source, photo, video) | true | 'not_initialized' | varchar(255) | org.hibernate.type.EnumType | 
+| discriminator | Indicator used by Hibernate to distinguish between different types of datasets. Used e.g. for STA DatasetAggregations. | false | - | varchar(255) | string | 
+| identifier | Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS and can be encoded in WaterML 2.0 oder TimeseriesML 1.0 outputs. | false | - | varchar(255) | string | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | false | - | varchar(255) | string | 
+| name | The human readable name of the dataset. | false | - | varchar(255) | string | 
+| description | A short description of the dataset | false | - | text | text | 
+| first_time | The timestamp of the temporally first observation that belongs to this dataset. | false | - | timestamp with time zone | timestamp | 
+| last_time | The timestamp of the temporally last observation that belongs to this dataset. | false | - | timestamp with time zone | timestamp | 
+| result_time_start | The timestamp of the earliest result time of the observations that belong to this dataset. | false | - | timestamp with time zone | timestamp | 
+| result_time_end | The timestamp of the latest result time of the observations that belong to this dataset. | false | - | timestamp with time zone | timestamp | 
+| observed_area | - | false | - | GEOMETRY | jts_geometry | 
 | fk_procedure_id | Reference to the procedure that belongs that belongs to this dataset. | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
 | fk_phenomenon_id | Reference to the phenomenon that belongs that belongs to this dataset. | true | - | int8 | org.n52.series.db.beans.PhenomenonEntity | 
 | fk_offering_id | Reference to the offering that belongs that belongs to this dataset. | true | - | int8 | org.n52.series.db.beans.OfferingEntity | 
 | fk_category_id | Reference to the category that belongs that belongs to this dataset. | true | - | int8 | org.n52.series.db.beans.CategoryEntity | 
 | fk_feature_id | Reference to the feature that belongs that belongs to this dataset. | false | - | int8 | org.n52.series.db.beans.FeatureEntity | 
 | fk_platform_id | Reference to the platform that belongs that belongs to this dataset. | false | - | int8 | org.n52.series.db.beans.PlatformEntity | 
-| fk_format_id | Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset. | false | - | int8 | org.n52.series.db.beans.FormatEntity | 
 | fk_unit_id | Reference to the unit of the observations that belongs to this dataset. | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
-| is_deleted | Flag that indicates if this dataset is deleted | true | 0 | int2 | small_boolean | 
-| is_disabled | Flag that indicates if this dataset is disabled for insertion of new data | true | 0 | int2 | small_boolean | 
-| is_published | Flag that indicates if this dataset should be published | true | 1 | int2 | small_boolean | 
-| is_mobile | Flag that indicates if the procedure is mobile (1/true) or stationary (0/false). | false | 0 | int2 | small_boolean | 
-| is_insitu | Flag that indicates if the procedure is insitu (1/true) or remote (0/false). | false | 1 | int2 | small_boolean | 
-| is_hidden | Flag that indicates if this dataset should be hidden, e.g. for sub-datasets of a complex datasets | true | 0 | int2 | small_boolean | 
-| origin_timezone | Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin). It no time zone is defined, UTC would be used as default. | false | - | varchar(40) | string | 
-| first_time | The timestamp of the temporally first observation that belongs to this dataset. | false | - | timestamp with time zone | timestamp | 
-| last_time | The timestamp of the temporally last observation that belongs to this dataset. | false | - | timestamp with time zone | timestamp | 
+| fk_format_id | Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset. | false | - | int8 | org.n52.series.db.beans.FormatEntity | 
+| fk_aggregation_id | Reference to the aggregation if this dataset belongs to one. | false | - | int8 | org.n52.series.db.beans.AbstractDatasetEntity | 
 | first_value | The value of the temporally first observation that belongs to this dataset. | false | - | numeric(20, 10) | big_decimal | 
 | last_value | The value of the temporally last quantity observation that belongs to this dataset. | false | - | numeric(20, 10) | big_decimal | 
 | fk_first_observation_id | Reference to the temporally first observation in the observation table that belongs to this dataset. | false | - | int8 | org.n52.series.db.beans.DataEntity | 
 | fk_last_observation_id | Reference to the temporally last observation in the observation table that belongs to this dataset. | false | - | int8 | org.n52.series.db.beans.DataEntity | 
+| dataset_type | Indicator whether the dataset provides individualObservation (individual observations), timeseries (timeseries obervations) or trajectories (trajectory observations). | true | 'not_initialized' | varchar(255) | org.hibernate.type.EnumType | 
+| observation_type | Indicator whether the dataset observations are of type simple (a simple observation, e.g. a scalar value like the temperature) or profile (profile observations) | true | 'not_initialized' | varchar(255) | org.hibernate.type.EnumType | 
+| value_type | Indicator of the type of the single values. Valid values are quantity (scalar values), count (integer values), text (textual values), category (categorical values), bool (boolean values), reference (references, e.g. link to a source, photo, video) | true | 'not_initialized' | varchar(255) | org.hibernate.type.EnumType | 
+| is_deleted | Flag that indicates if this dataset is deleted | true | 0 | int2 | small_boolean | 
+| is_disabled | Flag that indicates if this dataset is disabled for insertion of new data | true | 0 | int2 | small_boolean | 
+| is_published | Flag that indicates if this dataset should be published | true | 1 | int2 | small_boolean | 
+| is_mobile | Flag that indicates if the procedure is mobile (1/true) or stationary (0/false). | true | 0 | int2 | small_boolean | 
+| is_insitu | Flag that indicates if the procedure is insitu (1/true) or remote (0/false). | true | 1 | int2 | small_boolean | 
+| is_hidden | Flag that indicates if this dataset should be hidden, e.g. for sub-datasets of a complex datasets | true | 0 | int2 | small_boolean | 
+| origin_timezone | Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id (CET) or full name (Europe/Berlin). It no time zone is defined, UTC would be used as default. | false | - | varchar(40) | string | 
 | decimals | Number of decimals that should be present in the output of the observation values. If no value is set, all decimals would be present. | false | - | int4 | integer | 
-| identifier | Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS and can be encoded in WaterML 2.0 oder TimeseriesML 1.0 outputs. | false | - | varchar(255) | string | 
 | fk_identifier_codespace_id | The codespace of the dataset identifier, reference to the codespace table. Can be null. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
-| name | The human readable name of the dataset. | false | - | varchar(255) | string | 
 | fk_name_codespace_id | The codespace of the dataset name, reference to the codespace table. Can be null. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
-| description | A short description of the dataset | false | - | text | text | 
 | fk_value_profile_id | Reference to the vertical metadata that belongs to this profile dataset. | false | - | int8 | org.n52.series.db.beans.VerticalMetadataEntity | 
+| is_samplings | Flag that indicates if this dataset has samplings | true | 0 | int2 | small_boolean | 
 
 [top](#Tables)
 
@@ -150,7 +159,7 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
 | dataset_i18n_id | PK column of the table | true | - | int8 | long | 
-| fk_dataset_id | Reference to the dataset table this internationalization belongs to. | true | - | int8 | org.n52.series.db.beans.DatasetEntity | 
+| fk_dataset_id | Reference to the dataset table this internationalization belongs to. | true | - | int8 | org.n52.series.db.beans.AbstractDatasetEntity | 
 | locale | Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php) | true | - | varchar(255) | string | 
 | name | Locale/language specific name of the dataset entity | false | - | varchar(255) | string | 
 | description | Locale/language specific description of the dataset entity | false | - | text | text | 
@@ -158,12 +167,28 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 [top](#Tables)
 
 ### dataset_parameter
-**Description**: Storage of relations between dataset and related parameter
+**Description**: Storage for additional information for platforms
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| fk_dataset_id | The reference to the dataset in the dataset table | true | - | int8 | long | 
-| fk_parameter_id | The reference to the parameter in the dataset parameter | true | - | int8 | org.n52.series.db.beans.parameter.ParameterEntity | 
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_dataset_id | Reference to the Dataset this Parameter describes. | true | - | int8 | org.n52.series.db.beans.AbstractDatasetEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
 
 [top](#Tables)
 
@@ -178,52 +203,6 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 
 [top](#Tables)
 
-### datastream
-**Description**: -
-
-| column | comment | NOT-NULL | default | SQL type | Java type |
-| --- | --- | --- | --- | --- | --- |
-| datastream_id | - | true | - | int8 | long | 
-| identifier | Unique identifier of the datastream. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321. | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
-| name | - | true | - | varchar(255) | string | 
-| description | - | true | - | text | text | 
-| observed_area | - | false | - | GEOMETRY | jts_geometry | 
-| result_time_start | - | false | NULL | timestamp with time zone | timestamp | 
-| result_time_end | - | false | NULL | timestamp with time zone | timestamp | 
-| phenomenon_time_start | - | false | NULL | timestamp with time zone | timestamp | 
-| phenomenon_time_end | - | false | NULL | timestamp with time zone | timestamp | 
-| fk_format_id | - | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
-| fk_unit_id | - | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
-| fk_thing_id | - | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
-| fk_procedure_id | - | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
-| fk_phenomenon_id | - | true | - | int8 | org.n52.series.db.beans.PhenomenonEntity | 
-
-[top](#Tables)
-
-### datastream_dataset
-**Description**: -
-
-| column | comment | NOT-NULL | default | SQL type | Java type |
-| --- | --- | --- | --- | --- | --- |
-| fk_datastream_id | - | true | - | int8 | long | 
-| fk_dataset_id | - | true | - | int8 | org.n52.series.db.beans.DatasetEntity | 
-
-[top](#Tables)
-
-### datastream_i18n
-**Description**: -
-
-| column | comment | NOT-NULL | default | SQL type | Java type |
-| --- | --- | --- | --- | --- | --- |
-| datastream_i18n_id | PK column of the table | true | - | int8 | long | 
-| fk_datastream_id | Reference to the feature table this internationalization belongs to. | true | - | int8 | org.n52.series.db.beans.sta.DatastreamEntity | 
-| locale | Locale/language specification for this entry | true | - | varchar(255) | string | 
-| name | Locale/language specific name of the datastream | false | - | varchar(255) | string | 
-| description | Locale/language specific description of the datastream | false | - | text | text | 
-
-[top](#Tables)
-
 ### feature
 **Description**: Storage of the features (OfInterest). A feature represents the observed location, route, or area. As examples, the location of the weather station or the water level location, a ferry (Cuxhaven-Helgoland) or a lake of interest.
 
@@ -233,7 +212,7 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | discriminator | Indicator used by Hibernate to map value specific entities (e.g. of a WaterML 2.0 MonitoringPoint) which are stored in separate tables. | false | - | varchar(255) | string | 
 | fk_format_id | Reference to the featureType in the format table. Required by the SOS to identify the typ of the feature, e.g. http://www.opengis.net/def/samplingFeatureType/OGC-OM/2.0/SF_SamplingPoint. | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
 | identifier | Unique identifier of the feature which is used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321 | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
 | fk_identifier_codespace_id | The codespace of the feature identifier, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
 | name | The human readable name of the feature. | false | - | varchar(255) | string | 
 | fk_name_codespace_id | The codespace of the feature name, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
@@ -268,12 +247,28 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 [top](#Tables)
 
 ### feature_parameter
-**Description**: Storage of relations between feature and related parameter
+**Description**: Storage for additional information for platforms
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| fk_feature_id | The reference to the feature in the feature table | true | - | int8 | long | 
-| fk_parameter_id | The reference to the parameter in the feature parameter | true | - | int8 | org.n52.series.db.beans.parameter.ParameterEntity | 
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_feature_id | Reference to the Feature this Parameter describes. | true | - | int8 | org.n52.series.db.beans.AbstractFeatureEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
 
 [top](#Tables)
 
@@ -294,8 +289,8 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | --- | --- | --- | --- | --- | --- |
 | historical_location_id | - | true | - | int8 | long | 
 | identifier | Unique identifier of the HistoricalLocation. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321. | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
-| fk_thing_id | - | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
+| fk_platform_id | - | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
 | time | - | true | - | timestamp with time zone | timestamp | 
 
 [top](#Tables)
@@ -307,7 +302,7 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | --- | --- | --- | --- | --- | --- |
 | location_id | - | true | - | int8 | long | 
 | identifier | Unique identifier of the location. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321. | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
 | name | - | true | - | varchar(255) | string | 
 | description | - | true | - | text | text | 
 | location | - | false | - | text | text | 
@@ -337,6 +332,32 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | name | Locale/language specific name of the location | false | - | varchar(255) | string | 
 | description | Locale/language specific description of the location | false | - | text | text | 
 | location | Locale/language specific location property of the location | false | - | text | text | 
+
+[top](#Tables)
+
+### location_parameter
+**Description**: Storage for additional information for platforms
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_location_id | Reference to the Location this Parameter describes. | true | - | int8 | org.n52.series.db.beans.sta.LocationEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
 
 [top](#Tables)
 
@@ -388,9 +409,9 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | fk_dataset_id | Reference to the dataset to which this observation belongs. | true | - | int8 | org.n52.series.db.beans.DatasetEntity | 
 | sampling_time_start | The timestamp when the observation period has started or the observation took place. In the the latter, sampling_time_start and sampling_time_end are equal. | true | - | timestamp with time zone | timestamp | 
 | sampling_time_end | The timestamp when the measurement period has finished or the observation took place. In the the latter, sampling_time_start and sampling_time_end are equal. | true | - | timestamp with time zone | timestamp | 
-| result_time | The timestamp when the observation was published. Might be identical with sampling_time_start and sampling_time_end. | true | - | timestamp with time zone | timestamp | 
+| result_time | The timestamp when the observation was published. Might be identical with sampling_time_start and sampling_time_end. | false | - | timestamp with time zone | timestamp | 
 | identifier | Unique identifier of the observation which can be for used filtering, e.g. GetObservationById in the SOS. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321 | false | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
 | fk_identifier_codespace_id | The codespace of the data/observation identifier, reference to the codespace table. Can be null. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
 | name | The human readable name of the observation. | false | - | varchar(255) | string | 
 | fk_name_codespace_id | The codespace of the data/observation name, reference to the codespace table. Can be null. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
@@ -407,13 +428,13 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | fk_parent_observation_id | Reference to the parent observation in the case of complex observations like profiles, complex or swedataarray observations. | false | - | int8 | long | 
 | fk_sampling_id | The id of the sampling this observation belongs to. | false | - | int8 | org.n52.series.db.beans.sampling.SamplingEntity | 
 | value_quantity | The quantity value of an observation (Measurement) | false | - | numeric(20, 10) | big_decimal | 
+| value_text | The textual value of an observation (TextObservation)) | false | - | varchar(255) | string | 
+| value_count | The count/integer value of an observation (CountObservation) | false | - | int4 | integer | 
+| value_category | The categorical value of an observation (CategoryObervation) | false | - | varchar(255) | string | 
+| value_boolean | The boolean value of an observation (Boolean/TruthObservation) | false | - | int2 | small_boolean | 
 | detection_limit_flag | Flag that indicates if measured value lower/higher of the detection limit. | false | - | int2 | short | 
 | detection_limit | The detection limit | false | - | numeric(20, 10) | big_decimal | 
-| value_text | The textual value of an observation (TextObservation)) | false | - | varchar(255) | string | 
 | value_reference | The reference value (URI) of an observation (ReferenceObservation) | false | - | varchar(255) | string | 
-| value_count | The count/integer value of an observation (CountObservation) | false | - | int4 | integer | 
-| value_boolean | The boolean value of an observation (Boolean/TruthObservation) | false | - | int2 | small_boolean | 
-| value_category | The categorical value of an observation (CategoryObervation) | false | - | varchar(255) | string | 
 | value_geometry | The geometry value of an observation (GeometryObservation) | false | - | GEOMETRY | geolatte_geometry | 
 | value_array | The textual value of an observation (SweDataArrayObservation)) | false | - | text | text | 
 | fk_result_template_id | Reference to the result template which holds the structure and encoding. | false | - | int8 | org.n52.series.db.beans.ResultTemplateEntity | 
@@ -437,12 +458,28 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 [top](#Tables)
 
 ### observation_parameter
-**Description**: Storage of relations between data/observation and related parameter
+**Description**: Storage of relations between observation and related parameter
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| fk_observation_id | The reference to the data/observation in the observation table | true | - | int8 | long | 
-| fk_parameter_id | The reference to the parameter in the data/observation parameter | true | - | int8 | org.n52.series.db.beans.parameter.ParameterEntity | 
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_observation_id | Reference to the Observation this Parameter describes. | true | - | int8 | org.n52.series.db.beans.DataEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
 
 [top](#Tables)
 
@@ -520,35 +557,14 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 
 [top](#Tables)
 
-### parameter
-**Description**: Storage for additional information for features, observations or datasets
-
-| column | comment | NOT-NULL | default | SQL type | Java type |
-| --- | --- | --- | --- | --- | --- |
-| parameter_id | PK column of the table | true | - | int8 | long | 
-| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
-| name | The name of the parameter | true | - | varchar(255) | string | 
-| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
-| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
-| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
-| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
-| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
-| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
-| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
-| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
-| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
-| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
-
-[top](#Tables)
-
 ### phenomenon
 **Description**: Storage of the phenomenon/observableProperties, e.g. air temperature, water temperature, ...
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
 | phenomenon_id | PK column of the table | true | - | int8 | long | 
-| identifier | Unique identifier of the phenomenon which can be used for filtering. Should be a URI (reference to a vacabulary entry), UUID. E.g. http://www.example.org/123, 123-321 | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
+| identifier | Unique identifier of the phenomenon which can be used for filtering. Should be a URI (reference to a vocabulary entry), UUID. E.g. http://www.example.org/123, 123-321 | true | - | varchar(255) | string | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
 | fk_identifier_codespace_id | The codespace of the phenomenon identifier, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
 | name | The human readable name of the phenomenon. | false | - | varchar(255) | string | 
 | fk_name_codespace_id | The codespace of the phenomenon name, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
@@ -569,19 +585,44 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 
 [top](#Tables)
 
+### phenomenon_parameter
+**Description**: Storage for additional information for platforms
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_phenomenon_id | Reference to the Phenomenon this Parameter describes. | true | - | int8 | org.n52.series.db.beans.PhenomenonEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
+
+[top](#Tables)
+
 ### platform
-**Description**: Storage of the platforms. With a platform several procedures can be grouped or in the case of citizen science the platform can be the camera or mobile phone. An example of a platform is a vessel that has multiple sensors (Procedure). In most cases, the platform is the same as the feature or procedure, such as a weather station or a water level location.
+**Description**: Storage of the platforms. With a platform several procedures can be grouped or in the case of citizen science the platform can be the camera or mobile phone. An example of a platform is a vessel that has multiple sensors (Procedure). In most cases, the platform is the same as the platform or procedure, such as a weather station or a water level location.
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
 | platform_id | PK column of the table | true | - | int8 | long | 
 | identifier | Unique identifier of the platform which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321 | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
+| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
 | fk_identifier_codespace_id | The codespace of the platform identifier, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
 | name | The human readable name of the platform. | false | - | varchar(255) | string | 
 | fk_name_codespace_id | The codespace of the platform name, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
 | description | A short description of the platform | false | - | text | text | 
-| properties | - | false | - | text | text | 
 
 [top](#Tables)
 
@@ -591,50 +632,76 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
 | platform_i18n_id | PK column of the table | true | - | int8 | long | 
-| fk_platform_id | Reference to the feature table this internationalization belongs to. | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
+| fk_platform_id | Reference to the platform table this internationalization belongs to. | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
 | locale | Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php) | true | - | varchar(255) | string | 
 | name | Locale/language specific name of the platform | false | - | varchar(255) | string | 
 | description | Locale/language specific description of the platform | false | - | text | text | 
 
 [top](#Tables)
 
-### platform_parameter
-**Description**: Storage of relations between platform and related parameter
+### platform_location
+**Description**: -
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| fk_platform_id | The reference to the platform in the observation table | true | - | int8 | long | 
-| fk_parameter_id | The reference to the parameter in the platform parameter | true | - | int8 | org.n52.series.db.beans.parameter.ParameterEntity | 
+| fk_location_id | - | true | - | int8 | long | 
+| fk_platform_id | - | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
+
+[top](#Tables)
+
+### platform_parameter
+**Description**: Storage for additional information for platforms
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_platform_id | Reference to the Platform this Parameter describes. | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
 
 [top](#Tables)
 
 ### procedure
-**Description**: Storage of the procedure/sensors. The procedure can be a sensor, process/method or a system that produces observations.
+**Description**: -
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| procedure_id | PK column of the table | true | - | int8 | long | 
-| identifier | Unique identifier of the procedure which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321 | true | - | varchar(255) | string | 
-| sta_identifier | Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vacabulary entry), UUID. E.g. 123, 123-321 | true | - | varchar(255) | string | 
-| fk_identifier_codespace_id | The codespace of the procedure identifier, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
-| name | The human readable name of the procedure. | false | - | varchar(255) | string | 
-| fk_name_codespace_id | The codespace of the procedure name, reference to the codespace table. | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
-| description | A short description of the procedure | false | - | text | text | 
-| description_file | Location to or XML encoded description of the procedure. Can be used if procedure history is not supported. | false | - | text | text | 
-| is_reference | Flag that indicates if the procedure is a reference. | false | 0 | int2 | small_boolean | 
-| fk_type_of_procedure_id | Reference to a procedure this entry is a typeOf. | false | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
-| is_aggregation | Flag that indicates if the procedure is an aggregated process or a system. | false | 1 | int2 | small_boolean | 
-| fk_format_id | Reference to the format of the procedure description, e.g. SensorML 2.0 | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
+| procedure_id | - | true | - | int8 | long | 
+| identifier | - | true | - | varchar(255) | string | 
+| sta_identifier | - | true | - | varchar(255) | string | 
+| fk_identifier_codespace_id | - | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
+| name | - | false | - | varchar(255) | string | 
+| fk_name_codespace_id | - | false | - | int8 | org.n52.series.db.beans.CodespaceEntity | 
+| description | - | false | - | text | text | 
+| description_file | - | false | - | text | text | 
+| is_reference | - | true | 0 | int2 | small_boolean | 
+| fk_type_of_procedure_id | - | false | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
+| is_aggregation | - | true | 1 | int2 | small_boolean | 
+| fk_format_id | - | true | - | int8 | org.n52.series.db.beans.FormatEntity | 
 
 [top](#Tables)
 
 ### procedure_hierarchy
-**Description**: Storage of hierarchies between procedures
+**Description**: -
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| fk_child_procedure_id | Reference to the child procedure in procedure table. | true | - | int8 | long | 
-| fk_parent_procedure_id | Reference to the parent procedure in procedure table. | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
+| fk_child_procedure_id | - | true | - | int8 | long | 
+| fk_parent_procedure_id | - | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
 
 [top](#Tables)
 
@@ -653,17 +720,43 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 [top](#Tables)
 
 ### procedure_i18n
-**Description**: Storage for internationalizations of procedures.
+**Description**: -
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| procedure_i18n_id | PK column of the table | true | - | int8 | long | 
-| fk_procedure_id | Reference to the procedure table this internationalization belongs to. | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
-| locale | Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php) | true | - | varchar(255) | string | 
-| name | Locale/language specific name of the procedure | false | - | varchar(255) | string | 
-| description | Locale/language specific description of the procedure | false | - | text | text | 
-| short_name | Locale/language specific shortname of the procedure | false | - | varchar(255) | string | 
-| long_name | Locale/language specific longname of the procedure | false | - | varchar(255) | string | 
+| procedure_i18n_id | - | true | - | int8 | long | 
+| fk_procedure_id | - | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
+| locale | - | true | - | varchar(255) | string | 
+| name | - | false | - | varchar(255) | string | 
+| description | - | false | - | text | text | 
+| short_name | - | false | - | varchar(255) | string | 
+| long_name | - | false | - | varchar(255) | string | 
+
+[top](#Tables)
+
+### procedure_parameter
+**Description**: Storage for additional information for procedures
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| parameter_id | PK column of the table | true | - | int8 | long | 
+| type | Indicator used by Hibernate to map value specific entities. | true | - | varchar(255) | string | 
+| name | The name of the parameter | true | - | varchar(255) | string | 
+| description | A short description of the parameter | false | - | text | text | 
+| last_update | Timestamp that provides the time of the last modification of this entry | false | - | timestamp with time zone | timestamp | 
+| domain | The domain this parameter belongs to. | false | - | varchar(255) | string | 
+| fk_procedure_id | Reference to the Procedure this Parameter describes. | true | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
+| value_boolean | Storage of a boolean parameter value. | false | - | int2 | small_boolean | 
+| value_category | Storage of a categorical parameter value. | false | - | varchar(255) | string | 
+| fk_unit_id | Reference to the unit of this value in the unit table | false | - | int8 | org.n52.series.db.beans.UnitEntity | 
+| value_count | Storage of a count parameter value. | false | - | int4 | integer | 
+| value_quantity | Storage of a quantity parameter value. | false | - | numeric(19, 2) | big_decimal | 
+| value_text | Storage of a textual parameter value. | false | - | varchar(255) | string | 
+| value_xml | Storage of a XML encoded parameter value. | false | - | text | text | 
+| value_json | Storage of a JSON encoded parameter value. | false | - | text | text | 
+| value_temporal_from | Storage of a temporal from parameter value. | false | - | timestamp with time zone | timestamp | 
+| value_temporal_to | Storage of a temporal to parameter value. | false | - | timestamp with time zone | timestamp | 
+| fk_parent_parameter_id | Reference to the parent parameter | false | - | int8 | long | 
 
 [top](#Tables)
 
@@ -712,9 +805,12 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 | fk_phenomenon_id | The phenomenon that is associated with the result template | true | - | int8 | org.n52.series.db.beans.PhenomenonEntity | 
 | fk_procedure_id | The procedure that is associated with the result template. Can be null if the feature is defined in the structure. | false | - | int8 | org.n52.series.db.beans.ProcedureEntity | 
 | fk_feature_id | The feature that is associated with the result template. Can be null if the feature is defined in the structure. | false | - | int8 | org.n52.series.db.beans.AbstractFeatureEntity | 
+| fk_category_id | The category that is associated with the result template | true | - | int8 | org.n52.series.db.beans.CategoryEntity | 
 | identifier | Unique identifier of the result template used for insertion operation | true | - | varchar(255) | string | 
-| structure | The structure of the result template, should be a XML encoded swe:DataRecord | true | - | text | text | 
-| encoding | The encding of the result template, should be a XML encoded swe:TextEncoding | true | - | text | text | 
+| structure | The structure of the result template, should be a XML encoded swe:DataRecord | false | - | text | text | 
+| encoding | The encding of the result template, should be a XML encoded swe:TextEncoding | false | - | text | text | 
+| observation_structure | The structure of the result template used for observations, should be a XML encoded swe:DataRecord | false | - | text | text | 
+| observation_encoding | The encding of the result template used for observations, should be a XML encoded swe:TextEncoding | false | - | text | text | 
 
 [top](#Tables)
 
@@ -761,13 +857,37 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 
 [top](#Tables)
 
-### thing_location
-**Description**: -
+### tag
+**Description**: Storage of the tags which should be used to tag the data.
 
 | column | comment | NOT-NULL | default | SQL type | Java type |
 | --- | --- | --- | --- | --- | --- |
-| fk_location_id | - | true | - | int8 | long | 
-| fk_thing_id | - | true | - | int8 | org.n52.series.db.beans.PlatformEntity | 
+| tag_id | PK column of the table | true | - | int8 | long | 
+| identifier | Unique identifier/name of the tag which can be used for filtering. | false | - | varchar(255) | string | 
+| description | A short description of the tag | false | - | text | text | 
+
+[top](#Tables)
+
+### tag_dataset
+**Description**: Storage of relations between dataset and related tags
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| fk_tag_id | - | true | - | int8 | long | 
+| fk_dataset_id | - | true | - | int8 | org.n52.series.db.beans.DatasetEntity | 
+
+[top](#Tables)
+
+### tag_i18n
+**Description**: Storage for internationalizations of tags.
+
+| column | comment | NOT-NULL | default | SQL type | Java type |
+| --- | --- | --- | --- | --- | --- |
+| tag_i18n_id | PK column of the table | true | - | int8 | long | 
+| fk_tag_id | Reference to the tag table this internationalization belongs to. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php) | true | - | int8 | org.n52.series.db.beans.TagEntity | 
+| locale | Locale/language specification for this entry | true | - | varchar(255) | string | 
+| name | Locale/language specific name of the tag | false | - | varchar(255) | string | 
+| description | Locale/language specific description of the tag | false | - | text | text | 
 
 [top](#Tables)
 
@@ -834,4 +954,4 @@ The *SQL type* column in the tables is generated for Hibernate dialect: *Timesta
 [top](#Tables)
 
 
-*Creation date: 2020-05-13 11:45:46 +02:00*
+*Creation date: 2021-10-22 09:20:22 +02:00*

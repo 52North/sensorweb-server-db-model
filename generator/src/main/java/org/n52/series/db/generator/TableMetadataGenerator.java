@@ -99,7 +99,7 @@ public final class TableMetadataGenerator extends AbstractGenerator {
 
     private Path createFile(Path path) throws IOException {
         Files.deleteIfExists(path);
-        Files.createDirectories(path);
+        Files.createDirectories(path.getParent());
         return Files.createFile(path);
     }
 
