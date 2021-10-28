@@ -17,6 +17,7 @@
 package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.HasTags;
+import org.joda.time.DateTimeZone;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
@@ -43,7 +44,7 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
-
+    private static final String OFFSET_REGEX = "([+-](?:2[0-3]|[01][0-9]):[0-5][0-9])";
     private static final long serialVersionUID = -7491530543976690237L;
 
     private boolean published = true;
@@ -67,6 +68,8 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     private boolean insitu = true;
 
     private String originTimezone;
+
+    private DateTimeZone timeZone;
 
     private Set<RelatedDatasetEntity> relatedDatasets;
 
@@ -227,6 +230,21 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     public boolean isSetOriginTimezone() {
         return getOriginTimezone() != null && !getOriginTimezone().isEmpty();
+    }
+
+    public DateTimeZone getDateTimeZone() {
+        if (timeZone == null) {
+            if (originTimezone != null && !originTimezone.isEmpty()) {
+                if (originTimezone.matches(OFFSET_REGEX)) {
+                    this.timeZone =
+                            DateTimeZone.forTimeZone(TimeZone.getTimeZone(ZoneOffset.of(originTimezone).normalized()));
+                } else {
+                    this.timeZone = DateTimeZone.forID(originTimezone.trim());
+                }
+            }
+            this.timeZone = DateTimeZone.UTC;
+        }
+        return timeZone;
     }
 
     public Set<RelatedDatasetEntity> getRelatedDatasets() {
