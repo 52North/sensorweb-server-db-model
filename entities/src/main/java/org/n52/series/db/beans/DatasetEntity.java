@@ -18,12 +18,15 @@ package org.n52.series.db.beans;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.ZoneOffset;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+import org.joda.time.DateTimeZone;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
@@ -59,7 +62,7 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
-
+    private static final String OFFSET_REGEX = "([+-](?:2[0-3]|[01][0-9]):[0-5][0-9])";
     private static final long serialVersionUID = -7491530543976690237L;
 
     private PhenomenonEntity phenomenon;
@@ -113,6 +116,8 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
     private boolean insitu = true;
 
     private String originTimezone;
+
+    private DateTimeZone timeZone;
 
     private Set<RelatedDatasetEntity> relatedDatasets;
 
@@ -465,6 +470,21 @@ public class DatasetEntity extends DescribableEntity implements Serializable {
 
     public boolean isSetOriginTimezone() {
         return getOriginTimezone() != null && !getOriginTimezone().isEmpty();
+    }
+
+    public DateTimeZone getDateTimeZone() {
+        if (timeZone == null) {
+            if (originTimezone != null && !originTimezone.isEmpty()) {
+                if (originTimezone.matches(OFFSET_REGEX)) {
+                    this.timeZone =
+                            DateTimeZone.forTimeZone(TimeZone.getTimeZone(ZoneOffset.of(originTimezone).normalized()));
+                } else {
+                    this.timeZone = DateTimeZone.forID(originTimezone.trim());
+                }
+            }
+            this.timeZone = DateTimeZone.UTC;
+        }
+        return timeZone;
     }
 
     public Set<RelatedDatasetEntity> getRelatedDatasets() {
