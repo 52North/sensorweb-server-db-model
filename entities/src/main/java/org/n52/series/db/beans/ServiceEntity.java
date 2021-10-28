@@ -16,7 +16,10 @@
  */
 package org.n52.series.db.beans;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -43,6 +46,10 @@ public class ServiceEntity extends DescribableEntity {
 
     private ServiceMetadataEntity serviceMetadata;
 
+    private Collection<BigDecimal> quantityNoDataValues;
+
+    private Collection<Integer> countNoDataValues;
+
     public ServiceEntity() {
         noDataValues = Collections.emptyList();
     }
@@ -64,13 +71,11 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     public boolean isNoDataValue(DataEntity<?> observation) {
-        return observation.isNoDataValue(noDataValues) && !observation.hasDetectionLimit();
+        return !observation.hasDetectionLimit() && checkNoDataValue(observation);
     }
 
     public String getNoDataValues() {
-        // XXX make parsing more robust
-        final String csv = Arrays.toString(noDataValues.toArray(new Double[0]));
-        return csv.substring(1).substring(0, csv.length() - 2);
+        return String.join(",", noDataValues);
     }
 
     public void setNoDataValues(final String noDataValues) {
@@ -80,6 +85,8 @@ public class ServiceEntity extends DescribableEntity {
         } else {
             final String[] values = noDataValues.split(",");
             this.noDataValues = Arrays.asList(values);
+            this.quantityNoDataValues = convertToBigDecimal(this.noDataValues);
+            this.countNoDataValues = convertToIntegers(this.noDataValues);
         }
     }
 
@@ -117,6 +124,41 @@ public class ServiceEntity extends DescribableEntity {
 
     public boolean isSetServiceMetadata() {
         return getServiceMetadata() != null && getServiceMetadata().isSetMetadata();
+    }
+
+    private boolean checkNoDataValue(DataEntity<?> observation) {
+        if (observation instanceof QuantityDataEntity) {
+            return ((QuantityDataEntity) observation).checkNoDataValue(quantityNoDataValues);
+        } else if (observation instanceof CountDataEntity) {
+            return ((CountDataEntity) observation).checkNoDataValue(countNoDataValues);
+        }
+        return observation.isNoDataValue(noDataValues);
+    }
+
+    private Collection<BigDecimal> convertToBigDecimal(Collection<String> collection) {
+        List<BigDecimal> validatedValues = new ArrayList<>();
+        for (String value : collection) {
+            String trimmed = value.trim();
+            try {
+                validatedValues.add(new BigDecimal(trimmed));
+            } catch (NumberFormatException e) {
+                LOGGER.trace("Ignoring NO_DATA value {} (not a big decimal value).", trimmed);
+            }
+        }
+        return validatedValues;
+    }
+
+    private Collection<Integer> convertToIntegers(Collection<String> collection) {
+        List<Integer> validatedValues = new ArrayList<>();
+        for (String value : collection) {
+            String trimmed = value.trim();
+            try {
+                validatedValues.add(Integer.parseInt(trimmed));
+            } catch (NumberFormatException e) {
+                LOGGER.debug("Ignoring NO_DATA value {} (not an integer).", trimmed);
+            }
+        }
+        return validatedValues;
     }
 
     @Override
