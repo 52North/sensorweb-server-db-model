@@ -44,7 +44,7 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         Iterator<Column> columns = index.getColumnIterator();
         StringBuilder buf = new StringBuilder("create").append(" index ")
                 .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
-                .append(table.getQualifiedName(this, defaultCatalog, defaultSchema)).append(" USING GIST")
+                .append(table.getQualifiedTableName().render()).append(" USING GIST")
                 .append(" (");
         while (columns.hasNext()) {
             Column column = columns.next();
