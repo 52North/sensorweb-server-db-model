@@ -23,8 +23,10 @@ import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
 public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
