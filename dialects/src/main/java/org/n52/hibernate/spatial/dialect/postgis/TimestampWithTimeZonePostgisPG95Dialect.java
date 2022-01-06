@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2021 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -44,8 +44,7 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         Iterator<Column> columns = index.getColumnIterator();
         StringBuilder buf = new StringBuilder("create").append(" index ")
                 .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
-                .append(table.getQualifiedTableName().render()).append(" USING GIST")
-                .append(" (");
+                .append(table.getQualifiedTableName().render()).append(" USING GIST").append(" (");
         while (columns.hasNext()) {
             Column column = columns.next();
             buf.append(column.getQuotedName(this));
