@@ -16,12 +16,6 @@
 package org.n52.hibernate.spatial.dialect.postgis;
 
 import java.sql.Types;
-import java.util.Iterator;
-
-import org.hibernate.internal.util.StringHelper;
-import org.hibernate.mapping.Column;
-import org.hibernate.mapping.Index;
-import org.hibernate.mapping.Table;
 
 import org.hibernate.spatial.dialect.postgis.PostgisPG95Dialect;
 
@@ -34,25 +28,4 @@ public class TimestampWithTimeZonePostgisPG95Dialect extends PostgisPG95Dialect 
         registerColumnType(Types.TIMESTAMP, "timestamp with time zone");
     }
 
-    public String buildSqlCreateSpatialIndexString(Index index, String defaultCatalog, String defaultSchema) {
-        // http://postgis.net/docs/manual-2.0/using_postgis_dbmanagement.html#idp60795872
-        // CREATE INDEX [indexname] ON [tablename] USING GIST ( [geometryfield]
-        // );
-
-        String name = index.getName();
-        Table table = index.getTable();
-        Iterator<Column> columns = index.getColumnIterator();
-        StringBuilder buf = new StringBuilder("create").append(" index ")
-                .append(this.qualifyIndexName() ? name : StringHelper.unqualify(name)).append(" on ")
-                .append(table.getQualifiedTableName().render()).append(" USING GIST").append(" (");
-        while (columns.hasNext()) {
-            Column column = columns.next();
-            buf.append(column.getQuotedName(this));
-            if (columns.hasNext()) {
-                buf.append(", ");
-            }
-        }
-        buf.append(")");
-        return buf.toString();
-    }
 }

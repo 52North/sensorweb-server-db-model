@@ -46,4 +46,8 @@ public class TimestampMySQL57SpatialDialect extends MySQL56SpatialDialect {
         return super.getTypeName(code);
     }
 
+    @Override
+    public String getNullColumnString() {
+        return " NULL";
+    }
 }
