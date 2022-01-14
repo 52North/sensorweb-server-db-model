@@ -42,6 +42,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.n52.hibernate.type.SmallBooleanType;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Class to generate the create and drop scripts for different databases. Currently supported spatial
  * databases to create scripts
@@ -97,6 +99,7 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         System.out.println("The generated file was written to: " + Files.write(path, result).toAbsolutePath());
     }
 
+    @SuppressFBWarnings
     private Path createFile(Path path) throws IOException {
         Files.deleteIfExists(path);
         Files.createDirectories(path.getParent());
