@@ -26,5 +26,6 @@ public class TimestampWithTimeZoneGeoDBDialect extends GeoDBDialect {
     public TimestampWithTimeZoneGeoDBDialect() {
         super();
         registerColumnType(Types.TIMESTAMP, "timestamp with time zone");
+        registerColumnType(Types.LONGVARCHAR, "varchar(1048576)");
     }
 }
