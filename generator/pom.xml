@@ -16,7 +16,7 @@
         <version.ojdbc8>21.4.0.0.1</version.ojdbc8>
         <version.sqljdbc>8.2.2.jre8</version.sqljdbc>
         <version.mysql>8.0.20</version.mysql>
-        <version.h2>1.4.200</version.h2>
+        <version.h2>2.1.210</version.h2>
         <version.geodb>0.9</version.geodb>
     </properties>
 
