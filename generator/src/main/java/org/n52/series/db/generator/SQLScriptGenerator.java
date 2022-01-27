@@ -27,6 +27,7 @@ import java.util.Properties;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -125,13 +126,14 @@ public final class SQLScriptGenerator extends AbstractGenerator {
                 concept.name(), profile.name(), feature.name()));
         Dialect dia = getDialect(dialect, comments);
         Properties p = new Properties();
-        p.put("hibernate.dialect", dia.getClass().getName());
+        p.put(AvailableSettings.DIALECT, dia.getClass().getName());
         String fileNameCreate = createFileName("_create.sql", dialect, concept, profile, feature);
         String fileNameDrop = createFileName("_drop.sql", dialect, concept, profile, feature);
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {
-            p.put("hibernate.default_schema", schema);
+            p.put(AvailableSettings.DEFAULT_SCHEMA, schema);
+
         }
         configuration.addProperties(p);
         setDirectoriesForModelSelection(concept, profile, feature, configuration, null);
