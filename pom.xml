@@ -62,6 +62,14 @@
         <hibernate.version>5.6.5.Final</hibernate.version>
         <spring-boot.version>2.6.3</spring-boot.version>
         <javax.version>8.0.1</javax.version>
+        
+        <postgresql.version>42.2.12</postgresql.version>
+        <postgis.version>2.5.1</postgis.version>
+        <ojdbc8.version>21.4.0.0.1</ojdbc8.version>
+        <sqljdbc.version>8.2.2.jre8</sqljdbc.version>
+        <mysql.version>8.0.20</mysql.version>
+        <h2.version>2.1.210</h2.version>
+        <geodb.version>0.9</geodb.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
@@ -117,6 +125,48 @@
                 <artifactId>db-model-dialects</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <dependency>
+	            <groupId>org.postgresql</groupId>
+	            <artifactId>postgresql</artifactId>
+	            <version>${postgresql.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>net.postgis</groupId>
+	            <artifactId>postgis-jdbc</artifactId>
+	            <version>${postgis.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.oracle.database.jdbc</groupId>
+	            <artifactId>ojdbc8</artifactId>
+	            <version>${ojdbc8.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.microsoft.sqlserver</groupId>
+	            <artifactId>mssql-jdbc</artifactId>
+	            <version>${sqljdbc.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>mysql</groupId>
+	            <artifactId>mysql-connector-java</artifactId>
+	            <version>${mysql.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.h2database</groupId>
+	            <artifactId>h2</artifactId>
+	            <version>${h2.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opengeo</groupId>
+	            <artifactId>geodb</artifactId>
+	            <version>${geodb.version}</version>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>com.h2database</groupId>
+	                    <artifactId>h2</artifactId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
 
             <dependency>
                 <groupId>javax</groupId>
