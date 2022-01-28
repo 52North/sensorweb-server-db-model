@@ -135,6 +135,9 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             p.put(AvailableSettings.DEFAULT_SCHEMA, schema);
 
         }
+        if (dialect.equals(DialectSelector.POSTGIS) && (schema == null || schema.isEmpty())) {
+            p.put(AvailableSettings.DEFAULT_SCHEMA, PUBLIC);
+        }
         configuration.addProperties(p);
         setDirectoriesForModelSelection(concept, profile, feature, configuration, null);
         configuration.registerTypeOverride(SmallBooleanType.INSTANCE);

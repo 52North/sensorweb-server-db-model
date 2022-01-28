@@ -10,7 +10,7 @@
     <packaging>jar</packaging>
     <name>Sensor Web Server Database Model - Generator</name>
 
-    <dependencies>
+     <dependencies>
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>db-model-mappings</artifactId>
@@ -121,4 +121,3 @@
         </dependency>
     </dependencies>
 </project>
-
