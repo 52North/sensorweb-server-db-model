@@ -27,6 +27,7 @@ import java.util.Properties;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -130,7 +131,10 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {
-            p.put("hibernate.default_schema", schema);
+            p.put(AvailableSettings.DEFAULT_SCHEMA, schema);
+        }
+        if (dialect.equals(DialectSelector.POSTGIS) && (schema == null || schema.isEmpty())) {
+            p.put(AvailableSettings.DEFAULT_SCHEMA, PUBLIC);
         }
         configuration.addProperties(p);
         setDirectoriesForModelSelection(concept, profile, configuration, null);
