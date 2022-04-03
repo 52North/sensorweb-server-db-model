@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
+public class DatasetEntity extends Dataset implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
 

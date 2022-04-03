@@ -36,7 +36,7 @@
             </column>
         </property>
 
-        <many-to-one name="obsGroup" class="org.n52.series.db.beans.sta.ObservationGroupEntity"
+        <many-to-one name="obsGroup" class="org.n52.series.db.beans.sta.plus.GroupEntity"
                      foreign-key="fk_observationgroup_id">
             <column name="fk_observationgroup_id" not-null="true" index="idx_observationgroup_parameter">
                 <comment>Reference to the Observationgroup this Parameter describes.</comment>

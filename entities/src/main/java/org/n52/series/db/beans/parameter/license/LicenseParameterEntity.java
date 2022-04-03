@@ -18,7 +18,7 @@
 package org.n52.series.db.beans.parameter.license;
 
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.plus.LicenseEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>

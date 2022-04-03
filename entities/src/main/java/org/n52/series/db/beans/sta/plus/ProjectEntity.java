@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.sta;
+package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
+import org.n52.series.db.beans.sta.StaPlusDataset;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -42,51 +42,61 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "project_seq", allocationSize = 1)
 @Table(name = "project")
-public class ProjectEntity extends IdEntity
-        implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasDescription,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
+public class ProjectEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
+        HibernateRelations.HasDescription, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
 
-    public static final String PROPERTY_DATASTREAMS = "datasets";
+    public static final String PROPERTY_DATASTREAMS = "datastreams";
     public static final String PROPERTY_URL = "url";
-    public static final String PROPERTY_RUNTIME_START = "runtimeStart";
-    public static final String PROPERTY_RUNTIME_END = "runtimeEnd";
-    public static final String PROPERTY_CREATED_START = "createdStart";
-    public static final String PROPERTY_CREATED_END = "createdEnd";
+    public static final String PROPERTY_START_TIME = "startTime";
+    public static final String PROPERTY_END_TIME = "endTime";
+    public static final String PROPERTY_CREATION_TIME = "creationTime";
     public static final String PROPERTY_PRIVACY_POLICY = "privacyPolicy";
     public static final String PROPERTY_TERMS_OF_USE = "termsOfUse";
     public static final String PROPERTY_CLASSIFICATION = "classification";
+
     private static final long serialVersionUID = 1050625647937315126L;
+
     @Id
     @Column(nullable = false, name = "project_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "project_seq")
     private Long id;
+
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
+
     @Column(name = NAME, nullable = false)
     private String name;
+
     @Column(name = DESCRIPTION, nullable = false)
     private String description;
-    @Column(name = PROPERTY_RUNTIME_START, length = 29, nullable = true)
-    private Date runtimeStart;
-    @Column(name = PROPERTY_RUNTIME_END, length = 29, nullable = true)
-    private Date runtimeEnd;
-    @Column(name = PROPERTY_CREATED_START, length = 29, nullable = false)
-    private Date createdStart;
-    @Column(name = PROPERTY_CREATED_END, length = 29, nullable = false)
-    private Date createdEnd;
-    @Column(name = PROPERTY_PRIVACY_POLICY)
-    private String privacyPolicy;
-    @Column(name = PROPERTY_TERMS_OF_USE)
-    private String termsOfUse;
+
     @Column(name = PROPERTY_CLASSIFICATION)
     private String classification;
-    @Column(name = PROPERTY_URL)
+
+    @Column(name = PROPERTY_TERMS_OF_USE, nullable = false)
+    private String termsOfUse;
+
+    @Column(name = PROPERTY_PRIVACY_POLICY)
+    private String privacyPolicy;
+
+    @Column(name = PROPERTY_CREATION_TIME, length = 29, nullable = false)
+    private Date creationTime;
+
+    @Column(name = PROPERTY_START_TIME, length = 29, nullable = true)
+    private Date startTime;
+
+    @Column(name = PROPERTY_END_TIME, length = 29, nullable = true)
+    private Date endTime;
+
+    @Column(name = PROPERTY_URL, nullable = true)
     private String url;
-    @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PROJECT)
-    private Set<AbstractDatasetEntity> datasets;
+
+    @OneToMany(mappedBy = StaPlusDataset.PROPERTY_PROJECT)
+    private Set<StaPlusDataset> datastreams;
+
     @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
@@ -132,20 +142,20 @@ public class ProjectEntity extends IdEntity
         this.description = description;
     }
 
-    public Date getRuntimeStart() {
-        return runtimeStart != null ? new Date(runtimeStart.getTime()) : null;
+    public Date getStartTime() {
+        return startTime != null ? new Date(startTime.getTime()) : null;
     }
 
-    public void setRuntimeStart(Date runtimeStart) {
-        this.runtimeStart = runtimeStart != null ? new Date(runtimeStart.getTime()) : null;
+    public void setStartTime(Date runtimeStart) {
+        this.startTime = runtimeStart != null ? new Date(runtimeStart.getTime()) : null;
     }
 
-    public Date getRuntimeEnd() {
-        return runtimeEnd != null ? new Date(runtimeEnd.getTime()) : null;
+    public Date getEndTime() {
+        return endTime != null ? new Date(endTime.getTime()) : null;
     }
 
-    public void setRuntimeEnd(Date runtimeEnd) {
-        this.runtimeEnd = runtimeEnd != null ? new Date(runtimeEnd.getTime()) : null;
+    public void setEndTime(Date runtimeEnd) {
+        this.endTime = runtimeEnd != null ? new Date(runtimeEnd.getTime()) : null;
     }
 
     public String getUrl() {
@@ -156,14 +166,12 @@ public class ProjectEntity extends IdEntity
         this.url = url;
     }
 
-    @Override
-    public Set<AbstractDatasetEntity> getDatasets() {
-        return datasets;
+    public Set<StaPlusDataset> getDatastreams() {
+        return datastreams;
     }
 
-    @Override
-    public void setDatasets(Set<AbstractDatasetEntity> observations) {
-        this.datasets = observations;
+    public void setDatastreams(Set<StaPlusDataset> datasets) {
+        this.datastreams = datasets;
     }
 
     public String getPrivacyPolicy() {
@@ -216,19 +224,12 @@ public class ProjectEntity extends IdEntity
         this.parameters.add(parameter);
     }
 
-    public Date getCreatedStart() {
-        return createdStart;
+    public Date getCreationTime() {
+        return creationTime;
     }
 
-    public void setCreatedStart(Date createdStart) {
-        this.createdStart = createdStart;
+    public void setCreationTime(Date time) {
+        this.creationTime = time;
     }
 
-    public Date getCreatedEnd() {
-        return createdEnd;
-    }
-
-    public void setCreatedEnd(Date createdEnd) {
-        this.createdEnd = createdEnd;
-    }
 }

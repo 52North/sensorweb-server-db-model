@@ -36,7 +36,7 @@
             </column>
         </property>
 
-        <many-to-one name="license" class="org.n52.series.db.beans.sta.LicenseEntity"
+        <many-to-one name="license" class="org.n52.series.db.beans.sta.plus.LicenseEntity"
                      foreign-key="fk_license_id">
             <column name="fk_license_id" not-null="true" index="idx_license_parameter">
                 <comment>Reference to the License this Parameter describes.</comment>

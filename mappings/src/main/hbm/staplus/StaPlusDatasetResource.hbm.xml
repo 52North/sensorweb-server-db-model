@@ -3,7 +3,7 @@
                    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="AbstractDatasetEntity" table="dataset">
+    <class name="StaPlusDataset" table="dataset">
         <comment>Storage of the dataset, the core table of the whole database model.</comment>
         <id name="id" type="long">
             <column name="dataset_id">
@@ -108,17 +108,17 @@
                 <comment>Reference to the aggregation if this dataset belongs to one.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="org.n52.series.db.beans.sta.LicenseEntity" name="license" foreign-key="fk_dataset_license">
+        <many-to-one class="org.n52.series.db.beans.sta.plus.LicenseEntity" name="license" foreign-key="fk_dataset_license">
             <column name="fk_license_id"  not-null="false" index="idx_dataset_license">
                 <comment>Reference to the license that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="org.n52.series.db.beans.sta.ProjectEntity" name="project" foreign-key="fk_dataset_project">
+        <many-to-one class="org.n52.series.db.beans.sta.plus.ProjectEntity" name="project" foreign-key="fk_dataset_project">
             <column name="fk_project_id"  not-null="false" index="idx_dataset_project">
                 <comment>Reference to the project that belongs that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="org.n52.series.db.beans.sta.PartyEntity" name="party" foreign-key="fk_dataset_party">
+        <many-to-one class="org.n52.series.db.beans.sta.plus.PartyEntity" name="party" foreign-key="fk_dataset_party">
             <column name="fk_party_id"  not-null="false" index="idx_dataset_party">
                 <comment>Reference to the party that belongs that belongs to this dataset.</comment>
             </column>
@@ -150,15 +150,15 @@
             <one-to-many class="org.n52.series.db.beans.parameter.dataset.DatasetParameterEntity" />
         </set>
 
-        <subclass extends="AbstractDatasetEntity" name="org.n52.series.db.beans.DatasetAggregationEntity" discriminator-value="aggregation">
+        <subclass name="org.n52.series.db.beans.sta.plus.StaPlusDatasetAggregationEntity" extends="StaPlusDataset" discriminator-value="aggregation">
             <!-- All neede properties are already included in the AbstractDatasetEntity-->
             <set name="datasets" table="dataset">
                 <key column="fk_aggregation_id" not-null="false"/>
-                <one-to-many class="AbstractDatasetEntity" />
+                <one-to-many class="StaPlusAbstractDatasetEntity" />
             </set>
         </subclass>
 
-        <subclass extends="AbstractDatasetEntity" name="org.n52.series.db.beans.DatasetEntity" discriminator-value="null">
+        <subclass name="org.n52.series.db.beans.sta.plus.StaPlusDatasetEntity" extends="StaPlusDataset" discriminator-value="null">
             <property name="datasetType" index="idx_dataset_dataset_type">
                 <column name="dataset_type" scale="20" not-null="true" default="'not_initialized'"
                         check="dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', 'trajectory', 'not_initialized')">

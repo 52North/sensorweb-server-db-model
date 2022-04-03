@@ -40,7 +40,7 @@
             </column>
         </property>
 
-        <many-to-one name="party" class="org.n52.series.db.beans.sta.PartyEntity"
+        <many-to-one name="party" class="org.n52.series.db.beans.sta.plus.PartyEntity"
                      foreign-key="fk_param_party_id">
             <column name="fk_party_id" not-null="true" index="idx_party_parameter">
                 <comment>Reference to the Party this Parameter describes.</comment>

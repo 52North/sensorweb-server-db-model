@@ -106,10 +106,10 @@ import org.n52.series.db.beans.parameter.project.ProjectJsonParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectTextParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectXmlParameterEntity;
-import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.plus.LicenseEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
-import org.n52.series.db.beans.sta.ObservationGroupEntity;
-import org.n52.series.db.beans.sta.ProjectEntity;
+import org.n52.series.db.beans.sta.plus.GroupEntity;
+import org.n52.series.db.beans.sta.plus.ProjectEntity;
 
 /**
  * Denotes Classes that can create concrete parameter entities.
@@ -147,7 +147,7 @@ public class ParameterFactory {
             entityType = EntityType.LICENSE;
         } else if (entity instanceof ProjectEntity) {
             entityType = EntityType.PROJECT;
-        } else if (entity instanceof ObservationGroupEntity) {
+        } else if (entity instanceof GroupEntity) {
             entityType = EntityType.OBS_GROUP;
         }
         return entityType != null ? from(entityType, valueType) : null;

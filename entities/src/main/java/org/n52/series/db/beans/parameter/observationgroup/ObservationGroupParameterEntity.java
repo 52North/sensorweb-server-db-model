@@ -17,7 +17,7 @@
 package org.n52.series.db.beans.parameter.observationgroup;
 
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.ObservationGroupEntity;
+import org.n52.series.db.beans.sta.plus.GroupEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
@@ -27,14 +27,14 @@ public abstract class ObservationGroupParameterEntity<T> extends ParameterEntity
     public static final String PROP_OBS_GROUP = "obsGroup";
     public static final String PROP_OBS_GROUP_ID = "obsGroupId";
 
-    private ObservationGroupEntity obsGroup;
+    private GroupEntity obsGroup;
     private long obsGroupId;
 
-    public ObservationGroupEntity getObsGroup() {
+    public GroupEntity getObsGroup() {
         return obsGroup;
     }
 
-    public void setObsGroup(ObservationGroupEntity obsGroup) {
+    public void setObsGroup(GroupEntity obsGroup) {
         this.obsGroup = obsGroup;
     }
 
@@ -48,6 +48,6 @@ public abstract class ObservationGroupParameterEntity<T> extends ParameterEntity
 
     @Override
     public void setEntity(Object entity) {
-        setObsGroup((ObservationGroupEntity) entity);
+        setObsGroup((GroupEntity) entity);
     }
 }

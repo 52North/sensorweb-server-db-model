@@ -43,13 +43,13 @@
  * Public License for more details.
  */
 
-package org.n52.series.db.beans.sta;
+package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.party.PartyParameterEntity;
+import org.n52.series.db.beans.sta.StaPlusDataset;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -71,11 +71,11 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
 @Table(name = "party")
-public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasAbstractDatasets,
-        HibernateRelations.HasStaIdentifier, HibernateRelations.HasDescription, HibernateRelations.HasParameters {
+public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier,
+        HibernateRelations.HasDescription, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
-    public static final String PROPERTY_NICKNAME = "nickname";
+    public static final String PROPERTY_DISPLAY_NAME = "displayName";
     public static final String PROPERTY_ROLE = "role";
     public static final String PROPERTY_AUTH_ID = "authId";
     private static final long serialVersionUID = 5875256537419920242L;
@@ -89,24 +89,33 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
 
-    @Column(name = PROPERTY_AUTH_ID)
-    private String authId;
-
-    @Column(name = PROPERTY_NICKNAME)
-    private String nickname;
-
     @Column(name = PROPERTY_DESCRIPTION)
     private String description;
+
+    @Column(name = PROPERTY_AUTH_ID)
+    private String authId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = PROPERTY_ROLE, nullable = false)
     private Role role;
 
+    @Column(name = PROPERTY_DISPLAY_NAME)
+    private String displayName;
+
     @OneToMany(mappedBy = PartyParameterEntity.PROP_PARTY, targetEntity = PartyParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
-    @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PARTY)
-    private Set<AbstractDatasetEntity> datasets;
+    @OneToMany(mappedBy = StaPlusDataset.PROPERTY_PARTY)
+    private Set<StaPlusDataset> datastreams;
+
+    @OneToMany(mappedBy = StaPlusPlatformEntity.PROPERTY_PARTY)
+    private Set<StaPlusPlatformEntity> things;
+
+    @OneToMany(mappedBy = GroupEntity.PROPERTY_PARTY)
+    private Set<GroupEntity> groups;
+
+    @OneToMany(mappedBy = RelationEntity.PROPERTY_PARTY)
+    private Set<RelationEntity> relations;
 
     @Override
     public Long getId() {
@@ -134,12 +143,12 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
         this.staIdentifier = staIdentifier;
     }
 
-    public String getNickname() {
-        return nickname;
+    public String getDisplayName() {
+        return displayName;
     }
 
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
+    public void setDisplayName(String nickname) {
+        this.displayName = nickname;
     }
 
     public Role getRole() {
@@ -158,13 +167,12 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
         this.authId = authId;
     }
 
-    public Set<AbstractDatasetEntity> getDatasets() {
-        return datasets;
+    public Set<StaPlusDataset> getDatastreams() {
+        return datastreams;
     }
 
-    @Override
-    public void setDatasets(Set<AbstractDatasetEntity> observations) {
-        this.datasets = observations;
+    public void setDatastreams(Set<StaPlusDataset> observations) {
+        this.datastreams = observations;
     }
 
     @Override
@@ -201,6 +209,22 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
             this.parameters = new HashSet<>();
         }
         this.parameters.add(parameter);
+    }
+
+    public Set<GroupEntity> getGroups() {
+        return groups;
+    }
+
+    public void setGroups(Set<GroupEntity> groups) {
+        this.groups = groups;
+    }
+
+    public Set<StaPlusPlatformEntity> getThings() {
+        return things;
+    }
+
+    public void setThings(Set<StaPlusPlatformEntity> things) {
+        this.things = things;
     }
 
     public enum Role {

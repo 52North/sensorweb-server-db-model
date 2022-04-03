@@ -15,14 +15,14 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.sta;
+package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupParameterEntity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -33,6 +33,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
@@ -45,19 +46,23 @@ import java.util.Set;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@Table(name = "observationgroup")
-@SequenceGenerator(name = "observation_group_seq", allocationSize = 1)
-public class ObservationGroupEntity extends IdEntity
+@Table(name = "group")
+@SequenceGenerator(name = "group_seq", allocationSize = 1)
+public class GroupEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasStaIdentifier,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
-    public static final String PROP_OBSERVATIONRELATIONS = "observationRelations";
+    public static final String PROP_RELATIONS = "relations";
     public static final String PROPERTY_LICENSE = "license";
+    public static final String PROPERTY_PARTY = "party";
+    public static final String PROPERTY_PARENT = "parent";
+    public static final String PROPERTY_CHILDREN = "children";
 
     private static final long serialVersionUID = 3611419770138299218L;
+
     @Id
     @Column(nullable = false, unique = true)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "observation_group_seq")
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "group_seq")
     private Long id;
     /**
      * Identification for SensorThings API of the entity without special chars.
@@ -72,28 +77,42 @@ public class ObservationGroupEntity extends IdEntity
 
     @Column
     private String description;
+
     @Column
     private String purpose;
+
     @Column
     private Date runtimeStart;
+
     @Column
     private Date runtimeEnd;
+
     @Column
     private Date createdStart;
+
     @Column
     private Date createdEnd;
 
-    @ManyToOne(targetEntity = LicenseEntity.class)
+    @OneToOne
+    @JoinColumn(name = "parent_id")
+    private GroupEntity parent;
+
+    @OneToMany(mappedBy = "parent", cascade = CascadeType.ALL)
+    private Set<GroupEntity> children = new HashSet<>();
+
+    @ManyToOne
     private LicenseEntity license;
 
     @ManyToMany
-    private Set<DataEntity> observations;
+    private Set<StaPlusDataEntity<?>> observations;
+
+    @ManyToOne
+    private PartyEntity party;
 
     @ManyToMany
-    @JoinTable(name = "observationgroup_observationrelation",
-            joinColumns = { @JoinColumn(name = "fk_observationgroup", referencedColumnName = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "fk_observationrelation", referencedColumnName = "id") })
-    private Set<ObservationRelationEntity> observationRelations;
+    @JoinTable(name = "group_relation", joinColumns = { @JoinColumn(name = "fk_group", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "fk_relation", referencedColumnName = "id") })
+    private Set<RelationEntity> relations;
 
     @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
             targetEntity = ObservationGroupParameterEntity.class)
@@ -102,7 +121,7 @@ public class ObservationGroupEntity extends IdEntity
     @Transient
     private boolean processed;
 
-    public ObservationGroupEntity() {
+    public GroupEntity() {
     }
 
     public String getPurpose() {
@@ -157,7 +176,7 @@ public class ObservationGroupEntity extends IdEntity
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof ObservationGroupEntity)) {
+        if (obj == null || !(obj instanceof GroupEntity)) {
             return false;
         }
         return Objects.equals(this.hashCode(), obj.hashCode());
@@ -189,12 +208,12 @@ public class ObservationGroupEntity extends IdEntity
         this.staIdentifier = staIdentifier;
     }
 
-    public Set<ObservationRelationEntity> getObservationRelations() {
-        return observationRelations;
+    public Set<RelationEntity> getRelations() {
+        return relations;
     }
 
-    public void setObservationRelations(Set<ObservationRelationEntity> observationRelations) {
-        this.observationRelations = observationRelations;
+    public void setRelations(Set<RelationEntity> observationRelations) {
+        this.relations = observationRelations;
     }
 
     @Override
@@ -241,11 +260,35 @@ public class ObservationGroupEntity extends IdEntity
         this.license = license;
     }
 
-    public Set<DataEntity> getObservations() {
+    public Set<StaPlusDataEntity<?>> getObservations() {
         return observations;
     }
 
-    public void setObservations(Set<DataEntity> observations) {
+    public void setObservations(Set<StaPlusDataEntity<?>> observations) {
         this.observations = observations;
+    }
+
+    public PartyEntity getParty() {
+        return party;
+    }
+
+    public void setParty(PartyEntity party) {
+        this.party = party;
+    }
+
+    public GroupEntity getParent() {
+        return parent;
+    }
+
+    public void setParent(GroupEntity parent) {
+        this.parent = parent;
+    }
+
+    public Set<GroupEntity> getChildren() {
+        return children;
+    }
+
+    public void setChildren(Set<GroupEntity> children) {
+        this.children = children;
     }
 }

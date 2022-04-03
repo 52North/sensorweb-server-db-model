@@ -17,7 +17,7 @@
 package org.n52.series.db.beans.parameter.project;
 
 import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.sta.ProjectEntity;
+import org.n52.series.db.beans.sta.plus.ProjectEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>

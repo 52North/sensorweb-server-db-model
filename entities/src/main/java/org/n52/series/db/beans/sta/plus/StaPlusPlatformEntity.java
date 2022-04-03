@@ -15,18 +15,20 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.sta.plus;
 
+import org.n52.series.db.beans.AbstractDatasetEntity;
+import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
-import org.n52.series.db.beans.sta.plus.PartyEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
+public class StaPlusPlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
         HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 
     public static final String PROPERTY_LOCATIONS = "locations";
@@ -45,12 +47,12 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         return historicalLocations;
     }
 
-    public PlatformEntity setHistoricalLocations(Set<HistoricalLocationEntity> historicalLocations) {
+    public StaPlusPlatformEntity setHistoricalLocations(Set<HistoricalLocationEntity> historicalLocations) {
         this.historicalLocations = historicalLocations;
         return this;
     }
 
-    public PlatformEntity addHistoricalLocation(HistoricalLocationEntity historicalLocation) {
+    public StaPlusPlatformEntity addHistoricalLocation(HistoricalLocationEntity historicalLocation) {
         if (historicalLocations == null) {
             historicalLocations = new LinkedHashSet<>();
         }
@@ -107,7 +109,7 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof PlatformEntity)) {
+        if (obj == null || !(obj instanceof StaPlusPlatformEntity)) {
             return false;
         }
         return super.equals(obj);

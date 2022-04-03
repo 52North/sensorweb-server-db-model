@@ -1,40 +1,27 @@
-/*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *    http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-package org.n52.series.db.beans;
+package org.n52.series.db.beans.sta.plus;
 
+import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.sta.AggregationEntity;
+import org.n52.series.db.beans.sta.StaPlusDataset;
 
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
- */
-public class DatasetAggregationEntity extends Dataset implements AggregationEntity<Dataset> {
+public class StaPlusDatasetAggregationEntity extends StaPlusDataset
+        implements StaPlusAbstractDatasetEntity, AggregationEntity<StaPlusDataset> {
 
-    private static final long serialVersionUID = 4214347342270609845L;
+    private static final long serialVersionUID = -4016466176991438726L;
 
-    private Set<DatasetEntity> datasets;
+    private LicenseEntity license;
+    private PartyEntity party;
+    private ProjectEntity project;
+    private Set<AbstractDatasetEntity> datasets;
 
-    public Set<DatasetEntity> getDatasets() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(Set<DatasetEntity> datasets) {
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
     }
 
@@ -42,7 +29,31 @@ public class DatasetAggregationEntity extends Dataset implements AggregationEnti
         return getDatasets() != null && !getDatasets().isEmpty();
     }
 
-    public void copy(Dataset dataset) {
+    public LicenseEntity getLicense() {
+        return license;
+    }
+
+    public void setLicense(LicenseEntity license) {
+        this.license = license;
+    }
+
+    public PartyEntity getParty() {
+        return party;
+    }
+
+    public void setParty(PartyEntity party) {
+        this.party = party;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
+    }
+
+    public void copy(StaPlusDataset dataset) {
         setIdentifier(dataset.getIdentifier());
         setIdentifierCodespace(dataset.getIdentifierCodespace());
         setStaIdentifier(dataset.getStaIdentifier());
@@ -73,9 +84,13 @@ public class DatasetAggregationEntity extends Dataset implements AggregationEnti
             setResultTimes(dataset.getResultTimes().stream().collect(Collectors.toSet()));
         }
         setUnit(dataset.getUnit());
-        if (dataset instanceof DatasetAggregationEntity) {
-            setDatasets(((DatasetAggregationEntity) dataset).getDatasets());
-        }
-    }
 
+        if (dataset instanceof StaPlusDatasetAggregationEntity) {
+            setDatasets(((StaPlusDatasetAggregationEntity) dataset).getDatasets());
+        }
+
+        setProject(((StaPlusDatasetEntity) dataset).getProject());
+        setLicense(((StaPlusDatasetEntity) dataset).getLicense());
+        setParty(((StaPlusDatasetEntity) dataset).getParty());
+    }
 }

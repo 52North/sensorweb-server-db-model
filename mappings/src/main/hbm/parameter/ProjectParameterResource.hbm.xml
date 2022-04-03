@@ -36,7 +36,7 @@
             </column>
         </property>
 
-        <many-to-one name="project" class="org.n52.series.db.beans.sta.ProjectEntity"
+        <many-to-one name="project" class="org.n52.series.db.beans.sta.plus.ProjectEntity"
                      foreign-key="fk_project_id">
             <column name="fk_project_id" not-null="true" index="idx_project_parameter">
                 <comment>Reference to the Project this Parameter describes.</comment>

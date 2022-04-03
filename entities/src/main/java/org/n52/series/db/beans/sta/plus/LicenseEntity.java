@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-package org.n52.series.db.beans.sta;
+package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.license.LicenseParameterEntity;
+import org.n52.series.db.beans.sta.StaPlusDataset;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -56,20 +56,24 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
      */
     @Column(nullable = false, name = STA_IDENTIFIER, unique = true)
     private String staIdentifier;
+
     @Column(name = NAME, nullable = false)
     private String name;
+
     @Column(name = DESCRIPTION)
     private String description;
+
     @Column(name = PROPERTY_DEFINITION, nullable = false)
     private String definition;
+
     @Column(name = PROPERTY_LOGO)
     private String logo;
 
-    @OneToMany(mappedBy = DataEntity.PROPERTY_LICENSE)
-    private Set<DataEntity> observations;
+    @OneToMany(mappedBy = GroupEntity.PROPERTY_LICENSE)
+    private Set<GroupEntity> groups;
 
-    @OneToMany(mappedBy = ObservationGroupEntity.PROPERTY_LICENSE)
-    private Set<ObservationGroupEntity> observationGroups;
+    @OneToMany(mappedBy = StaPlusDataset.PROPERTY_LICENSE)
+    private Set<StaPlusDataset> datastreams;
 
     @OneToMany(mappedBy = LicenseParameterEntity.PROP_LICENSE, targetEntity = LicenseParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
@@ -77,19 +81,6 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
     @Override
     public Long getId() {
         return id;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, staIdentifier, name);
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof LicenseEntity)) {
-            return false;
-        }
-        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 
     public String getStaIdentifier() {
@@ -122,14 +113,6 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
 
     public void setLogo(String logo) {
         this.logo = logo;
-    }
-
-    public Set<DataEntity> getObservations() {
-        return observations;
-    }
-
-    public void setObservations(Set<DataEntity> observations) {
-        this.observations = observations;
     }
 
     @Override
@@ -168,11 +151,24 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
         this.description = description;
     }
 
-    public Set<ObservationGroupEntity> getObservationGroups() {
-        return observationGroups;
+    public Set<GroupEntity> getGroups() {
+        return groups;
     }
 
-    public void setObservationGroups(Set<ObservationGroupEntity> observationGroups) {
-        this.observationGroups = observationGroups;
+    public void setGroups(Set<GroupEntity> observationGroups) {
+        this.groups = observationGroups;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, staIdentifier, name);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null || !(obj instanceof LicenseEntity)) {
+            return false;
+        }
+        return Objects.equals(this.hashCode(), obj.hashCode());
     }
 }
