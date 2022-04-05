@@ -86,7 +86,7 @@ public class GroupEntity extends IdEntity
     @Column
     private Date createdEnd;
 
-    @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP, 
+    @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
             targetEntity = ObservationGroupParameterEntity.class)
     private Set<ParameterEntity<?>> parameters;
 
@@ -109,9 +109,8 @@ public class GroupEntity extends IdEntity
     private PartyEntity party;
 
     @ManyToMany
-    @JoinTable(name = "group_relation", joinColumns = {
-            @JoinColumn(name = "fk_group", referencedColumnName = "id") }, inverseJoinColumns = {
-                    @JoinColumn(name = "fk_relation", referencedColumnName = "id") })
+    @JoinTable(name = "group_relation", joinColumns = { @JoinColumn(name = "fk_group", referencedColumnName = "id") },
+            inverseJoinColumns = { @JoinColumn(name = "fk_relation", referencedColumnName = "id") })
     private Set<RelationEntity> relations;
 
     // #############################

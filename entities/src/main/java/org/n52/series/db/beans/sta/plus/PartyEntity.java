@@ -68,8 +68,8 @@ import org.n52.series.db.beans.sta.StaPlusDataset;
 @Entity
 @Table(name = "party")
 @SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
-public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier,
-        HibernateRelations.HasDescription {
+public class PartyEntity extends IdEntity
+        implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier, HibernateRelations.HasDescription {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_DISPLAY_NAME = "displayName";

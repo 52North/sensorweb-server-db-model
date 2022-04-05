@@ -46,7 +46,7 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
     public static final String PROPERTY_LOGO = "logo";
 
     private static final long serialVersionUID = 6159174609682812188L;
-    
+
     @Id
     @Column(nullable = false, name = "license_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_seq")
