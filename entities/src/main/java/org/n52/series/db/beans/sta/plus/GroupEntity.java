@@ -19,6 +19,7 @@ import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupParameterEntity;
+import org.n52.series.db.common.Utils;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -131,35 +132,35 @@ public class GroupEntity extends IdEntity
     }
 
     public Date getRuntimeStart() {
-        return runtimeStart;
+        return Utils.createUnmutableTimestamp(runtimeStart);
     }
 
     public void setRuntimeStart(Date runtimeStart) {
-        this.runtimeStart = runtimeStart;
+        this.runtimeStart = Utils.createUnmutableTimestamp(runtimeStart);
     }
 
     public Date getRuntimeEnd() {
-        return runtimeEnd;
+        return Utils.createUnmutableTimestamp(runtimeEnd);
     }
 
     public void setRuntimeEnd(Date runtimeEnd) {
-        this.runtimeEnd = runtimeEnd;
+        this.runtimeEnd = Utils.createUnmutableTimestamp(runtimeEnd);
     }
 
     public Date getCreatedStart() {
-        return createdStart;
+        return Utils.createUnmutableTimestamp(createdStart);
     }
 
     public void setCreatedStart(Date createdStart) {
-        this.createdStart = createdStart;
+        this.createdStart = Utils.createUnmutableTimestamp(createdStart);
     }
 
     public Date getCreatedEnd() {
-        return createdEnd;
+        return Utils.createUnmutableTimestamp(createdEnd);
     }
 
     public void setCreatedEnd(Date createdEnd) {
-        this.createdEnd = createdEnd;
+        this.createdEnd = Utils.createUnmutableTimestamp(createdEnd);
     }
 
     @Override

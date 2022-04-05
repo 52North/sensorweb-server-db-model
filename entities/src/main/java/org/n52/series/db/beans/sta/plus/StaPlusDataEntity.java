@@ -49,12 +49,6 @@ public abstract class StaPlusDataEntity<T> extends DataEntity<T> {
         this.objects = objects;
     }
 
-    public int compareTo(StaPlusDataEntity<T> o) {
-        return Comparator.comparing(StaPlusDataEntity<T>::getSamplingTimeEnd)
-                .thenComparing(StaPlusDataEntity<T>::getSamplingTimeStart).thenComparing(StaPlusDataEntity<T>::getId)
-                .compare(this, o);
-    }
-
     public Set<GroupEntity> getGroups() {
         return groups;
     }

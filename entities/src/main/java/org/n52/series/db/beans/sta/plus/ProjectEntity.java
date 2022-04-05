@@ -20,6 +20,7 @@ import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
 import org.n52.series.db.beans.sta.StaPlusDataset;
+import org.n52.series.db.common.Utils;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -223,11 +224,11 @@ public class ProjectEntity extends IdEntity implements HibernateRelations.HasId,
     }
 
     public Date getCreationTime() {
-        return creationTime;
+        return Utils.createUnmutableTimestamp(creationTime);
     }
 
     public void setCreationTime(Date time) {
-        this.creationTime = time;
+        this.creationTime = Utils.createUnmutableTimestamp(time);
     }
 
 }
