@@ -37,18 +37,21 @@ import java.util.Set;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@SequenceGenerator(name = "license_seq", allocationSize = 1)
 @Table(name = "license")
+@SequenceGenerator(name = "license_seq", allocationSize = 1)
 public class LicenseEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
         HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters, HibernateRelations.HasDescription {
 
     public static final String PROPERTY_DEFINITION = "definition";
     public static final String PROPERTY_LOGO = "logo";
+
     private static final long serialVersionUID = 6159174609682812188L;
+    
     @Id
     @Column(nullable = false, name = "license_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "license_seq")
     private Long id;
+
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
@@ -67,14 +70,18 @@ public class LicenseEntity extends IdEntity implements HibernateRelations.HasId,
     @Column(name = PROPERTY_LOGO)
     private String logo;
 
+    @OneToMany(mappedBy = LicenseParameterEntity.PROP_LICENSE, targetEntity = LicenseParameterEntity.class)
+    private Set<ParameterEntity<?>> parameters;
+
+    // #### OData Linked Entities
+
     @OneToMany(mappedBy = GroupEntity.PROPERTY_LICENSE)
     private Set<GroupEntity> groups;
 
     @OneToMany(mappedBy = StaPlusDataset.PROPERTY_LICENSE)
     private Set<StaPlusDataset> datastreams;
 
-    @OneToMany(mappedBy = LicenseParameterEntity.PROP_LICENSE, targetEntity = LicenseParameterEntity.class)
-    private Set<ParameterEntity<?>> parameters;
+    // ##########################
 
     @Override
     public Long getId() {

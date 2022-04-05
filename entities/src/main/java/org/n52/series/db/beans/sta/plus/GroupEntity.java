@@ -81,16 +81,16 @@ public class GroupEntity extends IdEntity
     private String purpose;
 
     @Column
-    private Date runtimeStart;
-
-    @Column
-    private Date runtimeEnd;
-
-    @Column
     private Date createdStart;
 
     @Column
     private Date createdEnd;
+
+    @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP, 
+            targetEntity = ObservationGroupParameterEntity.class)
+    private Set<ParameterEntity<?>> parameters;
+
+    // #### OData Linked Entities
 
     @OneToOne
     @JoinColumn(name = "parent_id")
@@ -109,13 +109,12 @@ public class GroupEntity extends IdEntity
     private PartyEntity party;
 
     @ManyToMany
-    @JoinTable(name = "group_relation", joinColumns = { @JoinColumn(name = "fk_group", referencedColumnName = "id") },
-            inverseJoinColumns = { @JoinColumn(name = "fk_relation", referencedColumnName = "id") })
+    @JoinTable(name = "group_relation", joinColumns = {
+            @JoinColumn(name = "fk_group", referencedColumnName = "id") }, inverseJoinColumns = {
+                    @JoinColumn(name = "fk_relation", referencedColumnName = "id") })
     private Set<RelationEntity> relations;
 
-    @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
-            targetEntity = ObservationGroupParameterEntity.class)
-    private Set<ParameterEntity<?>> parameters;
+    // #############################
 
     @Transient
     private boolean processed;
@@ -129,22 +128,6 @@ public class GroupEntity extends IdEntity
 
     public void setPurpose(String purpose) {
         this.purpose = purpose;
-    }
-
-    public Date getRuntimeStart() {
-        return Utils.createUnmutableTimestamp(runtimeStart);
-    }
-
-    public void setRuntimeStart(Date runtimeStart) {
-        this.runtimeStart = Utils.createUnmutableTimestamp(runtimeStart);
-    }
-
-    public Date getRuntimeEnd() {
-        return Utils.createUnmutableTimestamp(runtimeEnd);
-    }
-
-    public void setRuntimeEnd(Date runtimeEnd) {
-        this.runtimeEnd = Utils.createUnmutableTimestamp(runtimeEnd);
     }
 
     public Date getCreatedStart() {

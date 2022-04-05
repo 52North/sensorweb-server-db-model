@@ -17,7 +17,7 @@ package org.n52.series.db.beans.sta.plus;
 
 import org.n52.series.db.beans.sta.StaPlusDataset;
 
-public class StaPlusDatasetEntity extends StaPlusDataset implements StaPlusAbstractDatasetEntity {
+public class StaPlusDatasetEntity extends StaPlusDataset {
 
     private static final long serialVersionUID = -4016466176991438726L;
 

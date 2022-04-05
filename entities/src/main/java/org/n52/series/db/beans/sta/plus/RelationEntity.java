@@ -48,6 +48,7 @@ public class RelationEntity extends IdEntity
     public static final String PROPERTY_EXTERNAL_OBJECT = "namespace";
     public static final String PROPERTY_SUBJECT = "subject";
     public static final String PROPERTY_OBJECT = "object";
+
     private static final long serialVersionUID = -5523688573276493324L;
 
     @Id
@@ -70,6 +71,8 @@ public class RelationEntity extends IdEntity
     @Column(name = PROPERTY_EXTERNAL_OBJECT)
     private String externalObject;
 
+    // #### OData Linked Entities
+
     @ManyToMany(mappedBy = "relations")
     private Set<GroupEntity> groups;
 
@@ -81,6 +84,8 @@ public class RelationEntity extends IdEntity
 
     @ManyToOne
     private PartyEntity party;
+
+    // #############################
 
     @Override
     public Long getId() {

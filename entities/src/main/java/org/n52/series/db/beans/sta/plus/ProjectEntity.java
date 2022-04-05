@@ -93,11 +93,15 @@ public class ProjectEntity extends IdEntity implements HibernateRelations.HasId,
     @Column(name = PROPERTY_URL, nullable = true)
     private String url;
 
+    @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
+    private Set<ParameterEntity<?>> parameters;
+
+    // #### OData Linked Entities
+
     @OneToMany(mappedBy = StaPlusDataset.PROPERTY_PROJECT)
     private Set<StaPlusDataset> datastreams;
 
-    @OneToMany(mappedBy = ProjectParameterEntity.PROP_PROJECT, targetEntity = ProjectParameterEntity.class)
-    private Set<ParameterEntity<?>> parameters;
+    // ##########################
 
     @Override
     public Long getId() {

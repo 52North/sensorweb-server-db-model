@@ -44,11 +44,8 @@
 
 package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.HibernateRelations;
-import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
-import org.n52.series.db.beans.parameter.party.PartyParameterEntity;
-import org.n52.series.db.beans.sta.StaPlusDataset;
+import java.util.Objects;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -60,28 +57,33 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+
+import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.sta.StaPlusDataset;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
-@SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
 @Table(name = "party")
+@SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
 public class PartyEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier,
-        HibernateRelations.HasDescription, HibernateRelations.HasParameters {
+        HibernateRelations.HasDescription {
 
     public static final String PROPERTY_DATASTREAMS = "datasets";
     public static final String PROPERTY_DISPLAY_NAME = "displayName";
+    public static final String PROPERTY_PERSONAL_DATA = "personalData";
     public static final String PROPERTY_ROLE = "role";
     public static final String PROPERTY_AUTH_ID = "authId";
+
     private static final long serialVersionUID = 5875256537419920242L;
+
     @Id
     @Column(nullable = false, name = "party_id", unique = true)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "party_seq")
     private Long id;
+
     /**
      * Identification for SensorThings API of the entity without special chars.
      */
@@ -101,8 +103,11 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
     @Column(name = PROPERTY_DISPLAY_NAME)
     private String displayName;
 
-    @OneToMany(mappedBy = PartyParameterEntity.PROP_PARTY, targetEntity = PartyParameterEntity.class)
-    private Set<ParameterEntity<?>> parameters;
+    // personal data is stored as a json string
+    @Column(name = PROPERTY_PERSONAL_DATA)
+    private String personalData;
+
+    // #### OData Linked Entities
 
     @OneToMany(mappedBy = StaPlusDataset.PROPERTY_PARTY)
     private Set<StaPlusDataset> datastreams;
@@ -115,6 +120,8 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
 
     @OneToMany(mappedBy = RelationEntity.PROPERTY_PARTY)
     private Set<RelationEntity> relations;
+
+    // ############################
 
     @Override
     public Long getId() {
@@ -184,32 +191,6 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
         this.description = description;
     }
 
-    @Override
-    public Set<ParameterEntity<?>> getParameters() {
-        return parameters;
-    }
-
-    @Override
-    public void setParameters(Set<ParameterEntity<?>> parameters) {
-        this.parameters = parameters;
-    }
-
-    @Override
-    public void addParameters(Set<ParameterEntity<?>> parameters) {
-        if (this.parameters == null) {
-            this.parameters = new HashSet<>();
-        }
-        this.parameters.addAll(parameters);
-    }
-
-    @Override
-    public void addParameter(ParameterEntity<?> parameter) {
-        if (this.parameters == null) {
-            this.parameters = new HashSet<>();
-        }
-        this.parameters.add(parameter);
-    }
-
     public Set<GroupEntity> getGroups() {
         return groups;
     }
@@ -227,6 +208,6 @@ public class PartyEntity extends IdEntity implements HibernateRelations.HasId, H
     }
 
     public enum Role {
-        individual, institution;
+        INDIVIDUAL, INSTITUTIONAL;
     }
 }
