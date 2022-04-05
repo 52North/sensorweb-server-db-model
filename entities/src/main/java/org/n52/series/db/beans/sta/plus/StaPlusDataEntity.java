@@ -15,11 +15,10 @@
  */
 package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.DataEntity;
-
-import java.util.Comparator;
 import java.util.Objects;
 import java.util.Set;
+
+import org.n52.series.db.beans.DataEntity;
 
 public abstract class StaPlusDataEntity<T> extends DataEntity<T> {
 
