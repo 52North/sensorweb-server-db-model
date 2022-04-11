@@ -19,7 +19,6 @@ import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
-import org.n52.series.db.beans.sta.StaPlusDataset;
 import org.n52.series.db.common.Utils;
 
 import javax.persistence.Column;

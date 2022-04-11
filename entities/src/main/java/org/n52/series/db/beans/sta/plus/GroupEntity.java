@@ -81,10 +81,10 @@ public class GroupEntity extends IdEntity
     private String purpose;
 
     @Column
-    private Date createdStart;
+    private Date creationTime;
 
     @Column
-    private Date createdEnd;
+    private Date endTime;
 
     @OneToMany(mappedBy = ObservationGroupParameterEntity.PROP_OBS_GROUP,
             targetEntity = ObservationGroupParameterEntity.class)
@@ -103,6 +103,7 @@ public class GroupEntity extends IdEntity
     private LicenseEntity license;
 
     @ManyToMany
+    @JoinTable(name = "group_observation")
     private Set<StaPlusDataEntity<?>> observations;
 
     @ManyToOne
@@ -129,20 +130,20 @@ public class GroupEntity extends IdEntity
         this.purpose = purpose;
     }
 
-    public Date getCreatedStart() {
-        return Utils.createUnmutableTimestamp(createdStart);
+    public Date getCreationTime() {
+        return Utils.createUnmutableTimestamp(creationTime);
     }
 
-    public void setCreatedStart(Date createdStart) {
-        this.createdStart = Utils.createUnmutableTimestamp(createdStart);
+    public void setCreationTime(Date createdStart) {
+        this.creationTime = Utils.createUnmutableTimestamp(createdStart);
     }
 
-    public Date getCreatedEnd() {
-        return Utils.createUnmutableTimestamp(createdEnd);
+    public Date getEndTime() {
+        return Utils.createUnmutableTimestamp(endTime);
     }
 
-    public void setCreatedEnd(Date createdEnd) {
-        this.createdEnd = Utils.createUnmutableTimestamp(createdEnd);
+    public void setEndTime(Date createdEnd) {
+        this.endTime = Utils.createUnmutableTimestamp(createdEnd);
     }
 
     @Override

@@ -15,9 +15,7 @@
  */
 package org.n52.series.db.beans.sta.plus;
 
-import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.sta.AggregationEntity;
-import org.n52.series.db.beans.sta.StaPlusDataset;
 
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -27,45 +25,18 @@ public class StaPlusDatasetAggregationEntity extends StaPlusDataset
 
     private static final long serialVersionUID = -4016466176991438726L;
 
-    private LicenseEntity license;
-    private PartyEntity party;
-    private ProjectEntity project;
-    private Set<AbstractDatasetEntity> datasets;
+    private Set<StaPlusDataset> datasets;
 
-    public Set<AbstractDatasetEntity> getDatasets() {
+    public Set<StaPlusDataset> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+    public void setDatasets(Set<StaPlusDataset> datasets) {
         this.datasets = datasets;
     }
 
     public boolean isSetDatasets() {
         return getDatasets() != null && !getDatasets().isEmpty();
-    }
-
-    public LicenseEntity getLicense() {
-        return license;
-    }
-
-    public void setLicense(LicenseEntity license) {
-        this.license = license;
-    }
-
-    public PartyEntity getParty() {
-        return party;
-    }
-
-    public void setParty(PartyEntity party) {
-        this.party = party;
-    }
-
-    public ProjectEntity getProject() {
-        return project;
-    }
-
-    public void setProject(ProjectEntity project) {
-        this.project = project;
     }
 
     public void copy(StaPlusDataset dataset) {
@@ -102,10 +73,10 @@ public class StaPlusDatasetAggregationEntity extends StaPlusDataset
 
         if (dataset instanceof StaPlusDatasetAggregationEntity) {
             setDatasets(((StaPlusDatasetAggregationEntity) dataset).getDatasets());
+        } else {
+            setProject(((StaPlusDatasetEntity) dataset).getProject());
+            setLicense(((StaPlusDatasetEntity) dataset).getLicense());
+            setParty(((StaPlusDatasetEntity) dataset).getParty());
         }
-
-        setProject(((StaPlusDatasetEntity) dataset).getProject());
-        setLicense(((StaPlusDatasetEntity) dataset).getLicense());
-        setParty(((StaPlusDatasetEntity) dataset).getParty());
     }
 }

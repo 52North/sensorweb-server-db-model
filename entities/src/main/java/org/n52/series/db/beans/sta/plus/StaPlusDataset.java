@@ -13,11 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.sta;
+package org.n52.series.db.beans.sta.plus;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
-import org.n52.series.db.beans.sta.plus.StaPlusAbstractDatasetEntity;
 
 public abstract class StaPlusDataset extends AbstractDatasetEntity implements StaPlusAbstractDatasetEntity {
 
+    private LicenseEntity license;
+    private PartyEntity party;
+    private ProjectEntity project;
+
+    public LicenseEntity getLicense() {
+        return license;
+    }
+
+    public void setLicense(LicenseEntity license) {
+        this.license = license;
+    }
+
+    public PartyEntity getParty() {
+        return party;
+    }
+
+    public void setParty(PartyEntity party) {
+        this.party = party;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
+    }
 }

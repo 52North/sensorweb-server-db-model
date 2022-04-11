@@ -60,7 +60,6 @@ import javax.persistence.Table;
 
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
-import org.n52.series.db.beans.sta.StaPlusDataset;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
