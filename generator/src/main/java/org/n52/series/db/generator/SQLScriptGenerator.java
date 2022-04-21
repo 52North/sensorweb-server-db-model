@@ -169,15 +169,14 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             String schema = PUBLIC;
             // dialectSelection
             for (int i = 0; i < 5; i++) {
-                schema = getSchema(i);
-                // modelSelection/profile
-                for (int j = 0; j < 2; j++) {
-                    // concept
-                    for (int k = 0; k < 4; k++) {
-                        // feature
-                        for (int l = 0; l < 2; l++) {
-                            // execute(sqlScriptGenerator, i, j, k, l, schema);
-                            execute(i, j, k, l, schema, true, false);
+                if (i != 1) {
+                    schema = getSchema(i);
+                    // modelSelection/profile
+                    for (int j = 0; j < 2; j++) {
+                        // concept
+                        for (int k = 0; k < 4; k++) {
+                            // execute(sqlScriptGenerator, i, j, k, schema);
+                            execute(i, j, k, schema, true, false);
                         }
                     }
                 }
