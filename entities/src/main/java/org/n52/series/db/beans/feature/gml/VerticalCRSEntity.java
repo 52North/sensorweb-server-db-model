@@ -20,12 +20,15 @@ import java.util.Set;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entiity for the verticalCRS
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks<VerticalCRSEntity> {
 
     private static final long serialVersionUID = 2282402634799023149L;

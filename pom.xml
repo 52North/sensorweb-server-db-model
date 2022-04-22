@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>21</version>
+        <version>24</version>
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
@@ -297,6 +297,12 @@
                 <artifactId>geolatte-geom</artifactId>
                 <version>${geolatte.version}</version>
             </dependency>
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>4.4.0</version>
+                <scope>provided</scope>
+            </dependency>
 
             <!-- Testing -->
             <dependency>
@@ -582,6 +588,23 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>dependency</id>
+            <build>
+                <plugins>
+                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>analyze-dependencies</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>  
                 </plugins>
             </build>
         </profile>

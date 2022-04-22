@@ -48,6 +48,8 @@ import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Represents a SensorThingsAPI Observation. Uses Javax Annotations to use @AttributeOverride
  *
@@ -63,6 +65,7 @@ import org.n52.series.db.common.Utils;
                 @Index(name = "idx_result_time", columnList = "result_time") })
 @DiscriminatorColumn(name = "value_type")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ObservationEntity<T> extends AbstractObservationEntity<T> implements Comparable<ObservationEntity<T>> {
 
     public static final String PROPERTY_ID = "id";
@@ -360,18 +363,22 @@ public class ObservationEntity<T> extends AbstractObservationEntity<T> implement
         this.samplingGeometry = samplingGeometry;
     }
 
+    @Override
     public BigDecimal getVerticalTo() {
         return verticalTo;
     }
 
+    @Override
     public void setVerticalTo(BigDecimal verticalTo) {
         this.verticalTo = verticalTo;
     }
 
+    @Override
     public BigDecimal getVerticalFrom() {
         return verticalFrom;
     }
 
+    @Override
     public void setVerticalFrom(BigDecimal verticalFrom) {
         this.verticalFrom = verticalFrom;
     }

@@ -27,6 +27,9 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes<OfferingEntity>,
         HasFeatureTypes<OfferingEntity>, HasRelatedFeatures<OfferingEntity>, HasPhenomenonTime,
         HasResultTimes<OfferingEntity>, HasValidTime<OfferingEntity> {
@@ -211,7 +214,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
 
     @Override
     public boolean isSetValidTime() {
-        return (getValidTimeStart() != null) && (getValidTimeEnd() != null);
+        return getValidTimeStart() != null && getValidTimeEnd() != null;
     }
 
     @Override

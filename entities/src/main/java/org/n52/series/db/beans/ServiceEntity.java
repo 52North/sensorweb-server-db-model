@@ -79,7 +79,7 @@ public class ServiceEntity extends DescribableEntity {
 
     public void setNoDataValues(final String noDataValues) {
         LOGGER.debug("Set noData values: {}", noDataValues);
-        if ((noDataValues == null) || noDataValues.isEmpty()) {
+        if (noDataValues == null || noDataValues.isEmpty()) {
             this.noDataValues = Collections.emptyList();
         } else {
             final String[] values = noDataValues.split(",");

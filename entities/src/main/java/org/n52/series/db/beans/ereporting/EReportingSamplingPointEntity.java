@@ -20,12 +20,15 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasAssess
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasNetwork;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasStation;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Entity for AQD e-Reporting SamplingPoint
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class EReportingSamplingPointEntity extends DescribableEntity
         implements HasAssessmentType, HasStation, HasNetwork {
 

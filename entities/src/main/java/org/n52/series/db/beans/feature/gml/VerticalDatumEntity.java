@@ -23,12 +23,15 @@ import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entiity for the verticalDatum
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks<VerticalDatumEntity> {
 
     private static final long serialVersionUID = -2829473090233745827L;
