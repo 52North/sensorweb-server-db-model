@@ -20,6 +20,9 @@ import java.util.Set;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.sta.StaRelations.Datastreams;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ObservablePropertyEntity extends PhenomenonEntity implements Datastreams<PhenomenonEntity> {
 
     private static final long serialVersionUID = -1903162304158931533L;

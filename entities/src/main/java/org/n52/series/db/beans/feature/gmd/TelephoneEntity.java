@@ -17,12 +17,15 @@ package org.n52.series.db.beans.feature.gmd;
 
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entity for telephone.
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class TelephoneEntity extends AbstractCiEntity {
 
     private static final long serialVersionUID = -3871291699397692580L;

@@ -17,6 +17,9 @@ package org.n52.series.db.beans.ereporting;
 
 import java.io.Serializable;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class EReportingProfileDatasetEntity implements Serializable {
 
     public static final String SAMPLING_POINT = "samplingPoint";
@@ -35,7 +38,7 @@ public class EReportingProfileDatasetEntity implements Serializable {
     }
 
     public EReportingProfileDatasetEntity copy(EReportingProfileDatasetEntity dataset) {
-        setSamplingPoint(((EReportingProfileDatasetEntity) dataset).getSamplingPoint());
+        setSamplingPoint(dataset.getSamplingPoint());
         return this;
     }
 }

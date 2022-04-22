@@ -27,6 +27,9 @@ import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class PlatformEntity extends DescribableEntity
         implements AbstractStaEntity, Locations<PlatformEntity>, HasDatasets, IsStaEntity {
 
@@ -71,7 +74,7 @@ public class PlatformEntity extends DescribableEntity
 
     @Override
     public boolean hasParameters() {
-        return (getParameters() != null) && !getParameters().isEmpty();
+        return getParameters() != null && !getParameters().isEmpty();
     }
 
     @Override

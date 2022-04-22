@@ -25,6 +25,9 @@ import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.beans.HibernateRelations.HasSamplingTime;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class SamplingEntity extends DescribableEntity implements HasDatasets, HasSamplingTime {
 
     public static final String PROPERTY_DATASETS = "datasets";

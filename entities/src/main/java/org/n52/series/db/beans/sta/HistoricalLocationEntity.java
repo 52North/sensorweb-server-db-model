@@ -26,10 +26,13 @@ import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.sta.StaRelations.Locations;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  *
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class HistoricalLocationEntity extends DescribableEntity
         implements AbstractStaEntity, Serializable, Locations<HistoricalLocationEntity> {
 

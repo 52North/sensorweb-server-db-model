@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import java.math.BigDecimal;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * Represents an STA Observation with ValueType Quantity. For more information
@@ -28,6 +31,7 @@ import java.math.BigDecimal;
  */
 @Entity
 @DiscriminatorValue("quantity")
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class QuantityObservationEntity extends ObservationEntity<BigDecimal> {
 
     private static final long serialVersionUID = -8508643177021481959L;

@@ -20,9 +20,12 @@ import java.util.Set;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
     private Set<ObservationEntity<?>> observations;
@@ -61,7 +64,7 @@ public class StaFeatureEntity<T> extends AbstractFeatureEntity<T> {
 
     @Override
     public boolean equals(Object obj) {
-        return (obj instanceof StaFeatureEntity) && super.equals(obj)
+        return obj instanceof StaFeatureEntity && super.equals(obj)
                 && Objects.hash(observations) == Objects.hash(((StaFeatureEntity) obj).getObservations());
     }
 }

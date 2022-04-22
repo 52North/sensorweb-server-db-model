@@ -22,9 +22,12 @@ import java.util.Set;
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasOfferings;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class RelatedFeatureEntity extends IdEntity
         implements Serializable, HasFeature<RelatedFeatureEntity>, HasOfferings<RelatedFeatureEntity> {
     public static final String PROPERTY_SERVICE = "service";
