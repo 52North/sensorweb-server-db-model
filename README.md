@@ -5,6 +5,11 @@
 
 **Provide Hibernate files for 52°North Sensor Web Server database model.**
 
+
+## Documentation
+
+More information about the Tables can be found in this [documenation](docs/README.md).
+
 ## References
 tbd
 
@@ -13,8 +18,10 @@ tbd
 The module is published under the [GNU General Public License v2 (GPLv2)](http://www.gnu.org/licenses/gpl-2.0.html).
 
 ## Changelog
-- https://github.com/52North/sensorweb-server-db-model/blob/develop/CHANGELOG.md
-- for detailed infos check https://github.com/52North/sensorweb-server-db-model/pulls?q=is%3Apr+is%3Aclosed
+
+The changes for each version is documented in the [release description](https://github.com/52North/sensorweb-server-db-model/releases)
+
+Or for detailed infos check https://github.com/52North/sensorweb-server-db-model/pulls?q=is%3Apr+is%3Aclosed
 
 ## Contributing
 We try to follow [the GitFlow model](http://nvie.com/posts/a-successful-git-branching-model/), although we do not see it that strict. 

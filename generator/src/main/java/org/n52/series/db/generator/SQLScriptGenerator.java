@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015-2021 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import java.util.Properties;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -130,7 +131,10 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {
-            p.put("hibernate.default_schema", schema);
+            p.put(AvailableSettings.DEFAULT_SCHEMA, schema);
+        }
+        if (dialect.equals(DialectSelector.POSTGIS) && (schema == null || schema.isEmpty())) {
+            p.put(AvailableSettings.DEFAULT_SCHEMA, PUBLIC);
         }
         configuration.addProperties(p);
         setDirectoriesForModelSelection(concept, profile, configuration, null);
@@ -163,13 +167,15 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             String schema = PUBLIC;
             // dialectSelection
             for (int i = 0; i < 5; i++) {
-                schema = getSchema(i);
-                // modelSelection/profile
-                for (int j = 0; j < 2; j++) {
-                    // concept
-                    for (int k = 0; k < 4; k++) {
-                        // execute(sqlScriptGenerator, i, j, k, schema);
-                        execute(i, j, k, schema, true, false);
+                if (i != 1) {
+                    schema = getSchema(i);
+                    // modelSelection/profile
+                    for (int j = 0; j < 2; j++) {
+                        // concept
+                        for (int k = 0; k < 4; k++) {
+                            // execute(sqlScriptGenerator, i, j, k, schema);
+                            execute(i, j, k, schema, true, false);
+                        }
                     }
                 }
             }
