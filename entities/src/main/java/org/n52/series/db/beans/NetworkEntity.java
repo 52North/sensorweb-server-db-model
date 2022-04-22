@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Entity for AQD e-Reporting Network
  *

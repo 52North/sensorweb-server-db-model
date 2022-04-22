@@ -17,12 +17,15 @@ package org.n52.series.db.beans.feature.gmd;
 
 import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entity for exVerticalExtent.
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ExVerticalExtentEntity extends AbstractCiEntity {
 
     private static final long serialVersionUID = 4387639041569175476L;

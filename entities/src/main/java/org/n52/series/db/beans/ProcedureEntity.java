@@ -24,6 +24,9 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> implements HasProcedureHistory,
         HasProcedureDescriptionFormat, HasGeometry, HibernateRelations.HasAbstractDatasets, IsStaEntity {
 

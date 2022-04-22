@@ -15,12 +15,15 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entity for responsibleParty.
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ResponsiblePartyEntity extends AbstractCiEntity {
 
     private static final long serialVersionUID = -371431604695988543L;

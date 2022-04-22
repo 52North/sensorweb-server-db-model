@@ -27,7 +27,7 @@ public interface HiberanteEReportingRelations extends HibernateRelations {
         void setInspireId(String inspireId);
 
         default boolean isSetInspireId() {
-            return (getInspireId() != null) && !getInspireId().isEmpty();
+            return getInspireId() != null && !getInspireId().isEmpty();
         }
     }
 
@@ -71,7 +71,7 @@ public interface HiberanteEReportingRelations extends HibernateRelations {
         void setPrimaryObservation(String primaryObservation);
 
         default boolean isSetPrimaryObservation() {
-            return (getPrimaryObservation() != null) && !getPrimaryObservation().isEmpty();
+            return getPrimaryObservation() != null && !getPrimaryObservation().isEmpty();
         }
     }
 

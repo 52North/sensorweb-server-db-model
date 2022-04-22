@@ -15,15 +15,17 @@
  */
 package org.n52.series.db.beans.sampling;
 
-import org.n52.series.db.beans.HibernateRelations.HasDatasets;
-import org.n52.series.db.common.Utils;
-
 import java.util.Date;
 import java.util.Set;
 
 import org.n52.series.db.beans.DatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
+import org.n52.series.db.beans.HibernateRelations.HasDatasets;
+import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class MeasuringProgramEntity extends DescribableEntity implements HasDatasets {
 
     public static final String PROPERTY_DATASETS = "datasets";

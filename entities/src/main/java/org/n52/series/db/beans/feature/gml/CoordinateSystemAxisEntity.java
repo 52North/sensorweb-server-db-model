@@ -20,12 +20,15 @@ import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.feature.ReferenceEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entiity for the coordinateSystemAxis
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks {
 
     private static final long serialVersionUID = 1841614376918978967L;

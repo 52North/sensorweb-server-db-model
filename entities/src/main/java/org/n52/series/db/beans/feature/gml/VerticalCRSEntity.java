@@ -27,6 +27,7 @@ import java.util.Set;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks {
 
     private static final long serialVersionUID = 2282402634799023149L;

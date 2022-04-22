@@ -29,6 +29,10 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
@@ -259,7 +263,7 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     }
 
     public boolean hasRelatedDatasets() {
-        return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
+        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
     }
 
     public VerticalMetadataEntity getVerticalMetadata() {

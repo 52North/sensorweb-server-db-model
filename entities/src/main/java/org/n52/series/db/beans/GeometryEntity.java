@@ -22,6 +22,9 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class GeometryEntity implements Serializable {
 
     public static final String PROPERTY_GEOMETRY = "geometry";
@@ -45,7 +48,7 @@ public class GeometryEntity implements Serializable {
     private int srid;
 
     public boolean isSetGeometry() {
-        return (geometry != null) && !geometry.isEmpty();
+        return geometry != null && !geometry.isEmpty();
     }
 
     public void setGeometry(final Geometry geometry) {
@@ -64,13 +67,12 @@ public class GeometryEntity implements Serializable {
     }
 
     private Geometry createPoint() {
-        Coordinate coordinate =
-                (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt) : new Coordinate(lon, lat);
+        Coordinate coordinate = alt != null && !alt.isNaN() ? new Coordinate(lon, lat, alt) : new Coordinate(lon, lat);
         return getGeometryFactory().createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
-        return (lon != null) && (lat != null);
+        return lon != null && lat != null;
     }
 
     public Double getLon() {

@@ -73,7 +73,7 @@ public interface HibernateRelations {
         void setIdentifier(String identifier, boolean staSupportsUrls);
 
         default boolean isSetIdentifier() {
-            return (getIdentifier() != null) && !getIdentifier().isEmpty();
+            return getIdentifier() != null && !getIdentifier().isEmpty();
         }
 
         default String getDomain() {
@@ -103,7 +103,7 @@ public interface HibernateRelations {
         void setStaIdentifier(String staIdentifier);
 
         default boolean isSetStaIdentifier() {
-            return (getStaIdentifier() != null) && !getStaIdentifier().isEmpty();
+            return getStaIdentifier() != null && !getStaIdentifier().isEmpty();
         }
 
         default String generateUUID() {
@@ -141,7 +141,7 @@ public interface HibernateRelations {
         }
 
         default void addValue(StringBuffer buffer, String value, boolean addEmpty) {
-            if (value != null && ((addEmpty && value.isEmpty()) || !value.isEmpty())) {
+            if (value != null && (addEmpty && value.isEmpty() || !value.isEmpty())) {
                 buffer.append(":").append(value);
             }
         }
@@ -216,7 +216,7 @@ public interface HibernateRelations {
          * @return <code>true</code>, if description is set
          */
         default boolean isSetDescription() {
-            return (getDescription() != null) && !getDescription().isEmpty();
+            return getDescription() != null && !getDescription().isEmpty();
         }
     }
 
@@ -229,7 +229,7 @@ public interface HibernateRelations {
         void setIdentifierCodespace(CodespaceEntity codespace);
 
         default boolean isSetIdentifierCodespace() {
-            return (getIdentifierCodespace() != null) && !getIdentifierCodespace().isSetName();
+            return getIdentifierCodespace() != null && !getIdentifierCodespace().isSetName();
         }
     }
 
@@ -246,7 +246,7 @@ public interface HibernateRelations {
         void setNameCodespace(CodespaceEntity codespaceName);
 
         default boolean isSetNameCodespace() {
-            return (getNameCodespace() != null) && !getNameCodespace().isSetName();
+            return getNameCodespace() != null && !getNameCodespace().isSetName();
         }
     }
 
@@ -299,7 +299,7 @@ public interface HibernateRelations {
         void setFeatureTypes(Set<FormatEntity> featureOfInterestTypes);
 
         default boolean hasFeatureTypes() {
-            return (getFeatureTypes() != null) && !getFeatureTypes().isEmpty();
+            return getFeatureTypes() != null && !getFeatureTypes().isEmpty();
         }
 
     }
@@ -385,7 +385,7 @@ public interface HibernateRelations {
         void setName(String name);
 
         default boolean isSetName() {
-            return (getName() != null) && !getName().isEmpty();
+            return getName() != null && !getName().isEmpty();
         }
 
     }
@@ -436,7 +436,7 @@ public interface HibernateRelations {
         void setObservationTypes(Set<FormatEntity> observationTypes);
 
         default boolean hasObservationTypes() {
-            return (getObservationTypes() != null) && !getObservationTypes().isEmpty();
+            return getObservationTypes() != null && !getObservationTypes().isEmpty();
         }
     }
 
@@ -651,7 +651,7 @@ public interface HibernateRelations {
         void setRelatedFeatures(Set<RelatedFeatureEntity> relatedFeatures);
 
         default boolean hasRelatedFeatures() {
-            return (getRelatedFeatures() != null) && !getRelatedFeatures().isEmpty();
+            return getRelatedFeatures() != null && !getRelatedFeatures().isEmpty();
         }
     }
 
@@ -664,7 +664,7 @@ public interface HibernateRelations {
         void setEncoding(String resultEncoding);
 
         default boolean isSetEncoding() {
-            return (getEncoding() != null) && !getEncoding().isEmpty();
+            return getEncoding() != null && !getEncoding().isEmpty();
         }
     }
 
@@ -677,7 +677,7 @@ public interface HibernateRelations {
         void setStructure(String resultStructure);
 
         default boolean isSetStructure() {
-            return (getStructure() != null) && !getStructure().isEmpty();
+            return getStructure() != null && !getStructure().isEmpty();
         }
     }
 
@@ -795,7 +795,7 @@ public interface HibernateRelations {
         }
 
         default boolean hasOfferings() {
-            return (getOfferings() != null) && !getOfferings().isEmpty();
+            return getOfferings() != null && !getOfferings().isEmpty();
         }
 
     }
@@ -813,7 +813,7 @@ public interface HibernateRelations {
         void addParameter(ParameterEntity<?> parameter);
 
         default boolean hasParameters() {
-            return (getParameters() != null) && !getParameters().isEmpty();
+            return getParameters() != null && !getParameters().isEmpty();
         }
 
     }
@@ -827,7 +827,7 @@ public interface HibernateRelations {
         void setRelatedObservations(Set<RelatedDataEntity> relatedObservations);
 
         default boolean hasRelatedObservations() {
-            return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
+            return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
         }
 
     }
@@ -918,7 +918,7 @@ public interface HibernateRelations {
          * @return <code>true</code>, if longitude and latitude are set
          */
         default boolean isSetLongLat() {
-            return (getLon() != null) && (getLat() != null);
+            return getLon() != null && getLat() != null;
         }
 
         Object getAlt();
@@ -946,7 +946,7 @@ public interface HibernateRelations {
         void setProcedureHistory(Set<ProcedureHistoryEntity> procedureHistory);
 
         default boolean hasProcedureHistory() {
-            return (getProcedureHistory() != null) && !getProcedureHistory().isEmpty();
+            return getProcedureHistory() != null && !getProcedureHistory().isEmpty();
         }
     }
 
@@ -963,7 +963,7 @@ public interface HibernateRelations {
         void addParent(T parent);
 
         default boolean hasParents() {
-            return (getParents() != null) && !getParents().isEmpty();
+            return getParents() != null && !getParents().isEmpty();
         }
 
         Set getChildren();
@@ -973,7 +973,7 @@ public interface HibernateRelations {
         void addChild(T child);
 
         default boolean hasChildren() {
-            return (getChildren() != null) && !getChildren().isEmpty();
+            return getChildren() != null && !getChildren().isEmpty();
         }
     }
 
@@ -1017,7 +1017,7 @@ public interface HibernateRelations {
         void setSamplingGeometry(Geometry samplingGeometry);
 
         default boolean hasSamplingGeometry() {
-            return (getSamplingGeometry() != null) && !getSamplingGeometry().isEmpty();
+            return getSamplingGeometry() != null && !getSamplingGeometry().isEmpty();
         }
 
     }
@@ -1031,7 +1031,7 @@ public interface HibernateRelations {
         void setXml(String xml);
 
         default boolean isSetXml() {
-            return (getXml() != null) && !getXml().isEmpty();
+            return getXml() != null && !getXml().isEmpty();
         }
     }
 
@@ -1049,7 +1049,7 @@ public interface HibernateRelations {
         void setRemarks(String remarks);
 
         default boolean isSetRemarks() {
-            return (getRemarks() != null) && !getRemarks().isEmpty();
+            return getRemarks() != null && !getRemarks().isEmpty();
         }
     }
 
@@ -1060,7 +1060,7 @@ public interface HibernateRelations {
         void setDatasetType(String datasetType);
 
         default boolean isSetDatasetType() {
-            return (getDatasetType() != null) && !getDatasetType().isEmpty();
+            return getDatasetType() != null && !getDatasetType().isEmpty();
         }
 
     }

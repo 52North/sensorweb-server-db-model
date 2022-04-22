@@ -15,11 +15,12 @@
  */
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.HibernateRelations;
-import org.n52.series.db.beans.IdEntity;
+import java.io.Serializable;
 
 import javax.persistence.Transient;
-import java.io.Serializable;
+
+import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 
 public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable,
         HibernateRelations.HasPhenomenonTime, HibernateRelations.HasAbstractDataset, HibernateRelations.HasId,

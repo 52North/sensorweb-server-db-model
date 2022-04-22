@@ -28,9 +28,12 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class HistoricalLocationEntity extends DescribableEntity
         implements Serializable, HasLocations, HibernateRelations.IsProcessed, HibernateRelations.HasThing {
 

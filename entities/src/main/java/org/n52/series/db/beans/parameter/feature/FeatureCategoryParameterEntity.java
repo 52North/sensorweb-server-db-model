@@ -17,12 +17,14 @@ package org.n52.series.db.beans.parameter.feature;
 
 import java.util.Map;
 
+import org.n52.series.db.beans.HibernateRelations.HasUnit;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.CategoryParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class FeatureCategoryParameterEntity extends FeatureParameterEntity<String> implements CategoryParameterEntity {
 
     private static final long serialVersionUID = -6262887605542676492L;

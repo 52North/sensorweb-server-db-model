@@ -18,12 +18,14 @@ package org.n52.series.db.beans.parameter.platform;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import org.n52.series.db.beans.HibernateRelations.HasUnit;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class PlatformQuantityParameterEntity extends PlatformParameterEntity<BigDecimal>
         implements QuantityParameterEntity {
 

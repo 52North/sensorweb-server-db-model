@@ -20,9 +20,12 @@ import java.io.Serializable;
 import org.n52.series.db.beans.HibernateRelations.HasResultEncoding;
 import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ResultTemplateEntity extends IdEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
     public static final String PROPERTY_OFFERING = "offering";
@@ -153,7 +156,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     public boolean isSetIdentifier() {
-        return (getIdentifier() != null) && !getIdentifier().isEmpty();
+        return getIdentifier() != null && !getIdentifier().isEmpty();
     }
 
     @Override
@@ -181,7 +184,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     public boolean isSetObservationStructure() {
-        return (getObservationStructure() != null) && !getObservationStructure().isEmpty();
+        return getObservationStructure() != null && !getObservationStructure().isEmpty();
     }
 
     public void setObservationStructure(String observationStructure) {
@@ -197,7 +200,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     public boolean isSetObservationEncoding() {
-        return (getObservationEncoding() != null) && !getObservationEncoding().isEmpty();
+        return getObservationEncoding() != null && !getObservationEncoding().isEmpty();
     }
 
     public boolean isSetProcedure() {

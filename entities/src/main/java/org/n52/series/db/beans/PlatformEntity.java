@@ -24,6 +24,9 @@ import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class PlatformEntity extends DescribableEntity
         implements HasLocations, IsStaEntity, HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed,
         HibernateRelations.HasParameters, HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType {

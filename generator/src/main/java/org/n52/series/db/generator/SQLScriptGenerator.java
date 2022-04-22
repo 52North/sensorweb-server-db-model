@@ -104,7 +104,7 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         printToScreen("");
         printEnterYourSelection();
 
-        return readSelectionFromStdIoWithDefault(1) == 1 ? true : false;
+        return readSelectionFromStdIoWithDefault(1) == 1;
     }
 
     private void printFinished(String fileName) {

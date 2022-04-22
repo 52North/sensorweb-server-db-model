@@ -31,7 +31,8 @@ import java.util.Set;
 /**
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
-public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed {
 
     public static final String PROPERTY_NAME = NAME;

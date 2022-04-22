@@ -24,6 +24,9 @@ import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasXml;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
         implements HasXml, HasGeometry, HasDatasets, IsStaEntity {
 
@@ -91,7 +94,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     }
 
     public boolean isSetUrl() {
-        return (getUrl() != null) && !getUrl().isEmpty();
+        return getUrl() != null && !getUrl().isEmpty();
     }
 
     @Override
