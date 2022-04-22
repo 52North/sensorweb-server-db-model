@@ -1311,7 +1311,7 @@ public interface HibernateRelations {
         HasAssessmentType setAssessmentType(AssessmentTypeEntity assessmentType);
 
         default boolean isSetAssessmentType() {
-            return (getAssessmentType() != null) && getAssessmentType().isSetAssessmentType();
+            return getAssessmentType() != null && getAssessmentType().isSetAssessmentType();
         }
     }
 

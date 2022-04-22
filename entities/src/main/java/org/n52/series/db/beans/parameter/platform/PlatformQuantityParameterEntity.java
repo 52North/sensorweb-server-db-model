@@ -18,9 +18,10 @@ package org.n52.series.db.beans.parameter.platform;
 import java.math.BigDecimal;
 import java.util.Map;
 
-import org.n52.series.db.beans.HibernateRelations.HasUnit;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.QuantityParameterEntity;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>

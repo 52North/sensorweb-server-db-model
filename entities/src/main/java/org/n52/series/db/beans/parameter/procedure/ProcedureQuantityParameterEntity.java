@@ -21,9 +21,12 @@ import java.util.Map;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProcedureQuantityParameterEntity extends ProcedureParameterEntity<BigDecimal>
         implements QuantityParameterEntity {
 

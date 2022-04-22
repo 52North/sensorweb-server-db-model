@@ -19,6 +19,8 @@ package org.n52.series.db.beans.feature.gml;
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
 import org.n52.series.db.beans.feature.ReferenceEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Set;
 
 /**

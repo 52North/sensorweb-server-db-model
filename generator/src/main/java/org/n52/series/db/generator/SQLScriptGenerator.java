@@ -175,8 +175,11 @@ public final class SQLScriptGenerator extends AbstractGenerator {
                     for (int j = 0; j < 2; j++) {
                         // concept
                         for (int k = 0; k < 4; k++) {
-                            // execute(sqlScriptGenerator, i, j, k, schema);
-                            execute(i, j, k, schema, true, false);
+                            // feature
+                            for (int l = 0; l < 2; l++) {
+                                // execute(sqlScriptGenerator, i, j, k, l, schema);
+                                execute(i, j, k, l, schema, true, false);
+                            }
                         }
                     }
                 }

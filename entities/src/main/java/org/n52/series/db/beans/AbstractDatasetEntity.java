@@ -19,6 +19,8 @@ import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -30,6 +32,7 @@ import java.util.stream.Collectors;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class AbstractDatasetEntity extends DescribableEntity
         implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
 
@@ -284,7 +287,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public boolean isSetOMObservationType() {
-        return (getOMObservationType() != null) && getOMObservationType().isSetFormat();
+        return getOMObservationType() != null && getOMObservationType().isSetFormat();
     }
 
     public FormatEntity getOmObservationType() {

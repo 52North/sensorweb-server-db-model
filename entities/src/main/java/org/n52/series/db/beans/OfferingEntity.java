@@ -25,8 +25,11 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Date;
 import java.util.Set;
+
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes, HasFeatureTypes,
         HasRelatedFeatures, HasPhenomenonTime, HasResultTimes, HasValidTime {

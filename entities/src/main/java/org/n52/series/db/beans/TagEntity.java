@@ -20,6 +20,9 @@ import java.util.Set;
 import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.beans.i18n.I18nEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class TagEntity extends DescribableEntity implements HasDatasets {
 
     private static final long serialVersionUID = 7851120161214727821L;

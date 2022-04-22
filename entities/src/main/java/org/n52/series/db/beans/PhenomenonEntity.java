@@ -18,9 +18,12 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Objects;
 import java.util.Set;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity>
         implements HibernateRelations.HasAbstractDatasets, IsStaEntity {
 

@@ -24,6 +24,8 @@ import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.PlatformEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -32,7 +34,8 @@ import java.util.Set;
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
 
-@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed {
 
     public static final String PROPERTY_NAME = NAME;
