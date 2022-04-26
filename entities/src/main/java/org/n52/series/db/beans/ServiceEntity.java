@@ -16,11 +16,12 @@
 package org.n52.series.db.beans;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -35,7 +36,7 @@ public class ServiceEntity extends DescribableEntity {
 
     private String type = "RESTful series data access layer.";
 
-    private List<String> noDataValues;
+    private List<String> noDataValues = new LinkedList<>();
 
     private String version;
 
@@ -45,12 +46,11 @@ public class ServiceEntity extends DescribableEntity {
 
     private ServiceMetadataEntity serviceMetadata;
 
-    private Collection<BigDecimal> quantityNoDataValues;
+    private Set<BigDecimal> quantityNoDataValues = new LinkedHashSet<>();
 
-    private Collection<Integer> countNoDataValues;
+    private Set<Integer> countNoDataValues = new LinkedHashSet<>();
 
     public ServiceEntity() {
-        noDataValues = Collections.emptyList();
     }
 
     public String getUrl() {
@@ -79,14 +79,25 @@ public class ServiceEntity extends DescribableEntity {
 
     public void setNoDataValues(final String noDataValues) {
         LOGGER.debug("Set noData values: {}", noDataValues);
-        if (noDataValues == null || noDataValues.isEmpty()) {
-            this.noDataValues = Collections.emptyList();
-        } else {
+        this.noDataValues.clear();
+        this.quantityNoDataValues.clear();
+        this.countNoDataValues.clear();
+        if (noDataValues != null && !noDataValues.isEmpty()) {
             final String[] values = noDataValues.split(",");
-            this.noDataValues = Arrays.asList(values);
-            this.quantityNoDataValues = convertToBigDecimal(this.noDataValues);
-            this.countNoDataValues = convertToIntegers(this.noDataValues);
+            this.noDataValues.addAll(Arrays.asList(values));
+            convertToBigDecimal(this.noDataValues);
+            convertToIntegers(this.noDataValues);
         }
+    }
+
+    public void setNoDataValues(Collection<String> noDataValuesList, Collection<BigDecimal> quantityNoDataValues,
+            Collection<Integer> countNoDataValues) {
+        this.noDataValues.clear();
+        this.quantityNoDataValues.clear();
+        this.countNoDataValues.clear();
+        this.noDataValues.addAll(noDataValuesList);
+        this.quantityNoDataValues.addAll(quantityNoDataValues);
+        this.countNoDataValues.addAll(countNoDataValues);
     }
 
     public boolean getSupportsFirstLast() {
@@ -134,30 +145,26 @@ public class ServiceEntity extends DescribableEntity {
         return observation.isNoDataValue(noDataValues);
     }
 
-    private Collection<BigDecimal> convertToBigDecimal(Collection<String> collection) {
-        List<BigDecimal> validatedValues = new ArrayList<>();
+    private void convertToBigDecimal(Collection<String> collection) {
         for (String value : collection) {
             String trimmed = value.trim();
             try {
-                validatedValues.add(new BigDecimal(trimmed));
+                this.quantityNoDataValues.add(new BigDecimal(trimmed));
             } catch (NumberFormatException e) {
                 LOGGER.trace("Ignoring NO_DATA value {} (not a big decimal value).", trimmed);
             }
         }
-        return validatedValues;
     }
 
-    private Collection<Integer> convertToIntegers(Collection<String> collection) {
-        List<Integer> validatedValues = new ArrayList<>();
+    private void convertToIntegers(Collection<String> collection) {
         for (String value : collection) {
             String trimmed = value.trim();
             try {
-                validatedValues.add(Integer.parseInt(trimmed));
+                this.countNoDataValues.add(Integer.parseInt(trimmed));
             } catch (NumberFormatException e) {
-                LOGGER.debug("Ignoring NO_DATA value {} (not an integer).", trimmed);
+                LOGGER.trace("Ignoring NO_DATA value {} (not an integer).", trimmed);
             }
         }
-        return validatedValues;
     }
 
     @Override
