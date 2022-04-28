@@ -19,8 +19,10 @@ import java.io.Serializable;
 import java.util.StringJoiner;
 
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Polygon;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -35,7 +37,7 @@ public class GeometryEntity implements Serializable {
 
     private static final long serialVersionUID = -1411829809704409439L;
 
-    private GeometryFactory geometryFactory;
+    private GeometryFactory geometryFactory = new GeometryFactory();
 
     private Geometry geometry;
 
@@ -129,6 +131,36 @@ public class GeometryEntity implements Serializable {
                 setSrid(entity.getSrid());
             }
         }
+    }
+
+    public void expand(GeometryEntity entity) {
+        if (entity != null && entity.getGeometry() != null) {
+            if (getGeometry() != null) {
+                Envelope envelope = getGeometry().getEnvelopeInternal();
+                envelope.expandToInclude(entity.getGeometry().getEnvelopeInternal());
+                setGeometry(toPolygon(envelope, getGeometry().getSRID()));
+            } else {
+                setGeometry(toPolygon(entity.getGeometry().getEnvelopeInternal(), entity.getGeometry().getSRID()));
+                setSrid(entity.getSrid());
+            }
+        }
+    }
+
+    private Polygon toPolygon(Envelope env, int srid) {
+        Coordinate[] coords = toCoordiates(env);
+        Polygon polygon = getGeometryFactory().createPolygon(getGeometryFactory().createLinearRing(coords), null);
+        polygon.setSRID(srid);
+        return polygon;
+    }
+
+    private Coordinate[] toCoordiates(Envelope env) {
+        Coordinate[] coords = new Coordinate[5];
+        coords[0] = new Coordinate(env.getMinX(), env.getMinY());
+        coords[1] = new Coordinate(env.getMinX(), env.getMaxY());
+        coords[2] = new Coordinate(env.getMaxX(), env.getMaxY());
+        coords[3] = new Coordinate(env.getMaxX(), env.getMinY());
+        coords[4] = new Coordinate(env.getMinX(), env.getMinY());
+        return coords;
     }
 
     public GeometryEntity copy(GeometryEntity entity) {
