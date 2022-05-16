@@ -85,13 +85,13 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             case 1:
                 return PUBLIC;
             case 2:
-                return "oracle";
-            case 3:
                 return null;
-            case 4:
+            case 3:
                 return "sos";
-            case 5:
+            case 4:
                 return "dbo";
+            case 5:
+                return "oracle";
             default:
                 return PUBLIC;
         }
