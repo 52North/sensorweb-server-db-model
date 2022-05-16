@@ -82,10 +82,10 @@ public abstract class AbstractGenerator {
     protected int getDialectSelection() throws IOException {
         printToScreen("This SQL script generator supports:");
         printToScreen("0   PostgreSQL/PostGIS");
-        printToScreen("1   Oracle");
-        printToScreen("2   H2/GeoDB");
-        printToScreen("3   MySQL");
-        printToScreen("4   SQL Server");
+        printToScreen("1   H2/GeoDB");
+        printToScreen("2   MySQL");
+        printToScreen("3   SQL Server");
+        printToScreen("4   oracle");
         printToScreen("");
         printEnterYourSelection();
 
