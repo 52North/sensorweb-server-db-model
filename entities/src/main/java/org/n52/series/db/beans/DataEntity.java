@@ -112,6 +112,8 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
+    private String valueType;
+
     private String valueIdentifier;
 
     private String valueName;
@@ -297,6 +299,14 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public boolean hasRelatedObservations() {
         return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
+    }
+
+    public String getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
     }
 
     public String getValueIdentifier() {

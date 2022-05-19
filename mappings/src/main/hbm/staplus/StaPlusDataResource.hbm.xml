@@ -26,6 +26,11 @@
                 </comment>
             </column>
         </discriminator>
+        <property name="valueType" insert="false" update="false" type="string" not-null="true">
+            <column name="value_type" unique-key="un_observation_identity">
+                <comment>Expose value type to data entity</comment>
+            </column>
+        </property>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity"
                      lazy="proxy">
