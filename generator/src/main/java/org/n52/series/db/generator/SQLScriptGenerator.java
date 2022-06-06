@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import java.util.Properties;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
+import org.hibernate.cfg.AvailableSettings;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.tool.hbm2ddl.SchemaExport;
@@ -84,15 +85,15 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             case 1:
                 return PUBLIC;
             case 2:
-                return "oracle";
+                return null;
             case 3:
-                return null;
-            case 4:
                 return "sos";
-            case 5:
+            case 4:
                 return "dbo";
+            case 5:
+                return "oracle";
             default:
-                return null;
+                return PUBLIC;
         }
     }
 
@@ -103,7 +104,7 @@ public final class SQLScriptGenerator extends AbstractGenerator {
         printToScreen("");
         printEnterYourSelection();
 
-        return readSelectionFromStdIoWithDefault(1) == 1 ? true : false;
+        return readSelectionFromStdIoWithDefault(1) == 1;
     }
 
     private void printFinished(String fileName) {
@@ -125,13 +126,17 @@ public final class SQLScriptGenerator extends AbstractGenerator {
                 concept.name(), profile.name(), feature.name()));
         Dialect dia = getDialect(dialect, comments);
         Properties p = new Properties();
-        p.put("hibernate.dialect", dia.getClass().getName());
+        p.put(AvailableSettings.DIALECT, dia.getClass().getName());
         String fileNameCreate = createFileName("_create.sql", dialect, concept, profile, feature);
         String fileNameDrop = createFileName("_drop.sql", dialect, concept, profile, feature);
         Files.deleteIfExists(Paths.get(fileNameCreate));
         Files.deleteIfExists(Paths.get(fileNameDrop));
         if (schema != null && !schema.isEmpty()) {
-            p.put("hibernate.default_schema", schema);
+            p.put(AvailableSettings.DEFAULT_SCHEMA, schema);
+
+        }
+        if (dialect.equals(DialectSelector.POSTGIS) && (schema == null || schema.isEmpty())) {
+            p.put(AvailableSettings.DEFAULT_SCHEMA, PUBLIC);
         }
         configuration.addProperties(p);
         setDirectoriesForModelSelection(concept, profile, feature, configuration, null);
@@ -164,15 +169,17 @@ public final class SQLScriptGenerator extends AbstractGenerator {
             String schema = PUBLIC;
             // dialectSelection
             for (int i = 0; i < 5; i++) {
-                schema = getSchema(i);
-                // modelSelection/profile
-                for (int j = 0; j < 2; j++) {
-                    // concept
-                    for (int k = 0; k < 4; k++) {
-                        // feature
-                        for (int l = 0; l < 2; l++) {
-                            // execute(sqlScriptGenerator, i, j, k, l, schema);
-                            execute(i, j, k, l, schema, true, false);
+                if (i != 1) {
+                    schema = getSchema(i);
+                    // modelSelection/profile
+                    for (int j = 0; j < 2; j++) {
+                        // concept
+                        for (int k = 0; k < 4; k++) {
+                            // feature
+                            for (int l = 0; l < 2; l++) {
+                                // execute(sqlScriptGenerator, i, j, k, l, schema);
+                                execute(i, j, k, l, schema, true, false);
+                            }
                         }
                     }
                 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,17 +15,21 @@
  */
 package org.n52.series.db.beans;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.joda.time.DateTimeZone;
 import org.n52.series.db.beans.HibernateRelations.HasTags;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
-import org.n52.series.db.beans.ereporting.EReportingProfileDatasetEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 
+import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Set;
+import java.util.TimeZone;
 import java.util.stream.Collectors;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatasetEntity extends Dataset implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
@@ -43,7 +47,7 @@ public class DatasetEntity extends Dataset implements HasTags {
 
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
-
+    private static final String OFFSET_REGEX = "([+-](?:2[0-3]|[01][0-9]):[0-5][0-9])";
     private static final long serialVersionUID = -7491530543976690237L;
 
     private boolean published = true;
@@ -68,6 +72,8 @@ public class DatasetEntity extends Dataset implements HasTags {
 
     private String originTimezone;
 
+    private DateTimeZone timeZone;
+
     private Set<RelatedDatasetEntity> relatedDatasets;
 
     private List<DatasetEntity> referenceValues;
@@ -78,7 +84,7 @@ public class DatasetEntity extends Dataset implements HasTags {
 
     private SamplingProfileDatasetEntity samplingProfile;
 
-    private EReportingProfileDatasetEntity ereportingProfile;
+    private boolean ereportingProfile;
 
     private Set<TagEntity> tags;
 
@@ -229,6 +235,21 @@ public class DatasetEntity extends Dataset implements HasTags {
         return getOriginTimezone() != null && !getOriginTimezone().isEmpty();
     }
 
+    public DateTimeZone getDateTimeZone() {
+        if (timeZone == null) {
+            if (originTimezone != null && !originTimezone.isEmpty()) {
+                if (originTimezone.matches(OFFSET_REGEX)) {
+                    this.timeZone =
+                            DateTimeZone.forTimeZone(TimeZone.getTimeZone(ZoneOffset.of(originTimezone).normalized()));
+                } else {
+                    this.timeZone = DateTimeZone.forID(originTimezone.trim());
+                }
+            }
+            this.timeZone = DateTimeZone.UTC;
+        }
+        return timeZone;
+    }
+
     public Set<RelatedDatasetEntity> getRelatedDatasets() {
         return relatedDatasets;
     }
@@ -239,7 +260,7 @@ public class DatasetEntity extends Dataset implements HasTags {
     }
 
     public boolean hasRelatedDatasets() {
-        return (getRelatedDatasets() != null) && !getRelatedDatasets().isEmpty();
+        return getRelatedDatasets() != null && !getRelatedDatasets().isEmpty();
     }
 
     public VerticalMetadataEntity getVerticalMetadata() {
@@ -268,17 +289,17 @@ public class DatasetEntity extends Dataset implements HasTags {
         return getSamplingProfile() != null;
     }
 
-    public EReportingProfileDatasetEntity getEreportingProfile() {
+    public boolean getEreportingProfile() {
         return ereportingProfile;
     }
 
-    public DatasetEntity setEreportingProfile(EReportingProfileDatasetEntity ereportingProfile) {
+    public DatasetEntity setEreportingProfile(boolean ereportingProfile) {
         this.ereportingProfile = ereportingProfile;
         return this;
     }
 
     public boolean hasEreportingProfile() {
-        return getEreportingProfile() != null;
+        return getEreportingProfile();
     }
 
     @Override
@@ -325,6 +346,7 @@ public class DatasetEntity extends Dataset implements HasTags {
         setGeometryEntity(dataset.getGeometryEntity());
         setInsitu(dataset.isInsitu());
         setMobile(dataset.isMobile());
+        setEreportingProfile(dataset.getEreportingProfile());
         if (dataset.getRelatedDatasets() != null) {
             setRelatedObservations(dataset.getRelatedDatasets().stream().collect(Collectors.toSet()));
         }
@@ -333,9 +355,6 @@ public class DatasetEntity extends Dataset implements HasTags {
         }
         if (dataset.hasSamplingProfile()) {
             setSamplingProfile(new SamplingProfileDatasetEntity().copy(dataset.getSamplingProfile()));
-        }
-        if (dataset.hasEreportingProfile()) {
-            setEreportingProfile(new EReportingProfileDatasetEntity().copy(dataset.getEreportingProfile()));
         }
         if (dataset.hasVerticalMetadata()) {
             setVerticalMetadata(dataset.getVerticalMetadata());

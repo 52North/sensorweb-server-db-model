@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,6 @@
 package org.n52.series.db.beans.parameter.location;
 
 import java.util.Set;
-import java.util.TreeSet;
 import java.util.stream.Collectors;
 
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
@@ -28,7 +27,7 @@ public class LocationComplexParameterEntity extends LocationParameterEntity<Set<
 
     @Override
     public Set<LocationParameterEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
+        return super.getValue();
     }
 
     @Override

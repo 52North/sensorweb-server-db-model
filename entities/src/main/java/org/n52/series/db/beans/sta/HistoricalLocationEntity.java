@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,9 +27,12 @@ import java.util.Date;
 import java.util.Objects;
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class HistoricalLocationEntity extends DescribableEntity
         implements Serializable, HasLocations, HibernateRelations.IsProcessed, HibernateRelations.HasThing {
 

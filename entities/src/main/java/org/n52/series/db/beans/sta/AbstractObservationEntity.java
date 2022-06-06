@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,12 @@
  */
 package org.n52.series.db.beans.sta;
 
-import org.n52.series.db.beans.HibernateRelations;
-import org.n52.series.db.beans.IdEntity;
+import java.io.Serializable;
 
 import javax.persistence.Transient;
-import java.io.Serializable;
+
+import org.n52.series.db.beans.HibernateRelations;
+import org.n52.series.db.beans.IdEntity;
 
 public abstract class AbstractObservationEntity<T> extends IdEntity implements Serializable,
         HibernateRelations.HasPhenomenonTime, HibernateRelations.HasAbstractDataset, HibernateRelations.HasId,

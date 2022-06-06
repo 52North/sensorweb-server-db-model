@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,9 +21,12 @@ import java.util.Map;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatasetQuantityParameterEntity extends DatasetParameterEntity<BigDecimal>
         implements QuantityParameterEntity {
 
@@ -52,6 +55,6 @@ public class DatasetQuantityParameterEntity extends DatasetParameterEntity<BigDe
 
     @Override
     public String getValueAsString() {
-        return getValue().toPlainString();
+        return isSetValue() ? getValue().toPlainString() : null;
     }
 }

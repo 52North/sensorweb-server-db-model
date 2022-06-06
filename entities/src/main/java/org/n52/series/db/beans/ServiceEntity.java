@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,9 +15,13 @@
  */
 package org.n52.series.db.beans;
 
+import java.math.BigDecimal;
 import java.util.Arrays;
-import java.util.Collections;
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +36,7 @@ public class ServiceEntity extends DescribableEntity {
 
     private String type = "RESTful series data access layer.";
 
-    private List<String> noDataValues;
+    private List<String> noDataValues = new LinkedList<>();
 
     private String version;
 
@@ -42,8 +46,11 @@ public class ServiceEntity extends DescribableEntity {
 
     private ServiceMetadataEntity serviceMetadata;
 
+    private Set<BigDecimal> quantityNoDataValues = new LinkedHashSet<>();
+
+    private Set<Integer> countNoDataValues = new LinkedHashSet<>();
+
     public ServiceEntity() {
-        noDataValues = Collections.emptyList();
     }
 
     public String getUrl() {
@@ -63,23 +70,34 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     public boolean isNoDataValue(DataEntity<?> observation) {
-        return observation == null || observation.isNoDataValue(noDataValues) && !observation.hasDetectionLimit();
+        return observation == null || !observation.hasDetectionLimit() && checkNoDataValue(observation);
     }
 
     public String getNoDataValues() {
-        // XXX make parsing more robust
-        final String csv = Arrays.toString(noDataValues.toArray(new Double[0]));
-        return csv.substring(1).substring(0, csv.length() - 2);
+        return String.join(",", noDataValues);
     }
 
     public void setNoDataValues(final String noDataValues) {
         LOGGER.debug("Set noData values: {}", noDataValues);
-        if ((noDataValues == null) || noDataValues.isEmpty()) {
-            this.noDataValues = Collections.emptyList();
-        } else {
+        this.noDataValues.clear();
+        this.quantityNoDataValues.clear();
+        this.countNoDataValues.clear();
+        if (noDataValues != null && !noDataValues.isEmpty()) {
             final String[] values = noDataValues.split(",");
-            this.noDataValues = Arrays.asList(values);
+            this.noDataValues.addAll(Arrays.asList(values));
+            convertToBigDecimal(this.noDataValues);
+            convertToIntegers(this.noDataValues);
         }
+    }
+
+    public void setNoDataValues(Collection<String> noDataValuesList, Collection<BigDecimal> quantityNoDataValues,
+            Collection<Integer> countNoDataValues) {
+        this.noDataValues.clear();
+        this.quantityNoDataValues.clear();
+        this.countNoDataValues.clear();
+        this.noDataValues.addAll(noDataValuesList);
+        this.quantityNoDataValues.addAll(quantityNoDataValues);
+        this.countNoDataValues.addAll(countNoDataValues);
     }
 
     public boolean getSupportsFirstLast() {
@@ -116,6 +134,37 @@ public class ServiceEntity extends DescribableEntity {
 
     public boolean isSetServiceMetadata() {
         return getServiceMetadata() != null && getServiceMetadata().isSetMetadata();
+    }
+
+    private boolean checkNoDataValue(DataEntity<?> observation) {
+        if (observation instanceof QuantityDataEntity) {
+            return ((QuantityDataEntity) observation).checkNoDataValue(quantityNoDataValues);
+        } else if (observation instanceof CountDataEntity) {
+            return ((CountDataEntity) observation).checkNoDataValue(countNoDataValues);
+        }
+        return observation.isNoDataValue(noDataValues);
+    }
+
+    private void convertToBigDecimal(Collection<String> collection) {
+        for (String value : collection) {
+            String trimmed = value.trim();
+            try {
+                this.quantityNoDataValues.add(new BigDecimal(trimmed));
+            } catch (NumberFormatException e) {
+                LOGGER.trace("Ignoring NO_DATA value {} (not a big decimal value).", trimmed);
+            }
+        }
+    }
+
+    private void convertToIntegers(Collection<String> collection) {
+        for (String value : collection) {
+            String trimmed = value.trim();
+            try {
+                this.countNoDataValues.add(Integer.parseInt(trimmed));
+            } catch (NumberFormatException e) {
+                LOGGER.trace("Ignoring NO_DATA value {} (not an integer).", trimmed);
+            }
+        }
     }
 
     @Override

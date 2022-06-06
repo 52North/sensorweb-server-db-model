@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,15 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.ereporting;
+package org.n52.series.db.beans;
 
 import java.io.Serializable;
 
-public class EReportingAssessmentTypeEntity implements Serializable {
+public class AssessmentTypeEntity implements Serializable {
 
-    public static final String ID = "assessmentType";
+    public static final String PROPERTY_ID = "assessmentType";
 
-    public static final String ASSESSMENT_TYPE = ID;
+    public static final String PROPERTY_ASSESSMENT_TYPE = PROPERTY_ID;
 
     private static final long serialVersionUID = 1721670905098408954L;
 
@@ -41,7 +41,7 @@ public class EReportingAssessmentTypeEntity implements Serializable {
      *            the assessmentType to set
      * @return this
      */
-    public EReportingAssessmentTypeEntity setAssessmentType(String assessmentType) {
+    public AssessmentTypeEntity setAssessmentType(String assessmentType) {
         this.assessmentType = assessmentType;
         return this;
     }
@@ -58,7 +58,7 @@ public class EReportingAssessmentTypeEntity implements Serializable {
      *            the uri to set
      * @return this
      */
-    public EReportingAssessmentTypeEntity setUri(String uri) {
+    public AssessmentTypeEntity setUri(String uri) {
         this.uri = uri;
         return this;
     }

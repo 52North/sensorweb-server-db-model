@@ -123,7 +123,7 @@
         </subclass>
         <subclass discriminator-value="complex" extends="FeatureParameterEntity"
                   name="FeatureComplexParameterEntity">
-            <set name="value" table="feature_parameter" cascade="remove">
+            <set name="value" table="feature_parameter" inverse="false" cascade="all">
                 <key foreign-key="fk_feature_parent_parameter">
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>

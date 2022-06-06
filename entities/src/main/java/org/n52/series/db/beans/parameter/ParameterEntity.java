@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
 
 import org.n52.series.db.beans.IdEntity;
@@ -23,7 +24,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
-public abstract class ParameterEntity<T> extends IdEntity implements ValuedParameter<T> {
+public abstract class ParameterEntity<T> extends IdEntity
+        implements ValuedParameter<T>, Comparable<ParameterEntity<T>> {
 
     public static final String PROPERTY_PARENT = "parent";
 
@@ -134,5 +136,15 @@ public abstract class ParameterEntity<T> extends IdEntity implements ValuedParam
                 && Objects.equals(getDomain(), ((ParameterEntity<?>) obj).getDomain())
                 && Objects.equals(getName(), ((ParameterEntity<?>) obj).getName())
                 && Objects.equals(getValueAsString(), ((ParameterEntity<?>) obj).getValueAsString());
+    }
+
+    public int compareTo(ParameterEntity<T> o) {
+        if (getId() != null && o.getId() != null) {
+            return Long.compare(getId(), o.getId());
+        }
+        if (getId() == null && o.getId() == null) {
+            return 0;
+        }
+        return getId() == null ? -1 : 1;
     }
 }

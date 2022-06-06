@@ -133,7 +133,7 @@
                 <comment>Reference to the temporally last observation in the observation table that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <set name="parameters" table="dataset_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="dataset_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
             <key foreign-key="fk_dataset_parameter">
                 <column name="fk_dataset_id" not-null="true"/>
             </key>
@@ -179,32 +179,32 @@
                     <param name="useNamed">true</param>
                 </type>
             </property>
-            <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType">
+            <property name="deleted" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_deleted">
                 <column name="is_deleted" not-null="true" default="0" check="is_deleted in (1,0)">
                     <comment>Flag that indicates if this dataset is deleted</comment>
                 </column>
             </property>
-            <property name="disabled" type="org.n52.hibernate.type.SmallBooleanType">
-                <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)">
+            <property name="disabled" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_disabled">
+                <column name="is_disabled" not-null="true" default="0" check="is_disabled in (1,0)" >
                     <comment>Flag that indicates if this dataset is disabled for insertion of new data</comment>
                 </column>
             </property>
-            <property name="published" type="org.n52.hibernate.type.SmallBooleanType">
+            <property name="published" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_published">
                 <column name="is_published" not-null="true" default="1" check="is_published in (1,0)">
                     <comment>Flag that indicates if this dataset should be published</comment>
                 </column>
             </property>
-            <property name="mobile" type="org.n52.hibernate.type.SmallBooleanType">
-                <column name="is_mobile" not-null="false" default="0" check="is_mobile in (1,0)">
+            <property name="mobile" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_mobile">
+                <column name="is_mobile" not-null="true" default="0" check="is_mobile in (1,0)">
                     <comment>Flag that indicates if the procedure is mobile (1/true) or stationary (0/false).</comment>
                 </column>
             </property>
-            <property name="insitu" type="org.n52.hibernate.type.SmallBooleanType">
-                <column name="is_insitu" not-null="false" default="1" check="is_insitu in (1,0)">
+            <property name="insitu" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_insitu">
+                <column name="is_insitu" not-null="true" default="1" check="is_insitu in (1,0)">
                     <comment>Flag that indicates if the procedure is insitu (1/true) or remote (0/false).</comment>
                 </column>
             </property>
-            <property name="hidden" type="org.n52.hibernate.type.SmallBooleanType">
+            <property name="hidden" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_hidden">
                 <column name="is_hidden" not-null="true" default="0" check="is_hidden in (1,0)">
                     <comment>Flag that indicates if this dataset should be hidden, e.g. for sub-datasets of a complex datasets</comment>
                 </column>
@@ -219,7 +219,7 @@
                     <comment>Number of decimals that should be present in the output of the observation values. If no value is set, all decimals would be present.</comment>
                 </column>
             </property>
-            <list name="referenceValues" table="dataset_reference" inverse="false">
+            <list name="referenceValues" table="dataset_reference" inverse="false" lazy="true" cascade="all">
                 <comment>Storage of reference datasets, e.g. level zero, medium water level,etc. for water level.</comment>
                 <key not-null="true" foreign-key="fk_dataset_reference_from">
                     <column name="fk_dataset_id_from">
@@ -253,6 +253,11 @@
                 </column>
             </many-to-one>
             <component name="samplingProfile" class="org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity">
+                <property name="hasSamplings" type="org.n52.hibernate.type.SmallBooleanType" index="idx_dataset_is_samplings">
+                    <column name="is_samplings" not-null="true" default="0" check="is_samplings in (1,0)">
+                        <comment>Flag that indicates if this dataset has samplings</comment>
+                    </column>
+                </property>
                 <set inverse="true" name="samplings" table="sampling_dataset" >
                     <comment>Storage of relations between dataset and related samplings</comment>
                     <key not-null="true" foreign-key="fk_dataset_sampling">
@@ -269,7 +274,7 @@
                 <set inverse="true" name="measuringPrograms" table="measuring_program_dataset">
                     <comment>Storage of relations between dataset and related measuring programs</comment>
                     <key not-null="true" foreign-key="fk_dataset_measuring_program">
-                        <column name="fk_dataset_id">
+                        <column name="fk_dataset_id" index="idx_measuring_program_dataset_fk_dataset_id">
                             <comment>The reference to the dataset in the dataset table</comment>
                         </column>
                     </key>
@@ -283,7 +288,7 @@
             <set name="tags" table="tag_dataset">
                 <comment>Storage of relations between dataset and related tags</comment>
                 <key not-null="true" foreign-key="fk_dataset_tag">
-                    <column name="fk_dataset_id">
+                    <column name="fk_dataset_id" index="idx_tag_dataset_fk_dataset_id">
                         <comment>The reference to the dataset in the dataset table</comment>
                     </column>
                 </key>
@@ -293,7 +298,7 @@
                     </column>
                 </many-to-many>
             </set>
-            <set name="translations" table="dataset_i18n" inverse="true" fetch="select" cascade="remove">
+            <set name="translations" table="dataset_i18n" inverse="false" fetch="select" cascade="all">
                 <key column="fk_dataset_id" not-null="true"/>
                 <one-to-many class="org.n52.series.db.beans.i18n.I18nDatasetEntity"/>
             </set>
@@ -309,7 +314,7 @@
                 <param name="sequence_name">dataset_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="AbstractDatasetEntity" foreign-key="fk_dataset_i18n">
+        <many-to-one name="entity" class="AbstractDatasetEntity" foreign-key="fk_dataset_i18n" insert="false" update="false">
             <column name="fk_dataset_id" not-null="true" index="idx_dataset_i18n_dataset">
                 <comment>Reference to the dataset table this internationalization belongs to.</comment>
             </column>
@@ -330,5 +335,11 @@
             </column>
         </property>
     </class>
-
+    <database-object>
+        <create> CREATE INDEX idx_dataset_ts_s_cq ON ${schema}.dataset USING btree (dataset_type, observation_type, value_type, is_deleted, is_published, first_time, last_time) WHERE is_deleted = 0 AND is_published = 1 AND first_time IS NOT NULL  AND last_time IS NOT NULL AND dataset_type = 'timeseries' AND observation_type = 'simple' AND value_type IN ('count', 'quantity')</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
 </hibernate-mapping>

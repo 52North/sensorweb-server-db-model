@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum ValueType {
-    quantity, count, text, category, bool, geometry, blob, referenced, complex, dataarray, not_initialized;
+    quantity, count, text, category, bool, geometry, blob, reference, complex, dataarray, not_initialized;
 
     public static final String ALL = "all";
 

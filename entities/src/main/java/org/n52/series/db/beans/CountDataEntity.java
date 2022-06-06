@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,7 +22,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class CountDataEntity extends DataEntity<Integer> {
+public class CountDataEntity extends DataEntity<Integer> implements NumericalDataEntity<Integer> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountDataEntity.class);
 
@@ -33,13 +33,28 @@ public class CountDataEntity extends DataEntity<Integer> {
         return getValue() == null ? false : containsValue(noDataValues, getValue());
     }
 
-    private boolean containsValue(Collection<String> collection, Integer value) {
-        for (Integer noDataValue : convertToIntegers(collection)) {
+    @Override
+    public boolean checkNoDataValue(Collection<Integer> noDataValues) {
+        return getValue() == null ? false : checkValue(noDataValues, getValue());
+    }
+
+    private boolean checkValue(Collection<Integer> collection, Integer value) {
+        if (collection == null) {
+            return false;
+        }
+        for (Integer noDataValue : collection) {
             if (noDataValue.equals(value)) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean containsValue(Collection<String> collection, Integer value) {
+        if (collection == null) {
+            return false;
+        }
+        return checkValue(convertToIntegers(collection), value);
     }
 
     private Collection<Integer> convertToIntegers(Collection<String> collection) {

@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,9 @@ import org.n52.hibernate.spatial.dialect.oracle.TimestampWithTimeZoneOracleSpati
 import org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect;
 import org.n52.hibernate.spatial.dialect.sqlserver.TimestampWithTimeZoneSqlServer2008SpatialDialect;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractGenerator {
 
     protected static final String NEW_LINE = "\n";
@@ -79,10 +82,10 @@ public abstract class AbstractGenerator {
     protected int getDialectSelection() throws IOException {
         printToScreen("This SQL script generator supports:");
         printToScreen("0   PostgreSQL/PostGIS");
-        printToScreen("1   Oracle");
-        printToScreen("2   H2/GeoDB");
-        printToScreen("3   MySQL");
-        printToScreen("4   SQL Server");
+        printToScreen("1   H2/GeoDB");
+        printToScreen("2   MySQL");
+        printToScreen("3   SQL Server");
+        printToScreen("4   oracle");
         printToScreen("");
         printEnterYourSelection();
 

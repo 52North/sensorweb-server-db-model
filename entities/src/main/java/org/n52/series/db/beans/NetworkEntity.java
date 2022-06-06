@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans.ereporting;
-
-import org.n52.series.db.beans.DescribableEntity;
+package org.n52.series.db.beans;
 
 /**
  * Entity for AQD e-Reporting Network
@@ -23,7 +21,7 @@ import org.n52.series.db.beans.DescribableEntity;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
-public class EReportingNetworkEntity extends DescribableEntity {
+public class NetworkEntity extends DescribableEntity {
 
     public static final String ID = "network";
 
@@ -43,7 +41,7 @@ public class EReportingNetworkEntity extends DescribableEntity {
      *            the network to set
      * @return this
      */
-    public EReportingNetworkEntity setNetwork(Long network) {
+    public NetworkEntity setNetwork(Long network) {
         this.network = network;
         return this;
     }
@@ -55,7 +53,7 @@ public class EReportingNetworkEntity extends DescribableEntity {
 
     @Override
     public boolean equals(Object obj) {
-        if (obj == null || !(obj instanceof EReportingNetworkEntity)) {
+        if (obj == null || !(obj instanceof NetworkEntity)) {
             return false;
         }
         return super.equals(obj);

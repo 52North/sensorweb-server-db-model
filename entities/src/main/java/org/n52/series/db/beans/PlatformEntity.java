@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,30 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
-import org.n52.series.db.beans.sta.plus.PartyEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+public class PlatformEntity extends DescribableEntity
+        implements HasLocations, IsStaEntity, HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed,
+        HibernateRelations.HasParameters, HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
     public static final String PROPERTY_DATASETS = "datasets";
-    public static final String PROPERTY_PARTY = "party";
     private static final long serialVersionUID = 3615089936334873353L;
 
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<AbstractDatasetEntity> datasets;
-    private PartyEntity party;
+    private AssessmentTypeEntity assessmentType;
+    private NetworkEntity network;
     private boolean processed;
 
     public Set<HistoricalLocationEntity> getHistoricalLocations() {
@@ -90,12 +93,36 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
         this.datasets = observations;
     }
 
-    public PartyEntity getParty() {
-        return party;
+    @Override
+    public AssessmentTypeEntity getAssessmentType() {
+        return assessmentType;
     }
 
-    public void setParty(PartyEntity party) {
-        this.party = party;
+    @Override
+    public PlatformEntity setAssessmentType(AssessmentTypeEntity type) {
+        this.assessmentType = type;
+        return this;
+    }
+
+    @Override
+    public boolean isSetAssessmentType() {
+        return getAssessmentType() != null && getAssessmentType().isSetAssessmentType();
+    }
+
+    @Override
+    public NetworkEntity getNetwork() {
+        return network;
+    }
+
+    @Override
+    public PlatformEntity setNetwork(NetworkEntity network) {
+        this.network = network;
+        return this;
+    }
+
+    @Override
+    public boolean isSetNetwork() {
+        return getNetwork() != null;
     }
 
     @Override

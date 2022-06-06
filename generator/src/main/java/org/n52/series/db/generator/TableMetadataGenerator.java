@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -42,6 +42,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.n52.hibernate.type.SmallBooleanType;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Class to generate the create and drop scripts for different databases. Currently supported spatial
  * databases to create scripts
@@ -79,8 +81,7 @@ public final class TableMetadataGenerator extends AbstractGenerator {
 
     private void exportTableColumnMetadata(Metadata metadata, Dialect dia, DialectSelector dialect, Concept concept,
             Profile profile) throws IOException {
-        Path path = Paths.get(createFileName(dialect, concept, profile));
-        Files.deleteIfExists(path);
+        Path path = createFile(Paths.get(createFileName(dialect, concept, profile)));
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
         List<String> result = new LinkedList<>();
         result.add("# Database table/column description");
@@ -96,6 +97,13 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         result.add(
                 "*Creation date: " + DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss ZZ").print(DateTime.now()) + "*");
         System.out.println("The generated file was written to: " + Files.write(path, result).toAbsolutePath());
+    }
+
+    @SuppressFBWarnings
+    private Path createFile(Path path) throws IOException {
+        Files.deleteIfExists(path);
+        Files.createDirectories(path.getParent());
+        return Files.createFile(path);
     }
 
     private SortedMap<String, TableMetadata> extractTableMetadata(Metadata metadata, Dialect dia) {

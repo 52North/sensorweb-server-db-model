@@ -1,5 +1,5 @@
 /*
- * Copyright 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,12 +22,15 @@ import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity;
 import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * Hibernate entiity for the abstract monitoringPoint
  *
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
     private static final long serialVersionUID = 3379003106634935899L;
