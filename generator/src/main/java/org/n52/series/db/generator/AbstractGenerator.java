@@ -239,7 +239,7 @@ public abstract class AbstractGenerator {
     }
 
     enum DialectSelector {
-        POSTGIS, ORACLE, GEODB_H2, MYSQL, SQL_SERVER;
+        POSTGIS, GEODB_H2, MYSQL, SQL_SERVER, ORACLE;
 
         @Override
         public String toString() {

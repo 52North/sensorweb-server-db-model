@@ -80,8 +80,8 @@ public final class TableMetadataGenerator extends AbstractGenerator {
     }
 
     private void exportTableColumnMetadata(Metadata metadata, Dialect dia, DialectSelector dialect, Concept concept,
-            Profile profile) throws IOException {
-        Path path = createFile(Paths.get(createFileName(dialect, concept, profile)));
+            Profile profile, Feature feature) throws IOException {
+        Path path = createFile(Paths.get(createFileName(dialect, concept, profile, feature)));
         SortedMap<String, TableMetadata> map = extractTableMetadata(metadata, dia);
         List<String> result = new LinkedList<>();
         result.add("# Database table/column description");
@@ -203,14 +203,14 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         setDirectoriesForModelSelection(concept, profile, feature, null, metadataSources);
         Metadata metadata = metadataSources.buildMetadata();
 
-        exportTableColumnMetadata(metadata, dia, dialect, concept, profile);
+        exportTableColumnMetadata(metadata, dia, dialect, concept, profile, feature);
     }
 
     protected boolean execute(Integer selection) throws Exception {
         int select = selection != null ? selection : getSelection();
         if (select == 1) {
             // dialectSelection
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 4; i++) {
                 // modelSelection/profile
                 for (int j = 0; j < 2; j++) {
                     // concept
