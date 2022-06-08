@@ -24,7 +24,7 @@ public class ComplexDataEntity extends CompositeDataEntity {
 
     @Override
     public Set<DataEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
+        return super.getValue();
     }
 
     @Override
