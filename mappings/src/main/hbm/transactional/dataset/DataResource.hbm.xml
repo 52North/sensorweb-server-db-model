@@ -249,7 +249,7 @@
                 </key>
                <property name="value"
                        type="blob">
-                 <column name="value">
+                 <column name="value_blob">
                      <comment>The blob value of an observation</comment>
                  </column>
                 </property>
