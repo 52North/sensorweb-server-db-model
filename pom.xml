@@ -57,13 +57,13 @@
 
         <version.junit>5.8.2</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>26.4</geotools.version>
+        <geotools.version>27.0</geotools.version>
         <geolatte.version>1.8.2</geolatte.version>
         <hibernate.version>5.6.9.Final</hibernate.version>
-        <spring-boot.version>2.6.7</spring-boot.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
         <javax.version>8.0.1</javax.version>
         
-        <postgresql.version>42.3.5</postgresql.version>
+        <postgresql.version>42.4.0</postgresql.version>
         <postgis.version>2.5.1</postgis.version>
         <ojdbc8.version>21.5.0.0</ojdbc8.version>
         <sqljdbc.version>11.1.1.jre8-preview</sqljdbc.version>
