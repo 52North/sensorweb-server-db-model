@@ -34,6 +34,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     public static final String PROPERTY_IDENTIFIER_CODESPACE = IDENTIFIER_CODESPACE;
 
     public static final String PROPERTY_SERVICE = "service";
+    public static final String PROPERTY_SERVICE_ID = PROPERTY_SERVICE + "." + PROPERTY_ID;
 
     public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
