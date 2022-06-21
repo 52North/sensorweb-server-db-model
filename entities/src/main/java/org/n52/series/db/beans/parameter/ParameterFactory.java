@@ -120,7 +120,13 @@ public class ParameterFactory {
         } else if (entity instanceof PlatformEntity) {
             entityType = EntityType.PLATFORM;
         }
-        return entityType != null ? from(entityType, valueType) : null;
+        if (entityType != null) {
+            ParameterEntity<?> e = from(entityType, valueType);
+            e.setDescribeableEntity(entity);
+            return e;
+        } else {
+            return null;
+        }
     }
 
     /**
