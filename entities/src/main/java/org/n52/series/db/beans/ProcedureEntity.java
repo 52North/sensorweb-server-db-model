@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,16 +24,19 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
 import java.util.Set;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> implements HasProcedureHistory,
         HasProcedureDescriptionFormat, HasGeometry, HibernateRelations.HasAbstractDatasets, IsStaEntity {
 
     public static final String PROPERTY_REFERENCE = "reference";
+    public static final String PROPERTY_AGGRAGATION = "aggregation";
     public static final String PROPERTY_VALID_PROCEDURE_TIME = "procedureHistory";
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "format";
     public static final String PROPERTY_DESCRIPTION_FILE = "descriptionFile";
 
     private static final long serialVersionUID = 4028002933920185756L;
-
     private boolean reference;
 
     private FormatEntity format;

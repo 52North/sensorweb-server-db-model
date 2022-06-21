@@ -42,7 +42,7 @@
         <many-to-one name="locationEncoding" class="org.n52.series.db.beans.FormatEntity" foreign-key="fk_location_format">
             <column name="fk_format_id" not-null="true" index="idx_location_format"/>
         </many-to-one>
-        <set name="parameters" table="location_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="location_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
             <key foreign-key="fk_location_parameter">
                 <column name="fk_location_id" not-null="true"/>
             </key>
@@ -63,6 +63,11 @@
             <many-to-many class="HistoricalLocationEntity" foreign-key="fk_historical_loc_location">
                 <column name="fk_historical_location_id" not-null="true" index="idx_location_historical_location"/>
             </many-to-many>
+        </set>
+          <!-- Comments for the translations are defined below! -->
+        <set name="translations" table="location_i18n" inverse="false" fetch="select" cascade="all">
+            <key column="fk_location_id" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nLocationEntity" />
         </set>
     </class>
 
@@ -108,7 +113,7 @@
                 <param name="sequence_name">location_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="LocationEntity" foreign-key="fk_location">
+        <many-to-one name="entity" class="LocationEntity" foreign-key="fk_location" insert="false" update="false">
             <column name="fk_location_id" not-null="true" index="idx_location_i18n_location">
                 <comment>Reference to the feature table this internationalization belongs to.</comment>
             </column>

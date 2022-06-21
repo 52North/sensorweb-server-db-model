@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,6 +24,9 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class DescribableEntity extends IdEntity implements Describable, Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
@@ -32,6 +34,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     public static final String PROPERTY_IDENTIFIER_CODESPACE = IDENTIFIER_CODESPACE;
 
     public static final String PROPERTY_SERVICE = "service";
+    public static final String PROPERTY_SERVICE_ID = PROPERTY_SERVICE + "." + PROPERTY_ID;
 
     public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
@@ -153,18 +156,22 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
 
     @Override
     public void addParameters(Set<ParameterEntity<?>> parameters) {
-        if (getParameters() == null) {
-            setParameters(new LinkedHashSet<>());
+        if (parameters != null) {
+            if (this.getParameters() == null) {
+                setParameters(new LinkedHashSet<>());
+            }
+            this.getParameters().addAll(parameters);
         }
-        this.parameters.addAll(parameters);
     }
 
     @Override
     public void addParameter(ParameterEntity<?> parameter) {
-        if (getParameters() == null) {
-            setParameters(new LinkedHashSet<>());
+        if (parameter != null) {
+            if (this.getParameters() == null) {
+                setParameters(new LinkedHashSet<>());
+            }
+            this.getParameters().add(parameter);
         }
-        this.parameters.add(parameter);
     }
 
     @Override

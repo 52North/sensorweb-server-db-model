@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>21</version>
+        <version>24</version>
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
@@ -21,7 +21,7 @@
         <module>dialects</module>
     </modules>
      <organization>
-         <name>52North Initiative for Geospatial Open Source Software GmbH</name>
+         <name>52North Spatial Information Research GmbH</name>
          <url>https://52north.org</url>
      </organization>
 
@@ -55,13 +55,21 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.junit>5.7.0</version.junit>
+        <version.junit>5.8.2</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>24.1</geotools.version>
-        <geolatte.version>1.6.0</geolatte.version>
-        <hibernate.version>5.4.27.Final</hibernate.version>
-        <spring-boot.version>2.4.1</spring-boot.version>
+        <geotools.version>27.0</geotools.version>
+        <geolatte.version>1.8.2</geolatte.version>
+        <hibernate.version>5.6.9.Final</hibernate.version>
+        <spring-boot.version>2.7.0</spring-boot.version>
         <javax.version>8.0.1</javax.version>
+        
+        <postgresql.version>42.4.0</postgresql.version>
+        <postgis.version>2.5.1</postgis.version>
+        <ojdbc8.version>21.5.0.0</ojdbc8.version>
+        <sqljdbc.version>11.1.1.jre8-preview</sqljdbc.version>
+        <mysql.version>8.0.29</mysql.version>
+        <h2.version>2.1.212</h2.version>
+        <geodb.version>0.9</geodb.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
@@ -117,6 +125,90 @@
                 <artifactId>db-model-dialects</artifactId>
                 <version>${project.version}</version>
             </dependency>
+            
+            <dependency>
+	            <groupId>org.postgresql</groupId>
+	            <artifactId>postgresql</artifactId>
+	            <version>${postgresql.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>net.postgis</groupId>
+	            <artifactId>postgis-jdbc</artifactId>
+	            <version>${postgis.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.oracle.database.jdbc</groupId>
+	            <artifactId>ojdbc8</artifactId>
+	            <version>${ojdbc8.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.microsoft.sqlserver</groupId>
+	            <artifactId>mssql-jdbc</artifactId>
+	            <version>${sqljdbc.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>mysql</groupId>
+	            <artifactId>mysql-connector-java</artifactId>
+	            <version>${mysql.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>com.h2database</groupId>
+	            <artifactId>h2</artifactId>
+	            <version>${h2.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.opengeo</groupId>
+	            <artifactId>geodb</artifactId>
+	            <version>${geodb.version}</version>
+	            <exclusions>
+	                <exclusion>
+	                    <groupId>com.h2database</groupId>
+	                    <artifactId>h2</artifactId>
+	                </exclusion>
+	            </exclusions>
+	        </dependency>
+
+			<dependency>
+				<groupId>org.postgresql</groupId>
+				<artifactId>postgresql</artifactId>
+				<version>${postgresql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>net.postgis</groupId>
+				<artifactId>postgis-jdbc</artifactId>
+				<version>${postgis.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.oracle.database.jdbc</groupId>
+				<artifactId>ojdbc8</artifactId>
+				<version>${ojdbc8.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.microsoft.sqlserver</groupId>
+				<artifactId>mssql-jdbc</artifactId>
+				<version>${sqljdbc.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.opengeo</groupId>
+				<artifactId>geodb</artifactId>
+				<version>${geodb.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>com.h2database</groupId>
+						<artifactId>h2</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
 
             <dependency>
                 <groupId>javax</groupId>
@@ -127,18 +219,23 @@
             <dependency>
                 <groupId>com.neovisionaries</groupId>
                 <artifactId>nv-i18n</artifactId>
-                <version>1.28</version>
+                <version>1.29</version>
             </dependency>
             <dependency>
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>3.0.2</version>
+             </dependency>
+             <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>4.6.0</version>
             </dependency>
 
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.10.9</version>
+                <version>2.10.14</version>
             </dependency>
 
             <dependency>
@@ -233,7 +330,7 @@
             <dependency>
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.18.0</version>
+                <version>1.18.2</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->
@@ -246,6 +343,12 @@
                 <groupId>org.geolatte</groupId>
                 <artifactId>geolatte-geom</artifactId>
                 <version>${geolatte.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.spotbugs</groupId>
+                <artifactId>spotbugs-annotations</artifactId>
+                <version>4.7.0</version>
+                <scope>provided</scope>
             </dependency>
 
             <!-- Testing -->
@@ -437,7 +540,7 @@
                 <plugin>
                     <groupId>net.revelc.code.formatter</groupId>
                     <artifactId>formatter-maven-plugin</artifactId>
-                    <version>2.13.0</version>
+                    <version>2.16.0</version>
                     <configuration>
                         <configFile>${project.basedir}/etc/eclipse_formatter.xml</configFile>
                         <lineEnding>LF</lineEnding>
@@ -532,6 +635,23 @@
                             </execution>
                         </executions>
                     </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <profile>
+            <id>dependency</id>
+            <build>
+                <plugins>
+                     <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-dependency-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>analyze-dependencies</id>
+                                <phase>none</phase>
+                            </execution>
+                        </executions>
+                    </plugin>  
                 </plugins>
             </build>
         </profile>

@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +19,8 @@ import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class AbstractDatasetEntity extends DescribableEntity
         implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
 
@@ -285,7 +287,7 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public boolean isSetOMObservationType() {
-        return (getOMObservationType() != null) && getOMObservationType().isSetFormat();
+        return getOMObservationType() != null && getOMObservationType().isSetFormat();
     }
 
     public FormatEntity getOmObservationType() {
@@ -367,6 +369,9 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     @Override
     public String getLabelFrom(final String locale) {
+        if (isSetName()) {
+            return super.getLabelFrom(locale);
+        }
         final StringBuilder sb = new StringBuilder();
         sb.append(phenomenon.getLabelFrom(locale)).append(" ");
         sb.append(procedure.getLabelFrom(locale)).append(", ");

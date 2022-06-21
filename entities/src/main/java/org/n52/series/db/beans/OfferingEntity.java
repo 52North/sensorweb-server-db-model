@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -26,9 +25,12 @@ import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Date;
 import java.util.Set;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes, HasFeatureTypes,
         HasRelatedFeatures, HasPhenomenonTime, HasResultTimes, HasValidTime {
 
@@ -206,7 +208,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
 
     @Override
     public boolean isSetValidTime() {
-        return (getValidTimeStart() != null) && (getValidTimeEnd() != null);
+        return getValidTimeStart() != null && getValidTimeEnd() != null;
     }
 
     @Override

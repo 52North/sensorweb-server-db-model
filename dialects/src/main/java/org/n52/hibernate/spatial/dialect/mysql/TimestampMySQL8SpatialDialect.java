@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,4 +46,8 @@ public class TimestampMySQL8SpatialDialect extends MySQL8SpatialDialect {
         return super.getTypeName(code);
     }
 
+    @Override
+    public String getNullColumnString() {
+        return " NULL";
+    }
 }

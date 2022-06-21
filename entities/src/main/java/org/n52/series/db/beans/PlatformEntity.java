@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,8 +24,12 @@ import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
-        HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+public class PlatformEntity extends DescribableEntity
+        implements HasLocations, IsStaEntity, HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed,
+        HibernateRelations.HasParameters, HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
@@ -38,6 +41,8 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     private Set<LocationEntity> locations;
     private Set<HistoricalLocationEntity> historicalLocations;
     private Set<AbstractDatasetEntity> datasets;
+    private AssessmentTypeEntity assessmentType;
+    private NetworkEntity network;
     private boolean processed;
 
     @Override
@@ -102,6 +107,38 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     @Override
     public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
+    }
+
+    @Override
+    public AssessmentTypeEntity getAssessmentType() {
+        return assessmentType;
+    }
+
+    @Override
+    public PlatformEntity setAssessmentType(AssessmentTypeEntity type) {
+        this.assessmentType = type;
+        return this;
+    }
+
+    @Override
+    public boolean isSetAssessmentType() {
+        return getAssessmentType() != null && getAssessmentType().isSetAssessmentType();
+    }
+
+    @Override
+    public NetworkEntity getNetwork() {
+        return network;
+    }
+
+    @Override
+    public PlatformEntity setNetwork(NetworkEntity network) {
+        this.network = network;
+        return this;
+    }
+
+    @Override
+    public boolean isSetNetwork() {
+        return getNetwork() != null;
     }
 
 }

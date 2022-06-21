@@ -28,13 +28,13 @@
                 <!-- <comment>A short description of the procedure</comment> -->
             </column>
         </property>
-        <property name="reference" type="org.n52.hibernate.type.SmallBooleanType">
-            <column name="is_reference" default="0" check="is_reference in (1,0)">
+        <property name="reference" type="org.n52.hibernate.type.SmallBooleanType" index="idx_procedure_is_reference">
+            <column name="is_reference" not-null="true" default="0" check="is_reference in (1,0)">
                 <!-- <comment>Flag that indicates if the procedure is a reference.</comment> -->
             </column>
         </property>
         <!-- Comments for the translations are defined below! -->
-        <set name="translations" table="procedure_i18n" inverse="true" fetch="select">
+        <set name="translations" table="procedure_i18n" inverse="false" fetch="select" cascade="all">
             <key column="fk_procedure_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nProcedureEntity" />
         </set>
@@ -50,7 +50,7 @@
                 <param name="sequence_name">procedure_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="ProcedureEntity" foreign-key="fk_i18n_procedure">
+        <many-to-one name="entity" class="ProcedureEntity" foreign-key="fk_i18n_procedure" insert="false" update="false">
             <column name="fk_procedure_id" not-null="true" index="idx_procedure_i18n_procedure">
                 <!-- <comment>Reference to the procedure table this internationalization belongs to.</comment> -->
             </column>

@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -30,6 +29,7 @@ import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Comparator;
@@ -38,6 +38,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class DataEntity<T> extends DescribableEntity
         implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
         HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed, IsNoDataValue {
@@ -203,7 +204,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean isSetGeometryEntity() {
-        return (geometryEntity != null) && !geometryEntity.isEmpty();
+        return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
@@ -298,7 +299,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasRelatedObservations() {
-        return (getRelatedObservations() != null) && !getRelatedObservations().isEmpty();
+        return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
     }
 
     public String getValueIdentifier() {
@@ -310,7 +311,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueIdentifier() {
-        return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
+        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
     }
 
     public String getValueName() {
@@ -322,7 +323,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueName() {
-        return (getValueName() != null) && !getValueName().isEmpty();
+        return getValueName() != null && !getValueName().isEmpty();
     }
 
     public String getValueDescription() {
@@ -334,7 +335,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueDescription() {
-        return (getValueDescription() != null) && !getValueDescription().isEmpty();
+        return getValueDescription() != null && !getValueDescription().isEmpty();
     }
 
     public boolean hasVerticalInterval() {

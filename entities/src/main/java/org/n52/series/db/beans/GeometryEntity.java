@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,9 +19,14 @@ import java.io.Serializable;
 import java.util.StringJoiner;
 
 import org.locationtech.jts.geom.Coordinate;
+import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
 import org.locationtech.jts.geom.GeometryFactory;
+import org.locationtech.jts.geom.Polygon;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class GeometryEntity implements Serializable {
 
     public static final String PROPERTY_GEOMETRY = "geometry";
@@ -33,7 +37,7 @@ public class GeometryEntity implements Serializable {
 
     private static final long serialVersionUID = -1411829809704409439L;
 
-    private GeometryFactory geometryFactory;
+    private GeometryFactory geometryFactory = new GeometryFactory();
 
     private Geometry geometry;
 
@@ -46,7 +50,7 @@ public class GeometryEntity implements Serializable {
     private int srid;
 
     public boolean isSetGeometry() {
-        return (geometry != null) && !geometry.isEmpty();
+        return geometry != null && !geometry.isEmpty();
     }
 
     public void setGeometry(final Geometry geometry) {
@@ -65,13 +69,12 @@ public class GeometryEntity implements Serializable {
     }
 
     private Geometry createPoint() {
-        Coordinate coordinate =
-                (alt != null) && !alt.isNaN() ? new Coordinate(lon, lat, alt) : new Coordinate(lon, lat);
+        Coordinate coordinate = alt != null && !alt.isNaN() ? new Coordinate(lon, lat, alt) : new Coordinate(lon, lat);
         return getGeometryFactory().createPoint(coordinate);
     }
 
     public boolean isSetLonLat() {
-        return (lon != null) && (lat != null);
+        return lon != null && lat != null;
     }
 
     public Double getLon() {
@@ -128,6 +131,36 @@ public class GeometryEntity implements Serializable {
                 setSrid(entity.getSrid());
             }
         }
+    }
+
+    public void expand(GeometryEntity entity) {
+        if (entity != null && entity.getGeometry() != null) {
+            if (getGeometry() != null) {
+                Envelope envelope = getGeometry().getEnvelopeInternal();
+                envelope.expandToInclude(entity.getGeometry().getEnvelopeInternal());
+                setGeometry(toPolygon(envelope, getGeometry().getSRID()));
+            } else {
+                setGeometry(toPolygon(entity.getGeometry().getEnvelopeInternal(), entity.getGeometry().getSRID()));
+                setSrid(entity.getSrid());
+            }
+        }
+    }
+
+    private Polygon toPolygon(Envelope env, int srid) {
+        Coordinate[] coords = toCoordiates(env);
+        Polygon polygon = getGeometryFactory().createPolygon(getGeometryFactory().createLinearRing(coords), null);
+        polygon.setSRID(srid);
+        return polygon;
+    }
+
+    private Coordinate[] toCoordiates(Envelope env) {
+        Coordinate[] coords = new Coordinate[5];
+        coords[0] = new Coordinate(env.getMinX(), env.getMinY());
+        coords[1] = new Coordinate(env.getMinX(), env.getMaxY());
+        coords[2] = new Coordinate(env.getMaxX(), env.getMaxY());
+        coords[3] = new Coordinate(env.getMaxX(), env.getMinY());
+        coords[4] = new Coordinate(env.getMinX(), env.getMinY());
+        return coords;
     }
 
     public GeometryEntity copy(GeometryEntity entity) {

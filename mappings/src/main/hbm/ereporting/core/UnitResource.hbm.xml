@@ -29,7 +29,7 @@
             </column>
         </property>
         <!-- Comments for the translations are defined below! -->
-          <set name="translations" table="unit_i18n" inverse="true" fetch="select">
+          <set name="translations" table="unit_i18n" inverse="false" fetch="select" cascade="all">
              <key column="fk_unit_id" not-null="true"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nUnitEntity"/>
         </set>
@@ -45,7 +45,7 @@
                 <param name="sequence_name">unit_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="UnitEntity" foreign-key="fk_unit">
+        <many-to-one name="entity" class="UnitEntity" foreign-key="fk_unit" insert="false" update="false">
             <column name="fk_unit_id" not-null="true" index="idx_unit_i18n_unit">
                <comment>Reference to the unit table this internationalization belongs to.</comment>
             </column>

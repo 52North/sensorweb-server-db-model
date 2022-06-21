@@ -38,8 +38,8 @@
                 <comment>The unit of the vertical value, e.g. m</comment>
             </column>
         </many-to-one>
-        <set name="translations" table="value_profile_i18n" inverse="true" fetch="select">
-            <key column="fk_value_profile_id" not-null="true" foreign-key="fk_value_profile_i18n"/>
+        <set name="translations" table="value_profile_i18n" inverse="false" fetch="select" cascade="all">
+            <key column="fk_value_profile_id" not-null="true"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity" />
         </set>
     </class>
@@ -53,7 +53,7 @@
                 <param name="sequence_name">value_profile_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_i18n_value_profile">
+        <many-to-one name="entity" class="VerticalMetadataEntity" foreign-key="fk_i18n_value_profile" insert="false" update="false">
             <column name="fk_value_profile_id" not-null="true" index="idx_value_profile_i18n_value_profile">
                 <comment>Reference to the value_profile table this internationalization belongs to.</comment>
             </column>

@@ -33,7 +33,7 @@
             </many-to-many>
         </set>
         <!-- Comments for the translations are defined below! -->
-        <set name="translations" table="tag_i18n" inverse="true" fetch="select">
+        <set name="translations" table="tag_i18n" inverse="false" fetch="select" cascade="all">
             <key column="fk_tag_id" not-null="true" />
             <one-to-many class="org.n52.series.db.beans.i18n.I18nTagEntity" />
         </set>
@@ -49,7 +49,7 @@
                 <param name="sequence_name">tag_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="org.n52.series.db.beans.TagEntity" foreign-key="fk_tag">
+        <many-to-one name="entity" class="org.n52.series.db.beans.TagEntity" foreign-key="fk_tag" insert="false" update="false">
             <column name="fk_tag_id" not-null="true" index="idx_tag_i18n_tag">
                 <comment>Reference to the tag table this internationalization belongs to. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
             </column>

@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,9 +18,12 @@ package org.n52.series.db.beans;
 
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Objects;
 import java.util.Set;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity>
         implements HibernateRelations.HasAbstractDatasets, IsStaEntity {
 

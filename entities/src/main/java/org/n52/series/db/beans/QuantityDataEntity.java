@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,7 +23,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class QuantityDataEntity extends DataEntity<BigDecimal> {
+public class QuantityDataEntity extends DataEntity<BigDecimal> implements NumericalDataEntity<BigDecimal> {
 
     public static final BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
@@ -35,16 +34,28 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> {
         return getValue() == null ? false : containsValue(noDataValues, getValue());
     }
 
-    private boolean containsValue(Collection<String> collection, BigDecimal key) {
+    @Override
+    public boolean checkNoDataValue(Collection<BigDecimal> noDataValues) {
+        return getValue() == null ? false : checkValue(noDataValues, getValue());
+    }
+
+    private boolean checkValue(Collection<BigDecimal> collection, BigDecimal value) {
         if (collection == null) {
             return false;
         }
-        for (BigDecimal noDataValue : convertToDoubles(collection)) {
-            if (noDataValue.subtract(key).abs().compareTo(DOUBLE_THRESHOLD) < 0) {
+        for (BigDecimal noDataValue : collection) {
+            if (noDataValue.subtract(value).abs().compareTo(DOUBLE_THRESHOLD) < 0) {
                 return true;
             }
         }
         return false;
+    }
+
+    private boolean containsValue(Collection<String> collection, BigDecimal value) {
+        if (collection == null) {
+            return false;
+        }
+        return checkValue(convertToDoubles(collection), value);
     }
 
     private Collection<BigDecimal> convertToDoubles(Collection<String> collection) {

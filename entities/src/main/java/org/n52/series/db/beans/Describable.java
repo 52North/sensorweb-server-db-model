@@ -1,6 +1,5 @@
 /*
- * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
- * Software GmbH
+ * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,7 +20,12 @@ import org.n52.series.db.beans.HibernateRelations.HasDescriptionTranslation;
 import org.n52.series.db.beans.HibernateRelations.HasId;
 import org.n52.series.db.beans.HibernateRelations.HasNameTranslation;
 import org.n52.series.db.beans.HibernateRelations.HasParameters;
+import org.n52.series.db.beans.i18n.I18nEntity;
+import org.n52.series.db.common.LocaleHelper;
 
+import java.util.List;
+import java.util.Locale;
+import java.util.Locale.LanguageRange;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -53,6 +57,74 @@ public interface Describable<T>
             // absolute fallback
             return Long.toString(getId());
         }
+    }
+
+    default boolean isNameAvailable() {
+        return getName() != null && !getName().isEmpty();
+    }
+
+    default boolean isDomainAvailable() {
+        return getDomain() != null && !getDomain().isEmpty();
+    }
+
+    @Override
+    default boolean isi18nNameAvailable(String locale) {
+        return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
+    }
+
+    @Override
+    default boolean noTranslationAvailable(String locale) {
+        return locale == null || locale.isEmpty() || getTranslations() == null || getTranslations().isEmpty();
+    }
+
+    @Override
+    default String getNameI18n(String locale) {
+        if (noTranslationAvailable(locale)) {
+            return getName();
+        }
+        I18nEntity<? extends Describable> translation = getTranslation(locale);
+        return translation != null ? translation.getName() : getName();
+    }
+
+    @Override
+    default String getDescriptionI18n(String locale) {
+        if (noTranslationAvailable(locale)) {
+            return getDescription();
+        }
+        I18nEntity<? extends Describable> translation = getTranslation(locale);
+        return translation != null ? translation.getDescription() : getDescription();
+    }
+
+    @Override
+    default String getCountryCode(String locale) {
+        if (locale != null) {
+            return locale.split(LOCALE_REGEX).length > 1 ? locale.split(LOCALE_REGEX)[1]
+                    : locale.split(LOCALE_REGEX)[0];
+        }
+        return "";
+    }
+
+    @Override
+    default I18nEntity<? extends Describable> getTranslation(String locale) {
+        if (!noTranslationAvailable(locale)) {
+            String countryCode = getCountryCode(locale);
+            Locale matchingLocale = getMatchingLocale(getTranslations(), locale);
+            for (I18nEntity<? extends Describable> translation : getTranslations()) {
+                Locale translatedLocale = LocaleHelper.decode(translation.getLocale());
+                if (translatedLocale.equals(matchingLocale)
+                        || translatedLocale.getCountry().equalsIgnoreCase(countryCode)) {
+                    return translation;
+                }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    default Locale getMatchingLocale(Set<I18nEntity<? extends Describable>> translations, String queriedLocale) {
+        List<LanguageRange> localeRange = Locale.LanguageRange.parse(queriedLocale);
+        return Locale.lookup(localeRange,
+                translations.stream().map(t -> LocaleHelper.decode(t.getLocale())).collect(Collectors.toSet()));
     }
 
 }

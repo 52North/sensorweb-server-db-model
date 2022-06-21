@@ -1,4 +1,4 @@
-Copyright 2013 52°North Initiative for Geospatial Open Source Software GmbH
+Copyright (C) 2013-2021 52°North Spatial Information Research GmbH
 
 Licensed under GNU General Public License, Version 2.0
 
@@ -6,7 +6,6 @@ This project includes:
   AntLR Parser Generator under BSD License
   Byte Buddy (without dependencies) under Apache License, Version 2.0
   ClassMate under Apache License, Version 2.0
-  dom4j under BSD 3-clause New License
   FindBugs-jsr305 under The Apache Software License, Version 2.0
   Hibernate Commons Annotations under GNU Library General Public License v2.1 or later
   Hibernate ORM - hibernate-core under GNU Library General Public License v2.1 or later
@@ -19,7 +18,6 @@ This project includes:
   JavaBeans Activation Framework API jar under CDDL/GPLv2+CE
   javaee-api under CDDL + GPLv2 with classpath exception
   JavaMail API under CDDL/GPLv2+CE
-  Javassist under MPL 1.1 or LGPL 2.1 or Apache License 2.0
   javax.persistence-api under Eclipse Public License v1.0 or Eclipse Distribution License v. 1.0
   JAXB Runtime under Eclipse Distribution License - v 1.0
   jaxb-api under CDDL 1.1 or GPL2 w/ CPE

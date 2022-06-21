@@ -108,7 +108,7 @@
                 </column>
             </property>
         </component>
-        <set name="parameters" table="observation_parameter" inverse="true" lazy="true">
+        <set name="parameters" table="observation_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
             <comment>Storage of relations between observation and related parameter</comment>
             <key foreign-key="fk_observation_parameter">
                 <column name="fk_observation_id" not-null="true"/>
@@ -156,7 +156,7 @@
             </column>
         </property>
 
-        <set name="translations" table="observation_i18n" inverse="true" fetch="select">
+        <set name="translations" table="observation_i18n" inverse="false" fetch="select" cascade="all">
             <key column="fk_observation_id" not-null="true" foreign-key="fk_observation_i18n"/>
             <one-to-many class="org.n52.series.db.beans.i18n.I18nDataEntity" />
         </set>
@@ -250,7 +250,7 @@
                 </key>
                <property name="value"
                        type="blob">
-                 <column name="value">
+                 <column name="value_blob">
                      <comment>The blob value of an observation</comment>
                  </column>
                 </property>
@@ -310,7 +310,7 @@
                 <param name="sequence_name">observation_i18n_seq</param>
             </generator>
         </id>
-        <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation">
+        <many-to-one name="entity" class="DataEntity" foreign-key="fk_i18n_observation" insert="false" update="false">
             <column name="fk_observation_id" not-null="true" index="idx_observation_i18n_observation">
                 <comment>Reference to the data table this internationalization belongs to.</comment>
             </column>
@@ -341,4 +341,32 @@
             </column>
         </property>
     </class>
+    <database-object>
+        <create>CREATE INDEX idx_observation_ds_sts ON ${schema}.observation USING btree (fk_dataset_id, sampling_time_start)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE INDEX idx_observation_sts_ds ON ${schema}.observation USING btree (sampling_time_start, fk_dataset_id)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE INDEX idx_observation_ds_ste ON ${schema}.observation USING btree (fk_dataset_id, sampling_time_end)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
+    <database-object>
+        <create>CREATE INDEX idx_observation_ste_ds ON ${schema}.observation USING btree (sampling_time_end, fk_dataset_id)</create>
+        <drop></drop>
+        <dialect-scope name="org.hibernate.dialect.PostgreSQL95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.postgis.TimestampWithTimeZonePostgisPG95Dialect"></dialect-scope>
+        <dialect-scope name="org.n52.hibernate.spatial.dialect.TimestampWithTimeZonePostgisPG95DialectNoComments"></dialect-scope>
+    </database-object>
 </hibernate-mapping>
