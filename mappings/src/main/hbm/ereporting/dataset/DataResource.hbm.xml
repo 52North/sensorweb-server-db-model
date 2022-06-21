@@ -327,9 +327,9 @@
         </subclass>
 
         <subclass name="SensorML20DataEntity" extends="DataEntity" discriminator-value="sensorML20">
-            <property name="value" type="string">
+            <property name="value" type="text">
                 <column name="value_array">
-                    <comment>The XML representation of the SensorML20 Observation(SensorML20Observation)</comment>
+                    <comment>The XML representation of the SensorML20 Observation (SensorML20Observation)</comment>
                 </column>
             </property>
         </subclass>
