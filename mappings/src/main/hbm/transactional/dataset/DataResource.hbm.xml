@@ -292,19 +292,19 @@
             </set>
         </subclass>
 
+        <subclass name="TrajectoryDataEntity" extends="DataEntity" discriminator-value="trajectory">
+            <set name="value" table="observation" cascade="remove">
+                <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
+                <one-to-many class="DataEntity" />
+            </set>
+        </subclass>
+
         <subclass name="SensorML20DataEntity" extends="DataEntity" discriminator-value="sensorML20">
             <property name="value" type="text">
                 <column name="value_array">
                     <comment>The XML representation of the SensorML20 Observation (SensorML20Observation)</comment>
                 </column>
             </property>
-        </subclass>
-
-        <subclass name="TrajectoryDataEntity" extends="DataEntity" discriminator-value="trajectory">
-            <set name="value" table="observation" cascade="remove">
-                <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
-                <one-to-many class="DataEntity" />
-            </set>
         </subclass>
     </class>
 

@@ -124,9 +124,8 @@ public class ParameterFactory {
             ParameterEntity<?> e = from(entityType, valueType);
             e.setDescribeableEntity(entity);
             return e;
-        } else {
-            return null;
         }
+        return null;
     }
 
     /**
