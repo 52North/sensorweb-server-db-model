@@ -124,7 +124,7 @@
         <subclass discriminator-value="complex" extends="LocationParameterEntity"
                   name="LocationComplexParameterEntity">
             <set name="value" table="location_parameter" inverse="false" cascade="all">
-                <key foreign-key="fk_location_parent_parameter">
+                <key>
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>
                     </column>

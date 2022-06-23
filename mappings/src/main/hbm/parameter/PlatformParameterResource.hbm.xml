@@ -40,8 +40,8 @@
             </column>
         </property>
 
-        <many-to-one name="platform" class="org.n52.series.db.beans.PlatformEntity" foreign-key="fk_param_platform_id"
-                     lazy="proxy" insert="false" update="false">
+        <many-to-one name="platform" class="org.n52.series.db.beans.PlatformEntity"
+        			 foreign-key="fk_param_platform_id" insert="false" update="false">
             <column name="fk_platform_id" not-null="true" index="idx_platform_parameter">
                 <comment>Reference to the Platform this Parameter describes.</comment>
             </column>
@@ -115,7 +115,7 @@
         <subclass discriminator-value="complex" extends="PlatformParameterEntity"
                   name="PlatformComplexParameterEntity">
             <set name="value" table="platform_parameter" inverse="false" cascade="all">
-                <key foreign-key="fk_platform_parent_parameter">
+                <key>
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>
                     </column>

@@ -136,7 +136,11 @@
 	            </column>
 	        </many-to-one>
             <set name="value" table="dataset_parameter" inverse="false" cascade="all">
-                <key column="fk_parent_parameter_id" not-null="false"/>
+                <key>
+                    <column name="fk_parent_parameter_id" not-null="false">
+                        <comment>Reference to the parent parameter</comment>
+                    </column>
+                </key>
                 <one-to-many class="DatasetParameterEntity" />
             </set>
         </subclass>
