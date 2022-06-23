@@ -299,6 +299,14 @@
                 <one-to-many class="DataEntity" />
             </set>
         </subclass>
+
+        <subclass name="SensorML20DataEntity" extends="DataEntity" discriminator-value="sensorML20">
+            <property name="value" type="text">
+                <column name="value_array">
+                    <comment>The XML representation of the SensorML20 Observation (SensorML20Observation)</comment>
+                </column>
+            </property>
+        </subclass>
     </class>
 
     <class name="org.n52.series.db.beans.i18n.I18nDataEntity" table="observation_i18n">
