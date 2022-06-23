@@ -17,7 +17,6 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
-
         <module>dialects</module>
     </modules>
      <organization>

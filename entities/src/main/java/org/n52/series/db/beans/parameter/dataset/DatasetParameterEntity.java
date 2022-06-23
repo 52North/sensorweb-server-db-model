@@ -31,7 +31,7 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_DATASET_ID = "datasetId";
     private static final long serialVersionUID = 8580995030975785255L;
     private AbstractDatasetEntity dataset;
-    private long datasetId;
+    private Long datasetId;
 
     public AbstractDatasetEntity getDataset() {
         return dataset;

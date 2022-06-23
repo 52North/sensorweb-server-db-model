@@ -31,7 +31,7 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_PHENOMENON_ID = "phenomenonId";
     private static final long serialVersionUID = 5234864540316301294L;
     private PhenomenonEntity phenomenon;
-    private long phenomenonId;
+    private Long phenomenonId;
 
     public PhenomenonEntity getPhenomenon() {
         return phenomenon;

@@ -110,9 +110,7 @@
         </component>
         <set name="parameters" table="observation_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
             <comment>Storage of relations between observation and related parameter</comment>
-            <key foreign-key="fk_observation_parameter">
-                <column name="fk_observation_id" not-null="true"/>
-            </key>
+            <key column="fk_observation_id" not-null="true"/>
             <one-to-many class="org.n52.series.db.beans.parameter.observation.ObservationParameterEntity" />
         </set>
         <!-- Comments are defined in the RelatedDataResource.hbm.xml -->

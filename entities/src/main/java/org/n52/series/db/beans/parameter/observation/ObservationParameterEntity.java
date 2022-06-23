@@ -31,7 +31,7 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_OBSERVATION_ID = "observationId";
     private static final long serialVersionUID = -3170715124801725482L;
     private DataEntity observation;
-    private long observationId;
+    private Long observationId;
 
     public DataEntity getObservation() {
         return observation;

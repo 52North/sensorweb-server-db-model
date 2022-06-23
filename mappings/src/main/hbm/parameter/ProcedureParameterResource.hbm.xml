@@ -41,7 +41,7 @@
         </property>
 
         <many-to-one name="procedure" class="org.n52.series.db.beans.ProcedureEntity"
-                     foreign-key="fk_param_procedure_id">
+                     foreign-key="fk_param_procedure_id" insert="false" update="false">
             <column name="fk_procedure_id" not-null="true" index="idx_procedure_parameter">
                 <comment>Reference to the Procedure this Parameter describes.</comment>
             </column>
@@ -123,7 +123,7 @@
         <subclass discriminator-value="complex" extends="ProcedureParameterEntity"
                   name="ProcedureComplexParameterEntity">
             <set name="value" table="procedure_parameter" inverse="false" cascade="all">
-                <key foreign-key="fk_procedure_parent_parameter">
+                <key>
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>
                     </column>

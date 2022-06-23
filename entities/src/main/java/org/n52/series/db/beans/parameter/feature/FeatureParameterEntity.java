@@ -31,7 +31,7 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_FEATURE_ID = "featureId";
     private static final long serialVersionUID = 1123453212836718013L;
     private AbstractFeatureEntity feature;
-    private long featureId;
+    private Long featureId;
 
     public AbstractFeatureEntity getFeature() {
         return feature;
@@ -41,12 +41,12 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
         this.feature = feature;
     }
 
-    public long getFeatureId() {
+    public Long getFeatureId() {
         return featureId;
     }
 
-    public void setFeatureId(long observationId) {
-        this.featureId = observationId;
+    public void setFeatureId(long featureId) {
+        this.featureId = featureId;
     }
 
     @Override

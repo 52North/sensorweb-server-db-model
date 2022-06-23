@@ -32,7 +32,7 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
     private static final long serialVersionUID = -8427939633323086462L;
     private PlatformEntity platform;
 
-    private long platformId;
+    private Long platformId;
 
     public PlatformEntity getPlatform() {
         return platform;

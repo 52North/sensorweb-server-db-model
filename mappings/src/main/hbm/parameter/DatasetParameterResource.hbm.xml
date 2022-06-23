@@ -42,7 +42,7 @@
         </property>
 
         <many-to-one name="dataset" class="org.n52.series.db.beans.AbstractDatasetEntity"
-                     foreign-key="fk_param_dataset_id">
+                     foreign-key="fk_param_dataset_id" insert="false" update="false">
             <column name="fk_dataset_id" not-null="true" index="idx_dataset_parameter">
                 <comment>Reference to the Dataset this Parameter describes.</comment>
             </column>
@@ -124,7 +124,7 @@
         <subclass discriminator-value="complex" extends="DatasetParameterEntity"
                   name="DatasetComplexParameterEntity">
             <set name="value" table="dataset_parameter" inverse="false" cascade="all">
-                <key foreign-key="fk_dataset_parent_parameter">
+                <key>
                     <column name="fk_parent_parameter_id" not-null="false">
                         <comment>Reference to the parent parameter</comment>
                     </column>

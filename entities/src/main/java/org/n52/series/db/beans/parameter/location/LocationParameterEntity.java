@@ -31,7 +31,7 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_LOCATION_ID = "locationId";
     private static final long serialVersionUID = 8449960591522592006L;
     private LocationEntity location;
-    private long locationId;
+    private Long locationId;
 
     public LocationEntity getLocation() {
         return location;
