@@ -41,11 +41,11 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
         this.dataset = dataset;
     }
 
-    public long getDatasetId() {
+    public Long getDatasetId() {
         return datasetId;
     }
 
-    public void setDatasetId(long observationId) {
+    public void setDatasetId(Long observationId) {
         this.datasetId = observationId;
     }
 

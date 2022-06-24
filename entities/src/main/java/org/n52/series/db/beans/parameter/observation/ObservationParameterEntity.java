@@ -41,11 +41,11 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
         this.observation = observation;
     }
 
-    public long getObservationId() {
+    public Long getObservationId() {
         return observationId;
     }
 
-    public void setObservationId(long observationId) {
+    public void setObservationId(Long observationId) {
         this.observationId = observationId;
     }
 

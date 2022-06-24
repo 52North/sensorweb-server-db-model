@@ -41,11 +41,11 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
         this.location = location;
     }
 
-    public long getLocationId() {
+    public Long getLocationId() {
         return locationId;
     }
 
-    public void setLocationId(long observationId) {
+    public void setLocationId(Long observationId) {
         this.locationId = observationId;
     }
 

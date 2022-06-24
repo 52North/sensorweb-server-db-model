@@ -41,11 +41,11 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
         this.phenomenon = phenomenon;
     }
 
-    public long getPhenomenonId() {
+    public Long getPhenomenonId() {
         return phenomenonId;
     }
 
-    public void setPhenomenonId(long observationId) {
+    public void setPhenomenonId(Long observationId) {
         this.phenomenonId = observationId;
     }
 

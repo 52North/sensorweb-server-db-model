@@ -31,7 +31,7 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_PROCEDURE_ID = "procedureId";
     private static final long serialVersionUID = -3203271103169023133L;
     private ProcedureEntity procedure;
-    private long procedureId;
+    private Long procedureId;
 
     public ProcedureEntity getProcedure() {
         return procedure;
@@ -41,11 +41,11 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
         this.procedure = procedure;
     }
 
-    public long getProcedureId() {
+    public Long getProcedureId() {
         return procedureId;
     }
 
-    public void setProcedureId(long procedureId) {
+    public void setProcedureId(Long procedureId) {
         this.procedureId = procedureId;
     }
 

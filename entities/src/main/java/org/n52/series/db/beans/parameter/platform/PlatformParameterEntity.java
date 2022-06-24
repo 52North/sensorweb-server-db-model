@@ -31,7 +31,6 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_PLATFORM_ID = "platformId";
     private static final long serialVersionUID = -8427939633323086462L;
     private PlatformEntity platform;
-
     private Long platformId;
 
     public PlatformEntity getPlatform() {
@@ -42,11 +41,11 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
         this.platform = platform;
     }
 
-    public long getPlatformId() {
+    public Long getPlatformId() {
         return platformId;
     }
 
-    public void setPlatformId(long platformId) {
+    public void setPlatformId(Long platformId) {
         this.platformId = platformId;
     }
 
