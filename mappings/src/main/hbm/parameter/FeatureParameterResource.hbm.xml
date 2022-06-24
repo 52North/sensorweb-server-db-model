@@ -49,10 +49,12 @@
         <property name="featureId" insert="false" update="false" type="long">
             <column name="fk_feature_id" not-null="true"/>
         </property>
-        <property name="parent" type="long">
-            <column name="fk_parent_parameter_id" not-null="false"/>
-        </property>
-        
+
+		<many-to-one name="parent" class="FeatureParameterEntity" foreign-key="fk_param_feature_parent_id" >
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_feature_parent">
+                <comment>Reference to the Feature this Parameter describes.</comment>
+            </column>
+        </many-to-one>
 
 		<many-to-one name="parent" class="FeatureParameterEntity" foreign-key="fk_param_feature_parent_id" >
             <column name="fk_parent_parameter_id" not-null="false" index="idx_feature_parent_parameter">
@@ -130,22 +132,24 @@
                 </column>
             </property>
         </subclass>
-        <subclass discriminator-value="complex" extends="FeatureParameterEntity"
-                  name="FeatureComplexParameterEntity">
-            <set name="value" table="feature_parameter" inverse="false" cascade="all" >
-                <key>
-                    <column name="fk_parent_parameter_id" not-null="false">
-                        <comment>Reference to the parent parameter</comment>
-                    </column>
-                </key>
-                <one-to-many class="FeatureParameterEntity" />
-            </set>
-        </subclass>
+		<subclass discriminator-value="complex" extends="FeatureParameterEntity"
+				  name="FeatureComplexParameterEntity">
+			<many-to-one name="feature" class="org.n52.series.db.beans.AbstractFeatureEntity"
+				foreign-key="fk_param_feature_id" insert="false" update="false">
+				<column name="fk_feature_id" not-null="true" index="idx_feature_parameter">
+					<comment>Reference to the Feature this Parameter describes.</comment>
+				</column>
+			</many-to-one>
+			<set name="value" table="feature_parameter" inverse="false" cascade="all">
+				<key column="fk_parent_parameter_id" not-null="false" />
+				<one-to-many class="FeatureParameterEntity" />
+			</set>
+		</subclass>
         <subclass discriminator-value="temporal" extends="FeatureParameterEntity"
                   name="FeatureTemporalParameterEntity">
             <component class="org.n52.series.db.beans.parameter.TimeRange" name="value">
                 <property name="from" type="timestamp">
-                    <column name="value_temporal_from" length="29" >
+                    <column name="value_temporal_from" length="29">
                         <comment>Storage of a temporal from parameter value.</comment>
                     </column>
                 </property>

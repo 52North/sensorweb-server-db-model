@@ -50,13 +50,21 @@
             <column name="fk_platform_id" not-null="true" />
         </property>
 
-        <subclass discriminator-value="category" extends="PlatformParameterEntity" name="PlatformCategoryParameterEntity">
+        <many-to-one name="parent" class="PlatformParameterEntity" foreign-key="fk_param_platform_parent_id" >
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_platform_parent">
+                <comment>Reference to the Platform this Parameter describes.</comment>
+            </column>
+        </many-to-one>
+
+        <subclass discriminator-value="category" extends="PlatformParameterEntity"
+        		  name="PlatformCategoryParameterEntity">
             <property name="value" type="string">
                 <column name="value_category">
                     <comment>Storage of a categorical parameter value.</comment>
                 </column>
             </property>
-            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false" foreign-key="fk_platform_param_unit">
+            <many-to-one class="org.n52.series.db.beans.UnitEntity" name="unit" not-null="false"
+            			 foreign-key="fk_platform_param_unit">
                 <column name="fk_unit_id" index="idx_platform_parameter_unit">
                     <comment>Reference to the unit of this value in the unit table</comment>
                 </column>
@@ -114,12 +122,14 @@
         </subclass>
         <subclass discriminator-value="complex" extends="PlatformParameterEntity"
                   name="PlatformComplexParameterEntity">
+            <many-to-one name="platform" class="org.n52.series.db.beans.PlatformEntity"
+        			 foreign-key="fk_param_platform_id" insert="false" update="false">
+	            <column name="fk_platform_id" not-null="true" index="idx_platform_parameter">
+	                <comment>Reference to the Platform this Parameter describes.</comment>
+	            </column>
+	        </many-to-one>
             <set name="value" table="platform_parameter" inverse="false" cascade="all">
-                <key>
-                    <column name="fk_parent_parameter_id" not-null="false">
-                        <comment>Reference to the parent parameter</comment>
-                    </column>
-                </key>
+                <key column="fk_parent_parameter_id" not-null="false" />
                 <one-to-many class="PlatformParameterEntity" />
             </set>
         </subclass>
