@@ -24,6 +24,9 @@ import java.util.Objects;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class ParameterEntity<T> extends IdEntity
         implements ValuedParameter<T>, Comparable<ParameterEntity<T>> {
 
@@ -34,7 +37,7 @@ public abstract class ParameterEntity<T> extends IdEntity
     private String description;
     private Date lastUpdate;
     private String domain;
-    private Long parent;
+    private ParameterEntity parent;
     private T value;
 
     public Map<String, Object> toValueMap(String locale) {
@@ -93,11 +96,11 @@ public abstract class ParameterEntity<T> extends IdEntity
         return getDomain() != null && !getDomain().isEmpty();
     }
 
-    public Long getParent() {
+    public ParameterEntity<?> getParent() {
         return parent;
     }
 
-    public void setParent(Long parent) {
+    public void setParent(ParameterEntity<?> parent) {
         this.parent = parent;
     }
 

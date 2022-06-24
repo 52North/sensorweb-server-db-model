@@ -45,7 +45,7 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
         return featureId;
     }
 
-    public void setFeatureId(long featureId) {
+    public void setFeatureId(Long featureId) {
         this.featureId = featureId;
     }
 

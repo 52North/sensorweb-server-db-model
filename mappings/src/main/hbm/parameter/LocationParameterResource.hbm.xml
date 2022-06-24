@@ -51,6 +51,12 @@
             <column name="fk_location_id" not-null="true"/>
         </property>
 
+        <many-to-one name="parent" class="LocationParameterEntity" foreign-key="fk_param_location_parent_id" >
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_location_parent">
+                <comment>Reference to the Location this Parameter describes.</comment>
+            </column>
+        </many-to-one>
+
         <subclass discriminator-value="bool" extends="LocationParameterEntity"
                   name="LocationBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
@@ -123,12 +129,14 @@
         </subclass>
         <subclass discriminator-value="complex" extends="LocationParameterEntity"
                   name="LocationComplexParameterEntity">
+            <many-to-one name="location" class="org.n52.series.db.beans.sta.LocationEntity"
+                     foreign-key="fk_param_location_id" insert="false" update="false">
+	            <column name="fk_location_id" not-null="true" index="idx_location_parameter">
+	                <comment>Reference to the Location this Parameter describes.</comment>
+	            </column>
+	        </many-to-one>
             <set name="value" table="location_parameter" inverse="false" cascade="all">
-                <key>
-                    <column name="fk_parent_parameter_id" not-null="false">
-                        <comment>Reference to the parent parameter</comment>
-                    </column>
-                </key>
+                <key column="fk_parent_parameter_id" not-null="false" />
                 <one-to-many class="LocationParameterEntity" />
             </set>
         </subclass>

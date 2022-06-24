@@ -50,6 +50,12 @@
             <column name="fk_procedure_id" not-null="true" />
         </property>
 
+        <many-to-one name="parent" class="ProcedureParameterEntity" foreign-key="fk_param_procedure_parent_id" >
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_procedure_parent">
+                <comment>Reference to the Procedure this Parameter describes.</comment>
+            </column>
+        </many-to-one>
+
         <subclass discriminator-value="bool" extends="ProcedureParameterEntity"
                   name="ProcedureBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
@@ -122,12 +128,14 @@
         </subclass>
         <subclass discriminator-value="complex" extends="ProcedureParameterEntity"
                   name="ProcedureComplexParameterEntity">
+            <many-to-one name="procedure" class="org.n52.series.db.beans.ProcedureEntity"
+                     foreign-key="fk_param_procedure_id" insert="false" update="false">
+	            <column name="fk_procedure_id" not-null="true" index="idx_procedure_parameter">
+	                <comment>Reference to the Procedure this Parameter describes.</comment>
+	            </column>
+	        </many-to-one>
             <set name="value" table="procedure_parameter" inverse="false" cascade="all">
-                <key>
-                    <column name="fk_parent_parameter_id" not-null="false">
-                        <comment>Reference to the parent parameter</comment>
-                    </column>
-                </key>
+                <key column="fk_parent_parameter_id" not-null="false" />
                 <one-to-many class="ProcedureParameterEntity" />
             </set>
         </subclass>
