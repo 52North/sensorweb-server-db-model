@@ -59,13 +59,13 @@
         <geotools.version>27.0</geotools.version>
         <geolatte.version>1.8.2</geolatte.version>
         <hibernate.version>5.6.9.Final</hibernate.version>
-        <spring-boot.version>2.7.0</spring-boot.version>
+        <spring-boot.version>2.7.1</spring-boot.version>
         <javax.version>8.0.1</javax.version>
         
         <postgresql.version>42.4.0</postgresql.version>
         <postgis.version>2.5.1</postgis.version>
         <ojdbc8.version>21.6.0.0.1</ojdbc8.version>
-        <sqljdbc.version>11.1.1.jre8-preview</sqljdbc.version>
+        <sqljdbc.version>11.1.2.jre8-preview</sqljdbc.version>
         <mysql.version>8.0.29</mysql.version>
         <h2.version>2.1.214</h2.version>
         <geodb.version>0.9</geodb.version>
