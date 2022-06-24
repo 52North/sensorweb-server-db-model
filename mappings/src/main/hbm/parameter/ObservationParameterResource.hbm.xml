@@ -52,7 +52,7 @@
         </property>
 
         <many-to-one name="parent" class="ObservationParameterEntity" foreign-key="fk_param_observation_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_observation_parent">
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_observation_parent_parameter">
                 <comment>Reference to the Observation this Parameter describes.</comment>
             </column>
         </many-to-one>

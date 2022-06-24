@@ -51,7 +51,7 @@
         </property>
 
         <many-to-one name="parent" class="ProcedureParameterEntity" foreign-key="fk_param_procedure_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_procedure_parent">
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_procedure_parent_parameter">
                 <comment>Reference to the Procedure this Parameter describes.</comment>
             </column>
         </many-to-one>

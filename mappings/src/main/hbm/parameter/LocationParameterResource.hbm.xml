@@ -52,7 +52,7 @@
         </property>
 
         <many-to-one name="parent" class="LocationParameterEntity" foreign-key="fk_param_location_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_location_parent">
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_location_parent_parameter">
                 <comment>Reference to the Location this Parameter describes.</comment>
             </column>
         </many-to-one>

@@ -52,7 +52,7 @@
         </property>
 
         <many-to-one name="parent" class="DatasetParameterEntity" foreign-key="fk_param_dataset_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_dataset_parent">
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_dataset_parent_parameter">
                 <comment>Reference to the Dataset this Parameter describes.</comment>
             </column>
         </many-to-one>

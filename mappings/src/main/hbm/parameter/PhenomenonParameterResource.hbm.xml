@@ -52,7 +52,7 @@
         </property>
 
         <many-to-one name="parent" class="PhenomenonParameterEntity" foreign-key="fk_param_phenomenon_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_phenomenon_parent">
+            <column name="fk_parent_parameter_id" not-null="false" index="idx_phenomenon_parent_parameter">
                 <comment>Reference to the Phenomenon this Parameter describes.</comment>
             </column>
         </many-to-one>
