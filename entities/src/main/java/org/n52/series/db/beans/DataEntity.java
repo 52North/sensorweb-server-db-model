@@ -26,6 +26,7 @@ import org.n52.series.db.beans.HibernateRelations.IsNoDataValue;
 import org.n52.series.db.beans.HibernateRelations.IsProcessed;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.quality.QualityEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.common.Utils;
 
@@ -35,6 +36,7 @@ import java.math.BigDecimal;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -142,6 +144,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     private Integer valueCount;
 
     private AbstractFeatureEntity<?> feature;
+    private Set<QualityEntity<?>> qualities = new LinkedHashSet<>();
 
     private boolean processed;
 
@@ -450,6 +453,52 @@ public abstract class DataEntity<T> extends DescribableEntity
     @Override
     public void setFeature(AbstractFeatureEntity<?> feature) {
         this.feature = feature;
+    }
+
+    /**
+     * @return the qualities
+     */
+    public Set<QualityEntity<?>> getQuality() {
+        return qualities;
+    }
+
+    /**
+     * @param qualities
+     *            the qualities to set
+     * @return this
+     */
+    public DataEntity<T> setQuality(Set<QualityEntity<?>> qualities) {
+        this.qualities.clear();
+        addQuality(qualities);
+        return this;
+    }
+
+    /**
+     * @param qualities
+     *            the qualities to add
+     * @return this
+     */
+    public DataEntity<T> addQuality(Set<QualityEntity<?>> qualities) {
+        if (qualities != null) {
+            this.qualities.addAll(qualities);
+        }
+        return this;
+    }
+
+    /**
+     * @param quality
+     *            the quality to add
+     * @return this
+     */
+    public DataEntity<T> addQuality(QualityEntity<?> quality) {
+        if (quality != null) {
+            this.qualities.add(quality);
+        }
+        return this;
+    }
+
+    public boolean hasQuality() {
+        return getQuality() != null && !getQuality().isEmpty();
     }
 
     @Override
