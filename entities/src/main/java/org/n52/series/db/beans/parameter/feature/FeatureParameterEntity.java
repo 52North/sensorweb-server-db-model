@@ -16,7 +16,6 @@
 package org.n52.series.db.beans.parameter.feature;
 
 import org.n52.series.db.beans.AbstractFeatureEntity;
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -50,7 +49,7 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setFeature((AbstractFeatureEntity) entity);
     }
 }

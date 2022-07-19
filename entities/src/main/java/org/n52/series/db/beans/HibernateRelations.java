@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
 import org.locationtech.jts.geom.Geometry;
@@ -53,7 +52,11 @@ public interface HibernateRelations {
 
     String C = "children";
 
+    String I = "id";
+
     interface HasId {
+
+        String ID = I;
 
         Long getId();
 
@@ -94,7 +97,7 @@ public interface HibernateRelations {
         }
     }
 
-    interface HasStaIdentifier extends HasIdentifier {
+    interface HasStaIdentifier {
 
         String STA_IDENTIFIER = "staIdentifier";
 
@@ -979,7 +982,7 @@ public interface HibernateRelations {
 
     interface HasObservationId {
 
-        String OBS_ID = "id";
+        String OBS_ID = I;
 
         /**
          * Get the observation id

@@ -13,7 +13,6 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans.sta;
 
 import org.locationtech.jts.geom.Geometry;
@@ -40,8 +39,10 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
+    public static final String PROPERTY_PLATFORMS = "platforms";
+    public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
-    public static final String PROPERTY_LOCATION_ENCODINT = "locationEncoding";
+    public static final String PROPERTY_LOCATION_ENCODING = "locationEncoding";
 
     private static final long serialVersionUID = -8201429072560300649L;
 

@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
+ * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -117,6 +118,8 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
 
+    private String valueType;
+
     private String valueIdentifier;
 
     private String valueName;
@@ -207,7 +210,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean isSetGeometryEntity() {
-        return geometryEntity != null && !geometryEntity.isEmpty();
+        return (geometryEntity != null) && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
@@ -305,6 +308,14 @@ public abstract class DataEntity<T> extends DescribableEntity
         return getRelatedObservations() != null && !getRelatedObservations().isEmpty();
     }
 
+    public String getValueType() {
+        return valueType;
+    }
+
+    public void setValueType(String valueType) {
+        this.valueType = valueType;
+    }
+
     public String getValueIdentifier() {
         return valueIdentifier;
     }
@@ -314,7 +325,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueIdentifier() {
-        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
+        return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
     }
 
     public String getValueName() {
@@ -326,7 +337,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueName() {
-        return getValueName() != null && !getValueName().isEmpty();
+        return (getValueName() != null) && !getValueName().isEmpty();
     }
 
     public String getValueDescription() {
@@ -338,7 +349,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueDescription() {
-        return getValueDescription() != null && !getValueDescription().isEmpty();
+        return (getValueDescription() != null) && !getValueDescription().isEmpty();
     }
 
     public boolean hasVerticalInterval() {

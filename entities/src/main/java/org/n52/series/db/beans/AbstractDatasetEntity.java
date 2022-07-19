@@ -51,6 +51,7 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
     public static final String PROPERTY_UNIT = "unit";
     public static final String PROPERTY_AGGREGATION = "aggregation";
+
     private static final long serialVersionUID = 4178505006632345142L;
 
     private AbstractFeatureEntity<?> feature;
@@ -129,17 +130,17 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.offering = offering;
     }
 
+    @Override
+    public boolean isSetOffering() {
+        return getOffering() != null;
+    }
+
     public CategoryEntity getCategory() {
         return category;
     }
 
     public void setCategory(CategoryEntity category) {
         this.category = category;
-    }
-
-    @Override
-    public boolean isSetOffering() {
-        return getOffering() != null;
     }
 
     @Override
@@ -222,10 +223,6 @@ public class AbstractDatasetEntity extends DescribableEntity
         this.resultTimeStart = Utils.createUnmutableTimestamp(resultTimeStart);
     }
 
-    public boolean isSetResultTimeStart() {
-        return getResultTimeStart() != null;
-    }
-
     @Override
     public Date getResultTimeEnd() {
         return Utils.createUnmutableTimestamp(resultTimeEnd);
@@ -234,6 +231,10 @@ public class AbstractDatasetEntity extends DescribableEntity
     @Override
     public void setResultTimeEnd(Date resultTimeEnd) {
         this.resultTimeEnd = Utils.createUnmutableTimestamp(resultTimeEnd);
+    }
+
+    public boolean isSetResultTimeStart() {
+        return getResultTimeStart() != null;
     }
 
     public boolean isSetResultTimeEnd() {
@@ -304,15 +305,15 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     @Override
+    public void setGeometryEntity(GeometryEntity geometryEntity) {
+        this.observedArea = geometryEntity;
+    }
+
+    @Override
     public void setGeometry(Geometry geometry) {
         this.observedArea = new GeometryEntity();
         this.observedArea.setGeometry(geometry);
         this.observedArea.setSrid(geometry.getSRID());
-    }
-
-    @Override
-    public void setGeometryEntity(GeometryEntity geometryEntity) {
-        this.observedArea = geometryEntity;
     }
 
     @Override
@@ -346,13 +347,13 @@ public class AbstractDatasetEntity extends DescribableEntity
     }
 
     @Override
-    public void setObservations(Set<DataEntity<?>> observations) {
-        this.observations = observations;
+    public Set<DataEntity<?>> getObservations() {
+        return this.observations;
     }
 
     @Override
-    public Set<DataEntity<?>> getObservations() {
-        return this.observations;
+    public void setObservations(Set<DataEntity<?>> observations) {
+        this.observations = observations;
     }
 
     public AbstractDatasetEntity getAggregation() {

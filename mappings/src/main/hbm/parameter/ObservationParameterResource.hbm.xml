@@ -3,8 +3,7 @@
                    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="ObservationParameterEntity" abstract="true"
-    	   table="observation_parameter"
+    <class name="ObservationParameterEntity" abstract="true" table="observation_parameter"
            check="type in ('bool', 'category', 'count', 'quantity', 'text', 'xml', 'json', 'complex', 'temporal')">
         <comment>Storage for additional information for observations</comment>
         <id name="id" type="long">
@@ -41,8 +40,7 @@
             </column>
         </property>
 
-        <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity"
-                     foreign-key="fk_param_observation_id" insert="false" update="false">
+        <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity" foreign-key="fk_observation_id">
             <column name="fk_observation_id" not-null="true" index="idx_observation_parameter">
                 <comment>Reference to the Observation this Parameter describes.</comment>
             </column>
@@ -50,12 +48,6 @@
         <property name="observationId" insert="false" update="false" type="long" >
             <column name="fk_observation_id" not-null="true" />
         </property>
-
-        <many-to-one name="parent" class="ObservationParameterEntity" foreign-key="fk_param_observation_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_observation_parent_parameter">
-                <comment>Reference to the Observation this Parameter describes.</comment>
-            </column>
-        </many-to-one>
 
         <subclass discriminator-value="bool" extends="ObservationParameterEntity"
                   name="ObservationBooleanParameterEntity">
@@ -129,14 +121,12 @@
         </subclass>
         <subclass discriminator-value="complex" extends="ObservationParameterEntity"
                   name="ObservationComplexParameterEntity">
-            <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity"
-                     foreign-key="fk_param_observation_id" insert="false" update="false">
-	            <column name="fk_observation_id" not-null="true" index="idx_observation_parameter">
-	                <comment>Reference to the Observation this Parameter describes.</comment>
-	            </column>
-	        </many-to-one>
             <set name="value" table="observations_parameter" inverse="false" cascade="all">
-                <key column="fk_parent_parameter_id" not-null="false" />
+                <key foreign-key="fk_observation_parent_parameter">
+                    <column name="fk_parent_parameter_id" not-null="false">
+                        <comment>Reference to the parent parameter</comment>
+                    </column>
+                </key>
                 <one-to-many class="ObservationParameterEntity" />
             </set>
         </subclass>

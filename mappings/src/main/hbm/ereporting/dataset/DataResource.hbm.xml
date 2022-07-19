@@ -18,6 +18,11 @@
                 <comment>Indicator used by Hibernate to map value specific entities. Valid values are quantity (scalar values in value_quantity), count (integer values in value_count), text (textual values in value_text), category (categorical values in value_category), bool (boolean values in value_boolean), reference (references in value_reference, e.g. link to a source, photo, video)</comment>
             </column>
         </discriminator>
+        <property name="valueType" insert="false" update="false" type="string" not-null="true">
+            <column name="value_type" unique-key="un_observation_identity">
+                <comment>Expose value type to data entity</comment>
+            </column>
+        </property>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity" lazy="proxy">
             <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
@@ -292,7 +297,7 @@
                     <comment>The textual value of an observation (SweDataArrayObservation))</comment>
                 </column>
             </property>
-            <set name="value" table="observation" cascade="remove">
+            <set name="value" table="observation" cascade="remove" order-by="id">
                 <key foreign-key="fk_parent_observation">
                      <column name="fk_parent_observation_id" not-null="false">
                         <comment>Reference to the parent data/observation</comment>
@@ -309,21 +314,21 @@
 
         <subclass name="ComplexDataEntity" extends="DataEntity" discriminator-value="complex">
             <!-- See above comments for DataArrayDataEntity -->
-            <set name="value" table="observation" cascade="remove">
+            <set name="value" table="observation" cascade="remove" order-by="id">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <set name="value" table="observation" cascade="remove">
+            <set name="value" table="observation" cascade="remove" order-by="id">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
         </subclass>
 
         <subclass name="TrajectoryDataEntity" extends="DataEntity" discriminator-value="trajectory">
-            <set name="value" table="observation" cascade="remove">
+            <set name="value" table="observation" cascade="remove" order-by="id">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>

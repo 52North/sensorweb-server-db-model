@@ -77,7 +77,9 @@
             </many-to-many>
         </set>
         <set name="parameters" table="phenomenon_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
-            <key column="fk_phenomenon_id" not-null="true"/>
+            <key foreign-key="fk_phenomenon_parameter">
+                <column name="fk_phenomenon_id" not-null="true"/>
+            </key>
             <one-to-many class="org.n52.series.db.beans.parameter.phenomenon.PhenomenonParameterEntity" />
         </set>
         <!-- Comments for the translations are defined below! -->

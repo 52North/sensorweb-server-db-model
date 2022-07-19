@@ -42,7 +42,7 @@
         </property>
 
         <many-to-one name="phenomenon" class="org.n52.series.db.beans.PhenomenonEntity"
-                     foreign-key="fk_param_phenomenon_id" insert="false" update="false">
+                     foreign-key="fk_param_phenomenon_id">
             <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_parameter">
                 <comment>Reference to the Phenomenon this Parameter describes.</comment>
             </column>
@@ -50,12 +50,6 @@
         <property name="phenomenonId" insert="false" update="false" type="long">
             <column name="fk_phenomenon_id" not-null="true"/>
         </property>
-
-        <many-to-one name="parent" class="PhenomenonParameterEntity" foreign-key="fk_param_phenomenon_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_phenomenon_parent_parameter">
-                <comment>Reference to the Phenomenon this Parameter describes.</comment>
-            </column>
-        </many-to-one>
 
         <subclass discriminator-value="bool" extends="PhenomenonParameterEntity"
                   name="PhenomenonBooleanParameterEntity">
@@ -129,14 +123,12 @@
         </subclass>
         <subclass discriminator-value="complex" extends="PhenomenonParameterEntity"
                   name="PhenomenonComplexParameterEntity">
-            <many-to-one name="phenomenon" class="org.n52.series.db.beans.PhenomenonEntity"
-                     foreign-key="fk_param_phenomenon_id" insert="false" update="false">
-	            <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_parameter">
-	                <comment>Reference to the Phenomenon this Parameter describes.</comment>
-	            </column>
-	        </many-to-one>
             <set name="value" table="phenomenon_parameter" inverse="false" cascade="all">
-                <key column="fk_parent_parameter_id" not-null="false" />
+                <key foreign-key="fk_phenomenon_parent_parameter">
+                    <column name="fk_parent_parameter_id" not-null="false">
+                        <comment>Reference to the parent parameter</comment>
+                    </column>
+                </key>
                 <one-to-many class="PhenomenonParameterEntity" />
             </set>
         </subclass>

@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+                   xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="org.n52.series.db.beans.sta.plus.StaPlusDataset" table="dataset">
+        <comment>Storage of the dataset, the core table of the whole database model.</comment>
+        <id name="id" type="long">
+            <column name="dataset_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">dataset_seq</param>
+            </generator>
+        </id>
+        <discriminator type="string" not-null="false">
+            <column name="discriminator" not-null="false">
+                <comment>Indicator used by Hibernate to distinguish between different types of datasets. Used e.g. for STA DatasetAggregations.</comment>
+            </column>
+        </discriminator>
+        <property name="identifier" type="string" index="idx_dataset_identifier">
+            <column name="identifier" not-null="false" unique-key="un_dataset_identifier">
+                <comment>Unique identifier of the dataset which can be used for filtering, e.g. GetObservationById in the SOS and can be encoded in WaterML 2.0 oder TimeseriesML 1.0 outputs.</comment>
+            </column>
+        </property>
+        <property name="staIdentifier" type="string" index="idx_dataset_staIdentifier">
+            <column name="sta_identifier" not-null="false" unique-key="un_dataset_staIdentifier"><comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>The human readable name of the dataset.</comment>
+            </column>
+        </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the dataset</comment>
+            </column>
+        </property>
+        <property name="firstValueAt" type="timestamp">
+            <column name="first_time">
+                <comment>The timestamp of the temporally first observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <property name="lastValueAt" type="timestamp">
+            <column name="last_time">
+                <comment>The timestamp of the temporally last observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <property name="resultTimeStart" type="timestamp">
+            <column name="result_time_start" not-null="false">
+                <comment>The timestamp of the earliest result time of the observations that belong to this dataset.</comment>
+            </column>
+        </property>
+        <property name="resultTimeEnd" type="timestamp">
+            <column name="result_time_end" not-null="false">
+                <comment>The timestamp of the latest result time of the observations that belong to this dataset.</comment>
+            </column>
+        </property>
+        <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
+            <property name="geometry" type="jts_geometry">
+                <column name="observed_area" not-null="false"/>
+            </property>
+        </component>
+        <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
+            <column name="fk_procedure_id"  not-null="true" index="idx_dataset_procedure">
+                <comment>Reference to the procedure that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="PhenomenonEntity" name="phenomenon" unique-key="un_dataset_identity" foreign-key="fk_dataset_phenomenon">
+            <column name="fk_phenomenon_id"  not-null="true" index="idx_dataset_phenomenon">
+                <comment>Reference to the phenomenon that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="OfferingEntity" name="offering" unique-key="un_dataset_identity" foreign-key="fk_dataset_offering">
+            <column name="fk_offering_id" not-null="true" index="idx_dataset_offering">
+                <comment>Reference to the offering that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="CategoryEntity" name="category" unique-key="un_dataset_identity" foreign-key="fk_dataset_category">
+            <column name="fk_category_id" not-null="true" index="idx_dataset_category">
+                <comment>Reference to the category that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="FeatureEntity" name="feature" unique-key="un_dataset_identity" foreign-key="fk_dataset_feature">
+            <column name="fk_feature_id" not-null="false" index="idx_dataset_feature">
+                <comment>Reference to the feature that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="PlatformEntity" name="platform" unique-key="un_dataset_identity" foreign-key="fk_dataset_platform">
+            <column name="fk_platform_id" not-null="false" index="idx_dataset_platform">
+                <comment>Reference to the platform that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="UnitEntity" name="unit" unique-key="un_dataset_identity" foreign-key="fk_dataset_unit">
+            <column name="fk_unit_id" index="idx_dataset_unit">
+                <comment>Reference to the unit of the observations that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="omObservationType" class="FormatEntity" not-null="false"
+                     foreign-key="fk_dataset_om_obs_type">
+            <column name="fk_format_id" index="idx_dataset_observation_type">
+                <comment>Reference to the observationType in the format table. Required by the SOS to persist the valid observationType for the dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="aggregation" class="AbstractDatasetEntity" foreign-key="fk_aggregation_id">
+            <column name="fk_aggregation_id" not-null="false" index="idx_dataset_aggregation">
+                <comment>Reference to the aggregation if this dataset belongs to one.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="org.n52.series.db.beans.sta.plus.LicenseEntity" name="license" foreign-key="fk_dataset_license">
+            <column name="fk_license_id"  not-null="false" index="idx_dataset_license">
+                <comment>Reference to the license that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="org.n52.series.db.beans.sta.plus.ProjectEntity" name="project" foreign-key="fk_dataset_project">
+            <column name="fk_project_id"  not-null="false" index="idx_dataset_project">
+                <comment>Reference to the project that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="org.n52.series.db.beans.sta.plus.PartyEntity" name="party" foreign-key="fk_dataset_party">
+            <column name="fk_party_id"  not-null="false" index="idx_dataset_party">
+                <comment>Reference to the party that belongs that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <property name="firstQuantityValue" type="big_decimal" precision="20" scale="10">
+            <column name="first_value" precision="20" scale="10">
+                <comment>The value of the temporally first observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <property name="lastQuantityValue" type="big_decimal" precision="20" scale="10">
+            <column name="last_value" precision="20" scale="10">
+                <comment>The value of the temporally last quantity observation that belongs to this dataset.</comment>
+            </column>
+        </property>
+        <many-to-one class="DataEntity" name="firstObservation" fetch="select" foreign-key="fk_dataset_first_obs">
+            <column name="fk_first_observation_id" index="idx_dataset_first_observation">
+                <comment>Reference to the temporally first observation in the observation table that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="DataEntity" name="lastObservation" fetch="select" foreign-key="fk_dataset_last_obs">
+            <column name="fk_last_observation_id" index="idx_dataset_last_observation">
+                <comment>Reference to the temporally last observation in the observation table that belongs to this dataset.</comment>
+            </column>
+        </many-to-one>
+        <set name="parameters" table="dataset_parameter" inverse="true" lazy="true">
+            <key foreign-key="fk_dataset_parameter">
+                <column name="fk_dataset_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.n52.series.db.beans.parameter.dataset.DatasetParameterEntity" />
+        </set>
+
+        <subclass name="org.n52.series.db.beans.sta.plus.StaPlusDatasetAggregationEntity" discriminator-value="aggregation">
+            <set name="datasets" table="dataset">
+                <key column="fk_aggregation_id" not-null="false"/>
+                <one-to-many class="org.n52.series.db.beans.sta.plus.StaPlusDataset" />
+            </set>
+        </subclass>
+
+        <subclass name="org.n52.series.db.beans.sta.plus.StaPlusDatasetEntity" discriminator-value="null">
+        </subclass>
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nDatasetEntity" table="dataset_i18n">
+        <id name="id" type="long">
+            <column name="dataset_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">dataset_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="AbstractDatasetEntity" foreign-key="fk_dataset_i18n">
+            <column name="fk_dataset_id" not-null="true" index="idx_dataset_i18n_dataset">
+                <comment>Reference to the dataset table this internationalization belongs to.</comment>
+            </column>
+        </many-to-one>
+        <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the dataset entity</comment>
+            </column>
+        </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>Locale/language specific description of the dataset entity</comment>
+            </column>
+        </property>
+    </class>
+
+</hibernate-mapping>

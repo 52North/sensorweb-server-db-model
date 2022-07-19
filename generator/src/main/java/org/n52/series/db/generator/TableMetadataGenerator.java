@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2015-2022 52°North Spatial Information Research GmbH
+ * Copyright 2015-2021 52°North Initiative for Geospatial Open Source
+ * Software GmbH
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -203,14 +204,14 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         setDirectoriesForModelSelection(concept, profile, feature, null, metadataSources);
         Metadata metadata = metadataSources.buildMetadata();
 
-        exportTableColumnMetadata(metadata, dia, dialect, concept, profile, feature);
+        exportTableColumnMetadata(metadata, dia, dialect, concept, profile);
     }
 
     protected boolean execute(Integer selection) throws Exception {
         int select = selection != null ? selection : getSelection();
         if (select == 1) {
             // dialectSelection
-            for (int i = 0; i < 4; i++) {
+            for (int i = 0; i < 5; i++) {
                 // modelSelection/profile
                 for (int j = 0; j < 2; j++) {
                     // concept

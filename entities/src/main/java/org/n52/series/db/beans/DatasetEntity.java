@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.HibernateRelations.HasTags;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.joda.time.DateTimeZone;
+import org.n52.series.db.beans.HibernateRelations.HasTags;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
@@ -29,10 +29,8 @@ import java.util.Set;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
+public class DatasetEntity extends Dataset implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
 

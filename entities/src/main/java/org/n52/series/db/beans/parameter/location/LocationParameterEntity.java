@@ -15,7 +15,6 @@
  */
 package org.n52.series.db.beans.parameter.location;
 
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 
@@ -50,7 +49,7 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setDescribeableEntity(DescribableEntity entity) {
+    public void setEntity(Object entity) {
         setLocation((LocationEntity) entity);
     }
 }

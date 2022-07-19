@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans;
 
+import org.n52.series.db.beans.sta.AggregationEntity;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -24,16 +26,17 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class DatasetAggregationEntity extends AbstractDatasetEntity {
+public class DatasetAggregationEntity extends Dataset implements AggregationEntity<Dataset> {
 
     private static final long serialVersionUID = 4214347342270609845L;
-    private Set<AbstractDatasetEntity> datasets;
 
-    public Set<AbstractDatasetEntity> getDatasets() {
+    private Set<DatasetEntity> datasets;
+
+    public Set<DatasetEntity> getDatasets() {
         return datasets;
     }
 
-    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
+    public void setDatasets(Set<DatasetEntity> datasets) {
         this.datasets = datasets;
     }
 
@@ -41,7 +44,7 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
         return getDatasets() != null && !getDatasets().isEmpty();
     }
 
-    public void copy(AbstractDatasetEntity dataset) {
+    public void copy(Dataset dataset) {
         setIdentifier(dataset.getIdentifier());
         setIdentifierCodespace(dataset.getIdentifierCodespace());
         setStaIdentifier(dataset.getStaIdentifier());

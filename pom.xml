@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
-    <version>4.0.0-SNAPSHOT</version>
+    <version>4.2.0-STA-SNAPSHOT</version>
     <name>Sensor Web Server Database Model</name>
     <packaging>pom</packaging>
 
@@ -17,6 +17,7 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
+
         <module>dialects</module>
     </modules>
      <organization>
@@ -56,18 +57,18 @@
 
         <version.junit>5.8.2</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>27.0</geotools.version>
+        <geotools.version>26.4</geotools.version>
         <geolatte.version>1.8.2</geolatte.version>
         <hibernate.version>5.6.9.Final</hibernate.version>
-        <spring-boot.version>2.7.1</spring-boot.version>
+        <spring-boot.version>2.6.7</spring-boot.version>
         <javax.version>8.0.1</javax.version>
         
-        <postgresql.version>42.4.0</postgresql.version>
+        <postgresql.version>42.3.5</postgresql.version>
         <postgis.version>2.5.1</postgis.version>
-        <ojdbc8.version>21.6.0.0.1</ojdbc8.version>
-        <sqljdbc.version>11.1.2.jre8-preview</sqljdbc.version>
+        <ojdbc8.version>21.5.0.0</ojdbc8.version>
+        <sqljdbc.version>11.1.1.jre8-preview</sqljdbc.version>
         <mysql.version>8.0.29</mysql.version>
-        <h2.version>2.1.214</h2.version>
+        <h2.version>2.1.212</h2.version>
         <geodb.version>0.9</geodb.version>
 
         <timestamp>${maven.build.timestamp}</timestamp>
@@ -329,7 +330,7 @@
             <dependency>
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.19.0</version>
+                <version>1.18.2</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->
@@ -346,7 +347,7 @@
             <dependency>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-annotations</artifactId>
-                <version>4.7.1</version>
+                <version>4.7.0</version>
                 <scope>provided</scope>
             </dependency>
 

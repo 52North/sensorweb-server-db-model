@@ -199,7 +199,7 @@
         </subclass>
 
         <subclass name="ProfileDataEntity" extends="DataEntity" discriminator-value="profile">
-            <set name="value" table="observation" cascade="remove">
+            <set name="value" table="observation" cascade="remove" order-by="id">
                 <key column="fk_parent_observation_id" not-null="false" foreign-key="fk_parent_observation"/>
                 <one-to-many class="DataEntity" />
             </set>
