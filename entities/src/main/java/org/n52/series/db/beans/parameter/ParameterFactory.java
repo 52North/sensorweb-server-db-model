@@ -18,6 +18,7 @@ package org.n52.series.db.beans.parameter;
 import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.AbstractFeatureEntity;
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.ProcedureEntity;
@@ -151,7 +152,7 @@ public class ParameterFactory {
         }
         if (entityType != null) {
             ParameterEntity<?> e = from(entityType, valueType);
-            e.setDescribeableEntity(entity);
+            e.setDescribeableEntity((DescribableEntity) entity);
             return e;
         }
         return null;

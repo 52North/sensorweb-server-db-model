@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.party;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.plus.PartyEntity;
 
@@ -46,7 +47,7 @@ public abstract class PartyParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setEntity(Object entity) {
-        setParty((PartyEntity) entity);
+    public void setDescribeableEntity(DescribableEntity entity) {
+        throw new RuntimeException("not implemented yet!");
     }
 }

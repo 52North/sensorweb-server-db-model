@@ -16,6 +16,7 @@
 package org.n52.series.db.beans.parameter.observation;
 
 import org.n52.series.db.beans.DataEntity;
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -49,7 +50,7 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setEntity(Object entity) {
+    public void setDescribeableEntity(DescribableEntity entity) {
         setObservation((DataEntity) entity);
     }
 }

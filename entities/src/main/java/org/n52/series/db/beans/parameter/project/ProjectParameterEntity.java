@@ -15,7 +15,9 @@
  */
 package org.n52.series.db.beans.parameter.project;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.sta.plus.PartyEntity;
 import org.n52.series.db.beans.sta.plus.ProjectEntity;
 
 /**
@@ -46,7 +48,7 @@ public abstract class ProjectParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setEntity(Object entity) {
-        setProject((ProjectEntity) entity);
+    public void setDescribeableEntity(DescribableEntity entity) {
+        throw new RuntimeException("not implemented yet!");
     }
 }

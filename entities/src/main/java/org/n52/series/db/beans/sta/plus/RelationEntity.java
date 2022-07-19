@@ -35,8 +35,8 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "relation", indexes = {
-        // @Index(name = "idx_obsrel_subject", columnList = "subject"),
-        // @Index(name = "idx_obsrel_object", columnList = "object"),
+// @Index(name = "idx_obsrel_subject", columnList = "subject"),
+// @Index(name = "idx_obsrel_object", columnList = "object"),
 })
 @SequenceGenerator(name = "rel_seq", allocationSize = 1)
 public class RelationEntity extends IdEntity

@@ -204,7 +204,7 @@ public final class TableMetadataGenerator extends AbstractGenerator {
         setDirectoriesForModelSelection(concept, profile, feature, null, metadataSources);
         Metadata metadata = metadataSources.buildMetadata();
 
-        exportTableColumnMetadata(metadata, dia, dialect, concept, profile);
+        exportTableColumnMetadata(metadata, dia, dialect, concept, profile, feature);
     }
 
     protected boolean execute(Integer selection) throws Exception {

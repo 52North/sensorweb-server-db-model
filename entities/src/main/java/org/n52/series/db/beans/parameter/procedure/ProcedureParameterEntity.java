@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.procedure;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.ProcedureEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -49,7 +50,7 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
     }
 
     @Override
-    public void setEntity(Object entity) {
+    public void setDescribeableEntity(DescribableEntity entity) {
         setProcedure((ProcedureEntity) entity);
     }
 }

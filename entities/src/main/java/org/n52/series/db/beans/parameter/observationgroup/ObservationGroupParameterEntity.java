@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.observationgroup;
 
+import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.sta.plus.GroupEntity;
 
@@ -46,7 +47,7 @@ public abstract class ObservationGroupParameterEntity<T> extends ParameterEntity
     }
 
     @Override
-    public void setEntity(Object entity) {
-        setObsGroup((GroupEntity) entity);
+    public void setDescribeableEntity(DescribableEntity entity) {
+        throw new RuntimeException("not implemented yet!");
     }
 }
