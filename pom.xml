@@ -124,48 +124,6 @@
                 <artifactId>db-model-dialects</artifactId>
                 <version>${project.version}</version>
             </dependency>
-            
-            <dependency>
-	            <groupId>org.postgresql</groupId>
-	            <artifactId>postgresql</artifactId>
-	            <version>${postgresql.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>net.postgis</groupId>
-	            <artifactId>postgis-jdbc</artifactId>
-	            <version>${postgis.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>com.oracle.database.jdbc</groupId>
-	            <artifactId>ojdbc8</artifactId>
-	            <version>${ojdbc8.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>com.microsoft.sqlserver</groupId>
-	            <artifactId>mssql-jdbc</artifactId>
-	            <version>${sqljdbc.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>mysql</groupId>
-	            <artifactId>mysql-connector-java</artifactId>
-	            <version>${mysql.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>com.h2database</groupId>
-	            <artifactId>h2</artifactId>
-	            <version>${h2.version}</version>
-	        </dependency>
-	        <dependency>
-	            <groupId>org.opengeo</groupId>
-	            <artifactId>geodb</artifactId>
-	            <version>${geodb.version}</version>
-	            <exclusions>
-	                <exclusion>
-	                    <groupId>com.h2database</groupId>
-	                    <artifactId>h2</artifactId>
-	                </exclusion>
-	            </exclusions>
-	        </dependency>
 
 			<dependency>
 				<groupId>org.postgresql</groupId>
@@ -225,11 +183,6 @@
                 <artifactId>jsr305</artifactId>
                 <version>3.0.2</version>
              </dependency>
-             <dependency>
-                <groupId>com.github.spotbugs</groupId>
-                <artifactId>spotbugs-annotations</artifactId>
-                <version>4.6.0</version>
-            </dependency>
 
             <dependency>
                 <groupId>joda-time</groupId>
