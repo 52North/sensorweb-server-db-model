@@ -42,7 +42,7 @@
         </property>
 
         <many-to-one name="phenomenon" class="org.n52.series.db.beans.PhenomenonEntity"
-                     foreign-key="fk_param_phenomenon_id">
+                     foreign-key="fk_param_phenomenon_id" insert="false" update="false">
             <column name="fk_phenomenon_id" not-null="true" index="idx_phenomenon_parameter">
                 <comment>Reference to the Phenomenon this Parameter describes.</comment>
             </column>

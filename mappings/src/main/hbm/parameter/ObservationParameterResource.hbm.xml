@@ -40,7 +40,8 @@
             </column>
         </property>
 
-        <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity" foreign-key="fk_observation_id">
+        <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity"
+                     foreign-key="fk_observation_id" insert="false" update="false">
             <column name="fk_observation_id" not-null="true" index="idx_observation_parameter">
                 <comment>Reference to the Observation this Parameter describes.</comment>
             </column>
