@@ -56,12 +56,6 @@
             </column>
         </many-to-one>
 
-		<many-to-one name="parent" class="FeatureParameterEntity" foreign-key="fk_param_feature_parent_id" >
-            <column name="fk_parent_parameter_id" not-null="false" index="idx_feature_parent_parameter">
-                <comment>Reference to the Feature this Parameter describes.</comment>
-            </column>
-        </many-to-one>
-
         <subclass discriminator-value="bool" extends="FeatureParameterEntity"
                   name="FeatureBooleanParameterEntity">
             <property name="value" type="org.n52.hibernate.type.SmallBooleanType">
