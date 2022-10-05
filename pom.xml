@@ -54,12 +54,12 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.junit>5.9.0</version.junit>
+        <version.junit>5.9.1</version.junit>
         <hamcrest.version>2.2</hamcrest.version>
         <geotools.version>27.1</geotools.version>
         <geolatte.version>1.8.2</geolatte.version>
-        <hibernate.version>5.6.11.Final</hibernate.version>
-        <spring-boot.version>2.7.3</spring-boot.version>
+        <hibernate.version>5.6.12.Final</hibernate.version>
+        <spring-boot.version>2.7.4</spring-boot.version>
         <javax.version>8.0.1</javax.version>
         
         <postgresql.version>42.5.0</postgresql.version>
@@ -187,7 +187,7 @@
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.11.1</version>
+                <version>2.11.2</version>
             </dependency>
 
             <dependency>
