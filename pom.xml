@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.n52</groupId>
         <artifactId>parent</artifactId>
-        <version>24</version>
+        <version>26</version>
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
@@ -69,7 +69,9 @@
         <mysql.version>8.0.30</mysql.version>
         <h2.version>2.1.214</h2.version>
         <geodb.version>0.9</geodb.version>
-
+		<version.java>11</version.java>
+        <java.compiler.source>${version.java}</java.compiler.source>
+        <java.compiler.target>${version.java}</java.compiler.target>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
@@ -462,7 +464,7 @@
                 <plugin>
                     <!-- assemble licenses -->
                     <groupId>org.jasig.maven</groupId>
-                    <artifactId>maven-notice-plugin</artifactId>
+                    <artifactId>notice-maven-plugin</artifactId>
                     <configuration>
                         <noticeTemplate>etc/NOTICE.template</noticeTemplate>
                         <licenseMapping>
