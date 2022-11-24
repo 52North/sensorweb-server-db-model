@@ -38,4 +38,13 @@ public class GeometryEntityTest {
         Assertions.assertEquals("GeometryEntity [ latitude: 52.7, longitude: 7.52 ]", geometryEntity.toString());
     }
 
+    @Test
+    public void copy() throws ParseException {
+        GeometryEntity geometryEntity = new GeometryEntity();
+        geometryEntity.setGeometry(new WKTReader(new GeometryFactory()).read("Point(52.7 7.52)"));
+        GeometryEntity copy = geometryEntity.copy();
+        Assertions.assertEquals(geometryEntity.hashCode(), geometryEntity.hashCode());
+        Assertions.assertEquals(copy.hashCode(), copy.hashCode());
+        Assertions.assertNotEquals(geometryEntity.hashCode(), copy.hashCode());
+    }
 }

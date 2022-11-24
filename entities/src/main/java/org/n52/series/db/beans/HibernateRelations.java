@@ -1181,7 +1181,7 @@ public interface HibernateRelations {
         }
     }
 
-    public interface HasNameTranslation extends HasName, HasTranslations {
+    interface HasNameTranslation extends HasName, HasTranslations {
 
         default boolean isi18nNameAvailable(String locale) {
             return getNameI18n(locale) != null && !getNameI18n(locale).isEmpty();
@@ -1196,7 +1196,7 @@ public interface HibernateRelations {
         }
     }
 
-    public interface HasDescriptionTranslation extends HasDescription, HasTranslations {
+    interface HasDescriptionTranslation extends HasDescription, HasTranslations {
 
         default String getDescriptionI18n(String locale) {
             if (noTranslationAvailable(locale)) {

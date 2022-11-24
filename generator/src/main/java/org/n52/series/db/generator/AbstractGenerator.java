@@ -172,6 +172,7 @@ public abstract class AbstractGenerator {
         }
     }
 
+    @SuppressFBWarnings("SF_SWITCH_NO_DEFAULT")
     protected List<String> getFeatureConceptDirectories(Feature concept, Configuration configuration,
             MetadataSources metadataSources) throws Exception {
         List<String> paths = new LinkedList<>();

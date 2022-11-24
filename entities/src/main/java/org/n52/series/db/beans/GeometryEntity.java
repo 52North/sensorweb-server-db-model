@@ -163,14 +163,15 @@ public class GeometryEntity implements Serializable {
         return coords;
     }
 
-    public GeometryEntity copy(GeometryEntity entity) {
-        setGeometry(entity.getGeometry().copy());
-        setGeometryFactory(entity.getGeometryFactory());
-        setLon(entity.getLon());
-        setLat(entity.getLat());
-        setAlt(entity.getAlt());
-        setSrid(entity.getSrid());
-        return entity;
+    public GeometryEntity copy() {
+        GeometryEntity copy = new GeometryEntity();
+        copy.setGeometry(getGeometry().copy());
+        copy.setGeometryFactory(getGeometryFactory());
+        copy.setLon(getLon());
+        copy.setLat(getLat());
+        copy.setAlt(getAlt());
+        copy.setSrid(getSrid());
+        return copy;
     }
 
     @Override
