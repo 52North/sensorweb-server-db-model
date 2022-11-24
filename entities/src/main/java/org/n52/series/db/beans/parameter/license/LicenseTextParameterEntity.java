@@ -17,9 +17,12 @@ package org.n52.series.db.beans.parameter.license;
 
 import org.n52.series.db.beans.parameter.TextParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LicenseTextParameterEntity extends LicenseParameterEntity<String> implements TextParameterEntity {
 
     private static final long serialVersionUID = 3300965770609382377L;

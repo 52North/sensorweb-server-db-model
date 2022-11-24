@@ -18,11 +18,14 @@ package org.n52.series.db.beans.parameter.license;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.CategoryParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Map;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LicenseCategoryParameterEntity extends LicenseParameterEntity<String> implements CategoryParameterEntity {
 
     private static final long serialVersionUID = -6262887605542676492L;

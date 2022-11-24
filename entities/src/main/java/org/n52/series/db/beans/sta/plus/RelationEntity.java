@@ -18,6 +18,8 @@ package org.n52.series.db.beans.sta.plus;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,6 +41,7 @@ import java.util.Set;
 // @Index(name = "idx_obsrel_object", columnList = "object"),
 })
 @SequenceGenerator(name = "rel_seq", allocationSize = 1)
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class RelationEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier, HibernateRelations.HasDescription {
 

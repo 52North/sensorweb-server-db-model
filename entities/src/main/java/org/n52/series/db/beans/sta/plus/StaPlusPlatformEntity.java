@@ -23,9 +23,12 @@ import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class StaPlusPlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
         HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {
 

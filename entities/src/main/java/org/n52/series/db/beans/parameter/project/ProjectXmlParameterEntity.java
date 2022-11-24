@@ -17,9 +17,12 @@ package org.n52.series.db.beans.parameter.project;
 
 import org.n52.series.db.beans.parameter.XmlParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProjectXmlParameterEntity extends ProjectParameterEntity<String> implements XmlParameterEntity {
 
     private static final long serialVersionUID = 1209102870245642049L;

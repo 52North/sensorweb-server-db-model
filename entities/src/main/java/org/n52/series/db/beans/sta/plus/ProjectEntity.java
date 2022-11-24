@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.project.ProjectParameterEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -40,6 +42,7 @@ import java.util.Set;
 @Entity
 @SequenceGenerator(name = "project_seq", allocationSize = 1)
 @Table(name = "project")
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProjectEntity extends IdEntity implements HibernateRelations.HasId, HibernateRelations.HasName,
         HibernateRelations.HasDescription, HibernateRelations.HasStaIdentifier, HibernateRelations.HasParameters {
 

@@ -17,9 +17,12 @@ package org.n52.series.db.beans.parameter.project;
 
 import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProjectBooleanParameterEntity extends ProjectParameterEntity<Boolean> implements BooleanParameterEntity {
 
     private static final long serialVersionUID = -1280123654095577480L;

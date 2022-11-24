@@ -20,6 +20,9 @@ import java.util.Set;
 
 import org.n52.series.db.beans.DataEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class StaPlusDataEntity<T> extends DataEntity<T> {
 
     public static final String PROPERTY_SUBJECTS = "subjects";

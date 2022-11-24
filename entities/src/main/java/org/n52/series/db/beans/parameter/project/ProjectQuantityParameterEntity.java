@@ -18,12 +18,15 @@ package org.n52.series.db.beans.parameter.project;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.math.BigDecimal;
 import java.util.Map;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProjectQuantityParameterEntity extends ProjectParameterEntity<BigDecimal>
         implements QuantityParameterEntity {
 

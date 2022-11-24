@@ -32,12 +32,15 @@ import javax.persistence.Table;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @Entity
 @Table(name = "party")
 @SequenceGenerator(name = "cs_observation_seq", allocationSize = 1)
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class PartyEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasStaIdentifier, HibernateRelations.HasDescription {
 

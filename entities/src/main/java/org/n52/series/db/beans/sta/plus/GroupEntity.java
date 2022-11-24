@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 import org.n52.series.db.beans.parameter.observationgroup.ObservationGroupParameterEntity;
 import org.n52.series.db.common.Utils;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -47,6 +49,7 @@ import java.util.Set;
 @Entity
 @Table(name = "group")
 @SequenceGenerator(name = "group_seq", allocationSize = 1)
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class GroupEntity extends IdEntity
         implements HibernateRelations.HasId, HibernateRelations.HasName, HibernateRelations.HasStaIdentifier,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed, HibernateRelations.HasParameters {

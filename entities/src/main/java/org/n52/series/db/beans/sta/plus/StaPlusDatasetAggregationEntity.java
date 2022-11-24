@@ -17,9 +17,12 @@ package org.n52.series.db.beans.sta.plus;
 
 import org.n52.series.db.beans.sta.AggregationEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 import java.util.Set;
 import java.util.stream.Collectors;
 
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class StaPlusDatasetAggregationEntity extends StaPlusDataset
         implements StaPlusAbstractDatasetEntity, AggregationEntity<StaPlusDataset> {
 

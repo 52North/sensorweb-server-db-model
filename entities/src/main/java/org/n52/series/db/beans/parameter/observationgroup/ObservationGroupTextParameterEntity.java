@@ -17,9 +17,12 @@ package org.n52.series.db.beans.parameter.observationgroup;
 
 import org.n52.series.db.beans.parameter.TextParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ObservationGroupTextParameterEntity extends ObservationGroupParameterEntity<String>
         implements TextParameterEntity {
 

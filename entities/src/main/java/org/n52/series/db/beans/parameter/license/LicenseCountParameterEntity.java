@@ -17,9 +17,12 @@ package org.n52.series.db.beans.parameter.license;
 
 import org.n52.series.db.beans.parameter.CountParameterEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LicenseCountParameterEntity extends LicenseParameterEntity<Integer> implements CountParameterEntity {
 
     private static final long serialVersionUID = -7778025481981408886L;

@@ -17,6 +17,9 @@ package org.n52.series.db.beans.sta.plus;
 
 import org.n52.series.db.beans.AbstractDatasetEntity;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class StaPlusDataset extends AbstractDatasetEntity implements StaPlusAbstractDatasetEntity {
 
     private LicenseEntity license;
