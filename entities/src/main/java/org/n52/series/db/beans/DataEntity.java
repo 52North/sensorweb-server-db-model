@@ -208,7 +208,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean isSetGeometryEntity() {
-        return (geometryEntity != null) && !geometryEntity.isEmpty();
+        return geometryEntity != null && !geometryEntity.isEmpty();
     }
 
     public boolean getDeleted() {
@@ -323,7 +323,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueIdentifier() {
-        return (getValueIdentifier() != null) && !getValueIdentifier().isEmpty();
+        return getValueIdentifier() != null && !getValueIdentifier().isEmpty();
     }
 
     public String getValueName() {
@@ -335,7 +335,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueName() {
-        return (getValueName() != null) && !getValueName().isEmpty();
+        return getValueName() != null && !getValueName().isEmpty();
     }
 
     public String getValueDescription() {
@@ -347,7 +347,7 @@ public abstract class DataEntity<T> extends DescribableEntity
     }
 
     public boolean hasValueDescription() {
-        return (getValueDescription() != null) && !getValueDescription().isEmpty();
+        return getValueDescription() != null && !getValueDescription().isEmpty();
     }
 
     public boolean hasVerticalInterval() {

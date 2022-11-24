@@ -16,7 +16,6 @@
 package org.n52.series.db.beans;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
