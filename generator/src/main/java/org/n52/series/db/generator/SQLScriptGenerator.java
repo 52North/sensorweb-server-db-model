@@ -172,7 +172,7 @@ public final class SQLScriptGenerator extends AbstractGenerator {
                 if (i != 1) {
                     schema = getSchema(i);
                     // modelSelection/profile
-                    for (int j = 0; j < 2; j++) {
+                    for (int j = 0; j < 3; j++) {
                         // concept
                         for (int k = 0; k < 4; k++) {
                             // feature

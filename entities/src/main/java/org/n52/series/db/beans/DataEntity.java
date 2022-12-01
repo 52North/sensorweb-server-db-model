@@ -16,6 +16,15 @@
 
 package org.n52.series.db.beans;
 
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
+
 import org.n52.series.db.beans.HibernateRelations.HasDataset;
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasParameters;
@@ -28,22 +37,16 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.quality.QualityEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
+import org.n52.series.db.beans.sta.GroupEntity;
+import org.n52.series.db.beans.sta.StaRelations;
 import org.n52.series.db.common.Utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public abstract class DataEntity<T> extends DescribableEntity
-        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
-        HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed, IsNoDataValue {
+public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
+        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime, HasParameters, HasDataset, HasFeature,
+        IsProcessed, IsNoDataValue, StaRelations.HasGroups<DataEntity<?>> {
 
     public static final String PROPERTY_ID = "id";
 
@@ -145,6 +148,10 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     private AbstractFeatureEntity<?> feature;
     private Set<QualityEntity<?>> qualities = new LinkedHashSet<>();
+
+    private Set<DataEntity<?>> subjects;
+    private Set<DataEntity<?>> objects;
+    private Set<GroupEntity> groups;
 
     private boolean processed;
 
@@ -499,6 +506,41 @@ public abstract class DataEntity<T> extends DescribableEntity
 
     public boolean hasQuality() {
         return getQuality() != null && !getQuality().isEmpty();
+    }
+
+    public Set<DataEntity<?>> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<DataEntity<?>> subjects) {
+        this.subjects = subjects;
+    }
+
+    public boolean isSetSubjects() {
+        return getSubjects() != null && !getSubjects().isEmpty();
+    }
+
+    public Set<DataEntity<?>> getObjects() {
+        return objects;
+    }
+
+    public void setObjects(Set<DataEntity<?>> objects) {
+        this.objects = objects;
+    }
+
+    public boolean isSetObjects() {
+        return getObjects() != null && !getObjects().isEmpty();
+    }
+
+    @Override
+    public Set<GroupEntity> getGroups() {
+        return groups;
+    }
+
+    @Override
+    public DataEntity<T> setGroups(Set<GroupEntity> groups) {
+        this.groups = groups;
+        return this;
     }
 
     @Override

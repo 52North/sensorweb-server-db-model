@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping package="org.n52.series.db.beans"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="org.n52.series.db.beans.sta.RelationEntity" table="related_observation">
+        <comment>Store the relation of two observation or an external observation</comment>
+         <id name="id" type="long">
+            <column name="relation_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">relation_seq</param>
+            </generator>
+        </id>
+		<many-to-one class="DataEntity" name="subject" foreign-key="fk_relation_subject">
+            <column name="fk_subject_id" not-null="true" index="idx_relation_subject" >
+                <comment>Reference to the subject of the group.</comment>
+            </column>
+        </many-to-one>
+        <many-to-one class="DataEntity" name="object" foreign-key="fk_relation_object">
+            <column name="fk_object_id" not-null="false" index="idx_relation_object">
+                <comment>Reference to the object of the group.</comment>
+            </column>
+        </many-to-one>
+        <property name="role" type="string">
+            <column name="role" not-null="true">
+                <comment>The role of the relation</comment>
+            </column>
+        </property>
+        <property name="description" type="string">
+            <column name="description">
+                <comment>Description of the relation</comment>
+            </column>
+        </property>
+        <property name="externalObject" type="string" not-null="false">
+            <column name="external_object">
+                <comment>URL that point to external object</comment>
+            </column>
+        </property>
+         <set name="parameters" table="relation_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
+            <key column="fk_relation_id" not-null="true"/>
+            <one-to-many class="org.n52.series.db.beans.parameter.relation.RelationParameterEntity" />
+        </set>
+        <set name="groups" table="relations_groups" inverse="false" fetch="select">
+            <comment>Relation to store the groups for relations</comment>
+            <key foreign-key="fk_relations_groups">
+                <column name="fk_relation_id" not-null="true">
+                    <comment>The related relations</comment>
+                </column>
+            </key>
+            <many-to-many class="org.n52.series.db.beans.sta.GroupEntity" foreign-key="fk_groups_relations">
+                <column name="fk_group_id" not-null="true" index="idx_groups_relations">
+                    <comment>The reference of the related groups from the group table</comment>
+                </column>
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

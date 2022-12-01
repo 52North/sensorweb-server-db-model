@@ -1,0 +1,115 @@
+<hibernate-mapping package="org.n52.series.db.beans"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="org.n52.series.db.beans.sta.PartyEntity" table="party">
+        <comment>Storage of the parties.</comment>
+        <id name="id" type="long">
+            <column name="party_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">party_seq</param>
+            </generator>
+        </id>
+        <property name="identifier" type="string" index="idx_party_identifier">
+            <column name="identifier" not-null="true" unique-key="un_party_identifier">
+                <comment>Unique identifier/autid of the party which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
+            </column>
+        </property>
+         <property name="staIdentifier" type="string" index="idx_party_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_party_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
+         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_party_identifier_codesp">
+            <column name="fk_identifier_codespace_id" index="idx_party_identifier_codespace">
+                <comment>The codespace of the party identifier, reference to the codespace table.</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>The human readable name of the party.</comment>
+            </column>
+        </property>
+         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_party_name_codespace">
+            <column name="fk_name_codespace_id" index="idx_party_name_codespace">
+                <comment>The codespace of the party name, reference to the codespace table.</comment>
+            </column>
+        </many-to-one>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the party</comment>
+            </column>
+        </property>
+		<property name="role" type="text">
+			<column name="role" scale="20" not-null="true" default="'individual'" check="role in ('individual', 'institutional')">
+				<comment>Indicator whether the party tole is individual or institutional.</comment>
+			</column>
+			<type name="org.hibernate.type.EnumType">
+				<param name="enumClass">org.n52.series.db.beans.RolePartyCode</param>
+				<param name="useNamed">true</param>
+			</type>
+		</property>
+		<property name="displayName" type="text">
+			<column name="display_name">
+				<comment>A short description of the party</comment>
+			</column>
+		</property>
+        <!-- Comments for the translations are defined below! -->
+        <set name="translations" table="party_i18n" inverse="false" fetch="select" cascade="all">
+            <key column="fk_party_id" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nPartyEntity" />
+        </set>
+        <set name="platforms" table="platform" inverse="true">
+            <key foreign-key="fk_party_platform">
+                <column name="fk_platform_id" not-null="true"/>
+            </key>
+            <one-to-many class="PlatformEntity" />
+	    </set>
+	    <set name="groups" table="group" inverse="true">
+	        <key foreign-key="fk_party_group">
+	            <column name="fk_group_id" not-null="true"/>
+	        </key>
+	        <one-to-many class="org.n52.series.db.beans.sta.GroupEntity" />
+	    </set>
+	    <set name="datasets" table="dataset" inverse="true">
+	        <key foreign-key="fk_dataset_party">
+	            <column name="fk_party_id" not-null="true"/>
+	        </key>
+	        <one-to-many class="DatasetEntity" />
+	    </set>
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nPartyEntity" table="party_i18n">
+        <comment>Storage for internationalizations of parties.</comment>
+        <id name="id" type="long">
+            <column name="party_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">party_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="org.n52.series.db.beans.sta.PartyEntity" foreign-key="fk_party" insert="false" update="false">
+            <column name="fk_party_id" not-null="true" index="idx_party_i18n_party">
+                <comment>Reference to the party table this internationalization belongs to. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
+            </column>
+        </many-to-one>
+        <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the party</comment>
+            </column>
+        </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>Locale/language specific description of the party</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

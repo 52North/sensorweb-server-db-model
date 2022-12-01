@@ -17,7 +17,8 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
-        <module>dialects</module>
+		<module>repo</module>
+		<module>dialects</module>
     </modules>
      <organization>
          <name>52North Spatial Information Research GmbH</name>
@@ -60,6 +61,7 @@
         <geolatte.version>1.9.0</geolatte.version>
         <hibernate.version>5.6.14.Final</hibernate.version>
         <spring-boot.version>2.7.6</spring-boot.version>
+        <spring-data-entity-graph.version>2.7.10</spring-data-entity-graph.version>
         <javax.version>8.0.1</javax.version>
         
         <postgresql.version>42.5.1</postgresql.version>
@@ -98,6 +100,11 @@
                 <scope>import</scope>
                 <type>pom</type>
             </dependency>
+            <dependency>
+                <groupId>com.cosium.spring.data</groupId>
+                <artifactId>spring-data-jpa-entity-graph</artifactId>
+                <version>${spring-data-entity-graph.version}</version>
+            </dependency>
 
             <dependency>
                 <groupId>${project.groupId}</groupId>
@@ -122,6 +129,11 @@
             <dependency>
                 <groupId>${project.groupId}</groupId>
                 <artifactId>db-model-dialects</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+             <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>db-model-repo</artifactId>
                 <version>${project.version}</version>
             </dependency>
 

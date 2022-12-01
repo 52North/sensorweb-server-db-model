@@ -62,12 +62,7 @@
                 <column name="observed_area" not-null="false"/>
             </property>
         </component>
-        <many-to-one class="ServiceEntity" name="service" foreign-key="fk_service_dataset" unique-key="un_dataset_identity">
-            <column name="fk_service_id">
-                <comment>Reference to the service this dataset belongs to.</comment>
-            </column>
-        </many-to-one>
-		<many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
+        <many-to-one class="ProcedureEntity" name="procedure" unique-key="un_dataset_identity" foreign-key="fk_dataset_procedure">
             <column name="fk_procedure_id"  not-null="true" index="idx_dataset_procedure">
                 <comment>Reference to the procedure that belongs that belongs to this dataset.</comment>
             </column>
@@ -265,6 +260,7 @@
                     <comment>Reference to the vertical metadata that belongs to this profile dataset.</comment>
                 </column>
             </many-to-one>
+            <property name="ereportingProfile" type="org.n52.hibernate.type.SmallBooleanType" formula="1" insert="false" update="false"/>
             <set name="tags" table="tag_dataset">
                 <comment>Storage of relations between dataset and related tags</comment>
                 <key not-null="true" foreign-key="fk_dataset_tag">

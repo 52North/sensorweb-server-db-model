@@ -96,6 +96,7 @@ public abstract class AbstractGenerator {
         printToScreen("Which database model should be created:");
         printToScreen("0 default");
         printToScreen("1 sampling");
+        printToScreen("2 staplus");
         printToScreen("");
         printEnterYourSelection();
 
@@ -197,6 +198,10 @@ public abstract class AbstractGenerator {
             case SAMPLING:
                 paths.add(p + "/sampling");
                 break;
+            case STA_PLUS:
+                paths.add("/hbm/staplus");
+                paths.add(p + "/staplus");
+                break;
             default:
                 break;
         }
@@ -267,7 +272,7 @@ public abstract class AbstractGenerator {
     }
 
     enum Profile {
-        DEFAULT, SAMPLING;
+        DEFAULT, SAMPLING, STA_PLUS;
 
         @Override
         public String toString() {

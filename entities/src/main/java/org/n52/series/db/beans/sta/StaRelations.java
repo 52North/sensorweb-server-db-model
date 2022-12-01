@@ -16,10 +16,14 @@
 
 package org.n52.series.db.beans.sta;
 
+import java.util.Date;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-public interface StaRelations {
+import org.n52.series.db.beans.PlatformEntity;
+import org.n52.series.db.beans.HibernateRelations;
+
+public interface StaRelations extends HibernateRelations {
 
     interface HasLocations {
 
@@ -38,6 +42,96 @@ public interface StaRelations {
             return getLocations() != null && !getLocations().isEmpty();
         }
 
+    }
+
+    interface StaPlusTime<T> {
+
+        T setCreationTime(Date creationTime);
+
+        Date getCreationTime();
+
+        default boolean isSetCreationTime() {
+            return getCreationTime() != null;
+        }
+
+        T setRunTimeStart(Date runTimeStart);
+
+        Date getRunTimeStart();
+
+        default boolean isSetRunTimeSart() {
+            return getRunTimeStart() != null;
+        }
+
+        T setRunTimeEnd(Date runTimeEnd);
+
+        Date getRunTimeEnd();
+
+        default boolean isSetRunTimeEnd() {
+            return getRunTimeEnd() != null;
+        }
+
+    }
+
+    interface HasPlatforms<T> {
+
+        String PLATFORMS = "platforms";
+
+        String PROPERTY_PLATFORMS = PLATFORMS;
+
+        Set<PlatformEntity> getPlatforms();
+
+        T setPlatforms(Set<PlatformEntity> platforms);
+
+        default boolean hasPlatforms() {
+            return getPlatforms() != null && !getPlatforms().isEmpty();
+        }
+
+    }
+
+    interface HasGroups<T> {
+
+        String GROUPS = "groups";
+
+        String PROPERTY_GROUPS = GROUPS;
+
+        Set<GroupEntity> getGroups();
+
+        T setGroups(Set<GroupEntity> groups);
+
+        default boolean hasRelations() {
+            return getGroups() != null && !getGroups().isEmpty();
+        }
+
+    }
+
+    interface HasLicense<T> {
+
+        String LICENSE = "license";
+
+        String PROPERTY_LICENSE = LICENSE;
+
+        LicenseEntity getLicense();
+
+        T setLicense(LicenseEntity license);
+
+        default boolean isSetLicense() {
+            return getLicense() != null;
+        }
+    }
+
+    interface HasParty<T> {
+
+        String PARTY = "party";
+
+        String PROPERTY_PARTY = PARTY;
+
+        PartyEntity getParty();
+
+        T setParty(PartyEntity party);
+
+        default boolean isSetParty() {
+            return getParty() != null;
+        }
     }
 
 }

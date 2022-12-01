@@ -19,6 +19,8 @@ package org.n52.series.db.beans;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.sta.HistoricalLocationEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
+import org.n52.series.db.beans.sta.PartyEntity;
+import org.n52.series.db.beans.sta.StaRelations;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
 import java.util.LinkedHashSet;
@@ -27,9 +29,9 @@ import java.util.Set;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class PlatformEntity extends DescribableEntity
-        implements HasLocations, IsStaEntity, HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed,
-        HibernateRelations.HasParameters, HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType {
+public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters,
+        HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType, StaRelations.HasParty<PlatformEntity> {
 
     public static final String PROPERTY_LOCATIONS = "locations";
     public static final String PROPERTY_PROPERTIES = "properties";
@@ -43,6 +45,7 @@ public class PlatformEntity extends DescribableEntity
     private Set<AbstractDatasetEntity> datasets;
     private AssessmentTypeEntity assessmentType;
     private NetworkEntity network;
+    private PartyEntity party;
     private boolean processed;
 
     @Override
@@ -141,4 +144,14 @@ public class PlatformEntity extends DescribableEntity
         return getNetwork() != null;
     }
 
+    @Override
+    public PartyEntity getParty() {
+        return party;
+    }
+
+    @Override
+    public PlatformEntity setParty(PartyEntity party) {
+        this.party = party;
+        return this;
+    }
 }

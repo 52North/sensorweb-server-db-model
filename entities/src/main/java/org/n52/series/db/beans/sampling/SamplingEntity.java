@@ -174,11 +174,6 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
         return datasets;
     }
 
-    @Override
-    public boolean hasDatasets() {
-        return HasDatasets.super.hasDatasets() && !getDatasets().isEmpty();
-    }
-
     public void setObservations(Set<DataEntity<?>> observations) {
         this.observations = observations;
     }

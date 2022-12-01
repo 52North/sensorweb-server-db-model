@@ -1,0 +1,128 @@
+<hibernate-mapping package="org.n52.series.db.beans"
+    xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
+    <class name="org.n52.series.db.beans.sta.ProjectEntity" table="project">
+        <comment>Storage of the projects.</comment>
+        <id name="id" type="long">
+            <column name="project_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">project_seq</param>
+            </generator>
+        </id>
+        <property name="identifier" type="string" index="idx_project_identifier">
+            <column name="identifier" not-null="true" unique-key="un_project_identifier">
+                <comment>Unique identifier of the project which can be used for filtering. Should be a URI, UUID. E.g. http://www.example.org/123, 123-321</comment>
+            </column>
+        </property>
+         <property name="staIdentifier" type="string" index="idx_project_staIdentifier">
+            <column name="sta_identifier" not-null="true" unique-key="un_project_staIdentifier">
+                <comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321</comment>
+            </column>
+        </property>
+         <many-to-one name="identifierCodespace" class="CodespaceEntity" foreign-key="fk_project_identifier_codesp">
+            <column name="fk_identifier_codespace_id" index="idx_project_identifier_codespace">
+                <comment>The codespace of the project identifier, reference to the codespace table.</comment>
+            </column>
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>The human readable name of the project.</comment>
+            </column>
+        </property>
+         <many-to-one name="nameCodespace" class="CodespaceEntity" foreign-key="fk_project_name_codespace">
+            <column name="fk_name_codespace_id" index="idx_project_name_codespace">
+                <comment>The codespace of the project name, reference to the codespace table.</comment>
+            </column>
+        </many-to-one>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>A short description of the project</comment>
+            </column>
+        </property>
+        <property name="classification" type="text">
+            <column name="classification">
+                <comment>A classification of the projectr</comment>
+            </column>
+        </property>
+        <property name="termsOfUse" type="text">
+            <column name="terms_of_use">
+                <comment>A termsOfUse of the projectr</comment>
+            </column>
+        </property>
+        <property name="privacyPolicy" type="text">
+            <column name="privacy_policy">
+                <comment>A privacyPolicy of the projectr</comment>
+            </column>
+        </property>
+        <property name="runTimeStart" type="timestamp">
+            <column index="idx_project_run_time_start" name="run_time_start" length="29" not-null="true">
+                <comment>The timestamp when the observation period has started or the observation took place. In the the latter, run_time_start and run_time_end are equal.</comment>
+            </column>
+        </property>
+        <property name="runTimeEnd" type="timestamp">
+            <column index="idx_project_run_time_end" name="run_time_end" length="29" not-null="true">
+                <comment>The timestamp when the measurement period has finished or the observation took place. In the the latter, run_time_start and run_time_end are equal.</comment>
+            </column>
+        </property>
+        <property name="creationTime" type="timestamp">
+            <column index="idx_project_creation_time" name="creation_time" length="29" not-null="false">
+                <comment>The timestamp when the groupt was created.</comment>
+            </column>
+        </property>
+        <property name="url" type="text">
+            <column name="url">
+                <comment>A url of the projectr</comment>
+            </column>
+        </property>
+        <!-- Comments for the translations are defined below! -->
+        <set name="translations" table="project_i18n" inverse="false" fetch="select" cascade="all">
+            <key column="fk_project_id" not-null="true" />
+            <one-to-many class="org.n52.series.db.beans.i18n.I18nProjectEntity" />
+        </set>
+        <set name="parameters" table="project_parameter" inverse="false" lazy="true" cascade="all" where="fk_parent_parameter_id IS NULL">
+            <key column="fk_project_id" not-null="true"/>
+            <one-to-many class="org.n52.series.db.beans.parameter.project.ProjectParameterEntity" />
+        </set>
+        <set name="datasets" table="dataset" inverse="true">
+	        <key foreign-key="fk_dataset_projct">
+	            <column name="fk_project_id" not-null="true"/>
+	        </key>
+	        <one-to-many class="DatasetEntity" />
+	    </set>
+    </class>
+
+    <class name="org.n52.series.db.beans.i18n.I18nProjectEntity" table="project_i18n">
+        <comment>Storage for internationalizations of projects.</comment>
+        <id name="id" type="long">
+            <column name="project_i18n_id">
+                <comment>PK column of the table</comment>
+            </column>
+            <generator class="native">
+                <param name="sequence_name">project_i18n_seq</param>
+            </generator>
+        </id>
+        <many-to-one name="entity" class="org.n52.series.db.beans.sta.ProjectEntity" foreign-key="fk_project" insert="false" update="false">
+            <column name="fk_project_id" not-null="true" index="idx_project_i18n_project">
+                <comment>Reference to the project table this internationalization belongs to. ISO 639 Codes (http://www.loc.gov/standards/iso639-2/php/code_list.php)</comment>
+            </column>
+        </many-to-one>
+        <property name="locale" not-null="true" type="string">
+            <column name="locale">
+                <comment>Locale/language specification for this entry</comment>
+            </column>
+        </property>
+        <property name="name" type="string">
+            <column name="name">
+                <comment>Locale/language specific name of the project</comment>
+            </column>
+        </property>
+        <property name="description" type="text">
+            <column name="description">
+                <comment>Locale/language specific description of the project</comment>
+            </column>
+        </property>
+    </class>
+</hibernate-mapping>

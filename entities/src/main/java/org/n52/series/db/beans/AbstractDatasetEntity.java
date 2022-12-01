@@ -15,12 +15,6 @@
  */
 package org.n52.series.db.beans;
 
-import org.locationtech.jts.geom.Geometry;
-import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
-import org.n52.series.db.common.Utils;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -29,12 +23,23 @@ import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
+import org.n52.series.db.beans.sta.LicenseEntity;
+import org.n52.series.db.beans.sta.PartyEntity;
+import org.n52.series.db.beans.sta.ProjectEntity;
+import org.n52.series.db.beans.sta.StaRelations;
+import org.n52.series.db.common.Utils;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class AbstractDatasetEntity extends DescribableEntity
-        implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity {
+        implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity,
+        StaRelations.HasLicense<AbstractDatasetEntity>, StaRelations.HasParty<AbstractDatasetEntity> {
 
     public static final String PROPERTY_CATEGORY = "category";
     public static final String PROPERTY_OFFERING = "offering";
@@ -60,6 +65,9 @@ public class AbstractDatasetEntity extends DescribableEntity
     private UnitEntity unit;
     private OfferingEntity offering;
     private PlatformEntity platform;
+    private PartyEntity party;
+    private ProjectEntity project;
+    private LicenseEntity license;
     private GeometryEntity observedArea;
     private Set<Date> resultTimes;
     private Date firstValueAt;
@@ -154,6 +162,38 @@ public class AbstractDatasetEntity extends DescribableEntity
 
     public boolean isSetPlatform() {
         return getPlatform() != null;
+    }
+
+    @Override
+    public PartyEntity getParty() {
+        return party;
+    }
+
+    @Override
+    public AbstractDatasetEntity setParty(PartyEntity party) {
+        this.party = party;
+        return this;
+    }
+
+    public ProjectEntity getProject() {
+        return project;
+    }
+
+    public void setProject(ProjectEntity project) {
+        this.project = project;
+    }
+
+    public boolean isSetProject() {
+        return getProject() != null;
+    }
+
+    public LicenseEntity getLicense() {
+        return license;
+    }
+
+    public AbstractDatasetEntity setLicense(LicenseEntity license) {
+        this.license = license;
+        return this;
     }
 
     public Date getFirstValueAt() {
