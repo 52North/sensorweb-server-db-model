@@ -15,6 +15,10 @@ updates:
     versions: ">= 6.x"
   - dependency-name: "org.springframework.boot:*"
     versions: ">= 3.x"
+  - dependency-name: "org.springframework.data:*"
+    versions: ">= 3.x"
+  - dependency-name: "com.cosium.spring.data:*"
+    versions: ">= 3.x"
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
