@@ -102,21 +102,6 @@
                 <comment>Reference to the unit of the observations that belongs to this dataset.</comment>
             </column>
         </many-to-one>
-        <many-to-one class="org.n52.series.db.beans.sta.PartyEntity" name="party" foreign-key="fk_dataset_party">
-            <column name="fk_party_id" index="idx_dataset_party">
-                <comment>Reference to the party of the observations that belongs to this dataset.</comment>
-            </column>
-        </many-to-one>
-        <many-to-one class="org.n52.series.db.beans.sta.ProjectEntity" name="project" foreign-key="fk_dataset_project">
-            <column name="fk_project_id" index="idx_dataset_project">
-                <comment>Reference to the project of the observations that belongs to this dataset.</comment>
-            </column>
-        </many-to-one>
-        <many-to-one class="org.n52.series.db.beans.sta.LicenseEntity" name="license" foreign-key="fk_dataset_license">
-            <column name="fk_license_id" index="idx_dataset_license">
-                <comment>Reference to the license of the observations that belongs to this dataset.</comment>
-            </column>
-        </many-to-one>
         <many-to-one name="omObservationType" class="FormatEntity" not-null="false"
                      foreign-key="fk_dataset_om_obs_type">
             <column name="fk_format_id" index="idx_dataset_observation_type">
