@@ -17,7 +17,7 @@
         <module>mappings</module>
         <module>generator</module>
         <module>types</module>
-		<module>repo</module>
+		<module>repos</module>
 		<module>dialects</module>
     </modules>
      <organization>
@@ -133,7 +133,7 @@
             </dependency>
              <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>db-model-repo</artifactId>
+                <artifactId>db-model-repos</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
