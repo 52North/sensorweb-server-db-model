@@ -61,7 +61,7 @@
         <geolatte.version>1.9.0</geolatte.version>
         <hibernate.version>5.6.14.Final</hibernate.version>
         <spring-boot.version>2.7.6</spring-boot.version>
-        <spring-data-entity-graph.version>2.7.10</spring-data-entity-graph.version>
+        <spring-data-entity-graph.version>3.0.0</spring-data-entity-graph.version>
         <javax.version>8.0.1</javax.version>
         
         <postgresql.version>42.5.1</postgresql.version>
