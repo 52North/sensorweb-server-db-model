@@ -36,12 +36,13 @@ import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, HibernateRelations.IsProcessed {
+        HibernateRelations.HasDescription, HibernateRelations.IsProcessed, StaRelations.HasPlatforms<LocationEntity>,
+        StaRelations.HasHistoricalLocations<LocationEntity> {
 
     public static final String PROPERTY_NAME = NAME;
     public static final String PROPERTY_DESCRIPTION = DESCRIPTION;
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
-    public static final String PROPERTY_LOCATION_ENCODINT = "locationEncoding";
+    public static final String PROPERTY_LOCATION_ENCODING = "locationEncoding";
 
     private static final long serialVersionUID = -8201429072560300649L;
 

@@ -25,21 +25,53 @@ import org.n52.series.db.beans.HibernateRelations;
 
 public interface StaRelations extends HibernateRelations {
 
-    interface HasLocations {
+    interface HasLocations<T> {
 
-        void setLocations(Set<LocationEntity> Locations);
+        T setLocations(Set<LocationEntity> locations);
 
         Set<LocationEntity> getLocations();
 
-        default void addLocationEntity(LocationEntity Location) {
+        @Deprecated
+        default void addLocationEntity(LocationEntity location) {
+            addLocation(location);
+        }
+
+        default void addLocation(LocationEntity location) {
             if (getLocations() == null) {
                 setLocations(new LinkedHashSet<>());
             }
-            getLocations().add(Location);
+            getLocations().add(location);
         }
 
+        @Deprecated
         default boolean hasLocationEntities() {
+            return hasLocations();
+        }
+
+        default boolean hasLocations() {
             return getLocations() != null && !getLocations().isEmpty();
+        }
+
+    }
+
+    interface HasHistoricalLocations<T> {
+
+        String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
+
+        T setHistoricalLocations(Set<HistoricalLocationEntity> historicalLocations);
+
+        Set<HistoricalLocationEntity> getHistoricalLocations();
+
+        default T addHistoricalLocation(HistoricalLocationEntity historicalLocation) {
+            if (getHistoricalLocations() == null) {
+                setHistoricalLocations(new LinkedHashSet<>());
+            }
+            getHistoricalLocations().add(historicalLocation);
+            return (T) this;
+        }
+
+        default boolean hasHistoricalLocations() {
+            return getHistoricalLocations() != null && !getHistoricalLocations().isEmpty();
         }
 
     }

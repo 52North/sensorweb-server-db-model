@@ -34,8 +34,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author <a href="mailto:s.drost@52north.org">Sebastian Drost</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class HistoricalLocationEntity extends DescribableEntity
-        implements Serializable, HasLocations, HibernateRelations.IsProcessed, HibernateRelations.HasThing {
+public class HistoricalLocationEntity extends DescribableEntity implements Serializable,
+        HasLocations<HistoricalLocationEntity>, HibernateRelations.IsProcessed, HibernateRelations.HasThing {
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
     public static final String PROPERTY_TIME = "time";
@@ -68,8 +68,9 @@ public class HistoricalLocationEntity extends DescribableEntity
     }
 
     @Override
-    public void setLocations(Set<LocationEntity> locationEntities) {
+    public HistoricalLocationEntity setLocations(Set<LocationEntity> locationEntities) {
         this.locationEntities = locationEntities;
+        return this;
     }
 
     @Override

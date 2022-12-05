@@ -56,6 +56,7 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
     public static final String PROPERTY_UNIT = "unit";
     public static final String PROPERTY_AGGREGATION = "aggregation";
+    public static final String PROPERTY_PROJECT = "project";
     private static final long serialVersionUID = 4178505006632345142L;
 
     private AbstractFeatureEntity<?> feature;

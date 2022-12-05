@@ -29,7 +29,7 @@ import java.util.Set;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class PlatformEntity extends DescribableEntity implements HasLocations, IsStaEntity,
+public class PlatformEntity extends DescribableEntity implements HasLocations<PlatformEntity>, IsStaEntity,
         HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters,
         HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType, StaRelations.HasParty<PlatformEntity> {
 
@@ -103,8 +103,9 @@ public class PlatformEntity extends DescribableEntity implements HasLocations, I
     }
 
     @Override
-    public void setLocations(Set<LocationEntity> locations) {
+    public PlatformEntity setLocations(Set<LocationEntity> locations) {
         this.locations = locations;
+        return this;
     }
 
     @Override
