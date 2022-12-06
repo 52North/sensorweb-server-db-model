@@ -166,14 +166,14 @@ public interface StaRelations extends HibernateRelations {
             return getParty() != null;
         }
     }
-    
+
     interface HasRelation<T> {
 
         String PROPERTY_SUBJECTS = "subjects";
 
         String PROPERTY_OBJECTS = "objects";
 
-         Set<DataEntity<?>> getSubjects();
+        Set<DataEntity<?>> getSubjects();
 
         T setSubjects(Set<DataEntity<?>> subjects);
 
@@ -184,7 +184,7 @@ public interface StaRelations extends HibernateRelations {
         default boolean isSetSubjects() {
             return getSubjects() != null && !getSubjects().isEmpty();
         }
-        
+
         default boolean isSetParty() {
             return getObjects() != null && !getObjects().isEmpty();
         }

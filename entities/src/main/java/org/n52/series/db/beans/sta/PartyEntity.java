@@ -32,7 +32,7 @@ public class PartyEntity extends DescribableEntity
 
     public static final String PROPERTY_DISPLAY_NAME = "displayName";
     public static final String PROPERTY_ROLE = "role";
-    
+
     private static final long serialVersionUID = -7546755723749812564L;
 
     private RolePartyCode role = RolePartyCode.individual;

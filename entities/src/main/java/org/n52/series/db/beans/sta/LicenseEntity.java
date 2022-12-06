@@ -26,16 +26,17 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LicenseEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, HibernateRelations.HasDataset, HibernateRelations.IsProcessed {
-    
+        HibernateRelations.HasDescription, HibernateRelations.HasDatasets, HibernateRelations.IsProcessed {
+
     public static final String PROPERTY_DEFINITION = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_LOGO = "logo";
-    
+
     private static final long serialVersionUID = -1938665500675268434L;
 
     private String logo;
     private Set<DatasetEntity> datasets;
     private Set<GroupEntity> groups;
+    private boolean processsed;
 
     public String getDefinition() {
         return getIdentifier();
@@ -79,6 +80,16 @@ public class LicenseEntity extends DescribableEntity implements Serializable, Hi
 
     public boolean isSeRelationps() {
         return getGroups() != null && !getGroups().isEmpty();
+    }
+
+    @Override
+    public boolean isProcessed() {
+        return processsed;
+    }
+
+    @Override
+    public void setProcessed(boolean processsed) {
+        this.processsed = processsed;
     }
 
 }

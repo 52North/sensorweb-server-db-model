@@ -29,9 +29,8 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProjectEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
         HibernateRelations.HasDescription, StaPlusTime<ProjectEntity>, HibernateRelations.HasDatasets {
-    private static final long serialVersionUID = -2909642026383185577L;
-
     public static final String PROPERTY_URL = "url";
+    private static final long serialVersionUID = -2909642026383185577L;
 
     private String classification;
     private String termsOfUse;

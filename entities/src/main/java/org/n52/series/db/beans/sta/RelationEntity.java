@@ -28,10 +28,8 @@ public class RelationEntity extends DescribableEntity implements StaRelations.Ha
     public static final String PROPERTY_SUBJECT = "subject";
     public static final String PROPERTY_OBJECT = "object";
     public static final String PROPERTY_ROLE = "role";
-    
-    private static final long serialVersionUID = -8131424037218012268L;
 
-  
+    private static final long serialVersionUID = -8131424037218012268L;
 
     private String role;
     private String externalObject;
