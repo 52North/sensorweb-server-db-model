@@ -38,6 +38,7 @@ import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
 import org.n52.series.db.beans.quality.QualityEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
 import org.n52.series.db.beans.sta.GroupEntity;
+import org.n52.series.db.beans.sta.RelationEntity;
 import org.n52.series.db.beans.sta.StaRelations;
 import org.n52.series.db.common.Utils;
 
@@ -147,8 +148,8 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     private AbstractFeatureEntity<?> feature;
     private Set<QualityEntity<?>> qualities = new LinkedHashSet<>();
 
-    private Set<DataEntity<?>> subjects;
-    private Set<DataEntity<?>> objects;
+    private Set<RelationEntity> subjects;
+    private Set<RelationEntity> objects;
     private Set<GroupEntity> groups;
 
     private boolean processed;
@@ -507,23 +508,23 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     }
 
     @Override
-    public Set<DataEntity<?>> getSubjects() {
+    public Set<RelationEntity> getSubjects() {
         return subjects;
     }
 
     @Override
-    public DataEntity<T> setSubjects(Set<DataEntity<?>> subjects) {
+    public DataEntity<T> setSubjects(Set<RelationEntity> subjects) {
         this.subjects = subjects;
         return this;
     }
 
     @Override
-    public Set<DataEntity<?>> getObjects() {
+    public Set<RelationEntity> getObjects() {
         return objects;
     }
 
     @Override
-    public DataEntity<T> setObjects(Set<DataEntity<?>> objects) {
+    public DataEntity<T> setObjects(Set<RelationEntity> objects) {
         this.objects = objects;
         return this;
     }

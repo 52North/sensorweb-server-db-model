@@ -29,7 +29,9 @@ public abstract class RelationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_GROUP = "group";
     public static final String PROP_GROUP_ID = "groupId";
+    public static final String PROPERTY_RELATION_ID = "relationId";
     private static final long serialVersionUID = 1123453212836718013L;
+
     private RelationEntity relation;
     private Long relationId;
 

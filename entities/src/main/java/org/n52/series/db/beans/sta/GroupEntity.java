@@ -29,8 +29,10 @@ import org.n52.series.db.beans.sta.StaRelations.StaPlusTime;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class GroupEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, StaPlusTime<GroupEntity>, HasLicense<GroupEntity>, HasParty<GroupEntity> {
+public class GroupEntity extends DescribableEntity
+        implements Serializable, HibernateRelations.HasName, HibernateRelations.HasDescription,
+        StaPlusTime<GroupEntity>, HasLicense<GroupEntity>, HasParty<GroupEntity>, HibernateRelations.IsProcessed {
+    public static final String PROPERTY_RELATIONS = "relations";
     private static final long serialVersionUID = -1355442833604724327L;
 
     private String purpose;
@@ -41,6 +43,7 @@ public class GroupEntity extends DescribableEntity implements Serializable, Hibe
     private PartyEntity party;
     private Set<DataEntity<?>> observations;
     private Set<RelationEntity> relations;
+    private boolean processsed;
 
     public String getPurpose() {
         return purpose;
@@ -132,5 +135,15 @@ public class GroupEntity extends DescribableEntity implements Serializable, Hibe
 
     public boolean isSetRelations() {
         return getRelations() != null && !getRelations().isEmpty();
+    }
+
+    @Override
+    public boolean isProcessed() {
+        return processsed;
+    }
+
+    @Override
+    public void setProcessed(boolean processsed) {
+        this.processsed = processsed;
     }
 }

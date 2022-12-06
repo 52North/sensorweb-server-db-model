@@ -40,6 +40,20 @@ import org.n52.series.db.beans.parameter.feature.FeatureQuantityParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureTextParameterEntity;
 import org.n52.series.db.beans.parameter.feature.FeatureXmlParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupCountParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupJsonParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupTextParameterEntity;
+import org.n52.series.db.beans.parameter.group.GroupXmlParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseCountParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseJsonParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseTextParameterEntity;
+import org.n52.series.db.beans.parameter.license.LicenseXmlParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationBooleanParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationCategoryParameterEntity;
 import org.n52.series.db.beans.parameter.location.LocationComplexParameterEntity;
@@ -85,6 +99,20 @@ import org.n52.series.db.beans.parameter.procedure.ProcedureQuantityParameterEnt
 import org.n52.series.db.beans.parameter.procedure.ProcedureTemporalParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureTextParameterEntity;
 import org.n52.series.db.beans.parameter.procedure.ProcedureXmlParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectCountParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectJsonParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectTextParameterEntity;
+import org.n52.series.db.beans.parameter.project.ProjectXmlParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationBooleanParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationCategoryParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationCountParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationJsonParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationQuantityParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationTextParameterEntity;
+import org.n52.series.db.beans.parameter.relation.RelationXmlParameterEntity;
 import org.n52.series.db.beans.sta.LocationEntity;
 
 /**
@@ -300,13 +328,89 @@ public class ParameterFactory {
                     default:
                         return null;
                 }
+            case LICENSE:
+                switch (valueType) {
+                    case JSON:
+                        return new LicenseJsonParameterEntity();
+                    case XML:
+                        return new LicenseXmlParameterEntity();
+                    case TEXT:
+                        return new LicenseTextParameterEntity();
+                    case BOOLEAN:
+                        return new LicenseBooleanParameterEntity();
+                    case CATEGORY:
+                        return new LicenseCategoryParameterEntity();
+                    case COUNT:
+                        return new LicenseCountParameterEntity();
+                    case QUANTITY:
+                        return new LicenseQuantityParameterEntity();
+                    default:
+                        return null;
+                }
+            case GROUP:
+                switch (valueType) {
+                    case JSON:
+                        return new GroupJsonParameterEntity();
+                    case XML:
+                        return new GroupXmlParameterEntity();
+                    case TEXT:
+                        return new GroupTextParameterEntity();
+                    case BOOLEAN:
+                        return new GroupBooleanParameterEntity();
+                    case CATEGORY:
+                        return new GroupCategoryParameterEntity();
+                    case COUNT:
+                        return new GroupCountParameterEntity();
+                    case QUANTITY:
+                        return new GroupQuantityParameterEntity();
+                    default:
+                        return null;
+                }
+            case PROJECT:
+                switch (valueType) {
+                    case JSON:
+                        return new ProjectJsonParameterEntity();
+                    case XML:
+                        return new ProjectXmlParameterEntity();
+                    case TEXT:
+                        return new ProjectTextParameterEntity();
+                    case BOOLEAN:
+                        return new ProjectBooleanParameterEntity();
+                    case CATEGORY:
+                        return new ProjectCategoryParameterEntity();
+                    case COUNT:
+                        return new ProjectCountParameterEntity();
+                    case QUANTITY:
+                        return new ProjectQuantityParameterEntity();
+                    default:
+                        return null;
+                }
+            case RELATION:
+                switch (valueType) {
+                    case JSON:
+                        return new RelationJsonParameterEntity();
+                    case XML:
+                        return new RelationXmlParameterEntity();
+                    case TEXT:
+                        return new RelationTextParameterEntity();
+                    case BOOLEAN:
+                        return new RelationBooleanParameterEntity();
+                    case CATEGORY:
+                        return new RelationCategoryParameterEntity();
+                    case COUNT:
+                        return new RelationCountParameterEntity();
+                    case QUANTITY:
+                        return new RelationQuantityParameterEntity();
+                    default:
+                        return null;
+                }
             default:
                 return null;
         }
     }
 
     public enum EntityType {
-        PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION
+        PHENOMENON, PROCEDURE, PLATFORM, DATASET, FEATURE, OBSERVATION, LOCATION, LICENSE, GROUP, PROJECT, RELATION
     }
 
     public enum ValueType {
