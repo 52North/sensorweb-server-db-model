@@ -21,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 import org.n52.series.db.beans.PlatformEntity;
+import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.HibernateRelations;
 
 public interface StaRelations extends HibernateRelations {
@@ -163,6 +164,29 @@ public interface StaRelations extends HibernateRelations {
 
         default boolean isSetParty() {
             return getParty() != null;
+        }
+    }
+    
+    interface HasRelation<T> {
+
+        String PROPERTY_SUBJECTS = "subjects";
+
+        String PROPERTY_OBJECTS = "objects";
+
+         Set<DataEntity<?>> getSubjects();
+
+        T setSubjects(Set<DataEntity<?>> subjects);
+
+        Set<DataEntity<?>> getObjects();
+
+        T setObjects(Set<DataEntity<?>> objects);
+
+        default boolean isSetSubjects() {
+            return getSubjects() != null && !getSubjects().isEmpty();
+        }
+        
+        default boolean isSetParty() {
+            return getObjects() != null && !getObjects().isEmpty();
         }
     }
 

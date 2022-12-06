@@ -31,6 +31,8 @@ public class ProjectEntity extends DescribableEntity implements Serializable, Hi
         HibernateRelations.HasDescription, StaPlusTime<ProjectEntity>, HibernateRelations.HasDatasets {
     private static final long serialVersionUID = -2909642026383185577L;
 
+    public static final String PROPERTY_URL = "url";
+
     private String classification;
     private String termsOfUse;
     private String privacyPolicy;

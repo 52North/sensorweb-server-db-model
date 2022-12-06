@@ -26,7 +26,11 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LicenseEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, HibernateRelations.HasDatasets {
+        HibernateRelations.HasDescription, HibernateRelations.HasDataset, HibernateRelations.IsProcessed {
+    
+    public static final String PROPERTY_DEFINITION = PROPERTY_IDENTIFIER;
+    public static final String PROPERTY_LOGO = "logo";
+    
     private static final long serialVersionUID = -1938665500675268434L;
 
     private String logo;

@@ -46,9 +46,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
         HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime, HasParameters, HasDataset, HasFeature,
-        IsProcessed, IsNoDataValue, StaRelations.HasGroups<DataEntity<?>> {
-
-    public static final String PROPERTY_ID = "id";
+        IsProcessed, IsNoDataValue, StaRelations.HasGroups<DataEntity<?>>, StaRelations.HasRelation<DataEntity<?>> {
 
     public static final String PROPERTY_DATASET = "dataset";
 
@@ -508,28 +506,26 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
         return getQuality() != null && !getQuality().isEmpty();
     }
 
+    @Override
     public Set<DataEntity<?>> getSubjects() {
         return subjects;
     }
 
-    public void setSubjects(Set<DataEntity<?>> subjects) {
+    @Override
+    public DataEntity<T> setSubjects(Set<DataEntity<?>> subjects) {
         this.subjects = subjects;
+        return this;
     }
 
-    public boolean isSetSubjects() {
-        return getSubjects() != null && !getSubjects().isEmpty();
-    }
-
+    @Override
     public Set<DataEntity<?>> getObjects() {
         return objects;
     }
 
-    public void setObjects(Set<DataEntity<?>> objects) {
+    @Override
+    public DataEntity<T> setObjects(Set<DataEntity<?>> objects) {
         this.objects = objects;
-    }
-
-    public boolean isSetObjects() {
-        return getObjects() != null && !getObjects().isEmpty();
+        return this;
     }
 
     @Override
