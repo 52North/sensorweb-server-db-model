@@ -2,8 +2,8 @@
 <hibernate-mapping package="org.n52.series.db.beans"
     xmlns="http://www.hibernate.org/xsd/hibernate-mapping"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-mapping-4.0.xsd">
-    <class name="org.n52.series.db.beans.sta.RelationEntity" table="relations">
+    xsi:schemaLocation="http://www.hibernate.org/xsd/hibernate-mapping http://www.hibernate.org/xsd/hibernate-mapping/hibernate-m apping-4.0.xsd">
+    <class name="org.n52.series.db.beans.sta.RelationEntity" table="relations" check="fk_object_id IS NOT NULL OR external_object IS NOT NULL">
         <comment>Store the relation of two observation or an external observation</comment>
          <id name="id" type="long">
             <column name="relation_id">
