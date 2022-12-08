@@ -63,7 +63,7 @@
         </set>
         <set name="platforms" table="platform" inverse="true">
             <key foreign-key="fk_party_platform">
-                <column name="fk_platform_id" not-null="true"/>
+                <column name="fk_party_id" not-null="true"/>
             </key>
             <one-to-many class="PlatformEntity" />
 	    </set>
