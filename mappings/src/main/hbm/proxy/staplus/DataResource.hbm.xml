@@ -164,12 +164,12 @@
         <property name="valueBoolean" column="value_boolean" not-null="false" type="org.n52.hibernate.type.SmallBooleanType" insert="false" update="false" />
 
 		<many-to-one name="subjects" class="org.n52.series.db.beans.sta.RelationEntity" foreign-key="fk_subject">
-            <column name="fk_subject_id" not-null="true" index="idx_observation_relation_subject">
+            <column name="fk_subject_id" not-null="false" index="idx_observation_relation_subject">
                 <comment>Reference to the relation to which this observation belongs to as subject.</comment>
             </column>
         </many-to-one>
         <many-to-one name="objects" class="org.n52.series.db.beans.sta.RelationEntity" foreign-key="fk_object">
-            <column name="fk_object_id" not-null="true" index="idx_observation_relation_object">
+            <column name="fk_object_id" not-null="false" index="idx_observation_relation_object">
                 <comment>Reference to the relation to which this observation belongs to as object</comment>
             </column>
         </many-to-one>
