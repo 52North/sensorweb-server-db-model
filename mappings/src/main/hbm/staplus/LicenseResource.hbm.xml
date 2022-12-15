@@ -28,7 +28,7 @@
             </column>
         </many-to-one>
         <property name="name" type="string">
-            <column name="name">
+            <column name="name" not-null="true">
                 <comment>The human readable name of the license.</comment>
             </column>
         </property>
@@ -38,7 +38,7 @@
             </column>
         </many-to-one>
         <property name="description" type="text">
-            <column name="description">
+            <column name="description" not-null="true">
                 <comment>A short description of the license</comment>
             </column>
         </property>

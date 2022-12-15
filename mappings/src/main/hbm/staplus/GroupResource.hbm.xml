@@ -28,7 +28,7 @@
             </column>
         </many-to-one>
         <property name="name" type="string">
-            <column name="name">
+            <column name="name" not-null="true">
                 <comment>The human readable name of the group.</comment>
             </column>
         </property>
@@ -38,27 +38,27 @@
             </column>
         </many-to-one>
         <property name="description" type="text">
-            <column name="description">
+            <column name="description" not-null="true">
                 <comment>A short description of the group</comment>
             </column>
         </property>
         <property name="purpose" type="text">
-            <column name="purpose">
+            <column name="purpose" >
                 <comment>The purpose of the group</comment>
             </column>
         </property>
         <property name="runTimeStart" type="timestamp">
-            <column index="idx_group_run_time_start" name="run_time_start" length="29" not-null="true">
+            <column index="idx_group_run_time_start" name="run_time_start" length="29">
                 <comment>The timestamp when the observation period has started or the observation took place. In the the latter, run_time_start and run_time_end are equal.</comment>
             </column>
         </property>
         <property name="runTimeEnd" type="timestamp">
-            <column index="idx_group_run_time_end" name="run_time_end" length="29" not-null="true">
+            <column index="idx_group_run_time_end" name="run_time_end" length="29">
                 <comment>The timestamp when the measurement period has finished or the observation took place. In the the latter, run_time_start and run_time_end are equal.</comment>
             </column>
         </property>
         <property name="creationTime" type="timestamp">
-            <column index="idx_group_creation_time" name="creation_time" length="29" not-null="false">
+            <column index="idx_group_creation_time" name="creation_time" length="29">
                 <comment>The timestamp when the groupt was created.</comment>
             </column>
         </property>

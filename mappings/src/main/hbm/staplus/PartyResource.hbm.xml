@@ -28,7 +28,7 @@
             </column>
         </many-to-one>
         <property name="name" type="string">
-            <column name="name">
+            <column name="name" not-null="true">
                 <comment>The human readable name of the party.</comment>
             </column>
         </property>
@@ -38,7 +38,7 @@
             </column>
         </many-to-one>
         <property name="description" type="text">
-            <column name="description">
+            <column name="description" not-null="true">
                 <comment>A short description of the party</comment>
             </column>
         </property>
@@ -69,7 +69,7 @@
 	    </set>
 	    <set name="groups" table="group" inverse="true">
 	        <key foreign-key="fk_party_group">
-	            <column name="fk_group_id" not-null="true"/>
+	            <column name="fk_party_id" not-null="true"/>
 	        </key>
 	        <one-to-many class="org.n52.series.db.beans.sta.GroupEntity" />
 	    </set>
