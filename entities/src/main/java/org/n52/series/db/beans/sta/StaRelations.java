@@ -78,6 +78,10 @@ public interface StaRelations extends HibernateRelations {
 
     interface StaPlusTime<T> {
 
+        String PROPERTY_CREATION_TIME = "creationTime";
+        String PROPERTY_RUN_TIME_START = "runTimeStart";
+        String PROPERTY_RUN_TIME_ENDT = "runTimeEnd";
+
         T setCreationTime(Date creationTime);
 
         Date getCreationTime();

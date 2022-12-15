@@ -33,6 +33,8 @@ public class GroupEntity extends DescribableEntity
         implements Serializable, HibernateRelations.HasName, HibernateRelations.HasDescription,
         StaPlusTime<GroupEntity>, HasLicense<GroupEntity>, HasParty<GroupEntity>, HibernateRelations.IsProcessed {
     public static final String PROPERTY_RELATIONS = "relations";
+    public static final String PROPERTY_PURPOSE = "purpose";
+    public static final String PROPERTY_OBSERVATIONS = "observations";
     private static final long serialVersionUID = -1355442833604724327L;
 
     private String purpose;
