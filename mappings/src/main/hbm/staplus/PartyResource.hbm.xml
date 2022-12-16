@@ -42,12 +42,12 @@
                 <comment>A short description of the party</comment>
             </column>
         </property>
-		<property name="role" type="text">
+		<property name="role">
 			<column name="role" scale="20" not-null="true" default="'individual'" check="role in ('individual', 'institutional')">
 				<comment>Indicator whether the party tole is individual or institutional.</comment>
 			</column>
 			<type name="org.hibernate.type.EnumType">
-				<param name="enumClass">org.n52.series.db.beans.RolePartyCode</param>
+				<param name="enumClass">org.n52.series.db.beans.sta.RolePartyCode</param>
 				<param name="useNamed">true</param>
 			</type>
 		</property>
