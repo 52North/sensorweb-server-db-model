@@ -13,6 +13,11 @@
                 <param name="sequence_name">relation_seq</param>
             </generator>
         </id>
+		<property name="staIdentifier" type="string" index="idx_relation_staIdentifier">
+			<column name="sta_identifier" not-null="true" unique-key="un_relation_staIdentifier">
+				<comment>Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI (reference to a vocabulary entry), UUID. E.g. 123, 123-321</comment>
+			</column>
+		</property>
 		<many-to-one class="DataEntity" name="subject" foreign-key="fk_relation_subject">
             <column name="fk_subject_id" not-null="true" index="idx_relation_subject" >
                 <comment>Reference to the subject of the group.</comment>
