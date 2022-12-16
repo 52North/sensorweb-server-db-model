@@ -18,7 +18,7 @@ package org.n52.series.db.beans.sta;
 import java.io.Serializable;
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 
@@ -26,7 +26,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class LicenseEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, HibernateRelations.HasDatasets, HibernateRelations.IsProcessed {
+        HibernateRelations.HasDescription, HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed {
 
     public static final String PROPERTY_DEFINITION = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_LOGO = "logo";
@@ -34,7 +34,7 @@ public class LicenseEntity extends DescribableEntity implements Serializable, Hi
     private static final long serialVersionUID = -1938665500675268434L;
 
     private String logo;
-    private Set<DatasetEntity> datasets;
+    private Set<AbstractDatasetEntity> datasets;
     private Set<GroupEntity> groups;
     private boolean processsed;
 
@@ -61,12 +61,12 @@ public class LicenseEntity extends DescribableEntity implements Serializable, Hi
     }
 
     @Override
-    public void setDatasets(Set<DatasetEntity> datasets) {
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
     }
 
     @Override
-    public Set<DatasetEntity> getDatasets() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
     }
 

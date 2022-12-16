@@ -1065,39 +1065,44 @@ public interface HibernateRelations {
 
     }
 
-    interface HasDataset {
+    interface BaseHasDataset<T> {
 
-        DatasetEntity getDataset();
+        T getDataset();
 
-        void setDataset(DatasetEntity dataset);
+        void setDataset(T dataset);
 
         default boolean isSetDataset() {
             return getDataset() != null;
         }
+    }
+
+    interface HasDataset extends BaseHasDataset<DatasetEntity> {
 
     }
 
-    interface HasDatasets {
+    interface HasAbstractDataset extends BaseHasDataset<AbstractDatasetEntity> {
 
+    }
+
+    interface BaseHasDatasets<T> {
         String DATASETS = "datasets";
 
         String PROPERTY_DATASETS = DATASETS;
 
-        Set<DatasetEntity> getDatasets();
+        Set<T> getDatasets();
 
-        void setDatasets(Set<DatasetEntity> datasets);
+        void setDatasets(Set<T> datasets);
 
         default boolean hasDatasets() {
             return getDatasets() != null && !getDatasets().isEmpty();
         }
+    }
+
+    interface HasDatasets extends BaseHasDatasets<DatasetEntity> {
 
     }
 
-    interface HasAbstractDatasets {
-
-        Set<AbstractDatasetEntity> getDatasets();
-
-        void setDatasets(Set<AbstractDatasetEntity> datastreams);
+    interface HasAbstractDatasets extends BaseHasDatasets<AbstractDatasetEntity> {
 
         default void addDatastream(AbstractDatasetEntity datastream) {
             if (getDatasets() == null) {
@@ -1109,23 +1114,6 @@ public interface HibernateRelations {
         default boolean hasDatastreams() {
             return hasDatasets();
         }
-
-        default boolean hasDatasets() {
-            return getDatasets() != null && !getDatasets().isEmpty();
-        }
-
-    }
-
-    interface HasAbstractDataset {
-
-        AbstractDatasetEntity getDataset();
-
-        void setDataset(AbstractDatasetEntity datastreams);
-
-        default boolean hasDataset() {
-            return getDataset() != null;
-        }
-
     }
 
     interface HasTranslations {

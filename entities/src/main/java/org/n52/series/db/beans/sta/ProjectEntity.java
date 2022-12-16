@@ -19,7 +19,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.sta.StaRelations.StaPlusTime;
@@ -28,7 +28,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ProjectEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, StaPlusTime<ProjectEntity>, HibernateRelations.HasDatasets {
+        HibernateRelations.HasDescription, StaPlusTime<ProjectEntity>, HibernateRelations.HasAbstractDatasets {
     public static final String PROPERTY_URL = "url";
     private static final long serialVersionUID = -2909642026383185577L;
 
@@ -39,7 +39,7 @@ public class ProjectEntity extends DescribableEntity implements Serializable, Hi
     private Date runTimeStart;
     private Date runTimeEnd;
     private String url;
-    private Set<DatasetEntity> datasets;
+    private Set<AbstractDatasetEntity> datasets;
 
     public String getClassification() {
         return classification;
@@ -115,12 +115,12 @@ public class ProjectEntity extends DescribableEntity implements Serializable, Hi
     }
 
     @Override
-    public void setDatasets(Set<DatasetEntity> datasets) {
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
     }
 
     @Override
-    public Set<DatasetEntity> getDatasets() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
     }
 

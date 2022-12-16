@@ -18,7 +18,7 @@ package org.n52.series.db.beans.sta;
 import java.io.Serializable;
 import java.util.Set;
 
-import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.AbstractDatasetEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.PlatformEntity;
@@ -26,9 +26,9 @@ import org.n52.series.db.beans.PlatformEntity;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class PartyEntity extends DescribableEntity
-        implements Serializable, HibernateRelations.HasName, HibernateRelations.HasDescription,
-        HibernateRelations.HasDatasets, StaRelations.HasPlatforms<PartyEntity>, StaRelations.HasGroups<PartyEntity> {
+public class PartyEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
+        HibernateRelations.HasDescription, HibernateRelations.HasAbstractDatasets,
+        StaRelations.HasPlatforms<PartyEntity>, StaRelations.HasGroups<PartyEntity> {
 
     public static final String PROPERTY_DISPLAY_NAME = "displayName";
     public static final String PROPERTY_ROLE = "role";
@@ -38,7 +38,7 @@ public class PartyEntity extends DescribableEntity
     private RolePartyCode role = RolePartyCode.individual;
 
     private String displayName;
-    private Set<DatasetEntity> datasets;
+    private Set<AbstractDatasetEntity> datasets;
     private Set<PlatformEntity> platforms;
     private Set<GroupEntity> groups;
 
@@ -74,12 +74,12 @@ public class PartyEntity extends DescribableEntity
     }
 
     @Override
-    public void setDatasets(Set<DatasetEntity> datasets) {
+    public void setDatasets(Set<AbstractDatasetEntity> datasets) {
         this.datasets = datasets;
     }
 
     @Override
-    public Set<DatasetEntity> getDatasets() {
+    public Set<AbstractDatasetEntity> getDatasets() {
         return datasets;
     }
 
