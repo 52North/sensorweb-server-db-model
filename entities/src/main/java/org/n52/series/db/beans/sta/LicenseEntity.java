@@ -25,8 +25,9 @@ import org.n52.series.db.beans.HibernateRelations;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class LicenseEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
-        HibernateRelations.HasDescription, HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed {
+public class LicenseEntity extends DescribableEntity
+        implements Serializable, HibernateRelations.HasName, HibernateRelations.HasDescription,
+        HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, StaRelations.HasGroups<LicenseEntity> {
 
     public static final String PROPERTY_DEFINITION = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_LOGO = "logo";
@@ -70,8 +71,9 @@ public class LicenseEntity extends DescribableEntity implements Serializable, Hi
         return datasets;
     }
 
-    public void setGroups(Set<GroupEntity> groups) {
+    public LicenseEntity setGroups(Set<GroupEntity> groups) {
         this.groups = groups;
+        return this;
     }
 
     public Set<GroupEntity> getGroups() {
