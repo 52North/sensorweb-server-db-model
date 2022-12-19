@@ -87,7 +87,7 @@
             <one-to-many class="org.n52.series.db.beans.parameter.project.ProjectParameterEntity" />
         </set>
         <set name="datasets" table="dataset" inverse="true">
-	        <key foreign-key="fk_dataset_projct">
+	        <key foreign-key="fk_project_dataset">
 	            <column name="fk_project_id" not-null="true"/>
 	        </key>
 	        <one-to-many class="DatasetEntity" />
