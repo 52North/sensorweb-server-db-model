@@ -168,17 +168,18 @@
         <property name="valueCategory" column="value_category" not-null="false" type="string" insert="false" update="false" />
         <property name="valueBoolean" column="value_boolean" not-null="false" type="org.n52.hibernate.type.SmallBooleanType" insert="false" update="false" />
 
-		<many-to-one name="subjects" class="org.n52.series.db.beans.sta.RelationEntity" foreign-key="fk_subject">
-            <column name="fk_subject_id" not-null="false" index="idx_observation_relation_subject">
-                <comment>Reference to the relation to which this observation belongs to as subject.</comment>
-            </column>
-        </many-to-one>
-        <many-to-one name="objects" class="org.n52.series.db.beans.sta.RelationEntity" foreign-key="fk_object">
-            <column name="fk_object_id" not-null="false" index="idx_observation_relation_object">
-                <comment>Reference to the relation to which this observation belongs to as object</comment>
-            </column>
-        </many-to-one>
-
+		<set name="subjects" table="relation" inverse="true">
+            <key foreign-key="fk_observation_subjects">
+                <column name="fk_subject_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.n52.series.db.beans.sta.RelationEntity" />
+        </set>
+        <set name="objects" table="relation" inverse="true">
+            <key foreign-key="fk_observation_objects">
+                <column name="fk_object_id" not-null="true"/>
+            </key>
+            <one-to-many class="org.n52.series.db.beans.sta.RelationEntity" />
+        </set>
         <set name="groups" table="observations_groups" inverse="false" fetch="select">
             <comment>Relation to store the groups for observatios</comment>
             <key foreign-key="fk_observations_groups">
