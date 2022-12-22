@@ -21,7 +21,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public enum RolePartyCode {
-    individual, institution;
+    individual, institutional;
 
     public static Set<RolePartyCode> convert(Collection<String> values) {
         if (values != null) {
