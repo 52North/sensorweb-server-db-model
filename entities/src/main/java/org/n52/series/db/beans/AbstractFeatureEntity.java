@@ -16,6 +16,7 @@
 
 package org.n52.series.db.beans;
 
+import java.util.Objects;
 import java.util.Set;
 
 import org.locationtech.jts.geom.Geometry;
@@ -43,6 +44,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private String url;
     private String xml;
     private Set<DatasetEntity> datasets;
+    private Set<DataEntity<?>> observations;
 
     @Override
     public GeometryEntity getGeometryEntity() {
@@ -105,5 +107,25 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     @Override
     public void setDatasets(Set<DatasetEntity> datasets) {
         this.datasets = datasets;
+    }
+
+    public Set<DataEntity<?>> getObservations() {
+        return observations;
+    }
+
+    public AbstractFeatureEntity<E> setObservations(Set<DataEntity<?>> observations) {
+        this.observations = observations;
+        return this;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), observations.hashCode());
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof AbstractFeatureEntity && super.equals(obj)
+                && Objects.hash(observations) == Objects.hash(((AbstractFeatureEntity) obj).getObservations());
     }
 }
