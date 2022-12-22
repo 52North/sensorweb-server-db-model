@@ -18,6 +18,7 @@ package org.n52.series.db.beans;
 
 import java.util.Objects;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasDatasets;
@@ -110,7 +111,8 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     }
 
     public Set<DataEntity<?>> getObservations() {
-        return observations;
+        return observations != null ? observations
+                : getDatasets().stream().flatMap(d -> d.getObservations().stream()).collect(Collectors.toSet());
     }
 
     public AbstractFeatureEntity<E> setObservations(Set<DataEntity<?>> observations) {

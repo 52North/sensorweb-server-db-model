@@ -463,7 +463,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     @Override
     public AbstractFeatureEntity<?> getFeature() {
-        return feature;
+        return feature != null ? feature : getDataset().getFeature();
     }
 
     @Override
