@@ -122,7 +122,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), observations.hashCode());
+        return Objects.hash(super.hashCode(), Objects.hash(observations));
     }
 
     @Override
