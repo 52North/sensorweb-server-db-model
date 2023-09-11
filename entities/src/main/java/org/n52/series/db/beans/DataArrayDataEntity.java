@@ -16,7 +16,6 @@
 package org.n52.series.db.beans;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
@@ -46,11 +45,6 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     public boolean isSetResultTemplate() {
         return getResultTemplate() != null;
-    }
-
-    @Override
-    public Set<DataEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
     }
 
     @Override

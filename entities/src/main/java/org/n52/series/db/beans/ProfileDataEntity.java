@@ -16,16 +16,10 @@
 package org.n52.series.db.beans;
 
 import java.util.Set;
-import java.util.TreeSet;
 
 public class ProfileDataEntity extends CompositeDataEntity {
 
     private static final long serialVersionUID = -7431276500677067329L;
-
-    @Override
-    public Set<DataEntity<?>> getValue() {
-        return super.getValue() != null ? new TreeSet<>(super.getValue()) : super.getValue();
-    }
 
     @Override
     public void setValue(Set<DataEntity<?>> value) {
