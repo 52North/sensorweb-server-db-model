@@ -23,6 +23,11 @@ public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity<?>>>
     private static final long serialVersionUID = -2942122854792122664L;
 
     @Override
+    public Set<DataEntity<?>> getValue() {
+        return super.getValue();
+    }
+
+    @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         return false;
     }
