@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.n52.sensorweb-server.db-model</groupId>
     <artifactId>db-model-parent</artifactId>
-    <version>4.0.2</version>
+    <version>4.0.3-SNAPSHOT</version>
     <name>Sensor Web Server Database Model</name>
     <packaging>pom</packaging>
 
@@ -44,7 +44,7 @@
         <connection>scm:git:https://github.com/52North/series-hibernate.git</connection>
         <developerConnection>scm:git:https://github.com/52North/series-hibernate.git</developerConnection>
         <url>https://github.com/52North/series-hibernate</url>
-        <tag>v4.0.2</tag>
+        <tag>HEAD</tag>
     </scm>
 
     <properties>
