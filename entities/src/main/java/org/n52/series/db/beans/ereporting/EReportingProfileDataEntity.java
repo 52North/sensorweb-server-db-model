@@ -21,6 +21,8 @@ import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimar
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasValidation;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasVerification;
 
+import java.math.BigDecimal;
+
 public class EReportingProfileDataEntity
         implements HasValidation, HasVerification, HasPrimaryObservation, HasDataCapture, EReportingQualityData {
 
@@ -34,9 +36,9 @@ public class EReportingProfileDataEntity
 
     private Boolean dataCaptureFlag;
 
-    private Double dataCapture;
+    private BigDecimal dataCapture;
 
-    private Double uncertaintyEstimation;
+    private BigDecimal uncertaintyEstimation;
 
     public Integer getVerification() {
         return verification;
@@ -70,11 +72,11 @@ public class EReportingProfileDataEntity
         this.dataCaptureFlag = dataCaptureFlag;
     }
 
-    public Double getDataCapture() {
+    public BigDecimal getDataCapture() {
         return this.dataCapture;
     }
 
-    public void setDataCapture(Double dataCapture) {
+    public void setDataCapture(BigDecimal dataCapture) {
         this.dataCapture = dataCapture;
     }
 
@@ -86,11 +88,11 @@ public class EReportingProfileDataEntity
         this.timeCoverageFlag = timeCoverageFlag;
     }
 
-    public Double getUncertaintyEstimation() {
+    public BigDecimal getUncertaintyEstimation() {
         return this.uncertaintyEstimation;
     }
 
-    public void setUncertaintyEstimation(Double uncertaintyEstimation) {
+    public void setUncertaintyEstimation(BigDecimal uncertaintyEstimation) {
         this.uncertaintyEstimation = uncertaintyEstimation;
     }
 

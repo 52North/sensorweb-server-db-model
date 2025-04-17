@@ -19,6 +19,8 @@ import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
 
+import java.math.BigDecimal;
+
 public class EReportingQualityEntity extends IdEntity implements HasPrimaryObservation, EReportingQualityData {
 
     public static final String YEAR = "year";
@@ -41,7 +43,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     private Boolean dataCaptureFlag;
 
-    private Double uncertaintyEstimation;
+    private BigDecimal uncertaintyEstimation;
 
     /**
      * @return the dataset
@@ -119,12 +121,12 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
     }
 
     @Override
-    public Double getUncertaintyEstimation() {
+    public BigDecimal getUncertaintyEstimation() {
         return this.uncertaintyEstimation;
     }
 
     @Override
-    public void setUncertaintyEstimation(Double uncertaintyEstimation) {
+    public void setUncertaintyEstimation(BigDecimal uncertaintyEstimation) {
         this.uncertaintyEstimation = uncertaintyEstimation;
     }
 }

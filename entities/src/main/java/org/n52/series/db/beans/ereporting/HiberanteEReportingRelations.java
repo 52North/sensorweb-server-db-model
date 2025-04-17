@@ -17,6 +17,8 @@ package org.n52.series.db.beans.ereporting;
 
 import org.n52.series.db.beans.HibernateRelations;
 
+import java.math.BigDecimal;
+
 public interface HiberanteEReportingRelations extends HibernateRelations {
 
     interface HasInspireId {
@@ -103,9 +105,9 @@ public interface HiberanteEReportingRelations extends HibernateRelations {
 
         String DATA_CAPTURE = "dataCapture";
 
-        Double getDataCapture();
+        BigDecimal getDataCapture();
 
-        void setDataCapture(Double dataCapture);
+        void setDataCapture(BigDecimal dataCapture);
 
         default boolean isSetDataCapture() {
             return getDataCapture() != null;
@@ -115,9 +117,9 @@ public interface HiberanteEReportingRelations extends HibernateRelations {
     interface HasUncertaintyEstimation {
         String UNCERTAINTY_ESTIMATION = "uncertaintyEstimation";
 
-        Double getUncertaintyEstimation();
+        BigDecimal getUncertaintyEstimation();
 
-        void setUncertaintyEstimation(Double uncertaintyEstimation);
+        void setUncertaintyEstimation(BigDecimal uncertaintyEstimation);
 
         default boolean isSetUncertaintyEstimation() {
             return getUncertaintyEstimation() != null;
