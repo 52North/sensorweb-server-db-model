@@ -74,7 +74,7 @@
             <property column="lat" name="lat" type="big_decimal" precision="20" scale="10"/>
             <property column="lon" name="lon" type="big_decimal" precision="20" scale="10"/>
              -->
-            <property name="geometry" type="jts_geometry">
+            <property name="geometry">
                 <column name="geom">
                     <comment>The geometry/location of feature</comment>
                 </column>

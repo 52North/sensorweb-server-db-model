@@ -21,6 +21,8 @@ import org.n52.series.db.beans.sta.RelationEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -30,6 +32,7 @@ public abstract class RelationParameterEntity<T> extends ParameterEntity<T> {
     public static final String PROP_GROUP = "group";
     public static final String PROP_GROUP_ID = "groupId";
     public static final String PROPERTY_RELATION_ID = "relationId";
+    @Serial
     private static final long serialVersionUID = 1123453212836718013L;
 
     private RelationEntity relation;

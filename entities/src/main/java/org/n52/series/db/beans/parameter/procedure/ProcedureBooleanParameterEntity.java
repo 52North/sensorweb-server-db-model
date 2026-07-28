@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.procedure;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 
 /**
@@ -23,6 +25,7 @@ import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 public class ProcedureBooleanParameterEntity extends ProcedureParameterEntity<Boolean>
         implements BooleanParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = -1280123654095577480L;
 
     @Override

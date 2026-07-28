@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
 import java.util.Objects;
 
 import org.n52.series.db.beans.IdEntity;
@@ -26,6 +27,7 @@ public abstract class AbstractI18nEntity<T extends IdEntity> extends IdEntity {
 
     public static final String PROPERTY_LOCALE = "locale";
     public static final String PROPERTY_ENTITY = "entity";
+    @Serial
     private static final long serialVersionUID = -5046004232290585428L;
 
     private T entity;

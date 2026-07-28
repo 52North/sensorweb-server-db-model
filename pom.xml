@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>org.n52</groupId>
@@ -15,14 +16,12 @@
     <modules>
         <module>entities</module>
         <module>mappings</module>
-        <module>generator</module>
         <module>types</module>
-		<module>dialects</module>
     </modules>
-     <organization>
-         <name>52North Spatial Information Research GmbH</name>
-         <url>https://52north.org</url>
-     </organization>
+    <organization>
+        <name>52North Spatial Information Research GmbH</name>
+        <url>https://52north.org</url>
+    </organization>
 
     <developers>
         <developer>
@@ -54,49 +53,44 @@
         <!-- optional properties file -->
         <local.configFile>file:${user.home}/${project.build.finalName}.properties</local.configFile>
 
-        <version.junit>5.9.1</version.junit>
-        <hamcrest.version>2.2</hamcrest.version>
-        <geotools.version>28.0</geotools.version>
-        <geolatte.version>1.9.0</geolatte.version>
-        <hibernate.version>5.6.14.Final</hibernate.version>
-        <spring-boot.version>2.7.7</spring-boot.version>
-        <javax.version>8.0.1</javax.version>
-        
-        <postgresql.version>42.5.1</postgresql.version>
-        <postgis.version>2.5.1</postgis.version>
-        <ojdbc8.version>21.8.0.0</ojdbc8.version>
-        <sqljdbc.version>11.2.1.jre8</sqljdbc.version>
-        <mysql.version>8.0.30</mysql.version>
-        <h2.version>2.1.214</h2.version>
-        <geodb.version>0.9</geodb.version>
-		<version.java>11</version.java>
+        <version.junit>6.1.0</version.junit>
+        <hamcrest.version>3.0</hamcrest.version>
+        <geotools.version>35.0</geotools.version>
+        <geolatte.version>1.12</geolatte.version>
+        <hibernate.version>6.0.2.Final</hibernate.version>
+        <jakarta.version>3.2.0</jakarta.version>
+        <version.slf4j>2.0.18</version.slf4j>
+        <version.jakarta-annotation-api>3.0.0</version.jakarta-annotation-api>
+
+        <postgresql.version>42.7.11</postgresql.version>
+        <postgis.version>2025.1.1</postgis.version>
+        <h2.version>2.4.240</h2.version>
+        <version.java>17</version.java>
         <timestamp>${maven.build.timestamp}</timestamp>
         <maven.build.timestamp.format>yyyy</maven.build.timestamp.format>
         <currentYearDynamic>${maven.build.timestamp}</currentYearDynamic>
         <file.encoding>UTF-8</file.encoding>
 
+        <!-- OpenRewrite migration tooling (only used by the 'rewrite' profile) -->
+        <version.rewrite.plugin>6.41.0</version.rewrite.plugin>
+        <version.rewrite.recipe.bom>3.32.0</version.rewrite.recipe.bom>
+        <version.rewrite.spring>6.32.1</version.rewrite.spring>
+        <version.rewrite.migrate-java>3.36.0</version.rewrite.migrate-java>
+        <version.rewrite.hibernate>2.21.0</version.rewrite.hibernate>
+        <version.rewrite.testing-frameworks>3.37.0</version.rewrite.testing-frameworks>
     </properties>
 
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.orm</groupId>
                 <artifactId>hibernate-core</artifactId>
                 <version>${hibernate.version}</version>
             </dependency>
             <dependency>
-                <groupId>org.hibernate</groupId>
+                <groupId>org.hibernate.orm</groupId>
                 <artifactId>hibernate-spatial</artifactId>
                 <version>${hibernate.version}</version>
-            </dependency>
-            
-            <dependency>
-                <!-- Import dependency management from Spring Boot -->
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-dependencies</artifactId>
-                <version>${spring-boot.version}</version>
-                <scope>import</scope>
-                <type>pom</type>
             </dependency>
 
             <dependency>
@@ -124,52 +118,42 @@
                 <artifactId>db-model-dialects</artifactId>
                 <version>${project.version}</version>
             </dependency>
-			<dependency>
-				<groupId>org.postgresql</groupId>
-				<artifactId>postgresql</artifactId>
-				<version>${postgresql.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>net.postgis</groupId>
-				<artifactId>postgis-jdbc</artifactId>
-				<version>${postgis.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.oracle.database.jdbc</groupId>
-				<artifactId>ojdbc8</artifactId>
-				<version>${ojdbc8.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.microsoft.sqlserver</groupId>
-				<artifactId>mssql-jdbc</artifactId>
-				<version>${sqljdbc.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>mysql</groupId>
-				<artifactId>mysql-connector-java</artifactId>
-				<version>${mysql.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.h2database</groupId>
-				<artifactId>h2</artifactId>
-				<version>${h2.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.opengeo</groupId>
-				<artifactId>geodb</artifactId>
-				<version>${geodb.version}</version>
-				<exclusions>
-					<exclusion>
-						<groupId>com.h2database</groupId>
-						<artifactId>h2</artifactId>
-					</exclusion>
-				</exclusions>
-			</dependency>
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>net.postgis</groupId>
+                <artifactId>postgis-jdbc</artifactId>
+                <version>${postgis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
 
             <dependency>
-                <groupId>javax</groupId>
-                <artifactId>javaee-api</artifactId>
-                <version>${javax.version}</version>
+                <groupId>jakarta.platform</groupId>
+                <artifactId>jakarta.jakartaee-api</artifactId>
+                <version>11.0.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.persistence</groupId>
+                <artifactId>jakarta.persistence-api</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>3.0.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>jakarta.el</groupId>
+                <artifactId>jakarta.el-api</artifactId>
+                <version>6.0.1</version>
             </dependency>
 
             <dependency>
@@ -181,18 +165,18 @@
                 <groupId>com.google.code.findbugs</groupId>
                 <artifactId>jsr305</artifactId>
                 <version>3.0.2</version>
-             </dependency>
+            </dependency>
 
             <dependency>
                 <groupId>joda-time</groupId>
                 <artifactId>joda-time</artifactId>
-                <version>2.12.2</version>
+                <version>2.14.2</version>
             </dependency>
 
             <dependency>
                 <groupId>xalan</groupId>
                 <artifactId>xalan</artifactId>
-                <version>2.7.2</version>
+                <version>2.7.3</version>
                 <exclusions>
                     <exclusion>
                         <!-- uses older xml-apis than other fop dependencies -->
@@ -201,7 +185,7 @@
                     </exclusion>
                 </exclusions>
             </dependency>
-            
+
             <dependency>
                 <groupId>org.geotools</groupId>
                 <artifactId>gt-main</artifactId>
@@ -281,7 +265,7 @@
             <dependency>
                 <groupId>org.locationtech.jts</groupId>
                 <artifactId>jts-core</artifactId>
-                <version>1.19.0</version>
+                <version>1.20.0</version>
                 <exclusions>
                     <exclusion>
                         <!-- old version dependency causes conclicts -->
@@ -298,11 +282,50 @@
             <dependency>
                 <groupId>com.github.spotbugs</groupId>
                 <artifactId>spotbugs-annotations</artifactId>
-                <version>4.7.3</version>
+                <version>4.10.2</version>
                 <scope>provided</scope>
             </dependency>
 
+            <!-- Logging -->
+            <dependency>
+                <groupId>ch.qos.logback</groupId>
+                <artifactId>logback-core</artifactId>
+                <version>1.5.34</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-simple</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>jcl-over-slf4j</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>${version.slf4j}</version>
+            </dependency>
+
             <!-- Testing -->
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-api</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter-engine</artifactId>
+                <version>${version.junit}</version>
+                <scope>test</scope>
+            </dependency>
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -327,7 +350,16 @@
         </resources>
 
         <plugins>
-
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>2.7</version>
+                <configuration>
+                    <excludes>
+                        <exclude>org.apache.commons:commons-collections4</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
@@ -446,13 +478,21 @@
                         <useMissingFile>true</useMissingFile>
                         <fileTemplate>etc/license-as-csv.ftl</fileTemplate>
                         <licenseMerges>
-                            <licenseMerge>The Apache Software License, Version 2.0|Apache 2|Apache License, Version 2.0|Apache License, version 2.0|Apache Public License 2.0|AL 2.0</licenseMerge>
+                            <licenseMerge>The Apache Software License, Version 2.0|Apache 2|Apache License, Version
+                                2.0|Apache License, version 2.0|Apache Public License 2.0|AL 2.0
+                            </licenseMerge>
                             <licenseMerge>Apache Software Licenses|Apache Software License|Apache License</licenseMerge>
-                            <licenseMerge>GNU General Public License, v2.0|GNU GENERAL PUBLIC LICENSE Version 2, June 1991|GNU General Public License, Version 2.0</licenseMerge>
-                            <licenseMerge>Common Development and Distribution License (CDDL), version 1.0| Common Development and Distribution License (CDDL) v1.0</licenseMerge>
+                            <licenseMerge>GNU General Public License, v2.0|GNU GENERAL PUBLIC LICENSE Version 2, June
+                                1991|GNU General Public License, Version 2.0
+                            </licenseMerge>
+                            <licenseMerge>Common Development and Distribution License (CDDL), version 1.0| Common
+                                Development and Distribution License (CDDL) v1.0
+                            </licenseMerge>
                             <licenseMerge>GNU Lesser General Public License, version 2.1|LGPL 2.1</licenseMerge>
                             <licenseMerge>Mozilla Public License version 1.1|MPL 1.1</licenseMerge>
-                            <licenseMerge>Eclipse Public License, Version 1.0|Eclipse Public License (EPL), Version 1.0|Eclipse Public License - v 1.0</licenseMerge>
+                            <licenseMerge>Eclipse Public License, Version 1.0|Eclipse Public License (EPL), Version
+                                1.0|Eclipse Public License - v 1.0
+                            </licenseMerge>
                             <licenseMerge>GNU Lesser General Public Licence|LGPL</licenseMerge>
                         </licenseMerges>
                     </configuration>
@@ -482,6 +522,7 @@
                         <source>
                             import java.util.Date
                             import java.text.MessageFormat
+
                             def vartimestamp = MessageFormat.format("{0,date,yyyy}", new Date())
                             project.properties['currentYearDynamic'] = vartimestamp
                         </source>
@@ -593,7 +634,7 @@
             <id>dependency</id>
             <build>
                 <plugins>
-                     <plugin>
+                    <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-dependency-plugin</artifactId>
                         <executions>
@@ -602,7 +643,67 @@
                                 <phase>none</phase>
                             </execution>
                         </executions>
-                    </plugin>  
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+        <!--
+			OpenRewrite migration profile. Not active during normal builds.
+			Drives the automated upgrade to Spring Framework 6 / Spring Security 6,
+			Hibernate 6 and the javax -> jakarta (Jakarta EE) namespace migration,
+			plus the required Java 17 baseline.
+
+			Usage (run from the reactor root):
+			  mvn -Prewrite rewrite:dryRun   # produces target/rewrite/rewrite.patch, no changes
+			  mvn -Prewrite rewrite:run      # applies the changes in place
+			  mvn -Prewrite rewrite:discover # lists the recipes that would run
+
+			The active recipe is defined in rewrite.yml at the repository root.
+		-->
+        <profile>
+            <id>rewrite</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.openrewrite.maven</groupId>
+                        <artifactId>rewrite-maven-plugin</artifactId>
+                        <version>${version.rewrite.plugin}</version>
+                        <configuration>
+                            <exportDatatables>true</exportDatatables>
+                            <activeRecipes>
+                                <recipe>org.n52.sos.MigrateToSpring6AndJakarta</recipe>
+                            </activeRecipes>
+                        </configuration>
+                        <dependencies>
+                            <!--
+                                Recipe modules. Versions are kept in sync with the
+                                rewrite-recipe-bom (see version.rewrite.recipe.bom):
+                                https://docs.openrewrite.org/reference/latest-versions-of-every-openrewrite-module
+                                A plugin <dependencies> block does not honour an
+                                imported BOM, so the versions are pinned explicitly.
+                            -->
+                            <dependency>
+                                <groupId>org.openrewrite.recipe</groupId>
+                                <artifactId>rewrite-spring</artifactId>
+                                <version>${version.rewrite.spring}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.openrewrite.recipe</groupId>
+                                <artifactId>rewrite-migrate-java</artifactId>
+                                <version>${version.rewrite.migrate-java}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.openrewrite.recipe</groupId>
+                                <artifactId>rewrite-hibernate</artifactId>
+                                <version>${version.rewrite.hibernate}</version>
+                            </dependency>
+                            <dependency>
+                                <groupId>org.openrewrite.recipe</groupId>
+                                <artifactId>rewrite-testing-frameworks</artifactId>
+                                <version>${version.rewrite.testing-frameworks}</version>
+                            </dependency>
+                        </dependencies>
+                    </plugin>
                 </plugins>
             </build>
         </profile>

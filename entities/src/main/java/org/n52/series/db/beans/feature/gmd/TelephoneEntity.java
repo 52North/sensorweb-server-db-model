@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
+import java.io.Serial;
 import java.util.Set;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -28,6 +29,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class TelephoneEntity extends AbstractCiEntity {
 
+    @Serial
     private static final long serialVersionUID = -3871291699397692580L;
 
     private Set<String> voice;

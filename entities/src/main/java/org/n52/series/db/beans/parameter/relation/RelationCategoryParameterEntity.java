@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.relation;
 
+import java.io.Serial;
 import java.util.Map;
 
 import org.n52.series.db.beans.UnitEntity;
@@ -29,6 +30,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 public class RelationCategoryParameterEntity extends RelationParameterEntity<String>
         implements CategoryParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = -6262887605542676492L;
 
     private UnitEntity unit;

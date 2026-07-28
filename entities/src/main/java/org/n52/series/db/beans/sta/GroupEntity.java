@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -35,6 +36,7 @@ public class GroupEntity extends DescribableEntity
     public static final String PROPERTY_RELATIONS = "relations";
     public static final String PROPERTY_PURPOSE = "purpose";
     public static final String PROPERTY_OBSERVATIONS = "observations";
+    @Serial
     private static final long serialVersionUID = -1355442833604724327L;
 
     private String purpose;

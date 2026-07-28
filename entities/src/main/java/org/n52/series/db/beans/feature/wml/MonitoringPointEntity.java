@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.feature.wml;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
 
 /**
@@ -25,6 +27,7 @@ import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
  */
 public class MonitoringPointEntity extends AbstractMonitoringFeature {
 
+    @Serial
     private static final long serialVersionUID = -7745394070855227473L;
 
 }

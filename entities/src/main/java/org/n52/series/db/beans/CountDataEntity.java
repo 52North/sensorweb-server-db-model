@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -26,6 +27,7 @@ public class CountDataEntity extends DataEntity<Integer> implements NumericalDat
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountDataEntity.class);
 
+    @Serial
     private static final long serialVersionUID = -8559375927338360585L;
 
     @Override

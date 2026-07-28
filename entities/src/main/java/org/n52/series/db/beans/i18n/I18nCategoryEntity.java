@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.CategoryEntity;
 
 public class I18nCategoryEntity extends I18nEntity<CategoryEntity> {
 
+    @Serial
     private static final long serialVersionUID = -203423201673121632L;
 
     // serves for clear distinction

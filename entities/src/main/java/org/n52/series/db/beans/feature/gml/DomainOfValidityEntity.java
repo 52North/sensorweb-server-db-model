@@ -20,6 +20,8 @@ import org.n52.series.db.beans.feature.gmd.ExExtentEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * Hibernate entiity for the domainOfValidity
  *
@@ -29,6 +31,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DomainOfValidityEntity extends ReferenceEntity {
 
+    @Serial
     private static final long serialVersionUID = -8008081097916414101L;
 
     private ExExtentEntity exExtent;

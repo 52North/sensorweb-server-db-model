@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.observation;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.JsonParameterEntity;
 
 /**
@@ -22,6 +24,7 @@ import org.n52.series.db.beans.parameter.JsonParameterEntity;
  */
 public class ObservationJsonParameterEntity extends ObservationParameterEntity<String> implements JsonParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 3300965770609382377L;
 
     @Override

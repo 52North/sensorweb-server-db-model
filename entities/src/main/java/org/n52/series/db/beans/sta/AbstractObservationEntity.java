@@ -15,9 +15,10 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.io.Serializable;
 
-import javax.persistence.Transient;
+import jakarta.persistence.Transient;
 
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
@@ -29,6 +30,7 @@ public abstract class AbstractObservationEntity<T> extends IdEntity implements S
         HibernateRelations.HasDescription, HibernateRelations.HasSamplingGeometry, HibernateRelations.HasFeature,
         HibernateRelations.IsProcessed, HibernateRelations.IsStaEntity, HibernateRelations.HasVerticalFromTo {
 
+    @Serial
     private static final long serialVersionUID = -5478132580391608848L;
 
     @Transient

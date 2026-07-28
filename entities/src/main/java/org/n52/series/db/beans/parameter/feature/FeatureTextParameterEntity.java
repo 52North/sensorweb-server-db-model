@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.feature;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.TextParameterEntity;
 
 /**
@@ -22,6 +24,7 @@ import org.n52.series.db.beans.parameter.TextParameterEntity;
  */
 public class FeatureTextParameterEntity extends FeatureParameterEntity<String> implements TextParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 3300965770609382377L;
 
     @Override

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.platform;
 
+import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -23,6 +24,7 @@ import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 public class PlatformComplexParameterEntity extends PlatformParameterEntity<Set<PlatformParameterEntity<?>>>
         implements ComplexParameterEntity<Set<PlatformParameterEntity<?>>> {
 
+    @Serial
     private static final long serialVersionUID = -5166758396873257962L;
 
     @Override

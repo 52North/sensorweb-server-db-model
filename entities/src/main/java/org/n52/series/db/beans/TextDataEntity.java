@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 
 public class TextDataEntity extends DataEntity<String> {
 
+    @Serial
     private static final long serialVersionUID = 4925354534934095827L;
 
     private String valueIdentifier;

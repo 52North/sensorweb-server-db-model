@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 
 /**
@@ -22,6 +23,7 @@ import java.util.Collection;
  */
 public class SensorML20DataEntity extends DataEntity<String> {
 
+    @Serial
     private static final long serialVersionUID = 6575930482296453999L;
 
     private String value;

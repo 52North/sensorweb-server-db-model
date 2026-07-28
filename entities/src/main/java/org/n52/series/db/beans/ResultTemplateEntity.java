@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import org.n52.series.db.beans.HibernateRelations.HasResultEncoding;
@@ -40,6 +41,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_CATEGORY = "category";
 
+    @Serial
     private static final long serialVersionUID = -8847952458819368733L;
 
     private PhenomenonEntity phenomenon;

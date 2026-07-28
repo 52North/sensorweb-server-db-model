@@ -46,9 +46,6 @@
                 <comment>Reference to the Feature this Parameter describes.</comment>
             </column>
         </many-to-one>
-        <property name="featureId" insert="false" update="false" type="long">
-            <column name="fk_feature_id" not-null="true"/>
-        </property>
 
 		<many-to-one name="parent" class="FeatureParameterEntity" foreign-key="fk_param_feature_parent_id" >
             <column name="fk_parent_parameter_id" not-null="false" index="idx_feature_parent_parameter">
@@ -128,12 +125,6 @@
         </subclass>
 		<subclass discriminator-value="complex" extends="FeatureParameterEntity"
 				  name="FeatureComplexParameterEntity">
-			<many-to-one name="feature" class="org.n52.series.db.beans.AbstractFeatureEntity"
-				foreign-key="fk_param_feature_id" insert="false" update="false">
-				<column name="fk_feature_id" not-null="true" index="idx_feature_parameter">
-					<comment>Reference to the Feature this Parameter describes.</comment>
-				</column>
-			</many-to-one>
 			<set name="value" table="feature_parameter" inverse="false" cascade="all">
 				<key column="fk_parent_parameter_id" not-null="false" />
 				<one-to-many class="FeatureParameterEntity" />

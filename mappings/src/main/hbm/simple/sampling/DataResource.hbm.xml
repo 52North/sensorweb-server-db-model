@@ -23,9 +23,7 @@
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
-        <property name="datasetId" insert="false" update="false" type="long" >
-            <column name="fk_dataset_id" not-null="true" />
-        </property>
+
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
@@ -86,7 +84,7 @@
                 <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
                 <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
             -->
-            <property name="geometry" type="jts_geometry" not-null="false">
+            <property name="geometry" not-null="false">
                 <column name="sampling_geometry">
                     <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations (trajectories) where this geometry is different from the feature geometry.</comment>
                 </column>

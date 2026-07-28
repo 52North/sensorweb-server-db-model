@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.feature;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
 
@@ -33,6 +34,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
+    @Serial
     private static final long serialVersionUID = 3379003106634935899L;
 
     private MonitoringPointContent content;

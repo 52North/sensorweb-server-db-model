@@ -21,6 +21,8 @@ import org.n52.series.db.beans.sta.LocationEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class LocationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_LOCATION = "location";
     public static final String PROP_LOCATION_ID = "locationId";
+    @Serial
     private static final long serialVersionUID = 8449960591522592006L;
     private LocationEntity location;
     private Long locationId;

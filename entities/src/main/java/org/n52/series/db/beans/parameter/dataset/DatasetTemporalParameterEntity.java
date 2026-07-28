@@ -15,12 +15,15 @@
  */
 package org.n52.series.db.beans.parameter.dataset;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.TemporalParameterEntity;
 import org.n52.series.db.beans.parameter.TimeRange;
 
 public class DatasetTemporalParameterEntity extends DatasetParameterEntity<TimeRange>
         implements TemporalParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 668796579118721620L;
 
 }

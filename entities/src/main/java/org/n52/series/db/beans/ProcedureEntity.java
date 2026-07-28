@@ -21,6 +21,7 @@ import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureHistory;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
+import java.io.Serial;
 import java.util.Set;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -35,6 +36,7 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
     public static final String PROPERTY_PROCEDURE_DESCRIPTION_FORMAT = "format";
     public static final String PROPERTY_DESCRIPTION_FILE = "descriptionFile";
 
+    @Serial
     private static final long serialVersionUID = 4028002933920185756L;
     private boolean reference;
 

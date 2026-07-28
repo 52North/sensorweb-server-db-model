@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     public static final String PROPERTY_GEOMETRY_ENTITY_LON = PROPERTY_GEOMETRY_ENTITY + ".lon";
     public static final String PROPERTY_FEATURE_TYPE = "featureType";
 
+    @Serial
     private static final long serialVersionUID = 6712642995944229067L;
     private GeometryEntity geometryEntity;
     private FormatEntity featureType;
@@ -126,7 +128,7 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
 
     @Override
     public boolean equals(Object obj) {
-        return obj instanceof AbstractFeatureEntity && super.equals(obj)
-                && Objects.hash(observations) == Objects.hash(((AbstractFeatureEntity) obj).getObservations());
+        return obj instanceof AbstractFeatureEntity afe && super.equals(obj)
+                && Objects.hash(observations) == Objects.hash(afe.getObservations());
     }
 }

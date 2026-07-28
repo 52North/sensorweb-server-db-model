@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class PlatformParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PLATFORM = "platform";
     public static final String PROP_PLATFORM_ID = "platformId";
+    @Serial
     private static final long serialVersionUID = -8427939633323086462L;
     private PlatformEntity platform;
     private Long platformId;

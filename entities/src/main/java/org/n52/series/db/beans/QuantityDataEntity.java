@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -27,6 +28,7 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> implements Numeri
 
     public static final BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
+    @Serial
     private static final long serialVersionUID = 7619426522406105659L;
 
     @Override

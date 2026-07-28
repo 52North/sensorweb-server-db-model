@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 
 public class CategoryDataEntity extends DataEntity<String> {
 
+    @Serial
     private static final long serialVersionUID = -4691677115635740162L;
 
     private String valueIdentifier;

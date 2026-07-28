@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.DescribableEntity;
 
 public class I18nEntity<T extends DescribableEntity> extends AbstractI18nEntity<T> {
@@ -23,6 +25,7 @@ public class I18nEntity<T extends DescribableEntity> extends AbstractI18nEntity<
 
     public static final String PROPERTY_ENTITY = "entity";
 
+    @Serial
     private static final long serialVersionUID = 693520332508628558L;
 
     private String name;

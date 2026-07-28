@@ -18,20 +18,14 @@
                 <comment>Indicator used by Hibernate to map value specific entities. Valid values are quantity (scalar values in value_quantity), count (integer values in value_count), text (textual values in value_text), category (categorical values in value_category), bool (boolean values in value_boolean), reference (references in value_reference, e.g. link to a source, photo, video)</comment>
             </column>
         </discriminator>
-        <property name="valueType" insert="false" update="false" type="string" not-null="true">
-            <column name="value_type" unique-key="un_observation_identity">
-                <comment>Expose value type to data entity</comment>
-            </column>
-        </property>
+        <property name="valueType" type="string" formula="value_type"/>
 
         <many-to-one name="dataset" class="DatasetEntity" foreign-key="fk_dataset" unique-key="un_observation_identity" lazy="proxy">
             <column name="fk_dataset_id" not-null="true" index="idx_observation_dataset">
                 <comment>Reference to the dataset to which this observation belongs.</comment>
             </column>
         </many-to-one>
-        <property name="datasetId" insert="false" update="false" type="long" >
-            <column name="fk_dataset_id" not-null="true" />
-        </property>
+
 
         <property name="samplingTimeStart" type="timestamp" unique-key="un_observation_identity">
             <column index="idx_sampling_time_start" name="sampling_time_start" length="29" not-null="true">
@@ -107,7 +101,7 @@
             <property column="lat" name="lat" type="big_decimal" precision="20" scale="10" />
             <property column="lon" name="lon" type="big_decimal" precision="20" scale="10" />
              -->
-            <property name="geometry" type="jts_geometry" not-null="false">
+            <property name="geometry" not-null="false">
                 <column name="sampling_geometry">
                     <comment>The geometry that represents the location where the observation was observed, e.g. mobile observations (trajectories) where this geometry is different from the feature geometry.</comment>
                 </column>
@@ -260,7 +254,7 @@
                 <property column="value_lat" name="lat" type="big_decimal" precision="20" scale="10" />
                 <property column="value_lon" name="lon" type="big_decimal" precision="20" scale="10" />
                 -->
-                <property name="geometry" type="geolatte_geometry">
+                <property name="geometry">
                 <column name="value_geometry">
                     <comment>The geometry value of an observation (GeometryObservation)</comment>
                 </column>

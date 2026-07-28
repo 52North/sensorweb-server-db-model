@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -24,6 +25,7 @@ public abstract class IdEntity implements Serializable, HasId {
 
     public static final String PROPERTY_ID = "id";
 
+    @Serial
     private static final long serialVersionUID = 1608995723035752862L;
 
     /**

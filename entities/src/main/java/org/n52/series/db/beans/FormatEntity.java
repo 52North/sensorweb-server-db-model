@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 public class FormatEntity extends IdEntity {
 
     public static final String FORMAT = "format";
 
+    @Serial
     private static final long serialVersionUID = -8428858401445365107L;
 
     private String format;

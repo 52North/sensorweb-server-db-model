@@ -26,6 +26,7 @@ import org.n52.series.db.common.Utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
 import java.util.Date;
 import java.util.Set;
 
@@ -38,6 +39,7 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     public static final String PROPERTY_RESULT_TIME_START = "resultTimeStart";
     public static final String PROPERTY_RESULT_TIME_END = "resultTimeEnd";
 
+    @Serial
     private static final long serialVersionUID = 5862607025737865794L;
 
     private GeometryEntity geometryEntity;

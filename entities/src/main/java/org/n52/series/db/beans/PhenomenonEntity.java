@@ -19,6 +19,7 @@ import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,6 +27,7 @@ import java.util.Set;
 public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity>
         implements HibernateRelations.HasAbstractDatasets, IsStaEntity {
 
+    @Serial
     private static final long serialVersionUID = 2302654989683191424L;
 
     private Set<AbstractDatasetEntity> datasets;

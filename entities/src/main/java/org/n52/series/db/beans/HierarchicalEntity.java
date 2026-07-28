@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -25,6 +26,7 @@ public abstract class HierarchicalEntity<T> extends DescribableEntity {
 
     public static final String PROPERTY_PARENTS = "parents";
     public static final String PROPERTY_CHILDREN = "children";
+    @Serial
     private static final long serialVersionUID = -530148269689996337L;
 
     private Set<T> children;

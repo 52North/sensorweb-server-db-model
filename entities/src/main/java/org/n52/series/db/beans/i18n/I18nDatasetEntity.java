@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.DescribableEntity;
 
 public class I18nDatasetEntity<T extends DescribableEntity> extends I18nEntity<T> {
 
+    @Serial
     private static final long serialVersionUID = -6806171135616112674L;
 
     // serves for clear distinction

@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.sampling.MeasuringProgramEntity;
 
 public class I18nMeasuringProgramEntity extends I18nEntity<MeasuringProgramEntity> {
 
+    @Serial
     private static final long serialVersionUID = 6723784868565645349L;
 
     // serves for clear distinction

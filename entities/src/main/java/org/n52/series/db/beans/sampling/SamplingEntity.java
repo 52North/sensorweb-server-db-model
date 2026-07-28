@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sampling;
 
+import java.io.Serial;
 import java.util.Date;
 import java.util.Set;
 
@@ -40,6 +41,7 @@ public class SamplingEntity extends DescribableEntity implements HasDatasets, Ha
 
     public static final String PROPERTY_SAMPLING_TIME_END = "samplingTimeEnd";
 
+    @Serial
     private static final long serialVersionUID = -8840602794587590180L;
 
     private Set<DatasetEntity> datasets;

@@ -15,9 +15,12 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.sta.ProjectEntity;
 
 public class I18nProjectEntity extends I18nEntity<ProjectEntity> {
+    @Serial
     private static final long serialVersionUID = -1541904527369601026L;
 
 }

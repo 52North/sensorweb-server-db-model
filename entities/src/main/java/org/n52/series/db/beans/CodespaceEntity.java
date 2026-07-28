@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
@@ -28,6 +29,7 @@ public class CodespaceEntity extends IdEntity implements Serializable {
 
     public static final String PROPERTY_NAME = "name";
 
+    @Serial
     private static final long serialVersionUID = 8795086004488469603L;
 
     private String name;

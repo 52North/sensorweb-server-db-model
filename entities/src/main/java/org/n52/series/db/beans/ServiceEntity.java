@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,6 +29,7 @@ import org.slf4j.LoggerFactory;
 
 public class ServiceEntity extends DescribableEntity {
 
+    @Serial
     private static final long serialVersionUID = 8926184900932191238L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceEntity.class);
@@ -137,10 +139,10 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     private boolean checkNoDataValue(DataEntity<?> observation) {
-        if (observation instanceof QuantityDataEntity) {
-            return ((QuantityDataEntity) observation).checkNoDataValue(quantityNoDataValues);
-        } else if (observation instanceof CountDataEntity) {
-            return ((CountDataEntity) observation).checkNoDataValue(countNoDataValues);
+        if (observation instanceof QuantityDataEntity entity1) {
+            return entity1.checkNoDataValue(quantityNoDataValues);
+        } else if (observation instanceof CountDataEntity entity) {
+            return entity.checkNoDataValue(countNoDataValues);
         }
         return observation.isNoDataValue(noDataValues);
     }

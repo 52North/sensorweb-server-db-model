@@ -15,8 +15,11 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 public class FeatureEntity extends AbstractFeatureEntity<FeatureEntity> {
 
+    @Serial
     private static final long serialVersionUID = 3926633318714623558L;
 
 }

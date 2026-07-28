@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Set;
 
 public class ProfileDataEntity extends CompositeDataEntity {
 
+    @Serial
     private static final long serialVersionUID = -7431276500677067329L;
 
     @Override

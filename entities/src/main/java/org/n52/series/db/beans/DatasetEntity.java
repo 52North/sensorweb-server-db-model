@@ -22,6 +22,7 @@ import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 
+import java.io.Serial;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Set;
@@ -49,6 +50,7 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
     private static final String OFFSET_REGEX = "([+-](?:2[0-3]|[01][0-9]):[0-5][0-9])";
+    @Serial
     private static final long serialVersionUID = -7491530543976690237L;
 
     private boolean published = true;

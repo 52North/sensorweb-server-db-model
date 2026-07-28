@@ -22,6 +22,7 @@ import org.n52.series.db.beans.sta.PartyEntity;
 import org.n52.series.db.beans.sta.StaRelations;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 
+import java.io.Serial;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
@@ -37,6 +38,7 @@ public class PlatformEntity extends DescribableEntity implements HasLocations<Pl
     public static final String PROPERTY_HISTORICAL_LOCATIONS = "historicalLocations";
     public static final String PROPERTY_DATASETS = "datasets";
 
+    @Serial
     private static final long serialVersionUID = 3615089936334873353L;
 
     private Set<LocationEntity> locations;

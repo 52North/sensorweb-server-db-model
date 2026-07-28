@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -32,6 +33,7 @@ public class LicenseEntity extends DescribableEntity
     public static final String PROPERTY_DEFINITION = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_LOGO = "logo";
 
+    @Serial
     private static final long serialVersionUID = -1938665500675268434L;
 
     private String logo;

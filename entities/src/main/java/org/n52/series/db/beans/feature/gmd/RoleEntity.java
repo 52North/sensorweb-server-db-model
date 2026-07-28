@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.feature.NilReasonEntity;
 
 /**
@@ -25,6 +27,7 @@ import org.n52.series.db.beans.feature.NilReasonEntity;
  */
 public class RoleEntity extends NilReasonEntity {
 
+    @Serial
     private static final long serialVersionUID = -1503660379060188778L;
 
     private String codeList;

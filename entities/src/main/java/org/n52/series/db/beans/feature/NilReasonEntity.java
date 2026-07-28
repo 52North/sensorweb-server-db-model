@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.feature;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.DescribableEntity;
 
 /**
@@ -23,6 +25,7 @@ import org.n52.series.db.beans.DescribableEntity;
  */
 public abstract class NilReasonEntity extends DescribableEntity {
 
+    @Serial
     private static final long serialVersionUID = -4118970139033618118L;
 
     private String nilReason;

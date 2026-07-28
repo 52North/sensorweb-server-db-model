@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatasetAggregationEntity extends AbstractDatasetEntity {
 
+    @Serial
     private static final long serialVersionUID = 4214347342270609845L;
     private Set<AbstractDatasetEntity> datasets;
 
@@ -72,8 +74,8 @@ public class DatasetAggregationEntity extends AbstractDatasetEntity {
             setResultTimes(dataset.getResultTimes().stream().collect(Collectors.toSet()));
         }
         setUnit(dataset.getUnit());
-        if (dataset instanceof DatasetAggregationEntity) {
-            setDatasets(((DatasetAggregationEntity) dataset).getDatasets());
+        if (dataset instanceof DatasetAggregationEntity entity) {
+            setDatasets(entity.getDatasets());
         }
     }
 

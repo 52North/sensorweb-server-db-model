@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class ProcedureParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PROCEDURE = "procedure";
     public static final String PROP_PROCEDURE_ID = "procedureId";
+    @Serial
     private static final long serialVersionUID = -3203271103169023133L;
     private ProcedureEntity procedure;
     private Long procedureId;

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Comparator;
@@ -92,6 +93,7 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public static final BigDecimal NOT_SET_VERTICAL = BigDecimal.valueOf(0);
 
+    @Serial
     private static final long serialVersionUID = 273612846605300612L;
 
     private Date samplingTimeStart;

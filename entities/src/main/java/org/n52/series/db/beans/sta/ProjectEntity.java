@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
@@ -33,6 +34,7 @@ public class ProjectEntity extends DescribableEntity implements Serializable, Hi
     public static final String PROPERTY_CLASSIFICATION = "classification";
     public static final String PROPERTY_TERMS_OF_USE = "termsOfUse";
     public static final String PROPERTY_PRIVACY_POLICY = "privacyPolicy";
+    @Serial
     private static final long serialVersionUID = -2909642026383185577L;
 
     private String classification;

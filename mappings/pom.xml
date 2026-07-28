@@ -12,6 +12,15 @@
 
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.hibernate.orm</groupId>
+                <artifactId>hibernate-maven-plugin</artifactId>
+                <configuration>
+                    <format>true</format>
+                </configuration>
+            </plugin>
+        </plugins>
         <resources>
             <resource>
                 <directory>src/main/hbm</directory>
@@ -22,6 +31,7 @@
             </resource>
         </resources>
     </build>
+
 
 </project>
 

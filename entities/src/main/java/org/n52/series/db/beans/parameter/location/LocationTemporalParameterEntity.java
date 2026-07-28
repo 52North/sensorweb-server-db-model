@@ -15,12 +15,15 @@
  */
 package org.n52.series.db.beans.parameter.location;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.TemporalParameterEntity;
 import org.n52.series.db.beans.parameter.TimeRange;
 
 public class LocationTemporalParameterEntity extends LocationParameterEntity<TimeRange>
         implements TemporalParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 668796579118721620L;
 
 }

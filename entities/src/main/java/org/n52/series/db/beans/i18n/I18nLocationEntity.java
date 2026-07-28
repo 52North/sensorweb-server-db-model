@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.sta.LocationEntity;
 
 public class I18nLocationEntity extends I18nEntity<LocationEntity> {
 
+    @Serial
     private static final long serialVersionUID = 1667966645309819316L;
     private String location;
 

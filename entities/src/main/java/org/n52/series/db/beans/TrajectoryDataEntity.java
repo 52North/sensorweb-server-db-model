@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Set;
 
 public class TrajectoryDataEntity extends CompositeDataEntity {
 
+    @Serial
     private static final long serialVersionUID = 2863299911063106407L;
 
     @Override

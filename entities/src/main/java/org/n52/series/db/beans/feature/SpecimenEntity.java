@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.feature;
 
+import java.io.Serial;
 import java.util.Date;
 
 import org.n52.series.db.beans.FeatureEntity;
@@ -26,6 +27,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class SpecimenEntity extends FeatureEntity {
 
+    @Serial
     private static final long serialVersionUID = -1128862083434595324L;
 
     private String materialClass;

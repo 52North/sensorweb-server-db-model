@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 
 public class GeometryDataEntity extends DataEntity<GeometryEntity> {
 
+    @Serial
     private static final long serialVersionUID = 3759168838980730712L;
 
     @Override

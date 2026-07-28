@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.dataset;
 
+import java.io.Serial;
 import java.util.Map;
 
 import org.n52.series.db.beans.UnitEntity;
@@ -28,6 +29,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class DatasetCategoryParameterEntity extends DatasetParameterEntity<String> implements CategoryParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = -6262887605542676492L;
 
     private UnitEntity unit;

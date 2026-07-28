@@ -15,11 +15,14 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 public abstract class AbstractRelationEntity<T> extends IdEntity {
 
     public static final String PROPERTY_ITEM = "item";
     public static final String PROPERTY_RELATED_ITEM = "relatedItem";
 
+    @Serial
     private static final long serialVersionUID = -2573767006446257428L;
 
     private T item;

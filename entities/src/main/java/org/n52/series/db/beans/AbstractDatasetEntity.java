@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -57,6 +58,7 @@ public class AbstractDatasetEntity extends DescribableEntity
     public static final String PROPERTY_UNIT = "unit";
     public static final String PROPERTY_AGGREGATION = "aggregation";
     public static final String PROPERTY_PROJECT = "project";
+    @Serial
     private static final long serialVersionUID = 4178505006632345142L;
 
     private AbstractFeatureEntity<?> feature;

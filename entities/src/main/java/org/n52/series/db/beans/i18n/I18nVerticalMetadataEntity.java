@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.VerticalMetadataEntity;
 
 public class I18nVerticalMetadataEntity extends AbstractI18nEntity<VerticalMetadataEntity> {
 
+    @Serial
     private static final long serialVersionUID = 329570776993990200L;
 
     private String verticalOriginName;

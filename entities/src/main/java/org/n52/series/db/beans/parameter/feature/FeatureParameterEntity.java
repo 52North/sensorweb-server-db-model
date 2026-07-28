@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class FeatureParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_FEATURE = "feature";
     public static final String PROP_FEATURE_ID = "featureId";
+    @Serial
     private static final long serialVersionUID = 1123453212836718013L;
     private AbstractFeatureEntity feature;
     private Long featureId;

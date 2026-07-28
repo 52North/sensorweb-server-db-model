@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -33,6 +34,7 @@ public class PartyEntity extends DescribableEntity implements Serializable, Hibe
     public static final String PROPERTY_DISPLAY_NAME = "displayName";
     public static final String PROPERTY_ROLE = "role";
 
+    @Serial
     private static final long serialVersionUID = -7546755723749812564L;
 
     private RolePartyCode role = RolePartyCode.individual;

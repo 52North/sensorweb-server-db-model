@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class DatasetParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_DATASET = "dataset";
     public static final String PROP_DATASET_ID = "datasetId";
+    @Serial
     private static final long serialVersionUID = 8580995030975785255L;
     private AbstractDatasetEntity dataset;
     private Long datasetId;

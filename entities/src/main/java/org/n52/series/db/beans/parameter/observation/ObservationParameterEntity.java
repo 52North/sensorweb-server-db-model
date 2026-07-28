@@ -21,6 +21,8 @@ import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_OBSERVATION = "observation";
     public static final String PROP_OBSERVATION_ID = "observationId";
+    @Serial
     private static final long serialVersionUID = -3170715124801725482L;
     private DataEntity observation;
     private Long observationId;

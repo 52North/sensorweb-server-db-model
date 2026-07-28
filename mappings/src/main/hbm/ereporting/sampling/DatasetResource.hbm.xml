@@ -58,7 +58,7 @@
             </column>
         </property>
         <component class="org.n52.series.db.beans.GeometryEntity" name="geometryEntity">
-            <property name="geometry" type="jts_geometry">
+            <property name="geometry">
                 <column name="observed_area" not-null="false"/>
             </property>
         </component>

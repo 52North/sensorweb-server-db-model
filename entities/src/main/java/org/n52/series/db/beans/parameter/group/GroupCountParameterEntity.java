@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.group;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.CountParameterEntity;
 
 /**
@@ -22,6 +24,7 @@ import org.n52.series.db.beans.parameter.CountParameterEntity;
  */
 public class GroupCountParameterEntity extends GroupParameterEntity<Integer> implements CountParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = -7778025481981408886L;
 
     @Override

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Objects;
@@ -39,6 +40,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     public static final String PROPERTY_DOMAIN_ID = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_CODESPACE = PROPERTY_IDENTIFIER_CODESPACE;
 
+    @Serial
     private static final long serialVersionUID = -4448231483118864847L;
 
     /**

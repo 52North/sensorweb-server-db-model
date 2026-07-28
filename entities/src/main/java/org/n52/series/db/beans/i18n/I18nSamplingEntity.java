@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.sampling.SamplingEntity;
 
 public class I18nSamplingEntity extends I18nEntity<SamplingEntity> {
 
+    @Serial
     private static final long serialVersionUID = 6375003360445007130L;
 
     private String samplingMethod;

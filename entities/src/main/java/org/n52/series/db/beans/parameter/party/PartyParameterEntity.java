@@ -21,6 +21,8 @@ import org.n52.series.db.beans.sta.PartyEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class PartyParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_GROUP = "party";
     public static final String PROP_GROUP_ID = "partyId";
+    @Serial
     private static final long serialVersionUID = 1123453212836718013L;
     private PartyEntity party;
     private Long partyId;

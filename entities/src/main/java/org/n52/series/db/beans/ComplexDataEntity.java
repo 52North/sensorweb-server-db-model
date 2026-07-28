@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Set;
 
 public class ComplexDataEntity extends CompositeDataEntity {
 
+    @Serial
     private static final long serialVersionUID = 2206385928964743369L;
 
     @Override

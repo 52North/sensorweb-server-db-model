@@ -15,11 +15,13 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Map;
 
 public class RecordDataEntity extends DataEntity<Map<String, Object>> {
 
+    @Serial
     private static final long serialVersionUID = -7378123892897587598L;
 
     @Override

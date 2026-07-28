@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
@@ -30,6 +31,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class RelatedFeatureEntity extends IdEntity implements Serializable, HasFeature, HasOfferings {
     public static final String PROPERTY_SERVICE = "service";
+    @Serial
     private static final long serialVersionUID = -8143897383050691280L;
 
     private AbstractFeatureEntity<?> feature;

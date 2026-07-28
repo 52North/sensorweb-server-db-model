@@ -22,6 +22,7 @@ import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 import org.n52.series.db.common.Utils;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -42,6 +43,7 @@ public class HistoricalLocationEntity extends DescribableEntity implements Seria
     public static final String PROPERTY_PLATFORM = "platform";
     public static final String PROPERTY_THING = PROPERTY_PLATFORM;
 
+    @Serial
     private static final long serialVersionUID = 5564686026419270062L;
 
     private Date time;

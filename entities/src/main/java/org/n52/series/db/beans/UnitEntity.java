@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 public class UnitEntity extends DescribableEntity {
 
     public static final String PROPERTY_UNIT = PROPERTY_IDENTIFIER;
     public static final String PROPERTY_SYMBOL = PROPERTY_IDENTIFIER;
+    @Serial
     private static final long serialVersionUID = -7512483445911729980L;
 
     private String link;

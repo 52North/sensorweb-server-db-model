@@ -15,8 +15,11 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 public class CategoryEntity extends DescribableEntity {
 
+    @Serial
     private static final long serialVersionUID = -5508957540970020954L;
 
 }

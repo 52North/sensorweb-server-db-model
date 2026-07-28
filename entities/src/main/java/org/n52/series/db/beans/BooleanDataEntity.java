@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 
 public class BooleanDataEntity extends DataEntity<Boolean> {
 
+    @Serial
     private static final long serialVersionUID = -8729150886271878177L;
 
     @Override

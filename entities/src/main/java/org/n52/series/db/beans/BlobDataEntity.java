@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Collection;
 
 public class BlobDataEntity extends DataEntity<Object> {
 
+    @Serial
     private static final long serialVersionUID = 2881474333508410655L;
 
     @Override

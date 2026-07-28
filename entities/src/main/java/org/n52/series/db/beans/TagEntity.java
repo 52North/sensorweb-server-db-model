@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Set;
 
 import org.n52.series.db.beans.HibernateRelations.HasDatasets;
@@ -25,6 +26,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class TagEntity extends DescribableEntity implements HasDatasets {
 
+    @Serial
     private static final long serialVersionUID = 7851120161214727821L;
     private Set<DatasetEntity> datasets;
     private Set<I18nEntity<? extends Describable>> translations;

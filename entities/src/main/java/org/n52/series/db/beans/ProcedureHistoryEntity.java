@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -36,6 +37,7 @@ public class ProcedureHistoryEntity extends IdEntity
     public static final String START_TIME = "startTime";
     public static final String END_TIME = "endTime";
 
+    @Serial
     private static final long serialVersionUID = -3658568714438752174L;
 
     private FormatEntity format;

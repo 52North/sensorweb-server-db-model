@@ -15,8 +15,11 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 public class RelatedDatasetEntity extends AbstractRelationEntity<DatasetEntity> {
 
+    @Serial
     private static final long serialVersionUID = 280165490758286290L;
 
 }

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.feature.inspire;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
@@ -23,6 +24,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class MediaMonitored implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = 6901599832181367565L;
 
     private long feature;

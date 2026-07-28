@@ -25,6 +25,7 @@ import org.n52.series.db.beans.PlatformEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -43,6 +44,7 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
     public static final String PROPERTY_GEOMETRY_ENTITY = "geometryEntity";
     public static final String PROPERTY_LOCATION_ENCODING = "locationEncoding";
 
+    @Serial
     private static final long serialVersionUID = -8201429072560300649L;
 
     private String location;

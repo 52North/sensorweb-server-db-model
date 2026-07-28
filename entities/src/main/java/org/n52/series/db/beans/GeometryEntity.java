@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.StringJoiner;
 
@@ -35,6 +36,7 @@ public class GeometryEntity implements Serializable {
     public static final String PROPERTY_ALT = "alt";
     public static final String PROPERTY_SRID = "srid";
 
+    @Serial
     private static final long serialVersionUID = -1411829809704409439L;
 
     private GeometryFactory geometryFactory = new GeometryFactory();

@@ -129,12 +129,6 @@
         </subclass>
         <subclass discriminator-value="complex" extends="ObservationParameterEntity"
                   name="ObservationComplexParameterEntity">
-            <many-to-one name="observation" class="org.n52.series.db.beans.DataEntity"
-                     foreign-key="fk_param_observation_id" insert="false" update="false">
-	            <column name="fk_observation_id" not-null="true" index="idx_observation_parameter">
-	                <comment>Reference to the Observation this Parameter describes.</comment>
-	            </column>
-	        </many-to-one>
             <set name="value" table="observations_parameter" inverse="false" cascade="all">
                 <key column="fk_parent_parameter_id" not-null="false" />
                 <one-to-many class="ObservationParameterEntity" />

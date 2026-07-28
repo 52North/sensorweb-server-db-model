@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter;
 
+import java.io.Serial;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public abstract class ParameterEntity<T> extends IdEntity
 
     public static final String PROPERTY_PARENT = "parent";
 
+    @Serial
     private static final long serialVersionUID = -1489503368673412638L;
     private String name;
     private String description;

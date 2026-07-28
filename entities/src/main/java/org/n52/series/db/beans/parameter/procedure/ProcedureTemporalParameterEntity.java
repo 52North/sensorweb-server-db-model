@@ -15,12 +15,15 @@
  */
 package org.n52.series.db.beans.parameter.procedure;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.TemporalParameterEntity;
 import org.n52.series.db.beans.parameter.TimeRange;
 
 public class ProcedureTemporalParameterEntity extends ProcedureParameterEntity<TimeRange>
         implements TemporalParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 668796579118721620L;
 
 }
