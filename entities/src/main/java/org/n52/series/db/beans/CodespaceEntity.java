@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
 
 import java.io.Serial;
 import java.io.Serializable;
 
-import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
-
 /**
  * @since 1.0.0
  */
+@Entity(name = "org.n52.series.db.beans.CodespaceEntity")
+@Table(name = "codespace",
+        uniqueConstraints = @UniqueConstraint(name = "un_codespace_codespace", columnNames = { "name" }))
 public class CodespaceEntity extends IdEntity implements Serializable {
 
     public static final String PROPERTY_CODESPACE = HasIdentifierCodespace.IDENTIFIER_CODESPACE;
@@ -32,6 +43,8 @@ public class CodespaceEntity extends IdEntity implements Serializable {
     @Serial
     private static final long serialVersionUID = 8795086004488469603L;
 
+    @Column(name = PROPERTY_NAME, nullable = false)
+    // @Comment("Name/definition of the codespace, e.g. of a domain")
     private String name;
 
     public String getName() {

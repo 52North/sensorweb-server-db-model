@@ -17,20 +17,38 @@ package org.n52.series.db.beans.parameter.observation;
 
 import java.io.Serial;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@Entity(name = "org.n52.series.db.beans.parameter.observation.ObservationBooleanParameterEntity")
+@DiscriminatorValue("bool")
 public class ObservationBooleanParameterEntity extends ObservationParameterEntity<Boolean>
         implements BooleanParameterEntity {
 
     @Serial
     private static final long serialVersionUID = -1280123654095577480L;
 
+    @Column(name = "value_boolean")
+    private Boolean value;
+
     @Override
     public String getValueAsString() {
         return isSetValue() ? getValue().toString() : null;
+    }
+
+    @Override
+    public Boolean getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Boolean value) {
+        this.value = value;
     }
 
 }

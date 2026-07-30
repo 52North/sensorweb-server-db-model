@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.MappedSuperclass;
+
 import java.io.Serial;
 import java.util.Collection;
 import java.util.Set;
 
+@MappedSuperclass
 public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity<?>>> {
 
     @Serial

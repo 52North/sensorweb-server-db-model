@@ -17,12 +17,23 @@ package org.n52.series.db.beans.i18n;
 
 import java.io.Serial;
 
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.PlatformEntity;
 
+@Entity(name = "org.n52.series.db.beans.i18n.I18nPlatformEntity")
+@Table(name = "platform_i18n", indexes = @Index(name = "idx_platform_i18n_platform", columnList = "fk_platform_id"))
+@AttributeOverride(name = "id", column = @Column(name = "platform_i18n_id"))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_platform_id", nullable = false, insertable = false, updatable = false))
 public class I18nPlatformEntity extends I18nEntity<PlatformEntity> {
 
     @Serial
     private static final long serialVersionUID = -1921468522255863839L;
 
-    // serves for clear distinction
 }

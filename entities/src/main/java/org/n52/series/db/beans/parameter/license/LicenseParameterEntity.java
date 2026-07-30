@@ -56,4 +56,14 @@ public abstract class LicenseParameterEntity<T> extends ParameterEntity<T> {
     public void setDescribeableEntity(DescribableEntity entity) {
         setLicense((LicenseEntity) entity);
     }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
+    }
 }

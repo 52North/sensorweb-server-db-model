@@ -13,7 +13,20 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
+import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
+import org.n52.series.db.beans.i18n.I18nEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -21,13 +34,8 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
-import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
-import org.n52.series.db.beans.i18n.I18nEntity;
-import org.n52.series.db.beans.parameter.ParameterEntity;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@MappedSuperclass
 public abstract class DescribableEntity extends IdEntity implements Describable, Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
@@ -43,35 +51,46 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     @Serial
     private static final long serialVersionUID = -4448231483118864847L;
 
-    /**
-     * Identification of the entity without special chars.
-     */
+    @Column(name = "identifier", nullable = false)
+    // @Comment("Unique identifier of the feature which is used for filtering.
+    // Should be a URI, UUID. E.g. http://www.example.org/123, 123-321")
     private String identifier;
 
-    /**
-     * Identification for SensorThings API of the entity without special chars.
-     */
+    @Column(name = "sta_identifier", nullable = false)
+    // @Comment("Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI
+    // (reference to a vocabulary entry), UUID. E.g. 123, 123-321")
     private String staIdentifier;
 
-    private CodespaceEntity identifierCodespace;
 
-    /**
-     * Default name of the entity.
-     */
+    @Column(name = "name")
+    // @Comment("The human readable name of the feature.")
     private String name;
 
-    private CodespaceEntity nameCodespace;
-
-    /**
-     * Default description of the entity.
-     */
+    @Column(name = "description", columnDefinition = "text")
+    // @Comment("A short description of the feature")
     private String description;
 
-    private ServiceEntity service;
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "fk_identifier_codespace_id", foreignKey = @ForeignKey(name = "fk_feature_identifier_codesp"))
+    //private CodespaceEntity identifierCodespace;
 
+    //@ManyToOne(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "fk_name_codespace_id", foreignKey = @ForeignKey(name = "fk_feature_name_codespace"))
+    //private CodespaceEntity nameCodespace;
+
+    @Transient
+    // explictly mapped in subclasses
+    private Set<ParameterEntity<?>> parameters;
+
+    @Transient
+    // explictly mapped in subclasses
     private Set<I18nEntity<? extends Describable>> translations;
 
-    private Set<ParameterEntity<?>> parameters;
+    // decision: not mapped here - only present in profiles/persistence-units that add the
+    // orm.xml override for this attribute (e.g. the "proxy" profile), since some deployments
+    // never had a service/fk_service_id column and must not gain one.
+    @Transient
+    private ServiceEntity service;
 
     @Override
     public String getIdentifier() {
@@ -97,16 +116,6 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     }
 
     @Override
-    public CodespaceEntity getIdentifierCodespace() {
-        return this.identifierCodespace;
-    }
-
-    @Override
-    public void setIdentifierCodespace(CodespaceEntity identifierCodespace) {
-        this.identifierCodespace = identifierCodespace;
-    }
-
-    @Override
     public String getName() {
         return name;
     }
@@ -116,15 +125,25 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
         this.name = name;
     }
 
-    @Override
-    public CodespaceEntity getNameCodespace() {
-        return nameCodespace;
-    }
-
-    @Override
-    public void setNameCodespace(CodespaceEntity nameCodespace) {
-        this.nameCodespace = nameCodespace;
-    }
+//    @Override
+//    public CodespaceEntity getIdentifierCodespace() {
+//        return this.identifierCodespace;
+//    }
+//
+//    @Override
+//    public void setIdentifierCodespace(CodespaceEntity identifierCodespace) {
+//        this.identifierCodespace = identifierCodespace;
+//    }
+//
+//    @Override
+//    public CodespaceEntity getNameCodespace() {
+//        return nameCodespace;
+//    }
+//
+//    @Override
+//    public void setNameCodespace(CodespaceEntity nameCodespace) {
+//        this.nameCodespace = nameCodespace;
+//    }
 
     @Override
     public String getDescription() {

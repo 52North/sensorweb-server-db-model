@@ -24,5 +24,4 @@ public class I18nServiceEntity extends I18nEntity<ServiceEntity> {
     @Serial
     private static final long serialVersionUID = 3194966888990805278L;
 
-    // serves for clear distinction
 }

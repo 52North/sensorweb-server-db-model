@@ -15,17 +15,27 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Lob;
+
 import java.io.Serial;
 import java.util.Collection;
 
 /**
  * DataEntity with a measurement consisting of a SensorML, e.g. a SensorML event encoded in XML.
  */
+@Entity(name = "org.n52.series.db.beans.SensorML20DataEntity")
+@DiscriminatorValue("sensorML20")
 public class SensorML20DataEntity extends DataEntity<String> {
 
     @Serial
     private static final long serialVersionUID = 6575930482296453999L;
 
+    @Column(name = "value_array", columnDefinition = "text")
+    // @Comment("The XML representation of the SensorML20 Observation (SensorML20Observation)")
     private String value;
 
     @Override

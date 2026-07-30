@@ -21,9 +21,15 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Entity(name = "org.n52.series.db.beans.QuantityDataEntity")
+@DiscriminatorValue("quantity")
 public class QuantityDataEntity extends DataEntity<BigDecimal> implements NumericalDataEntity<BigDecimal> {
 
     public static final BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);

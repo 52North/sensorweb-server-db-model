@@ -13,13 +13,57 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
-import java.io.Serial;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
 
+@Entity(name = "org.n52.series.db.beans.RelatedDatasetEntity")
+@Table(name = "related_dataset",
+        indexes = @Index(name = "idx_related_dataset_related_dataset", columnList = "fk_related_dataset_id"))
+// table comment: Store the relation of two datasets, e.g. one dataset depends on other datasets to provide
+// context
 public class RelatedDatasetEntity extends AbstractRelationEntity<DatasetEntity> {
 
-    @Serial
-    private static final long serialVersionUID = 280165490758286290L;
+    @EmbeddedId
+    private RelatedDatasetPK id = new RelatedDatasetPK();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId("relatedDatasetId")
+    @JoinColumn(name = "fk_related_dataset_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_rel_dataset_rel_dataset"))
+    private DatasetEntity relatedDataset;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId("datasetId")
+    @JoinColumn(name = "fk_dataset_id")
+    private DatasetEntity dataset;
+
+    @Override
+    public DatasetEntity getItem() {
+        return dataset;
+    }
+
+    @Override
+    public void setItem(DatasetEntity item) {
+        this.dataset = item;
+    }
+
+    @Override
+    public DatasetEntity getRelatedItem() {
+        return relatedDataset;
+    }
+
+    @Override
+    public void setRelatedItem(DatasetEntity relatedItem) {
+        this.relatedDataset = relatedItem;
+    }
 }

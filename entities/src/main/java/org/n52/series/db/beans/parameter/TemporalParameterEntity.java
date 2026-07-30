@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter;
 
-import java.util.Date;
-
 import org.joda.time.DateTime;
+
+import java.util.Date;
 
 public interface TemporalParameterEntity extends ValuedParameter<TimeRange> {
 
     default String asString(Date value) {
         return new DateTime(value).toString();
+    }
+
+    @Override
+    default TimeRange getValue() {
+        return null;
+    }
+
+    @Override
+    default void setValue(TimeRange value) {
+
     }
 
     @Override

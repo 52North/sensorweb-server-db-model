@@ -20,6 +20,17 @@ import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasOfferings;
 
@@ -29,18 +40,29 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @since 1.0.0
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.RelatedFeatureEntity")
+@Table(name = "related_feature", indexes = @Index(name = "idx_related_feature_feature", columnList = "fk_feature_id"))
+// table comment: Storage of relations between offerings and features. This table is used by the SOS to
+// fulfill the standard.
+@AttributeOverride(name = "id", column = @Column(name = "related_feature_id"))
 public class RelatedFeatureEntity extends IdEntity implements Serializable, HasFeature, HasOfferings {
     public static final String PROPERTY_SERVICE = "service";
     @Serial
     private static final long serialVersionUID = -8143897383050691280L;
 
+    @Transient
+    private ServiceEntity service;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_feature_id", nullable = false, foreignKey = @ForeignKey(name = "fk_related_feature"))
     private AbstractFeatureEntity<?> feature;
 
+    @Column(name = "role", nullable = false)
+    // @Comment("The role of the related feature.")
     private String role;
 
-    private Set<OfferingEntity> offerings = new HashSet<>(0);
-
-    private ServiceEntity service;
+    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<OfferingEntity> offerings;
 
     public RelatedFeatureEntity() {
     }

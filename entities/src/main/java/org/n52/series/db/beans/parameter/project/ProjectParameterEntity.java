@@ -56,4 +56,14 @@ public abstract class ProjectParameterEntity<T> extends ParameterEntity<T> {
     public void setDescribeableEntity(DescribableEntity entity) {
         setProject((ProjectEntity) entity);
     }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
+    }
 }

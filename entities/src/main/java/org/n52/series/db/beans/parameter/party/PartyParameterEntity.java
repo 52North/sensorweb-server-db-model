@@ -56,4 +56,14 @@ public abstract class PartyParameterEntity<T> extends ParameterEntity<T> {
     public void setDescribeableEntity(DescribableEntity entity) {
         setParty((PartyEntity) entity);
     }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
+    }
 }

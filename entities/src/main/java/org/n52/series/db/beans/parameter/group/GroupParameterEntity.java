@@ -17,6 +17,7 @@ package org.n52.series.db.beans.parameter.group;
 
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.TimeRange;
 import org.n52.series.db.beans.sta.GroupEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
@@ -55,5 +56,15 @@ public abstract class GroupParameterEntity<T> extends ParameterEntity<T> {
     @Override
     public void setDescribeableEntity(DescribableEntity entity) {
         setGroup((GroupEntity) entity);
+    }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
     }
 }

@@ -17,15 +17,30 @@ package org.n52.series.db.beans.i18n;
 
 import java.io.Serial;
 
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.ProcedureEntity;
 
+@Entity(name = "org.n52.series.db.beans.i18n.I18nProcedureEntity")
+@Table(name = "procedure_i18n",
+        indexes = @Index(name = "idx_procedure_i18n_procedure", columnList = "fk_procedure_id"))
+@AttributeOverride(name = "id", column = @Column(name = "procedure_i18n_id"))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_procedure_id", nullable = false, insertable = false, updatable = false))
 public class I18nProcedureEntity extends I18nEntity<ProcedureEntity> {
 
     @Serial
     private static final long serialVersionUID = -7990237043788544558L;
 
+    @Column(name = "short_name")
     private String shortName;
 
+    @Column(name = "long_name")
     private String longName;
 
     public String getShortName() {

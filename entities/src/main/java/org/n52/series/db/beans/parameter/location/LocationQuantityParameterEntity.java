@@ -19,6 +19,12 @@ import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Map;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.QuantityParameterEntity;
 
@@ -28,12 +34,19 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.parameter.location.LocationQuantityParameterEntity")
+@DiscriminatorValue("quantity")
 public class LocationQuantityParameterEntity extends LocationParameterEntity<BigDecimal>
         implements QuantityParameterEntity {
 
     @Serial
     private static final long serialVersionUID = 7528516075676290716L;
 
+    @Column(name = "value_quantity")
+    private BigDecimal value;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_unit_id")
     private UnitEntity unit;
 
     @Override
@@ -58,5 +71,15 @@ public class LocationQuantityParameterEntity extends LocationParameterEntity<Big
     @Override
     public String getValueAsString() {
         return isSetValue() ? getValue().toPlainString() : null;
+    }
+
+    @Override
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(BigDecimal value) {
+        this.value = value;
     }
 }

@@ -13,8 +13,28 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.UniqueConstraint;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasFeatureTypes;
 import org.n52.series.db.beans.HibernateRelations.HasObservationTypes;
@@ -22,15 +42,23 @@ import org.n52.series.db.beans.HibernateRelations.HasPhenomenonTime;
 import org.n52.series.db.beans.HibernateRelations.HasRelatedFeatures;
 import org.n52.series.db.beans.HibernateRelations.HasResultTimes;
 import org.n52.series.db.beans.HibernateRelations.HasValidTime;
+import org.n52.series.db.beans.i18n.I18nEntity;
+import org.n52.series.db.beans.i18n.I18nOfferingEntity;
 import org.n52.series.db.common.Utils;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 import java.io.Serial;
 import java.util.Date;
 import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.OfferingEntity")
+@Table(name = "offering",
+        indexes = { @Index(name = "idx_offering_identifier", columnList = "identifier"),
+                @Index(name = "idx_offering_identifier_codespace", columnList = "fk_identifier_codespace_id"),
+                @Index(name = "idx_offering_name_codespace", columnList = "fk_name_codespace_id") },
+        uniqueConstraints = @UniqueConstraint(name = "un_offering_identifier", columnNames = { "identifier" }))
+@AttributeOverride(name = "id", column = @Column(name = "offering_id"))
+@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes, HasFeatureTypes,
         HasRelatedFeatures, HasPhenomenonTime, HasResultTimes, HasValidTime {
 
@@ -42,25 +70,115 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     @Serial
     private static final long serialVersionUID = 5862607025737865794L;
 
-    private GeometryEntity geometryEntity;
-
-    private Set<FormatEntity> observationTypes;
-
-    private Set<FormatEntity> featureTypes;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "sampling_time_start", length = 29)
+    // @Comment("The minimum samplingTimeStart of all observation that belong to this offering. If the column
+    // is
+    // empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of
+    // the SOS.")
     private Date phenomenonTimeStart;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "sampling_time_end", length = 29)
+    // @Comment("The maximum samplingTimeStart of all observation that belong to this offering. If the column
+    // is
+    // empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of
+    // the SOS.")
     private Date phenomenonTimeEnd;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "result_time_start", length = 29)
+    // @Comment("The minimum resultTimeStart of all observation that belong to this offering. If the column is
+    // empty,
+    // the information is calculated during the cache update and stored locally. Used for the capabilities of
+    // the SOS.")
     private Date resultTimeStart;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "result_time_end", length = 29)
+    // @Comment("The maximum resultTimeEnd of all observation that belong to this offering. If the column is
+    // empty,
+    // the information is calculated during the cache update and stored locally. Used for the capabilities of
+    // the SOS.")
     private Date resultTimeEnd;
 
-    private Set<RelatedFeatureEntity> relatedFeatures;
-
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "valid_time_start", length = 29)
+    // @Comment("The minimum validTimeStart of all observation that belong to this offering. If the column is
+    // empty,
+    // the information is calculated during the cache update and stored locally. Used for the capabilities of
+    // the SOS.")
     private Date validTimeStart;
 
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "valid_time_end", length = 29)
+    // @Comment("The maximum validTimeEnd of all observation that belong to this offering. If the column is
+    // empty, the
+    // information is calculated during the cache update and stored locally. Used for the capabilities of the
+    // SOS.")
     private Date validTimeEnd;
+
+    @Embedded
+    private GeometryEntity geometryEntity;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "offering_observation_type",
+            joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_observation_type")), // points back at
+                                                                                      // OfferingEntity
+            inverseJoinColumns = @JoinColumn(name = "fk_format_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_observation_type_offering")) // points at the target
+    )
+    private Set<FormatEntity> observationTypes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "offering_feature_type",
+            joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_feature_type")), // points back at
+                                                                                  // OfferingEntity
+            inverseJoinColumns = @JoinColumn(name = "fk_format_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_feature_type_offering")) // points at the target
+    )
+    private Set<FormatEntity> featureTypes;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "offering_related_feature",
+            joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_related_feature")), // points back at
+                                                                                     // OfferingEntity
+            inverseJoinColumns = @JoinColumn(name = "fk_related_feature_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_related_feature_offering")) // points at the target
+    )
+    private Set<RelatedFeatureEntity> relatedFeatures;
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = I18nOfferingEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_offering_id", nullable = false, foreignKey = @ForeignKey(name = "fk_offering"))
+    public Set<I18nEntity<? extends Describable>> getTranslations() {
+        return super.getTranslations();
+    }
+
+    @Override
+    @ManyToMany(fetch = FetchType.LAZY)
+    @Access(AccessType.PROPERTY)
+    @JoinTable(name = "offering_hierarchy",
+            joinColumns = @JoinColumn(name = "fk_child_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_child")),
+            inverseJoinColumns = @JoinColumn(name = "fk_parent_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_parent")))
+    public Set<OfferingEntity> getParents() {
+        return super.getParents();
+    }
+
+    @Override
+    @ManyToMany(mappedBy = "parents", fetch = FetchType.LAZY)
+    @Access(AccessType.PROPERTY)
+    public Set<OfferingEntity> getChildren() {
+        return super.getChildren();
+    }
 
     public Geometry getGeometry() {
         return geometryEntity != null ? geometryEntity.getGeometry() : null;

@@ -19,8 +19,15 @@ import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
+//@Entity(name = "org.n52.series.db.beans.parameter.platform.PlatformComplexParameterEntity")
+//@DiscriminatorValue("complex")
+//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
 public class PlatformComplexParameterEntity extends PlatformParameterEntity<Set<PlatformParameterEntity<?>>>
         implements ComplexParameterEntity<Set<PlatformParameterEntity<?>>> {
 
@@ -29,12 +36,11 @@ public class PlatformComplexParameterEntity extends PlatformParameterEntity<Set<
 
     @Override
     public Set<PlatformParameterEntity<?>> getValue() {
-        return super.getValue();
+        return null;
     }
 
     @Override
     public void setValue(Set<PlatformParameterEntity<?>> value) {
-        super.setValue(value);
     }
 
     @Override

@@ -24,9 +24,30 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Entity(name = "org.n52.series.db.beans.ServiceEntity")
+@Table(name = "service",
+        indexes = { @Index(name = "idx_service_identifier", columnList = "identifier"),
+                @Index(name = "idx_service_identifier_codespace", columnList = "fk_identifier_codespace_id"),
+                @Index(name = "idx_service_name_codespace", columnList = "fk_name_codespace_id") },
+        uniqueConstraints = @UniqueConstraint(name = "un_service_identifier", columnNames = { "identifier" }))
+// table comment: Storage of the service.
+@AttributeOverride(name = "id", column = @Column(name = "service_id"))
+@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
 public class ServiceEntity extends DescribableEntity {
 
     @Serial
@@ -34,19 +55,32 @@ public class ServiceEntity extends DescribableEntity {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceEntity.class);
 
+    @Column(name = "url", columnDefinition = "text")
+    // @Comment("The url of the service")
     private String url;
 
+    @Column(name = "type")
+    // @Comment("The type of the service")
     private String type = "RESTful series data access layer.";
 
-    private List<String> noDataValues = new LinkedList<>();
-
+    @Column(name = "version")
+    // @Comment("The version of the service")
     private String version;
 
-    private boolean supportsFirstLast = true;
-
+    @Column(name = "connector")
+    // @Comment("The connector of the service.")
     private String connector;
 
+    @JdbcTypeCode(SqlTypes.SMALLINT)
+    @Column(name = "is_supports_first_last", nullable = false)
+    @ColumnDefault("1")
+    // @Comment("Flag that indicates if this service supports first/last observation queries")
+    private boolean supportsFirstLast;
+
+    @Embedded
     private ServiceMetadataEntity serviceMetadata;
+
+    private List<String> noDataValues = new LinkedList<>();
 
     private Set<BigDecimal> quantityNoDataValues = new LinkedHashSet<>();
 

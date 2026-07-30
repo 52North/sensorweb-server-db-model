@@ -13,23 +13,41 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter.dataset;
 
-import java.io.Serial;
-
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.BooleanParameterEntity;
+
+import java.io.Serial;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@Entity(name = "org.n52.series.db.beans.parameter.dataset.DatasetBooleanParameterEntity")
+@DiscriminatorValue("bool")
 public class DatasetBooleanParameterEntity extends DatasetParameterEntity<Boolean> implements BooleanParameterEntity {
 
     @Serial
-    private static final long serialVersionUID = -1280123654095577480L;
+    private static final long serialVersionUID = 3130389439734626025L;
+
+    @Column(name = "value_boolean")
+    private Boolean value;
 
     @Override
     public String getValueAsString() {
         return isSetValue() ? getValue().toString() : null;
     }
 
+    @Override
+    public Boolean getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Boolean value) {
+        this.value = value;
+    }
 }

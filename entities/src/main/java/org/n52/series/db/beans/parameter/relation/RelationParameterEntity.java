@@ -58,4 +58,14 @@ public abstract class RelationParameterEntity<T> extends ParameterEntity<T> {
     public void setDescribeableEntity(DescribableEntity entity) {
         setRelation((RelationEntity) entity);
     }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
+    }
 }

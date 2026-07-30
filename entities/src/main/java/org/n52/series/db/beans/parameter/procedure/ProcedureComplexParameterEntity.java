@@ -19,22 +19,28 @@ import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
+//@Entity(name = "org.n52.series.db.beans.parameter.procedure.ProcedureComplexParameterEntity")
+//@DiscriminatorValue("complex")
+//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
 public class ProcedureComplexParameterEntity extends ProcedureParameterEntity<Set<ProcedureParameterEntity<?>>>
         implements ComplexParameterEntity<Set<ProcedureParameterEntity<?>>> {
 
     @Serial
-    private static final long serialVersionUID = -5166758396873257962L;
+    private static final long serialVersionUID = 6058606080700304098L;
 
     @Override
     public Set<ProcedureParameterEntity<?>> getValue() {
-        return super.getValue();
+        return null;
     }
 
     @Override
     public void setValue(Set<ProcedureParameterEntity<?>> value) {
-        super.setValue(value);
     }
 
     @Override

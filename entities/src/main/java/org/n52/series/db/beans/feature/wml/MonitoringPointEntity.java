@@ -13,11 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature.wml;
 
-import java.io.Serial;
-
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.SecondaryTable;
 import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
+
+import java.io.Serial;
 
 /**
  * Hibernate entiity for the WaterML MonitoringPoint
@@ -25,6 +33,11 @@ import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+@Entity(name = "org.n52.series.db.beans.feature.wml.MonitoringPointEntity")
+@SecondaryTable(name = "wml_monitoring_point",
+        pkJoinColumns = @PrimaryKeyJoinColumn(name = "fk_feature_id",
+                foreignKey = @ForeignKey(name = "fk_wml_monitoring_point")))
+@DiscriminatorValue("WmlMonitoringPointEntity")
 public class MonitoringPointEntity extends AbstractMonitoringFeature {
 
     @Serial

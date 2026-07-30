@@ -17,19 +17,37 @@ package org.n52.series.db.beans.parameter.phenomenon;
 
 import java.io.Serial;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.JsonParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@Entity(name = "org.n52.series.db.beans.parameter.phenomenon.PhenomenonJsonParameterEntity")
+@DiscriminatorValue("json")
 public class PhenomenonJsonParameterEntity extends PhenomenonParameterEntity<String> implements JsonParameterEntity {
 
     @Serial
     private static final long serialVersionUID = 3300965770609382377L;
 
+    @Column(name = "value_json")
+    private String value;
+
     @Override
     public String getValueAsString() {
         return getValue();
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

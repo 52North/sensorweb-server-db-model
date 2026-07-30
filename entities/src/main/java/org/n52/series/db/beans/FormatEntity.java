@@ -15,8 +15,18 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+
 import java.io.Serial;
 
+@Entity(name = "org.n52.series.db.beans.FormatEntity")
+@Table(name = "format",
+        uniqueConstraints = @UniqueConstraint(name = "un_format_definition", columnNames = { "definition" }))
+@AttributeOverride(name = "id", column = @Column(name = "format_id"))
 public class FormatEntity extends IdEntity {
 
     public static final String FORMAT = "format";
@@ -24,6 +34,8 @@ public class FormatEntity extends IdEntity {
     @Serial
     private static final long serialVersionUID = -8428858401445365107L;
 
+    @Column(name = "definition", nullable = false)
+    // @Comment("The definition of the format.")
     private String format;
 
     public String getFormat() {

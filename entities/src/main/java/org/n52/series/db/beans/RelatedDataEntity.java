@@ -15,11 +15,61 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
+
 import java.io.Serial;
 
+@Entity(name = "org.n52.series.db.beans.RelatedDataEntity")
+@Table(name = "related_observation",
+        indexes = {
+                @Index(name = "idx_related_observation_related_observation", columnList = "fk_related_observation_id"),
+                @Index(name = "idx_related_observation", columnList = "fk_observation_id") })
+// table comment: Store the relation of two observation, e.g. one observation depends on other observations to
+// provide context
+@AttributeOverride(name = "id", column = @Column(name = "procedure_id"))
 public class RelatedDataEntity extends AbstractRelationEntity<DataEntity<?>> {
 
-    @Serial
-    private static final long serialVersionUID = 2436177373903826414L;
+    @EmbeddedId
+    private RelatedDataPK id = new RelatedDataPK();
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId("relatedObservationId")
+    @JoinColumn(name = "fk_related_observation_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_rel_obs_related"))
+    private DataEntity<?> relatedObservation;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @MapsId("observationId")
+    @JoinColumn(name = "fk_observation_id")
+    private DataEntity<?> observation;
+
+    @Override
+    public DataEntity<?> getItem() {
+        return observation;
+    }
+
+    @Override
+    public void setItem(DataEntity<?> item) {
+        this.observation = item;
+    }
+
+    @Override
+    public DataEntity<?> getRelatedItem() {
+        return relatedObservation;
+    }
+
+    @Override
+    public void setRelatedItem(DataEntity<?> relatedItem) {
+        this.relatedObservation = relatedItem;
+    }
 }

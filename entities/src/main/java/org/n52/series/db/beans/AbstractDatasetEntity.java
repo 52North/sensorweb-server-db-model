@@ -24,7 +24,26 @@ import java.util.Date;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import org.hibernate.annotations.SQLRestriction;
 import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.dataset.DatasetParameterEntity;
 import org.n52.series.db.beans.sta.AbstractDatastreamEntity;
 import org.n52.series.db.beans.sta.LicenseEntity;
 import org.n52.series.db.beans.sta.PartyEntity;
@@ -38,6 +57,41 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.AbstractDatasetEntity")
+@Table(name = "dataset",
+        indexes = { @Index(name = "idx_dataset_identifier", columnList = "identifier"),
+                @Index(name = "idx_dataset_staIdentifier", columnList = "sta_identifier"),
+                @Index(name = "idx_dataset_procedure", columnList = "fk_procedure_id"),
+                @Index(name = "idx_dataset_phenomenon", columnList = "fk_phenomenon_id"),
+                @Index(name = "idx_dataset_offering", columnList = "fk_offering_id"),
+                @Index(name = "idx_dataset_category", columnList = "fk_category_id"),
+                @Index(name = "idx_dataset_feature", columnList = "fk_feature_id"),
+                @Index(name = "idx_dataset_platform", columnList = "fk_platform_id"),
+                @Index(name = "idx_dataset_unit", columnList = "fk_unit_id"),
+                @Index(name = "idx_dataset_observation_type", columnList = "fk_format_id, observation_type"),
+                @Index(name = "idx_dataset_aggregation", columnList = "fk_aggregation_id"),
+                @Index(name = "idx_dataset_first_observation", columnList = "fk_first_observation_id"),
+                @Index(name = "idx_dataset_last_observation", columnList = "fk_last_observation_id"),
+                @Index(name = "idx_dataset_dataset_type", columnList = "dataset_type"),
+                @Index(name = "idx_dataset_value_type", columnList = "value_type"),
+                @Index(name = "idx_dataset_is_deleted", columnList = "is_deleted"),
+                @Index(name = "idx_dataset_is_disabled", columnList = "is_disabled"),
+                @Index(name = "idx_dataset_is_published", columnList = "is_published"),
+                @Index(name = "idx_dataset_is_mobile", columnList = "is_mobile"),
+                @Index(name = "idx_dataset_is_insitu", columnList = "is_insitu"),
+                @Index(name = "idx_dataset_is_hidden", columnList = "is_hidden"),
+                @Index(name = "idx_dataset_identifier_codespace", columnList = "fk_identifier_codespace_id"),
+                @Index(name = "idx_dataset_name_codespace", columnList = "fk_name_codespace_id"),
+                @Index(name = "idx_dataset_value_profile", columnList = "fk_value_profile_id") },
+        uniqueConstraints = { @UniqueConstraint(name = "un_dataset_identifier", columnNames = { "identifier" }),
+                @UniqueConstraint(name = "un_dataset_staIdentifier", columnNames = { "sta_identifier" }),
+                @UniqueConstraint(name = "un_dataset_identity",
+                        columnNames = { "fk_procedure_id", "fk_phenomenon_id", "fk_offering_id", "fk_category_id",
+                                "fk_feature_id", "fk_platform_id", "fk_unit_id" }) })
+// table comment: Storage of the dataset, the core table of the whole database model.
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "discriminator")
+@AttributeOverride(name = "id", column = @Column(name = "dataset_id"))
 public class AbstractDatasetEntity extends DescribableEntity
         implements Serializable, HibernateRelations.IsStaEntity, AbstractDatastreamEntity,
         StaRelations.HasLicense<AbstractDatasetEntity>, StaRelations.HasParty<AbstractDatasetEntity> {
@@ -87,6 +141,15 @@ public class AbstractDatasetEntity extends DescribableEntity
     private Set<DataEntity<?>> observations;
     private AbstractDatasetEntity aggregation;
     private boolean processed;
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = DatasetParameterEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_dataset_id", nullable = false, foreignKey = @ForeignKey(name = "fk_param_dataset_id"))
+    @SQLRestriction("fk_parent_parameter_id is null")
+    public Set<ParameterEntity<?>> getParameters() {
+        return super.getParameters();
+    }
 
     public PhenomenonEntity getPhenomenon() {
         return phenomenon;

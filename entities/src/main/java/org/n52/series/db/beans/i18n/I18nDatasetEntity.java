@@ -13,16 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.i18n;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
+import org.n52.series.db.beans.DatasetEntity;
+import org.n52.series.db.beans.DescribableEntity;
 
 import java.io.Serial;
 
-import org.n52.series.db.beans.DescribableEntity;
-
-public class I18nDatasetEntity<T extends DescribableEntity> extends I18nEntity<T> {
+@Entity(name = "org.n52.series.db.beans.i18n.I18nDatasetEntity")
+@Table(name = "dataset_i18n", indexes = @Index(name = "idx_dataset_i18n_dataset", columnList = "fk_dataset_id"))
+@AttributeOverride(name = "id", column = @Column(name = "dataset_i18n_id"))
+@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_dataset_id", nullable = false))
+public class I18nDatasetEntity extends I18nEntity<DatasetEntity> {
 
     @Serial
     private static final long serialVersionUID = -6806171135616112674L;
-
-    // serves for clear distinction
 }

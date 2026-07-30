@@ -13,10 +13,24 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
+
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
 
 import java.io.Serial;
 
+@Entity(name = "org.n52.series.db.beans.UnitEntity")
+@Table(name = "unit", uniqueConstraints = @UniqueConstraint(name = "un_unit_symbol", columnNames = { "symbol" }))
+// table comment: Storage of the units of measurement of the observation values. These may be °C or m as the
+// unit for
+// depth/height information.
+@AttributeOverride(name = "id", column = @Column(name = "unit_id"))
+@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
 public class UnitEntity extends DescribableEntity {
 
     public static final String PROPERTY_UNIT = PROPERTY_IDENTIFIER;
@@ -24,6 +38,8 @@ public class UnitEntity extends DescribableEntity {
     @Serial
     private static final long serialVersionUID = -7512483445911729980L;
 
+    @Column(name = "link")
+    // @Comment("Link/reference to an external description of the unit, e.g. to a vocabulary..")
     private String link;
 
     /**

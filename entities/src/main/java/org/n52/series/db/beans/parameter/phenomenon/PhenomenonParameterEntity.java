@@ -15,6 +15,19 @@
  */
 package org.n52.series.db.beans.parameter.phenomenon;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.PhenomenonEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -27,14 +40,27 @@ import java.io.Serial;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.parameter.phenomenon.PhenomenonParameterEntity")
+@Table(name = "phenomenon_parameter",
+        indexes = { @Index(name = "idx_phenomenon_param_name", columnList = "name"),
+                @Index(name = "idx_phenomenon_parameter", columnList = "fk_phenomenon_id"),
+                @Index(name = "idx_phenomenon_parent_parameter", columnList = "fk_parent_parameter_id"),
+                @Index(name = "idx_phenomenon_parameter_unit", columnList = "fk_unit_id") })
+// table comment: Storage for additional information for phenomenons
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_PHENOMENON = "phenomenon";
     public static final String PROP_PHENOMENON_ID = "phenomenonId";
+
     @Serial
     private static final long serialVersionUID = 5234864540316301294L;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_phenomenon_id", nullable = false, insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "fk_param_phenomenon_id"))
     private PhenomenonEntity phenomenon;
-    private Long phenomenonId;
 
     public PhenomenonEntity getPhenomenon() {
         return phenomenon;
@@ -44,12 +70,12 @@ public abstract class PhenomenonParameterEntity<T> extends ParameterEntity<T> {
         this.phenomenon = phenomenon;
     }
 
-    public Long getPhenomenonId() {
-        return phenomenonId;
-    }
-
-    public void setPhenomenonId(Long observationId) {
-        this.phenomenonId = observationId;
+    @Override
+    @Access(AccessType.PROPERTY)
+    @ManyToOne(targetEntity = PhenomenonParameterEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_parent_parameter_id", foreignKey = @ForeignKey(name = "fk_param_phenomenon_parent_id"))
+    public ParameterEntity<?> getParent() {
+        return super.getParent();
     }
 
     @Override

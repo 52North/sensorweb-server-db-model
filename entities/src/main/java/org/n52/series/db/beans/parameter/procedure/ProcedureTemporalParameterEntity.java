@@ -17,9 +17,16 @@ package org.n52.series.db.beans.parameter.procedure;
 
 import java.io.Serial;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.TemporalParameterEntity;
 import org.n52.series.db.beans.parameter.TimeRange;
 
+//@Entity(name = "org.n52.series.db.beans.parameter.procedure.ProcedureTemporalParameterEntity")
+//@DiscriminatorValue("temporal")
+//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
 public class ProcedureTemporalParameterEntity extends ProcedureParameterEntity<TimeRange>
         implements TemporalParameterEntity {
 

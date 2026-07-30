@@ -17,19 +17,37 @@ package org.n52.series.db.beans.parameter.dataset;
 
 import java.io.Serial;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.TextParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@Entity(name = "org.n52.series.db.beans.parameter.dataset.DatasetTextParameterEntity")
+@DiscriminatorValue("text")
 public class DatasetTextParameterEntity extends DatasetParameterEntity<String> implements TextParameterEntity {
 
     @Serial
     private static final long serialVersionUID = 3300965770609382377L;
 
+    @Column(name = "value_text")
+    private String value;
+
     @Override
     public String getValueAsString() {
         return getValue();
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

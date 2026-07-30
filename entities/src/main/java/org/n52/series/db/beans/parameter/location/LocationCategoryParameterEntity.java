@@ -18,6 +18,13 @@ package org.n52.series.db.beans.parameter.location;
 import java.io.Serial;
 import java.util.Map;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.beans.parameter.CategoryParameterEntity;
 
@@ -27,12 +34,19 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.parameter.location.LocationCategoryParameterEntity")
+@DiscriminatorValue("category")
 public class LocationCategoryParameterEntity extends LocationParameterEntity<String>
         implements CategoryParameterEntity {
 
     @Serial
     private static final long serialVersionUID = -6262887605542676492L;
 
+    @Column(name = "value_category")
+    private String value;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_unit_id", foreignKey = @ForeignKey(name = "fk_location_param_unit"))
     private UnitEntity unit;
 
     @Override
@@ -62,5 +76,15 @@ public class LocationCategoryParameterEntity extends LocationParameterEntity<Str
     @Override
     public String getValueAsString() {
         return getValue();
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 }

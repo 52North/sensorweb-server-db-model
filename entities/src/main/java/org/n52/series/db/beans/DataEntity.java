@@ -25,6 +25,34 @@ import java.util.LinkedHashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
+import jakarta.persistence.UniqueConstraint;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.DiscriminatorOptions;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.Type;
+import org.hibernate.type.SqlTypes;
 import org.n52.series.db.beans.HibernateRelations.HasDataset;
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasParameters;
@@ -45,9 +73,34 @@ import org.n52.series.db.common.Utils;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public abstract class DataEntity<T> extends DescribableEntity implements Comparable<DataEntity<T>>, Serializable,
-        HasPhenomenonTime, IsStaEntity, HasResultTime, HasValidTime, HasParameters, HasDataset, HasFeature,
-        IsProcessed, IsNoDataValue, StaRelations.HasGroups<DataEntity<?>>, StaRelations.HasRelation<DataEntity<?>> {
+@Entity(name = "org.n52.series.db.beans.DataEntity")
+@Table(name = "observation",
+        indexes = { @Index(name = "idx_observation_dataset", columnList = "fk_dataset_id"),
+                @Index(name = "idx_sampling_time_start", columnList = "sampling_time_start"),
+                @Index(name = "idx_sampling_time_end", columnList = "sampling_time_end"),
+                @Index(name = "idx_result_time", columnList = "result_time"),
+                @Index(name = "idx_observation_staIdentifier", columnList = "sta_identifier"),
+                @Index(name = "idx_observation_identifier_codespace", columnList = "fk_identifier_codespace_id"),
+                @Index(name = "idx_observation_name_codespace", columnList = "fk_name_codespace_id"),
+                @Index(name = "idx_observation_is_deleted", columnList = "is_deleted"),
+                @Index(name = "idx_observation_parent", columnList = "fk_parent_observation_id"),
+                @Index(name = "idx_observation_result_template", columnList = "fk_result_template_id") },
+        uniqueConstraints = {
+                @UniqueConstraint(name = "un_observation_identity",
+                        columnNames = { "value_type", "fk_dataset_id", "sampling_time_start", "sampling_time_end",
+                                "result_time", "vertical_from", "vertical_to" }),
+                @UniqueConstraint(name = "un_observation_identifier", columnNames = { "identifier" }),
+                @UniqueConstraint(name = "un_observation_staIdentifier", columnNames = { "sta_identifier" }) })
+// table comment: Storage of the observation values with the timestamp and additional metadata. The metadata
+// are height/depth values for profile observation and sampling geometries for trajectory observations. In
+// each observation entry only one value_... column should be filled with a value!
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "value_type")
+@DiscriminatorOptions(force = true)
+@AttributeOverride(name = "id", column = @Column(name = "observation_id"))
+public abstract class DataEntity<T> extends DescribableEntity
+        implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
+        HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed, IsNoDataValue {
 
     public static final String PROPERTY_DATASET = "dataset";
 
@@ -96,64 +149,114 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     @Serial
     private static final long serialVersionUID = 273612846605300612L;
 
-    private Date samplingTimeStart;
-
-    private Date samplingTimeEnd;
-
-    private T value;
-
-    private GeometryEntity geometryEntity;
-
-    private boolean deleted;
-
-    private Date validTimeStart;
-
-    private Date validTimeEnd;
-
-    private Date resultTime;
-
-    private Long parent;
-
-    private DatasetEntity dataset;
-
-    private Long datasetId;
-
-    private Set<RelatedDataEntity> relatedObservations = new HashSet<>(0);
-
+    @Formula("value_type")
     private String valueType;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_dataset_id", nullable = false, foreignKey = @ForeignKey(name = "fk_dataset"))
+    private DatasetEntity dataset;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "sampling_time_start", nullable = false, length = 29)
+    // @Comment("The timestamp when the observation period has started or the observation took place. In the
+    // the latter, sampling_time_start and sampling_time_end are equal.")
+    private Date samplingTimeStart;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "sampling_time_end", nullable = false, length = 29)
+    // @Comment("The timestamp when the measurement period has finished or the observation took place. In the
+    // the latter, sampling_time_start and sampling_time_end are equal.")
+    private Date samplingTimeEnd;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "result_time", length = 29)
+    // @Comment("The timestamp when the observation was published. Might be identical with sampling_time_start
+    // and sampling_time_end.")
+    private Date resultTime;
+
+    @JdbcTypeCode(SqlTypes.SMALLINT)
+    @Column(name = "is_deleted", nullable = false)
+    @ColumnDefault("0")
+    // @Comment("Flag that indicates if this observation is deleted")
+    private boolean deleted;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "valid_time_start", length = 29)
+    @ColumnDefault("NULL")
+    // @Comment("The timestamp from when the obervation is valid, e.g. forcaste observations")
+    private Date validTimeStart;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "valid_time_end", length = 29)
+    @ColumnDefault("NULL")
+    // @Comment("The timestamp until when the obervation is valid, e.g. forcaste observations")
+    private Date validTimeEnd;
+
+    @Embedded
+    private GeometryEntity geometryEntity;
+
+    @OneToMany(mappedBy = "observation", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<RelatedDataEntity> relatedObservations;
+
+    @Column(name = "value_identifier")
+    // @Comment("Identifier of the value. E.g. used in OGC SWE encoded values like SweText")
     private String valueIdentifier;
 
+    @Column(name = "value_name")
+    // @Comment("Identifier of the name. E.g. used in OGC SWE encoded values like SweText")
     private String valueName;
 
+    @Column(name = "value_description")
+    // @Comment("Identifier of the description. E.g. used in OGC SWE encoded values like SweText")
     private String valueDescription;
 
+    @Column(name = "vertical_from", nullable = false)
+    @ColumnDefault("0")
+    // @Comment("The start level of a vertical observation, required for profile observations")
     private BigDecimal verticalFrom = NOT_SET_VERTICAL;
 
+    @Column(name = "vertical_to", nullable = false)
+    @ColumnDefault("0")
+    // @Comment("The end level or the level of a vertical observation, required for profile observations")
     private BigDecimal verticalTo = NOT_SET_VERTICAL;
 
-    private DetectionLimitEntity detectionLimit;
+    @Column(name = "fk_parent_observation_id")
+    // @Comment("Reference to the parent observation in the case of complex observations like profiles,
+    // complex or swedataarray observations.")
+    private Long parent;
 
-    private SamplingProfileDataEntity samplingProfile;
-
+    @Embedded
     private EReportingProfileDataEntity ereportingProfile;
 
-    private Boolean valueBoolean;
-
-    private String valueText;
-
+    @Column(name = "value_quantity", insertable = false, updatable = false)
     private BigDecimal valueQuantity;
 
-    private String valueCategory;
+    @Column(name = "value_text", insertable = false, updatable = false)
+    private String valueText;
 
+    @Column(name = "value_count", insertable = false, updatable = false)
     private Integer valueCount;
 
-    private AbstractFeatureEntity<?> feature;
-    private Set<QualityEntity<?>> qualities = new LinkedHashSet<>();
+    @Column(name = "value_category", insertable = false, updatable = false)
+    private String valueCategory;
 
-    private Set<RelationEntity> subjects;
-    private Set<RelationEntity> objects;
-    private Set<GroupEntity> groups;
+    @JdbcTypeCode(SqlTypes.SMALLINT)
+    @Column(name = "value_boolean", insertable = false, updatable = false)
+    private Boolean valueBoolean;
+
+    @Transient
+    private T value;
+
+    @Transient
+    private DetectionLimitEntity detectionLimit;
+
+    @Transient
+    private SamplingProfileDataEntity samplingProfile;
+
+    @Transient
+    private AbstractFeatureEntity<?> feature;
+    @Transient
+    private Set<QualityEntity<?>> qualities = new LinkedHashSet<>();
 
     private boolean processed;
 
@@ -292,14 +395,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
     @Override
     public void setDataset(final DatasetEntity dataset) {
         this.dataset = dataset;
-    }
-
-    public Long getDatasetId() {
-        return datasetId;
-    }
-
-    public void setDatasetId(Long datasetId) {
-        this.datasetId = datasetId;
     }
 
     public Set<RelatedDataEntity> getRelatedObservations() {
@@ -516,39 +611,6 @@ public abstract class DataEntity<T> extends DescribableEntity implements Compara
 
     public boolean hasQuality() {
         return getQuality() != null && !getQuality().isEmpty();
-    }
-
-    @Override
-    public Set<RelationEntity> getSubjects() {
-        return subjects;
-    }
-
-    @Override
-    public DataEntity<T> setSubjects(Set<RelationEntity> subjects) {
-        this.subjects = subjects;
-        return this;
-    }
-
-    @Override
-    public Set<RelationEntity> getObjects() {
-        return objects;
-    }
-
-    @Override
-    public DataEntity<T> setObjects(Set<RelationEntity> objects) {
-        this.objects = objects;
-        return this;
-    }
-
-    @Override
-    public Set<GroupEntity> getGroups() {
-        return groups;
-    }
-
-    @Override
-    public DataEntity<T> setGroups(Set<GroupEntity> groups) {
-        this.groups = groups;
-        return this;
     }
 
     @Override

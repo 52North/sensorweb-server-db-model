@@ -15,7 +15,27 @@
  */
 package org.n52.series.db.beans.sta;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import org.hibernate.annotations.SQLRestriction;
 import org.locationtech.jts.geom.Geometry;
+import org.n52.series.db.beans.Describable;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.FormatEntity;
 import org.n52.series.db.beans.GeometryEntity;
@@ -24,6 +44,10 @@ import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.PlatformEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.n52.series.db.beans.i18n.I18nEntity;
+import org.n52.series.db.beans.i18n.I18nLocationEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.location.LocationParameterEntity;
 
 import java.io.Serial;
 import java.io.Serializable;
@@ -35,6 +59,14 @@ import java.util.Set;
  */
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.sta.LocationEntity")
+@Table(name = "location",
+        indexes = { @Index(name = "idx_location_identifier", columnList = "identifier"),
+                @Index(name = "idx_location_staIdentifier", columnList = "sta_identifier"),
+                @Index(name = "idx_location_format", columnList = "fk_format_id") },
+        uniqueConstraints = { @UniqueConstraint(name = "un_location_identifier", columnNames = { "identifier" }),
+                @UniqueConstraint(name = "un_location_staIdentifier", columnNames = { "sta_identifier" }) })
+@AttributeOverride(name = "id", column = @Column(name = "location_id"))
 public class LocationEntity extends DescribableEntity implements Serializable, HasGeometry, HibernateRelations.HasName,
         HibernateRelations.HasDescription, HibernateRelations.IsProcessed, StaRelations.HasPlatforms<LocationEntity>,
         StaRelations.HasHistoricalLocations<LocationEntity> {
@@ -47,11 +79,45 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
     @Serial
     private static final long serialVersionUID = -8201429072560300649L;
 
+    @Column(name = "location", columnDefinition = "text")
     private String location;
+
+    @Embedded
     private GeometryEntity geometryEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_format_id", nullable = false, foreignKey = @ForeignKey(name = "fk_location_format"))
     private FormatEntity locationEncoding;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    // TODO mappedBy = "<owning field on the other entity>"
     private Set<PlatformEntity> platforms;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "location_historical_location",
+            joinColumns = @JoinColumn(name = "fk_location_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_location_historical_loc")),
+            inverseJoinColumns = @JoinColumn(name = "fk_historical_location_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_historical_loc_location")))
     private Set<HistoricalLocationEntity> historicalLocations;
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = LocationParameterEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_location_id", nullable = false, foreignKey = @ForeignKey(name = "fk_param_location_id"))
+    @SQLRestriction("fk_parent_parameter_id is null")
+    public Set<ParameterEntity<?>> getParameters() {
+        return super.getParameters();
+    }
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = I18nLocationEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_location_id", nullable = false, foreignKey = @ForeignKey(name = "fk_location"))
+    public Set<I18nEntity<? extends Describable>> getTranslations() {
+        return super.getTranslations();
+    }
+
     private boolean processed;
 
     public FormatEntity getLocationEncoding() {

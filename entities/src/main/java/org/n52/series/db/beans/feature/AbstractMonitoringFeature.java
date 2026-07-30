@@ -19,6 +19,8 @@ import java.io.Serial;
 import java.util.Collection;
 import java.util.Collections;
 
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Transient;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.feature.gmd.ResponsiblePartyEntity;
 import org.n52.series.db.beans.feature.gml.VerticalDatumEntity;
@@ -32,11 +34,13 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @since 1.0.0
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@MappedSuperclass
 public abstract class AbstractMonitoringFeature extends FeatureEntity {
 
     @Serial
     private static final long serialVersionUID = 3379003106634935899L;
 
+    @Transient
     private MonitoringPointContent content;
 
     /**

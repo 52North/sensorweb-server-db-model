@@ -17,12 +17,24 @@ package org.n52.series.db.beans.i18n;
 
 import java.io.Serial;
 
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.PhenomenonEntity;
 
+@Entity(name = "org.n52.series.db.beans.i18n.I18nPhenomenonEntity")
+@Table(name = "phenomenon_i18n",
+        indexes = @Index(name = "idx_phenomenon_i18n_phenomenon", columnList = "fk_phenomenon_id"))
+@AttributeOverride(name = "id", column = @Column(name = "phenomenon_i18n_id"))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_phenomenon_id", nullable = false, insertable = false, updatable = false))
 public class I18nPhenomenonEntity extends I18nEntity<PhenomenonEntity> {
 
     @Serial
     private static final long serialVersionUID = 8139714432806062380L;
 
-    // serves for clear distinction
 }
