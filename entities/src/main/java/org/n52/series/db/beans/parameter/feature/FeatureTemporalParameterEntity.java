@@ -15,12 +15,22 @@
  */
 package org.n52.series.db.beans.parameter.feature;
 
+import java.io.Serial;
+
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.TemporalParameterEntity;
 import org.n52.series.db.beans.parameter.TimeRange;
 
+//@Entity(name = "org.n52.series.db.beans.parameter.feature.FeatureTemporalParameterEntity")
+//@DiscriminatorValue("temporal")
+//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
 public class FeatureTemporalParameterEntity extends FeatureParameterEntity<TimeRange>
         implements TemporalParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 668796579118721620L;
 
 }

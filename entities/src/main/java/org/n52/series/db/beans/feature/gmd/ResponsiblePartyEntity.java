@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
+import java.io.Serial;
+
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 /**
@@ -26,6 +28,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ResponsiblePartyEntity extends AbstractCiEntity {
 
+    @Serial
     private static final long serialVersionUID = -371431604695988543L;
 
     private String individualName;

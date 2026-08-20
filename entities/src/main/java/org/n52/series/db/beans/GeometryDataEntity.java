@@ -15,11 +15,36 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Embedded;
+import jakarta.persistence.Entity;
+
+import java.io.Serial;
 import java.util.Collection;
 
+@Entity(name = "org.n52.series.db.beans.GeometryDataEntity")
+@DiscriminatorValue("geometry")
 public class GeometryDataEntity extends DataEntity<GeometryEntity> {
 
+    @Serial
     private static final long serialVersionUID = 3759168838980730712L;
+
+    @Embedded
+    @AttributeOverride(name = "geometry", column = @Column(name = "value_geometry"))
+    // @Comment("The geometry value of an observation (GeometryObservation)")
+    private GeometryEntity value;
+
+    @Override
+    public void setValue(GeometryEntity value) {
+        this.value = value;
+    }
+
+    @Override
+    public GeometryEntity getValue() {
+        return value;
+    }
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {

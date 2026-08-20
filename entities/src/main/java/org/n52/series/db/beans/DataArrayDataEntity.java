@@ -15,18 +15,32 @@
  */
 package org.n52.series.db.beans;
 
-import java.util.Set;
+import java.io.Serial;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.DataArrayDataEntity")
+@DiscriminatorValue("dataarray")
 public class DataArrayDataEntity extends CompositeDataEntity {
 
+    @Serial
     private static final long serialVersionUID = -1618516259763515255L;
 
-    private ResultTemplateEntity resultTemplate;
-
+    @Column(name = "value_array", columnDefinition = "text")
+    // @Comment("The textual value of an observation (SweDataArrayObservation))")
     private String stringValue;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_result_template_id", foreignKey = @ForeignKey(name = "fk_result_template"))
+    private ResultTemplateEntity resultTemplate;
 
     /**
      * @return the resultTemplate
@@ -45,11 +59,6 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     public boolean isSetResultTemplate() {
         return getResultTemplate() != null;
-    }
-
-    @Override
-    public void setValue(Set<DataEntity<?>> value) {
-        super.setValue(value);
     }
 
     /**

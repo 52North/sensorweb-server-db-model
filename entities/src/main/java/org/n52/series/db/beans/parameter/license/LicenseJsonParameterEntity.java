@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.license;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.JsonParameterEntity;
 
 /**
@@ -22,6 +24,7 @@ import org.n52.series.db.beans.parameter.JsonParameterEntity;
  */
 public class LicenseJsonParameterEntity extends LicenseParameterEntity<String> implements JsonParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 3300965770609382377L;
 
     @Override

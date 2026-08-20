@@ -13,22 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.MappedSuperclass;
+import org.n52.series.db.beans.HibernateRelations.HasId;
+
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
-import org.n52.series.db.beans.HibernateRelations.HasId;
-
+@MappedSuperclass
 public abstract class IdEntity implements Serializable, HasId {
 
     public static final String PROPERTY_ID = "id";
 
+    @Serial
     private static final long serialVersionUID = 1608995723035752862L;
 
     /**
      * A serial primary key.
      */
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = PROPERTY_ID, nullable = false, updatable = false)
+    // @Comment("PK column of the table")
     private Long id;
 
     @Override

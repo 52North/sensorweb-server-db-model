@@ -15,8 +15,19 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.n52.series.db.beans.HibernateRelations.HasResultEncoding;
 import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
 
@@ -26,6 +37,16 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
  * @since 1.0.0
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.ResultTemplateEntity")
+@Table(name = "result_template",
+        indexes = { @Index(name = "idx_result_template_offering", columnList = "fk_offering_id"),
+                @Index(name = "idx_result_template_phenomenon", columnList = "fk_phenomenon_id"),
+                @Index(name = "idx_result_template_procedure", columnList = "fk_procedure_id"),
+                @Index(name = "idx_result_template_feature", columnList = "fk_feature_id"),
+                @Index(name = "idx_result_template_category", columnList = "fk_category_id"),
+                @Index(name = "idx_result_template_identifier", columnList = "identifier") })
+// table comment: Storage of templates for the result handling operations
+@AttributeOverride(name = "id", column = @Column(name = "result_template_id"))
 public class ResultTemplateEntity extends IdEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
     public static final String PROPERTY_OFFERING = "offering";
@@ -40,29 +61,56 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
 
     public static final String PROPERTY_CATEGORY = "category";
 
+    @Serial
     private static final long serialVersionUID = -8847952458819368733L;
 
-    private PhenomenonEntity phenomenon;
-
-    private OfferingEntity offering;
-
-    private ProcedureEntity procedure;
-
-    private AbstractFeatureEntity<?> feature;
-
-    private CategoryEntity category;
-
-    private String identifier;
-
+    @Transient
     private String domain;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_offering_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_result_template_offering"))
+    private OfferingEntity offering;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_phenomenon_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_result_template_phenomenon"))
+    private PhenomenonEntity phenomenon;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_procedure_id", foreignKey = @ForeignKey(name = "fk_result_template_procedure"))
+    private ProcedureEntity procedure;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_feature_id", foreignKey = @ForeignKey(name = "fk_result_template_feature"))
+    private AbstractFeatureEntity<?> feature;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_category_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_result_template_category"))
+    private CategoryEntity category;
+
+    @Column(name = "identifier", nullable = false)
+    // @Comment("Unique identifier of the result template used for insertion operation")
+    private String identifier;
+
+    @Column(name = "structure", columnDefinition = "text")
+    // @Comment("The structure of the result template, should be a XML encoded swe:DataRecord")
     private String structure;
 
+    @Column(name = "encoding", columnDefinition = "text")
+    // @Comment("The encding of the result template, should be a XML encoded swe:TextEncoding")
     private String encoding;
 
+    @Column(name = "observation_structure", columnDefinition = "text")
+    // @Comment("The structure of the result template used for observations, should be a XML encoded
+    // swe:DataRecord")
     private String observationStructure;
 
-    private String observationsEncoding;
+    @Column(name = "observation_encoding", columnDefinition = "text")
+    // @Comment("The encding of the result template used for observations, should be a XML encoded
+    // swe:TextEncoding")
+    private String observationEncoding;
 
     public ResultTemplateEntity() {
     }
@@ -192,11 +240,11 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     }
 
     public String getObservationEncoding() {
-        return this.observationsEncoding;
+        return this.observationEncoding;
     }
 
     public void setObservationEncoding(String observationsEncoding) {
-        this.observationsEncoding = observationsEncoding;
+        this.observationEncoding = observationsEncoding;
     }
 
     public boolean isSetObservationEncoding() {

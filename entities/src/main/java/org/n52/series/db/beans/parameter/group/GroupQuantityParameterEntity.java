@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.parameter.group;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Map;
 
@@ -29,6 +30,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class GroupQuantityParameterEntity extends GroupParameterEntity<BigDecimal> implements QuantityParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 7528516075676290716L;
 
     private UnitEntity unit;

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Date;
 
 import org.n52.series.db.common.Utils;
@@ -24,6 +25,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class SamplingGeometryEntity extends IdEntity {
 
+    @Serial
     private static final long serialVersionUID = -3036211037882973515L;
 
     private Date timestamp;

@@ -15,10 +15,24 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.sta.LicenseEntity;
 
+//@Entity(name = "org.n52.series.db.beans.i18n.I18nLicenseEntity")
+//@Table(name = "license_i18n", indexes = @Index(name = "idx_license_i18n_license", columnList = "fk_license_id"))
+//@AttributeOverride(name = "id", column = @Column(name = "license_i18n_id"))
+//@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_license_id", nullable = false))
 public class I18nLicenseEntity extends I18nEntity<LicenseEntity> {
 
+    @Serial
     private static final long serialVersionUID = -4934084508058855199L;
 
 }

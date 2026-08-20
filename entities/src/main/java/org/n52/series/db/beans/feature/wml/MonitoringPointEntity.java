@@ -13,9 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.feature.wml;
 
 import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
+
+import java.io.Serial;
 
 /**
  * Hibernate entiity for the WaterML MonitoringPoint
@@ -23,8 +26,11 @@ import org.n52.series.db.beans.feature.AbstractMonitoringFeature;
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
+// entity registration (name, secondary table, discriminator value) now happens
+// in orm/feature/wml-monitoring-point.orm.xml
 public class MonitoringPointEntity extends AbstractMonitoringFeature {
 
+    @Serial
     private static final long serialVersionUID = -7745394070855227473L;
 
 }

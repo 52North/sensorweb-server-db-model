@@ -15,24 +15,33 @@
  */
 package org.n52.series.db.beans.parameter.feature;
 
+import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
+//@Entity(name = "org.n52.series.db.beans.parameter.feature.FeatureComplexParameterEntity")
+//@DiscriminatorValue("complex")
+//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
 public class FeatureComplexParameterEntity extends FeatureParameterEntity<Set<FeatureParameterEntity<?>>>
         implements ComplexParameterEntity<Set<FeatureParameterEntity<?>>> {
 
+    @Serial
     private static final long serialVersionUID = -5166758396873257962L;
 
     @Override
     public Set<FeatureParameterEntity<?>> getValue() {
-        return super.getValue();
+        return null;
     }
 
     @Override
     public void setValue(Set<FeatureParameterEntity<?>> value) {
-        super.setValue(value);
+
     }
 
     @Override

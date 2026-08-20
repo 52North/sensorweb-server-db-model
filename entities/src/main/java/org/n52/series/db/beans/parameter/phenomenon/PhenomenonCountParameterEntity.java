@@ -15,19 +15,40 @@
  */
 package org.n52.series.db.beans.parameter.phenomenon;
 
+import java.io.Serial;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.CountParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@Entity(name = "org.n52.series.db.beans.parameter.phenomenon.PhenomenonCountParameterEntity")
+@DiscriminatorValue("count")
 public class PhenomenonCountParameterEntity extends PhenomenonParameterEntity<Integer>
         implements CountParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = -7778025481981408886L;
+
+    @Column(name = "value_count")
+    private Integer value;
 
     @Override
     public String getValueAsString() {
         return isSetValue() ? getValue().toString() : null;
+    }
+
+    @Override
+    public Integer getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Integer value) {
+        this.value = value;
     }
 
 }

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class AssessmentTypeEntity implements Serializable {
@@ -23,6 +24,7 @@ public class AssessmentTypeEntity implements Serializable {
 
     public static final String PROPERTY_ASSESSMENT_TYPE = PROPERTY_ID;
 
+    @Serial
     private static final long serialVersionUID = 1721670905098408954L;
 
     private String assessmentType;

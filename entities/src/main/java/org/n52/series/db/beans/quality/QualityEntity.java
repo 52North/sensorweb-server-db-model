@@ -21,9 +21,12 @@ import org.n52.series.db.beans.HibernateRelations.HasUnitValue;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public abstract class QualityEntity<T> extends DescribableEntity implements HasUnitValue<T> {
 
+    @Serial
     private static final long serialVersionUID = 4794651765162321131L;
     private UnitEntity unit;
 

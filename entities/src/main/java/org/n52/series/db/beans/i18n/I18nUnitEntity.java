@@ -15,10 +15,27 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.UnitEntity;
 
+@Entity(name = "org.n52.series.db.beans.i18n.I18nUnitEntity")
+@Table(name = "unit_i18n", indexes = @Index(name = "idx_unit_i18n_unit", columnList = "fk_unit_id"))
+@AttributeOverrides({ @AttributeOverride(name = "id", column = @Column(name = "unit_i18n_id")),
+        @AttributeOverride(name = "description",
+                column = @Column(name = "unit_i18n_id", insertable = false, updatable = false)) })
+@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_unit_id", nullable = false))
 public class I18nUnitEntity extends I18nEntity<UnitEntity> {
 
+    @Serial
     private static final long serialVersionUID = -611501137242466095L;
 
     // re-uses existing i18n logic

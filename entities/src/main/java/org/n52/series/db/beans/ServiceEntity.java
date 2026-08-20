@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.Collection;
@@ -23,28 +24,49 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
+import org.hibernate.annotations.ColumnDefault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class ServiceEntity extends DescribableEntity {
+// Conditional Entity based on *.orm.xml mapping. Only mapped if specific SOS Profiles are active
+@AttributeOverride(name = "id", column = @Column(name = "service_id"))
+@AttributeOverride(name = "staIdentifier",
+        column = @Column(name = "identifier", insertable = false, updatable = false))
+public class ServiceEntity extends AbstractCodespaceEntity {
 
+    @Serial
     private static final long serialVersionUID = 8926184900932191238L;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(ServiceEntity.class);
 
+    @Column(name = "url", columnDefinition = "text")
+    // @Comment("The url of the service")
     private String url;
 
+    @Column(name = "type")
+    // @Comment("The type of the service")
     private String type = "RESTful series data access layer.";
 
-    private List<String> noDataValues = new LinkedList<>();
-
+    @Column(name = "version")
+    // @Comment("The version of the service")
     private String version;
 
-    private boolean supportsFirstLast = true;
-
+    @Column(name = "connector")
+    // @Comment("The connector of the service.")
     private String connector;
 
+    @Column(name = "is_supports_first_last", nullable = false)
+    @ColumnDefault("true")
+    // @Comment("Flag that indicates if this service supports first/last observation queries")
+    private boolean supportsFirstLast;
+
+    @Embedded
     private ServiceMetadataEntity serviceMetadata;
+
+    private List<String> noDataValues = new LinkedList<>();
 
     private Set<BigDecimal> quantityNoDataValues = new LinkedHashSet<>();
 
@@ -137,10 +159,10 @@ public class ServiceEntity extends DescribableEntity {
     }
 
     private boolean checkNoDataValue(DataEntity<?> observation) {
-        if (observation instanceof QuantityDataEntity) {
-            return ((QuantityDataEntity) observation).checkNoDataValue(quantityNoDataValues);
-        } else if (observation instanceof CountDataEntity) {
-            return ((CountDataEntity) observation).checkNoDataValue(countNoDataValues);
+        if (observation instanceof QuantityDataEntity entity1) {
+            return entity1.checkNoDataValue(quantityNoDataValues);
+        } else if (observation instanceof CountDataEntity entity) {
+            return entity.checkNoDataValue(countNoDataValues);
         }
         return observation.isNoDataValue(noDataValues);
     }

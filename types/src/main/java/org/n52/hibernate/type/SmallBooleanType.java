@@ -13,53 +13,21 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.hibernate.type;
 
-import java.io.Serializable;
-
-import org.hibernate.dialect.Dialect;
 import org.hibernate.type.AbstractSingleColumnStandardBasicType;
-import org.hibernate.type.DiscriminatorType;
-import org.hibernate.type.PrimitiveType;
-import org.hibernate.type.descriptor.java.BooleanTypeDescriptor;
-import org.hibernate.type.descriptor.sql.SmallIntTypeDescriptor;
+import org.hibernate.type.descriptor.java.BooleanJavaType;
+import org.hibernate.type.descriptor.jdbc.SmallIntJdbcType;
 
-public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Boolean>
-        implements PrimitiveType<Boolean>, DiscriminatorType<Boolean> {
-
-    public static final SmallBooleanType INSTANCE = new SmallBooleanType();
-
-    private static final long serialVersionUID = 5426388285620763702L;
-
-    private String name = "small_boolean";
+public class SmallBooleanType extends AbstractSingleColumnStandardBasicType<Boolean> {
 
     public SmallBooleanType() {
-        super(new SmallIntTypeDescriptor(), BooleanTypeDescriptor.INSTANCE);
+        super(SmallIntJdbcType.INSTANCE, BooleanJavaType.INSTANCE);
     }
 
     @Override
     public String getName() {
-        return name;
+        return "small_boolean";
     }
-
-    @Override
-    public Class<?> getPrimitiveClass() {
-        return Boolean.class;
-    }
-
-    @Override
-    public Serializable getDefaultValue() {
-        return Boolean.FALSE;
-    }
-
-    @Override
-    public Boolean stringToObject(String string) {
-        return fromString(string);
-    }
-
-    @Override
-    public String objectToSQLString(Boolean value, Dialect dialect) {
-        return value ? "1" : "0";
-    }
-
 }

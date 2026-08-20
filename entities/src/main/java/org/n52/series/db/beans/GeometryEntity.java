@@ -15,9 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.StringJoiner;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Transient;
 import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.Envelope;
 import org.locationtech.jts.geom.Geometry;
@@ -27,6 +30,7 @@ import org.locationtech.jts.geom.Polygon;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Embeddable
 public class GeometryEntity implements Serializable {
 
     public static final String PROPERTY_GEOMETRY = "geometry";
@@ -35,18 +39,24 @@ public class GeometryEntity implements Serializable {
     public static final String PROPERTY_ALT = "alt";
     public static final String PROPERTY_SRID = "srid";
 
+    @Serial
     private static final long serialVersionUID = -1411829809704409439L;
 
+    @Transient
     private GeometryFactory geometryFactory = new GeometryFactory();
 
     private Geometry geometry;
 
+    @Transient
     private Double lon;
 
+    @Transient
     private Double lat;
 
+    @Transient
     private Double alt;
 
+    @Transient
     private int srid;
 
     public boolean isSetGeometry() {

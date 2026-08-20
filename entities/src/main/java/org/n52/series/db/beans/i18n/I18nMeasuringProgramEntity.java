@@ -15,11 +15,26 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.sampling.MeasuringProgramEntity;
 
+//@Entity(name = "org.n52.series.db.beans.i18n.I18nMeasuringProgramEntity")
+//@Table(name = "measuring_program_i18n",
+//        indexes = @Index(name = "idx_measuring_program_i18n_measuring_program",
+//                columnList = "fk_measuring_program_id"))
+//@AttributeOverride(name = "id", column = @Column(name = "measuring_program_i18n_id"))
+//@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_measuring_program_id", nullable = false))
 public class I18nMeasuringProgramEntity extends I18nEntity<MeasuringProgramEntity> {
 
+    @Serial
     private static final long serialVersionUID = 6723784868565645349L;
 
-    // serves for clear distinction
 }

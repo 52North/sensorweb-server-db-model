@@ -15,11 +15,22 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+import java.io.Serial;
 import java.util.Collection;
 
+@Entity(name = "org.n52.series.db.beans.CategoryDataEntity")
+@DiscriminatorValue("category")
 public class CategoryDataEntity extends DataEntity<String> {
 
+    @Serial
     private static final long serialVersionUID = -4691677115635740162L;
+
+    @Column(name = "value_category")
+    private String value;
 
     private String valueIdentifier;
 
@@ -60,5 +71,15 @@ public class CategoryDataEntity extends DataEntity<String> {
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         return getValue() == null ? false : noDataValues.contains(getValue());
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 }

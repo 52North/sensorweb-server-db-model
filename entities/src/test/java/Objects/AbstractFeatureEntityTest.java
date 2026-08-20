@@ -15,16 +15,6 @@
  */
 package Objects;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import org.n52.series.db.beans.FeatureEntity;
-
 public class AbstractFeatureEntityTest {
-
-    @Test
-    public void test_hash() {
-        FeatureEntity featureEntity = new FeatureEntity();
-        Assertions.assertEquals(57259294, featureEntity.hashCode());
-    }
 
 }

@@ -15,24 +15,26 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.n52.series.db.beans.AbstractCodespaceEntity;
 import org.n52.series.db.beans.AbstractDatasetEntity;
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.PlatformEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class PartyEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
+public class PartyEntity extends AbstractCodespaceEntity implements Serializable, HibernateRelations.HasName,
         HibernateRelations.HasDescription, HibernateRelations.HasAbstractDatasets,
         StaRelations.HasPlatforms<PartyEntity>, StaRelations.HasGroups<PartyEntity> {
 
     public static final String PROPERTY_DISPLAY_NAME = "displayName";
     public static final String PROPERTY_ROLE = "role";
 
+    @Serial
     private static final long serialVersionUID = -7546755723749812564L;
 
     private RolePartyCode role = RolePartyCode.individual;

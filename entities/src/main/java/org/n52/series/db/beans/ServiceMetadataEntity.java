@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.io.Serializable;
 
 public class ServiceMetadataEntity implements Serializable {
 
+    @Serial
     private static final long serialVersionUID = -7921433199814370067L;
     private String metadata;
     private String format;

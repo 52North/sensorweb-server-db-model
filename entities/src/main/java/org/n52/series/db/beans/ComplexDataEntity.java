@@ -15,15 +15,19 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+
+import java.io.Serial;
 import java.util.Set;
 
+@Entity(name = "org.n52.series.db.beans.ComplexDataEntity")
+@DiscriminatorValue("complex")
 public class ComplexDataEntity extends CompositeDataEntity {
 
+    @Serial
     private static final long serialVersionUID = 2206385928964743369L;
-
-    @Override
-    public void setValue(Set<DataEntity<?>> value) {
-        super.setValue(value);
-    }
 
 }

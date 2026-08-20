@@ -15,18 +15,39 @@
  */
 package org.n52.series.db.beans.parameter.dataset;
 
+import java.io.Serial;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.XmlParameterEntity;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
+@Entity(name = "org.n52.series.db.beans.parameter.dataset.DatasetXmlParameterEntity")
+@DiscriminatorValue("xml")
 public class DatasetXmlParameterEntity extends DatasetParameterEntity<String> implements XmlParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 1209102870245642049L;
+
+    @Column(name = "value_xml")
+    private String value;
 
     @Override
     public String getValueAsString() {
         return getValue();
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 
 }

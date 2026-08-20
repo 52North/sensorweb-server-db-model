@@ -21,6 +21,8 @@ import org.n52.series.db.beans.sta.ProjectEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
@@ -29,6 +31,7 @@ public abstract class ProjectParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_GROUP = "project";
     public static final String PROP_GROUP_ID = "projectId";
+    @Serial
     private static final long serialVersionUID = 1123453212836718013L;
     private ProjectEntity project;
     private Long projectId;
@@ -52,5 +55,15 @@ public abstract class ProjectParameterEntity<T> extends ParameterEntity<T> {
     @Override
     public void setDescribeableEntity(DescribableEntity entity) {
         setProject((ProjectEntity) entity);
+    }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
     }
 }

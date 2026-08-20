@@ -15,50 +15,46 @@
  */
 package org.n52.series.db.beans;
 
-public abstract class AbstractRelationEntity<T> extends IdEntity {
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+
+import java.io.Serial;
+
+@MappedSuperclass
+public abstract class AbstractRelationEntity<T> {
 
     public static final String PROPERTY_ITEM = "item";
     public static final String PROPERTY_RELATED_ITEM = "relatedItem";
 
-    private static final long serialVersionUID = -2573767006446257428L;
-
-    private T item;
-
-    private T relatedItem;
-
+    @Column(name = "role")
+    // @Comment("Definition of the role of the relation")
     private String role;
 
+    @Column(name = "url")
+    // @Comment("URL that point to external information")
     private String relatedUrl;
 
     /**
      * @return the item
      */
-    public T getItem() {
-        return item;
-    }
+    public abstract T getItem();
 
     /**
      * @param item
      *            the item to set
      */
-    public void setItem(T item) {
-        this.item = item;
-    }
+    public abstract void setItem(T item);
 
     /**
      * @return the relatedItem
      */
-    public T getRelatedItem() {
-        return relatedItem;
-    }
+    public abstract T getRelatedItem();
 
     /**
      * @param relatedItem
      *            the relatedItem to set
      */
-    public void setRelatedItem(T relatedItem) {
-        this.relatedItem = relatedItem;
-    }
+    public abstract void setRelatedItem(T relatedItem);
 
     /**
      * @return the role

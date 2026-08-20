@@ -10,3 +10,7 @@ codegen/console.log
 .idea/*
 *.iml
 *.checkstyle
+.clawdea/REPO_STATE.md
+
+## local, credential-bearing config
+db.properties

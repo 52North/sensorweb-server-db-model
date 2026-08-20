@@ -15,11 +15,29 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.sta.LocationEntity;
 
+@Entity(name = "org.n52.series.db.beans.i18n.I18nLocationEntity")
+@Table(name = "location_i18n", indexes = @Index(name = "idx_location_i18n_location", columnList = "fk_location_id"))
+@AttributeOverride(name = "id", column = @Column(name = "location_i18n_id"))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_location_id", nullable = false, insertable = false, updatable = false))
 public class I18nLocationEntity extends I18nEntity<LocationEntity> {
 
+    @Serial
     private static final long serialVersionUID = 1667966645309819316L;
+
+    @Column(name = "location", columnDefinition = "text")
     private String location;
 
     public String getLocation() {
