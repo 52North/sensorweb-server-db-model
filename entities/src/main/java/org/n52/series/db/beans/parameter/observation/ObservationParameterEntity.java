@@ -17,7 +17,6 @@ package org.n52.series.db.beans.parameter.observation;
 
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
-import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -58,7 +57,7 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
     private static final long serialVersionUID = -3170715124801725482L;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "fk_observation_id", nullable = false,
+    @JoinColumn(name = "fk_observation_id", nullable = false, insertable = false, updatable = false,
             foreignKey = @ForeignKey(name = "fk_param_observation_id"))
     private DataEntity observation;
 

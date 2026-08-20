@@ -13,18 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
-import java.io.Serial;
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.LinkedHashSet;
-import java.util.Objects;
-import java.util.Set;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -37,7 +31,6 @@ import jakarta.persistence.Index;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -47,12 +40,8 @@ import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DiscriminatorOptions;
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.Formula;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.SqlTypes;
+import org.hibernate.annotations.SQLRestriction;
 import org.n52.series.db.beans.HibernateRelations.HasDataset;
 import org.n52.series.db.beans.HibernateRelations.HasFeature;
 import org.n52.series.db.beans.HibernateRelations.HasParameters;
@@ -63,14 +52,22 @@ import org.n52.series.db.beans.HibernateRelations.IsNoDataValue;
 import org.n52.series.db.beans.HibernateRelations.IsProcessed;
 import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.ereporting.EReportingProfileDataEntity;
+import org.n52.series.db.beans.i18n.I18nDataEntity;
+import org.n52.series.db.beans.i18n.I18nEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.observation.ObservationParameterEntity;
 import org.n52.series.db.beans.quality.QualityEntity;
 import org.n52.series.db.beans.sampling.SamplingProfileDataEntity;
-import org.n52.series.db.beans.sta.GroupEntity;
-import org.n52.series.db.beans.sta.RelationEntity;
-import org.n52.series.db.beans.sta.StaRelations;
 import org.n52.series.db.common.Utils;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.Serial;
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Comparator;
+import java.util.Date;
+import java.util.LinkedHashSet;
+import java.util.Objects;
+import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 @Entity(name = "org.n52.series.db.beans.DataEntity")
@@ -98,7 +95,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @DiscriminatorColumn(name = "value_type")
 @DiscriminatorOptions(force = true)
 @AttributeOverride(name = "id", column = @Column(name = "observation_id"))
-public abstract class DataEntity<T> extends DescribableEntity
+public abstract class DataEntity<T> extends AbstractCodespaceEntity
         implements Comparable<DataEntity<T>>, Serializable, HasPhenomenonTime, IsStaEntity, HasResultTime,
         HasValidTime, HasParameters, HasDataset, HasFeature, IsProcessed, IsNoDataValue {
 
@@ -156,6 +153,9 @@ public abstract class DataEntity<T> extends DescribableEntity
     @JoinColumn(name = "fk_dataset_id", nullable = false, foreignKey = @ForeignKey(name = "fk_dataset"))
     private DatasetEntity dataset;
 
+    @Column(name = "fk_dataset_id", insertable = false, updatable = false)
+    private Long datasetId;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sampling_time_start", nullable = false, length = 29)
     // @Comment("The timestamp when the observation period has started or the observation took place. In the
@@ -174,9 +174,8 @@ public abstract class DataEntity<T> extends DescribableEntity
     // and sampling_time_end.")
     private Date resultTime;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_deleted", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     // @Comment("Flag that indicates if this observation is deleted")
     private boolean deleted;
 
@@ -193,9 +192,11 @@ public abstract class DataEntity<T> extends DescribableEntity
     private Date validTimeEnd;
 
     @Embedded
+    @AttributeOverride(name = "geometry", column = @Column(name = "sampling_geometry"))
     private GeometryEntity geometryEntity;
 
-    @OneToMany(mappedBy = "observation", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = RelatedDataEntity.PROPERTY_OBSERVATION, fetch = FetchType.LAZY, cascade = CascadeType.ALL,
+            orphanRemoval = true)
     private Set<RelatedDataEntity> relatedObservations;
 
     @Column(name = "value_identifier")
@@ -210,12 +211,12 @@ public abstract class DataEntity<T> extends DescribableEntity
     // @Comment("Identifier of the description. E.g. used in OGC SWE encoded values like SweText")
     private String valueDescription;
 
-    @Column(name = "vertical_from", nullable = false)
+    @Column(name = "vertical_from", nullable = false, precision = 20, scale = 10)
     @ColumnDefault("0")
     // @Comment("The start level of a vertical observation, required for profile observations")
     private BigDecimal verticalFrom = NOT_SET_VERTICAL;
 
-    @Column(name = "vertical_to", nullable = false)
+    @Column(name = "vertical_to", nullable = false, precision = 20, scale = 10)
     @ColumnDefault("0")
     // @Comment("The end level or the level of a vertical observation, required for profile observations")
     private BigDecimal verticalTo = NOT_SET_VERTICAL;
@@ -225,27 +226,9 @@ public abstract class DataEntity<T> extends DescribableEntity
     // complex or swedataarray observations.")
     private Long parent;
 
-    @Embedded
-    private EReportingProfileDataEntity ereportingProfile;
-
-    @Column(name = "value_quantity", insertable = false, updatable = false)
-    private BigDecimal valueQuantity;
-
-    @Column(name = "value_text", insertable = false, updatable = false)
-    private String valueText;
-
-    @Column(name = "value_count", insertable = false, updatable = false)
-    private Integer valueCount;
-
-    @Column(name = "value_category", insertable = false, updatable = false)
-    private String valueCategory;
-
-    @JdbcTypeCode(SqlTypes.SMALLINT)
-    @Column(name = "value_boolean", insertable = false, updatable = false)
-    private Boolean valueBoolean;
-
     @Transient
-    private T value;
+    // not supported yet
+    private EReportingProfileDataEntity ereportingProfile;
 
     @Transient
     private DetectionLimitEntity detectionLimit;
@@ -258,7 +241,26 @@ public abstract class DataEntity<T> extends DescribableEntity
     @Transient
     private Set<QualityEntity<?>> qualities = new LinkedHashSet<>();
 
+    @Transient
     private boolean processed;
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = ObservationParameterEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_observation_id", nullable = false,
+            foreignKey = @ForeignKey(name = "fk_param_observation_id"))
+    @SQLRestriction("fk_parent_parameter_id is null")
+    public Set<ParameterEntity<?>> getParameters() {
+        return super.getParameters();
+    }
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = I18nDataEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_observation_id", nullable = false, foreignKey = @ForeignKey(name = "fk_observation"))
+    public Set<I18nEntity<? extends Describable>> getTranslations() {
+        return super.getTranslations();
+    }
 
     /**
      * @return the samplingTimeStart
@@ -298,13 +300,9 @@ public abstract class DataEntity<T> extends DescribableEntity
         this.samplingTimeEnd = Utils.createUnmutableTimestamp(samplingTimeEnd);
     }
 
-    public T getValue() {
-        return value;
-    }
+    public abstract T getValue();
 
-    public void setValue(final T value) {
-        this.value = value;
-    }
+    public abstract void setValue(final T value);
 
     public boolean hasValue() {
         return getValue() != null;
@@ -517,46 +515,6 @@ public abstract class DataEntity<T> extends DescribableEntity
         return getEreportingProfile() != null;
     }
 
-    public Boolean getValueBoolean() {
-        return valueBoolean;
-    }
-
-    public void setValueBoolean(Boolean valueBoolean) {
-        this.valueBoolean = valueBoolean;
-    }
-
-    public String getValueText() {
-        return valueText;
-    }
-
-    public void setValueText(String valueText) {
-        this.valueText = valueText;
-    }
-
-    public BigDecimal getValueQuantity() {
-        return valueQuantity;
-    }
-
-    public void setValueQuantity(BigDecimal valueQuantity) {
-        this.valueQuantity = valueQuantity;
-    }
-
-    public String getValueCategory() {
-        return valueCategory;
-    }
-
-    public void setValueCategory(String valueCategory) {
-        this.valueCategory = valueCategory;
-    }
-
-    public Integer getValueCount() {
-        return valueCount;
-    }
-
-    public void setValueCount(Integer valueCount) {
-        this.valueCount = valueCount;
-    }
-
     @Override
     public AbstractFeatureEntity<?> getFeature() {
         return feature != null ? feature : getDataset().getFeature();
@@ -621,6 +579,14 @@ public abstract class DataEntity<T> extends DescribableEntity
     @Override
     public void setProcessed(boolean processed) {
         this.processed = processed;
+    }
+
+    public Long getDatasetId() {
+        return datasetId;
+    }
+
+    public void setDatasetId(Long datasetId) {
+        this.datasetId = datasetId;
     }
 
     @Override

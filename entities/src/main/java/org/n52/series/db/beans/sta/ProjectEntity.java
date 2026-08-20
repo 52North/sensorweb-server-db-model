@@ -20,15 +20,15 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import org.n52.series.db.beans.AbstractCodespaceEntity;
 import org.n52.series.db.beans.AbstractDatasetEntity;
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.sta.StaRelations.StaPlusTime;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class ProjectEntity extends DescribableEntity implements Serializable, HibernateRelations.HasName,
+public class ProjectEntity extends AbstractCodespaceEntity implements Serializable, HibernateRelations.HasName,
         HibernateRelations.HasDescription, StaPlusTime<ProjectEntity>, HibernateRelations.HasAbstractDatasets {
     public static final String PROPERTY_URL = "url";
     public static final String PROPERTY_CLASSIFICATION = "classification";

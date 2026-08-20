@@ -50,8 +50,13 @@ public class FeatureEntity extends AbstractFeatureEntity<FeatureEntity> {
     }
 
     @Override
-    @ManyToMany(mappedBy = "parents", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @Access(AccessType.PROPERTY)
+    @JoinTable(name = "feature_hierarchy",
+            joinColumns = @JoinColumn(name = "fk_parent_feature_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_feature_parent")),
+            inverseJoinColumns = @JoinColumn(name = "fk_child_feature_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_feature_child")))
     public Set<FeatureEntity> getChildren() {
         return super.getChildren();
     }

@@ -30,9 +30,4 @@ public class ProfileDataEntity extends CompositeDataEntity {
     @Serial
     private static final long serialVersionUID = -7431276500677067329L;
 
-    @Override
-    public void setValue(Set<DataEntity<?>> value) {
-        super.setValue(value);
-    }
-
 }

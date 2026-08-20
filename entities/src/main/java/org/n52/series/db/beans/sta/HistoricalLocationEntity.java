@@ -30,10 +30,11 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.IdEntity;
+import org.n52.series.db.beans.IdentifiableEntity;
 import org.n52.series.db.beans.PlatformEntity;
 import org.n52.series.db.beans.sta.StaRelations.HasLocations;
 import org.n52.series.db.common.Utils;
@@ -58,8 +59,9 @@ import java.util.Set;
 @AttributeOverride(name = "id", column = @Column(name = "historical_location_id"))
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class HistoricalLocationEntity extends DescribableEntity implements Serializable,
-        HasLocations<HistoricalLocationEntity>, HibernateRelations.IsProcessed, HibernateRelations.HasThing {
+public class HistoricalLocationEntity extends IdentifiableEntity
+        implements Serializable, HasLocations<HistoricalLocationEntity>, HibernateRelations.IsProcessed,
+        HibernateRelations.HasThing, HibernateRelations.IsStaEntity {
 
     public static final String PROPERTY_IDENTIFIER = "identifier";
     public static final String PROPERTY_TIME = "time";
@@ -75,13 +77,14 @@ public class HistoricalLocationEntity extends DescribableEntity implements Seria
             foreignKey = @ForeignKey(name = "fk_platform_historical_location"))
     private PlatformEntity platform;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = LocationEntity.PROPERTY_HISTORICAL_LOCATIONS, fetch = FetchType.LAZY)
     private Set<LocationEntity> locations;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "time", nullable = false, length = 29)
     private Date time;
 
+    @Transient
     private boolean processed;
 
     public Date getTime() {

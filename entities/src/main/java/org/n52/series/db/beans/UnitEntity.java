@@ -27,10 +27,11 @@ import java.io.Serial;
 @Entity(name = "org.n52.series.db.beans.UnitEntity")
 @Table(name = "unit", uniqueConstraints = @UniqueConstraint(name = "un_unit_symbol", columnNames = { "symbol" }))
 // table comment: Storage of the units of measurement of the observation values. These may be °C or m as the
-// unit for
-// depth/height information.
+// unit for depth/height information.
 @AttributeOverride(name = "id", column = @Column(name = "unit_id"))
-@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
+@AttributeOverride(name = "identifier", column = @Column(name = "symbol"))
+@AttributeOverride(name = "staIdentifier", column = @Column(name = "symbol", insertable = false, updatable = false))
+@AttributeOverride(name = "description", column = @Column(name = "symbol", insertable = false, updatable = false))
 public class UnitEntity extends DescribableEntity {
 
     public static final String PROPERTY_UNIT = PROPERTY_IDENTIFIER;
@@ -41,6 +42,10 @@ public class UnitEntity extends DescribableEntity {
     @Column(name = "link")
     // @Comment("Link/reference to an external description of the unit, e.g. to a vocabulary..")
     private String link;
+
+    @Column(name = "symbol", insertable = false, updatable = false)
+    // @Comment("Link/reference to an external description of the unit, e.g. to a vocabulary..")
+    private String symbol;
 
     /**
      * @return the link

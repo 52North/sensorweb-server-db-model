@@ -13,6 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
 import jakarta.persistence.AttributeOverride;
@@ -27,8 +28,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MapsId;
 import jakarta.persistence.Table;
 
-import java.io.Serial;
-
 @Entity(name = "org.n52.series.db.beans.RelatedDataEntity")
 @Table(name = "related_observation",
         indexes = {
@@ -38,6 +37,9 @@ import java.io.Serial;
 // provide context
 @AttributeOverride(name = "id", column = @Column(name = "procedure_id"))
 public class RelatedDataEntity extends AbstractRelationEntity<DataEntity<?>> {
+
+    public static final String PROPERTY_OBSERVATION = "observation";
+    public static final String PROPERTY_RELATED_OBSERVATION = "relatedObservation";
 
     @EmbeddedId
     private RelatedDataPK id = new RelatedDataPK();

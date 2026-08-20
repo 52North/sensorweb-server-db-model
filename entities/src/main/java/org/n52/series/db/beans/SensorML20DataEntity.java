@@ -15,11 +15,9 @@
  */
 package org.n52.series.db.beans;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.Lob;
 
 import java.io.Serial;
 import java.util.Collection;
@@ -37,6 +35,16 @@ public class SensorML20DataEntity extends DataEntity<String> {
     @Column(name = "value_array", columnDefinition = "text")
     // @Comment("The XML representation of the SensorML20 Observation (SensorML20Observation)")
     private String value;
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {

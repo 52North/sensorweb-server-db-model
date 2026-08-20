@@ -39,7 +39,8 @@ import java.util.Set;
 @Table(name = "category", indexes = @Index(name = "idx_category_identifier", columnList = "identifier"),
         uniqueConstraints = @UniqueConstraint(name = "un_category_identifier", columnNames = { "identifier" }))
 @AttributeOverride(name = "id", column = @Column(name = "category_id"))
-@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
+@AttributeOverride(name = "staIdentifier",
+        column = @Column(name = "identifier", insertable = false, updatable = false))
 public class CategoryEntity extends DescribableEntity {
 
     @Serial

@@ -17,7 +17,6 @@
 package org.n52.series.db.beans;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
@@ -78,8 +77,8 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     @Enumerated(EnumType.STRING)
     @Column(name = "dataset_type", nullable = false)
     @ColumnDefault("'not_initialized'")
-    @Check(constraints = "dataset_type in ('individualObservation', 'sampling', 'timeseries', 'profile', "
-            + "'trajectory', 'not_initialized')")
+    @Check(constraints = "dataset_type in ('individualObservation', 'timeseries', 'profile', 'trajectory', "
+            + "'not_initialized')")
     // @Comment("Indicator whether the dataset provides individualObservation (individual observations),
     // timeseries
     // (timeseries obervations) or trajectories (trajectory observations).")
@@ -106,47 +105,40 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     // .g. link to a source, photo, video)")
     private ValueType valueType;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_deleted", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     // @Comment("Flag that indicates if this dataset is deleted")
     private boolean deleted;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_disabled", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     // @Comment("Flag that indicates if this dataset is disabled for insertion of new data")
     private boolean disabled;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_published", nullable = false)
-    @ColumnDefault("1")
+    @ColumnDefault("true")
     // @Comment("Flag that indicates if this dataset should be published")
     private boolean published;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_mobile", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     // @Comment("Flag that indicates if the procedure is mobile (1/true) or stationary (0/false).")
     private boolean mobile;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_insitu", nullable = false)
-    @ColumnDefault("1")
+    @ColumnDefault("true")
     // @Comment("Flag that indicates if the procedure is insitu (1/true) or remote (0/false).")
     private boolean insitu = true;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_hidden", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     // @Comment("Flag that indicates if this dataset should be hidden, e.g. for sub-datasets of a complex
     // datasets")
     private boolean hidden;
 
     @Column(name = "origin_timezone", length = 40)
     // @Comment("Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id
-    // (CET)
-    // or full name (Europe/Berlin). It no time zone is defined, UTC would be used as default.")
+    // (CET) or full name (Europe/Berlin). It no time zone is defined, UTC would be used as default.")
     private String originTimezone;
 
     @Column(name = "decimals")
@@ -168,8 +160,7 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     @JoinColumn(name = "fk_value_profile_id", foreignKey = @ForeignKey(name = "fk_value_profile"))
     private VerticalMetadataEntity verticalMetadata;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
-    @Formula("1")
+    @Formula("false")
     private boolean ereportingProfile;
 
     @ManyToMany(fetch = FetchType.LAZY)

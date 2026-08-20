@@ -13,8 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.sta;
 
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 import jakarta.persistence.AttributeOverride;
@@ -27,11 +29,11 @@ import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.SQLRestriction;
 import org.locationtech.jts.geom.Geometry;
@@ -42,8 +44,6 @@ import org.n52.series.db.beans.GeometryEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.PlatformEntity;
-
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.i18n.I18nLocationEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
@@ -83,14 +83,14 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
     private String location;
 
     @Embedded
+    @AttributeOverride(name = "geometry", column = @Column(name = "geom"))
     private GeometryEntity geometryEntity;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "fk_format_id", nullable = false, foreignKey = @ForeignKey(name = "fk_location_format"))
     private FormatEntity locationEncoding;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    // TODO mappedBy = "<owning field on the other entity>"
+    @ManyToMany(mappedBy = PlatformEntity.PROPERTY_LOCATIONS, fetch = FetchType.LAZY)
     private Set<PlatformEntity> platforms;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -118,6 +118,7 @@ public class LocationEntity extends DescribableEntity implements Serializable, H
         return super.getTranslations();
     }
 
+    @Transient
     private boolean processed;
 
     public FormatEntity getLocationEncoding() {

@@ -15,7 +15,6 @@
  */
 package org.n52.series.db.beans;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -27,11 +26,24 @@ import java.util.Collection;
 @DiscriminatorValue("bool")
 public class BooleanDataEntity extends DataEntity<Boolean> {
 
+    @Column(name = "value_boolean")
+    private Boolean value;
+
     @Serial
     private static final long serialVersionUID = -8729150886271878177L;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         return getValue() == null ? false : noDataValues.contains(getValue().toString());
+    }
+
+    @Override
+    public Boolean getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Boolean value) {
+        this.value = value;
     }
 }

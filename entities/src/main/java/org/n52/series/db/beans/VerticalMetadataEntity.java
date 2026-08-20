@@ -49,22 +49,21 @@ public class VerticalMetadataEntity extends IdEntity {
     @Serial
     private static final long serialVersionUID = 3156288491348980598L;
 
-    @Column(name = "orientation", nullable = false)
+    @Column(name = "orientation")
     // @Comment("The \"orientation\" of the vertical values as integer. 1 => above verticalOriginName and -1
-    // => below
-    // verticalOriginName") // Hibernate 6.2+
+    // => below verticalOriginName")
     private Short orientation;
 
     @Column(name = "vertical_origin_name")
-    // @Comment("The vertical origin name of the vertical values, e.g. water surface") // Hibernate 6.2+
+    // @Comment("The vertical origin name of the vertical values, e.g. water surface")
     private String verticalOriginName;
 
     @Column(name = "vertical_from_name")
-    // @Comment("The name of the vertical from values, e.g. from or depthFrom") // Hibernate 6.2+
+    // @Comment("The name of the vertical from values, e.g. from or depthFrom")
     private String verticalFromName;
 
     @Column(name = "vertical_to_name")
-    // @Comment("The name of the vertical from values, e.g. to or depthTo") // Hibernate 6.2+
+    // @Comment("The name of the vertical from values, e.g. to or depthTo")
     private String verticalToName;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

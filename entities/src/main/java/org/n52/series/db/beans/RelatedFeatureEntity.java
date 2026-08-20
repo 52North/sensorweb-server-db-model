@@ -61,7 +61,7 @@ public class RelatedFeatureEntity extends IdEntity implements Serializable, HasF
     // @Comment("The role of the related feature.")
     private String role;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = OfferingEntity.RELATED_FEATURES, fetch = FetchType.LAZY)
     private Set<OfferingEntity> offerings;
 
     public RelatedFeatureEntity() {

@@ -94,8 +94,13 @@ public class PhenomenonEntity extends HierarchicalEntity<PhenomenonEntity>
     }
 
     @Override
-    @ManyToMany(mappedBy = "parents", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @Access(AccessType.PROPERTY)
+    @JoinTable(name = "composite_phenomenon",
+            joinColumns = @JoinColumn(name = "fk_parent_phenomenon_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_phenomenon_parent")),
+            inverseJoinColumns = @JoinColumn(name = "fk_child_phenomenon_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_phenomenon_child")))
     public Set<PhenomenonEntity> getChildren() {
         return super.getChildren();
     }

@@ -19,7 +19,6 @@ package org.n52.series.db.beans.i18n;
 import jakarta.persistence.Column;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import org.n52.series.db.beans.DescribableEntity;
@@ -36,8 +35,7 @@ public abstract class I18nEntity<T extends DescribableEntity> extends AbstractI1
     // @Comment("Locale/language specific name of the location")
     private String name;
 
-    @Lob
-    @Column(name = "description")
+    @Column(name = "description", columnDefinition = "text")
     // @Comment("Locale/language specific description of the location")
     private String description;
 

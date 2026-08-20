@@ -31,7 +31,8 @@ import java.io.Serial;
 @Entity(name = "org.n52.series.db.beans.i18n.I18nDatasetEntity")
 @Table(name = "dataset_i18n", indexes = @Index(name = "idx_dataset_i18n_dataset", columnList = "fk_dataset_id"))
 @AttributeOverride(name = "id", column = @Column(name = "dataset_i18n_id"))
-@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_dataset_id", nullable = false))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_dataset_id", insertable = false, updatable = false))
 public class I18nDatasetEntity extends I18nEntity<DatasetEntity> {
 
     @Serial

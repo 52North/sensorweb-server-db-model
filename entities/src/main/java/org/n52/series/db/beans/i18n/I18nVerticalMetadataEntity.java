@@ -16,6 +16,7 @@
 
 package org.n52.series.db.beans.i18n;
 
+import jakarta.persistence.AssociationOverride;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -32,6 +33,8 @@ import java.io.Serial;
 @Table(name = "value_profile_i18n",
         indexes = @Index(name = "idx_value_profile_i18n_value_profile", columnList = "fk_value_profile_id"))
 @AttributeOverride(name = "id", column = @Column(name = "value_profile_i18n_id"))
+@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_value_profile_id", nullable = false,
+        insertable = false, updatable = false))
 public class I18nVerticalMetadataEntity extends AbstractI18nEntity<VerticalMetadataEntity> {
 
     @Serial

@@ -58,7 +58,8 @@ import java.util.Set;
                 @Index(name = "idx_offering_name_codespace", columnList = "fk_name_codespace_id") },
         uniqueConstraints = @UniqueConstraint(name = "un_offering_identifier", columnNames = { "identifier" }))
 @AttributeOverride(name = "id", column = @Column(name = "offering_id"))
-@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
+@AttributeOverride(name = "staIdentifier",
+        column = @Column(name = "identifier", insertable = false, updatable = false))
 public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implements HasObservationTypes, HasFeatureTypes,
         HasRelatedFeatures, HasPhenomenonTime, HasResultTimes, HasValidTime {
 
@@ -73,84 +74,75 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sampling_time_start", length = 29)
     // @Comment("The minimum samplingTimeStart of all observation that belong to this offering. If the column
-    // is
-    // empty, the information is calculated during the cache update and stored locally. Used for the
-    // capabilities of
-    // the SOS.")
+    // is empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of the SOS.")
     private Date phenomenonTimeStart;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sampling_time_end", length = 29)
     // @Comment("The maximum samplingTimeStart of all observation that belong to this offering. If the column
-    // is
-    // empty, the information is calculated during the cache update and stored locally. Used for the
-    // capabilities of
-    // the SOS.")
+    // is empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of the SOS.")
     private Date phenomenonTimeEnd;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "result_time_start", length = 29)
     // @Comment("The minimum resultTimeStart of all observation that belong to this offering. If the column is
-    // empty,
-    // the information is calculated during the cache update and stored locally. Used for the capabilities of
+    // empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of
     // the SOS.")
     private Date resultTimeStart;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "result_time_end", length = 29)
     // @Comment("The maximum resultTimeEnd of all observation that belong to this offering. If the column is
-    // empty,
-    // the information is calculated during the cache update and stored locally. Used for the capabilities of
+    // empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of
     // the SOS.")
     private Date resultTimeEnd;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "valid_time_start", length = 29)
     // @Comment("The minimum validTimeStart of all observation that belong to this offering. If the column is
-    // empty,
-    // the information is calculated during the cache update and stored locally. Used for the capabilities of
+    // empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of
     // the SOS.")
     private Date validTimeStart;
 
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "valid_time_end", length = 29)
     // @Comment("The maximum validTimeEnd of all observation that belong to this offering. If the column is
-    // empty, the
-    // information is calculated during the cache update and stored locally. Used for the capabilities of the
+    // empty, the information is calculated during the cache update and stored locally. Used for the
+    // capabilities of the
     // SOS.")
     private Date validTimeEnd;
 
     @Embedded
+    @AttributeOverride(name = "geometry", column = @Column(name = "geom"))
     private GeometryEntity geometryEntity;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "offering_observation_type",
             joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false,
-                    foreignKey = @ForeignKey(name = "fk_offering_observation_type")), // points back at
-                                                                                      // OfferingEntity
+                    foreignKey = @ForeignKey(name = "fk_offering_observation_type")),
             inverseJoinColumns = @JoinColumn(name = "fk_format_id", nullable = false,
-                    foreignKey = @ForeignKey(name = "fk_observation_type_offering")) // points at the target
-    )
+                    foreignKey = @ForeignKey(name = "fk_observation_type_offering")))
     private Set<FormatEntity> observationTypes;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "offering_feature_type",
             joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false,
-                    foreignKey = @ForeignKey(name = "fk_offering_feature_type")), // points back at
-                                                                                  // OfferingEntity
+                    foreignKey = @ForeignKey(name = "fk_offering_feature_type")),
             inverseJoinColumns = @JoinColumn(name = "fk_format_id", nullable = false,
-                    foreignKey = @ForeignKey(name = "fk_feature_type_offering")) // points at the target
-    )
+                    foreignKey = @ForeignKey(name = "fk_feature_type_offering")))
     private Set<FormatEntity> featureTypes;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "offering_related_feature",
             joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false,
-                    foreignKey = @ForeignKey(name = "fk_offering_related_feature")), // points back at
-                                                                                     // OfferingEntity
+                    foreignKey = @ForeignKey(name = "fk_offering_related_feature")),
             inverseJoinColumns = @JoinColumn(name = "fk_related_feature_id", nullable = false,
-                    foreignKey = @ForeignKey(name = "fk_related_feature_offering")) // points at the target
-    )
+                    foreignKey = @ForeignKey(name = "fk_related_feature_offering")))
     private Set<RelatedFeatureEntity> relatedFeatures;
 
     @Override
@@ -174,8 +166,13 @@ public class OfferingEntity extends HierarchicalEntity<OfferingEntity> implement
     }
 
     @Override
-    @ManyToMany(mappedBy = "parents", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @Access(AccessType.PROPERTY)
+    @JoinTable(name = "offering_hierarchy",
+            joinColumns = @JoinColumn(name = "fk_parent_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_parent")),
+            inverseJoinColumns = @JoinColumn(name = "fk_child_offering_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_offering_child")))
     public Set<OfferingEntity> getChildren() {
         return super.getChildren();
     }

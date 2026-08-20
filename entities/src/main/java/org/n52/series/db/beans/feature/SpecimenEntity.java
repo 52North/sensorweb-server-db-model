@@ -36,12 +36,13 @@ import org.n52.series.db.common.Utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-@Entity(name = "org.n52.series.db.beans.feature.SpecimenEntity")
-@SecondaryTable(name = "specimen",
-        pkJoinColumns = @PrimaryKeyJoinColumn(name = "fk_feature_id",
-                foreignKey = @ForeignKey(name = "fk_specimen_feature")))
-@DiscriminatorValue("SpecimenEntity")
+//TODO: support this
+//@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+//@Entity(name = "org.n52.series.db.beans.feature.SpecimenEntity")
+//@SecondaryTable(name = "specimen",
+//        pkJoinColumns = @PrimaryKeyJoinColumn(name = "fk_feature_id",
+//                foreignKey = @ForeignKey(name = "fk_specimen_feature")))
+//@DiscriminatorValue("SpecimenEntity")
 public class SpecimenEntity extends FeatureEntity {
 
     @Serial

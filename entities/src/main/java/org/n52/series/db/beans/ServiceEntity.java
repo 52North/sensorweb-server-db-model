@@ -27,28 +27,15 @@ import java.util.Set;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Index;
-import jakarta.persistence.Lob;
-import jakarta.persistence.Table;
-import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.JdbcTypeCode;
-import org.hibernate.annotations.Type;
-import org.hibernate.type.SqlTypes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Entity(name = "org.n52.series.db.beans.ServiceEntity")
-@Table(name = "service",
-        indexes = { @Index(name = "idx_service_identifier", columnList = "identifier"),
-                @Index(name = "idx_service_identifier_codespace", columnList = "fk_identifier_codespace_id"),
-                @Index(name = "idx_service_name_codespace", columnList = "fk_name_codespace_id") },
-        uniqueConstraints = @UniqueConstraint(name = "un_service_identifier", columnNames = { "identifier" }))
-// table comment: Storage of the service.
+// Conditional Entity based on *.orm.xml mapping. Only mapped if specific SOS Profiles are active
 @AttributeOverride(name = "id", column = @Column(name = "service_id"))
-@AttributeOverride(name = "staIdentifier", column = @Column(name = "identifier", insertable = false, updatable = false))
-public class ServiceEntity extends DescribableEntity {
+@AttributeOverride(name = "staIdentifier",
+        column = @Column(name = "identifier", insertable = false, updatable = false))
+public class ServiceEntity extends AbstractCodespaceEntity {
 
     @Serial
     private static final long serialVersionUID = 8926184900932191238L;
@@ -71,9 +58,8 @@ public class ServiceEntity extends DescribableEntity {
     // @Comment("The connector of the service.")
     private String connector;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_supports_first_last", nullable = false)
-    @ColumnDefault("1")
+    @ColumnDefault("true")
     // @Comment("Flag that indicates if this service supports first/last observation queries")
     private boolean supportsFirstLast;
 

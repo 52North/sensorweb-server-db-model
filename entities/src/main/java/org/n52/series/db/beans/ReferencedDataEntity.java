@@ -15,7 +15,6 @@
  */
 package org.n52.series.db.beans;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -30,11 +29,25 @@ public class ReferencedDataEntity extends DataEntity<String> {
     @Serial
     private static final long serialVersionUID = 4925354534934095827L;
 
+    @Column(name = "value_reference")
+    // @Comment("The reference value (URI) of an observation (ReferenceObservation)")
+    private String value;
+
     private String valueIdentifier;
 
     private String valueName;
 
     private String valueDescription;
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
 
     @Override
     public String getValueIdentifier() {

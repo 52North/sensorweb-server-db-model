@@ -15,7 +15,6 @@
  */
 package org.n52.series.db.beans;
 
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -30,6 +29,9 @@ public class TextDataEntity extends DataEntity<String> {
 
     @Serial
     private static final long serialVersionUID = 4925354534934095827L;
+
+    @Column(name = "value_text")
+    private String value;
 
     @Transient
     private String valueIdentifier;
@@ -73,5 +75,15 @@ public class TextDataEntity extends DataEntity<String> {
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
         return getValue() == null ? false : noDataValues.contains(getValue());
+    }
+
+    @Override
+    public String getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(String value) {
+        this.value = value;
     }
 }

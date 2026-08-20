@@ -25,9 +25,9 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.ForeignKey;
 import jakarta.persistence.Index;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import org.n52.series.db.beans.HibernateRelations.HasResultEncoding;
 import org.n52.series.db.beans.HibernateRelations.HasResultStructure;
 
@@ -47,7 +47,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
                 @Index(name = "idx_result_template_identifier", columnList = "identifier") })
 // table comment: Storage of templates for the result handling operations
 @AttributeOverride(name = "id", column = @Column(name = "result_template_id"))
-
 public class ResultTemplateEntity extends IdEntity implements Serializable, HasResultStructure, HasResultEncoding {
 
     public static final String PROPERTY_OFFERING = "offering";
@@ -65,6 +64,7 @@ public class ResultTemplateEntity extends IdEntity implements Serializable, HasR
     @Serial
     private static final long serialVersionUID = -8847952458819368733L;
 
+    @Transient
     private String domain;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

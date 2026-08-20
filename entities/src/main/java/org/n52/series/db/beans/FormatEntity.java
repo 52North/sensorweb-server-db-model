@@ -30,11 +30,12 @@ import java.io.Serial;
 public class FormatEntity extends IdEntity {
 
     public static final String FORMAT = "format";
+    public static final String PROPERTY_DEFINITION = "definition";
 
     @Serial
     private static final long serialVersionUID = -8428858401445365107L;
 
-    @Column(name = "definition", nullable = false)
+    @Column(name = PROPERTY_DEFINITION, nullable = false)
     // @Comment("The definition of the format.")
     private String format;
 

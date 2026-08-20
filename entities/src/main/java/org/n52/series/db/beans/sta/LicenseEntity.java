@@ -19,14 +19,14 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 
+import org.n52.series.db.beans.AbstractCodespaceEntity;
 import org.n52.series.db.beans.AbstractDatasetEntity;
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class LicenseEntity extends DescribableEntity
+public class LicenseEntity extends AbstractCodespaceEntity
         implements Serializable, HibernateRelations.HasName, HibernateRelations.HasDescription,
         HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, StaRelations.HasGroups<LicenseEntity> {
 

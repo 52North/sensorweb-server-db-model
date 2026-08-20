@@ -32,11 +32,10 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.SQLRestriction;
-import org.hibernate.type.SqlTypes;
 import org.locationtech.jts.geom.Geometry;
 import org.n52.series.db.beans.HibernateRelations.HasGeometry;
 import org.n52.series.db.beans.HibernateRelations.HasProcedureDescriptionFormat;
@@ -75,26 +74,29 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
     @Serial
     private static final long serialVersionUID = 4028002933920185756L;
 
-    // Currently unmapped properties - might be required for some SOS Profiles
+    @Transient
+    // Currently unmapped properties - might be required for some SOS Profiles?
     private boolean deleted;
+    @Transient
+    // Currently unmapped properties - might be required for some SOS Profiles?
     private GeometryEntity geometryEntity;
+    @Transient
+    // Currently unmapped properties - might be required for some SOS Profiles?
     private boolean type;
 
     @Column(name = "description_file", columnDefinition = "text")
     private String descriptionFile;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_reference", nullable = false)
-    @ColumnDefault("0")
+    @ColumnDefault("false")
     private boolean reference;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fk_type_of_procedure_id", foreignKey = @ForeignKey(name = "fk_type_of"))
     private ProcedureEntity typeOf;
 
-    @JdbcTypeCode(SqlTypes.SMALLINT)
     @Column(name = "is_aggregation", nullable = false)
-    @ColumnDefault("1")
+    @ColumnDefault("false")
     private boolean aggregation;
 
     @OneToMany(mappedBy = AbstractDatasetEntity.PROPERTY_PROCEDURE, fetch = FetchType.LAZY, cascade = CascadeType.ALL,
@@ -139,8 +141,13 @@ public class ProcedureEntity extends HierarchicalEntity<ProcedureEntity> impleme
     }
 
     @Override
-    @ManyToMany(mappedBy = "parents", fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @Access(AccessType.PROPERTY)
+    @JoinTable(name = "procedure_hierarchy",
+            joinColumns = @JoinColumn(name = "fk_parent_procedure_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_procedure_parent")),
+            inverseJoinColumns = @JoinColumn(name = "fk_child_procedure_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_procedure_child")))
     public Set<ProcedureEntity> getChildren() {
         return super.getChildren();
     }

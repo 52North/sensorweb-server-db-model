@@ -20,8 +20,8 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
 
+import org.n52.series.db.beans.AbstractCodespaceEntity;
 import org.n52.series.db.beans.DataEntity;
-import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.HibernateRelations;
 import org.n52.series.db.beans.sta.StaRelations.HasLicense;
 import org.n52.series.db.beans.sta.StaRelations.HasParty;
@@ -30,7 +30,7 @@ import org.n52.series.db.beans.sta.StaRelations.StaPlusTime;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public class GroupEntity extends DescribableEntity
+public class GroupEntity extends AbstractCodespaceEntity
         implements Serializable, HibernateRelations.HasName, HibernateRelations.HasDescription,
         StaPlusTime<GroupEntity>, HasLicense<GroupEntity>, HasParty<GroupEntity>, HibernateRelations.IsProcessed {
     public static final String PROPERTY_RELATIONS = "relations";

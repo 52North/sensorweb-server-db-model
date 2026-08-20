@@ -18,13 +18,8 @@ package org.n52.series.db.beans;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import jakarta.persistence.Column;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.ForeignKey;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
-import org.n52.series.db.beans.HibernateRelations.IsStaEntity;
 import org.n52.series.db.beans.i18n.I18nEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
@@ -36,7 +31,7 @@ import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 @MappedSuperclass
-public abstract class DescribableEntity extends IdEntity implements Describable, Serializable {
+public abstract class DescribableEntity extends IdentifiableEntity implements Describable, Serializable {
 
     public static final String PROPERTY_IDENTIFIER = IDENTIFIER;
     public static final String PROPERTY_STA_IDENTIFIER = STA_IDENTIFIER;
@@ -51,17 +46,6 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     @Serial
     private static final long serialVersionUID = -4448231483118864847L;
 
-    @Column(name = "identifier", nullable = false)
-    // @Comment("Unique identifier of the feature which is used for filtering.
-    // Should be a URI, UUID. E.g. http://www.example.org/123, 123-321")
-    private String identifier;
-
-    @Column(name = "sta_identifier", nullable = false)
-    // @Comment("Unique identifier used by SensorThingsAPI for addressing the entity. Should be a URI
-    // (reference to a vocabulary entry), UUID. E.g. 123, 123-321")
-    private String staIdentifier;
-
-
     @Column(name = "name")
     // @Comment("The human readable name of the feature.")
     private String name;
@@ -70,13 +54,11 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     // @Comment("A short description of the feature")
     private String description;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "fk_identifier_codespace_id", foreignKey = @ForeignKey(name = "fk_feature_identifier_codesp"))
-    //private CodespaceEntity identifierCodespace;
+    @Transient
+    private CodespaceEntity identifierCodespace;
 
-    //@ManyToOne(fetch = FetchType.LAZY)
-    //@JoinColumn(name = "fk_name_codespace_id", foreignKey = @ForeignKey(name = "fk_feature_name_codespace"))
-    //private CodespaceEntity nameCodespace;
+    @Transient
+    private CodespaceEntity nameCodespace;
 
     @Transient
     // explictly mapped in subclasses
@@ -93,29 +75,6 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
     private ServiceEntity service;
 
     @Override
-    public String getIdentifier() {
-        return identifier;
-    }
-
-    @Override
-    public void setIdentifier(String identifier, boolean staSupportsUrls) {
-        this.identifier = identifier;
-        if (!isSetStaIdentifier()) {
-            setStaIdentifier(staSupportsUrls ? identifier : processIdentifierForSta(identifier));
-        }
-    }
-
-    @Override
-    public String getStaIdentifier() {
-        return staIdentifier;
-    }
-
-    @Override
-    public void setStaIdentifier(String staIdentifier) {
-        this.staIdentifier = staIdentifier;
-    }
-
-    @Override
     public String getName() {
         return name;
     }
@@ -125,25 +84,25 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
         this.name = name;
     }
 
-//    @Override
-//    public CodespaceEntity getIdentifierCodespace() {
-//        return this.identifierCodespace;
-//    }
-//
-//    @Override
-//    public void setIdentifierCodespace(CodespaceEntity identifierCodespace) {
-//        this.identifierCodespace = identifierCodespace;
-//    }
-//
-//    @Override
-//    public CodespaceEntity getNameCodespace() {
-//        return nameCodespace;
-//    }
-//
-//    @Override
-//    public void setNameCodespace(CodespaceEntity nameCodespace) {
-//        this.nameCodespace = nameCodespace;
-//    }
+    @Override
+    public CodespaceEntity getIdentifierCodespace() {
+        return this.identifierCodespace;
+    }
+
+    @Override
+    public void setIdentifierCodespace(CodespaceEntity identifierCodespace) {
+        this.identifierCodespace = identifierCodespace;
+    }
+
+    @Override
+    public CodespaceEntity getNameCodespace() {
+        return nameCodespace;
+    }
+
+    @Override
+    public void setNameCodespace(CodespaceEntity nameCodespace) {
+        this.nameCodespace = nameCodespace;
+    }
 
     @Override
     public String getDescription() {
@@ -215,8 +174,7 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
 
     @Override
     public int hashCode() {
-        return Objects.hash(super.hashCode(), getIdentifier(), this instanceof IsStaEntity ? getStaIdentifier() : "",
-                getName());
+        return Objects.hash(super.hashCode(), getName());
     }
 
     @Override
@@ -225,8 +183,6 @@ public abstract class DescribableEntity extends IdEntity implements Describable,
             return false;
         }
         DescribableEntity other = (DescribableEntity) obj;
-        return super.equals(other) && Objects.equals(getIdentifier(), other.getIdentifier())
-                && (this instanceof IsStaEntity ? Objects.equals(getStaIdentifier(), other.getStaIdentifier()) : true)
-                && Objects.equals(getName(), other.getName());
+        return super.equals(other) && Objects.equals(getName(), other.getName());
     }
 }

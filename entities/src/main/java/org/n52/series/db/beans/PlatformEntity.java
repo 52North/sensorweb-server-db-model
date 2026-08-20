@@ -55,13 +55,11 @@ import java.util.Set;
         indexes = { @Index(name = "idx_platform_identifier", columnList = "identifier"),
                 @Index(name = "idx_platform_staIdentifier", columnList = "sta_identifier"),
                 @Index(name = "idx_platform_identifier_codespace", columnList = "fk_identifier_codespace_id"),
-                @Index(name = "idx_platform_name_codespace", columnList = "fk_name_codespace_id"),
-                @Index(name = "idx_platfomr_assessment_type", columnList = "fk_assessment_type_id"),
-                @Index(name = "idx_platform_network", columnList = "fk_network_id") },
+                @Index(name = "idx_platform_name_codespace", columnList = "fk_name_codespace_id") },
         uniqueConstraints = { @UniqueConstraint(name = "un_platform_identifier", columnNames = { "identifier" }),
                 @UniqueConstraint(name = "un_platform_staIdentifier", columnNames = { "sta_identifier" }) })
 @AttributeOverride(name = "id", column = @Column(name = "platform_id"))
-public class PlatformEntity extends DescribableEntity implements HasLocations<PlatformEntity>, IsStaEntity,
+public class PlatformEntity extends AbstractCodespaceEntity implements HasLocations<PlatformEntity>, IsStaEntity,
         HibernateRelations.HasAbstractDatasets, HibernateRelations.IsProcessed, HibernateRelations.HasParameters,
         HibernateRelations.HasNetwork, HibernateRelations.HasAssessmentType, StaRelations.HasParty<PlatformEntity> {
 

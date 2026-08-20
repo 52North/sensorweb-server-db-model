@@ -30,9 +30,4 @@ public class ComplexDataEntity extends CompositeDataEntity {
     @Serial
     private static final long serialVersionUID = 2206385928964743369L;
 
-    @Override
-    public void setValue(Set<DataEntity<?>> value) {
-        super.setValue(value);
-    }
-
 }

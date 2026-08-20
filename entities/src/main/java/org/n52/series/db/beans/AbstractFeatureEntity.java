@@ -34,6 +34,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import jakarta.persistence.UniqueConstraint;
 import org.hibernate.annotations.SQLRestriction;
 import org.locationtech.jts.geom.Geometry;
@@ -91,12 +92,14 @@ public abstract class AbstractFeatureEntity<E> extends HierarchicalEntity<E>
     private String url;
 
     @Embedded
+    @AttributeOverride(name = "geometry", column = @Column(name = "geom"))
     private GeometryEntity geometryEntity;
 
     @OneToMany(mappedBy = DatasetEntity.PROPERTY_FEATURE, fetch = FetchType.LAZY, cascade = CascadeType.ALL,
             orphanRemoval = true)
     private Set<DatasetEntity> datasets;
 
+    @Transient
     private Set<DataEntity<?>> observations;
 
     @Override

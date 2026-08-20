@@ -23,7 +23,7 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public abstract class HierarchicalEntity<T> extends DescribableEntity {
+public abstract class HierarchicalEntity<T> extends AbstractCodespaceEntity {
 
     public static final String PROPERTY_PARENTS = "parents";
     public static final String PROPERTY_CHILDREN = "children";

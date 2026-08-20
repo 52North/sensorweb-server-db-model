@@ -16,10 +16,8 @@
 package org.n52.series.db.beans;
 
 import java.io.Serial;
-import java.util.Set;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
@@ -61,11 +59,6 @@ public class DataArrayDataEntity extends CompositeDataEntity {
 
     public boolean isSetResultTemplate() {
         return getResultTemplate() != null;
-    }
-
-    @Override
-    public void setValue(Set<DataEntity<?>> value) {
-        super.setValue(value);
     }
 
     /**

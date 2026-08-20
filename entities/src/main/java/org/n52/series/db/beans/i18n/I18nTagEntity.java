@@ -29,7 +29,7 @@ import org.n52.series.db.beans.TagEntity;
 @Entity(name = "org.n52.series.db.beans.i18n.I18nTagEntity")
 @Table(name = "tag_i18n", indexes = @Index(name = "idx_tag_i18n_tag", columnList = "fk_tag_id"))
 @AttributeOverride(name = "id", column = @Column(name = "tag_i18n_id"))
-@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_tag_id", nullable = false))
+@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_tag_id", nullable = false, insertable = false, updatable = false))
 public class I18nTagEntity extends I18nEntity<TagEntity> {
 
     @Serial

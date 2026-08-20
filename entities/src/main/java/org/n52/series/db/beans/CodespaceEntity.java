@@ -16,11 +16,9 @@
 
 package org.n52.series.db.beans;
 
+import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import org.n52.series.db.beans.HibernateRelations.HasIdentifierCodespace;
@@ -34,6 +32,7 @@ import java.io.Serializable;
 @Entity(name = "org.n52.series.db.beans.CodespaceEntity")
 @Table(name = "codespace",
         uniqueConstraints = @UniqueConstraint(name = "un_codespace_codespace", columnNames = { "name" }))
+@AttributeOverride(name = "id", column = @Column(name = "codespace_id"))
 public class CodespaceEntity extends IdEntity implements Serializable {
 
     public static final String PROPERTY_CODESPACE = HasIdentifierCodespace.IDENTIFIER_CODESPACE;
