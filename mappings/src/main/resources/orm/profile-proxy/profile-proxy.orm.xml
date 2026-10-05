@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Mapped-superclass overrides for the combined "proxy+transactional" persistence unit.
+  ("proxy" is never deployed standalone - always together with "transactional".)
+
+  DescribableEntity#service is annotated @Transient by default (entities module), since not
+  every profile's schema has this column. This file turns it back into a real mapping for
+  every entity that extends DescribableEntity, for consumers that build this persistence
+  unit - reference this file from that persistence.xml's <mapping-file>.
+
+  Overriding once per mapped superclass (rather than once per concrete entity class) means
+  every affected entity shares the same join column and foreign-key constraint name in this
+  profile - see the entities module for which classes extend which mapped superclass.
+-->
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_0.xsd"
+                  version="3.0">
+
+    <mapped-superclass class="org.n52.series.db.beans.DescribableEntity" metadata-complete="false">
+        <attributes>
+            <many-to-one name="service" target-entity="org.n52.series.db.beans.ServiceEntity" fetch="LAZY">
+                <join-column name="fk_service_id"/>
+                <foreign-key name="fk_service"/>
+            </many-to-one>
+        </attributes>
+    </mapped-superclass>
+
+    <entity class="org.n52.series.db.beans.ServiceEntity" name="org.n52.series.db.beans.ServiceEntity"
+            metadata-complete="false">
+        <table name="service">
+            <unique-constraint name="un_service_identifier">
+                <column-name>identifier</column-name>
+            </unique-constraint>
+            <index name="idx_service_identifier" column-list="identifier"/>
+            <index name="idx_service_identifier_codespace" column-list="fk_identifier_codespace_id"/>
+            <index name="idx_service_name_codespace" column-list="fk_name_codespace_id"/>
+        </table>
+    </entity>
+
+</entity-mappings>
