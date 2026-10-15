@@ -19,28 +19,36 @@ import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
-//@Entity(name = "org.n52.series.db.beans.parameter.platform.PlatformComplexParameterEntity")
-//@DiscriminatorValue("complex")
-//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
+@Entity(name = "org.n52.series.db.beans.parameter.platform.PlatformComplexParameterEntity")
+@DiscriminatorValue("complex")
 public class PlatformComplexParameterEntity extends PlatformParameterEntity<Set<PlatformParameterEntity<?>>>
         implements ComplexParameterEntity<Set<PlatformParameterEntity<?>>> {
 
     @Serial
     private static final long serialVersionUID = -5166758396873257962L;
 
+    // decision: collection owns fk_parent_parameter_id (as former hbm inverse="false"), so children are
+    // linked
+    // even when setParent(..) was not called on them
+    @OneToMany(targetEntity = PlatformParameterEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_parent_parameter_id")
+    private Set<PlatformParameterEntity<?>> value;
+
     @Override
     public Set<PlatformParameterEntity<?>> getValue() {
-        return null;
+        return value;
     }
 
     @Override
     public void setValue(Set<PlatformParameterEntity<?>> value) {
+        this.value = value;
     }
 
     @Override

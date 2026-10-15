@@ -19,28 +19,36 @@ import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
-//@Entity(name = "org.n52.series.db.beans.parameter.location.LocationComplexParameterEntity")
-//@DiscriminatorValue("complex")
-//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
+@Entity(name = "org.n52.series.db.beans.parameter.location.LocationComplexParameterEntity")
+@DiscriminatorValue("complex")
 public class LocationComplexParameterEntity extends LocationParameterEntity<Set<LocationParameterEntity<?>>>
         implements ComplexParameterEntity<Set<LocationParameterEntity<?>>> {
 
     @Serial
     private static final long serialVersionUID = -5166758396873257962L;
 
+    // decision: collection owns fk_parent_parameter_id (as former hbm inverse="false"), so children are
+    // linked
+    // even when setParent(..) was not called on them
+    @OneToMany(targetEntity = LocationParameterEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_parent_parameter_id")
+    private Set<LocationParameterEntity<?>> value;
+
     @Override
     public Set<LocationParameterEntity<?>> getValue() {
-        return null;
+        return value;
     }
 
     @Override
     public void setValue(Set<LocationParameterEntity<?>> value) {
+        this.value = value;
     }
 
     @Override

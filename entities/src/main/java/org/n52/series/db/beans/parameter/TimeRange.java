@@ -17,12 +17,18 @@ package org.n52.series.db.beans.parameter;
 
 import java.util.Date;
 
+import jakarta.persistence.Embeddable;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import org.n52.series.db.common.Utils;
 
+@Embeddable
 public class TimeRange {
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date from;
 
+    @Temporal(TemporalType.TIMESTAMP)
     private Date to;
 
     public TimeRange() {

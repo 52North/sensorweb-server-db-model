@@ -27,6 +27,7 @@ import java.util.Set;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
+import jakarta.persistence.Transient;
 import org.hibernate.annotations.ColumnDefault;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,10 +67,13 @@ public class ServiceEntity extends AbstractCodespaceEntity {
     @Embedded
     private ServiceMetadataEntity serviceMetadata;
 
+    @Transient
     private List<String> noDataValues = new LinkedList<>();
 
+    @Transient
     private Set<BigDecimal> quantityNoDataValues = new LinkedHashSet<>();
 
+    @Transient
     private Set<Integer> countNoDataValues = new LinkedHashSet<>();
 
     public ServiceEntity() {

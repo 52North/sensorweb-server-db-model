@@ -28,12 +28,11 @@ import org.n52.series.db.beans.DataEntity;
 import java.io.Serial;
 
 @Entity(name = "org.n52.series.db.beans.i18n.I18nDataEntity")
-@Table(
-    name = "observation_i18n",
-    indexes = @Index(name = "idx_observation_i18n_observation", columnList = "fk_observation_id"))
+@Table(name = "observation_i18n",
+        indexes = @Index(name = "idx_observation_i18n_observation", columnList = "fk_observation_id"))
 @AttributeOverride(name = "id", column = @Column(name = "observation_i18n_id"))
-@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_observation_id", nullable = false,
-                                                                insertable = false, updatable = false))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_observation_id", nullable = false, insertable = false, updatable = false))
 public class I18nDataEntity extends I18nEntity<DataEntity<?>> {
 
     @Serial

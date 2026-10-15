@@ -19,29 +19,36 @@ import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import jakarta.persistence.AttributeOverride;
-import jakarta.persistence.Column;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
-//@Entity(name = "org.n52.series.db.beans.parameter.observation.ObservationComplexParameterEntity")
-//@DiscriminatorValue("complex")
-//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
+@Entity(name = "org.n52.series.db.beans.parameter.observation.ObservationComplexParameterEntity")
+@DiscriminatorValue("complex")
 public class ObservationComplexParameterEntity extends ObservationParameterEntity<Set<ObservationParameterEntity<?>>>
         implements ComplexParameterEntity<Set<ObservationParameterEntity<?>>> {
 
     @Serial
     private static final long serialVersionUID = -5166758396873257962L;
 
+    // decision: collection owns fk_parent_parameter_id (as former hbm inverse="false"), so children are
+    // linked
+    // even when setParent(..) was not called on them
+    @OneToMany(targetEntity = ObservationParameterEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_parent_parameter_id")
+    private Set<ObservationParameterEntity<?>> value;
+
     @Override
     public Set<ObservationParameterEntity<?>> getValue() {
-        return null;
+        return value;
     }
 
     @Override
     public void setValue(Set<ObservationParameterEntity<?>> value) {
-
+        this.value = value;
     }
 
     @Override

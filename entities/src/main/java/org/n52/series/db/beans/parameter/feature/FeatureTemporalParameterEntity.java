@@ -20,17 +20,32 @@ import java.io.Serial;
 import jakarta.persistence.AttributeOverride;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import org.n52.series.db.beans.parameter.TemporalParameterEntity;
 import org.n52.series.db.beans.parameter.TimeRange;
 
-//@Entity(name = "org.n52.series.db.beans.parameter.feature.FeatureTemporalParameterEntity")
-//@DiscriminatorValue("temporal")
-//@AttributeOverride(name = "value", column = @Column(name = "TODO"))
+@Entity(name = "org.n52.series.db.beans.parameter.feature.FeatureTemporalParameterEntity")
+@DiscriminatorValue("temporal")
 public class FeatureTemporalParameterEntity extends FeatureParameterEntity<TimeRange>
         implements TemporalParameterEntity {
 
     @Serial
     private static final long serialVersionUID = 668796579118721620L;
+
+    @Embedded
+    @AttributeOverride(name = "from", column = @Column(name = "value_temporal_from"))
+    @AttributeOverride(name = "to", column = @Column(name = "value_temporal_to"))
+    private TimeRange value;
+
+    @Override
+    public TimeRange getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(TimeRange value) {
+        this.value = value;
+    }
 
 }
