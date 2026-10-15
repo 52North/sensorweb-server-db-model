@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.relation;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.XmlParameterEntity;
 
 /**
@@ -22,6 +24,7 @@ import org.n52.series.db.beans.parameter.XmlParameterEntity;
  */
 public class RelationXmlParameterEntity extends RelationParameterEntity<String> implements XmlParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = 1209102870245642049L;
 
     @Override

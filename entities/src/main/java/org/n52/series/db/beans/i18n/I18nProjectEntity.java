@@ -15,9 +15,23 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.sta.ProjectEntity;
 
+//@Entity(name = "org.n52.series.db.beans.i18n.I18nProjectEntity")
+//@Table(name = "project_i18n", indexes = @Index(name = "idx_project_i18n_project", columnList = "fk_project_id"))
+//@AttributeOverride(name = "id", column = @Column(name = "project_i18n_id"))
+//@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_project_id", nullable = false))
 public class I18nProjectEntity extends I18nEntity<ProjectEntity> {
+    @Serial
     private static final long serialVersionUID = -1541904527369601026L;
 
 }

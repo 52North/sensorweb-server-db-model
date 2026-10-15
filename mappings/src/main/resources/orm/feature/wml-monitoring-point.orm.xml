@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  JPA mapping override for the WaterML "MonitoringPoint" feature extension.
+
+  MonitoringPointEntity carries no @Entity/@SecondaryTable (entities module) since not every
+  deployment's schema has the "wml_monitoring_point" table. This file turns it back into a
+  real entity - reference it from the persistence.xml of any profile (proxy, transactional,
+  simple, ereporting, ...) that wants WaterML MonitoringPoint support, alongside that
+  profile's own mapping files.
+-->
+<entity-mappings xmlns="https://jakarta.ee/xml/ns/persistence/orm"
+                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence/orm https://jakarta.ee/xml/ns/persistence/orm/orm_3_0.xsd"
+                  version="3.0">
+
+    <entity class="org.n52.series.db.beans.feature.wml.MonitoringPointEntity"
+            name="org.n52.series.db.beans.feature.wml.MonitoringPointEntity"
+            metadata-complete="false">
+        <secondary-table name="wml_monitoring_point">
+            <primary-key-join-column name="fk_feature_id"/>
+            <foreign-key name="fk_wml_monitoring_point"/>
+        </secondary-table>
+        <discriminator-value>WmlMonitoringPointEntity</discriminator-value>
+    </entity>
+
+</entity-mappings>

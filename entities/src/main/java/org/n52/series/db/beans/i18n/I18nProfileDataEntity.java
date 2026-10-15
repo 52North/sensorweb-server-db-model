@@ -15,10 +15,13 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.ProfileDataEntity;
 
 public class I18nProfileDataEntity extends I18nEntity<ProfileDataEntity> {
 
+    @Serial
     private static final long serialVersionUID = -1039313696988014573L;
 
     private String orientation;

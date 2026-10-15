@@ -15,8 +15,11 @@
  */
 package org.n52.series.db.beans.quality;
 
+import java.io.Serial;
+
 public class TextQualityEntity extends QualityEntity<String> {
 
+    @Serial
     private static final long serialVersionUID = 6016434040907309530L;
     private String value;
 

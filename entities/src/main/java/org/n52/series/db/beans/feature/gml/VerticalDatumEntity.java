@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.feature.gml;
 
+import java.io.Serial;
 import java.util.Date;
 import java.util.Set;
 
@@ -34,6 +35,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalDatumEntity extends ReferenceEntity implements HasRemarks {
 
+    @Serial
     private static final long serialVersionUID = -2829473090233745827L;
 
     private String remarks;

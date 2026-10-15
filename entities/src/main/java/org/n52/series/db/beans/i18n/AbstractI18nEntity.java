@@ -13,32 +13,37 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.i18n;
 
-import java.util.Objects;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 import org.n52.series.db.beans.IdEntity;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.Serial;
+import java.util.Objects;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@MappedSuperclass
 public abstract class AbstractI18nEntity<T extends IdEntity> extends IdEntity {
 
     public static final String PROPERTY_LOCALE = "locale";
     public static final String PROPERTY_ENTITY = "entity";
+
+    @Serial
     private static final long serialVersionUID = -5046004232290585428L;
 
-    private T entity;
-
+    @Column(name = "locale", nullable = false)
     private String locale;
 
-    public T getEntity() {
-        return entity;
-    }
+    public abstract T getEntity();
 
-    public void setEntity(T entity) {
-        this.entity = entity;
-    }
+    public abstract void setEntity(T entity);
 
     public String getLocale() {
         return locale;

@@ -20,6 +20,7 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
 import java.util.Set;
 
 /**
@@ -31,6 +32,7 @@ import java.util.Set;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalCRSEntity extends ReferenceEntity implements HasRemarks {
 
+    @Serial
     private static final long serialVersionUID = 2282402634799023149L;
 
     private String remarks;

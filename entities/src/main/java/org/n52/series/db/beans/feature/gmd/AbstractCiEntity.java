@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.feature.ReferenceEntity;
 
 /**
@@ -25,6 +27,7 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
  */
 public abstract class AbstractCiEntity extends ReferenceEntity {
 
+    @Serial
     private static final long serialVersionUID = 7398216647031698387L;
 
     private String gmdid;

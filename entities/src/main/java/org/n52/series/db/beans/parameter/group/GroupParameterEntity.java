@@ -17,9 +17,12 @@ package org.n52.series.db.beans.parameter.group;
 
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.TimeRange;
 import org.n52.series.db.beans.sta.GroupEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+
+import java.io.Serial;
 
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
@@ -29,6 +32,7 @@ public abstract class GroupParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_GROUP = "group";
     public static final String PROP_GROUP_ID = "groupId";
+    @Serial
     private static final long serialVersionUID = 1123453212836718013L;
     private GroupEntity group;
     private Long groupId;
@@ -52,5 +56,15 @@ public abstract class GroupParameterEntity<T> extends ParameterEntity<T> {
     @Override
     public void setDescribeableEntity(DescribableEntity entity) {
         setGroup((GroupEntity) entity);
+    }
+
+    @Override
+    public T getValue() {
+        return null;
+    }
+
+    @Override
+    public void setValue(T value) {
+
     }
 }

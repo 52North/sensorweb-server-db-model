@@ -13,24 +13,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
-import org.n52.series.db.beans.HibernateRelations.HasTags;
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OrderColumn;
+import jakarta.persistence.Transient;
+import org.hibernate.annotations.Check;
+import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.Formula;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 import org.joda.time.DateTimeZone;
+import org.n52.series.db.beans.HibernateRelations.HasTags;
 import org.n52.series.db.beans.dataset.DatasetType;
 import org.n52.series.db.beans.dataset.ObservationType;
 import org.n52.series.db.beans.dataset.ValueType;
 import org.n52.series.db.beans.sampling.SamplingProfileDatasetEntity;
 
+import java.io.Serial;
 import java.time.ZoneOffset;
 import java.util.List;
 import java.util.Set;
 import java.util.TimeZone;
 import java.util.stream.Collectors;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.DatasetEntity")
+@DiscriminatorValue("null")
 public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
 
     public static final String ENTITY_ALIAS = "dataset";
@@ -49,45 +71,117 @@ public class DatasetEntity extends AbstractDatasetEntity implements HasTags {
     public static final String PROPERTY_SAMPLING_PROFILE = "samplingProfile";
     public static final String PROPERTY_EREPORTING_PROFILE = "ereportingProfile";
     private static final String OFFSET_REGEX = "([+-](?:2[0-3]|[01][0-9]):[0-5][0-9])";
+    @Serial
     private static final long serialVersionUID = -7491530543976690237L;
 
-    private boolean published = true;
-
-    private boolean deleted;
-
-    private boolean disabled;
-
+    @Enumerated(EnumType.STRING)
+    @Column(name = "dataset_type", nullable = false)
+    @ColumnDefault("'not_initialized'")
+    @Check(constraints = "dataset_type in ('individualObservation', 'timeseries', 'profile', 'trajectory', "
+            + "'not_initialized')")
+    // @Comment("Indicator whether the dataset provides individualObservation (individual observations),
+    // timeseries
+    // (timeseries obervations) or trajectories (trajectory observations).")
     private DatasetType datasetType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "observation_type", nullable = false)
+    @ColumnDefault("'not_initialized'")
+    @Check(constraints = "observation_type in ('simple', 'profile', 'timeseries', 'trajectory', 'not_initialized')")
+    // @Comment("Indicator whether the dataset observations are of type simple (a simple observation, e.g. a
+    // scalar
+    // value like the temperature) or profile (profile observations)")
     private ObservationType observationType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "value_type", nullable = false)
+    @ColumnDefault("'not_initialized'")
+    @Check(constraints = "value_type in ('quantity', 'count', 'text', 'category', 'bool', 'geometry', 'blob', "
+            + "'reference', 'complex', 'dataarray', 'not_initialized')")
+    // @Comment("Indicator of the type of the single values. Valid values are quantity (scalar values), count
+    // (integer
+    // values), text (textual values), category (categorical values), bool (boolean values), reference
+    // (references, e
+    // .g. link to a source, photo, video)")
     private ValueType valueType;
 
-    private long observationCount = -1;
+    @Column(name = "is_deleted", nullable = false)
+    @ColumnDefault("false")
+    // @Comment("Flag that indicates if this dataset is deleted")
+    private boolean deleted;
 
-    private boolean hidden;
+    @Column(name = "is_disabled", nullable = false)
+    @ColumnDefault("false")
+    // @Comment("Flag that indicates if this dataset is disabled for insertion of new data")
+    private boolean disabled;
 
+    @Column(name = "is_published", nullable = false)
+    @ColumnDefault("true")
+    // @Comment("Flag that indicates if this dataset should be published")
+    private boolean published;
+
+    @Column(name = "is_mobile", nullable = false)
+    @ColumnDefault("false")
+    // @Comment("Flag that indicates if the procedure is mobile (1/true) or stationary (0/false).")
     private boolean mobile;
 
+    @Column(name = "is_insitu", nullable = false)
+    @ColumnDefault("true")
+    // @Comment("Flag that indicates if the procedure is insitu (1/true) or remote (0/false).")
     private boolean insitu = true;
 
+    @Column(name = "is_hidden", nullable = false)
+    @ColumnDefault("false")
+    // @Comment("Flag that indicates if this dataset should be hidden, e.g. for sub-datasets of a complex
+    // datasets")
+    private boolean hidden;
+
+    @Column(name = "origin_timezone", length = 40)
+    // @Comment("Define the origin timezone of the dataset timestamps. Possible values are offset (+02:00), id
+    // (CET) or full name (Europe/Berlin). It no time zone is defined, UTC would be used as default.")
     private String originTimezone;
 
-    private DateTimeZone timeZone;
-
-    private Set<RelatedDatasetEntity> relatedDatasets;
-
-    private List<DatasetEntity> referenceValues;
-
+    @Column(name = "decimals")
+    // @Comment("Number of decimals that should be present in the output of the observation values. If no
+    // value is
+    // set, all decimals would be present.")
     private Integer numberOfDecimals;
 
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "dataset_reference",
+            joinColumns = @JoinColumn(name = "fk_dataset_id_from", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_dataset_reference_from")),
+            inverseJoinColumns = @JoinColumn(name = "fk_dataset_id_to", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_dataset_reference_to")))
+    @OrderColumn(name = "sort_order")
+    private List<DatasetEntity> referenceValues;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_value_profile_id", foreignKey = @ForeignKey(name = "fk_value_profile"))
     private VerticalMetadataEntity verticalMetadata;
 
-    private SamplingProfileDatasetEntity samplingProfile;
-
+    @Formula("false")
     private boolean ereportingProfile;
 
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tag_dataset",
+            joinColumns = @JoinColumn(name = "fk_dataset_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_dataset_tag")),
+            inverseJoinColumns = @JoinColumn(name = "fk_tag_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_tag_dataset")))
     private Set<TagEntity> tags;
+
+    @Transient
+    private long observationCount = -1;
+
+    @Transient
+    private DateTimeZone timeZone;
+
+    @Transient
+    private Set<RelatedDatasetEntity> relatedDatasets;
+
+    @Transient
+    private SamplingProfileDatasetEntity samplingProfile;
 
     public DatasetEntity() {
         this(DatasetType.not_initialized, ObservationType.not_initialized, ValueType.not_initialized);

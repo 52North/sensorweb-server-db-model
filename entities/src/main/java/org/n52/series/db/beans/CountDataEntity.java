@@ -13,20 +13,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.Serial;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+@Entity(name = "org.n52.series.db.beans.CountDataEntity")
+@DiscriminatorValue("count")
 public class CountDataEntity extends DataEntity<Integer> implements NumericalDataEntity<Integer> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CountDataEntity.class);
 
+    @Serial
     private static final long serialVersionUID = -8559375927338360585L;
+
+    @Column(name = "value_count")
+    private Integer value;
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
@@ -70,4 +81,13 @@ public class CountDataEntity extends DataEntity<Integer> implements NumericalDat
         return validatedValues;
     }
 
+    @Override
+    public Integer getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(Integer value) {
+        this.value = value;
+    }
 }

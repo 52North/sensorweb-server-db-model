@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.feature.gml;
 
+import java.io.Serial;
 import java.util.Set;
 
 import org.n52.series.db.beans.HibernateRelations.HasRemarks;
@@ -31,6 +32,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class VerticalCSEntity extends ReferenceEntity implements HasRemarks {
 
+    @Serial
     private static final long serialVersionUID = 8459136724611955821L;
 
     private String remarks;

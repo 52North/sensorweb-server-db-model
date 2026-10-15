@@ -13,26 +13,43 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.parameter.dataset;
 
+import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
+@Entity(name = "org.n52.series.db.beans.parameter.dataset.DatasetComplexParameterEntity")
+@DiscriminatorValue("complex")
 public class DatasetComplexParameterEntity extends DatasetParameterEntity<Set<DatasetParameterEntity<?>>>
         implements ComplexParameterEntity<Set<DatasetParameterEntity<?>>> {
 
+    @Serial
     private static final long serialVersionUID = -5166758396873257962L;
+
+    // decision: collection owns fk_parent_parameter_id (as former hbm inverse="false"), so children are
+    // linked
+    // even when setParent(..) was not called on them
+    @OneToMany(targetEntity = DatasetParameterEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_parent_parameter_id")
+    private Set<DatasetParameterEntity<?>> value;
 
     @Override
     public Set<DatasetParameterEntity<?>> getValue() {
-        return super.getValue();
+        return value;
     }
 
     @Override
     public void setValue(Set<DatasetParameterEntity<?>> value) {
-        super.setValue(value);
+        this.value = value;
     }
 
     @Override

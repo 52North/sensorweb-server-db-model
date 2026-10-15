@@ -15,10 +15,12 @@
  */
 package org.n52.series.db.beans.quality;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 
 public class QuantityQualityEntity extends QualityEntity<BigDecimal> {
 
+    @Serial
     private static final long serialVersionUID = 8313784962549255489L;
     private BigDecimal value;
 

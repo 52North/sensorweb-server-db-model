@@ -13,21 +13,35 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans.i18n;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MappedSuperclass;
 import org.n52.series.db.beans.DescribableEntity;
 
-public class I18nEntity<T extends DescribableEntity> extends AbstractI18nEntity<T> {
+import java.io.Serial;
 
-    public static final String PROPERTY_LOCALE = "locale";
+@MappedSuperclass
+public abstract class I18nEntity<T extends DescribableEntity> extends AbstractI18nEntity<T> {
 
-    public static final String PROPERTY_ENTITY = "entity";
-
+    @Serial
     private static final long serialVersionUID = 693520332508628558L;
 
+    @Column(name = "name")
+    // @Comment("Locale/language specific name of the location")
     private String name;
 
+    @Column(name = "description", columnDefinition = "text")
+    // @Comment("Locale/language specific description of the location")
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_entity_id", nullable = false)
+    private T entity;
 
     public String getName() {
         return name;
@@ -53,4 +67,13 @@ public class I18nEntity<T extends DescribableEntity> extends AbstractI18nEntity<
         return getDescription() != null && !getDescription().isEmpty();
     }
 
+    @Override
+    public T getEntity() {
+        return entity;
+    }
+
+    @Override
+    public void setEntity(T entity) {
+        this.entity = entity;
+    }
 }

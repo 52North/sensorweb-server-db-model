@@ -15,14 +15,30 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.sampling.SamplingEntity;
 
+//@Entity(name = "org.n52.series.db.beans.i18n.I18nSamplingEntity")
+//@Table(name = "sampling_i18n", indexes = @Index(name = "idx_sampling_i18n_sampling", columnList = "fk_sampling_id"))
+//@AttributeOverride(name = "id", column = @Column(name = "sampling_i18n_id"))
+//@AssociationOverride(name = "entity", joinColumns = @JoinColumn(name = "fk_sampling_id", nullable = false))
 public class I18nSamplingEntity extends I18nEntity<SamplingEntity> {
 
+    @Serial
     private static final long serialVersionUID = 6375003360445007130L;
 
+    @Column(name = "sampling_method")
     private String samplingMethod;
 
+    @Column(name = "environmental_conditions")
     private String environmentalConditions;
 
     /**

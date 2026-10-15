@@ -15,16 +15,36 @@
  */
 package org.n52.series.db.beans;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.OneToMany;
+
+import java.io.Serial;
 import java.util.Collection;
 import java.util.Set;
 
+@MappedSuperclass
 public abstract class CompositeDataEntity extends DataEntity<Set<DataEntity<?>>> {
 
+    @Serial
     private static final long serialVersionUID = -2942122854792122664L;
+
+    // the child observations reference their parent via fk_parent_observation_id, see DataEntity#parent
+    @OneToMany(targetEntity = DataEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "fk_parent_observation_id", foreignKey = @ForeignKey(name = "fk_parent_observation"))
+    private Set<DataEntity<?>> value;
+
+    @Override
+    public void setValue(Set<DataEntity<?>> value) {
+        this.value = value;
+    }
 
     @Override
     public Set<DataEntity<?>> getValue() {
-        return super.getValue();
+        return value;
     }
 
     @Override

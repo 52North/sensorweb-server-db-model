@@ -15,23 +15,51 @@
  */
 package org.n52.series.db.beans.parameter.observation;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.DiscriminatorColumn;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.Inheritance;
+import jakarta.persistence.InheritanceType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.DataEntity;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.parameter.ParameterEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:j.speckamp@52north.org">Jan Speckamp</a>
  */
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.parameter.observation.ObservationParameterEntity")
+@Table(name = "observation_parameter",
+        indexes = { @Index(name = "idx_observation_param_name", columnList = "name"),
+                @Index(name = "idx_observation_parameter", columnList = "fk_observation_id"),
+                @Index(name = "idx_observation_parent_parameter", columnList = "fk_parent_parameter_id"),
+                @Index(name = "idx_observation_parameter_unit", columnList = "fk_unit_id") })
+// table comment: Storage for additional information for observations
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name = "type")
 public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
 
     public static final String PROP_OBSERVATION = "observation";
     public static final String PROP_OBSERVATION_ID = "observationId";
+
+    @Serial
     private static final long serialVersionUID = -3170715124801725482L;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_observation_id", nullable = false, insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "fk_param_observation_id"))
     private DataEntity observation;
-    private Long observationId;
 
     public DataEntity getObservation() {
         return observation;
@@ -41,12 +69,12 @@ public abstract class ObservationParameterEntity<T> extends ParameterEntity<T> {
         this.observation = observation;
     }
 
-    public Long getObservationId() {
-        return observationId;
-    }
-
-    public void setObservationId(Long observationId) {
-        this.observationId = observationId;
+    @Override
+    @Access(AccessType.PROPERTY)
+    @ManyToOne(targetEntity = ObservationParameterEntity.class, fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_parent_parameter_id", foreignKey = @ForeignKey(name = "fk_param_observation_parent_id"))
+    public ParameterEntity<?> getParent() {
+        return super.getParent();
     }
 
     @Override

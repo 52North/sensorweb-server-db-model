@@ -15,30 +15,55 @@
  */
 package org.n52.series.db.beans.parameter;
 
+import java.io.Serial;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.MappedSuperclass;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import jakarta.persistence.Transient;
 import org.n52.series.db.beans.DescribableEntity;
 import org.n52.series.db.beans.IdEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@MappedSuperclass
+@AttributeOverride(name = "id", column = @Column(name = "parameter_id"))
 public abstract class ParameterEntity<T> extends IdEntity
         implements ValuedParameter<T>, Comparable<ParameterEntity<T>> {
 
     public static final String PROPERTY_PARENT = "parent";
 
+    @Serial
     private static final long serialVersionUID = -1489503368673412638L;
+
+    @Column(name = "name", nullable = false)
+    // @Comment("The name of the parameter")
     private String name;
+
+    @Column(name = "description", columnDefinition = "text")
+    // @Comment("A short description of the parameter")
     private String description;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "last_update")
+    // @Comment("Timestamp that provides the time of the last modification of this entry")
     private Date lastUpdate;
+
+    @Column(name = "domain")
+    // @Comment("The domain this parameter belongs to.")
     private String domain;
+
+    @Transient
+    // explictly mapped in subclasses
     private ParameterEntity parent;
-    private T value;
 
     public Map<String, Object> toValueMap(String locale) {
         Map<String, Object> valueMap = new HashMap<>();
@@ -106,16 +131,6 @@ public abstract class ParameterEntity<T> extends IdEntity
 
     public boolean hasParent() {
         return getParent() != null;
-    }
-
-    @Override
-    public T getValue() {
-        return value;
-    }
-
-    @Override
-    public void setValue(T value) {
-        this.value = value;
     }
 
     @Override

@@ -15,11 +15,25 @@
  */
 package org.n52.series.db.beans.i18n;
 
+import java.io.Serial;
+
+import jakarta.persistence.AssociationOverride;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.OfferingEntity;
 
+@Entity(name = "org.n52.series.db.beans.i18n.I18nOfferingEntity")
+@Table(name = "offering_i18n", indexes = @Index(name = "idx_offering_i18n_offering", columnList = "fk_offering_id"))
+@AttributeOverride(name = "id", column = @Column(name = "offering_i18n_id"))
+@AssociationOverride(name = "entity",
+        joinColumns = @JoinColumn(name = "fk_offering_id", nullable = false, insertable = false, updatable = false))
 public class I18nOfferingEntity extends I18nEntity<OfferingEntity> {
 
+    @Serial
     private static final long serialVersionUID = 6049859871182587108L;
 
-    // serves for clear distinction
 }

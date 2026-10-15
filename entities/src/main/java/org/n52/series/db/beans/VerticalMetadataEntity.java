@@ -13,15 +13,32 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
-import java.util.Set;
-
+import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import org.n52.series.db.beans.i18n.I18nVerticalMetadataEntity;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import java.io.Serial;
+import java.util.Set;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.VerticalMetadataEntity")
+@Table(name = "value_profile",
+        indexes = @Index(name = "idx_profile_vertical_unit", columnList = "fk_vertical_unit_id"))
+@AttributeOverride(name = "id", column = @Column(name = "value_profile_id"))
 public class VerticalMetadataEntity extends IdEntity {
 
     public static final String PROPERTY_VERTICAL_UNIT = "verticalUnit";
@@ -29,18 +46,33 @@ public class VerticalMetadataEntity extends IdEntity {
     public static final String PROPERTY_VERTICAL_ORIGIN_NAME = "verticalOriginName";
     public static final String PROPERTY_VERTICAL_FROM_NAME = "verticalFromName";
     public static final String PROPERTY_VERTICAL_TO_NAME = "verticalToName";
+    @Serial
     private static final long serialVersionUID = 3156288491348980598L;
 
+    @Column(name = "orientation")
+    // @Comment("The \"orientation\" of the vertical values as integer. 1 => above verticalOriginName and -1
+    // => below verticalOriginName")
     private Short orientation;
 
+    @Column(name = "vertical_origin_name")
+    // @Comment("The vertical origin name of the vertical values, e.g. water surface")
     private String verticalOriginName;
 
-    private String verticalfromName;
+    @Column(name = "vertical_from_name")
+    // @Comment("The name of the vertical from values, e.g. from or depthFrom")
+    private String verticalFromName;
 
-    private String verticaltoName;
+    @Column(name = "vertical_to_name")
+    // @Comment("The name of the vertical from values, e.g. to or depthTo")
+    private String verticalToName;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "fk_vertical_unit_id", nullable = false, foreignKey = @ForeignKey(name = "fk_profile_unit"))
     private UnitEntity verticalUnit;
 
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "value_profile_i18n", joinColumns = @JoinColumn(name = "fk_value_profile_id", nullable = false),
+            inverseJoinColumns = @JoinColumn(name = "value_profile_i18n_id", nullable = false))
     private Set<I18nVerticalMetadataEntity> translations;
 
     public Short getOrientation() {
@@ -76,11 +108,11 @@ public class VerticalMetadataEntity extends IdEntity {
     }
 
     public String getVerticalFromName() {
-        return verticalfromName;
+        return verticalFromName;
     }
 
     public void setVerticalFromName(String name) {
-        this.verticalfromName = name;
+        this.verticalFromName = name;
     }
 
     public boolean isSetVerticalFromName() {
@@ -88,11 +120,11 @@ public class VerticalMetadataEntity extends IdEntity {
     }
 
     public String getVerticalToName() {
-        return verticaltoName;
+        return verticalToName;
     }
 
     public void setVerticalToName(String name) {
-        this.verticaltoName = name;
+        this.verticalToName = name;
     }
 
     public boolean isSetVerticalToName() {

@@ -15,12 +15,15 @@
  */
 package org.n52.series.db.beans.feature;
 
+import java.io.Serial;
+
 /**
  * @author <a href="mailto:c.hollmann@52north.org">Carsten Hollmann</a>
  * @since 1.0.0
  */
 public abstract class ReferenceEntity extends NilReasonEntity {
 
+    @Serial
     private static final long serialVersionUID = -5926562773130484266L;
 
     private String href;

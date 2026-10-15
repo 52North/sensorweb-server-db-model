@@ -19,6 +19,8 @@ import org.n52.series.db.beans.feature.gml.VerticalCRSEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * Hibernate entity for exVerticalExtent.
  *
@@ -28,6 +30,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class ExVerticalExtentEntity extends AbstractCiEntity {
 
+    @Serial
     private static final long serialVersionUID = 4387639041569175476L;
 
     private Double minimumValue;

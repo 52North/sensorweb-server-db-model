@@ -22,6 +22,8 @@ import org.n52.series.db.beans.feature.ReferenceEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+
 /**
  * Hibernate entiity for the coordinateSystemAxis
  *
@@ -31,6 +33,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
 public class CoordinateSystemAxisEntity extends ReferenceEntity implements HasRemarks {
 
+    @Serial
     private static final long serialVersionUID = 1841614376918978967L;
 
     private String remarks;

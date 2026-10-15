@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.feature.gmd;
 
+import java.io.Serial;
+
 /**
  * Hibernate entity for onlineResource.
  *
@@ -23,6 +25,7 @@ package org.n52.series.db.beans.feature.gmd;
  */
 public class OnlineResourceEntity extends AbstractCiEntity {
 
+    @Serial
     private static final long serialVersionUID = -7852109322377425189L;
 
     private String linkage;

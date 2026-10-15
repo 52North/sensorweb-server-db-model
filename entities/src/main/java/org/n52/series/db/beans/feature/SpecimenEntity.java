@@ -15,26 +15,64 @@
  */
 package org.n52.series.db.beans.feature;
 
+import java.io.Serial;
 import java.util.Date;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.PrimaryKeyJoinColumn;
+import jakarta.persistence.SecondaryTable;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
 import org.n52.series.db.beans.FeatureEntity;
 import org.n52.series.db.beans.UnitEntity;
 import org.n52.series.db.common.Utils;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
-@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+//TODO: support this
+//@SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+//@Entity(name = "org.n52.series.db.beans.feature.SpecimenEntity")
+//@SecondaryTable(name = "specimen",
+//        pkJoinColumns = @PrimaryKeyJoinColumn(name = "fk_feature_id",
+//                foreignKey = @ForeignKey(name = "fk_specimen_feature")))
+//@DiscriminatorValue("SpecimenEntity")
 public class SpecimenEntity extends FeatureEntity {
 
+    @Serial
     private static final long serialVersionUID = -1128862083434595324L;
 
+    @Column(name = "material_class", table = "specimen", nullable = false)
     private String materialClass;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "sampling_time_start", table = "specimen", nullable = false, length = 29)
     private Date samplingTimeStart;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "sampling_time_end", table = "specimen", nullable = false, length = 29)
     private Date samplingTimeEnd;
+
+    @Column(name = "sampling_method", table = "specimen")
     private String samplingMethod;
+
+    @Column(name = "specimen_size", table = "specimen")
     private Double size;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fk_size_unit_id", foreignKey = @ForeignKey(name = "fk_specimen_unit"))
     private UnitEntity sizeUnit;
+
+    @Column(name = "current_location", table = "specimen")
     private String currentLocation;
+
+    @Column(name = "specimen_type", table = "specimen")
     private String specimenType;
 
     /**

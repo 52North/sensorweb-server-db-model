@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sta;
 
+import java.io.Serial;
 import java.util.Set;
 
 import org.n52.series.db.beans.DataEntity;
@@ -30,6 +31,7 @@ public class RelationEntity extends DescribableEntity implements StaRelations.Ha
     public static final String PROPERTY_ROLE = "role";
     public static final String PROPERTY_EXTERNAL_OBJECT = "externalObject";
 
+    @Serial
     private static final long serialVersionUID = -8131424037218012268L;
 
     private String role;

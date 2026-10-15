@@ -13,21 +13,42 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.io.Serial;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+@Entity(name = "org.n52.series.db.beans.QuantityDataEntity")
+@DiscriminatorValue("quantity")
 public class QuantityDataEntity extends DataEntity<BigDecimal> implements NumericalDataEntity<BigDecimal> {
 
     public static final BigDecimal DOUBLE_THRESHOLD = BigDecimal.valueOf(0.0001d);
     private static final Logger LOGGER = LoggerFactory.getLogger(QuantityDataEntity.class);
+    @Serial
     private static final long serialVersionUID = 7619426522406105659L;
+
+    @Column(name = "value_quantity", precision = 20, scale = 10)
+    private BigDecimal value;
+
+    @Override
+    public BigDecimal getValue() {
+        return value;
+    }
+
+    @Override
+    public void setValue(BigDecimal value) {
+        this.value = value;
+    }
 
     @Override
     public boolean isNoDataValue(Collection<String> noDataValues) {
@@ -70,5 +91,4 @@ public class QuantityDataEntity extends DataEntity<BigDecimal> implements Numeri
         }
         return validatedValues;
     }
-
 }

@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sampling;
 
+import java.io.Serial;
 import java.util.Date;
 import java.util.Set;
 
@@ -38,6 +39,7 @@ public class MeasuringProgramEntity extends DescribableEntity implements HasData
 
     public static final String PROPERTY_PRODUCER = "producer";
 
+    @Serial
     private static final long serialVersionUID = 2525309717383048842L;
 
     private String producer;

@@ -13,10 +13,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package org.n52.series.db.beans;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.Index;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import org.n52.series.db.beans.i18n.I18nCategoryEntity;
+import org.n52.series.db.beans.i18n.I18nEntity;
+
+import java.io.Serial;
+import java.util.Set;
+
+@Entity(name = "org.n52.series.db.beans.CategoryEntity")
+@Table(name = "category", indexes = @Index(name = "idx_category_identifier", columnList = "identifier"),
+        uniqueConstraints = @UniqueConstraint(name = "un_category_identifier", columnNames = { "identifier" }))
+@AttributeOverride(name = "id", column = @Column(name = "category_id"))
+@AttributeOverride(name = "staIdentifier",
+        column = @Column(name = "identifier", insertable = false, updatable = false))
 public class CategoryEntity extends DescribableEntity {
 
+    @Serial
     private static final long serialVersionUID = -5508957540970020954L;
 
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = I18nCategoryEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_category_id", nullable = false, foreignKey = @ForeignKey(name = "fk_category"))
+    public Set<I18nEntity<? extends Describable>> getTranslations() {
+        return super.getTranslations();
+    }
 }

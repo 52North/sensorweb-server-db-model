@@ -15,19 +15,61 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
 import java.util.Set;
 
+import jakarta.persistence.Access;
+import jakarta.persistence.AccessType;
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.ForeignKey;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
+import org.hibernate.annotations.SQLRestriction;
 import org.n52.series.db.beans.HibernateRelations.HasDatasets;
 import org.n52.series.db.beans.i18n.I18nEntity;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
+import org.n52.series.db.beans.i18n.I18nLocationEntity;
+import org.n52.series.db.beans.i18n.I18nProcedureEntity;
+import org.n52.series.db.beans.i18n.I18nTagEntity;
+import org.n52.series.db.beans.parameter.ParameterEntity;
+import org.n52.series.db.beans.parameter.procedure.ProcedureParameterEntity;
 
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
+@Entity(name = "org.n52.series.db.beans.TagEntity")
+@Table(name = "tag")
+// table comment: Storage of the tags which should be used to tag the data.
+@AttributeOverride(name = "id", column = @Column(name = "tag_id"))
+@AttributeOverride(name = "staIdentifier",
+        column = @Column(name = "identifier", insertable = false, updatable = false))
+@AttributeOverride(name = "name", column = @Column(name = "identifier", insertable = false, updatable = false))
 public class TagEntity extends DescribableEntity implements HasDatasets {
 
+    @Serial
     private static final long serialVersionUID = 7851120161214727821L;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "tag_dataset",
+            joinColumns = @JoinColumn(name = "fk_tag_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_tag_dataset")),
+            inverseJoinColumns = @JoinColumn(name = "fk_dataset_id", nullable = false,
+                    foreignKey = @ForeignKey(name = "fk_dataset_tag")))
     private Set<DatasetEntity> datasets;
-    private Set<I18nEntity<? extends Describable>> translations;
+
+    @Override
+    @Access(AccessType.PROPERTY)
+    @OneToMany(targetEntity = I18nTagEntity.class, fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_tag_id", nullable = false, foreignKey = @ForeignKey(name = "fk_tag"))
+    public Set<I18nEntity<? extends Describable>> getTranslations() {
+        return super.getTranslations();
+    }
 
     @Override
     public String getName() {
@@ -47,16 +89,6 @@ public class TagEntity extends DescribableEntity implements HasDatasets {
     @Override
     public void setDatasets(Set<DatasetEntity> datasets) {
         this.datasets = datasets;
-    }
-
-    @Override
-    public Set<I18nEntity<? extends Describable>> getTranslations() {
-        return translations;
-    }
-
-    @Override
-    public void setTranslations(Set<I18nEntity<? extends Describable>> translations) {
-        this.translations = translations;
     }
 
 }

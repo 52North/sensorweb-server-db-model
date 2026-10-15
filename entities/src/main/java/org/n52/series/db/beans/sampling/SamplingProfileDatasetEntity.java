@@ -15,6 +15,7 @@
  */
 package org.n52.series.db.beans.sampling;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ public class SamplingProfileDatasetEntity implements Serializable {
     public static final String PROPERTY_SAMPLING_IDS = "samplingIds";
     public static final String PROPERTY_MEASURING_PROGRAMS = "measuringPrograms";
 
+    @Serial
     private static final long serialVersionUID = -6526107787041904177L;
 
     private boolean hasSamplings;

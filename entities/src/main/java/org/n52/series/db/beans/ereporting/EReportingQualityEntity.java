@@ -19,6 +19,7 @@ import org.n52.series.db.beans.IdEntity;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.EReportingQualityData;
 import org.n52.series.db.beans.ereporting.HiberanteEReportingRelations.HasPrimaryObservation;
 
+import java.io.Serial;
 import java.math.BigDecimal;
 
 public class EReportingQualityEntity extends IdEntity implements HasPrimaryObservation, EReportingQualityData {
@@ -29,6 +30,7 @@ public class EReportingQualityEntity extends IdEntity implements HasPrimaryObser
 
     public static final String PRIMARY_OBSERVATION = "primaryObservation";
 
+    @Serial
     private static final long serialVersionUID = 1891418800348199576L;
 
     private long dataset;

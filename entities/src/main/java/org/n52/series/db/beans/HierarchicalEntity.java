@@ -13,23 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.n52.series.db.beans;
 
-import java.util.LinkedHashSet;
-import java.util.Set;
+package org.n52.series.db.beans;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 
+import java.io.Serial;
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @SuppressFBWarnings({ "EI_EXPOSE_REP", "EI_EXPOSE_REP2" })
-public abstract class HierarchicalEntity<T> extends DescribableEntity {
+public abstract class HierarchicalEntity<T> extends AbstractCodespaceEntity {
 
     public static final String PROPERTY_PARENTS = "parents";
     public static final String PROPERTY_CHILDREN = "children";
+    @Serial
     private static final long serialVersionUID = -530148269689996337L;
 
-    private Set<T> children;
-
     private Set<T> parents;
+    private Set<T> children;
 
     public void setChildren(Set<T> children) {
         this.children = children;

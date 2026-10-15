@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans.parameter.license;
 
+import java.io.Serial;
+
 import org.n52.series.db.beans.parameter.BooleanParameterEntity;
 
 /**
@@ -22,6 +24,7 @@ import org.n52.series.db.beans.parameter.BooleanParameterEntity;
  */
 public class LicenseBooleanParameterEntity extends LicenseParameterEntity<Boolean> implements BooleanParameterEntity {
 
+    @Serial
     private static final long serialVersionUID = -1280123654095577480L;
 
     @Override

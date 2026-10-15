@@ -15,6 +15,8 @@
  */
 package org.n52.series.db.beans;
 
+import java.io.Serial;
+
 /**
  * Entity for AQD e-Reporting Network
  *
@@ -25,6 +27,7 @@ public class NetworkEntity extends DescribableEntity {
 
     public static final String ID = "network";
 
+    @Serial
     private static final long serialVersionUID = -6039520306580755303L;
 
     private Long network;

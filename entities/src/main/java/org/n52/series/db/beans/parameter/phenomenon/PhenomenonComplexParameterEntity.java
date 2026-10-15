@@ -15,24 +15,40 @@
  */
 package org.n52.series.db.beans.parameter.phenomenon;
 
+import java.io.Serial;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToMany;
 import org.n52.series.db.beans.parameter.ComplexParameterEntity;
 
+@Entity(name = "org.n52.series.db.beans.parameter.phenomenon.PhenomenonComplexParameterEntity")
+@DiscriminatorValue("complex")
 public class PhenomenonComplexParameterEntity extends PhenomenonParameterEntity<Set<PhenomenonParameterEntity<?>>>
         implements ComplexParameterEntity<Set<PhenomenonParameterEntity<?>>> {
 
+    @Serial
     private static final long serialVersionUID = -5166758396873257962L;
+
+    // decision: collection owns fk_parent_parameter_id (as former hbm inverse="false"), so children are
+    // linked
+    // even when setParent(..) was not called on them
+    @OneToMany(targetEntity = PhenomenonParameterEntity.class, cascade = CascadeType.ALL)
+    @JoinColumn(name = "fk_parent_parameter_id")
+    private Set<PhenomenonParameterEntity<?>> value;
 
     @Override
     public Set<PhenomenonParameterEntity<?>> getValue() {
-        return super.getValue();
+        return value;
     }
 
     @Override
     public void setValue(Set<PhenomenonParameterEntity<?>> value) {
-        super.setValue(value);
+        this.value = value;
     }
 
     @Override
